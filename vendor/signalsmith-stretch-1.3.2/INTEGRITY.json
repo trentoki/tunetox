@@ -1,0 +1,17 @@
+{
+  "version": "1.3.2",
+  "gitHead": "222093b4cc13ddb4d07c826bc3c1559326091731",
+  "dist": {
+    "integrity": "sha512-tJqRbwPCoWLSHXwO29UQ75u72IwPsHns3RG+TKzuOAp7OduJiJMzEtz32JEFbPFQcTR7aiKCIVc+/Kzw8bMZUw==",
+    "shasum": "8549203d56c12c1ddf6f4083e4781bab19eae839",
+    "tarball": "https://registry.npmjs.org/signalsmith-stretch/-/signalsmith-stretch-1.3.2.tgz",
+    "fileCount": 4,
+    "unpackedSize": 232286,
+    "signatures": [
+      {
+        "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U",
+        "sig": "MEYCIQDLZMRuVgSzXP/4D0H4TxCk6Dcjvw9wTejrTAFQbl9YwgIhAMN06cBQfgXrobw6yp+cej81Ftva+W7PcP0wCpJ6SfXu"
+      }
+    ]
+  }
+}

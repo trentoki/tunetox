@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<title>TuneFlow legacy metadata demonstration</title>
+<h1>Legacy metadata synchronization demonstration</h1>
+<p>This historical prototype is separate from continuous matching and real audio playback.
+The demonstration uses its own four decks and does not change application state.</p>
+<button id="run" type="button">Run metadata demonstration</button>
+<pre id="result">Not run.</pre>
+<script src="../participation.js"></script>
+<script src="../stem-state.js"></script>
+<script src="../two-deck-stem-handoff.js"></script>
+<script src="../app.js"></script>
+<script src="metadata-demo.js"></script>
+<script>
+document.getElementById('run').addEventListener('click', () => {
+  const demo = runLegacySynchronizationDemo();
+  document.getElementById('result').textContent = JSON.stringify({
+    beforeSync: demo.beforeSync,
+    afterViewChange: demo.afterViewChange,
+    afterSync: demo.state.decks.map(deck => deck.tempo),
+    globalTempo: demo.state.globalTempo
+  }, null, 2);
+});
+</script>
+</html>

@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Signalsmith adapter gain rendering</title>
+<h1>Signalsmith adapter gain rendering</h1>
+<p>OfflineAudioContext renders a constant signal through the actual adapter gain automation.
+No sound is played. This checks browser automation, not Signalsmith DSP or device startup.</p>
+<button id="run">Run rendered gain tests</button>
+<pre id="results"></pre>
+<script src="../audio-engine.js"></script>
+<script src="../experimental/signalsmith-transport.js"></script>
+<script src="signalsmith-gain-render-tests.js"></script>
+</html>

@@ -1,0 +1,79 @@
+# Operating-system and editor-local files
+.DS_Store
+._*
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local configuration and credentials (review templates separately)
+.env
+.env.*
+.envrc
+.npmrc
+.netrc
+.gitconfig
+*.local
+*.local.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+service-account*.json
+*secrets*.json
+/.aws/
+/.ssh/
+/.codex/
+
+# Installed dependencies, caches and generated output
+node_modules/
+.cache/
+/coverage/
+/dist/
+/build/
+/test-results/
+/playwright-report/
+*.log
+*.tsbuildinfo
+
+# Temporary media, recordings and diagnostic exports
+/recordings/
+/diagnostic-captures/
+/captures/
+/exports/
+/audio-test-files/
+/tests/fixtures/audio/
+/tmp/
+/temp/
+signalsmith-capture-*
+*.[wW][aA][vV]
+*.[wW][aA][vV][eE]
+*.[aA][iI][fF]
+*.[aA][iI][fF][fF]
+*.[mM][pP]3
+*.[mM]4[aA]
+*.[aA][aA][cC]
+*.[fF][lL][aA][cC]
+*.[oO][gG][gG]
+*.[oO][pP][uU][sS]
+*.[cC][aA][fF]
+*.[pP][cC][mM]
+*.[rR][aA][wW]
+*.[wW][eE][bB][mM]
+*.[mM][pP]4
+*.[mM][oO][vV]
+
+# Downloaded archives and backup copies
+*.[zZ][iI][pP]
+*.[tT][gG][zZ]
+*.[tT][aA][rR]
+*.tar.gz
+*.bak
+*.backup
+
+# Keep vendor runtime code (including WASM), package metadata, licenses,
+# provenance/integrity records, source files, tests and documentation tracked.
+# Small licensed media fixtures require an explicit reviewed exception.
