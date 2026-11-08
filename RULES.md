@@ -945,3 +945,26 @@ Sharing establishment, Stop/natural-end membership, participation-enable priorit
 re-enable triggers remain integration decisions. The existing two-deck calculator, application,
 UI, audio routing, transport and smoothing are unchanged. Numerical caps are target constraints,
 not proof of a continuous cap during audio ramps. Tests run in the existing automated runner.
+
+### Phase 2A — opt-in coordinated native start scheduling
+
+Implemented scheduling primitive only; four-deck membership/allocator transport integration
+is still absent. Existing ordinary Play and two-deck actions are unchanged.
+`createNativeStemMixer.startCoordinated(id, snapshot)` accepts validated gain targets for all
+owned decks. After asynchronous resume/cancellation checks it schedules four joining sources
+behind a silent transport, fading that transport 0→1 over 10 ms at the same boundary as other
+decks' stem envelopes. The boundary follows existing ramps and has a provisional 20 ms minimum
+scheduling lead. Existing playing main volumes must be unchanged; simultaneous volume/stem
+retargeting needs separate continuous-product validation and rejects here. Initial settled and
+final per-category audible sums must be at most 1. This is scheduling validation, not new
+allocation, participation or authorization policy.
+
+All four source starts must succeed before existing-deck automation is scheduled. Cancelled,
+partial or expired starts retire the joining graph and do not report success. A true result
+means scheduled successfully, not hardware-audible onset. Native AudioParam scheduling failures
+can still partially alter existing automation; these reject, retire the join and must never
+commit membership. This retains the existing nontransactional native-audio limitation.
+Phase 2B must commit domain membership only after true success and handle cancellation and
+reported scheduling errors. No queue, lifecycle membership, UI or upstream DSP changes occur.
+Samplewise envelope tests pass in the macOS runner; actual browser rendering/listening and
+Safari/iPad timing/click validation remain required. Click freedom is not established by mocks.

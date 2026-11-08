@@ -1338,3 +1338,29 @@ then add transport notifications and action integration as separate tested steps
 paused membership (new direction), queued allocation inheritance and no implicit Play authorization.
 Queue transport, smoothing integration and continuous audio-cap verification remain future work.
 See the latest RULES.md Phase 1 section for precedence over historical pair-only plans.
+
+### Phase 2A — shared timeline start primitive
+
+Native mixer `startCoordinated(id, snapshot)` and bridge forwarding method are opt-in, currently
+unused by the application. Reuse the native player's guarded start path: ordinary Play still
+initializes unity transport; coordinated starts initialize the target musical coefficients
+behind zero transport and ramp transport to unity over 10 ms. Successful source scheduling
+precedes existing gain retargets, using one reserved context time after outstanding envelopes.
+A 20 ms minimum lead is provisional and a missed reservation rejects. Pending coordinated starts
+are serialized by rejection, not a queue. Snapshots are copied before asynchronous resume.
+
+With existing main volumes held fixed, each effective contribution interpolates linearly from
+its settled initial value to its target (joining initial contribution is zero). Thus their sum
+is a convex combination of validated capped endpoints. Existing-volume changes reject rather
+than assuming products of ramps are linear. Existing musical ramps, independent transports,
+source offsets and context ownership are reused; no allocator or membership is wired in.
+Partial source-start failures disconnect all new paths without modifying existing automation;
+native automation failure after scheduling begins is surfaced but cannot claim full rollback.
+No membership is stored/committed in this phase. The caller must treat only true success as a
+candidate membership admission; later lifecycle cancellation remains Phase 2B work.
+
+Tests reconstruct scheduled AudioParam envelopes at 48 kHz throughout two-/three-existing-deck
+joins, verify common boundaries and unchanged source starts, cancellation, concurrent requests,
+partial-start cleanup, expired deadlines, endpoint rejection and outstanding-ramp settling.
+These are deterministic automation tests, not actual OfflineAudioContext rendering or audible
+click measurements. Browser rendering and Mac/iPad listening remain separate validation steps.

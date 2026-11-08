@@ -86,12 +86,13 @@ function createFourStemPlayer(createContext = () => new AudioContext(), options 
       return true;
     } finally { if (version === loadVersion) loading = false; }
   }
-  async function play() {
+  async function startPlayback(prepareStart = null) {
     if (closed || loading || !buffers || session) return false;
     const audio = getContext(), token = ++command;
     await audio.resume();
     if (token !== command || closed || loading || session || !buffers) return false;
     if (audio.state !== 'running') throw new Error('AudioContext is not running. Click Play again.');
+    const plan = prepareStart ? prepareStart(audio) : null;
     if (position >= buffers.transients.duration) position = 0;
     const current = { paths: {}, startedAt: 0, remaining: 4 };
     try {
@@ -101,7 +102,7 @@ function createFourStemPlayer(createContext = () => new AudioContext(), options 
         const gain = audio.createGain();
         current.paths[name].gain = gain;
         source.buffer = buffers[name];
-        gain.gain.setValueAtTime(levels[name], audio.currentTime);
+        gain.gain.setValueAtTime(plan ? plan.target.levels[name] : levels[name], audio.currentTime);
         source.connect(gain);
         source.onended = () => {
           if (session !== current) return;
@@ -113,17 +114,35 @@ function createFourStemPlayer(createContext = () => new AudioContext(), options 
       // Transport gating is separate from musical stem and main-volume gains.
       current.volume = { gain: audio.createGain(), ramp: null };
       current.transport = audio.createGain();
-      current.volume.gain.gain.setValueAtTime(mainVolume, audio.currentTime);
-      current.transport.gain.setValueAtTime(1, audio.currentTime);
+      current.volume.gain.gain.setValueAtTime(plan ? plan.target.mainVolume : mainVolume, audio.currentTime);
+      current.transport.gain.setValueAtTime(plan ? 0 : 1, audio.currentTime);
       for (const path of Object.values(current.paths)) path.gain.connect(current.volume.gain);
       current.volume.gain.connect(current.transport);
       current.transport.connect(audio.destination);
       // One future render quantum gives all four native starts the same clock boundary.
-      current.startedAt = audio.currentTime + 128 / audio.sampleRate;
+      current.startedAt = plan ? plan.when : audio.currentTime + 128 / audio.sampleRate;
       for (const path of Object.values(current.paths)) path.source.start(current.startedAt, position);
+      if (plan) {
+        // All source.start calls succeeded before touching another deck's automation.
+        // Reject an expired reservation while the new transport is still gated silent.
+        if (audio.currentTime >= plan.when) throw new Error('Coordinated start deadline missed. Retry Play.');
+        plan.schedule();
+        if (audio.currentTime >= plan.when) throw new Error('Coordinated scheduling deadline missed. Retry Play.');
+        current.transport.gain.setValueAtTime(0, plan.when);
+        current.transport.gain.linearRampToValueAtTime(1, plan.when + smoothingSeconds);
+        for (const name of prototypeStemNames) levels[name] = plan.target.levels[name];
+        mainVolume = plan.target.mainVolume;
+      }
+      current.coordinated = !!plan;
       session = current;
       return true;
     } catch (error) { disconnect(current); throw error; }
+  }
+  function play() { return startPlayback(); }
+  function getGainSettledTime() {
+    if (!session) return 0;
+    return Math.max(session.startedAt + (session.coordinated ? smoothingSeconds : 0), session.volume.ramp?.end || 0,
+      ...prototypeStemNames.map(name => session.paths[name].ramp?.end || 0));
   }
   function setStemLevel(name, value, when) {
     if (closed) throw new Error('Player is closed.');
@@ -158,6 +177,7 @@ function createFourStemPlayer(createContext = () => new AudioContext(), options 
     if (options.ownsContext !== false && context && context.state !== 'closed') await context.close();
   }
   return Object.freeze({ loadFiles, play, pause, stop, eject, close, setStemLevel, setMainVolume,
+    startCoordinated: startPlayback, getGainSettledTime,
     getState: () => ({ loaded: !!buffers, loading, closed, isPlaying: !!session,
       position: getPosition(), duration: buffers?.transients.duration || 0,
       levels: { ...levels }, mainVolume, contextState: context?.state || 'uncreated', smoothingSeconds }) });
@@ -179,7 +199,7 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
     if (!deckIds.includes(id)) throw new Error('Deck is not owned by this native mixer.');
     return decks[deckIds.indexOf(id)];
   }
-  function applyGainSnapshot(snapshot) {
+  function validateGainSnapshot(snapshot) {
     if (closed) throw new Error('Native stem mixer is closed.');
     // Validate the entire batch before scheduling any AudioParam changes.
     for (const id of deckIds) {
@@ -189,9 +209,12 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
         if (!Number.isFinite(value) || value < 0 || value > 1) throw new Error('Invalid gain snapshot.');
       }
     }
+  }
+  function applyGainSnapshot(snapshot, scheduledTime) {
+    validateGainSnapshot(snapshot);
     // A shared future boundary keeps the whole batch ahead of rendering. No context is
     // created by state changes; initial targets are retained until explicit Load/Play.
-    const when = context ? context.currentTime + 128 / context.sampleRate : undefined;
+    const when = scheduledTime === undefined ? (context ? context.currentTime + 128 / context.sampleRate : undefined) : scheduledTime;
     for (const id of deckIds) {
       const deck = getDeck(id), previous = deck.getState(), target = snapshot[id];
       for (const name of prototypeStemNames) {
@@ -200,6 +223,48 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
       if (previous.mainVolume !== target.mainVolume) deck.setMainVolume(target.mainVolume, when);
     }
     return when ?? null;
+  }
+  let coordinatedStartPending = false;
+  async function startCoordinated(id, snapshot) {
+    if (coordinatedStartPending) throw new Error('Another coordinated start is pending. Retry Play.');
+    validateGainSnapshot(snapshot);
+    // Own a validated copy across audio.resume(); caller mutations cannot alter the plan.
+    const targets = Object.fromEntries(deckIds.map(deckId => [deckId, {
+      mainVolume: snapshot[deckId].mainVolume, levels: { ...snapshot[deckId].levels }
+    }]));
+    const joining = getDeck(id);
+    coordinatedStartPending = true;
+    try {
+      return await joining.startCoordinated(audio => {
+        validateGainSnapshot(targets);
+        const playing = deckIds.filter(deckId => deckId !== id && getDeck(deckId).getState().isPlaying);
+        for (const deckId of playing) {
+          if (targets[deckId].mainVolume !== getDeck(deckId).getState().mainVolume) {
+            throw new Error('Coordinated start requires unchanged existing main volumes.');
+          }
+        }
+        for (const name of prototypeStemNames) {
+          const previous = playing.reduce((sum, deckId) => {
+            const state = getDeck(deckId).getState();
+            return sum + state.mainVolume * state.levels[name];
+          }, 0);
+          const next = [...playing, id].reduce((sum, deckId) =>
+            sum + targets[deckId].mainVolume * targets[deckId].levels[name], 0);
+          if (previous > 1 + 1e-12 || next > 1 + 1e-12) throw new Error('Coordinated start exceeds stem capacity.');
+        }
+        // Wait for existing envelopes, then linearly interpolate effective gains.
+        // With fixed main volumes the sum is a convex combination of capped endpoints.
+        const when = Math.max(audio.currentTime + 0.020,
+          ...playing.map(deckId => getDeck(deckId).getGainSettledTime() + 128 / audio.sampleRate));
+        return { when, target: targets[id], schedule() {
+          const others = { ...targets };
+          // The joining graph already has its target coefficients and a 0 -> 1 transport.
+          // Keep its stored coefficients untouched until the player commits success.
+          others[id] = { mainVolume: joining.getState().mainVolume, levels: joining.getState().levels };
+          applyGainSnapshot(others, when);
+        } };
+      });
+    } finally { coordinatedStartPending = false; }
   }
   function close() {
     if (closing) return closing;
@@ -210,7 +275,7 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
     });
     return closing;
   }
-  return Object.freeze({ deckIds, getDeck, applyGainSnapshot, close });
+  return Object.freeze({ deckIds, getDeck, applyGainSnapshot, startCoordinated, close });
 }
 
 // Compatibility entry point for the standalone two-deck fixture and its tests.

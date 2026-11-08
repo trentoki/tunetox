@@ -28,7 +28,10 @@ function createStemHandoffAudioBridge(state, mixer, onCommit = () => {}, sharedA
     synchronizeAudio();
     return changed;
   }
-  return Object.freeze({ synchronizeAudio,
+  // Scheduling only: future membership actions must commit only on a true result.
+  // This does not mutate domain allocations, requests, authorization or membership.
+  function startCoordinated(id, targets) { return mixer.startCoordinated(id, targets); }
+  return Object.freeze({ synchronizeAudio, startCoordinated,
     setStemLevel: (id, name, value, gestureId) => commit(() => stems.setStemLevel(id, name, value, gestureId), getStemControlId(id, name)),
     setMainVolume: (id, value, gestureId) => commit(() => stems.setDeckVolume(id, value, gestureId), getDeckVolumeControlId(id)),
     setParticipation: (id, value) => commit(() => participation.set(id, 'stemHandoff', value)) });
