@@ -12,7 +12,7 @@ function mountStemControls(container, deckId, options) {
   const section = document.createElement('section');
   const title = document.createElement('h2'); title.textContent = 'Deck ' + deckId; section.append(title);
   const batchLabel = document.createElement('label'); batchLabel.textContent = 'Select stem files together ';
-  const batch = document.createElement('input'); batch.type = 'file'; batch.accept = 'audio/*'; batch.multiple = true;
+  const batch = document.createElement('input'); batch.type = 'file'; batch.multiple = true;
   batch.id = 'prototype.deck.' + deckId + '.stem.batch';
   batch.addEventListener('change', () => {
     if (!batch.files.length) return;
@@ -49,7 +49,7 @@ function mountStemControls(container, deckId, options) {
   for (const name of prototypeStemNames) {
     const row = document.createElement('p'), label = document.createElement('label');
     label.textContent = name[0].toUpperCase() + name.slice(1) + ' file ';
-    const file = document.createElement('input'); file.type = 'file'; file.accept = 'audio/*';
+    const file = document.createElement('input'); file.type = 'file';
     file.id = 'prototype.deck.' + deckId + '.stem.' + name + '.file';
     file.addEventListener('change', () => {
       if (!file.files.length) return;
