@@ -12,6 +12,10 @@
   <h1>TuneFlow</h1>
   <p>Temporary rate-based tempo controls: changing tempo also changes pitch.
     No time stretching or synchronization. Enter BPM manually; files are not analyzed.</p>
+  <p>All four decks offer opt-in native four-stem playback. Eject before changing source.
+    All four decks participate in handoff by default; explicitly leave exactly two decks participating
+    for two-deck redistribution (any pair). Three/four participants currently use direct-only control.
+    Stem mode starts at main volume 0, has no tempo processing, and uses pre-separated aligned files.</p>
   <div id="audio-decks"></div>
   <p>Deck 1 experiment: eject its file before switching modes. Pitch-preserving mode is
     limited to 0.8–1.2×. Both experimental outputs use −12 dB headroom. Position estimates are not sample-accurate; tempo changes may have artifacts.</p>
@@ -60,6 +64,12 @@
   <script src="experimental/deck-one-transport.js"></script>
   <script src="experimental/signalsmith-diagnostics.js"></script>
   <script src="experimental/signalsmith-transport.js"></script>
+  <script src="experimental/four-stem-player.js"></script>
+  <script src="experimental/stem-handoff-audio-bridge.js"></script>
+  <script src="experimental/stem-file-assignments.js"></script>
+<script src="experimental/stem-controls.js"></script>
+  <script src="stem-source-router.js"></script>
+  <script src="main-stem-integration.js"></script>
   <script src="audio-controls.js"></script>
   <script src="experimental/signalsmith-diagnostics-controls.js"></script>
   <script src="experimental/signalsmith-context-controls.js"></script>

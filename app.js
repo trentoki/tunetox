@@ -48,7 +48,8 @@ const appState = {
 // Future mouse/touch/keyboard/MIDI adapters share these actions; no DSP wiring yet.
 const appActions = Object.freeze({
   participation: createParticipationActions(appState),
-  stems: createStemActions(appState)
+  stems: createStemActions(appState),
+  stemHandoff: createAutomaticStemHandoffActions(appState)
 });
 // Startup boundary: no storage is read. Later defaults must be supplied here before session actions.
 appActions.participation.initialize();

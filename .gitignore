@@ -38,6 +38,10 @@ node_modules/
 /playwright-report/
 *.log
 *.tsbuildinfo
+*.cpuprofile
+*.heapprofile
+*.heapsnapshot
+/profiling/
 
 # Temporary media, recordings and diagnostic exports
 /recordings/
@@ -53,6 +57,7 @@ signalsmith-capture-*
 *.[wW][aA][vV][eE]
 *.[aA][iI][fF]
 *.[aA][iI][fF][fF]
+*.[aA][iI][fF][cC]
 *.[mM][pP]3
 *.[mM]4[aA]
 *.[aA][aA][cC]

@@ -820,3 +820,165 @@ acknowledgements retain their planned source mapping for release-end bookmarks; 
 cannot overwrite resumed state. The immediate-mute control tests remain available at duration
 zero. All JavaScript watchdog recovery depends on the browser allowing tasks to run; a frozen
 main thread cannot execute cleanup until it resumes. Safari listening remains outstanding.
+
+## Isolated native two-deck four-stem prototype
+
+Open `/experimental/four-stem-player.html` through localhost. This separate page does not
+instantiate the existing application, Signalsmith or SoundTouch transports, change domain
+stem state, or integrate automatic handoff. Implementation: `four-stem-player.js` and its
+small controls adapter. Each deck has four native sources with one start time/offset. Both decks share one context,
+with independent source positions and four stem gains per deck. Each deck sums through a
+separate main-volume gain and then a transport gain before reaching the destination. Starts are scheduled one
+128-frame render quantum ahead; this is a scheduling allowance, not measured device latency.
+No additional stretching, separation, limiting or normalization is applied.
+
+Validation is deliberately conservative: all four explicitly mapped categories are required;
+nonempty mono/stereo decoded buffers must have identical sample rates and exact frame counts.
+There is no duration tolerance, trimming or stretching. Decoding can resample to the shared
+context rate; original file sample rates need not match. Equal decoded lengths do **not** prove
+musical alignment: use exports with the same original timeline start, including leading silence.
+Offsets, shifted musical content and incorrect category assignments cannot be detected here.
+Failed replacement stops playback but retains the previous validated set; errors are shown.
+
+Main volume and stem levels start at 1 for this isolated fixture (not application startup state). They remain intact
+through replacement/eject. Each change retargets a provisional 10 ms linear ramp from the
+tracked current envelope value. Pause stops all paths immediately and resumes at one saved
+source position; Stop resets that position. No new Pause/Stop release envelope is added.
+Consequently transport-edge clicks remain possible and require listening. All sources/gains
+are disconnected on retirement; Close all audio also releases both decks’ buffers and closes the shared context. Individual
+deck disposal never closes that shared context.
+Decode already underway cannot be forcibly cancelled; stale results are discarded. Loading
+uses sequential reads/decodes but retains fully decoded stems, so long-file memory capacity
+still requires measurement. No claim is made about native memory reclamation.
+
+### Safari listening procedure
+
+1. From the project directory run `python3 -m http.server 8000 --bind 127.0.0.1`.
+2. Open `http://127.0.0.1:8000/experimental/four-stem-player.html` in Safari.
+3. In each deck panel select matching local exports for Transients, Flow, Tune and Voice. Lower device volume
+   initially: summed stems can clip. Click **Load selected stems**, then **Play / Resume**.
+4. Set three levels to 0; listen to the remaining category. Repeat for all four to verify labels
+   and independent paths. Restore the intended levels and listen for synchronized attacks.
+5. Play both decks at different times. Pause, resume, stop and eject one; confirm the other
+   continues uninterrupted at its own position. Test each main volume independently.
+   Move a level rapidly back and forth, including reversing during movement. Listen for clicks
+   and confirm the other paths remain unchanged. These controls use 10 ms gain smoothing.
+6. Pause/resume repeatedly, then Stop/Play. Verify common position, beginning reset, and no old
+   audio. Replace all four files and confirm levels stay unchanged. Try a missing file, a corrupt
+   file, and a different-length stem; expect a clear rejection without starting the invalid set.
+7. During loading click **Eject / Cancel load**, then load another set. Confirm the stale set
+   does not return. Finally click **Close all audio**; playback must stop and further playback is
+   disabled until page refresh.
+
+Automated entry points: full macOS runner and `/tests/four-stem-player-tests.html` (**Run tests**).
+The browser page checks real generated WAV decoding, native-source scheduling, OfflineAudioContext
+path amplitudes/10 ms envelope, real-time clock progress and transport cleanup. It does not
+replace actual Safari listening, device latency measurement or long-running memory/CPU tests.
+
+The two-deck extension reuses `createFourStemPlayer` with explicit borrowed-context ownership;
+`createTwoDeckStemPlayer` owns final shutdown. All transport cleanup remains deck-local.
+The user reported successful listening for the earlier one-deck fixture; repeat the checklist
+for both decks before treating the extension as Safari-validated. There is still no automatic
+handoff integration. Transport-edge clicks, eight-stem memory/CPU capacity and device latency
+remain manual checks. No listening was performed by the automated browser tests.
+
+
+### Automatic handoff integration — current prototype listening checklist
+
+The prototype now runs shared domain actions through `stem-handoff-audio-bridge.js`. The earlier
+standalone fixture defaults described above are historical: the integrated page starts both
+main volumes at 0, Deck 1 stems at 1, Deck 2 stems at 0, with Decks 1/2 participating and Decks
+3/4 excluded. Other pages retain their existing behavior. Both independent decks previously
+passed user Safari listening; this newly connected handoff has not yet been listened to.
+
+1. Serve localhost as above and open `/experimental/four-stem-player.html`. Load aligned sets
+   into both panels, then Play independently. Initially both decks are silent (main volumes 0).
+2. Raise both main volumes to 1. Deck 1's eligible stems sound; Deck 2's stems are still at 0.
+3. Raise Deck 2 Flow to 0.50: Flow effective gains should become [0.50,0.50]. Raise to 1:
+   expect [0,1]. Reverse to 0 without releasing: Deck 1 Flow should return. Verify other
+   categories remain unchanged and compare requested/allocated/origin labels immediately.
+4. Test rapid reversals, then main-volume gestures. Main volume affects all nonzero categories;
+   restoration may be constrained by receiver volume/authorization, as shown by domain results.
+5. Disable one participation checkbox: levels must stay unchanged, subsequent gestures remain
+   independent. Re-enable: no immediate normalization. The next eligible gesture follows the
+   approved relationship rules. Test replacement and Pause/Stop/Eject while the other plays.
+6. Close all audio when finished. Report unexpected loudness, clicks, display lag, timing changes,
+   or old audio. Summed categories can clip; keep device volume conservative.
+
+Gain targets use shared-time 10 ms ramps; no handoff math is performed in audio callbacks.
+Native scheduling failure is reported after the committed state and is not claimed to roll back
+partially scheduled AudioParams. Listening and hardware-output latency are not verified by the
+rendered tests. Separate stem/main ramps can have intermediate effective values different from
+the final state coefficient. The previous transport-edge/memory limitations still apply.
+
+### Main-page opt-in stem integration
+
+`index.html` now offers Complete song / Four stems on Decks 1–2. Complete song remains the
+startup choice. Existing normal, SoundTouchJS and Signalsmith implementations are unchanged.
+Decks 3–4 retain complete-song playback. All four handoff participation checkboxes start ON;
+explicitly uncheck Decks 3 and 4 for the tested two-participant calculator path. With three/four
+participants, musical controls remain direct-only. Merely switching source does not synchronize,
+reset participation or authorize gain. Complete-song volume behavior remains unchanged; the
+new musical gain controls apply to native stems only.
+
+Use Eject before switching sources. Both backends must be empty, no release/closure blocked,
+and all tracked load/transport promises settled. A browser decode may remain pending after
+Eject; switching stays locked until it resolves/rejects. No retry/delay or fake cancellation is
+introduced. Select four files and click Load selected stems, then use the existing deck transport
+buttons. Native stem tempo fields are disabled. Four-stem errors/status appear in the mounted
+stem panel; requested levels and allocated faders update immediately through the shared bridge.
+Replacement retains levels and authorization; loading does not synthesize a gesture.
+
+The main page uses appState/appActions; it does not copy the prototype's Deck 3/4 exclusions.
+`experimental/stem-controls.js` is the same mounted component on both pages. The main page uses
+its existing single polling timer for transport refresh; gain/fader updates are synchronous.
+Page exit closes the shared stem context. Existing backends retain their own context ownership.
+The standalone prototype still has its own Close all audio control and host-owned timer.
+
+Safari check: open main index via localhost, confirm four participation checks ON; opt Decks 1/2
+into stems, load aligned exports, Play, raise main volumes, then explicitly exclude Decks 3/4
+and repeat the Flow handoff checklist. Verify Eject is required before returning to complete
+songs and retest Normal/SoundTouchJS/Signalsmith (including the explicit Signalsmith Load button).
+The prior isolated handoff passed user Safari listening. Main-page integration has not yet had
+Safari listening; native gain scheduling errors and resource limits remain documented limitations.
+
+### Batch stem selection (main page and standalone prototype)
+
+Use **Select stem files together** to select a four-file export. Matching is case-insensitive:
+drums/drum -> Transients, bass -> Flow, others/other -> Tune, vocals/vocal -> Voice, anywhere
+in each filename. Review the four **Assigned file** dropdowns before clicking the existing Load.
+Selection does not decode or start playback. Individual file pickers remain available.
+
+Ambiguous/unknown names or duplicate-category matches require manual assignment. Conflicting
+batches retain existing mappings; explicitly choose replacement dropdown values. To swap files,
+unassign one first, then reassign; the same file cannot occupy two categories. **Clear selected
+files** resets the selection pool, not audio, gains or domain state. Extra candidate files are
+not loaded unless assigned. A cancelled picker leaves mappings and loaded audio intact.
+
+Duplicate checks use filename, size, modification time and type, not content hashes. Separate
+files with identical metadata are conservatively treated as the same candidate; rename one if
+needed. Musical alignment still requires aligned exports and the existing decoded-length checks.
+Batch UI passed Chrome automation; verify Safari multi-selection, cancellation, dropdown
+correction and a real replacement load before accepting the new UI on Safari.
+
+### Four-deck native playback verification
+
+Every main-page deck now offers Four stems, retaining the same batch assignment and explicit
+Load flow. All sixteen stem sources use one native context. Deck timelines remain independent;
+there is no beatmatching or pitch processing. The standalone prototype intentionally remains
+two decks and uses the same generalized context-owner implementation.
+
+Safari checklist: use short aligned exports first; select Four stems on all four main-page
+decks, load separate sets, and start them at different times. Raise volumes/stems deliberately.
+Solo paths, pause/resume/stop/eject/replace one deck, and verify the others continue. After Eject
+and completion of pending work, switch one deck back to Complete song and verify coexistence.
+To test handoff involving Decks 3/4, explicitly exclude Decks 1/2, introduce Deck 3 Flow through a
+positive gesture, raise both volumes, then raise Deck 4 Flow through 0.5 to 1 and reverse. With
+all four participating, changes remain direct-only; no hidden participation changes occur.
+
+Automated Chrome coverage includes sixteen actual sources/one context, rendered sixteen-stem
+sums/isolation, and arbitrary-pair handoff. New pages: tests/four-deck-stem-browser-tests.html;
+rendering remains in tests/four-stem-player-tests.html. Four-deck Safari listening has not been
+performed by the agent. Decoded PCM memory is substantial (~1.84 GB for sixteen five-minute
+stereo 48 kHz stems, before overhead). Long-file memory, sustained CPU, native reclamation,
+transport clicks and clipping remain manual measurements. No limiter or memory cap was added.

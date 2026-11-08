@@ -1,4 +1,4 @@
-// Domain state/actions only. Individual-stem two-deck handoff uses the pure calculator; no audio, storage or UI.
+// Domain state/actions only. Stem/volume two-deck handoff uses the pure calculator; no audio, storage or UI.
 const stemCategories = Object.freeze(['transients', 'flow', 'tune', 'voice']);
 
 function requireStemDeckId(deckId) {
@@ -34,6 +34,7 @@ function createStemSessionState() {
   const relationshipsByStem = {};
   for (const stem of stemCategories) relationshipsByStem[stem] = null;
   return Object.freeze({
+    automaticHandoffEnabled: true,
     eligibilityByDeck: Object.freeze(eligibilityByDeck),
     relationshipsByStem: Object.freeze(relationshipsByStem),
     authorization: Object.freeze({ ceilingsByStem: Object.freeze(ceilingsByStem) }),
@@ -73,6 +74,7 @@ function calculateGestureHandoffState(session, context) {
     const eligibility = Object.freeze({ ...next.eligibilityByDeck[deck.id], [stem]: true });
     next = Object.freeze({ ...next, eligibilityByDeck: Object.freeze({ ...next.eligibilityByDeck, [deck.id]: eligibility }) });
   }
+  if (!next.automaticHandoffEnabled) return next;
   const pair = getStemHandoffPair(participation);
   if (!pair || !pair.includes(deck.id)) return next;
   const other = decks.find(candidate => candidate.id === pair.find(id => id !== deck.id));
@@ -83,6 +85,7 @@ function calculateGestureHandoffState(session, context) {
     const otherGain = calculateEffectiveStemGain(other.volume, other.stems.allocatedLevels[category]);
     const previousGain = calculateEffectiveStemGain(deck.volume, deck.stems.allocatedLevels[category]);
     const proposedGain = calculateEffectiveStemGain(nextVolume, nextStems.allocatedLevels[category]);
+    if (proposedGain === previousGain) continue;
     const previousTotal = previousGain + otherGain;
     const alreadyComplementary = Math.abs(previousTotal - 1) <= 1e-12;
     const upwardCrossing = previousTotal < 1 && proposedGain > previousGain && proposedGain + otherGain >= 1;
@@ -171,7 +174,7 @@ function createStemActions(applicationState) {
       });
     }
     const participating = applicationState.participation.byDeck[deck.id].stemHandoff === true;
-    const authorization = changed && participating
+    const authorization = changed && participating && applicationState.stemSession.automaticHandoffEnabled
       ? calculateStemAuthorization(applicationState.stemSession.authorization, nextVolume,
         nextStems.allocatedLevels, stem || null)
       : applicationState.stemSession.authorization;
@@ -184,35 +187,53 @@ function createStemActions(applicationState) {
     let automaticDeck = null;
     let automaticStems = null;
     const pair = getStemHandoffPair(applicationState.participation);
-    const effectiveGainChanged = stem && calculateEffectiveStemGain(deck.volume, deck.stems.allocatedLevels[stem]) !==
-      calculateEffectiveStemGain(nextVolume, nextStems.allocatedLevels[stem]);
-    if (stem && participating && pair && effectiveGainChanged) {
-      const result = calculateTwoDeckStemHandoff({
-        decks: applicationState.decks.map(candidate => ({
-          id: candidate.id, volume: candidate.volume,
-          allocatedLevel: candidate.stems.allocatedLevels[stem],
-          participating: applicationState.participation.byDeck[candidate.id].stemHandoff,
-          returnEligible: nextSession.eligibilityByDeck[candidate.id][stem]
-        })),
-        directDeckId: deck.id, directStemLevel: action.value,
-        authorizationCeiling: authorization.ceilingsByStem[stem],
-        relationshipEstablished: nextSession.relationshipsByStem[stem] !== null,
-        trigger: 'directGesture'
-      });
+    const handoffByStem = {};
+    const rejectionsByStem = {};
+    if (applicationState.stemSession.automaticHandoffEnabled && participating && pair) {
       automaticDeck = findDeck(pair.find(id => id !== deck.id));
-      const automaticLevel = result.allocationsByDeck[automaticDeck.id];
-      if (automaticLevel !== automaticDeck.stems.allocatedLevels[stem]) {
-        automaticStems = Object.freeze({
-          requestedLevels: automaticDeck.stems.requestedLevels,
-          allocatedLevels: Object.freeze({ ...automaticDeck.stems.allocatedLevels, [stem]: automaticLevel })
-        });
-      }
+      const automaticLevels = { ...automaticDeck.stems.allocatedLevels };
       const relationships = { ...nextSession.relationshipsByStem };
-      if (result.relationshipEstablished && !relationships[stem]) {
-        relationships[stem] = Object.freeze({ deckIds: Object.freeze([...pair]), established: true });
+      for (const category of stem ? [stem] : stemCategories) {
+        const previousGain = calculateEffectiveStemGain(deck.volume, deck.stems.allocatedLevels[category]);
+        const nextGain = calculateEffectiveStemGain(nextVolume, nextStems.allocatedLevels[category]);
+        if (previousGain === nextGain) continue;
+        const calculatorInput = {
+          decks: applicationState.decks.map(candidate => ({
+            id: candidate.id, volume: candidate.volume,
+            allocatedLevel: candidate.stems.allocatedLevels[category],
+            participating: applicationState.participation.byDeck[candidate.id].stemHandoff,
+            returnEligible: nextSession.eligibilityByDeck[candidate.id][category]
+          })),
+          directDeckId: deck.id, directStemLevel: nextStems.allocatedLevels[category],
+          directVolume: nextVolume,
+          authorizationCeiling: authorization.ceilingsByStem[category],
+          relationshipEstablished: nextSession.relationshipsByStem[category] !== null,
+          trigger: 'directGesture'
+        };
+        // All categories finish before commit. An exception rolls back the entire gesture.
+        const result = calculateTwoDeckStemHandoff(calculatorInput);
+        const acceptance = assessStemHandoffProposal(calculatorInput, result);
+        if (!acceptance.accepted) {
+          rejectionsByStem[category] = acceptance.reason;
+          continue; // Existing direct-only fallback; never apply a rejected receiver proposal.
+        }
+        automaticLevels[category] = result.allocationsByDeck[automaticDeck.id];
+        handoffByStem[category] = result;
+        if (result.relationshipEstablished && !relationships[category]) {
+          relationships[category] = Object.freeze({ deckIds: Object.freeze([...pair]), established: true });
+        }
       }
+      if (stemCategories.some(category => automaticLevels[category] !== automaticDeck.stems.allocatedLevels[category])) {
+        automaticStems = Object.freeze({ requestedLevels: automaticDeck.stems.requestedLevels,
+          allocatedLevels: Object.freeze(automaticLevels) });
+      }
+      const details = stem
+        ? { ...(handoffByStem[stem] ? { handoff: handoffByStem[stem] } : {}),
+            ...(rejectionsByStem[stem] ? { handoffRejection: rejectionsByStem[stem] } : {}) }
+        : { ...(Object.keys(handoffByStem).length ? { handoffByStem: Object.freeze(handoffByStem) } : {}),
+            ...(Object.keys(rejectionsByStem).length ? { handoffRejectionsByStem: Object.freeze(rejectionsByStem) } : {}) };
       nextSession = Object.freeze({ ...nextSession, relationshipsByStem: Object.freeze(relationships),
-        lastChange: Object.freeze({ ...lastChange, handoff: result }) });
+        lastChange: Object.freeze({ ...lastChange, ...details }) });
     }
     // Synchronous commit after all validation/calculation. Automatic allocation never passes
     // through dispatch, so it cannot alter requested intent, eligibility or authorization.
@@ -238,4 +259,77 @@ function createStemActions(applicationState) {
   }
   return Object.freeze({ dispatch, setDeckVolume, setStemLevel, getEffectiveGain,
     stemControlId: getStemControlId, volumeControlId: getDeckVolumeControlId });
+}
+
+
+// A global permission gate, independent of participation and retained sharing latches.
+function createAutomaticStemHandoffActions(applicationState) {
+  const controlId = 'global.stemHandoff.enabled';
+  function get() { return applicationState.stemSession.automaticHandoffEnabled; }
+  function set(value) {
+    if (typeof value !== 'boolean') throw new TypeError('Automatic stem handoff permission must be Boolean.');
+    if (get() === value) return false;
+    applicationState.stemSession = Object.freeze({ ...applicationState.stemSession, automaticHandoffEnabled: value });
+    return true;
+  }
+  function toggle() { return set(!get()); }
+  function dispatch(action) {
+    if (!action || action.controlId !== controlId || !['stemHandoff.set', 'stemHandoff.toggle'].includes(action.type)) {
+      throw new TypeError('Unknown global stem handoff action/control.');
+    }
+    return action.type === 'stemHandoff.set' ? set(action.value) : toggle();
+  }
+  return Object.freeze({ get, set, toggle, dispatch, controlId });
+}
+
+// Contract/constraint validation only. This does not invent convergence or reject deficits.
+function assessStemHandoffProposal(input, result) {
+  const reject = reason => Object.freeze({ accepted: false, reason });
+  const validGain = value => Number.isFinite(value) && value >= 0 && value <= 1;
+  const near = (a, b) => Number.isFinite(a) && Number.isFinite(b) && Math.abs(a - b) <= 1e-12;
+  if (!result || !result.allocationsByDeck || !result.effectiveGainsByDeck || result.targetGain !== 1 ||
+      typeof result.relationshipEstablished !== 'boolean') return reject('Invalid result structure.');
+  if (!validGain(result.deficit) || !validGain(result.excess)) return reject('Invalid residual range.');
+  const ids = input.decks.map(deck => String(deck.id));
+  for (const map of [result.allocationsByDeck, result.effectiveGainsByDeck]) {
+    const keys = Reflect.ownKeys(map);
+    if (keys.length !== ids.length || keys.some(key => !ids.includes(key))) return reject('Invalid result deck IDs.');
+  }
+  let total = 0;
+  for (const deck of input.decks) {
+    const level = result.allocationsByDeck[deck.id], gain = result.effectiveGainsByDeck[deck.id];
+    if (!validGain(level) || !validGain(gain) || !near(gain, (deck.id === input.directDeckId && input.directVolume !== undefined ? input.directVolume : deck.volume) * level)) return reject('Invalid allocation/effective gain.');
+    if (deck.id === input.directDeckId) {
+      if (level !== input.directStemLevel) return reject('Direct human target was changed.');
+    } else if (!deck.participating) {
+      if (level !== deck.allocatedLevel) return reject('Unrelated deck was changed.');
+    } else {
+      const previous = deck.volume * deck.allocatedLevel;
+      const capacity = deck.returnEligible && input.authorizationCeiling !== null ? Math.min(deck.volume, input.authorizationCeiling) : 0;
+      if (gain > Math.max(previous, capacity) + 1e-12) return reject('Automatic increase exceeds eligibility/authorization/physical capacity.');
+      if (deck.volume === 0 && level !== deck.allocatedLevel) return reject('Muted receiver fader was changed.');
+    }
+    if (deck.participating) total += gain;
+  }
+  const direct = input.decks.find(deck => deck.id === input.directDeckId);
+  const other = input.decks.find(deck => deck.participating && deck.id !== input.directDeckId);
+  const oldDirect = direct.volume * direct.allocatedLevel, otherGain = other.volume * other.allocatedLevel;
+  const directGain = (input.directVolume === undefined ? direct.volume : input.directVolume) * input.directStemLevel;
+  const expectedSharing = input.relationshipEstablished || (oldDirect + otherGain < 1 &&
+    directGain > oldDirect && directGain + otherGain >= 1);
+  if (result.relationshipEstablished !== expectedSharing) return reject('Sharing lifecycle mismatch.');
+  const otherResultGain = result.effectiveGainsByDeck[other.id];
+  const capacity = Math.max(otherGain, other.returnEligible && input.authorizationCeiling !== null
+    ? Math.min(other.volume, input.authorizationCeiling) : 0);
+  if (!expectedSharing && result.allocationsByDeck[other.id] !== other.allocatedLevel) return reject('Inactive sharing changed the receiver.');
+  if (expectedSharing && (total > 1 + 1e-12 || (total < 1 - 1e-12 && otherResultGain < capacity - 1e-12))) {
+    return reject('Established complement has an avoidable deficit or excess.');
+  }
+
+  const expectedStatus = !expectedSharing ? 'inactive' : Math.abs(total - 1) <= 1e-12 ? 'balanced' : 'constrained';
+  if (result.status !== expectedStatus || !near(result.combinedGain, total) ||
+      !near(result.deficit, Math.max(0, 1 - total)) || !near(result.excess, Math.max(0, total - 1))) {
+    return reject('Inconsistent result totals/status.');
+  }
+  return Object.freeze({ accepted: true, reason: null });
 }

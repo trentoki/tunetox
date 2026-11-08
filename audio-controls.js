@@ -1,6 +1,8 @@
 // Temporary audio controls. These do not call metadata loading or cueing.
 const signalsmithPlayer = createSignalsmithPlayer();
-const audioEngine = createDeckOneExperimentRouter(createAudioEngine(), createPitchPreservingPlayer(), signalsmithPlayer);
+const completeSongEngine = createDeckOneExperimentRouter(createAudioEngine(), createPitchPreservingPlayer(), signalsmithPlayer);
+const mainStemIntegration = typeof createMainStemIntegration === 'function' ? createMainStemIntegration(completeSongEngine) : null;
+const audioEngine = mainStemIntegration ? mainStemIntegration.router : completeSongEngine;
 
 // Each call keeps its elements and pending selections local to one deck.
 function createDeckAudioControls(deckId) {
@@ -15,7 +17,9 @@ function createDeckAudioControls(deckId) {
   const audioFileInput = section.querySelector('input[type="file"]');
   const loadSelectedButton = section.querySelector('[data-action="load-selected"]');
   let selectedSignalsmithFile = null;
-  const isSignalsmith = () => deckId === 1 && audioEngine.getMode() === 'signalsmith';
+  const isStemSource = () => audioEngine.getSourceMode && audioEngine.getSourceMode(deckId) === 'stems';
+  let updateStemControls = () => {};
+  const isSignalsmith = () => !isStemSource() && deckId === 1 && audioEngine.getMode() === 'signalsmith';
   const playButton = section.querySelector('[data-action="play"]');
   const pauseButton = section.querySelector('[data-action="pause"]');
   const stopButton = section.querySelector('[data-action="stop"]');
@@ -28,7 +32,7 @@ function createDeckAudioControls(deckId) {
   const tempoStatus = section.querySelector('[data-display="tempo"]');
   const modeInput = section.querySelector('[data-input="playback-mode"]');
   if (deckId === 1) section.querySelector('[data-experiment]').hidden = false;
-  const isPreserving = () => deckId === 1 && audioEngine.isPitchPreserving();
+  const isPreserving = () => !isStemSource() && deckId === 1 && audioEngine.isPitchPreserving();
   const comparisonPanel = section.querySelector('[data-comparison]');
   const comparisonInput = section.querySelector('[data-input="comparison-level"]');
   comparisonInput.addEventListener('input', () => {
@@ -90,6 +94,7 @@ function createDeckAudioControls(deckId) {
         ' RMS ' + state.outputRms.toFixed(3) + (state.outputPeak >= 1 ? ' — CLIPPING: lower comparison output level' : '');
       if (state.error && !closureBlocked) audioStatus.textContent = state.error;
     }
+    updateStemControls();
   }
 
   modeInput.addEventListener('change', () => {
@@ -204,6 +209,7 @@ function createDeckAudioControls(deckId) {
     if (version === selectionVersion) updateAudioControls();
   });
 
+  if (mainStemIntegration) updateStemControls = mainStemIntegration.mount(section, deckId);
   updateAudioControls();
   return updateAudioControls;
 }

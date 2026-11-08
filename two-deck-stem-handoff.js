@@ -1,4 +1,4 @@
-// Pure one-category proposal calculator, used by individual-stem domain actions and numerical tests.
+// Pure one-category proposal calculator, used by stem/volume domain actions and numerical tests.
 // Callers retain returned sharing state. Below-unity upward crossing can establish sharing;
 // return eligibility and other activation/convergence rules are never inferred.
 function calculateTwoDeckStemHandoff(input) {
@@ -26,6 +26,9 @@ function calculateTwoDeckStemHandoff(input) {
   const direct = participants.find(deck => deck.id === directDeckId);
   if (!direct) throw new RangeError('Direct deck must participate in the pair.');
   const other = participants.find(deck => deck.id !== directDeckId);
+  // Optional volume target preserves the real pre-gesture snapshot and fixed stem allocation.
+  if (input.directVolume !== undefined) requireUnitGain(input.directVolume);
+  const directVolume = trigger === 'directGesture' && input.directVolume !== undefined ? input.directVolume : direct.volume;
   const allocationsByDeck = {};
   for (const deck of decks) allocationsByDeck[deck.id] = deck.allocatedLevel;
 
@@ -37,7 +40,7 @@ function calculateTwoDeckStemHandoff(input) {
     allocationsByDeck[direct.id] = directStemLevel;
     const previousDirectGain = calculateEffectiveStemGain(direct.volume, direct.allocatedLevel);
     const currentOtherGain = calculateEffectiveStemGain(other.volume, other.allocatedLevel);
-    const directGain = calculateEffectiveStemGain(direct.volume, directStemLevel);
+    const directGain = calculateEffectiveStemGain(directVolume, directStemLevel);
     // Use spare effective-gain capacity first. Crossing unity during an upward gesture
     // establishes sharing, including when one event jumps past the exact boundary.
     if (!relationshipEstablished && previousDirectGain + currentOtherGain < 1 &&
@@ -62,7 +65,7 @@ function calculateTwoDeckStemHandoff(input) {
   // Participation changes never apply a proposed direct value or normalize allocations.
   const effectiveGainsByDeck = {};
   for (const deck of decks) {
-    effectiveGainsByDeck[deck.id] = calculateEffectiveStemGain(deck.volume, allocationsByDeck[deck.id]);
+    effectiveGainsByDeck[deck.id] = calculateEffectiveStemGain(deck.id === directDeckId ? directVolume : deck.volume, allocationsByDeck[deck.id]);
   }
   const combinedGain = participants.reduce((total, deck) => total + effectiveGainsByDeck[deck.id], 0);
   const deficit = Math.max(0, 1 - combinedGain);

@@ -1,5 +1,8 @@
 # TuneFlow — Product Design and Development Handoff
 
+Working product name: **TuneToss**, formerly TuneFlow. Existing paths and executable identifiers remain unchanged.
+
+
 **Purpose:** Share architecture, design context, roadmap and unresolved decisions. This is
 not a claim that every feature is implemented. AGENTS.md owns workflow/safeguards; RULES.md
 owns approved product behavior and labelled historical implementation. Updated-named older
@@ -642,7 +645,7 @@ Actions prepare control/allocation, authorization and lastChange records before 
 Non-human/automatic origins remain rejected without any state update. Initialization records
 no gesture and grants nothing. Authorization is shared globally by category, separate from
 participation/saved defaults, and reset for every new application session. No persistence,
-audio gain enforcement, main-volume redistribution, above-unity convergence or multi-deck allocation is implemented.
+audio gain enforcement, above-unity convergence or multi-deck allocation is implemented.
 Individual-stem two-deck state redistribution is now integrated below.
 The existing requested-versus-allocated state/action behavior remains otherwise unchanged.
 
@@ -717,8 +720,8 @@ introduce eligibility or authorization, overwrite human provenance, or modify ma
 lastChange.handoff optionally records the immutable calculator result for that direct event,
 including deficit/excess. The existing Boolean action return contract remains unchanged.
 
-No-effect changes (including volume 0), excluded decks, unsupported participant counts and
-main-volume gestures do not call the calculator. Membership changes still only invalidate
+No-effect changes, excluded decks and unsupported participant counts do not call the calculator.
+Main-volume gestures now evaluate each changed effective-gain category independently. Membership changes still only invalidate
 relationships while preserving levels and authorization. Automatic allocations retain full
 calculator precision, while direct input validation retains 0.01 steps. No UI animation,
 input binding, display quantization or takeover behavior is added.
@@ -729,118 +732,170 @@ and no-effect guards, requested/allocated separation, disable/re-enable, and ato
 Earlier lifecycle tests that asserted no redistribution were updated only at those now-approved
 integration points; their relationship/participation and preservation checks remain.
 
-### Future independent automatic handoff setting and MIDI-ready controls
+### Main-volume two-deck handoff — implemented, audio-independent
 
-**Approved requirements, not implemented:** a default-enabled automatic stem handoff setting
-for the four-deck mixer, independent of automatic tempo matching/beatmatching and key matching/
-tune matching. It governs permission for automatic allocation; per-deck participation remains
-separate in the existing authoritative store. Visible layout must not become a matching gate.
-No new global enable field, settings UI, storage or runtime gate is added in this milestone.
+Direct main-volume actions preserve the controlled deck's requested and allocated stem
+records. Each category whose effective gain changes uses the same two-deck calculator,
+eligibility, authorization, sharing latch, physical capacity and global suspension rules.
+The calculator accepts optional `directVolume`, retaining the real pre-gesture snapshot;
+omitted means unchanged volume. Participation-change proposals still preserve all levels.
+The proposal validator uses the proposed volume when checking effective gains.
 
-Enabled behavior: approved handoff may change participating decks' allocated levels while
-preserving human-requested levels. Disabled behavior: independent direct stem control with
-no automatic redistribution. Disabling preserves playback, current allocations and requests;
-it neither restores remembered requests nor changes tempo/pitch or matching settings. Future
-individual-deck participation controls coexist with this setting rather than being replaced.
-Current action support remains two participants only; the default-on setting is not permission
-to implement three-/four-deck handoff.
+Prepare all four category proposals before committing volume, receiver allocations and
+session metadata. Any calculator exception rolls back the entire gesture, including direct
+volume, authorization and provenance. Existing rejected-proposal fallback is category-specific:
+retain the direct gesture and leave that receiver category unchanged. Valid constrained results
+remain accepted. Automatic allocations never change receiver requested levels or main volume,
+and grant neither authorization nor human provenance. Direct volume gestures evaluate all
+four resulting effective gains for high-water authorization without introducing eligibility.
 
-### Approved future OFF/ON lifecycle and preference persistence
+Zero-effect categories, excluded decks, suspension and non-two-deck groups do not redistribute.
+Participation changes never normalize allocations. No new above-unity convergence is added.
+`lastChange.handoffByStem` records accepted category results/residuals; optional
+`handoffRejectionsByStem` records rejection reasons. These are event metadata, not another
+allocation store. Individual-stem event fields remain compatible.
 
-The global setting defaults ON in the four-deck mixer, and its user preference should eventually
-persist across application sessions. Switching two-/four-deck views preserves the selected value;
-visibility is not a reset or synchronization trigger. No setting/storage implementation is added.
+Permanent tests: tests/stem-volume-handoff-tests.js covers capacity-first establishment,
+reversals, zero endpoints, independent categories, authorization/physical limits, muted and
+ineligible receivers, participation/count guards, suspension and third-category failure with
+full rollback. No audio routing, UI or DSP is connected by this milestone.
 
-OFF preserves requested and allocated levels, playback, authorization and human provenance at
-toggle time, without redistribution. While OFF, each manual stem gesture affects its directly
-controlled stem only. ON also preserves levels initially; automatic handoff resumes on the next
-eligible intentional stem gesture. Neither toggle is a human stem gesture, grants authorization,
-changes provenance, or initiates a calculation. Per-deck participation remains independent.
+### Global automatic handoff permission — implemented, UI/persistence/MIDI deferred
 
-**Approved distinction:** global OFF suspends redistribution and retains existing latches,
-authorization, requested/allocated levels and human provenance. Explicit sharing disable is a
-separate operation: existing per-deck disable/pair-change paths still clear their relationships
-without changing levels. Global OFF must not masquerade as a participation change or invoke
-explicit disable. This resolves the earlier suspension-versus-disable question without changing
-the current per-deck lifecycle or production behavior.
+**Working-tree checkpoint:** the preceding implementation is uncommitted and implements a
+stem-only permission. The revised master/individual model below is approved design, not code.
+Existing source and tests remain untouched pending a separately approved migration.
 
-Global ON restores eligibility to run automatic processing on the next eligible intentional
-stem gesture; it does not reset individual eligibility, introduce untouched stems, synthesize
-a gesture or calculate immediately. Existing eligible/ineligible records, authorization and
-provenance remain intact. No old latch is cleared or reestablished merely by toggling.
 
-Manual OFF-state gestures may produce above-unity allocations. Compare effective gains when
-assessing the handoff target; raw allocated fader sums alone do not define excess. ON must
-preserve the allocations. On the next qualifying gesture, use the unchanged calculator only
-when it can safely produce an approved allocation; otherwise preserve current allocations
-without partial changes or unexpected normalization. No new convergence formula is authorized.
+appState.stemSession.automaticHandoffEnabled is the single permission Boolean, factory true
+for the four underlying decks. It is independent of participation, beatmatching, tune matching
+and layout. appActions.stemHandoff exposes get/set/toggle/dispatch and the stable controlId
+ global.stemHandoff.enabled. Dispatch accepts stemHandoff.set (Boolean value) or
+stemHandoff.toggle. This adds no settings UI, input adapter, storage or identifier rename.
 
-**Remaining safety ambiguity:** an established latch currently yields an immediate complement
-even if the starting effective total is above 1. Example: [0.8,0.6], main volumes 1, then direct
-Deck 2→0.65 produces [0.35,0.65] with adequate authorization. It is numerically valid, but whether
-that 0.45 automatic reduction is acceptable existing handoff or unexpected normalization is
-not yet specified. An inactive above-unity pair has no convergence rule. A future wrapper
-must not equate finite/in-range output or balanced status with musical safety.
+Set/toggle replace only the permission field; all existing deck records, authorization,
+eligibility, relationships and lastChange provenance remain identical. OFF suspends the
+individual-stem calculator path and prevents new direct authorization/sharing latches while
+allowing independent manual controls and eligibility introduction. ON never calculates or
+creates a gesture; the next eligible intentional action resumes existing handoff. Explicit
+participation disable/pair changes still clear their own relationship, including while OFF.
+Main-volume redistribution, multi-deck allocation and inactive above-unity convergence remain
+outside scope. Switching views does not reset the preference.
 
-**Remaining transaction decision:** preserving all current allocations when a proposal is
-rejected may also reject the new human-controlled allocation, unlike the existing rule that
-preserves the direct target when automatic capacity is insufficient. Clarify whether rejection
-is a complete rollback (including requested level, provenance, authorization and eligibility)
-or a direct-only commit. Do not alter the action contract without approval. It also remains
-open whether genuine manual gestures while OFF can establish new relationships; keeping old
-latches is approved and does not alone settle new establishment.
+An already established pair can accept the existing calculator's complement from above unity:
+[0.8,0.6] followed by direct Deck 2→0.65 gives [0.35,0.65] when constraints allow. The permission
+toggle itself never produces this adjustment. This resolves the prior concern about whether
+that numerically valid existing handoff reduction is unexpected normalization.
 
-### State assessment and smallest proposed implementation/test sequence
+### Proposal acceptance, fallback and atomicity — implemented
 
-Current stemSession has relationship, eligibility and authorization records; participation is
-separate and authoritative. These records can remain intact during suspension. There is no
-global permission flag yet. Add one independent Boolean through the shared application/settings
-boundary, not a change to participation or relationshipEstablished. This proposal requires
-implementation approval; it is not a code change.
+assessStemHandoffProposal(input,result) is a pure deterministic result-contract check, not
+another convergence algorithm. It checks structure and exact deck IDs, finite unit-range
+values, effective-gain multiplication, direct-target priority, unchanged unrelated/muted
+controls, eligibility/authorization/physical increase bounds, sharing lifecycle and internally
+consistent totals/status/residuals. It rejects an avoidable deficit/excess in established
+sharing and receiver changes while inactive. The existing 1e-12 tolerance handles numerical
+arithmetic only. A constrained result is accepted when its deficit is imposed by capacity;
+there is no amplitude, timing or musical threshold for rejecting an otherwise valid result.
 
-1. Resolve the above safety/transaction and OFF-state establishment decisions. Then add a
-   default-ON global state flag and validated shared set/toggle actions; proposed stable ID
-   global.stemHandoff.enabled. Toggles update only that flag, never deck data, human stem
-   provenance, authorization, eligibility or existing relationships. No visibility-based reset.
-2. Gate only the approved individual-stem redistribution path. OFF permits independent manual
-   control; ON does no calculation until an eligible intentional gesture. Keep the pure
-   calculator unchanged and put any approved proposal validation in a small domain wrapper.
-   Prepare the entire accepted transaction before committing; never use partial recovery.
-3. Permanent tests: toggle identity preservation for allocations/requests/authorization/latches/
-   eligibility/provenance; independent OFF gestures; ON without synthetic events; next-gesture
-   resumption and reversals; explicit disable/pair invalidation while suspended; no-effect and
-   excluded guards; above-unity acceptance/rejection per the newly approved safety policy;
-   forced failure rollback; unchanged startup, matching and audio tests. Run full automated
-   and relevant browser suites before calling the milestone complete.
-4. Future persistence is a separate bounded adapter/migration milestone: save only the approved
-   Boolean preference through a versioned offline settings record, validate before initialization,
-   preserve preference across views, and handle unsupported versions/write failure. Do not
-   silently add fields to the strict participation-defaults v1 record, or persist session
-   latches/ceilings/eligibility/history. Authorization persistence remains separately undecided.
-5. Future MIDI/mouse/touch/keyboard adapters share the same stable-ID setting actions; reuse
-   existing per-stem IDs/actions. No MIDI learn, feedback or UI is implemented now. Define input
-   mapping/feedback and idempotent set versus toggle semantics in that later milestone rather
-   than duplicating handoff behavior in an input adapter.
+1. Invalid direct input, a calculator exception, or an exception while checking a proposal:
+   throw/report the error, commit nothing. Existing full-rollback regression is preserved.
+2. Successful calculation, deliberately rejected result: prepare an explicit direct-only
+   fallback using the validated human target, authorization, eligibility, relationship and
+   provenance metadata. Leave every other deck untouched. lastChange.handoffRejection reports
+   a fixed reason; invalid result data is not committed as a handoff snapshot.
+3. Accepted result (balanced, inactive or valid constrained): retain the prior atomic action
+   commit, including calculator deficit/excess reporting in lastChange.handoff.
 
-Future ON/OFF preference persistence is approved; future sharing-authorization persistence is
-explicitly undecided. This reopens the earlier documented permanent no-ceiling-persistence
-product rule, but changes no implemented behavior: current ceilings remain session-only and
-reset at startup. A future repository must not infer permission to save ceilings, relationships,
-eligibility or gesture history from permission to save the Boolean preference. Storage/UI details
-remain deferred; no migration or persistence code is introduced.
+This resolves the earlier transaction ambiguity without catching calculator exceptions as
+fallback. Structural/constraint violations supply rejection criteria already required by
+existing rules; no new musical rejection policy has been invented. Any future additional
+musical rejection policy still requires approval. Toggles cannot overwrite human provenance.
 
-All interactive stem controls must eventually be independently MIDI-mappable. Preserve stable
-control identity and shared validated actions across mouse, touch and future MIDI. The current
-deck.<id>.stem.<category>.level and deck.<id>.volume IDs already provide those domain seams.
-Input adapters invoke the same actions; automatic receiver allocations do not invoke direct
-actions or masquerade as human/MIDI authorization. MIDI learn, input bindings, controller
-feedback and configuration storage remain deferred. No UI/MIDI implementation is added.
+Permanent tests/global-stem-handoff-tests.js covers validated shared controls/idempotence,
+suspension identity guarantees, OFF-state independent control without authorization/new latches,
+re-enable without a synthetic event, view preservation, explicit disable while suspended,
+above-unity resumption, valid constrained outcomes, rejection fallback and acceptance defects.
+Existing forced-calculator-exception tests remain unchanged. No audio/DSP behavior is altered.
 
-Verification added in this milestone: permanent integration tests repeatedly control one deck
-and alternate human gestures between Decks 1/2, asserting that each receiver retains its own
-latest human-requested record and that provenance follows only the human actor. Existing
-return-from-zero, failed-calculation atomicity, excluded/no-effective-change and authorization/
-physical-limit cases remain intact. No calculator or production action algorithm is changed.
+### Deferred persistence and input adapters
+
+Persisting the user's Boolean preference is approved future work, independent of session
+authorization persistence (still undecided). A later versioned offline adapter must validate
+before initialization, handle unsupported versions and failures, preserve preferences across
+views and not silently extend the strict participation-defaults v1 format. No browser storage
+exists for this permission yet; new application sessions currently use the factory ON value.
+Do not infer permission to save ceilings, eligibility, pair latches or gesture history.
+
+Future mouse/touch/keyboard/MIDI adapters call the same setting actions using
+ global.stemHandoff.enabled, and retain existing deck.<id>.stem.<category>.level and
+ deck.<id>.volume actions. MIDI learn, feedback, configuration persistence and settings UI
+remain separately approved milestones. Automatic allocations never masquerade as human input.
+
+### Proposed master/individual automatic-mixing architecture — not implemented
+
+One authoritative preferences record should own masterEnabled and the selected beatMatch,
+tuneMatch and stemHandoff Booleans. Names/record location are proposals, not executable API
+renames. Proposed layout:
+
+```js
+// Proposed only; do not add alongside an authoritative duplicate stem permission.
+automaticMixing: {
+  masterEnabled: /* explicit factory default still to confirm */,
+  features: { beatMatch: true, tuneMatch: true, stemHandoff: true }
+}
+```
+
+Stable controls: global.automaticMixing.enabled, global.beatMatch.enabled,
+global.tuneMatch.enabled, global.stemHandoff.enabled. Shared validated set/toggle actions should
+own behavior; future UI, mouse/touch/keyboard and MIDI adapters invoke those actions. Compute
+effective permission as masterEnabled && features[feature], then apply the existing per-deck
+participation restriction. Never store another effective-state copy or rewrite the three
+individual preferences when master changes. Master ON therefore uses retained choices rather
+than replacing them with all-ON defaults or a stale snapshot.
+
+Master OFF preserves playback tempo/pitch, stem requests/allocations, latches, authorization,
+eligibility, participation and human provenance, while suspending every automatic feature.
+Master ON changes only permission; each enabled feature waits for its appropriate qualifying
+action. Stem handoff keeps the approved suspension/latch/calculator/fallback rules, including
+no immediate normalization. No synthetic gestures, human authorization or implicit MIDI input.
+An explicit sharing disable/pair change remains distinct from master or feature suspension.
+
+### Conflicts and smallest safe implementation sequence — proposal only
+
+1. **Migrate permission ownership first, with tests.** The current uncommitted
+   stemSession.automaticHandoffEnabled is the individual stem preference, not the master.
+   Move ownership to the agreed shared record (or an agreed equivalent) with no second writable
+   Boolean. Preserve stable global.stemHandoff.enabled identity; add the master and beat/tune
+   IDs/actions. Keep session authorization/eligibility/relationships separate. Confirm master
+   factory default first; default ON is recommended to preserve current initial behavior.
+2. **Gate the existing stem action path by the derived permission.** Either master OFF or
+   individual stem OFF must suspend redistribution/new authorization/new latches while retaining
+   state; manual gestures remain direct. Master ON must respect individual OFF preferences.
+   Preserve the current calculator algorithm, rollback/rejection distinctions and atomic commits.
+3. **Explicitly reconcile existing metadata synchronization before claiming master OFF works.**
+   loadSong still calls synchronizeLoadedDecks when interfaceMode is fourDeck; that stopped-deck
+   averaging path ignores participation and global permissions. cueSong independently prepares
+   tempo/pitch from global/reference state. These historical paths are not continuous matching
+   and cannot be silently left active under a supposedly suspending master. Specify and test
+   which applying/preparation actions are automatic, including cue fallback when matching is
+   disabled, without changing pure harmonic calculations or inventing convergence behavior.
+4. **Add feature gating without implementing new matching algorithms.** Cover feature-specific
+   action boundaries only after step 3 is approved; beatmatching/tune-matching qualifying resume
+   actions are not fully defined yet. Toggling master/features never applies tempo/pitch/gain.
+   No stem/audio integration or unrelated metadata reset is implied.
+5. **Verification:** all master/feature Boolean combinations; retained individual choices through
+   OFF/ON and view changes; explicit sharing disable vs suspension; unchanged levels/tempo/pitch/
+   provenance/authorization; manual controls while suspended; no immediate work on ON; correct
+   qualifying-action resumption; existing calculator/failure regressions; legacy load/cue negative
+   cases; full suite and relevant browser checks. No production-readiness claim from state tests.
+6. **Later:** versioned offline preference storage and UI/MIDI adapters through shared IDs/actions,
+   with no implicit authorization persistence. Do not change strict participation-defaults v1
+   format or rewrite uncommitted work as a side effect of planning.
+
+This sequence expands the proposed milestone beyond a stem-only switch but authorizes no code
+now. Preserve the existing uncommitted implementation and tests for review. No files/directories
+or existing TuneFlow identifiers are renamed; audio/DSP behavior remains unchanged.
 
 ### Mathematical design constraint: continuous reversal without release
 
@@ -993,7 +1048,7 @@ Older updated-named documents and the read-only v40 reference do not override cu
 **Milestones completed:** stem state/actions, session eligibility/pair lifecycle and isolated
 individual-stem two-deck action integration. Authorization and physical bounds apply to the
 automatic receiver through the existing calculator. Next work requires separate approval:
-main-volume or multi-deck redistribution, above-unity convergence, audio routing, separation,
+multi-deck redistribution, above-unity convergence, audio routing, separation,
 continuation, UI/MIDI bindings and persistence. No general automatic allocator is authorized.
 
 ## 23. Visual reference, implementation status and boundaries
@@ -1010,7 +1065,7 @@ Safari listening succeeded according to the user in the tested release+persisten
 are made here.
 
 Confirmed requirements are distinguished from recommended schemas/interactions/roadmap and
-open design decisions. Library/search/layouts, browser persistence of defaults, main-volume/multi-deck handoff, above-unity convergence and
+open design decisions. Library/search/layouts, browser persistence of defaults, multi-deck handoff, above-unity convergence and
 MIDI are not implemented. Individual-stem two-deck domain handoff is integrated; no audio
 gain routing is connected. Participation state/actions and validated one-time starting-default initialization are implemented; the stem state/action foundation is also implemented; storage and audio integration are not. Existing interfaceMode triggers remain until an
 approved migration. Convergence mathematics, reference edge cases, remaining handoff precedence and live transition
@@ -1064,3 +1119,194 @@ and interactions with automatic stem handoff and effective-gain authorization. D
 that sampler activity grants authorization, inherits a particular ceiling, or changes handoff
 participation. These behaviors need later design and explicit approval; existing rules and
 current audio routing remain unchanged.
+
+### Isolated native four-stem fixture — two-deck extension implemented experimentally
+
+`createFourStemPlayer` remains the reusable transport. `createTwoDeckStemPlayer` lazily owns
+one shared AudioContext and exposes `getDeck(1|2)` plus pair-wide `close()`. Each borrowed-context
+player owns its buffers, position, loading/command versions and session graph; individual close
+cannot close the pair's context. Pair shutdown invalidates both decks' pending work before
+closing the context once. One-deck construction still owns its own context for compatibility.
+
+Each session routes four sources through four musical stem GainNodes, then a musical main-volume
+GainNode, then a separate transport GainNode to the shared destination. No common master limiter
+or normalization is introduced. Main-volume and stem adjustments independently retain current
+linear-envelope values on retarget and use the provisional 10 ms ramp. The standalone player API defaults to unity; the integrated page now initializes its audio
+targets from domain defaults (volumes 0, Deck 1 stems 1, Deck 2 stems 0).
+Both controls survive audio replacement. Within-deck starts/offsets are identical; deck timelines
+remain independent. Pause/Stop still use immediate retirement, without a new release envelope.
+
+The existing page now provides two separately labelled panels and Close all audio. Stable
+control IDs now use existing deck volume/stem/participation IDs and dispatch shared actions
+through the isolated bridge. Existing normal/SoundTouchJS/Signalsmith code is unchanged.
+
+Validation remains conservative: identical decoded length/rate per deck, mono/stereo only;
+no musical-offset detection. Different decks may use different-duration songs. Eight decoded
+stem buffers and transient replacement buffers require Safari/iPad memory/CPU measurement.
+The user-reported two-deck Safari listening pass is recorded; newly connected automatic
+handoff listening remains pending. Native reclamation, transport clicks and long-running stability are not established.
+
+Tests cover borrowed context ownership, simultaneous independent transports, within-deck
+resume synchronization, gain isolation/reversals, retained levels, cancellation, repeated
+sessions and full cleanup. Browser tests decode generated WAVs and render two-deck sums and
+independent main-volume ramps, then exercise simultaneous native playback. No audio handoff
+claim follows from the earlier transport tests. The bridge below now adds experimental handoff
+audio; stretching, separation and beat/tune matching remain absent.
+
+### Shared-action audio bridge — isolated prototype implementation
+
+`experimental/stem-handoff-audio-bridge.js` invokes the existing stem/participation action
+factories against appState, then schedules a projection of committed allocations and volumes.
+No duplicate mathematical policy or writable participation store is introduced. The separate
+page loads domain scripts, excludes inaudible Decks 3/4 and initializes audio targets before
+loading any files. No context is created until an explicit Load gesture.
+
+`createTwoDeckStemPlayer.applyGainSnapshot` validates both targets before scheduling changes
+at one shared future context time. Existing setters accept an optional scheduling time; old
+callers retain their behavior. Gain ramps keep their unfinished segment during future-time
+retargeting. Automatic allocations update the actual fader positions immediately after commit;
+requested labels preserve intent, while per-control labels distinguish direct and automatic
+updates. Range displays allow fractional allocations; direct input still uses 0.01 increments.
+The 100 ms timer only refreshes transport status, not handoff movement.
+
+Calculator exceptions schedule nothing and preserve full rollback. Native AudioParam failures
+cannot be rolled back transactionally after a domain commit: errors are surfaced. Gain ramps
+are provisional smoothing, not claims of instantaneous effective-gain-cap enforcement while
+separate volume/stem envelopes move. Replacement retains current domain/audio targets; transports
+remain independent. Tests include stereo-isolated rendered Flow [1,0] -> [0.5,0.5] -> [0,1],
+main-volume once, independent categories, participation, rapid retarget continuity and failure
+rollback. Safari listening, device latency and long-run resource validation remain pending for
+this integration. No normal/SoundTouchJS/Signalsmith files or DSP are changed.
+
+### Main-page source integration — experimental bounded implementation
+
+`stem-source-router.js` routes transport/file calls to the existing complete-song router or
+the tested two-deck native player. Mode defaults to complete song, only Decks 1/2 can opt in.
+Switch guards inspect both backend states plus pending operation counts; Eject clearing a load
+flag cannot bypass a still-pending browser promise. Source mode is backend selection, not a
+second participation/volume store. No new processing engine is created.
+
+`main-stem-integration.js` mounts the reusable `experimental/stem-controls.js`, owns the stem
+pair/bridge, and adds source and participation controls to the four existing panels. It passes
+existing appActions to the bridge and preserves four-deck participation defaults. The prototype
+host remains separate and retains its explicit fixture exclusions. Neither host duplicates the
+calculator. Complete-song controls/diagnostics retain the previous router API and context
+ownership. Existing Play/Pause/Stop/Eject buttons serve stem mode; the mounted component adds
+mapped files, Load and musical controls without duplicate transport handlers or polling timers.
+
+Main-page volume/stem controls affect native stems, not legacy complete-song gain routing.
+No new metadata load/cue synchronization is triggered. Unsupported stem tempo controls are
+explicitly disabled. Shared-action commit callbacks immediately refresh both musical panels;
+the existing 100 ms loop handles transport status. Source switching leaves domain allocations,
+authorization and eligibility intact. As before, a native scheduling error after a successful
+domain commit cannot be represented as transactional audio rollback.
+
+Regression coverage adds source-router mocks and tests/main-stem-browser-tests.html for four
+startup defaults, source locks, exclusive routing, manual exclusions, immediate handoff displays,
+replacement, stale loads, normal-playback return and prototype mounting. Existing rendered
+handoff and experimental-backend tests remain applicable. Main-page Safari listening and long-run
+CPU/memory validation remain pending; earlier isolated two-deck handoff listening passed.
+
+### Batch stem-file selection — bounded reusable preparation layer
+
+`experimental/stem-file-assignments.js` owns only a deck-local candidate pool and category-to-file
+mapping. `recognizeStemFilename` returns every matching category rather than picking one;
+`createStemFileAssignments` adds non-destructive batch proposals, explicit manual assignments,
+completeness checks and selection clear. It does not know about audio or domain gain state.
+Candidates use conservative name/size/lastModified/type identity to reject duplicate assignments
+across dialogs, without reading or hashing file content. Metadata collisions remain a limitation.
+
+`experimental/stem-controls.js` reuses that layer on both pages. A multiple-file input feeds
+recognition; four review dropdowns display/correct assignments while individual file pickers
+remain explicit fallbacks. Existing mappings survive conflicting batches; users explicitly
+unassign/reassign to resolve conflicts. File cancellation is a no-op. Candidate/option lists
+are rebuilt only when candidates change, so periodic transport refresh does not close an open
+review dropdown. Filenames are inserted as text. Load is gated on a complete distinct mapping
+and calls the existing loader with a snapshot; no decoder or musical action runs on selection.
+No audio engine, gain routing, DSP or handoff policy changes are introduced.
+
+Tests: tests/stem-file-assignment-tests.js (full runner) and tests/batch-stem-browser-tests.html
+(real selection UI, deferred decoding, correction, replacement and playback). Existing main-page,
+prototype, rendered handoff and backend regressions remain in the validation set. Safari batch
+picker UX remains to be checked; existing full-buffer memory/validation limitations are unchanged.
+
+### Four-deck native playback extension — implemented experimentally
+
+The native context owner is generalized as `createNativeStemMixer(contextFactory, deckIds)`;
+main-page ownership is [1,2,3,4]. `createTwoDeckStemPlayer` remains a compatibility wrapper
+using [1,2], so the standalone prototype keeps the same behavior without a second engine.
+The frozen `deckIds` list describes audio ownership only, not handoff participation. All players
+reuse `createFourStemPlayer` and borrow the same lazily created context. Pair-wide shutdown
+becomes owner-wide shutdown; individual retirement still cannot close that shared context.
+
+The source router tracks selection and pending operations for every owned deck, the bridge
+projects canonical state for those IDs, and main integration mounts the same stem controls on
+all four panels. No additional timer, DSP callback or matching logic is introduced. Contexts
+for existing complete-song backends remain separate under their original owners.
+
+Tests add four-deck loading, sixteen actual sources with one context, within-deck alignment,
+independent pause/resume/stop/eject/replacement/source switching, batch controls on all four,
+control isolation and cleanup. Rendered measurements cover sixteen-source sums and gain
+isolation, plus existing stereo-isolated handoff for pairs [1,2], [3,4] and [1,4]. Three/four
+participants retain direct-only actions; no authorization or eligibility semantics change.
+
+Performance limitation: all stems are decoded into memory. Sixteen stereo stems at 48 kHz
+use about 6.144 MB of float PCM per second of equal-duration material (~1.84 GB for five
+minutes), before encoded files, old buffers retained during replacement, decoder overhead and
+browser/device allocations. Mono uses half that PCM. Short generated tests do not establish
+long-file iPad/Safari capacity, native reclamation or sustained glitch-free operation. Native
+mixing introduces no stretching DSP; CPU, device latency, clipping and lifecycle stability
+still need real-device measurement/listening. Do not claim production capacity from tests.
+
+### Bounded WAV streaming feasibility fixture — isolated implementation
+
+`experimental/bounded-wav-reader.js` parses RIFF chunks and converts bounded integer/float32 PCM regions.
+`bounded-wav-player.js` schedules 250 ms chunks from a single deck timeline, bounded to selectable
+1/2/5-second windows. The standalone HTML/controls expose transport, seek, independent gains,
+manual dormancy and logical buffer/latency/underrun counters. No existing application module
+imports this experiment. There is no new DSP, resampling or handoff policy.
+
+This first fixture uses main-thread conversion/native chunk scheduling, a 25 ms maintenance
+timer, and a 50 ms start/activation lead after preparation. It is not the proposed worker/worklet
+architecture and does not establish older-device performance. Cancelled reads can remain pending;
+generation checks discard results. Rendered tests compare source samples across chunks, seeks
+and dormant activation; real-time tests cross the initial window through refills. Counters are
+logical ownership estimates, not process memory/native reclamation measurements. Safari testing,
+listening, longer runs and worker-based comparisons remain separate follow-up work.
+
+
+The isolated WAV reader now distinguishes container/signature, RF64/BW64, RIFX, encoding tags,
+widths, extensible GUIDs and malformed chunk errors. It adds ordinary IEEE float32 and standard
+extensible PCM/float without replacing the transport or decoding complete files. Format headers
+read at most 40 bytes per fmt chunk; the player status includes successful per-stem encoding,
+bit depth, valid bits, channels, rate and frame count. Original-container failure remains
+unidentified without a failing header or the new diagnostic; this extension does not claim
+that float/extensible support fixes an invalid RIFF/WAVE signature. See experimental/BOUNDED_WAV.md.
+
+
+The standalone bounded reader now uses header dispatch to WAV or AIFF/AIFF-C metadata parsing,
+then one endian-aware bounded PCM reader and the unchanged source-frame timeline. AIFF metadata
+is normalized into the same rate/frames/align/offset/encoding representation. AIFF-C supports
+NONE, sowt and fl32/FL32; other codecs reject explicitly. This extension reads no complete
+recording and introduces no resampling/DSP. Status exposes detected container/encoding fields.
+Original WAV rendering tests remain and are repeated with mixed AIFF/AIFF-C stems. No main
+application or existing transport backend imports this experiment. User-file compression type
+and actual Safari listening still require a retry; FORM/AIFC alone identifies only the container.
+
+
+The standalone bounded prototype now separates transport/starting, shared source-frame timeline,
+and PCM preparation/readiness. One cached covering chunk per enabled stem enables Ready Play
+without payload reads or AudioBuffer allocation. The cache shares the existing bounded ownership
+with streaming chunks; no full-song/start-cache duplication is introduced. A serialized preparation
+queue and coalesced timer pump prevent concurrent stale payload allocations. Read and conversion
+are timed separately in the existing bounded reader; create/copy and startup stage timing live
+in the player. Context/performance-clock onset estimates are explicitly not audible measurements.
+
+Delayed activation and playing seeks map their scheduled output time back to current source
+frames and trim buffer offsets, preserving the timeline during preparation. Paused seek retains
+its exact sample; Stop retains/replenishes frame-zero PCM. Generation/command/stem epochs guard
+all asynchronous transitions. The experimental lead is 10 ms with a 50 ms fallback, and gains
+retain 10 ms opening. Under controlled Chrome tests the previous 55.0–57.4 ms predicted startup
+became 10.0–10.1 ms for Ready starts; Safari and hardware output still require validation.
+See experimental/BOUNDED_WAV.md for methodology, metrics, regression scope and limitations.
+This is not authorization to change the main application or adopt worker/worklet/adaptive handoff.

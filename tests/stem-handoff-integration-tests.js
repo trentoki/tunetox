@@ -113,8 +113,8 @@ function runStemHandoffIntegrationTests() {
   check(noEffect.model.decks[0].stems.allocatedLevels.flow === 0.1 && noEffect.model.stemSession.lastChange.handoff === undefined,
     'Requested-only changes with unchanged allocated effective gain must not redistribute');
   noEffect.actions.setDeckVolume(2,0.5,'volume-no-redistribution');
-  check(noEffect.model.decks[0].stems.allocatedLevels.flow === 0.1 && noEffect.model.stemSession.lastChange.handoff === undefined,
-    'Main-volume gestures do not redistribute');
+  check(near(noEffect.model.decks[0].stems.allocatedLevels.flow,0.8) && noEffect.model.stemSession.lastChange.handoffByStem.flow,
+    'Main-volume gestures redistribute changed effective gains');
   for (const count of [1,3,4]) {
     const many = fixture(count); flow(many,1,0.6); flow(many,2,0.2);
     many.actions.setStemLevel(1,'flow',0.7,'unsupported-count');

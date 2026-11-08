@@ -35,10 +35,10 @@ async function runSignalsmithSelectionTests(controlsSource) {
     },
     eject(id) { Object.assign(states[id - 1], { loaded: false, loading: false }); }
   };
-  const run = new Function('document', 'createDeckOneExperimentRouter', 'createAudioEngine',
+  const run = new Function('createMainStemIntegration', 'document', 'createDeckOneExperimentRouter', 'createAudioEngine',
     'createPitchPreservingPlayer', 'createSignalsmithPlayer', 'setInterval', 'console', controlsSource);
   let refresh;
-  run(document, () => engine, () => ({}), () => ({}), () => ({}), callback => { refresh = callback; }, { error() {} });
+  run(undefined, document, () => engine, () => ({}), () => ({}), () => ({}), callback => { refresh = callback; }, { error() {} });
   const first = sections[0];
   const picker = first.querySelector('input[type="file"]');
   const load = first.querySelector('[data-action="load-selected"]');
