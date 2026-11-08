@@ -912,3 +912,36 @@ support faster Ready scheduling, not verified Safari/hardware latency. Counters 
 read/conversion/buffer preparation and predicted onset; actual audible latency remains unmeasured.
 The user reported smooth Safari continuous playback before these changes. No main-app behavior,
 existing playback backend, handoff, authorization, waveform UI or adaptive scheduler changes.
+
+## Four-deck allocation Phase 1 — pure calculator only
+
+New approved direction supersedes playback-independent membership for future integration:
+first Play admits a handoff-enabled active song; Pause retains membership and allocations.
+Never-played loaded/prepared songs and queued songs are not members. Eject releases membership.
+Stop membership is not specified by this update and must be settled before transport integration.
+Requests and allocations remain separate. Entry and live direct adjustments prioritize that
+deck's prepared request; departure uses remaining members' latest effective requests as weights.
+Established sharing fills capacity 1 proportionally, subject to eligibility, physical capacity
+and existing session authorization. Automatic allocation never changes requests or grants
+eligibility/authorization. Global OFF retains independent controls.
+
+Implemented only in `four-deck-stem-allocation.js`, not loaded by the app: one-category pure
+calculator over four snapshots, zero to four retained active members. `active` means membership,
+not current audible playback; callers own membership and sharing lifecycle. Entry/direct inputs
+are post-event requests/volume with pre-event allocations. `preserve` handles Pause without
+redistribution; `preparation` changes only the inactive direct deck. No transport is implemented.
+Established distribution may exceed a positive request to fill capacity. Zero requests have
+zero weight; all-zero requests leave capacity unused rather than inventing a preference.
+Before establishment, receivers are bounded by requests as well as existing increase limits.
+Reductions/retention above authorization remain permitted; increases require eligibility and a
+non-null ceiling. Muted faders are retained. Play honors its prepared priority but never raises
+session ceilings; later restoration may therefore have a constrained deficit. The caller must
+supply already-qualified authorization for a direct gesture; this calculator never updates it.
+
+Future queue direction: swaps inherit outgoing allocations; queued songs have no independent
+stem settings. Natural end swaps to a queued song if present, otherwise leaves the finished song
+loaded. No queue/swap transport or natural-end membership policy is implemented here.
+Sharing establishment, Stop/natural-end membership, participation-enable priority and global
+re-enable triggers remain integration decisions. The existing two-deck calculator, application,
+UI, audio routing, transport and smoothing are unchanged. Numerical caps are target constraints,
+not proof of a continuous cap during audio ramps. Tests run in the existing automated runner.

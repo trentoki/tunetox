@@ -1310,3 +1310,31 @@ retain 10 ms opening. Under controlled Chrome tests the previous 55.0–57.4 ms 
 became 10.0–10.1 ms for Ready starts; Safari and hardware output still require validation.
 See experimental/BOUNDED_WAV.md for methodology, metrics, regression scope and limitations.
 This is not authorization to change the main application or adopt worker/worklet/adaptive handoff.
+
+### Four-deck handoff Phase 1 — isolated allocation foundation
+
+`four-deck-stem-allocation.js` adds `calculateFourDeckStemAllocation` without loading it in
+index.html or changing the existing two-deck path. It reuses stem-state gain/ID validators and
+the existing one-category authorization ceiling/return eligibility concepts. Four validated
+snapshots supply id, volume, requestedLevel, allocatedLevel, active retained membership,
+participating and returnEligible. Permission, established sharing, trigger and optional priority
+ID are explicit inputs; no state, transport, UI or authorization mutation occurs.
+
+Triggers: entry/directGesture prioritize the supplied request; departure/rebalance distribute
+remaining requests; preparation isolates inactive adjustments; preserve retains allocations.
+Effective request weights are volume × requestedLevel. Bounded proportional water filling
+redistributes capped shares among remaining positive weights in at most four passes. Existing
+effective allocations bound retention; eligibility and session ceilings bound increases.
+Established sharing fills capacity beyond positive requests when permitted; zero weights are
+not invented. Unestablished redistribution caps receiver targets at requests. Numeric deck-ID
+sorting makes results independent of input order. Frozen outputs include allocations, retained
+requests, membership IDs, effective gains, deficit/excess and status.
+
+Tests cover the entry/Pause/Eject example, updated requests, zero through four members,
+all permutations, bounded randomized-pattern cases, authorization/eligibility, muted and zero
+weights, OFF controls and invalid inputs. They verify numerical proposals, not actual playback.
+Next: settle sharing activation, Stop/natural-end membership and participation/re-enable policy,
+then add transport notifications and action integration as separate tested steps. Preserve
+paused membership (new direction), queued allocation inheritance and no implicit Play authorization.
+Queue transport, smoothing integration and continuous audio-cap verification remain future work.
+See the latest RULES.md Phase 1 section for precedence over historical pair-only plans.
