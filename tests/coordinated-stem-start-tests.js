@@ -1,7 +1,4 @@
-async function runCoordinatedStemStartTests() {
-  let checks = 0;
-  function check(value, message) { checks++; if (!value) throw new Error(message); }
-  function fixture() {
+  function createStemSchedulingFixture() {
     const sources = [], gains = [];
     let attempts = 0, failAt = 0, waiting = null;
     const audio = { currentTime: 0, state: 'running', sampleRate: 48000, destination: {},
@@ -22,7 +19,7 @@ async function runCoordinatedStemStartTests() {
       {arrayBuffer:async()=>({length:48000,sampleRate:48000,numberOfChannels:1,duration:1})}]))); }
     return {audio,mixer,sources,gains,levels,snapshot,load,fail(value){failAt=value;},wait(value){waiting=value;},attempts:()=>attempts};
   }
-  function valueAt(events,time) {
+  function stemSchedulingValueAt(events,time) {
     let previous={time:0,value:1};
     for(const event of events) {
       if(event.time>time) return event.type==='ramp' ? previous.value+(event.value-previous.value)*(time-previous.time)/(event.time-previous.time) : previous.value;
@@ -30,9 +27,13 @@ async function runCoordinatedStemStartTests() {
     }
     return previous.value;
   }
+
+async function runCoordinatedStemStartTests() {
+  let checks = 0;
+  function check(value, message) { checks++; if (!value) throw new Error(message); }
   async function rejects(action,message) {let rejected=false;try{await action();}catch(_){rejected=true;}check(rejected,message);}
   for(const count of [2,3]) {
-    const f=fixture(),targets=f.snapshot(0);
+    const f=createStemSchedulingFixture(),targets=f.snapshot(0);
     for(let id=1;id<=count;id++) { targets[id].levels=f.levels(1/count);await f.load(id); }
     f.mixer.applyGainSnapshot(targets);
     for(let id=1;id<=count;id++)await f.mixer.getDeck(id).play();
@@ -47,7 +48,7 @@ async function runCoordinatedStemStartTests() {
     check(oldSources.every((source,i)=>!source.stopped&&source.time===oldTimes[i]),'Existing decks never restart or stop');
     for(let id=1;id<=count;id++)check(f.gains[(id-1)*6].events.some(e=>e.type==='ramp'&&Math.abs(e.time-start-0.01)<1e-12),'Existing reduction ends with joining fade');
     const transport=f.gains[count*6+5];
-    check(valueAt(transport.events,start)===0,'Joining starts silent');
+    check(stemSchedulingValueAt(transport.events,start)===0,'Joining starts silent');
     // Reconstruct every AudioParam envelope at each sample, not just endpoints.
     for(let frame=0;frame<=960;frame++) {
       const time=start-0.005+frame/48000;
@@ -55,7 +56,7 @@ async function runCoordinatedStemStartTests() {
         let combined=0;
         for(let deck=0;deck<=count;deck++) {
           if(time<f.sources[deck*4].time)continue;
-          combined+=valueAt(f.gains[deck*6+stem].events,time)*valueAt(f.gains[deck*6+4].events,time)*valueAt(f.gains[deck*6+5].events,time);
+          combined+=stemSchedulingValueAt(f.gains[deck*6+stem].events,time)*stemSchedulingValueAt(f.gains[deck*6+4].events,time)*stemSchedulingValueAt(f.gains[deck*6+5].events,time);
         }
         check(combined<=1+1e-12&&combined>=0,'Every transition sample stays capped');
         check(Math.abs(combined-1)<1e-12,'Complementary transition has no gain discontinuity');
@@ -63,7 +64,7 @@ async function runCoordinatedStemStartTests() {
     }
     await f.mixer.close();
   }
-  const f=fixture();await f.load(1);await f.load(2);
+  const f=createStemSchedulingFixture();await f.load(1);await f.load(2);
   const initial=f.snapshot(0);initial[1].levels=f.levels(1);f.mixer.applyGainSnapshot(initial);await f.mixer.getDeck(1).play();f.audio.currentTime=0.1;
   const next=f.snapshot(0);next[2].levels=f.levels(1);
   const before=JSON.stringify(f.gains.slice(0,6).map(g=>g.events));

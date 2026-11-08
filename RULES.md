@@ -968,3 +968,29 @@ Phase 2B must commit domain membership only after true success and handle cancel
 reported scheduling errors. No queue, lifecycle membership, UI or upstream DSP changes occur.
 Samplewise envelope tests pass in the macOS runner; actual browser rendering/listening and
 Safari/iPad timing/click validation remain required. Click freedom is not established by mocks.
+
+### Phase 2A.1 — interrupted coordinated allocations
+
+The opt-in native mixer now protects subsequent `applyGainSnapshot` retargets after a successful
+coordinated start. At one shared future render boundary it evaluates scheduled transport and
+stem envelopes, folds the current transport coefficient into each stem, and sets transport to
+unity at that same boundary. The product is continuous; all resulting effective stem gains
+then interpolate linearly for 10 ms. It validates both current and target audible per-category
+sums against 1. This replaces the unsafe assumption that independent stem ramps remain capped
+while a joining transport is still opening. No extra fade-end delay is used. Before a source's
+reserved start time, retargets use that start boundary so the source still opens at zero.
+
+Playing main volumes must be settled and unchanged; unsupported volume changes, over-capacity
+plans and invalid times reject before automation mutation. In a protected mixer, direct player
+gain setters reject; callers must use a complete mixer snapshot. Ordinary Play/mixers that have
+never used the coordinated API keep their existing independent-control behavior. Protection
+continues for the lifetime of an opted-in mixer. These APIs remain unused by the live app.
+Native partial automation failure or missed retarget deadline fails closed by pausing owned
+sessions and reporting an error; it cannot claim transactional audio rollback or click freedom.
+Departure remains the existing Pause/Stop/Eject operation followed by a snapshot for remaining
+decks; participation/fader changes are snapshots, with no new domain policy here.
+
+Permanent tests reproduce legacy peak 1.178888889 and verify interrupted/repeated multi-deck
+retargets, effective continuity, nonunit main volumes, exclusions, departures and failure cleanup.
+These are automation-envelope simulations, not browser rendering/listening. Phase 2B membership,
+queue transport and allocator wiring remain absent.

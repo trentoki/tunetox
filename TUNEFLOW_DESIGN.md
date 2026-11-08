@@ -1364,3 +1364,29 @@ joins, verify common boundaries and unchanged source starts, cancellation, concu
 partial-start cleanup, expired deadlines, endpoint rejection and outstanding-ramp settling.
 These are deterministic automation tests, not actual OfflineAudioContext rendering or audible
 click measurements. Browser rendering and Mac/iPad listening remain separate validation steps.
+
+### Phase 2A.1 — retargeting scheduled products safely
+
+The prior uninterrupted-join proof did not cover a stem retarget while transport was ramping.
+A permanent regression reconstructs its 1.178888889 peak. Native player session metadata now
+tracks transport envelopes as well as musical envelopes. Mixer snapshots in coordinated mode
+prepare every deck before writes: evaluate the actual scheduled coefficients at a shared time,
+validate effective endpoints including fixed main volumes, then normalize transport into the
+stem coefficients without changing the effective product at that boundary. Subsequent 10 ms
+stem ramps form a convex combination of capped effective endpoints, including interruptions.
+Transport normalization retains the preceding ramp segment up to the boundary. Main-volume
+changes/unfinished main ramps reject rather than approximating nonlinear products. No lookup
+of AudioParam.value or previous target is used as the current moving coefficient.
+
+Preparation and application methods on players are mixer-internal scheduling helpers. Direct
+gain setters in a coordinated mixer reject to prevent bypass; the bridge already uses snapshots.
+Ordinary mixers retain prior behavior. Pause/Eject removes sources normally; the next complete
+snapshot redistributes among actual remaining sessions without restarting them. Native partial
+write failures/missed deadlines pause owned sessions and throw; future integration must not
+commit membership after an error. Membership/action events remain Phase 2B work.
+
+The runner includes permanent samplewise regression tests, repeated interrupt fractions with
+up to four audible decks, simultaneous categories, nonunit volumes, continuity, participation-
+style snapshots, departures and safe rejections. Existing cancellation/start-failure coverage
+remains. Simulated cap evidence does not establish browser click freedom or hardware onset;
+Safari/Mac/iPad rendering/listening is still required before release claims.
