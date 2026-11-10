@@ -69,7 +69,7 @@ function createSignalsmithPlayer(options = {}) {
   const limits = { resume: 15000, read: 30000, decode: 60000, import: 15000,
     ready: 20000, buffers: 15000, latency: 10000, updates: 10000,
     schedule: 10000, close: 5000, ...options.timeouts };
-  const log = options.log || (record => console.log('[TuneFlow Signalsmith]', JSON.stringify(record)));
+  const log = options.log || (record => console.log('[TuneToss Signalsmith]', JSON.stringify(record)));
   let diagnostic = null;
 
   function browserActivation() {

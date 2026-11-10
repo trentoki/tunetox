@@ -52,6 +52,14 @@ function createDeckAudioControls(deckId) {
 
   function updateAudioControls() {
     const state = audioEngine.getState(deckId);
+    if (isStemSource()) {
+      const routineMessages = ['No audio file loaded.', 'No stems loaded.', 'Loading stems…', 'Stems loaded — paused.', 'Stems playing.'];
+      // Preserve reported errors; only routine presentation text follows actual native state.
+      if (routineMessages.includes(audioStatus.textContent) || audioStatus.textContent.startsWith('Source selected:')) {
+        audioStatus.textContent = state.loading ? 'Loading stems…' : !state.loaded ? 'No stems loaded.' :
+          state.isPlaying ? 'Stems playing.' : 'Stems loaded — paused.';
+      }
+    }
     const closureBlocked = isSignalsmith() && state.closureBlocked;
     if (closureBlocked) audioStatus.textContent = state.closureStatus;
     else if (wasClosureBlocked) audioStatus.textContent = 'Signalsmith context closure completed. Click Load selected file or Play to continue.';
@@ -176,6 +184,11 @@ function createDeckAudioControls(deckId) {
   });
 
   playButton.addEventListener("click", async () => {
+    const state = audioEngine.getState(deckId);
+    if (!state.loaded || state.loading || state.isPlaying || state.closureBlocked) {
+      updateAudioControls();
+      return;
+    }
     const version = selectionVersion;
     try {
       await audioEngine.play(deckId);

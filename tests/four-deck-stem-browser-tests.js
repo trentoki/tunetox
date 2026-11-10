@@ -23,16 +23,15 @@ document.getElementById('run').addEventListener('click',async()=>{
       d.getElementById('prototype.deck.'+id+'.load').click();
     }
     await wait(()=>[1,2,3,4].every(id=>router.getState(id).loaded));
+    for(const id of [1,2,3,4]){slide('deck.'+id+'.volume',1);slide('deck.'+id+'.stem.flow.level',0.5);}
     for(const id of [1,2,3,4])await router.play(id);
     check(sources.length===16&&new Set(sources.map(source=>source.context)).size===1,'Sixteen native stem sources share one actual context');
     check([1,2,3,4].every(id=>router.getState(id).isPlaying),'All four decks play simultaneously');
-    slide('deck.3.volume',1);slide('deck.4.volume',1);slide('deck.3.stem.flow.level',1);slide('deck.4.stem.flow.level',0.5);
-    check(state.decks[2].stems.allocatedLevels.flow===1,'Four participants retain direct-only behavior');
-    for(const id of [1,2]){const input=d.getElementById('deck.'+id+'.participation.stemHandoff');input.checked=false;input.dispatchEvent(new w.Event('change'));}
-    slide('deck.4.stem.flow.level',0);slide('deck.4.stem.flow.level',0.5);
-    check(state.decks[2].stems.allocatedLevels.flow===0.5&&Number(d.getElementById('deck.3.stem.flow.level').value)===0.5&&router.getState(3).levels.flow===0.5,
-      'Pair 3/4 handoff updates state, audio and fader immediately');
-    slide('deck.4.stem.flow.level',1);check(router.getState(3).levels.flow===0,'Pair 3/4 completes complementary handoff');
+    check([1,2,3,4].every(id=>state.stemSession.nativeHandoff.members[id]),'Four successful native owners');
+    slide('deck.4.stem.flow.level',0.7);
+    check(Math.abs(state.decks.slice(0,3).reduce((sum,deck)=>sum+deck.stems.allocatedLevels.flow,0)-0.3)<1e-12,'Four-deck proportional redistribution');
+    check(Number(d.getElementById('deck.3.stem.flow.level').value)===router.getState(3).levels.flow,'Receiver fader projects native allocation');
+    slide('deck.4.stem.flow.level',1);check(router.getState(3).levels.flow===0,'Four-deck takeover');
     await router.pause(3);const position=router.getState(3).position;await router.play(3);
     check(router.getState(3).position>=position&&router.getState(4).isPlaying,'Deck 3 resumes independently');
     await router.stop(2);await router.eject(3);
@@ -45,7 +44,7 @@ document.getElementById('run').addEventListener('click',async()=>{
     check(router.getState(3).isPlaying&&router.getState(1).isPlaying,'Complete-song Deck 3 coexists with native stem Deck 1');
     await router.eject(3);await mixer.close();
     check([1,2,3,4].every(id=>mixer.getDeck(id).getState().closed),'All native decks shut down');
-    result.textContent='Four-deck native browser tests passed: sixteen actual sources/one context, batch loads, pair 3/4 handoff, independent transports, replacement, source switching and cleanup.';
+    result.textContent='Four-deck native browser tests passed: sixteen actual sources/one context, batch loads, four-deck handoff, independent transports, replacement, source switching and cleanup.';
   }catch(error){result.textContent='FAIL: '+error.message;console.error(error);}
   finally{if(originalSource)w.AudioContext.prototype.createBufferSource=originalSource;}
 });

@@ -222,7 +222,7 @@ Only the Signalsmith adapter's reliability handling has changed. Upstream Signal
 SoundTouch, Normal Playback, and Decks 2–4 are unchanged. A Signalsmith-only file-picker
 reset allows selecting the same file after a failed load without needing a different file.
 
-Loading now logs `[TuneFlow Signalsmith]` JSON records with attempt ID, stage, start/complete/
+Loading now logs `[TuneToss Signalsmith]` JSON records with attempt ID, stage, start/complete/
 error/abandoned events, elapsed milliseconds, file name/size/type, context state, requested
 and actual context rate, decoded channels/rate/duration/frame count, and PCM-copy size.
 No audio samples are logged. File names appear only in the local console; redact them before
@@ -255,7 +255,7 @@ Main-thread blocking work can delay timers, so deadlines are not hard real-time 
 
 1. Keep the localhost server running; open `http://127.0.0.1:8000/` and reload the page to
    load this change. Open Safari Web Inspector (Develop → Show Web Inspector), select Console,
-   clear it, and filter for `TuneFlow Signalsmith`. Enable console log messages if filtered out.
+   clear it, and filter for `TuneToss Signalsmith`. Enable console log messages if filtered out.
 2. Select Signalsmith on empty Deck 1. Choose `JOYRYDE - THE BOX (Original Mix).aiff` once.
    Do not press Play or Eject while collecting the first failure, unless intentionally testing
    cancellation. A successful load ends with `stage:"ready", event:"committed"`.
@@ -300,7 +300,7 @@ null flags rather than assuming permission. These flags are evidence, not proof 
 internal audio policy.
 
 Safari verification:
-1. Reload localhost and open Web Inspector → Console. Filter for `TuneFlow Signalsmith`.
+1. Reload localhost and open Web Inspector → Console. Filter for `TuneToss Signalsmith`.
 2. On empty Deck 1 choose Signalsmith. Select the previously failing JOYRYDE AIFF.
    Expect “Selected: … Click Load selected file”, with no new context/resume/decode logs yet.
 3. Click Load selected file directly. Capture context/start and resume/start records,
@@ -555,7 +555,7 @@ recording is still needed to measure the pre-tap period and possible downstream 
 
 ### Safari: collect Load-only evidence without Play
 
-1. Run `python3 -m http.server 8000` from the TuneFlow folder. Open
+1. Run `python3 -m http.server 8000` from the TuneToss folder. Open
    `http://localhost:8000` in Safari and reload.
 2. Select Signalsmith on empty Deck 1. Check **Capture Load / startup / Stop (enable before
    loading)** before loading any audio. Keep the current 4 ms ramp and closure experiment.
@@ -956,7 +956,7 @@ files** resets the selection pool, not audio, gains or domain state. Extra candi
 not loaded unless assigned. A cancelled picker leaves mappings and loaded audio intact.
 
 Duplicate checks use filename, size, modification time and type, not content hashes. Separate
-files with identical metadata are conservatively treated as the same candidate; rename one if
+files with identical metadata are conservatively treated as the same candidate; propose an approved workspace-copy rename if
 needed. Musical alignment still requires aligned exports and the existing decoded-length checks.
 Batch UI passed Chrome automation; verify Safari multi-selection, cancellation, dropdown
 correction and a real replacement load before accepting the new UI on Safari.

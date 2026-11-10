@@ -1,4 +1,4 @@
-// TuneFlow transport extension. SoundTouch's WSOLA implementation is unchanged.
+// TuneToss transport extension. SoundTouch's WSOLA implementation is unchanged.
 import { Stretch } from '../vendor/soundtouchjs-2.1.1/soundtouch-export.js';
 
 class DeckOneProcessor extends AudioWorkletProcessor {

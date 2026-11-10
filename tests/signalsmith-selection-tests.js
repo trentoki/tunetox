@@ -39,6 +39,18 @@ async function runSignalsmithSelectionTests(controlsSource) {
     'createPitchPreservingPlayer', 'createSignalsmithPlayer', 'setInterval', 'console', controlsSource);
   let refresh;
   run(undefined, document, () => engine, () => ({}), () => ({}), () => ({}), callback => { refresh = callback; }, { error() {} });
+  let playCalls = 0;
+  engine.play = async () => { playCalls++; };
+  const playControl = sections[0].querySelector('[data-action="play"]');
+  await playControl.fire('click');
+  check(playCalls === 0, 'Unloaded Play must not dispatch even through a direct handler call');
+  states[0].loaded = true; states[0].loading = true;
+  await playControl.fire('click');
+  check(playCalls === 0, 'Decoding Play must not dispatch with previous audio retained');
+  states[0].loading = false;
+  await playControl.fire('click');
+  check(playCalls === 1, 'Decoded ready audio can dispatch Play');
+  states[0].loaded = false;
   const first = sections[0];
   const picker = first.querySelector('input[type="file"]');
   const load = first.querySelector('[data-action="load-selected"]');

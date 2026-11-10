@@ -1,12 +1,14 @@
 // Reusable DOM adapter; host owns transport routing, state and refresh lifecycle.
 let stemControlGesture = 0;
 function mountStemControls(container, deckId, options) {
-  const { player, state: domainState, bridge, origins, refreshAll, loadFiles = files => player.loadFiles(files), transportControls = true, participationControl = true } = options;
+  const { player, state: domainState, bridge, origins, refreshAll, loadFiles = files => player.loadFiles(files), transportControls = true, participationControl = true, externalError = () => null, controlsEnabled = () => true } = options;
   const fileAssignments = createStemFileAssignments();
   const assignmentSelects = {};
   let assignmentMessages = [];
   let optionSignature = null;
   let errorMessage = '';
+  let loadedAssignments = null;
+  let loadFailureStage = '';
   const levelInputs = {}, levelDescriptions = {};
   let volumeInput;
   const section = document.createElement('section');
@@ -16,12 +18,12 @@ function mountStemControls(container, deckId, options) {
   batch.id = 'prototype.deck.' + deckId + '.stem.batch';
   batch.addEventListener('change', () => {
     if (!batch.files.length) return;
-    assignmentMessages = fileAssignments.addFiles(batch.files); errorMessage = ''; refresh();
+    assignmentMessages = fileAssignments.addFiles(batch.files); errorMessage = ''; loadFailureStage = ''; refresh();
     batch.value = ''; // Reselecting the same batch can emit change; mappings remain in the model.
   });
   batchLabel.append(batch); section.append(batchLabel);
   const clear = document.createElement('button'); clear.textContent = 'Clear selected files';
-  clear.addEventListener('click', () => { fileAssignments.clear(); assignmentMessages = []; refresh(); });
+  clear.addEventListener('click', () => { fileAssignments.clear(); assignmentMessages = []; errorMessage = ''; loadFailureStage = ''; refresh(); });
   section.append(clear);
   const assignmentStatus = document.createElement('p'); assignmentStatus.setAttribute('role','status'); section.append(assignmentStatus);
   function slider(labelText, id, action) {
@@ -32,7 +34,9 @@ function mountStemControls(container, deckId, options) {
       try { errorMessage = ''; action(Number(input.value)); } catch (error) { errorMessage = error.message; }
       refreshAll();
     });
-    label.append(input); return label;
+    const value = document.createElement('output'); value.setAttribute('for', id);
+    value.className = 'fader-value'; value.value = '1.00';
+    label.append(input, value); return label;
   }
   const volumeLabel = slider('Main volume', getDeckVolumeControlId(deckId), value =>
     bridge.setMainVolume(deckId, value, 'stem-ui-' + ++stemControlGesture));
@@ -65,7 +69,10 @@ function mountStemControls(container, deckId, options) {
       try {
         const candidate = fileAssignments.getState().candidates.find(item => item.key === assignment.value);
         fileAssignments.assign(name, candidate ? candidate.file : null); errorMessage = '';
-      } catch (error) { errorMessage = error.message; }
+      } catch (error) {
+        errorMessage = error.message;
+        if (name === 'load') loadFailureStage = 'Load failed: ';
+      }
       refresh();
     });
     assignmentSelects[name] = assignment; assignmentLabel.append(assignment); row.append(assignmentLabel);
@@ -85,7 +92,19 @@ function mountStemControls(container, deckId, options) {
     const button = document.createElement('button'); button.textContent = {load:'Load selected stems',play:'Play / Resume',pause:'Pause',stop:'Stop',eject:'Eject / Cancel load'}[name];
     button.id = 'prototype.deck.' + deckId + '.' + name;
     button.addEventListener('click', async () => {
-      try { errorMessage = ''; await action(); } catch (error) { errorMessage = error.message; }
+      try {
+        errorMessage = '';
+        const selected = name === 'load' ? fileAssignments.getFiles() : null;
+        // Invoke immediately in the human gesture, then refresh before awaiting decoding.
+        if (name === 'load') loadFailureStage = '';
+        const pending = action();
+        refresh();
+        const succeeded = await pending;
+        if (name === 'load' && succeeded) loadedAssignments = selected;
+      } catch (error) {
+        errorMessage = error.message;
+        if (name === 'load') loadFailureStage = 'Load failed: ';
+      }
       refresh();
     });
     buttons[name] = button; section.append(button);
@@ -107,27 +126,43 @@ function mountStemControls(container, deckId, options) {
       select.value = selection.assignments[name] || ''; select.disabled = state.closed;
     }
     optionSignature = signature;
-    assignmentStatus.textContent = (selection.ready ? 'Four assignments ready. Click Load to decode.' : 'Assign one distinct file to each category before loading.') +
+    const assigned = selection.ready ? fileAssignments.getFiles() : null;
+    const assignmentsLoaded = state.loaded && assigned && loadedAssignments &&
+      prototypeStemNames.every(name => assigned[name] === loadedAssignments[name]);
+    const reportedError = errorMessage || externalError()?.message;
+    assignmentStatus.dataset.loadState = reportedError ? 'error' : state.loading ? 'loading' :
+      assignmentsLoaded ? 'ready' : selection.ready ? 'assigned' : 'incomplete';
+    assignmentStatus.textContent = (reportedError ? (loadFailureStage || 'Error: ') + reportedError +
+      (state.loaded ? ' Previous decoded audio remains loaded.' : ' No decoded audio ready.') :
+      state.loading ? 'Loading / decoding four stems…' :
+      assignmentsLoaded ? 'Four stems loaded — ready to play.' :
+      selection.ready ? 'Four assignments ready. Click Load to decode.' :
+      'Assign one distinct file to each category before loading.') +
       (selection.candidates.length > 4 ? ' Extra files remain available for correction; only the four assignments will load.' : '') +
-      (assignmentMessages.length ? ' ' + assignmentMessages.join(' ') : '');
+      (assignmentMessages.length ? ' Selection review: ' + assignmentMessages.join(' ') : '') +
+      (selection.candidates.length > 4 ? ' To select a different song set, Clear selected files, then select all four matching stems together. Loaded audio is retained until Load succeeds.' : '');
+    assignmentStatus.dataset.stage = state.loading ? 'decode' : loadFailureStage ? 'load-error' :
+      assignmentsLoaded ? 'ready' : 'assignment';
     clear.disabled = state.closed;
     const domainDeck = domainState.decks.find(deck => deck.id === deckId);
     volumeInput.value = domainDeck.volume;
+    volumeLabel.querySelector('output').value = domainDeck.volume.toFixed(2);
     participationInput.checked = domainState.participation.byDeck[deckId].stemHandoff;
     participationInput.disabled = state.closed;
     for (const name of prototypeStemNames) {
       const requested = domainDeck.stems.requestedLevels[name], allocated = domainDeck.stems.allocatedLevels[name];
       levelInputs[name].value = allocated;
+      levelInputs[name].parentElement.querySelector('output').value = allocated.toFixed(3);
       levelDescriptions[name].textContent = ' Requested ' + requested.toFixed(2) +
         ' / allocated ' + allocated.toFixed(3) + ' — ' +
         (origins[getStemControlId(deckId, name)] || 'initialization') +
         (requested !== allocated ? ' (differs from human request)' : '');
     }
-    status.textContent = (errorMessage ? 'Error: ' + errorMessage + '\n' : '') + JSON.stringify(state,null,2);
+    status.textContent = (reportedError ? 'Error: ' + reportedError + '\n' : '') + JSON.stringify(state,null,2);
     for (const button of Object.values(buttons)) button.disabled = state.closed;
-    buttons.load.disabled = state.closed || state.loading || !selection.ready;
+    buttons.load.disabled = state.closed || !controlsEnabled() || state.loading || !selection.ready;
     if (buttons.play) buttons.play.disabled = state.closed || state.loading || !state.loaded || state.isPlaying;
-    for (const input of section.querySelectorAll('input')) input.disabled = state.closed;
+    for (const input of section.querySelectorAll('input')) input.disabled = state.closed || (!controlsEnabled() && input.type === 'range');
   }
   container.append(section); refresh();
   return Object.freeze({ refresh, section });

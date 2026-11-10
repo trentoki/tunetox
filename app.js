@@ -36,7 +36,7 @@ const appState = {
   globalPitchShift: 0,
   referenceKey: null,
 
-  // The four shared TuneFlow decks.
+  // The four shared TuneToss decks.
   decks: [
     createDeck(1),
     createDeck(2),

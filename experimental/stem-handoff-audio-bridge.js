@@ -32,6 +32,7 @@ function createStemHandoffAudioBridge(state, mixer, onCommit = () => {}, sharedA
   // This does not mutate domain allocations, requests, authorization or membership.
   function startCoordinated(id, targets) { return mixer.startCoordinated(id, targets); }
   return Object.freeze({ synchronizeAudio, startCoordinated,
+    applySnapshot: targets => mixer.applyGainSnapshot(targets),
     setStemLevel: (id, name, value, gestureId) => commit(() => stems.setStemLevel(id, name, value, gestureId), getStemControlId(id, name)),
     setMainVolume: (id, value, gestureId) => commit(() => stems.setDeckVolume(id, value, gestureId), getDeckVolumeControlId(id)),
     setParticipation: (id, value) => commit(() => participation.set(id, 'stemHandoff', value)) });

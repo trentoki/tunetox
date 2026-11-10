@@ -1,5 +1,5 @@
 // Source ownership only; existing complete-song backends and stem DSP/math are unchanged.
-function createStemSourceRouter(complete, mixer) {
+function createStemSourceRouter(complete, mixer, nativeActions = null) {
   const deckIds = mixer.deckIds || [1, 2];
   const modes = Object.fromEntries(deckIds.map(id => [id, 'complete']));
   const pending = Object.fromEntries(deckIds.map(id => [id, 0]));
@@ -20,7 +20,7 @@ function createStemSourceRouter(complete, mixer) {
   const router = {};
   for (const operation of ['play', 'pause', 'stop', 'eject']) {
     router[operation] = (id, ...args) => track(id, () => isStem(id)
-      ? mixer.getDeck(id)[operation](...args) : complete[operation](id, ...args));
+      ? (operation === 'play' && nativeActions ? nativeActions.play(id) : mixer.getDeck(id)[operation](...args)) : complete[operation](id, ...args));
   }
   router.loadFile = (id, file) => {
     if (isStem(id)) throw new Error('Select four mapped stem files and use Load selected stems.');

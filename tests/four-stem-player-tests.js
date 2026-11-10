@@ -21,7 +21,16 @@ async function runFourStemPlayerTests() {
   const invalid=files();invalid.flow={arrayBuffer:async()=>({bad:true})};
   await rejects(()=>player.loadFiles(invalid),'Undecodable audio must reject');
   const short=files();short.voice={arrayBuffer:async()=>buffer(47999)};
-  await rejects(()=>player.loadFiles(short),'Even one mismatched frame must reject conservatively');
+  let alignmentError='';
+  try { await player.loadFiles(short); } catch(error) { alignmentError=error.message; }
+  check(alignmentError.includes('validation failed')&&alignmentError.includes('47999 frames')&&alignmentError.includes('48000 Hz'),
+    'A one-frame mismatch rejects with decoded measurements');
+  check(await player.play()===false&&!player.getState().isPlaying,'Rejected initial set cannot enter playing state');
+  const namedInvalid=files();namedInvalid.flow={name:'SecondSong_bass.wav',arrayBuffer:async()=>({bad:true})};
+  let decodeError='';
+  try { await player.loadFiles(namedInvalid); } catch(error) { decodeError=error.message; }
+  check(decodeError.includes('SecondSong_bass.wav')&&decodeError.includes('read/decode'),
+    'Decode failure names the selected file and failure boundary');
   for(const invalidBuffer of [{...buffer(),numberOfChannels:4},{...buffer(),length:0},{...buffer(),sampleRate:44100}]){
     const set=files();set.tune={arrayBuffer:async()=>invalidBuffer};
     await rejects(()=>player.loadFiles(set),'Unsupported/empty/mismatched decoded audio must reject');

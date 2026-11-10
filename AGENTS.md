@@ -1,7 +1,9 @@
-# TuneFlow — Instructions for Codex
+# TuneToss — Instructions for Codex
 
 ## Project purpose
-TuneFlow is an evolving, offline-first DJ and music application built with readable JavaScript, HTML, and CSS. It should ultimately work across desktop browsers, iPad, and iPhone, with installable/PWA behavior planned. The human is the product designer and final decision-maker. The application is designed around **four underlying decks**, regardless of how many are visible at once.
+TuneToss names the entire current project, including the DJ application and broader music/audio research. Do not retain TuneFlow as a separate research-project name; any future name is undecided. Preserve historical names and technical identifiers only where needed for accuracy or compatibility.
+
+TuneToss is an evolving, offline-first DJ and music application built with readable JavaScript, HTML, and CSS. It should ultimately work across desktop browsers, iPad, and iPhone, with installable/PWA behavior planned. The human is the product designer and final decision-maker. The application is designed around **four underlying decks**, regardless of how many are visible at once.
 
 ## Documentation authority
 - `AGENTS.md` is the authoritative development workflow and safeguard document, incorporating the intended replacement formerly named AGENTS_updated.md.
@@ -41,6 +43,7 @@ TuneFlow is an evolving, offline-first DJ and music application built with reada
 6. Update the relevant documentation, then report precisely which files and behavior changed, verification results, remaining risks/limitations, and the next recommended step.
 
 ## Engineering quality, security and release safeguards
+- **Original audio safety:** Treat browser-selected audio files as read-only inputs. Do not rename, move, overwrite, delete or otherwise modify original audio outside the project. Do not run bulk filename corrections against a music library. Any proposed renaming or conversion requires explicit approval and must operate on copies in an appropriate project workspace. Investigate with exact existing filenames.
 - **Security boundaries:** Validate untrusted files, metadata, messages and settings at appropriate entry points before committing state or allocating substantial resources. Never hardcode secrets, commit credentials or expose them in client assets, logs or exports.
 - **Dependency and platform review:** For relevant changes, review dependency provenance, pinned versions, known vulnerabilities and license notices, along with browser permissions and file, network and storage risks. Treat local/offline input as untrusted; do not equate local operation with security.
 - **Audio deadlines:** Prioritize deterministic calculations, explicit/predictable state transitions and low latency. Avoid unnecessary allocation, blocking work, I/O or continuous logging in time-critical audio processing; keep render work bounded and measure performance on target browsers/devices before claiming capacity or timing guarantees.

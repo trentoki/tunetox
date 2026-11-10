@@ -7,18 +7,22 @@
         content="width=device-width, initial-scale=1">
 
   <title>TuneToss</title>
+  <link rel="stylesheet" href="mixer.css">
 </head>
 <body>
-  <h1>TuneToss</h1>
-  <p>Temporary rate-based tempo controls: changing tempo also changes pitch.
-    No time stretching or synchronization. Enter BPM manually; files are not analyzed.</p>
-  <p>All four decks offer opt-in native four-stem playback. Eject before changing source.
-    All four decks participate in handoff by default; explicitly leave exactly two decks participating
-    for two-deck redistribution (any pair). Three/four participants currently use direct-only control.
-    Stem mode starts at main volume 0, has no tempo processing, and uses pre-separated aligned files.</p>
-  <div id="audio-decks"></div>
-  <p>Deck 1 experiment: eject its file before switching modes. Pitch-preserving mode is
-    limited to 0.8–1.2×. Both experimental outputs use −12 dB headroom. Position estimates are not sample-accurate; tempo changes may have artifacts.</p>
+  <header class="app-header">
+    <div><h1>TuneToss</h1><span class="app-subtitle">Four-deck live mixer</span></div>
+    <details class="app-help"><summary>Testing notes</summary><div>
+      <p>Prepare main volume before Play. Live volume changes may reject safely.</p>
+      <p>First Play admits handoff ownership; Pause retains it, Eject releases it.</p>
+      <p>Assign four distinct aligned files, then Load selected stems to decode. Selection alone does not load audio.</p>
+      <p>Native stems have no tempo or pitch processing. Complete-song tempo also changes pitch.</p>
+      <p>Deck 1 SoundTouch/Signalsmith experiments retain their existing behavior. Eject before changing source.</p>
+      <p>Accent-color Settings and waveform backgrounds are deferred.</p>
+    </div></details>
+  </header>
+  <main id="audio-decks" aria-label="Four-deck mixer"></main>
+  <details id="global-diagnostics"><summary>Audio experiments & diagnostics</summary><div id="diagnostic-panels"></div></details>
 
   <template id="audio-deck-template">
   <section>
@@ -47,7 +51,7 @@
     <p>
       <button data-action="play" type="button" disabled>Play</button>
       <button data-action="pause" type="button" disabled>Pause</button>
-      <button data-action="stop" type="button" disabled>Stop</button>
+      <button data-action="stop" type="button" hidden disabled>Stop</button>
       <button data-action="eject" type="button" disabled>Eject</button>
     </p>
     <p data-display="status" role="status">No audio file loaded.</p>
@@ -58,6 +62,7 @@
   <script src="participation.js"></script>
   <script src="stem-state.js"></script>
   <script src="two-deck-stem-handoff.js"></script>
+  <script src="four-deck-stem-allocation.js"></script>
   <script src="app.js"></script>
   <script src="audio-engine.js"></script>
   <script src="experimental/comparison-output.js"></script>
@@ -69,9 +74,11 @@
   <script src="experimental/stem-file-assignments.js"></script>
 <script src="experimental/stem-controls.js"></script>
   <script src="stem-source-router.js"></script>
+  <script src="native-stem-handoff.js"></script>
   <script src="main-stem-integration.js"></script>
   <script src="audio-controls.js"></script>
   <script src="experimental/signalsmith-diagnostics-controls.js"></script>
   <script src="experimental/signalsmith-context-controls.js"></script>
+  <script src="mixer-layout.js"></script>
 </body>
 </html>

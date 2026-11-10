@@ -1,12 +1,12 @@
-# TuneFlow — Behavior Rules
+# TuneToss — Behavior Rules
 
-Working product name: **TuneToss** (formerly TuneFlow). Existing file names and executable identifiers are retained.
+Project name: **TuneToss**, including the DJ application and broader music/audio research (formerly TuneFlow). Any future name is undecided. Existing file names and executable identifiers are retained for compatibility.
 
-This file records the **agreed user-facing behavior** of TuneFlow. Keep it readable and update it whenever a product decision changes. `AGENTS.md` describes how to develop; `TUNEFLOW_DESIGN.md` provides broader context. Do not treat unresolved ideas as implemented requirements. The approved matching model in section 14 and unified product direction in section 17 supersede conflicting earlier *planned* behavior; earlier sections remain as historical prototype and experiment descriptions until implementation is reconciled. Section 21 supersedes older stem joining/cap/initialization rules. Only AGENTS.md, RULES.md and TUNEFLOW_DESIGN.md are authoritative project instructions/requirements/design; older updated-named copies, if present, are historical.
+This file records the **agreed user-facing behavior** of TuneToss. Keep it readable and update it whenever a product decision changes. `AGENTS.md` describes how to develop; `TUNEFLOW_DESIGN.md` provides broader context. Do not treat unresolved ideas as implemented requirements. The approved matching model in section 14 and unified product direction in section 17 supersede conflicting earlier *planned* behavior; earlier sections remain as historical prototype and experiment descriptions until implementation is reconciled. Section 21 supersedes older stem joining/cap/initialization rules. Only AGENTS.md, RULES.md and TUNEFLOW_DESIGN.md are authoritative project instructions/requirements/design; older updated-named copies, if present, are historical.
 
 ## 1. Decks and interfaces
 
-1. TuneFlow has four underlying deck objects: Decks 1, 2, 3, and 4.
+1. TuneToss has four underlying deck objects: Decks 1, 2, 3, and 4.
 2. The historical metadata prototype distinguishes two-/four-deck interface modes while retaining the same four objects. Approved future phone portrait shows all four in a 2×2 grid (section 17); layouts never create a different audio system.
 3. Switching between interfaces must not unload songs, reset deck settings, interrupt playback, or itself trigger synchronization.
 4. Each deck begins empty and paused. A loaded song retains its **original** BPM and key in its song information, separately from current playback tempo and pitch adjustments.
@@ -70,7 +70,7 @@ Apply the following rules to the state at the time of loading:
 10. `referenceKey` is the established matching reference before `globalPitchShift`; global pitch is applied once when deriving the current sounding key. Cueing must not establish or change `referenceKey`.
 11. `calculateParentScaleTransposition(firstSong, secondSong)` is a pure calculation returning the shortest signed semitone shift to transpose the first song's parent collection to match the second's. It returns `null` when either song has an unsupported key or mode.
 12. `calculateSymmetricalParentScaleShifts(firstSong, secondSong)` is a separate pure calculation that returns equal-and-opposite half-shifts for the two songs. The values may be fractional. Both calculations preserve each song's actual tonic and mode and do not alter cueing, playback, global pitch, or synchronization.
-13. TuneFlow reads key and mode from supplied `song.key` metadata. It does not currently detect keys or modes from audio.
+13. TuneToss reads key and mode from supplied `song.key` metadata. It does not currently detect keys or modes from audio.
 14. Pentatonic keys use `song.key.scaleType` with `majorPentatonic` or `minorPentatonic`, alongside the song's actual `tonic`. Their intervals are `[0, 2, 4, 7, 9]` and `[0, 3, 5, 7, 10]`, respectively. C major pentatonic and A minor pentatonic therefore have identical pitch-class collections.
 15. `getSongPitchClassCollection(song)` builds the actual collection for either a pentatonic scale or one of the seven diatonic modes. It returns `null` for an undefined/null song, a missing or invalid key, or an unsupported scale type. `comparePitchClassCollections(first, second)` reports equality and containment using pitch classes, not scale names. A pentatonic collection is compatible with a diatonic mode when all five of its pitch classes are contained in the mode's seven-note collection.
 16. `findSmallestCompatibleScaleTransposition(firstSong, secondSong)` searches relative semitone transpositions and chooses the compatible candidate with the smallest absolute movement. Its `matchedPitchClassCollection` is the contained collection after the full relative transposition but before symmetrical midpoint shifts. On equal-movement ties, compare the sorted matched pitch classes numerically (C=0 through B=11) and choose the lexicographically lowest collection; do not prefer a transposition direction.
@@ -832,7 +832,7 @@ review selectors. Unknown names, multi-category names and competing files for th
 are not guessed. Automatic recognition never replaces an existing assignment. Duplicate file
 use across categories is rejected, including reselected files with identical name/size/modified
 time/type metadata. This is conservative identity checking, not a content hash; metadata
-collisions may require renaming a genuinely different file. Four distinct assigned categories
+collisions must be reported for review; any proposed renaming requires explicit approval and workspace copies. Browser-selected originals remain read-only. Four distinct assigned categories
 are required to enable Load. Extra candidates remain available for manual correction but are
 not decoded unless assigned. Clear selected files affects selection only, never loaded audio.
 
@@ -994,3 +994,163 @@ Permanent tests reproduce legacy peak 1.178888889 and verify interrupted/repeate
 retargets, effective continuity, nonunit main volumes, exclusions, departures and failure cleanup.
 These are automation-envelope simulations, not browser rendering/listening. Phase 2B membership,
 queue transport and allocator wiring remain absent.
+
+### Phase 2B — main-page native handoff integration (bounded implementation)
+
+The main page now uses `createNativeStemHandoffActions` with the existing allocator, gain
+bridge and coordinated mixer. The standalone two-deck fixture and legacy domain tests retain
+their existing path. Ownership is in `appState.stemSession.nativeHandoff`, participation only
+in the existing store. Never-played loaded decks can prepare controls without changing other
+allocations. Successful coordinated source scheduling admits a song; failed/cancelled starts
+do not. Play does not grant authorization. Pause and internal Stop retain ownership; Resume
+uses current allocations, not prepared requests. Natural completion leaves the song loaded and
+retains ownership (same as Pause); queue advancement remains absent. Eject and replacement
+loading release old-song ownership. A failed replacement retains old buffers under existing
+player behavior, but requires a new successful Play to rejoin.
+
+Entry prioritizes prepared requests. Active stem gestures preserve requests and use the pure
+allocator; established sharing distributes capacity proportionally over positive effective
+request weights with existing eligibility/high-water constraints. Sharing establishes when a
+qualifying enabled allocation reaches unity. No untouched zero category is introduced.
+All changed faders refresh on commit and audio receives complete gain snapshots. Prepared and
+paused controls can change where scheduling validates. Pending async starts reject competing
+musical edits; lifecycle interruption cancels the pending start rather than accepting a stale
+proposal. Native events, not metadata isPlaying or polling, drive ownership lifecycle.
+
+Safety limits: the scheduler caps ALL audible native decks, including excluded decks. A live
+participation exclusion that would overfill that audible sum rejects and restores the checkbox.
+Global OFF preserves allocations and makes gestures independent of the allocator, but targets
+that exceed the scheduler cap still reject. Thus unrestricted live exclusion/OFF operation is
+not complete. Playing main-volume changes reject; prepare volume before Play or while paused.
+The native adapter exposes setEnabled; no new global control is added. Existing appActions
+remain the legacy API; native callers must use mainStemIntegration.handoff for these controls.
+A native scheduling failure may pause owned sessions; no failed join acquires ownership.
+Departure already occurred if its subsequent redistribution fails: ownership is truthfully
+released, previous coefficients retained, and an error is exposed in stem status.
+
+Automated runner covers 1–4 ownership, takeover, retained requests, lifecycle, participation,
+start failure/cancellation and fader projection. Browser tests were updated but not executed:
+browser-control host was unavailable. Real Safari listening and browser UI checks are pending;
+this is an experimental playable subset, not full feature/release validation.
+
+### First Safari findings — preparation isolation regression correction
+
+Playing main-volume changes remain unsupported in the coordinated scheduler. The settled,
+unchanged-main-volume error is an intentional rejection, not evidence that the preparation
+volume path is supported during playback. No live main-volume support is added here.
+
+New regressions distinguish unloaded, loaded-never-played and retained paused owners. Unloaded
+and never-played volume/stem edits preserve other decks' requests, allocations and ownership.
+A defect in their audio projection was found: complete snapshots with unchanged audible targets
+still normalized/restarted playing decks' envelopes. The scheduler now validates the snapshot
+and audible endpoint cap, stores only silent deck coefficients when all audible targets are
+unchanged, and leaves existing audio automation intact. This is an idempotent snapshot path,
+not a direct-setter bypass or weaker capacity rule.
+
+A previously played paused/stopped/finished song remains an owner even when nothing sounds.
+Changing its volume can really redistribute the other silent owners. Replacement Load releases
+that old ownership, after which preparation is isolated. This reproduces a possible explanation
+for the Safari observation; unloaded/never-played allocation coupling was not reproduced, and
+the exact observed device state remains unknown. The follow-up adds state and envelope tests;
+it does not claim browser/UI reproduction or alter retained ownership semantics.
+
+### Safari playback interruption follow-up — rejection versus native failure
+
+Regression tests explicitly verify that unsupported playing main-volume gestures on either
+deck reject before AudioParam writes, preserve domain state and leave both sessions playing.
+Unloaded/never-played Deck 2 preparation also leaves playing Deck 1's transport untouched.
+A retained paused Deck 2 owner can trigger a valid allocation redistribution while Deck 1
+plays. Under an injected native scheduling delay, that redistribution misses the existing
+render-boundary deadline and deliberately pauses owned sessions through fail-closed cleanup.
+This reproduces a possible interruption mechanism, not the cause of the reported Safari event.
+The unchanged-main preflight rejection itself does not call shared pause cleanup.
+
+No deadline/cap/fail-closed policy was weakened. Add read-only diagnostics via
+mainStemIntegration.handoff.getDiagnostics(): actual loaded/playing/ownership/participation
+states and the last shared native scheduling failure (operation, message, sequence, scheduled
+and observed context times, decks playing immediately before safety pause). Expected preflight
+rejection does not create a failure record. Compare before/after records to avoid confusing a
+historical failure with a new gesture. Exact Safari cause remains unconfirmed until that snapshot
+and the actual error message are captured; no speculative transport workaround is implemented.
+
+### Compact Mac live-test mixer — presentation milestone
+
+The main page presents Decks 1/2 above Decks 3/4 in fixed 2×2 positions, using a shared compact
+neon/dark stylesheet. Desktop target is at least 900×680 CSS pixels, normal browser zoom;
+smaller windows remain usable with scrolling rather than scaled/clipped controls. Title,
+Play, Pause, Eject, participation, source, main volume and four stem rows stay together.
+Native faders are shown disabled until Four stems is selected; complete-song remains the
+startup source. Numeric readouts reflect allocated levels directly during the existing refresh.
+Internal Stop remains in the DOM/API but is not visible. No deck linking, waveform background
+or settings persistence is introduced; accent-color Settings are deferred.
+
+Assign & load stems expands the existing batch/manual review controls without moving other
+cards. File selection/assignment alone never decodes; explicit Load selected stems remains the
+loading action. Clear selection does not unload audio. Full-song/advanced and allocation
+information are expandable; existing experimental panels remain under global diagnostics.
+Routine native status now distinguishes no stems, loading, loaded/paused and playing while
+preserving error messages. All four decks share the same existing control/action identities.
+This layout does not alter source selection, participation, gain targets, allocator, scheduler,
+audio lifecycle or experiment settings. Browser geometry tests cover fixed placement, overflow,
+file overlays, source switching and numeric readouts; execution/listening on Safari remains pending.
+
+Compact loading follow-up: assignment review now explicitly distinguishes incomplete/assigned,
+decoding, successfully decoded matching assignments, and errors. Changing selection does not
+replace decoded audio until explicit Load succeeds. Decode errors remain visible in the file
+panel, including whether previous decoded audio remains. Play's UI handler also checks decoded
+readiness before dispatch. This changes presentation/guarding only, not native allocation or DSP.
+
+Matching-set investigation clarification: users select one song's matching four stems per deck.
+No cross-song combination or relaxed recognition/alignment rules are authorized. The current
+filename helper recognizes categories, not verified song identity or content. A second batch
+retains existing assignments; the UI must explain Clear selected files before switching sets.
+Read/decode errors identify the file; decoded validation errors report frames/rate/channels.
+Compact panels provide Close and Escape dismissal, restore summary focus, and reserve access
+to playback controls while open. These safeguards do not change allocator/scheduler behavior.
+
+### Native silence diagnostics — read-only investigation
+
+Allocation details offers an explicit Capture native audio diagnostics action. It snapshots
+shared native context state/time, loaded buffer metadata, source start/position, modeled gain
+envelopes/effective products, reported AudioParam readings, destination-connection bookkeeping
+and the last Play error. It neither resumes a context nor changes transport, gains or allocation.
+PCM inspection is bounded to 256 frames per channel at the current source position; zero in
+that window does not establish a silent file. Connection bookkeeping records successful native
+connect calls, not a hardware output measurement. These diagnostics do not authorize playing
+main-volume changes or weaken any scheduler cap/deadline protection.
+
+### Live native output measurement
+
+The shared native output now passes through an AnalyserNode immediately before destination.
+Capture diagnostics reads live left/right RMS and peak at nativeAudio.outputMeter; stereo
+channels are measured separately to avoid cancellation from mono downmix. Per-session side
+taps expose each source, stem-gain output, main-gain output and transport output. These taps
+do not change coefficients or add an audible duplicate path. No continuous UI sampling is
+added. Meters add diagnostic graph processing; read operations do not resume/start/schedule.
+No real Safari signal result or root cause is claimed until a live capture is supplied.
+
+### Idle shared-context output probe
+
+Allocation details includes Test shared output, a deliberate 0.75-second, 440 Hz tone through
+the already-created native shared context and the same final output node. It refuses active
+native playback, loading, pending coordinated starts and overlapping tests; the main UI also
+checks complete-song playback. It never creates a replacement context, changes destination
+channels or alters deck gain/allocation/ownership. Play/Load reject during the short probe.
+Tone end/owner close disconnect its nodes. This is an explicit sound-producing diagnostic,
+separate from the read-only Capture action; it is not a live scheduler bypass.
+
+### Fresh-context comparison probe
+
+Test fresh context is a separate explicit diagnostic action beside Test shared output. It uses
+the same brief waveform and metered final routing in a temporary default context, resumed in
+the click handler and closed after the tone. It does not resume, close, replace or reconfigure
+the production context or change loaded decks. Both probes require idle playback/loading and
+cannot overlap; native Play/Load reject while a probe is active. Creation/resume configuration,
+errors and temporary-close status are inspectable in capture diagnostics. Physical Apollo
+routing and device-selection history must not be inferred from generic context properties.
+
+Probe measurement clarification: shared/fresh diagnostics retain two bounded live output
+observations requested at 150 and 500 ms, including context state/time and read-only page
+audio-session/activation state where available. Captures remain available after temporary
+context closure. Missing/delayed/unavailable readings or measurement errors are not zero
+signal. No browser audio-session policy is changed.

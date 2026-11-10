@@ -1,6 +1,6 @@
-# TuneFlow — Product Design and Development Handoff
+# TuneToss — Product Design and Development Handoff
 
-Working product name: **TuneToss**, formerly TuneFlow. Existing paths and executable identifiers remain unchanged.
+Project name: **TuneToss**, including the DJ application and broader music/audio research (formerly TuneFlow). TuneFlow is not the name of a separate ongoing research project; any future name is undecided. Existing paths and executable identifiers remain unchanged for compatibility.
 
 
 **Purpose:** Share architecture, design context, roadmap and unresolved decisions. This is
@@ -14,7 +14,7 @@ historical/superseded = retained context, not current policy; unresolved = no al
 behavior may be silently chosen. RULES.md section 21 owns the latest stem decisions.
 
 ## 1. Vision and working style
-TuneFlow is an iPad-first DJ application, rebuilt from an earlier working prototype with emphasis on stability, understandable code, and a coherent user experience. The developer is learning JavaScript and wants to participate in decisions rather than have an assistant generate an opaque application.
+TuneToss is an iPad-first DJ application, rebuilt from an earlier working prototype with emphasis on stability, understandable code, and a coherent user experience. The developer is learning JavaScript and wants to participate in decisions rather than have an assistant generate an opaque application.
 
 Guiding principle: **The code should reflect the sequence of the user's experience whenever practical.** The user opens the app, sees decks, selects songs, optionally triggers synchronization, and then plays/mixes. Function declarations may appear before initialization; their execution should still follow user actions.
 
@@ -86,7 +86,7 @@ A global pitch shift should move synchronized songs together while maintaining t
 - `calculateSymmetricalScaleCompatibilityShifts(firstSong, secondSong)` divides that movement equally and oppositely, including fractional offsets. It returns `matchedPitchClassCollection` and separate `firstSongSoundingPitchClasses` / `secondSongSoundingPitchClasses` arrays after midpoint shifts. For C minor pentatonic with C Locrian, it returns `-1` and `+1` semitone shifts.
 - Prepare a cue by transposing the whole song the shortest pitch interval needed to match the reference's current sounding normalized collection. Keep global pitch separate and apply it once; cueing does not change `referenceKey`.
 - A playing deck is the key reference. Deck 3 prefers Deck 1, Deck 4 prefers Deck 2, and otherwise the lowest-numbered valid-key playing deck is used. With no decks playing, use `appState.referenceKey`, then the lowest-numbered loaded deck with a valid key. If no reference exists, leave the cue at its original key.
-- Key and mode are read from supplied `song.key` metadata. TuneFlow does not currently detect keys or modes from audio.
+- Key and mode are read from supplied `song.key` metadata. TuneToss does not currently detect keys or modes from audio.
 
 ## 6. Four-deck stem-mixing vision — planned, not implemented
 A landscape-oriented mixer concept uses multiple decks that can control the functional stems Transients, Flow, Tune and Voice. A key design idea is **shared allocation of each stem type across decks**: as one deck claims more of a stem's available volume, the other decks' allocation of that stem is reduced, enabling smooth stem handoffs. Per-deck cueing and crossfading between stems within/across decks are part of the broader vision.
@@ -1100,7 +1100,7 @@ joining requirements are historical documentation, not implemented behavior to p
 ## 25. Integrated stem sampler — planned central performance feature, deferred
 
 **Approved high-level concept; not implemented.** The sampler is intended to become a central
-TuneFlow performance feature, but development is explicitly deferred until the core application
+TuneToss performance feature, but development is explicitly deferred until the core application
 is operational. It does not expand the current milestone or delay foundational functionality.
 Implementation requires separate approval.
 
@@ -1390,3 +1390,518 @@ up to four audible decks, simultaneous categories, nonunit volumes, continuity, 
 style snapshots, departures and safe rejections. Existing cancellation/start-failure coverage
 remains. Simulated cap evidence does not establish browser click freedom or hardware onset;
 Safari/Mac/iPad rendering/listening is still required before release claims.
+
+### Phase 2B — bounded native lifecycle/action adapter
+
+`native-stem-handoff.js` stages a copied domain proposal, reuses direct action validation and
+eligibility with the legacy calculator suspended in that copy, applies existing high-water
+qualification, then invokes the pure allocator. Audio validates/schedules through the existing
+bridge before authoritative allocations/requests/participation are committed. Native ownership
+and multi-deck sharing live inside stemSession; no competing participation or metadata playback
+store is created. Native-player subscribe notifications cover started, pause, eject, replacement
+and ended; internal Stop emits pause and retains ownership. First successful scheduling commits
+ownership, while Resume runs coordinated source scheduling with existing allocations and no
+new allocator entry. Source-router Play optionally dispatches this adapter; legacy callers keep
+the original router and fixture APIs. No new engine, polling, queue or visible controls.
+
+Lifecycle events invalidate pending proposals and cancel pending native Play. Musical actions
+reject during an async start. Native departure updates ownership even if redistribution rejects;
+the error remains inspectable and appears in the reusable component's existing status area.
+The main page loads the allocator/action adapter and routes the existing controls through it.
+Callback-driven refresh uses allocated levels; requested intent is retained separately.
+
+Implementation limits remain explicit: protected snapshots include all audible native decks,
+so live exclusion and global-OFF changes that overfill that total reject. Playing main-volume
+changes also reject. Supporting uncapped independent/excluded cohorts requires a separately
+validated scheduler boundary; this adapter does not bypass safety. Global native permission is
+available through mainStemIntegration.handoff.setEnabled; no new UI is introduced and legacy
+appActions are not replaced. Paused/finished songs retain ownership, internal Stop preserves
+compatibility, and replacement attempts release it before decoding. No queued song participates.
+
+Tests add native adapter integration with real mixer mocks, actual source-start failure and
+cancellation, 1–4 owners, Voice takeover, requests, UI projection callbacks, lifecycle and safe
+participation rejection. Main/four-deck browser tests now exercise native playing membership;
+standalone two-deck expectations remain. Browser execution was unavailable in this session.
+Next: Mac Safari manual validation, then iPad; settle independent-cohort scheduling before
+claiming unrestricted global OFF/live participation behavior.
+
+### Safari follow-up — isolated preparation must not retime another deck
+
+The native isolation tests now start with genuinely unloaded players instead of loading every
+deck in the fixture. They cover volume sweeps before/after Load, preparation while Deck 1 is
+playing, stem edits after Eject, and retained paused-owner redistribution followed by replacement.
+No unloaded/never-played allocation or membership coupling was reproduced. However, the new
+assertion that preparation preserves existing AudioParam event lists failed: protected mixer
+snapshots always retargeted every audible session, even with identical targets.
+
+The minimal correction is inside retargetSnapshot: if every playing session has unchanged
+main/stem targets, validate the complete snapshot and audible cap, then update silent players'
+stored coefficients only. Existing source and gain envelopes stay untouched; normal coordinated
+retarget validation/failure handling is unchanged for audible changes. Paused membership remains
+intentional; a paused owner's volume can change others' allocations even with no audible decks.
+Load/replacement releases that ownership. Exact Safari observation remains unverified without
+its loaded/ownership state; do not label it a confirmed UI wiring bug.
+
+Supporting playing main-volume changes safely still requires coordinated effective-product
+trajectories (main × stem × transport), physical stem bounds including volume zero, interruption
+and reversal tests, and native failure handling. The unchanged-main restriction remains intact.
+
+### Safari interruption diagnosis — preserve failure boundaries
+
+Tests now assert transport survival and unchanged AudioParam event lists for expected main-
+volume rejection, both deck directions, and preparation on unloaded/never-played Deck 2.
+Retained paused ownership differs: accepted volume changes can require real native scheduling.
+A test injects elapsed context time during AudioParam writes and reproduces Deck 1 pausing in
+the existing missed-deadline cleanup. State proposals remain uncommitted; retained ownership
+remains paused truthfully. This does not establish what happened on Safari.
+
+Mixer fail-closed catch sites now share the same pause cleanup plus a frozen, read-only last
+failure snapshot. No preflight rejection enters that function. The native action adapter exposes
+getDiagnostics() with loaded/playing/ownership/participation and that snapshot, without polling,
+continuous logging, new controls or scheduling changes. Native exceptions are preserved.
+Capture diagnostics immediately before/after a Safari gesture plus its exact error to distinguish
+ordinary rejection from actual native failure (including scheduled vs observed context time).
+Do not expand the deadline or suppress shared safety cleanup based only on the reported symptom.
+
+### Compact four-deck live-test surface
+
+`mixer-layout.js` is a one-time presentation adapter over already-mounted controls: it moves
+existing DOM nodes into persistent card headers, transport strips, fader rows and expandable
+file/advanced panels. It creates no playback/domain events or timers. `mixer.css` supplies the
+2×2 desktop layout, responsive spacing, deck accents and overlay panels. Fixed IDs, listeners,
+player/context ownership and component closures remain intact. v40 is a reference direction;
+no v40 visual asset was found in this checkout for direct comparison.
+
+The reusable stem component adds output elements refreshed from domain allocations and an
+optional controlsEnabled callback. Main-page complete-song mode shows inactive native faders
+instead of hiding the whole component; the callback disables native faders/Load until stem
+source selection. Standalone prototype defaults remain enabled. The integration captures its
+original complete-song file label before layout moves nodes, avoiding a dynamic first-file
+query accidentally hiding the batch picker. Audio-controls changes are routine native status
+presentation only; errors and playback actions are preserved. Stop is hidden, not removed.
+
+Target desktop footprint is 900×680 CSS pixels and up at normal zoom. Smaller layouts retain
+2×2 order and allow scrolling. Browser test page `tests/compact-mixer-browser-tests.html`
+checks common viewport sizes, bounds, fixed cards on panel expansion, current values and
+unchanged control identities. It requires actual browser execution; native Safari preview
+access timed out and browser automation host was unavailable in this session. The macOS
+regression runner and changed-script syntax checks remain executable. No waveform work,
+settings/color persistence, library redesign or audio changes are part of this milestone.
+
+### Compact loading investigation follow-up
+
+Confirmed presentation defects: the absolutely positioned footer details became the containing
+block for their own overlay, constraining assignment controls to footer width; assignment status
+unconditionally advertised Load even after success; source-selection status was excluded from
+routine native status refresh. Expanded footer details now use the card as their containing block.
+The reusable component refreshes immediately after invoking Load in the original click stack,
+tracks successfully decoded assignment identities, and exposes decoding/readiness/errors beside
+the file controls. The transport handler checks readiness before dispatch.
+
+Inspection found retained picker/listener/File-model references through DOM moves. Native player
+and Phase 2B Play already reject unloaded/loading decks. No decoder, allocator, scheduler, handoff
+or engine changes were made in this follow-up. The reported Safari silence has not been reproduced;
+these presentation fixes alone do not establish audible recovery.
+
+Verification: full macOS regression runner passed, including UI-handler readiness checks;
+changed JavaScript syntax and git diff whitespace checks passed. Browser assignment tests now
+check moved Load dispatch, decoding state, readiness, corrupt-file errors and retry; geometry
+tests require card-width overlays. Those browser tests and audible Safari checks remain unexecuted.
+
+Safari verification (serve checkout over local HTTP, normal zoom):
+1. Open index.html at 1280×720 or larger; reload, select Four stems on Deck 1.
+2. Open Assign & load stems. Confirm all assignments/status fit within the Deck 1 card;
+   opening it must not move or cover controls outside that card.
+3. Assign the four previously working aligned files, individually and then via batch after
+   Clear selected files. Review each category. Before Load, Play must remain disabled.
+4. Click Load selected stems once. Confirm Loading / decoding, disabled Load and Play, then
+   Four stems loaded — ready to play, nonzero duration and enabled Play.
+5. Prepare Deck 1 main volume 1 and four stem levels 1 before Play. Click Play; confirm
+   advancing position, Stems playing, and audible output. Pause/resume and Eject; Eject disables Play.
+6. Repeat on Deck 2 with its intended prepared levels, then verify the existing Deck 1/2
+   handoff behavior and unchanged playing-main-volume restriction.
+7. Eject, assign four invalid audio files with recognizable category names and Load.
+   Confirm visible decode error and disabled Play. Clear, reassign valid files and retry.
+8. Repeat loading on Decks 3/4; check panel geometry on bottom-row cards and at 900×680.
+9. Open tests/batch-stem-browser-tests.html and tests/compact-mixer-browser-tests.html;
+   click Run tests on each and record results. Generated batch WAVs are silent fixtures:
+   use the original stems for the listening checks.
+If silence persists, capture the visible file-panel error, Allocation details player state and
+mainStemIntegration.handoff.getDiagnostics() immediately after Load and Play in Safari's console.
+
+### Matching-set investigation (correction)
+
+The report concerns two separate, internally matching four-stem song sets; one worked and one
+failed. No mixing of songs is requested. At the time of that investigation, the actual failed filenames, formats and Safari error
+were not available. The exact filenames have since been supplied below; the error remains unavailable.
+
+Examined boundaries:
+- Recognition remains literal case-insensitive drum/bass/other/vocal substring matching.
+  Category terms in the song title can make otherwise matching filenames ambiguous. This
+  existing rule is tested and preserved; no category or song-identity guessing was added.
+- New batches retain existing assignments. Tests now reproduce selecting a second complete
+  song set, retaining all first-set mappings, then clearing and selecting the second set with
+  no stale references. UI explains this intentional retention and explicit switching path.
+- Native decoding remains sequential and snapshots mapped File objects. Errors now include
+  category/filename; validation failures include all decoded frame counts/rates/channels.
+  Exact frame equality, sample-rate equality and mono/stereo validation remain unchanged.
+  A matching song set can still have an unsupported encoding or a one-frame export mismatch.
+- Previous validated audio survives replacement failure, while an initial failed load cannot
+  play. Error/readiness text distinguishes those cases; tests cover both boundaries.
+- Compact panels now include Close and Escape dismissal with summary-focus restoration.
+  Their top follows the transport strip and their bottom reserves the footer; transport remains
+  above the panel. Geometry/close/hit-testing assertions were added to the browser fixture.
+
+Run tests/batch-stem-browser-tests.html and tests/compact-mixer-browser-tests.html in Safari.
+For the user's two sets: Clear, select all four from the working song, review and Load; record
+ready state and listen. Clear, select all four from the failed song; record assignment messages
+before Load and the exact error afterward. This distinguishes recognition/retention from actual
+read/decode/validation failure. Check each assignment filename, Play readiness and whether old
+audio was retained. Test Close, Escape, and Play/Pause/Eject accessibility with the panel open
+on every card. Browser geometry/listening remains unverified in this session.
+
+Executed verification for this follow-up: full macOS regression suite passed, including new
+assignment-switching and filename/decoded-validation diagnostics checks; all seven changed
+JavaScript files passed syntax parsing; git diff --check passed. Browser fixture additions
+were syntax-checked only, not executed. No commit or push was performed.
+
+
+### Exact reported AIF filenames and original-file safety
+
+The user supplied these names verbatim; no original audio file was accessed or modified for this test:
+
+```text
+Blessing Cassian Remix Harris Bass Calvin Harris, Clementine Douglas - Blessings (Cassian Remix).aif
+Blessing Cassian Remix Harris Drums Calvin Harris, Clementine Douglas - Blessings (Cassian Remix).aif
+Blessing Cassian Remix Harris Others Calvin Harris, Clementine Douglas - Blessings (Cassian Remix).aif
+Blessing Cassian Remix Harris Vocals Calvin Harris, Clementine Douglas - Blessings (Cassian Remix).aif
+```
+
+Tests run these exact strings through the production recognizer and assignment model using
+frozen metadata objects, including empty MIME metadata. Expected mapping is Bass -> Flow,
+Drums -> Transients, Others -> Tune, Vocals -> Voice. Each name has one category match.
+Tests also cover existing-assignment retention and explicit clear/reselect with these names.
+This checks filename/assignment handling only, not the bytes, codec or alignment of the originals.
+The .aif extension is not filtered by the native loader and does not establish actual encoding.
+
+Scoped file-safety audit: main native selection retains File references; loading calls
+arrayBuffer and decodeAudioData. No original-file rename, move or write-back path was found
+in the inspected project loading code. The diagnostic download creates a separate capture
+download, not a write to selected originals. Synthetic File construction in tests creates
+in-memory fixtures. No audio rename command occurred in the visible Codex work for this
+conversation. This is not an audit of other sessions, applications or OS file history, and
+does not establish who or what changed the names. Original audio outside this project was
+not inspected. All selected originals must remain read-only; conversion/renaming requires
+explicit approval and workspace copies.
+
+Next diagnostic: in Safari, Eject if starting an empty-deck test, Clear selected files,
+select precisely these four files together, and record the assignment message and four
+review dropdown names. If ready, click Load once and copy the complete resulting status/error.
+A read/decode error identifies that boundary; decoded validation errors report frames/rate/
+channels. If Load never becomes available, capture source mode and assignment messages.
+No working-set filenames or actual failed-set error have been supplied; neither is inferred.
+
+Verification for the exact-name follow-up: full macOS regression suite passed, including
+verbatim filename mapping, frozen-reference preservation and clear/reselect tests.
+Changed test JavaScript syntax and git diff --check passed. No original-file decoding or
+Safari listening was performed. No commit or push was performed.
+
+### Phase 2B native Safari silence investigation
+
+Latest user evidence: multiple song sets load, category matching works and handoff faders
+respond; playback remains inaudible. This supersedes failed-loading as the current priority.
+A definite Safari root cause has not been established.
+
+The inspected native graph is source -> per-stem gain -> shared deck main-volume gain ->
+deck transport gain -> the mixer's shared AudioContext.destination. Sources share a future
+start time and offset. Ordinary starts use unity transport; coordinated starts set transport
+zero then ramp it to unity over 10 ms. Retargeting normalizes the scheduled transport product
+into musical coefficients; unchanged-audible-target preparation skips live automation. Native
+resume errors, non-running state and missed deadlines reject; no output workaround is added.
+Playing-main-volume automation remains unsupported and unchanged.
+
+createFourStemPlayer.getDiagnostics() snapshots state without context creation/resume, graph
+changes or AudioParam writes. It includes context clock/state/rate/latency, source start time/
+count and remaining sources, position, decoded metadata, bounded PCM peaks, modeled stem/main/
+transport coefficients and their effective products, reported AudioParam.value readings,
+successful destination-connection bookkeeping and the most recent Play error name/message.
+Scheduled envelope models are distinguished from AudioParam readings; neither measures actual
+speaker output. The 256-frame/channel PCM window is not a whole-recording silence scan.
+Snapshots are frozen and contain no node/buffer references. They are sampled only on request.
+
+The native mixer aggregates these snapshots; handoff.getDiagnostics().nativeAudio adds them to
+existing allocation/participation and last scheduler-failure diagnostics. Allocation details
+has a Capture native audio diagnostics button rendering a snapshot, refreshed only by another
+explicit capture. No polling, analyser, new output routing or continuous logging was added.
+Playback wrapper retains resume/start exceptions for diagnostics and rethrows unchanged.
+
+Regression coverage reconstructs the source/stem/main/transport/destination connections,
+coordinated silent reservation, in-flight ramp product, settled nonzero product and advancing
+clock, silent preparation during the start ramp, suspended state without auto-resume,
+resume rejection, pause disconnection and deep-frozen read-only snapshots. Existing cap,
+retarget/interruption, lifecycle, matching and loading suites remain required. This evidence is
+mock scheduling/PCM inspection, not Safari rendering/listening or an autoplay-policy diagnosis.
+
+Exact Mac Safari verification:
+1. Serve this checkout over local HTTP (python3 -m http.server 8000) and open
+   http://localhost:8000/index.html in Safari. Reload. Check the tab and macOS output volume,
+   mute state and intended output device.
+2. Select Four stems on Deck 1; clear selections, select one matching four-stem song set and
+   Load. Wait for ready. While paused, set main volume 1 and all four stem levels 1 using
+   direct controls. Leave other decks paused. Do not adjust main volume while playing.
+3. Open Allocation details and click Capture native audio diagnostics; retain the snapshot.
+   Alternatively in Web Inspector Console evaluate
+   JSON.stringify(mainStemIntegration.handoff.getDiagnostics(), null, 2).
+4. Close the panel, click Play directly, wait at least one second, capture again, then wait
+   another second and capture a third time. Use original audible stems, not silent test WAVs.
+   Save complete snapshots and any deck error/Console error verbatim. Do not continuously poll.
+5. Compare nativeAudio.contextState/contextTime and nativeAudio.decks[1].position between
+   captures. Running clock/position should advance before the song ends. Inspect
+   sourceStartCalls (4), sourceClockReachedStart, connectedToDestination, modeledTransport
+   (1 after the ramp), mainVolumeTarget/modeledMainVolume and per-stem modeledEffectiveGain.
+   For this isolated Deck 1 preparation the effective gains should be nonzero. Inspect
+   sampledPcmPeak across several captures; zero in one short window is inconclusive.
+6. Inspect lastPlayError and lastSchedulingFailure for native/resume/deadline errors.
+   A suspended/interrupted context, frozen clock, zero effective coefficients, absent source
+   starts or disconnected bookkeeping identifies different boundaries. Running/nonzero
+   bookkeeping alone cannot prove Safari/hardware output or rule out external muting.
+7. Pause/resume Deck 1 and capture again. Repeat isolated playback on another deck, preparing
+   that deck's main and stem levels before Play; then test the existing two-deck handoff
+   and capture before/after a stem gesture. Do not change the playing-main-volume restriction.
+8. If silence persists, provide the before/after JSON plus exact Safari/macOS versions and
+   output device. No inference about actual Safari autoplay restrictions is possible without
+   its state/error evidence.
+
+No audio originals were modified, and no commit or push is part of this investigation.
+
+Executed checks for this silence-diagnostic change: full macOS regression runner passed
+(including new graph/envelope/read-only diagnostics checks), all four changed JavaScript
+files passed syntax parsing, and git diff --check passed. Real Safari state/error capture,
+browser rendering and audible output verification remain outstanding.
+
+### Safari final-output regression: historical comparison and live meters
+
+Read-only Git comparison used cd5e6f8 (before coordinated starts), d142490 (coordinated starts),
+c022f0d (retarget correction), and the preserved working-tree diff. cd5e6f8 RULES records prior
+main-page Safari playback success and isolated two-deck listening success; the exact user-tested
+commit is not established. Its native route was source -> stem gain -> main gain -> transport
+(unity) -> destination. Current route before this instrumentation had the same destination
+connection; coordinated starts add zero-to-unity transport automation, retargeting accounts for
+transport products, and Phase 2B adds lifecycle notifications/ownership/action staging. Inspection
+did not identify a definite final-route regression. Nothing was checked out/reset/discarded.
+
+Latest live evidence supplied by the user: running 44.1 kHz context, advancing time, successful
+source starts, unity reported gains, nonzero decoded PCM, connection bookkeeping true, no errors,
+but complete silence. This narrows the investigation but does not measure rendered output.
+
+New shared inline analyser feeds the final destination once. Each meter uses a channel splitter
+and separate left/right time-domain analysers (2048 frames), avoiding opposite-phase stereo
+cancellation in AnalyserNode's mono data. Per-session side taps measure source outputs, stem
+gain outputs, main gain output and transport output. They are installed after successful
+deadline-sensitive start scheduling and disconnected during retirement; they do not feed an
+additional audible destination. Extra graph processing is diagnostic overhead, not a performance
+guarantee. Measurement failures are exposed; unavailable mocks retain direct output routing.
+If shared meter creation fails, playback retains the direct destination path and outputMeter
+reports unavailable/error instead of falsely reporting zero.
+
+Capture nativeAudio.outputMeter for final left/right RMS/peak, and
+nativeAudio.decks[1].liveMeters for transientsSource/transientsStemGain (and flow/tune/voice),
+main and transport. Captures are explicit, bounded reads with context timestamps. No snapshot
+is hardware loopback; final nonzero proves signal at the destination input, not speaker output.
+Stereo mix cancellation between stems/decks is also possible: compare individual stage signals
+and combined main/transport/final signals before blaming routing.
+
+Precise Safari procedure:
+1. Serve project locally; reload index.html. Load one known audible matching set on Deck 1.
+   Leave other decks paused; prepare main/stem gains to 1 before Play.
+2. Click Play; during an audible musical passage open Allocation details and Capture native
+   audio diagnostics three times, about one second apart. Save full JSON. The same snapshot
+   is available from JSON.stringify(mainStemIntegration.handoff.getDiagnostics(),null,2).
+3. Inspect nativeAudio.outputMeter.available and left/right rms/peak. Do not classify an
+   unavailable meter, a short silent passage or an ended song as graph silence.
+4. If both final channels remain zero: inspect Deck 1 liveMeters backward, transport -> main
+   -> each StemGain -> each Source. A nonzero upstream/zero downstream pair localizes the
+   boundary. Compare current context timestamps and gain/error state. Report all snapshots.
+   If individual stems are nonzero but their main sum is zero, check cancellation rather than
+   assuming a disconnected node. No boundary has yet been observed in live Safari.
+5. If final output is nonzero but inaudible: unmute this Safari tab using its audio control;
+   in macOS System Settings > Sound > Output select the intended physical device and check
+   output volume/Mute. Test Built-in Speakers to isolate Bluetooth/USB/HDMI/aggregate routing;
+   record active device and any third-party per-app routing/mute utility. Compare another known
+   audible source on the same device. Re-select output and reload/retest; do not alter scheduler.
+6. Open tests/native-output-browser-tests.html and click Run audible native output test.
+   This generates a quiet 440 Hz tone and measures real source/stem/main/transport/final signal,
+   Pause silence and Resume recovery. Record PASS/FAIL separately from whether you hear it.
+   No original files are involved. Repeat main-page test after handoff and Pause/resume.
+7. Supply JSON, test result, Safari/macOS versions and selected output device. The browser
+   fixture and live listening have not been executed by Codex in this session.
+
+References: Web Audio specification https://www.w3.org/TR/webaudio/ (AnalyserNode passthrough,
+unconnected analysis outputs and mono time-domain downmix); Apple Safari tab mute guide
+https://support.apple.com/en-ca/guide/safari/ibrwae910b47/mac and Sound output guide
+https://support.apple.com/guide/mac-help/change-the-sound-output-settings-mchlp2256/mac.
+
+Executed verification: full macOS regression suite passed, including stereo meter arithmetic,
+read-only captures, stage-meter lifecycle and existing coordinated cap/failure tests. All three
+changed/new JavaScript files passed syntax parsing; git diff --check passed. The new real Web
+Audio browser fixture is added and syntax-checked but unexecuted. No original audio was modified;
+no commit/push or working-tree reset occurred.
+
+### Apollo Twin isolation: working test versus application context
+
+New user hardware evidence: built-in speakers work; Apollo output from TuneToss is silent
+with nonzero internal final stereo readings and no Apollo Console activity. YouTube and the
+native-output browser fixture work on Apollo. Therefore Safari Web Audio/Apollo output is
+possible; a general hardware mute or universally broken Web Audio route is not established.
+
+Comparison of working fixture with main app:
+- Both use createNativeStemMixer, native players, shared output analyser/destination, and
+  startCoordinated. Thus the fixture already tests the same scheduler and final graph code.
+- Fixture creates a fresh default AudioContext and awaits resume in the Run click before
+  passing it to the mixer. Main app constructs only the owner at startup, creates its default
+  context lazily during explicit Load, constructs output metering, then invokes resume before
+  file reads. Play resumes again; the context persists across song loads/pauses/ejects.
+- Neither explicitly sets sample rate, sink/device, destination channelCount/countMode or
+  channelInterpretation. No hardcoded Apollo routing/channel map is present. Unknown browser
+  sink fields remain null; they are not proof of a physical device selection.
+- Fixture closes the context at test completion; main app closes on pagehide. Existing
+  complete-song backends own separate contexts, created lazily by their own operations.
+- Historical cd5e6f8 used default lazy shared-context creation and persistent ownership too;
+  direct destination routing and unity ordinary transport preceded coordinated scheduling.
+  Prior Safari success is documented, but the exact hardware/tested commit is unspecified.
+
+No definite Apollo-specific code defect is established. Do not force stereo/sample rate,
+recreate/suspend the live context or rewrite scheduling based on this evidence alone.
+
+A controlled idle-only probe now plays 0.05-amplitude 440 Hz mono PCM (same waveform as the
+working fixture's individual generated stems, shortened to 0.75 seconds with 5 ms edge ramps)
+through the actual retained context's shared output node/destination. It does not use another
+context or another device. It reports before/after-resume context state and destination config,
+creation-time config and most recent statechange snapshot. No automatic device-change reset,
+routing write or continuous log is added. The probe is deliberate sound generation, not a
+read-only capture. It refuses playback/loading/pending coordinated starts, and its lock prevents
+new native Play/Load until it ends. UI additionally refuses any current complete-song playback.
+It preserves buffers, positions, gains, domain allocations, participation and ownership.
+Owner close cancels it; failures retain the actual error and release its lock.
+
+One Safari verification step: with Apollo selected, reproduce silent song playback, Pause all
+decks (do not Eject or reload, preserving the suspect context), open Allocation details and click
+Test shared output — pause all native decks. Report whether the brief tone is heard and Apollo
+Console meters move; include Capture JSON afterward for contextAtCreation/contextNow and
+lastDiagnosticTone. If the probe is silent too, the retained shared output/context boundary is
+implicated; if audible, the normal source/graph lifecycle needs further isolation within that
+same context. Neither result alone identifies a specific browser/driver defect.
+
+Executed verification for the Apollo probe: full macOS regression suite passed, including
+active-playback rejection without automation changes, existing-destination tone routing,
+overlap/Load/Play exclusion, natural-end cleanup, resume failure recovery and owner-close
+cleanup. Four changed JavaScript files passed syntax checks; git diff --check passed.
+The browser fixture includes shared-probe output assertions but was not executed here;
+Apollo hardware verification remains with the user. Original audio and uncommitted work
+were preserved; no commit or push was performed.
+
+### Retained versus fresh context comparison
+
+User result: the existing shared-context tone was silent with no Apollo Console response after
+pausing the silently playing deck without reload/eject. The standalone native-output test was
+audible with Apollo meters responding. This further isolates decoded material and allocator
+from the symptom, but does not establish a specific context or downstream routing mechanism.
+
+Source comparison remains: both contexts use default AudioContext construction, default
+destination channel settings and the same shared analyser output topology. The standalone
+test creates/resumes immediately in its Run click then closes; the production context is
+retained from Load and resumed again by Play/shared-probe gestures. Code does not select
+Apollo or react to device connection/selection by rebuilding/rerouting the production context.
+Creation/current sample rate, destination channelCount/maxChannelCount/countMode/interpretation,
+optional sink ID and last statechange are captured. These properties do not identify physical
+output channels or reconstruct when Apollo was connected/selected. No device permissions,
+automatic context reset, forced sample rate or channel changes are introduced.
+
+A new Test fresh context button constructs/resumes a separate default temporary context in
+the explicit click, attaches the same output meter, and plays the same shared helper's
+0.75-second 440 Hz waveform with 5 ms edges. It closes/disconnects only the temporary graph
+after natural end, error or owner shutdown. The retained production context is neither resumed
+nor replaced by this comparison. Loaded buffers, position, allocations and gains are preserved.
+Mutual probe/Play/Load exclusion prevents accidental overlap; UI also rejects complete-song
+playback. nativeAudio.lastFreshDiagnosticTone records creation/resume settings, production
+configuration alongside them, actual error and temporaryContextClosed status;
+freshOutputMeter exposes live temporary output while the short tone is active.
+
+Simple Safari test: reproduce Apollo silence, Pause all decks without eject/reload, then in
+Allocation details click Test shared output, wait for it to finish, and click Test fresh context.
+Keep the macOS output device fixed throughout. Report heard/not-heard and Apollo meter
+movement for each; Capture after both retains both context records. Fresh-only sound supports
+a retained-context/output-state difference; both silent in this page despite audible standalone
+output calls for a broader page/context comparison. No individual browser/driver fault is proven.
+
+Controlled device-order investigation, if required after that comparison: record whether Apollo
+was already connected and selected before first Load/context creation. In a separate deliberately
+fresh page run, compare that order with first Load on Built-in Speakers followed by selecting
+Apollo and repeating the two probes without reloading. Capture settings and hardware response
+at each boundary. Never recreate the production context automatically. This hardware/order
+experiment has not been executed by Codex, and its outcomes must not be invented.
+
+Verification: full macOS regression suite passed, including separate-context creation/resume,
+production-state preservation, mutual exclusion, natural-end/error cleanup and shutdown.
+All four changed JavaScript files passed syntax checks; git diff --check passed.
+Browser fixture assertions were added/syntax-checked, not executed. Safari/Apollo comparison
+remains outstanding. No original audio or unrelated uncommitted work was discarded; no commit/push.
+
+### Confirmed page comparison and a probe measurement gap
+
+Latest user evidence supersedes the stale-context hypothesis: normal playback, shared tone
+and fresh tone are silent in the main Safari page on Apollo, while the standalone native-output
+fixture is audible and built-in speakers work. Fresh-only success must no longer be assumed.
+This suggests page/output interaction, but does not identify its mechanism.
+
+Concrete source comparison:
+- Standalone handler creates/resumes a default context synchronously from Run before its first
+  await; it decodes four 3-second mono PCM16 WAVs at the context rate, each amplitude 0.05 and
+  frequency 440 Hz, then starts four sources through the same mixer/scheduler/analyser path.
+  Their in-phase combined signal is approximately 0.20 before metering.
+- Main fresh handler's guards and mixer call are synchronous before its first await. Its default
+  temporary context is created/resumed in that click stack. It uses a single direct AudioBuffer
+  at the context rate, amplitude 0.05, frequency 440 Hz, duration 0.75 seconds with 5 ms edges,
+  through a gain into the same type of shared analyser/splitter/destination topology. It skips
+  stem decoding, allocator and deck transport, so it is not an identical stimulus to standalone.
+- Neither writes destination channel count/mode/interpretation, sample rate, sink/device or
+  navigator.audioSession/mediaSession settings. Fresh probe checks running before starting;
+  errors propagate into the visible diagnostics area. Hardware silence does not itself prove
+  that the probe reached running/nonzero rendered output.
+- Experiment factories initialize ownership/state but create contexts lazily; their panels
+  read status until explicit user actions. No page-wide AudioContext constructor replacement,
+  suspend loop, hidden media playback or audio-session override was found in inspected code.
+  pagehide closes engines; normal compact toggles/resize/status refresh do not.
+- UI audit still maps visual IDs 1–4 to persistent players 1–4 in one native owner. Play goes
+  through Phase 2B action staging/coordinated scheduling; Pause/Eject/Load target the same ID;
+  main/stem gestures use validated snapshots and allocator, while UI refresh reads domain/player
+  state. Other decks' fader changes can be intentional allocation. Complete-song mode retains
+  its separate backend. No current wrong-deck/duplicate active-handler wiring was found.
+- Read-only Git comparison of cd5e6f8 and c022f0d versus working tree shows DOM moves plus
+  concurrent Phase 2B action changes. Historically direct Play becomes coordinated Play; lazy
+  native context ownership remains. Earlier Safari listening is documented without an exact
+  verified build/hardware reference. No causal compact-UI or CSS-only fault is established.
+
+Confirmed diagnostic defect: the fresh UI initially read live analyser samples immediately
+after scheduling the tone in the future, then discarded the meter at tone end. Thus a later
+capture could not verify its live output. Corrected by two bounded observations at requested
+150/500 ms offsets, retained in lastFreshDiagnosticTone.observations (and equivalent shared
+observations). Each records context clock/state, measured stereo peak/RMS and read-only page
+activation/audioSession/mediaSession/visibility state. Entry activation is captured before await.
+Timers can be delayed by the browser; missing measurements are not evidence of silence.
+Measurement failures are recorded as errors, not substituted zeros. Samplers stop on retirement;
+no continuous polling or output/state-policy modification is added.
+
+Smallest next Safari diagnostic: reproduce in the main page, Pause all decks, run Test fresh
+context, wait one second and Capture. Supply nativeAudio.lastFreshDiagnosticTone, especially
+observations, atCreation/afterResume, entryPageState/pageState, error and close status.
+Running clock plus nonzero live output in those retained observations moves the unexplained
+boundary downstream of the fresh graph; zero or errors first require resolving that observed
+boundary. Compare the same fields with the standalone fixture rather than assuming the tests
+are identical. Do not force an audio-session type or recreate production contexts speculatively.
+
+Executed verification: full macOS regression suite passed, including bounded observation
+retention, measurement-error reporting, cancellation and all existing allocation/scheduling
+checks. Changed JavaScript syntax checks and git diff --check passed. Browser fixture includes
+real retained-fresh-measurement assertions and prints its fresh result alongside playback;
+browser/hardware execution remains outstanding. No original audio, commits or pushes.
