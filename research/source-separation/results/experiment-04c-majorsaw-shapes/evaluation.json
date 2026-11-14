@@ -1,0 +1,164 @@
+{
+  "full_recording_absolute_peak": 0.2702820301055908,
+  "full_recording_absolute_rms": 0.08002992564547136,
+  "note_region_peak_range": [
+    0.21215344965457916,
+    0.22736074030399323
+  ],
+  "region_cycle_median_rms_range": [
+    0.08719559185377423,
+    0.08820612088948307
+  ],
+  "shape_relationship_statistics": {
+    "geometry": {
+      "min": 0.9891063093158704,
+      "q05": 0.9925317957464236,
+      "median": 0.9967603097658677,
+      "q95": 0.9989600704572147,
+      "max": 0.9997658731538266
+    },
+    "slope": {
+      "min": 0.7609275005871903,
+      "q05": 0.8309821720569264,
+      "median": 0.9586525122208647,
+      "q95": 0.9937285294138958,
+      "max": 0.997577085709161
+    },
+    "curvature": {
+      "min": 0.4898087487367675,
+      "q05": 0.6301773420301761,
+      "median": 0.9282431485946331,
+      "q95": 0.9933197662885794,
+      "max": 0.9971538781491803
+    },
+    "harmonic_magnitudes": {
+      "min": 0.9989361655249696,
+      "q05": 0.9991500304204534,
+      "median": 0.9997319311298308,
+      "q95": 0.9999326293884347,
+      "max": 0.9999991287753837
+    }
+  },
+  "per_region_assignments": [
+    {
+      "region": 1,
+      "counts": {
+        "1:assigned": 37
+      }
+    },
+    {
+      "region": 2,
+      "counts": {
+        "1:assigned": 48
+      }
+    },
+    {
+      "region": 3,
+      "counts": {
+        "1:assigned": 53
+      }
+    },
+    {
+      "region": 4,
+      "counts": {
+        "1:assigned": 54,
+        "2:assigned": 1,
+        "None:ambiguous": 1,
+        "3:assigned": 1
+      }
+    },
+    {
+      "region": 5,
+      "counts": {
+        "None:ambiguous": 26,
+        "1:assigned": 38
+      }
+    },
+    {
+      "region": 6,
+      "counts": {
+        "None:ambiguous": 48,
+        "1:assigned": 23,
+        "3:assigned": 1
+      }
+    },
+    {
+      "region": 7,
+      "counts": {
+        "None:ambiguous": 42,
+        "1:assigned": 37,
+        "2:assigned": 2
+      }
+    },
+    {
+      "region": 8,
+      "counts": {
+        "None:ambiguous": 40,
+        "1:assigned": 45,
+        "3:assigned": 1
+      }
+    },
+    {
+      "region": 9,
+      "counts": {
+        "None:ambiguous": 158,
+        "1:assigned": 126,
+        "2:assigned": 8
+      }
+    },
+    {
+      "region": 10,
+      "counts": {
+        "4:assigned": 2,
+        "1:assigned": 84,
+        "None:ambiguous": 165
+      }
+    },
+    {
+      "region": 11,
+      "counts": {
+        "None:ambiguous": 89,
+        "1:assigned": 131
+      }
+    },
+    {
+      "region": 12,
+      "counts": {
+        "5:provisional": 1,
+        "2:assigned": 1,
+        "None:ambiguous": 50,
+        "1:assigned": 152
+      }
+    },
+    {
+      "region": 13,
+      "counts": {
+        "6:provisional": 1,
+        "None:ambiguous": 95,
+        "1:assigned": 95
+      }
+    },
+    {
+      "region": 14,
+      "counts": {
+        "4:assigned": 1,
+        "7:provisional": 1,
+        "None:ambiguous": 1,
+        "1:assigned": 165
+      }
+    },
+    {
+      "region": 15,
+      "counts": {
+        "8:provisional": 1,
+        "None:ambiguous": 1,
+        "1:assigned": 299
+      }
+    }
+  ],
+  "evaluation_only": "15 automatically detected periodic plateaus agree in count with the user-described eight ascending plus seven descending notes. This was evaluated only after discovery, not supplied as a count or boundary constraint.",
+  "source_identity_inferred": false,
+  "tests_passed": 7,
+  "report_bytes": 28912300,
+  "input_bytes": 2116892
+}

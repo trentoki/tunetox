@@ -1,0 +1,31 @@
+{
+  "prior_research_files_verified_unchanged": 335,
+  "all_existing_audio_and_algorithms_preserved": true,
+  "diagnostic_tests_passed": 7,
+  "every_significant_gap_has_candidate_trace": true,
+  "accepted_not_rendered_cycles": 0,
+  "signature_regeneration_difference": 0,
+  "no_new_audio_or_4j": true,
+  "no_linear256_combination": true,
+  "midi_used": false,
+  "html_links_and_unique_ids_checked": true,
+  "four_svg_figures_parse_with_finite_coordinates": true,
+  "rendered_browser_preview_inspected": false,
+  "all_sources_compile_in_memory": true,
+  "own_manifest_excluded_from_inventory": true,
+  "files_sha256": {
+    "test_results.py": "29bfc911f75e24d87fa3df0a2ac5e7adcd60acfb41730be20b374424581f05e4",
+    "report.json": "ffbcc7edb3297239cdb7b986a0c6f2ee9c06f28770e2b9a4b0f840e1df5995b0",
+    "preservation.json": "85c2c148ed0d7cc92f51c36c090262cba544de514cb3138a8f8ad74e65a9c6f7",
+    "build_report.py": "02aa0ee2dc94b05a236b43612a5a38ea61612786ad7452c6cd337f14262d8cad",
+    "README.md": "2e0fc513214c8a2494dad9728bf4bd50045509b44bb86e84095e8447eca81c13",
+    "test_trace.py": "9f9d7a8c162bc0268926a653fc95a801a4aa40a303ebd2ee9797779e629b6726",
+    "gap-trace.csv": "1fd7a122c988681eb164e45563ca1cfd3272aa5abe637cf5f95ad213401dab74",
+    "i4.svg": "1797d912b42ea52e48748d74492f13223ddc554816f6b08cfb01e8410867e698",
+    "report.html": "81feabbc2ec830556774c51fa8291c7157dfbf72fa20ea1adfaba0585361d61d",
+    "i3.svg": "0d5203a2bae420d12637e42952bce8cabf965ded3096580221f66bc0813dc610",
+    "i2.svg": "658886bbeafb89ca0413108de0fbbbe7c4a3579502be233254b575db09fe9548",
+    "analyze.py": "91d923f583aaf0f7b859a04fafde085fe65af2d5fad53e2a58960a96ad796e5e",
+    "i1.svg": "b86a6230a934ab2aaee8d86fe08ca472977635e8d56c5337d73b2bb096f3fe38"
+  }
+}

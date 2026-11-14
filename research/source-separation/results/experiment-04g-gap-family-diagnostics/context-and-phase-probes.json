@@ -1,0 +1,2136 @@
+{
+  "refined_family_contexts": {
+    "1": {
+      "prototype_context": "recording-start attack (censored)",
+      "occurrence_contexts": {
+        "recording-start attack (censored)": 6,
+        "recording-start / attack (censored)": 7,
+        "sustain-like stable level": 1252,
+        "release / low-level decay": 23,
+        "silence-backed attack": 43,
+        "envelope-varying / uncertain phase": 4,
+        "pitch-region edge / transition": 38,
+        "continuous pitch-region transition": 19,
+        "outside stable pitch region": 6
+      }
+    },
+    "2": {
+      "prototype_context": "release / low-level decay",
+      "occurrence_contexts": {
+        "release / low-level decay": 1,
+        "silence-backed attack": 1,
+        "sustain-like stable level": 9,
+        "continuous pitch-region transition": 1
+      }
+    },
+    "3": {
+      "prototype_context": "release / low-level decay",
+      "occurrence_contexts": {
+        "release / low-level decay": 3
+      }
+    },
+    "4": {
+      "prototype_context": "continuous pitch-region transition",
+      "occurrence_contexts": {
+        "continuous pitch-region transition": 3
+      }
+    }
+  },
+  "recurring_family_fractional_phase_probes": [
+    {
+      "left": 1,
+      "right": 2,
+      "direct_similarity": 0.9848269570320364,
+      "bounded_half_position_probe": {
+        "shift_positions": -0.5,
+        "similarity": 0.9936758010351623
+      },
+      "scope": "Linear fractional shifting changes sampled shape slightly; diagnostic increase does not prove pure physical phase error."
+    },
+    {
+      "left": 1,
+      "right": 3,
+      "direct_similarity": 0.9624948893832559,
+      "bounded_half_position_probe": {
+        "shift_positions": 0.5,
+        "similarity": 0.9890925607690908
+      },
+      "scope": "Linear fractional shifting changes sampled shape slightly; diagnostic increase does not prove pure physical phase error."
+    },
+    {
+      "left": 1,
+      "right": 4,
+      "direct_similarity": 0.9317289925600161,
+      "bounded_half_position_probe": {
+        "shift_positions": 0.5,
+        "similarity": 0.9780991967383275
+      },
+      "scope": "Linear fractional shifting changes sampled shape slightly; diagnostic increase does not prove pure physical phase error."
+    },
+    {
+      "left": 2,
+      "right": 3,
+      "direct_similarity": 0.9381333623004884,
+      "bounded_half_position_probe": {
+        "shift_positions": 0.5,
+        "similarity": 0.9812537635603114
+      },
+      "scope": "Linear fractional shifting changes sampled shape slightly; diagnostic increase does not prove pure physical phase error."
+    },
+    {
+      "left": 2,
+      "right": 4,
+      "direct_similarity": 0.9032835695777285,
+      "bounded_half_position_probe": {
+        "shift_positions": 0.5,
+        "similarity": 0.956596926054449
+      },
+      "scope": "Linear fractional shifting changes sampled shape slightly; diagnostic increase does not prove pure physical phase error."
+    },
+    {
+      "left": 3,
+      "right": 4,
+      "direct_similarity": 0.9818723157187681,
+      "bounded_half_position_probe": {
+        "shift_positions": 0.25,
+        "similarity": 0.9884052561115692
+      },
+      "scope": "Linear fractional shifting changes sampled shape slightly; diagnostic increase does not prove pure physical phase error."
+    }
+  ],
+  "neighbor_only_bounded_probes": [
+    {
+      "cycle": 271,
+      "time_seconds": 1.0017480292823773,
+      "source_energy": 1.447197088785202,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 239,
+          "gap_periods": 52.735517164278576,
+          "geometry": 0.9501937999976497,
+          "relative_period_change": 0.10911304343429795,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9838596188189528
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 272,
+          "gap_periods": 0.0,
+          "geometry": 0.9978105833581129,
+          "relative_period_change": 0.014909614424982953,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978105833581129
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 277,
+      "time_seconds": 1.0124738419324488,
+      "source_energy": 1.4471957026240196,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 275,
+          "gap_periods": 0.012103394017651705,
+          "geometry": 0.9945130159189841,
+          "relative_period_change": 0.0013298301627517883,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9978064428570869
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 278,
+          "gap_periods": 0.0,
+          "geometry": 0.9978052870639721,
+          "relative_period_change": 0.015037243411326617,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978052870639721
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 283,
+      "time_seconds": 1.0231995242132945,
+      "source_energy": 1.4471865493773726,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 281,
+          "gap_periods": 0.012070743783498043,
+          "geometry": 0.9945077118461314,
+          "relative_period_change": 0.0015321199317150924,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9977622519987706
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 284,
+          "gap_periods": 0.0,
+          "geometry": 0.9978141707450556,
+          "relative_period_change": 0.015102252361279378,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978141707450556
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 290,
+      "time_seconds": 1.033925202523527,
+      "source_energy": 1.44717814801455,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 288,
+          "gap_periods": 0.012033273168862057,
+          "geometry": 0.9944956894718707,
+          "relative_period_change": 0.0017402620168525118,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9977156366122787
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 291,
+          "gap_periods": 0.0,
+          "geometry": 0.9978238180966978,
+          "relative_period_change": 0.015158382881565569,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978238180966978
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 297,
+      "time_seconds": 1.0446508768300076,
+      "source_energy": 1.447170409370661,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 295,
+          "gap_periods": 0.011990785077388395,
+          "geometry": 0.9944763728836448,
+          "relative_period_change": 0.0019552787577619135,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9976664084608926
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 298,
+          "gap_periods": 0.0,
+          "geometry": 0.9978342659212609,
+          "relative_period_change": 0.015205716713760031,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978342659212609
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 304,
+      "time_seconds": 1.0553765471084335,
+      "source_energy": 1.4471632674812207,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 302,
+          "gap_periods": 0.011943119375171738,
+          "geometry": 0.9944523459403345,
+          "relative_period_change": 0.0021744283407783005,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9976156486567337
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 305,
+          "gap_periods": 0.0,
+          "geometry": 0.9978456340164835,
+          "relative_period_change": 0.015244351839844628,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978456340164835
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 311,
+      "time_seconds": 1.066102213421047,
+      "source_energy": 1.4471570279815087,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 309,
+          "gap_periods": 0.011890254916623662,
+          "geometry": 0.9944347143463748,
+          "relative_period_change": 0.002384934292102514,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9975682764100676
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 312,
+          "gap_periods": 0.0,
+          "geometry": 0.9978579530652276,
+          "relative_period_change": 0.015274364214511449,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978579530652276
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 318,
+      "time_seconds": 1.0768278757554919,
+      "source_energy": 1.4471514371532839,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 316,
+          "gap_periods": 0.011832069061864407,
+          "geometry": 0.9944237524405636,
+          "relative_period_change": 0.0025873054865415135,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9975245389921502
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 319,
+          "gap_periods": 0.0,
+          "geometry": 0.9978712784391842,
+          "relative_period_change": 0.015295698527669987,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978712784391842
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 349,
+      "time_seconds": 1.1304574650573074,
+      "source_energy": 0.05540568840229425,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 347,
+          "gap_periods": 0.01295461921697082,
+          "geometry": 0.9932449804925617,
+          "relative_period_change": 0.004074291201381808,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9968406391895175
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 350,
+          "gap_periods": 0.0,
+          "geometry": 0.9977900893622269,
+          "relative_period_change": 0.017644096746113114,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9977900893622269
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 459,
+      "time_seconds": 1.5006166756082029,
+      "source_energy": 1.144746666685407,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 429,
+          "gap_periods": 65.28470788594667,
+          "geometry": 0.9832519018856043,
+          "relative_period_change": 0.09974277899945494,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.991511344566343
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 460,
+          "gap_periods": 0.0,
+          "geometry": 0.9998393692707237,
+          "relative_period_change": 0.0013154418767901133,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9998393692707237
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 483,
+      "time_seconds": 1.5312743379035962,
+      "source_energy": 1.144993572097757,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 481,
+          "gap_periods": 0.01611647399590753,
+          "geometry": 0.9767405661757929,
+          "relative_period_change": 0.015915470675909704,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9957197650239143
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 484,
+          "gap_periods": 0.0,
+          "geometry": 0.9997644213408209,
+          "relative_period_change": 0.0001415531219011168,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997644213408209
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 498,
+      "time_seconds": 1.5517054872883989,
+      "source_energy": 1.145027256064742,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 496,
+          "gap_periods": 0.016183765671088656,
+          "geometry": 0.9769129453881946,
+          "relative_period_change": 0.01600698170276671,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9956490203666244
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 499,
+          "gap_periods": 0.0,
+          "geometry": 0.9997481844558597,
+          "relative_period_change": 0.00012712772621858992,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997481844558597
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 527,
+      "time_seconds": 1.5908662185057645,
+      "source_energy": 1.144998478650857,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 525,
+          "gap_periods": 0.016128678981002495,
+          "geometry": 0.9767560069896751,
+          "relative_period_change": 0.015931231566612136,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9957095070664387
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 528,
+          "gap_periods": 0.0,
+          "geometry": 0.9997622893450987,
+          "relative_period_change": 0.00013941796156402564,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997622893450987
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 542,
+      "time_seconds": 1.6112973628161011,
+      "source_energy": 1.1450310299927366,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 540,
+          "gap_periods": 0.016188544648889854,
+          "geometry": 0.976950373780622,
+          "relative_period_change": 0.01601471918549524,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.995641723185928
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 543,
+          "gap_periods": 0.0,
+          "geometry": 0.9997459606666939,
+          "relative_period_change": 0.0001253996995269624,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997459606666939
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 560,
+      "time_seconds": 1.633430491871637,
+      "source_energy": 0.00857277302610366,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 558,
+          "gap_periods": 0.0172728347047371,
+          "geometry": 0.9753389925516105,
+          "relative_period_change": 0.01717095139503777,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9948546887151256
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 561,
+          "gap_periods": 0.0,
+          "geometry": 0.9996984825797659,
+          "relative_period_change": 7.899429768820632e-05,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9996984825797659
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 590,
+      "time_seconds": 1.770319227576913,
+      "source_energy": 1.079473071915618,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 588,
+          "gap_periods": 0.016319092130190695,
+          "geometry": 0.9993248533109187,
+          "relative_period_change": 0.0017634556002646962,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9993248533109187
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 591,
+          "gap_periods": 0.0,
+          "geometry": 0.9957348070656896,
+          "relative_period_change": 0.018564495073935428,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9979626560665064
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 601,
+      "time_seconds": 1.7831756759386472,
+      "source_energy": 1.0794748184262335,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 599,
+          "gap_periods": 0.01581550195046146,
+          "geometry": 0.9993108323540878,
+          "relative_period_change": 0.002156263047430662,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9993108323540878
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 602,
+          "gap_periods": 0.0,
+          "geometry": 0.9964038605749894,
+          "relative_period_change": 0.017962054636665004,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9980167127640096
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 612,
+      "time_seconds": 1.7960320115076553,
+      "source_energy": 1.0794821286160456,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 610,
+          "gap_periods": 0.01519104536460073,
+          "geometry": 0.999075780848617,
+          "relative_period_change": 0.003230349806039867,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.999075780848617
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 613,
+          "gap_periods": 0.0,
+          "geometry": 0.9970433684214904,
+          "relative_period_change": 0.015795151986797373,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9981739006974386
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 631,
+      "time_seconds": 1.8201378962791313,
+      "source_energy": 1.0794726005060113,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 629,
+          "gap_periods": 0.0163713196986261,
+          "geometry": 0.9993264843630058,
+          "relative_period_change": 0.0017212084231290614,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9993264843630058
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 632,
+          "gap_periods": 0.0,
+          "geometry": 0.9956469226976351,
+          "relative_period_change": 0.01861282555188981,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.997951093070681
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 642,
+      "time_seconds": 1.8329943565236455,
+      "source_energy": 1.0794744320738974,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 640,
+          "gap_periods": 0.015879710389356788,
+          "geometry": 0.9993125035255829,
+          "relative_period_change": 0.0021073070758178547,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9993125035255829
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 643,
+          "gap_periods": 0.0,
+          "geometry": 0.9963319053867546,
+          "relative_period_change": 0.0180492890830406,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9980140099896997
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 653,
+      "time_seconds": 1.845850706424838,
+      "source_energy": 1.0794816310022814,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 651,
+          "gap_periods": 0.01527083930155461,
+          "geometry": 0.9991209462387959,
+          "relative_period_change": 0.003064451408645641,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9991209462387959
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 654,
+          "gap_periods": 0.0,
+          "geometry": 0.9969732992111047,
+          "relative_period_change": 0.016138444599428592,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9981528040999496
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 672,
+      "time_seconds": 1.8699565636766393,
+      "source_energy": 1.0794721362578024,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 670,
+          "gap_periods": 0.016422201297571236,
+          "geometry": 0.9993281402280203,
+          "relative_period_change": 0.001679657253627842,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9993281402280203
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 673,
+          "gap_periods": 0.0,
+          "geometry": 0.9955563993263775,
+          "relative_period_change": 0.018656259533897268,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9979382110108961
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 683,
+      "time_seconds": 1.8828140889263107,
+      "source_energy": 0.012294093507277257,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 681,
+          "gap_periods": 0.017279096950413523,
+          "geometry": 0.9992247670373944,
+          "relative_period_change": 0.002008539078045213,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9992247670373944
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 684,
+          "gap_periods": 0.0,
+          "geometry": 0.9954745801877007,
+          "relative_period_change": 0.01985980719201197,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9977810771300025
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 705,
+      "time_seconds": 2.002295321851714,
+      "source_energy": 1.145055692065602,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 703,
+          "gap_periods": 0.016496964902038412,
+          "geometry": 0.9629517765108504,
+          "relative_period_change": 0.009663515689277813,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9940728597019162
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 706,
+          "gap_periods": 0.0,
+          "geometry": 0.9997224620087857,
+          "relative_period_change": 5.47641468506832e-07,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997224620087857
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 719,
+      "time_seconds": 2.0210246971530808,
+      "source_energy": 1.1449708785616635,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 717,
+          "gap_periods": 0.016048543384028943,
+          "geometry": 0.9766889860163881,
+          "relative_period_change": 0.01583036475469768,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9957655453463254
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 720,
+          "gap_periods": 0.0,
+          "geometry": 0.9997738923689538,
+          "relative_period_change": 0.0001516768840038596,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997738923689538
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 734,
+      "time_seconds": 2.041455870503606,
+      "source_energy": 1.1450075704675575,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 732,
+          "gap_periods": 0.01614949892340858,
+          "geometry": 0.976789767038433,
+          "relative_period_change": 0.015958641592330958,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9956895787448489
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 735,
+          "gap_periods": 0.0,
+          "geometry": 0.9997581239425748,
+          "relative_period_change": 0.00013546982544931918,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997581239425748
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 763,
+      "time_seconds": 2.0806165812074084,
+      "source_energy": 1.1449760427948017,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 761,
+          "gap_periods": 0.016065369238929556,
+          "geometry": 0.9766979110226783,
+          "relative_period_change": 0.01585117078135234,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9957555191087333
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 764,
+          "gap_periods": 0.0,
+          "geometry": 0.9997718227262263,
+          "relative_period_change": 0.00014940024756460168,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997718227262263
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 778,
+      "time_seconds": 2.10104774907134,
+      "source_energy": 1.145011943079112,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 776,
+          "gap_periods": 0.01615880659091634,
+          "geometry": 0.9768094986105621,
+          "relative_period_change": 0.015971221379436296,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9956792313049914
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 779,
+          "gap_periods": 0.0,
+          "geometry": 0.9997559486620172,
+          "relative_period_change": 0.0001335192036309163,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997559486620172
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 807,
+      "time_seconds": 2.140208464510241,
+      "source_energy": 1.1449813628530463,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 805,
+          "gap_periods": 0.01608121383166137,
+          "geometry": 0.976708178242661,
+          "relative_period_change": 0.015870869291194523,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9957454069158888
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 808,
+          "gap_periods": 0.0,
+          "geometry": 0.9997697364432964,
+          "relative_period_change": 0.00014709220146236213,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997697364432964
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 822,
+      "time_seconds": 2.160639626982379,
+      "source_energy": 1.1450165377048533,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 820,
+          "gap_periods": 0.016167155795658146,
+          "geometry": 0.976830539828902,
+          "relative_period_change": 0.01598272478678653,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9956688712891136
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 823,
+          "gap_periods": 0.0,
+          "geometry": 0.9997537587205944,
+          "relative_period_change": 0.0001316251856019468,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997537587205944
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 851,
+      "time_seconds": 2.199800347018446,
+      "source_energy": 1.1449861769987746,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 849,
+          "gap_periods": 0.01609599219396646,
+          "geometry": 0.9767200134719778,
+          "relative_period_change": 0.01588943883792393,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9957352540543781
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 852,
+          "gap_periods": 0.0,
+          "geometry": 0.9997676345750358,
+          "relative_period_change": 0.0001448632226528357,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997676345750358
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 866,
+      "time_seconds": 2.2202315042263234,
+      "source_energy": 1.1450208164640603,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 864,
+          "gap_periods": 0.016174518090761758,
+          "geometry": 0.9768607151981595,
+          "relative_period_change": 0.015993178943566,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9956604868759211
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 867,
+          "gap_periods": 0.0,
+          "geometry": 0.999751549507434,
+          "relative_period_change": 0.00012982501271263658,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.999751549507434
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 895,
+      "time_seconds": 2.2593922287727914,
+      "source_energy": 1.1449912490012277,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 893,
+          "gap_periods": 0.01610976531705084,
+          "geometry": 0.9767331466677387,
+          "relative_period_change": 0.01590688425558906,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9957250445847209
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 896,
+          "gap_periods": 0.0,
+          "geometry": 0.9997655205613403,
+          "relative_period_change": 0.00014265597582807654,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997655205613403
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 910,
+      "time_seconds": 2.279823380800364,
+      "source_energy": 1.1450252161739176,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 908,
+          "gap_periods": 0.016180881974988483,
+          "geometry": 0.9768944075155516,
+          "relative_period_change": 0.0160025471672004,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9956528367973346
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 911,
+          "gap_periods": 0.0,
+          "geometry": 0.9997493312327931,
+          "relative_period_change": 0.00012803866714483636,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997493312327931
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 939,
+      "time_seconds": 2.3189841097654478,
+      "source_energy": 1.1449958779808773,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 937,
+          "gap_periods": 0.01612250694312404,
+          "geometry": 0.9767478176673147,
+          "relative_period_change": 0.015923224877672504,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9957148080563971
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 940,
+          "gap_periods": 0.0,
+          "geometry": 0.999763392017444,
+          "relative_period_change": 0.000140510026044538,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.999763392017444
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 954,
+      "time_seconds": 2.3394152566834965,
+      "source_energy": 1.1450289536560716,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 952,
+          "gap_periods": 0.01618620454637114,
+          "geometry": 0.9769307599934082,
+          "relative_period_change": 0.016010854855688095,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9956454809753589
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 955,
+          "gap_periods": 0.0,
+          "geometry": 0.9997471097016776,
+          "relative_period_change": 0.00012630654560674692,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997471097016776
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 983,
+      "time_seconds": 2.378575990030756,
+      "source_energy": 1.1450007828652629,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 981,
+          "gap_periods": 0.0161342441478451,
+          "geometry": 0.9767639245304292,
+          "relative_period_change": 0.015938483818118243,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.995704534907803
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 984,
+          "gap_periods": 0.0,
+          "geometry": 0.9997612532652913,
+          "relative_period_change": 0.00013839955274697058,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997612532652913
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 999,
+      "time_seconds": 2.3990071319150212,
+      "source_energy": 1.145032937500241,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 997,
+          "gap_periods": 0.016190526842550963,
+          "geometry": 0.9769690402553002,
+          "relative_period_change": 0.01601809754355521,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9956382193565386
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1000,
+          "gap_periods": 0.0,
+          "geometry": 0.9997448849399277,
+          "relative_period_change": 0.0001245655077135588,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997448849399277
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1028,
+      "time_seconds": 2.4381678695998903,
+      "source_energy": 1.1450053948089276,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1026,
+          "gap_periods": 0.016144996777056792,
+          "geometry": 0.9767813794444948,
+          "relative_period_change": 0.015952623163442148,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.995694231249787
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1029,
+          "gap_periods": 0.0,
+          "geometry": 0.9997590967176477,
+          "relative_period_change": 0.00013636028804842049,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997590967176477
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1057,
+      "time_seconds": 2.477328578160143,
+      "source_energy": 1.144973792698872,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1055,
+          "gap_periods": 0.016057936883409767,
+          "geometry": 0.9766936469752857,
+          "relative_period_change": 0.015841946975893806,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.5,
+            "similarity": 0.9957600317364464
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1058,
+          "gap_periods": 0.0,
+          "geometry": 0.9997727551684391,
+          "relative_period_change": 0.00015042502096829224,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9997727551684391
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1330,
+      "time_seconds": 2.986011051470652,
+      "source_energy": 1.287088477458781,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1329,
+          "gap_periods": 0.0,
+          "geometry": 0.9985043374238385,
+          "relative_period_change": 0.00235356545258969,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9985043374238385
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1350,
+          "gap_periods": 15.346561753272539,
+          "geometry": 0.9986500210299898,
+          "relative_period_change": 0.11305083091301227,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9986500210299898
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1350,
+      "time_seconds": 3.017258129968084,
+      "source_energy": 1.4472393040829465,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1330,
+          "gap_periods": 13.787835494165238,
+          "geometry": 0.9986500210299898,
+          "relative_period_change": 0.10156843494764645,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9986500210299898
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1351,
+          "gap_periods": 0.0,
+          "geometry": 0.9978058112442345,
+          "relative_period_change": 0.014660277175442493,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978058112442345
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1356,
+      "time_seconds": 3.0279838294536634,
+      "source_energy": 1.447228617420284,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1354,
+          "gap_periods": 0.012176214242069832,
+          "geometry": 0.9944929864547601,
+          "relative_period_change": 0.0007096091528464576,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9979343018096437
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1357,
+          "gap_periods": 0.0,
+          "geometry": 0.9977861361392757,
+          "relative_period_change": 0.014765461498301047,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9977861361392757
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1362,
+      "time_seconds": 3.0387095251733367,
+      "source_energy": 1.4472179022992802,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1360,
+          "gap_periods": 0.012158709833220569,
+          "geometry": 0.9945037635571669,
+          "relative_period_change": 0.0008989334053741693,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9978966083920906
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1363,
+          "gap_periods": 0.0,
+          "geometry": 0.9977880974088335,
+          "relative_period_change": 0.014860785401616283,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9977880974088335
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1368,
+      "time_seconds": 3.0494352166399157,
+      "source_energy": 1.4472077490617612,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1366,
+          "gap_periods": 0.01213656380378346,
+          "geometry": 0.9945113185517634,
+          "relative_period_change": 0.001091434993622853,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9978570323671871
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1369,
+          "gap_periods": 0.0,
+          "geometry": 0.9977954932085678,
+          "relative_period_change": 0.014946338035733753,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9977954932085678
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1374,
+      "time_seconds": 3.0601609038523714,
+      "source_energy": 1.4471976155669148,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1372,
+          "gap_periods": 0.012109651972937686,
+          "geometry": 0.9945133360152413,
+          "relative_period_change": 0.001287838874850289,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9978154841204209
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1375,
+          "gap_periods": 0.0,
+          "geometry": 0.9978034924048359,
+          "relative_period_change": 0.01502237454799027,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978034924048359
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1380,
+      "time_seconds": 3.070886586997425,
+      "source_energy": 1.44718845016235,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1378,
+          "gap_periods": 0.012078022756185256,
+          "geometry": 0.9945093616159513,
+          "relative_period_change": 0.0014890389158053186,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9977717526685514
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1381,
+          "gap_periods": 0.0,
+          "geometry": 0.9978122436512977,
+          "relative_period_change": 0.015089298829901177,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978122436512977
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1387,
+      "time_seconds": 3.081612266146125,
+      "source_energy": 1.4471798020132243,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1385,
+          "gap_periods": 0.012041583040530152,
+          "geometry": 0.994498813013054,
+          "relative_period_change": 0.0016958331142884475,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9977256831740228
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1388,
+          "gap_periods": 0.0,
+          "geometry": 0.9978217166570494,
+          "relative_period_change": 0.015147278951309406,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978217166570494
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1394,
+      "time_seconds": 3.092337941302107,
+      "source_energy": 1.447171973631605,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1392,
+          "gap_periods": 0.012000171731865574,
+          "geometry": 0.9944810984768063,
+          "relative_period_change": 0.0019093008968107394,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9976770241898482
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1395,
+          "gap_periods": 0.0,
+          "geometry": 0.9978319944366807,
+          "relative_period_change": 0.01519647811608138,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978319944366807
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1401,
+      "time_seconds": 3.1030636124282687,
+      "source_energy": 1.4471646648816157,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1399,
+          "gap_periods": 0.011953604048630969,
+          "geometry": 0.9944569579200506,
+          "relative_period_change": 0.002128865245776046,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9976261155940088
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1402,
+          "gap_periods": 0.0,
+          "geometry": 0.9978431525266771,
+          "relative_period_change": 0.015236917786627835,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978431525266771
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1408,
+      "time_seconds": 3.1137892795537883,
+      "source_energy": 1.447158324838645,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1406,
+          "gap_periods": 0.011901820195244446,
+          "geometry": 0.9944378725497828,
+          "relative_period_change": 0.0023412754174327866,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9975779599580819
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1409,
+          "gap_periods": 0.0,
+          "geometry": 0.9978552852546738,
+          "relative_period_change": 0.015268723437086518,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978552852546738
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1415,
+      "time_seconds": 3.1245149427530268,
+      "source_energy": 1.4471524872138093,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1413,
+          "gap_periods": 0.011844794425109353,
+          "geometry": 0.9944255072212176,
+          "relative_period_change": 0.0025452515590249636,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9975334560326875
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1416,
+          "gap_periods": 0.0,
+          "geometry": 0.9978683733447707,
+          "relative_period_change": 0.01529191330189028,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978683733447707
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1461,
+      "time_seconds": 3.2060333216869514,
+      "source_energy": 1.4472820435364466,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1459,
+          "gap_periods": 0.012196623280643725,
+          "geometry": 0.994411782039272,
+          "relative_period_change": 0.0001448765346359071,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.998088416714431
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1462,
+          "gap_periods": 0.0,
+          "geometry": 0.9978868660386727,
+          "relative_period_change": 0.014186890766309856,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978868660386727
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1467,
+      "time_seconds": 3.216759038775126,
+      "source_energy": 1.4472697935732137,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1465,
+          "gap_periods": 0.012200558818218486,
+          "geometry": 0.9944395390163346,
+          "relative_period_change": 3.759654230206522e-05,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9980578706465922
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1468,
+          "gap_periods": 0.0,
+          "geometry": 0.997863281285811,
+          "relative_period_change": 0.01433120953527478,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.997863281285811
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1473,
+      "time_seconds": 3.2274847511901683,
+      "source_energy": 1.4472580464839462,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1471,
+          "gap_periods": 0.012200022011050655,
+          "geometry": 0.9944617072002789,
+          "relative_period_change": 0.00022039711221832903,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9980258130529384
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1474,
+          "gap_periods": 0.0,
+          "geometry": 0.9978406688311354,
+          "relative_period_change": 0.014464371515469754,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978406688311354
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1479,
+      "time_seconds": 3.238210458878316,
+      "source_energy": 1.4472463390054193,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1477,
+          "gap_periods": 0.012194863035805071,
+          "geometry": 0.9944786695071582,
+          "relative_period_change": 0.0004042520509015546,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.997992510624254
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1480,
+          "gap_periods": 0.0,
+          "geometry": 0.9978191094081218,
+          "relative_period_change": 0.014586954716494516,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978191094081218
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1485,
+      "time_seconds": 3.248936161893179,
+      "source_energy": 1.4472353844203691,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1483,
+          "gap_periods": 0.012185009168954786,
+          "geometry": 0.9944895101542652,
+          "relative_period_change": 0.0005896594414058764,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9979575736705613
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1486,
+          "gap_periods": 0.0,
+          "geometry": 0.997798650627599,
+          "relative_period_change": 0.014699073938079676,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.997798650627599
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1491,
+      "time_seconds": 3.2596618603687615,
+      "source_energy": 1.4472246196538396,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1489,
+          "gap_periods": 0.012170446453540072,
+          "geometry": 0.9944961341423095,
+          "relative_period_change": 0.0007772790506992422,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.997920980799148
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1492,
+          "gap_periods": 0.0,
+          "geometry": 0.9977836559125831,
+          "relative_period_change": 0.014800830712264457,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9977836559125831
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1497,
+      "time_seconds": 3.2703875545948207,
+      "source_energy": 1.4472142414734033,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1495,
+          "gap_periods": 0.012151318423077774,
+          "geometry": 0.9945070741783216,
+          "relative_period_change": 0.0009676631038160188,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9978826084234037
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1498,
+          "gap_periods": 0.0,
+          "geometry": 0.9977906884283706,
+          "relative_period_change": 0.014892618525319312,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9977906884283706
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1503,
+      "time_seconds": 3.281113244492606,
+      "source_energy": 1.44720396756185,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1501,
+          "gap_periods": 0.012127436459249746,
+          "geometry": 0.9945127207176163,
+          "relative_period_change": 0.0011614836143249985,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9978423602214278
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1504,
+          "gap_periods": 0.0,
+          "geometry": 0.9977982913067721,
+          "relative_period_change": 0.01497475095309575,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9977982913067721
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1509,
+      "time_seconds": 3.2918389302321174,
+      "source_energy": 1.447194324165467,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1507,
+          "gap_periods": 0.01209883539505713,
+          "geometry": 0.994512643435531,
+          "relative_period_change": 0.0013594903196945118,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.997800041869412
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1510,
+          "gap_periods": 0.0,
+          "geometry": 0.9978065588050766,
+          "relative_period_change": 0.01504743134138753,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978065588050766
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1515,
+      "time_seconds": 3.302564611921203,
+      "source_energy": 1.4471852842304864,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1513,
+          "gap_periods": 0.012065479280644132,
+          "geometry": 0.9945063600542426,
+          "relative_period_change": 0.0015625960968432828,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.997755495256942
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1516,
+          "gap_periods": 0.0,
+          "geometry": 0.9978155481610889,
+          "relative_period_change": 0.015111117739524227,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978155481610889
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1522,
+      "time_seconds": 3.3132902896661847,
+      "source_energy": 1.4471769615204255,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1520,
+          "gap_periods": 0.012027302280744287,
+          "geometry": 0.9944933029285957,
+          "relative_period_change": 0.001771673746603808,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.997708510683893
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1523,
+          "gap_periods": 0.0,
+          "geometry": 0.9978253133834502,
+          "relative_period_change": 0.015165966839696399,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978253133834502
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1529,
+      "time_seconds": 3.324015963383367,
+      "source_energy": 1.4471692411904993,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1527,
+          "gap_periods": 0.01198406106378863,
+          "geometry": 0.9944728959245624,
+          "relative_period_change": 0.0019877457017740685,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9976588900652877
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1530,
+          "gap_periods": 0.0,
+          "geometry": 0.9978358885859272,
+          "relative_period_change": 0.01521201327552335,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978358885859272
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1536,
+      "time_seconds": 3.3347416330509434,
+      "source_energy": 1.4471622841486291,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1534,
+          "gap_periods": 0.011935607198732,
+          "geometry": 0.9944493094745486,
+          "relative_period_change": 0.0022061744876538114,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.997608400831249
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1537,
+          "gap_periods": 0.0,
+          "geometry": 0.997847403644997,
+          "relative_period_change": 0.015249310105119873,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.997847403644997
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1543,
+      "time_seconds": 3.3454672987760725,
+      "source_energy": 1.4471562169626189,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1541,
+          "gap_periods": 0.011881963047373623,
+          "geometry": 0.9944326550719153,
+          "relative_period_change": 0.0024154204832345094,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9975615562469516
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1544,
+          "gap_periods": 0.0,
+          "geometry": 0.9978598592033026,
+          "relative_period_change": 0.015278041071327353,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978598592033026
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1595,
+      "time_seconds": 3.4377113603545935,
+      "source_energy": 1.4472776785574366,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1593,
+          "gap_periods": 0.012198563102991826,
+          "geometry": 0.9944224261312712,
+          "relative_period_change": 7.937359412002465e-05,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9980776413176211
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1596,
+          "gap_periods": 0.0,
+          "geometry": 0.997878296333905,
+          "relative_period_change": 0.014240048064255717,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.997878296333905
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1601,
+      "time_seconds": 3.4484370757254195,
+      "source_energy": 1.447265553643834,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1599,
+          "gap_periods": 0.012200868712527202,
+          "geometry": 0.9944480774136798,
+          "relative_period_change": 0.00010315381875880547,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9980464947108988
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1602,
+          "gap_periods": 0.0,
+          "geometry": 0.9978550450452508,
+          "relative_period_change": 0.014380234867422015,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978550450452508
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1607,
+      "time_seconds": 3.459162786450688,
+      "source_energy": 1.447253787864885,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1605,
+          "gap_periods": 0.012198691019650217,
+          "geometry": 0.9944684337677294,
+          "relative_period_change": 0.0002862820569362601,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9980140244144993
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1608,
+          "gap_periods": 0.0,
+          "geometry": 0.9978328093076945,
+          "relative_period_change": 0.014509561946637106,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978328093076945
+          }
+        }
+      ]
+    },
+    {
+      "cycle": 1613,
+      "time_seconds": 3.469888492468732,
+      "source_energy": 1.4472424049960786,
+      "nearest_reliable_comparisons": [
+        {
+          "side": -1,
+          "nearest_reliable_cycle": 1611,
+          "gap_periods": 0.012191869400398101,
+          "geometry": 0.9944832774799889,
+          "relative_period_change": 0.0004705993317404289,
+          "bounded_half_position_probe": {
+            "shift_positions": 0.25,
+            "similarity": 0.9979801513994394
+          }
+        },
+        {
+          "side": 1,
+          "nearest_reliable_cycle": 1614,
+          "gap_periods": 0.0,
+          "geometry": 0.9978116349825172,
+          "relative_period_change": 0.014628396184032999,
+          "bounded_half_position_probe": {
+            "shift_positions": 0,
+            "similarity": 0.9978116349825172
+          }
+        }
+      ]
+    }
+  ],
+  "nearest_reliable_direct_compatible_count": 8,
+  "nearest_reliable_phase_probe_compatible_count": 64,
+  "scope": "All comparisons are retrospective diagnostics. No grouping, eligibility, source phase, or audio was changed. Counts are not reconstructed cycles or quality guarantees."
+}

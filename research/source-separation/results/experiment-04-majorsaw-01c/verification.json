@@ -1,0 +1,27 @@
+{
+  "files": [
+    {
+      "file": "component_01.wav",
+      "sha256": "33707bd591d0d7f260d6b7b0c1354e821617eff781fc071c10ccf767d8f36d97",
+      "rate": 44100,
+      "channels": 2,
+      "frames": 264600,
+      "format": "IEEE float32 WAV",
+      "energy": 171.6987552371802
+    },
+    {
+      "file": "residual.wav",
+      "sha256": "7cb7dde0d3ed7f4bc17855913e9b71592435cb1c8b0578c4ef53351ecc09d588",
+      "rate": 44100,
+      "channels": 2,
+      "frames": 264600,
+      "format": "IEEE float32 WAV",
+      "energy": 3217.7155829354233
+    }
+  ],
+  "max_float32_reconstruction_sample_error": 7.450580596923828e-09,
+  "previous_files_unchanged": 173,
+  "input_hash_matches": true,
+  "algorithm_unchanged": true,
+  "listening_performed": false
+}

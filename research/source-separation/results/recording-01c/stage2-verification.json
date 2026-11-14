@@ -1,0 +1,12 @@
+{
+  "pairs": 105,
+  "hypothesis_counts": {
+    "shared terminal structure; inspect possible incomplete tail": 105,
+    "shared waveform structure": 30,
+    "possible complementary disjoint fragments; identity unproven": 3
+  },
+  "diagnostic_source_sha256": "1a3e140e44b427485485de54262becd6a22e803f34ebe7cd7ffb8023ef0369a4",
+  "preserved_prior_files": 107,
+  "tests_passed": 37,
+  "audio_reassigned": false
+}

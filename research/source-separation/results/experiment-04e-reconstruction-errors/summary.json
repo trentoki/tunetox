@@ -1,0 +1,225 @@
+{
+  "historical_4c_ambiguity_candidate_sets": [
+    {
+      "families": [
+        1,
+        2
+      ],
+      "cycles": 714
+    },
+    {
+      "families": [
+        1,
+        3
+      ],
+      "cycles": 1
+    },
+    {
+      "families": [
+        1,
+        7
+      ],
+      "cycles": 1
+    }
+  ],
+  "historical_ambiguous_median_best_similarity": 0.9962369068636725,
+  "historical_ambiguous_median_best_runner_gap": 0.006545925324550506,
+  "release_exemplar_family_2": {
+    "prototype_cycle": 236,
+    "start_seconds": 0.8800015535394553,
+    "absolute_rms": 0.018786228691356002,
+    "primary_prototype_rms": 0.0876004308972217,
+    "primary_exemplar_cosine": 0.9848269570320364,
+    "occurrence_times_seconds": [
+      0.8800015535394553,
+      1.5108431477123825,
+      1.5704350341729634,
+      2.060185369379495,
+      2.1197772589693415,
+      2.179369147657538,
+      2.23896103548575,
+      2.2985529224009267,
+      2.3581448084807612,
+      2.4177366937339793,
+      2.4568973634530384,
+      3.510197614315188
+    ],
+    "ambiguities_before_third_unambiguous_family_2_occurrence": 95
+  },
+  "clean_continuous_windows": [
+    {
+      "region": 1,
+      "coverage": 1.0,
+      "start_seconds": 0.0381859410430839,
+      "unique_32_harmonic_limit_hz": 9955.52472307733,
+      "minimum_independent_positions_to_represent_phased_harmonics_through_nyquist": 141
+    },
+    {
+      "region": 2,
+      "coverage": 1.0,
+      "start_seconds": 0.25816326530612244,
+      "unique_32_harmonic_limit_hz": 11175.919873783498,
+      "minimum_independent_positions_to_represent_phased_harmonics_through_nyquist": 127
+    },
+    {
+      "region": 3,
+      "coverage": 1.0,
+      "start_seconds": 0.5031746031746032,
+      "unique_32_harmonic_limit_hz": 12544.680664772239,
+      "minimum_independent_positions_to_represent_phased_harmonics_through_nyquist": 113
+    },
+    {
+      "region": 4,
+      "coverage": 1.0,
+      "start_seconds": 0.823015873015873,
+      "unique_32_harmonic_limit_hz": 13289.052921049588,
+      "minimum_independent_positions_to_represent_phased_harmonics_through_nyquist": 107
+    },
+    {
+      "region": 14,
+      "coverage": 1.0,
+      "start_seconds": 4.6978004535147395,
+      "unique_32_harmonic_limit_hz": 11175.922825162104,
+      "minimum_independent_positions_to_represent_phased_harmonics_through_nyquist": 127
+    },
+    {
+      "region": 15,
+      "coverage": 1.0,
+      "start_seconds": 5.387346938775511,
+      "unique_32_harmonic_limit_hz": 9955.524627088866,
+      "minimum_independent_positions_to_represent_phased_harmonics_through_nyquist": 141
+    }
+  ],
+  "maximum_absolute_bridge_band_delta_db_in_clean_windows": 0.00580872941531702,
+  "status_energy": {
+    "assigned": {
+      "cycles": 1416,
+      "original_energy": 2356.559188567831,
+      "residual_energy": 34.50506461389219
+    },
+    "unreliable": {
+      "cycles": 399,
+      "original_energy": 77.92234361034842,
+      "residual_energy": 77.92234361034842
+    },
+    "ambiguous": {
+      "cycles": 716,
+      "original_energy": 944.917391964154,
+      "residual_energy": 944.917391964154
+    },
+    "provisional": {
+      "cycles": 4,
+      "original_energy": 6.996870741747941,
+      "residual_energy": 6.996870741747941
+    }
+  },
+  "outside_harmonic_neighborhood_diagnostic": [
+    {
+      "region": 1,
+      "window_coverage": 1.0,
+      "original_outside_harmonic_neighborhood_fraction": 0.08143324246024886,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.08360109096369606,
+      "residual_outside_harmonic_neighborhood_fraction": 0.020488240062942475
+    },
+    {
+      "region": 2,
+      "window_coverage": 1.0,
+      "original_outside_harmonic_neighborhood_fraction": 0.0700661110139843,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.07232749105850644,
+      "residual_outside_harmonic_neighborhood_fraction": 0.0302662413581678
+    },
+    {
+      "region": 3,
+      "window_coverage": 1.0,
+      "original_outside_harmonic_neighborhood_fraction": 0.07006486494798769,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.07225979344819444,
+      "residual_outside_harmonic_neighborhood_fraction": 0.032986273836949964
+    },
+    {
+      "region": 4,
+      "window_coverage": 1.0,
+      "original_outside_harmonic_neighborhood_fraction": 0.06995260129475878,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.0730617689348243,
+      "residual_outside_harmonic_neighborhood_fraction": 0.09398057469411814
+    },
+    {
+      "region": 5,
+      "window_coverage": 0.6279296875,
+      "original_outside_harmonic_neighborhood_fraction": 0.07033403593504561,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.4623943487778046,
+      "residual_outside_harmonic_neighborhood_fraction": 0.5780442379550002
+    },
+    {
+      "region": 6,
+      "window_coverage": 0.37158203125,
+      "original_outside_harmonic_neighborhood_fraction": 0.06690562849212567,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.6920891402430736,
+      "residual_outside_harmonic_neighborhood_fraction": 0.3556792010020845
+    },
+    {
+      "region": 7,
+      "window_coverage": 0.5166015625,
+      "original_outside_harmonic_neighborhood_fraction": 0.06769587348671147,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.5776640604339789,
+      "residual_outside_harmonic_neighborhood_fraction": 0.43775737856285
+    },
+    {
+      "region": 8,
+      "window_coverage": 0.5791015625,
+      "original_outside_harmonic_neighborhood_fraction": 0.06883499790562164,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.510311661818754,
+      "residual_outside_harmonic_neighborhood_fraction": 0.5183687746748886
+    },
+    {
+      "region": 9,
+      "window_coverage": 0.552734375,
+      "original_outside_harmonic_neighborhood_fraction": 0.06769657721513533,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.5256660153165852,
+      "residual_outside_harmonic_neighborhood_fraction": 0.4758885343021765
+    },
+    {
+      "region": 10,
+      "window_coverage": 0.42333984375,
+      "original_outside_harmonic_neighborhood_fraction": 0.06695605551105888,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.6749262767224873,
+      "residual_outside_harmonic_neighborhood_fraction": 0.36731782155575554
+    },
+    {
+      "region": 11,
+      "window_coverage": 0.6435546875,
+      "original_outside_harmonic_neighborhood_fraction": 0.07032945527205359,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.4381593560198759,
+      "residual_outside_harmonic_neighborhood_fraction": 0.6003044647380258
+    },
+    {
+      "region": 12,
+      "window_coverage": 0.79296875,
+      "original_outside_harmonic_neighborhood_fraction": 0.06995266564297842,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.3390213917827998,
+      "residual_outside_harmonic_neighborhood_fraction": 0.6784083080949719
+    },
+    {
+      "region": 13,
+      "window_coverage": 0.5078125,
+      "original_outside_harmonic_neighborhood_fraction": 0.07006566327424801,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.5358518180735683,
+      "residual_outside_harmonic_neighborhood_fraction": 0.5181785790635473
+    },
+    {
+      "region": 14,
+      "window_coverage": 1.0,
+      "original_outside_harmonic_neighborhood_fraction": 0.070066723703604,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.07230246732810508,
+      "residual_outside_harmonic_neighborhood_fraction": 0.02717234559831272
+    },
+    {
+      "region": 15,
+      "window_coverage": 1.0,
+      "original_outside_harmonic_neighborhood_fraction": 0.08143334552414705,
+      "reconstructed_outside_harmonic_neighborhood_fraction": 0.08359896813322021,
+      "residual_outside_harmonic_neighborhood_fraction": 0.02271672552228854
+    }
+  ],
+  "scope": "Uses actual historical candidate lists for ambiguity causality. report.json best/runner and phase fields recompute against final exemplar dictionary and are retrospective, not replayed streaming decisions.",
+  "midi_validation": "Unavailable: no MIDI sequence found or supplied. No exact MIDI timing/pitch accuracy claimed."
+}

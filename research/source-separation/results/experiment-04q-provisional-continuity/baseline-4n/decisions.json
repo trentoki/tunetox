@@ -1,0 +1,884 @@
+[
+  {
+    "cycle": 353,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9925921399712623,
+    "phase_tolerant_target_similarity": 0.993511929261274,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 428,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor period mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 427,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.005400042435840469,
+        "original_single_neighbor_deviation": 0.005400042435840469,
+        "direct_similarity": 0.9990503712501104,
+        "phase_tolerant_similarity": 0.9990503712501104,
+        "comparison_shift_positions": 0
+      },
+      {
+        "side": "following",
+        "cycle": 429,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.023439406501369553,
+        "original_single_neighbor_deviation": 0.023439406501369553
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "fallback": "target overlaps boundary/silence bracket"
+    },
+    "robust_period_used": false,
+    "original_target_similarity": 0.9961235501807734,
+    "phase_tolerant_target_similarity": 0.9966958122858687,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 491,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 490,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.01641223119469526,
+        "original_single_neighbor_deviation": 0.009619753223642502,
+        "direct_similarity": 0.9962730048373847,
+        "phase_tolerant_similarity": 0.998155274339704,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 492,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.01641223119469526,
+        "original_single_neighbor_deviation": 0.023183087325822083,
+        "direct_similarity": 0.9956530949260528,
+        "phase_tolerant_similarity": 0.9982765653012744,
+        "comparison_shift_positions": 0.25
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "reference_cycle_ids": [
+        490,
+        489,
+        488,
+        492,
+        494,
+        496
+      ],
+      "flank_counts": [
+        3,
+        3
+      ],
+      "period_frames": 74.48331077625335,
+      "reference_periods_frames": [
+        74.9976789533539,
+        74.99604161475145,
+        75.0000040246523,
+        73.97057993775525,
+        73.8752237213339,
+        73.8299793106271
+      ],
+      "flank_medians": [
+        74.9976789533539,
+        73.8752237213339
+      ],
+      "relative_median_absolute_deviation": 0.006921425852005917,
+      "target_deviation": 0.01641223119469526
+    },
+    "robust_period_used": true,
+    "identity_interpretation": "Render supported; no family identity merge.",
+    "original_target_similarity": 0.9975994437010263,
+    "phase_tolerant_target_similarity": 0.998623092556588,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 535,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 534,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.016516237305621795,
+        "original_single_neighbor_deviation": 0.00967621512266803,
+        "direct_similarity": 0.996187373359874,
+        "phase_tolerant_similarity": 0.9981569065795695,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 536,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.016516237305621795,
+        "original_single_neighbor_deviation": 0.023324468546045862,
+        "direct_similarity": 0.9955995483558957,
+        "phase_tolerant_similarity": 0.9982708305065028,
+        "comparison_shift_positions": 0.25
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "reference_cycle_ids": [
+        534,
+        533,
+        532,
+        536,
+        538,
+        540
+      ],
+      "flank_counts": [
+        3,
+        3
+      ],
+      "period_frames": 74.480319851682,
+      "reference_periods_frames": [
+        74.9983223437448,
+        74.99591478028742,
+        74.99979086968233,
+        73.96472492307657,
+        73.87210206761665,
+        73.82889335845539
+      ],
+      "flank_medians": [
+        74.9983223437448,
+        73.87210206761665
+      ],
+      "relative_median_absolute_deviation": 0.006964749293028899,
+      "target_deviation": 0.016516237305621795
+    },
+    "robust_period_used": true,
+    "identity_interpretation": "Render supported; no family identity merge.",
+    "original_target_similarity": 0.9975989766474515,
+    "phase_tolerant_target_similarity": 0.9986069798178528,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 560,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor geometry mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 558,
+        "gap_periods": 0.0172728347047371,
+        "relative_period_change": 0.01717095139503777,
+        "original_single_neighbor_deviation": 0.01717095139503777,
+        "direct_similarity": 0.9753389925516105,
+        "phase_tolerant_similarity": 0.9948546887151256,
+        "comparison_shift_positions": 0.5
+      },
+      {
+        "side": "following",
+        "cycle": 561,
+        "gap_periods": 0.0,
+        "relative_period_change": 7.899429768820632e-05,
+        "original_single_neighbor_deviation": 7.899429768820632e-05,
+        "direct_similarity": 0.9996984825797659,
+        "phase_tolerant_similarity": 0.9996984825797659,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "reference_cycle_ids": [
+        558,
+        556,
+        554
+      ],
+      "flank_counts": [
+        3,
+        0
+      ],
+      "fallback": "insufficient reliable two-sided context"
+    },
+    "robust_period_used": false,
+    "original_target_similarity": 0.9963236191618611,
+    "phase_tolerant_target_similarity": 0.9963236191618611,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 562,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9949205930899802,
+    "phase_tolerant_target_similarity": 0.9949205930899802,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 685,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor period mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 684,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0018667462002082136,
+        "original_single_neighbor_deviation": 0.0018667462002082136,
+        "direct_similarity": 0.9950374599588739,
+        "phase_tolerant_similarity": 0.9981804182056154,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 686,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.020850491299276075,
+        "original_single_neighbor_deviation": 0.020850491299276075
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "fallback": "target overlaps boundary/silence bracket"
+    },
+    "robust_period_used": false,
+    "original_target_similarity": 0.9950983534754937,
+    "phase_tolerant_target_similarity": 0.9962860300642243,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 703,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "unsupported competing-family relationship"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9894130480112951,
+    "phase_tolerant_target_similarity": 0.9967425670426009,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 705,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor geometry mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 703,
+        "gap_periods": 0.016496964902038412,
+        "relative_period_change": 0.0001403661377002985,
+        "original_single_neighbor_deviation": 0.009663515689277813,
+        "direct_similarity": 0.9629517765108504,
+        "phase_tolerant_similarity": 0.9940728597019162,
+        "comparison_shift_positions": 0.5
+      },
+      {
+        "side": "following",
+        "cycle": 706,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0001403661377002985,
+        "original_single_neighbor_deviation": 5.47641468506832e-07,
+        "direct_similarity": 0.9997224620087857,
+        "phase_tolerant_similarity": 0.9997224620087857,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "reference_cycle_ids": [
+        703,
+        706,
+        707,
+        708
+      ],
+      "flank_counts": [
+        1,
+        3
+      ],
+      "period_frames": 75.01065708550595,
+      "reference_periods_frames": [
+        74.29621909721754,
+        75.0211464351305,
+        75.01356880208186,
+        75.00774536893005
+      ],
+      "flank_medians": [
+        74.29621909721754,
+        75.01356880208186
+      ],
+      "relative_median_absolute_deviation": 8.932774835702569e-05,
+      "target_deviation": 0.0001403661377002985
+    },
+    "robust_period_used": true,
+    "original_target_similarity": 0.9960848283840016,
+    "phase_tolerant_target_similarity": 0.9960848283840016,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 859,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 858,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.016246750368416163,
+        "original_single_neighbor_deviation": 0.009525815012156214,
+        "direct_similarity": 0.9964035848417555,
+        "phase_tolerant_similarity": 0.9981513608886863,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 860,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.016246750368416163,
+        "original_single_neighbor_deviation": 0.022959114276042136,
+        "direct_similarity": 0.9957325704921295,
+        "phase_tolerant_similarity": 0.9982848776101886,
+        "comparison_shift_positions": 0.25
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "reference_cycle_ids": [
+        858,
+        857,
+        856,
+        860,
+        862,
+        864
+      ],
+      "flank_counts": [
+        3,
+        3
+      ],
+      "period_frames": 74.48801033623022,
+      "reference_periods_frames": [
+        74.9969073614484,
+        74.99625834691687,
+        75.00032886472763,
+        73.97976232554356,
+        73.88016061396047,
+        73.83179764843953
+      ],
+      "flank_medians": [
+        74.9969073614484,
+        73.88016061396047
+      ],
+      "relative_median_absolute_deviation": 0.006854898856245079,
+      "target_deviation": 0.016246750368416163
+    },
+    "robust_period_used": true,
+    "identity_interpretation": "Render supported; no family identity merge.",
+    "original_target_similarity": 0.9975996285018273,
+    "phase_tolerant_target_similarity": 0.9986473572263144,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 903,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 902,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.016356832661788223,
+        "original_single_neighbor_deviation": 0.009588788185278418,
+        "direct_similarity": 0.996317416809072,
+        "phase_tolerant_similarity": 0.9981541439761948,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 904,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.016356832661788223,
+        "original_single_neighbor_deviation": 0.023108017437549866,
+        "direct_similarity": 0.9956803557374501,
+        "phase_tolerant_similarity": 0.998279444191015,
+        "comparison_shift_positions": 0.25
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "reference_cycle_ids": [
+        902,
+        901,
+        900,
+        904,
+        906,
+        908
+      ],
+      "flank_counts": [
+        3,
+        3
+      ],
+      "period_frames": 74.48489087638154,
+      "reference_periods_frames": [
+        74.99739080625295,
+        74.9961141309177,
+        75.0001142272813,
+        73.97366762184538,
+        73.87687951872067,
+        73.83057649037801
+      ],
+      "flank_medians": [
+        74.99739080625295,
+        73.87687951872067
+      ],
+      "relative_median_absolute_deviation": 0.006898870822519062,
+      "target_deviation": 0.016356832661788223
+    },
+    "robust_period_used": true,
+    "identity_interpretation": "Render supported; no family identity merge.",
+    "original_target_similarity": 0.9975995436626357,
+    "phase_tolerant_target_similarity": 0.9986314025909473,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 947,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 946,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.01646302144302858,
+        "original_single_neighbor_deviation": 0.009647633810152212,
+        "direct_similarity": 0.9962315762111387,
+        "phase_tolerant_similarity": 0.9981561536618797,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 948,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.01646302144302858,
+        "original_single_neighbor_deviation": 0.0232520541927701,
+        "direct_similarity": 0.9956273651397786,
+        "phase_tolerant_similarity": 0.9982738227430907,
+        "comparison_shift_positions": 0.25
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "reference_cycle_ids": [
+        946,
+        945,
+        944,
+        948,
+        950,
+        952
+      ],
+      "flank_counts": [
+        3,
+        3
+      ],
+      "period_frames": 74.48185491329787,
+      "reference_periods_frames": [
+        74.99797451420454,
+        74.99597869643185,
+        74.99990196197177,
+        73.96773113016388,
+        73.87370348999684,
+        73.82944405497983
+      ],
+      "flank_medians": [
+        74.99797451420454,
+        73.87370348999684
+      ],
+      "relative_median_absolute_deviation": 0.006942406649139088,
+      "target_deviation": 0.01646302144302858
+    },
+    "robust_period_used": true,
+    "identity_interpretation": "Render supported; no family identity merge.",
+    "original_target_similarity": 0.9975992621732062,
+    "phase_tolerant_target_similarity": 0.9986153124893059,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1072,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor outside time bound"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 1070,
+        "gap_periods": 0.016154747565441555,
+        "relative_period_change": 0.01596569891789823,
+        "original_single_neighbor_deviation": 0.01596569891789823,
+        "direct_similarity": 0.9768004086927373,
+        "phase_tolerant_similarity": 0.9956838825036844,
+        "comparison_shift_positions": 0.5
+      },
+      {
+        "side": "following",
+        "cycle": 1076,
+        "gap_periods": 1.8664565769081838,
+        "relative_period_change": 0.06626177410895462,
+        "original_single_neighbor_deviation": 0.06626177410895462
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "fallback": "target overlaps boundary/silence bracket"
+    },
+    "robust_period_used": false,
+    "original_target_similarity": 0.9960595572189291,
+    "phase_tolerant_target_similarity": 0.9960595572189291,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1076,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 1343,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 1348,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "unsupported competing-family relationship"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9958886858425574,
+    "phase_tolerant_target_similarity": 0.9959524411816477,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1623,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "unsupported competing-family relationship"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.995749160329161,
+    "phase_tolerant_target_similarity": 0.9961165272713757,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1635,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 1638,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor geometry mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 1637,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.004364136203233726,
+        "original_single_neighbor_deviation": 0.004364136203233726,
+        "direct_similarity": 0.9837774541805963,
+        "phase_tolerant_similarity": 0.9937730682594239,
+        "comparison_shift_positions": -0.5
+      },
+      {
+        "side": "following",
+        "cycle": 1639,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.002403657383658331,
+        "original_single_neighbor_deviation": 0.002403657383658331,
+        "direct_similarity": 0.9978672646765568,
+        "phase_tolerant_similarity": 0.9986170575132833,
+        "comparison_shift_positions": 0.25
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "fallback": "target overlaps boundary/silence bracket"
+    },
+    "robust_period_used": false,
+    "original_target_similarity": 0.9967371367074132,
+    "phase_tolerant_target_similarity": 0.9967371367074132,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1835,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9964489230747788,
+    "phase_tolerant_target_similarity": 0.9964489230747788,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1851,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 1853,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor outside time bound"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 1851,
+        "gap_periods": 0.9855658530169665,
+        "relative_period_change": 0.02833502329764881,
+        "original_single_neighbor_deviation": 0.02833502329764881
+      },
+      {
+        "side": "following",
+        "cycle": 1854,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.009688344694505746,
+        "original_single_neighbor_deviation": 0.009688344694505746,
+        "direct_similarity": 0.9940800237271711,
+        "phase_tolerant_similarity": 0.9980397708107264,
+        "comparison_shift_positions": 0.25
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "fallback": "target overlaps boundary/silence bracket"
+    },
+    "robust_period_used": false,
+    "original_target_similarity": 0.9971777029248855,
+    "phase_tolerant_target_similarity": 0.9972609985048646,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 2043,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor outside time bound"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 2042,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0012768910196185868,
+        "original_single_neighbor_deviation": 0.0012768910196185868,
+        "direct_similarity": 0.9987286371660797,
+        "phase_tolerant_similarity": 0.9987286371660797,
+        "comparison_shift_positions": 0
+      },
+      {
+        "side": "following",
+        "cycle": 2048,
+        "gap_periods": 0.9447798538341973,
+        "relative_period_change": 0.07165712662376866,
+        "original_single_neighbor_deviation": 0.07165712662376866
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "fallback": "target overlaps boundary/silence bracket"
+    },
+    "robust_period_used": false,
+    "original_target_similarity": 0.997281951698384,
+    "phase_tolerant_target_similarity": 0.997281951698384,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 2048,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 2049,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "unsupported competing-family relationship",
+      "target shape similarity too low"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9865480365671909,
+    "phase_tolerant_target_similarity": 0.9871603285902268,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 2051,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 2052,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "unsupported competing-family relationship"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9965022336054766,
+    "phase_tolerant_target_similarity": 0.9965022336054766,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 2228,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 2230,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor outside time bound"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 2228,
+        "gap_periods": 0.9820615907718738,
+        "relative_period_change": 0.05672223555338973,
+        "original_single_neighbor_deviation": 0.05672223555338973
+      },
+      {
+        "side": "following",
+        "cycle": 2231,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0037475507365676286,
+        "original_single_neighbor_deviation": 0.0037475507365676286,
+        "direct_similarity": 0.9988945813963092,
+        "phase_tolerant_similarity": 0.9988945813963092,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "local_period_estimate": {
+      "fallback": "target overlaps boundary/silence bracket"
+    },
+    "robust_period_used": false,
+    "original_target_similarity": 0.9982406410759491,
+    "phase_tolerant_target_similarity": 0.998436104086667,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  }
+]

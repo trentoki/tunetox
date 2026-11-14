@@ -1,0 +1,49 @@
+{
+  "prior_research_files_verified_unchanged": 349,
+  "tests_passed": 9,
+  "branches": {
+    "a-target-phase": {
+      "float32_sum_maximum_error": 7.450580596923828e-09,
+      "frame_count": 264600,
+      "no_baseline_support_removed": true,
+      "outside_support_is_zero": true
+    },
+    "b-sequence-continuity": {
+      "float32_sum_maximum_error": 7.450580596923828e-09,
+      "frame_count": 264600,
+      "no_baseline_support_removed": true,
+      "outside_support_is_zero": true
+    }
+  },
+  "all_original_references_byte_identical": true,
+  "branch_a_has_no_inferred_occurrences": true,
+  "branch_b_has_no_added_recognition_or_recursive_context": true,
+  "only_frozen_64_position_synthesis": true,
+  "no_linear256_or_combined_variant_or_4k": true,
+  "listening_performed": false,
+  "html_links_and_audio_sources_resolve": true,
+  "autoplay": false,
+  "all_sources_compile_in_memory": true,
+  "self_manifest_excluded": true,
+  "files_sha256": {
+    "run.py": "e5d15545918a3be9710a1112565b6f646c0e3c6e684a6afa066e80646ff682a5",
+    "test_methods.py": "36e21175532b6f220a8457c1ffebe8d198aa9641eac89a01e39362746323a065",
+    "test_exports.py": "00109070643430da4ffc7d3c103118c3d834e91ea8200fb65948c9f39ae96515",
+    "methods.py": "839fef96260ba10238c8a632e852908ae7c2dc19976ffafc4f8035ee3702d308",
+    "build_page.py": "5c22920b6f571517a6c3aa843e25dc606f63eea2f24b34297248b094b1b6ddc4",
+    "listen.html": "d8546c4d4778a32ca2fc4834813d4938548c67d779620533ac582e28cda7166d",
+    "README.md": "4a03be158df491d0b07e743f7966dba6fd146dac941734a4f220bfcb401ef7d1",
+    "a-target-phase/report.json": "fc81c02a70e415942b5ddce471b12b9bbfbd8d3e0079dcaf048fd888847451d9",
+    "a-target-phase/original_reference.wav": "f6bb9b2d6266e756292a52f72904a5d5a06202b31e444a76ee48942a36ca1aa7",
+    "a-target-phase/preservation.json": "f09e7861955824abcfc94d2654ccb2da7bde24d3a654ad2b5d863424cb69a26e",
+    "a-target-phase/decisions.json": "368d233f79a4b09f1d232bc61d66ac4618ba9022865ad03e3af605cf48091ceb",
+    "a-target-phase/residual.wav": "cef2c528a92117be96bf56ea1d69c2e89c2b18c74ac11869f1c454bda85ab0d4",
+    "a-target-phase/reconstructed.wav": "7215a904df8ed465f1a8165030c45d642da927e70892a0ac166a8f0da7ed1330",
+    "b-sequence-continuity/report.json": "9f5c28b566f18abb3e42d37989394f271e546c199fb6116760eccc7786f40f26",
+    "b-sequence-continuity/original_reference.wav": "f6bb9b2d6266e756292a52f72904a5d5a06202b31e444a76ee48942a36ca1aa7",
+    "b-sequence-continuity/preservation.json": "f09e7861955824abcfc94d2654ccb2da7bde24d3a654ad2b5d863424cb69a26e",
+    "b-sequence-continuity/decisions.json": "91311c70788c9445c9e0d378cfc5086eac0da190c35be7073599d787d178f647",
+    "b-sequence-continuity/residual.wav": "0f42c44d4afa86baf706237cf58a0d324a75da005c09df963743dadda9ede6ad",
+    "b-sequence-continuity/reconstructed.wav": "7be6ffe33f21eabfbdc799fc2fd51eb0e5cfd4d9f19de8367c37a3c59486df1c"
+  }
+}

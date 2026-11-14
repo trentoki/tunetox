@@ -1,0 +1,9 @@
+{
+  "input": "/Volumes/OWC Express 1M2/TuneToss/research/source-separation/audio/varvol2.aif",
+  "input_sha256": "5eab41d64b97a895b0c5ef6ffe81cf146e2d91e595bfb1245f1079e29a4298d4",
+  "algorithm_sha256": "69743fe42cebcaf948d375e9f132fcaa7993fd4422ace60415a1bcc2ba0771d5",
+  "algorithm_unchanged": true,
+  "adapter": "AIFC fl32 big-endian decode only; no scaling, clipping or resampling",
+  "reference_files_used": [],
+  "elapsed_seconds": 145.37702525
+}

@@ -1,0 +1,40 @@
+{
+  "prior_research_files_verified_unchanged": 294,
+  "original_input_and_all_1c_to_4f_artifacts_preserved": true,
+  "new_audio_exported": false,
+  "algorithms_changed": false,
+  "combined_a_b": false,
+  "experiment_4h_started": false,
+  "diagnostic_tests_passed": 9,
+  "html_ids_unique_and_links_resolve": true,
+  "svg_xml_and_finite_geometry": true,
+  "rendered_browser_preview_inspected": false,
+  "historical_manifest_limitation": [
+    "4F verification.json contains an invalid self-hash of its empty file at creation. That self-entry is excluded; every other recorded source/audio/output hash matched. The old manifest is not modified."
+  ],
+  "own_manifest_is_intentionally_excluded_from_file_hashes": true,
+  "files_sha256": {
+    "test_phase_probes.py": "35a8bce4a707575a401ca060219632e7acd491a492af1825634a6c7e62ed6bce",
+    "report.json": "a6e213ae2ca402f96f5054ce50daacb39bec2b8c376659adb95c7041fad3c178",
+    "w7-waveform.svg": "4710ef35e82aee08795ee50fe926231d34822798c2c865c5fe67361b371d9441",
+    "preservation.json": "9776034fa06bf1086e7d7cc4acd9ec2a0fb7af4fed16a732fb5de25717401397",
+    "w6-waveform.svg": "0e70b353ef5ec475354417a36b4a62e9d808a856c7612b77c826a1547a0dc5f1",
+    "w1-waveform.svg": "8c7794239afb7d383ff8ef00bbf2619e2857946231286d67432ea7a4f531e4ab",
+    "test_artifacts.py": "d76135e08d8ace452d89ca9cf98b1782eeabbfacd7642d7493a8c599e2c28bae",
+    "build_report.py": "5cc9ea431024797e924b477b484d3c0488bb7c126fa0ba25f5c0cc3fbe9d04f5",
+    "README.md": "6cf8795253528c1ee692056a01400feafa1bd694cc7c9efbfcd8520397c3be0a",
+    "w3-waveform.svg": "974d6ee554b34475121eae390756fd86759f982275a6a27905f8a683d7bb292c",
+    "w4-waveform.svg": "f2a6d3919ef41f8ddcca27f234c53cb96c5476d242d4119555f8a328a9da89c7",
+    "html-build-timing.json": "803ee9dd3b895b0124dad05636fc5ef472c9d59b1773aa17c3c57d033ce56c01",
+    "w5-waveform.svg": "43761df2ffed3f43252973cd221bac3b0935f0c483936fbefdc777eb2dbab26b",
+    "w2-waveform.svg": "c160e5a848f071ec24f835ec664386f5cc12e831cac0a8e83c6671b705102c84",
+    "context-and-phase-probes.json": "3a282864798eff8af95e13a994e031bc0cb20617d0f63f7b869488b6fb641019",
+    "w8-waveform.svg": "decee20cbc977b0ccdd3169d105774fce645eaeb4b45dec1f63921fa4f47b017",
+    "test_analyze.py": "4ef01b90e6cc1b0c56cd3ba6262715d0768229d84df667405c16b1bbc5530375",
+    "report.html": "f7819dbdfb2b1e1141d9b6565edbcb08334664d1954d14ae41655df608691763",
+    "contextualize.py": "77a0edc5f82679db3d64462a3f064729a1f4ef93644c1e83bfc3c3efc42d193b",
+    "family-shapes.svg": "bb140f0dcdd09bfcf66d202378b8dd104f6718f4098717ec973f04d5b5dc6617",
+    "interruptions.csv": "47c8f72088512a8e3e6cfc8fd4504851468158733fcc248e039760cf172b044f",
+    "analyze.py": "79f1569d82ff7d13b5fd6f766579804f0bbb3417846fc9702e298b96bcbd7914"
+  }
+}

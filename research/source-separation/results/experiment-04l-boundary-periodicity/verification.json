@@ -1,0 +1,17 @@
+{
+  "prior_files_verified": 386,
+  "baseline_rerun_bit_identical": true,
+  "focused_tests_passed": 4,
+  "unchanged_4j_tests_passed": 7,
+  "float32_stereo_full_length_verified": true,
+  "finite_audio_verified": true,
+  "conservation_max_abs_error": 7.450580596923828e-09,
+  "source_hashes_verified": true,
+  "independent_effect_cycle_sets_disjoint": true,
+  "old_modeled_region_error_energy_change": -0.0076085636253395705,
+  "maximum_new_cycle_error_ratio": 0.020987330657056293,
+  "median_new_cycle_error_ratio": 0.013674202245582467,
+  "listening_performed": false,
+  "no_midi_or_stems": true,
+  "no_synthesis_changes": true
+}

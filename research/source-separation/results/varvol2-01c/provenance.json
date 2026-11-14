@@ -1,0 +1,18 @@
+{
+  "input_filename": "varvol2.aif",
+  "input_path": "/Volumes/OWC Express 1M2/TuneToss/research/source-separation/audio/varvol2.aif",
+  "input_sha256": "5eab41d64b97a895b0c5ef6ffe81cf146e2d91e595bfb1245f1079e29a4298d4",
+  "input_hash_verified_before_run": true,
+  "algorithm_sha256": "eb8fd4895b4a62fe7d57c97c6004685d184a00258ca8fe29b68115c89994a6d7",
+  "algorithm_unchanged": true,
+  "settings": {
+    "threshold": 0.015,
+    "max_lag_ms": 5,
+    "max_components": 4
+  },
+  "adapter": "Retained AIFC fl32 decoder; no scaling, clipping or resampling",
+  "reference_files_used": [],
+  "normalization_applied": false,
+  "previous_files_verified_unchanged": 132,
+  "elapsed_seconds": 148.264358125
+}
