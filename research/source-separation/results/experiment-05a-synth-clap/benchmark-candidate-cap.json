@@ -1,0 +1,8 @@
+{
+  "hop_frames": 88,
+  "smooth_frames": 352,
+  "difference_frames": 352,
+  "threshold": 0.03106446619571178,
+  "uncapped_candidate_count": 51,
+  "candidate_cap_reached": true
+}

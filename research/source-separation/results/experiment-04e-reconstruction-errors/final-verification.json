@@ -1,0 +1,24 @@
+{
+  "prior_research_files_verified_unchanged": 230,
+  "no_algorithm_changes": true,
+  "no_new_audio": true,
+  "audio_based_scope_complete": true,
+  "tests_passed": 4,
+  "files_sha256": {
+    "summary.json": "0068fcf48d0ac2ea709334b94b7715628352402e8e11cc9aaf86ace8b04975d7",
+    "report.json": "f4865c0ea07d1f9827c8a8a11596214f747c516e2f8035dfedd428bfa7aeaef6",
+    "figures.html": "813d91453aea1960f51851e918235a89f2b303bf67fe46f0a3d279144a868b12",
+    "preservation.json": "8e9d6b6a17d8794c7357ce0d9eb5b4644c8e55b3c9d8417db0b6b3310656f4c8",
+    "summarize.py": "f251786a5aeadb13c148472b5a084f3b2f73f04c23d4f3d305e81034bdf07c50",
+    "final-verification.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "harmonic-loss.svg": "5e05c7e8bf72f91ef2f533dce3b444f52188364e0ede8d3de5abbbd363c0148b",
+    "README.md": "9a6fbd335ec6aca42e40ebd96fef961a6b02dbd53574fad2e367b7472a603957",
+    "plots.py": "f3d1bf38a1ed4144b1339c9fffe2c80fdff55a774b9e234395787199ba724d65",
+    "waveform-mechanisms.svg": "bbf40b735acb0a91998c44714e94169b7645295688cb2361c222785cc0beec0e",
+    "scope-confirmation.json": "bc8ad2edda4455471aa80e6550ad05fdc351e79c69b2e3f37fba92d1bf8b509a",
+    "verification.json": "b2d5c9ad94bb6b9a0f616be10d8c45439bdee2614da4a3e7a98d40fc786c7dcf",
+    "test_analyze.py": "9e4b937690af0d90b74065f2f21eb184043c8cc0ad087bfac9af5da558e4f797",
+    "coverage-and-error.svg": "35d6a433a70d42b13143eb2cb501878144390edfbce16cdc817fbcdb485fdd02",
+    "analyze.py": "9ee11a5f9f8a034e0c057233d94ff236a9bc1d54d6da4e9094a61a0bc4dd9832"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "input_sha256_verified": true,
+  "duration_seconds": 16,
+  "sample_rate": 44100,
+  "channels": 2,
+  "interleaved_samples": 1411200,
+  "existing_input_sample_limit": 4000000,
+  "detected_events": 4,
+  "extended_event_frames": [
+    65735,
+    88176,
+    264616,
+    287073
+  ],
+  "pairs_per_pass": 16,
+  "lags_per_pair": 441,
+  "overlap_samples_per_pass": 1747395692,
+  "representative_fit_seconds": 2.554514292,
+  "estimated_fit_seconds_per_pass": 77.0546217523018,
+  "estimated_max_four_pass_fit_seconds": 308.2184870092072,
+  "estimate_limitations": "Single representative pair; extrapolation is approximate and excludes presence tests, exports, and load variation.",
+  "limits": [
+    "Pure Python exhaustive integer-lag fitting scans every event pair; cost grows with pair count, overlap lengths, lag range and passes.",
+    "At most four components under unchanged 1C settings; not an assumed source count.",
+    "Detector merges continuous activity; long windows can contain multiple sources, impair recurrence or produce mixture templates.",
+    "No memory or runtime guarantee; no fractional shifts or drift compensation.",
+    "The existing report warning about an expected eight events is historical diagnostics only; no event assignments or count were forced."
+  ]
+}

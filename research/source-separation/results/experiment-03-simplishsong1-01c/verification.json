@@ -1,0 +1,48 @@
+{
+  "outputs": [
+    {
+      "file": "component_01.wav",
+      "sha256": "5bd46c2011824ec2f2bab6270fb7c1ce503db0f90c6649593c0310774fe1e2cb",
+      "format": "IEEE float32 WAV",
+      "rate": 44100,
+      "channels": 2,
+      "frames": 705600,
+      "peak": 1.589481234550476
+    },
+    {
+      "file": "component_02.wav",
+      "sha256": "3c311c025c0d77eb4d636b90bdee0238ac28cae2bed75b5a688a5625eb045d6e",
+      "format": "IEEE float32 WAV",
+      "rate": 44100,
+      "channels": 2,
+      "frames": 705600,
+      "peak": 1.567147970199585
+    },
+    {
+      "file": "component_03.wav",
+      "sha256": "ea55f43418c1afa290d139d3e5d3ae2380e59915d2f5a5430549fcb29388c95f",
+      "format": "IEEE float32 WAV",
+      "rate": 44100,
+      "channels": 2,
+      "frames": 705600,
+      "peak": 2.1700894832611084
+    },
+    {
+      "file": "residual.wav",
+      "sha256": "4ef2aafeb7ff8c4a7ebf2ddb3995332a05b411d6b7bdd0c582566c28ca31451b",
+      "format": "IEEE float32 WAV",
+      "rate": 44100,
+      "channels": 2,
+      "frames": 705600,
+      "peak": 2.096165895462036
+    }
+  ],
+  "max_float32_reconstruction_sample_error": 8.381903171539307e-08,
+  "previous_files_unchanged": 150,
+  "input_hash_matches": true,
+  "algorithm_unchanged": true,
+  "listening_performed": false,
+  "hardware_architecture": "arm64",
+  "host_platform": "macOS-15.6.1-arm64-arm-64bit",
+  "target_hardware_confirmed": false
+}

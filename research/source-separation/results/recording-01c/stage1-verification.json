@@ -1,0 +1,8 @@
+{
+  "tests_passed": 37,
+  "stage1_tested_before_stage2": true,
+  "export_max_reconstruction_error": 2.9802322443206464e-08,
+  "components": 3,
+  "residual_energy_fraction": 8.180328082184683e-36,
+  "listening_performed": false
+}

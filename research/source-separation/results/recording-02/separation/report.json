@@ -1,0 +1,845 @@
+{
+  "sample_rate": 44100,
+  "channels": 2,
+  "frames": 176400,
+  "events": [
+    {
+      "start_frame": 0,
+      "end_frame": 17601,
+      "time_seconds": 0.0,
+      "leading_context_frames": 88,
+      "energy": 4442.985073053278,
+      "peak": 0.9304065108299255,
+      "rms": 0.3552660912588684,
+      "interval_seconds": null
+    },
+    {
+      "start_frame": 21559,
+      "end_frame": 40129,
+      "time_seconds": 0.48886621315192746,
+      "leading_context_frames": 441,
+      "energy": 14594.1983510567,
+      "peak": 2.280073404312134,
+      "rms": 0.6268579997355356,
+      "interval_seconds": 0.48886621315192746
+    },
+    {
+      "start_frame": 43647,
+      "end_frame": 62569,
+      "time_seconds": 0.9897278911564625,
+      "leading_context_frames": 441,
+      "energy": 22664.8650944828,
+      "peak": 2.0994651317596436,
+      "rms": 0.7738878927359405,
+      "interval_seconds": 0.5008616780045352
+    },
+    {
+      "start_frame": 65735,
+      "end_frame": 84217,
+      "time_seconds": 1.4905895691609978,
+      "leading_context_frames": 441,
+      "energy": 9904.457883068459,
+      "peak": 1.412062406539917,
+      "rms": 0.5176376703768927,
+      "interval_seconds": 0.5008616780045352
+    },
+    {
+      "start_frame": 87735,
+      "end_frame": 103929,
+      "time_seconds": 1.989455782312925,
+      "leading_context_frames": 441,
+      "energy": 655.9969473032587,
+      "peak": 0.35736191272735596,
+      "rms": 0.14231767620913371,
+      "interval_seconds": 0.4988662131519274
+    },
+    {
+      "start_frame": 109823,
+      "end_frame": 128305,
+      "time_seconds": 2.4903174603174603,
+      "leading_context_frames": 441,
+      "energy": 7895.890526217593,
+      "peak": 1.670544147491455,
+      "rms": 0.46217992566456884,
+      "interval_seconds": 0.5008616780045352
+    },
+    {
+      "start_frame": 131823,
+      "end_frame": 150393,
+      "time_seconds": 2.989183673469388,
+      "leading_context_frames": 441,
+      "energy": 14257.067414205925,
+      "peak": 1.6651291847229004,
+      "rms": 0.6195753799438591,
+      "interval_seconds": 0.4988662131519274
+    },
+    {
+      "start_frame": 153911,
+      "end_frame": 170017,
+      "time_seconds": 3.4900453514739227,
+      "leading_context_frames": 441,
+      "energy": 742.6109514963407,
+      "peak": 1.118599772453308,
+      "rms": 0.15183497755474754,
+      "interval_seconds": 0.5008616780045352
+    }
+  ],
+  "passes": [
+    {
+      "template_event": 5,
+      "allocations": [
+        {
+          "event": 0,
+          "lag_frames": -427,
+          "gain": 0.7412651637586235,
+          "explained_energy": 4338.445730817992
+        },
+        {
+          "event": 1,
+          "lag_frames": 64,
+          "gain": 1.3595296638778218,
+          "explained_energy": 14594.139538704929
+        },
+        {
+          "event": 2,
+          "lag_frames": 26,
+          "gain": 1.6748463851471764,
+          "explained_energy": 22148.844741638022
+        },
+        {
+          "event": 3,
+          "lag_frames": -12,
+          "gain": 1.1108058519108082,
+          "explained_energy": 9742.657523921851
+        },
+        {
+          "event": 4,
+          "lag_frames": 38,
+          "gain": 0.2850784705753387,
+          "explained_energy": 641.050110458922
+        },
+        {
+          "event": 5,
+          "lag_frames": 0,
+          "gain": 1.0,
+          "explained_energy": 7895.890526217593
+        },
+        {
+          "event": 6,
+          "lag_frames": 50,
+          "gain": 1.3283553999129376,
+          "explained_energy": 13932.520459139367
+        },
+        {
+          "event": 7,
+          "lag_frames": 12,
+          "gain": 0.2612211284910477,
+          "explained_energy": 538.1888228126737
+        }
+      ],
+      "comparisons": [
+        {
+          "candidate": 0,
+          "energy": 4442.985073053278,
+          "explained_fractions": [
+            1.0,
+            0.9759485252139813,
+            0.9989572208276882,
+            0.9984539050879953,
+            0.9989950558576319,
+            0.976439151686064,
+            0.9989607769292532,
+            0.5813068068272198
+          ],
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "input_energy_fraction": 0.9822282773231374,
+          "median_original_event_energy_fraction": 0.9989572208276882,
+          "meaningful": true
+        },
+        {
+          "candidate": 1,
+          "energy": 14594.1983510567,
+          "explained_fractions": [
+            0.9759815682307114,
+            1.0,
+            0.9767418708163397,
+            0.9832459483500667,
+            0.9767225108907213,
+            0.9999973068269,
+            0.9767453475062555,
+            0.7261907120267095
+          ],
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "input_energy_fraction": 0.9820169430183314,
+          "median_original_event_energy_fraction": 0.9767436091612975,
+          "meaningful": true
+        },
+        {
+          "candidate": 2,
+          "energy": 22664.8650944828,
+          "explained_fractions": [
+            0.9989960587858592,
+            0.9767459930120912,
+            1.0,
+            0.9994577509046527,
+            0.9999999999996682,
+            0.9772380480242209,
+            0.9999999999999137,
+            0.5811801267298647
+          ],
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "input_energy_fraction": 0.9830603510123795,
+          "median_original_event_energy_fraction": 0.9994577509046527,
+          "meaningful": true
+        },
+        {
+          "candidate": 3,
+          "energy": 9904.457883068459,
+          "explained_fractions": [
+            0.9984878473617216,
+            0.9832453283229051,
+            0.9994528877069545,
+            1.0,
+            0.9994571910598334,
+            0.9836645959933124,
+            0.9994564455520886,
+            0.6040760951286968
+          ],
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "input_energy_fraction": 0.9847660895812753,
+          "median_original_event_energy_fraction": 0.9994528877069545,
+          "meaningful": true
+        },
+        {
+          "candidate": 4,
+          "energy": 655.9969473032587,
+          "explained_fractions": [
+            0.9979962052226095,
+            0.9757371874767843,
+            0.9989631226292452,
+            0.9984262694849726,
+            1.0,
+            0.9762300719870687,
+            0.998966678804139,
+            0.5811801278454026
+          ],
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "input_energy_fraction": 0.982054852305756,
+          "median_original_event_energy_fraction": 0.9984262694849726,
+          "meaningful": true
+        },
+        {
+          "candidate": 5,
+          "energy": 7895.890526217593,
+          "explained_fractions": [
+            0.976470922022827,
+            0.9999959701553757,
+            0.9772325866183783,
+            0.9836638853880935,
+            0.9772150817076485,
+            1.0,
+            0.9772360650589913,
+            0.7247251359924575
+          ],
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "input_energy_fraction": 0.9823313276392577,
+          "median_original_event_energy_fraction": 0.9772343258386849,
+          "meaningful": true
+        },
+        {
+          "candidate": 6,
+          "energy": 14257.067414205925,
+          "explained_fractions": [
+            0.9989960587463096,
+            0.9767459926479701,
+            0.9999964401631073,
+            0.9994577508484026,
+            0.9999999999996607,
+            0.9772380476638425,
+            1.0,
+            0.5811801255370607
+          ],
+          "members": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "input_energy_fraction": 0.9830592774037348,
+          "median_original_event_energy_fraction": 0.9994577508484026,
+          "meaningful": true
+        },
+        {
+          "candidate": 7,
+          "energy": 742.6109514963407,
+          "explained_fractions": [
+            0.5806638163677454,
+            0.7253828860747495,
+            0.5805158745542895,
+            0.6033889667448575,
+            0.5811184242449076,
+            0.723919503741153,
+            0.580517939923697,
+            1.0
+          ],
+          "members": [
+            1,
+            5,
+            7
+          ],
+          "input_energy_fraction": 0.22678349719109756,
+          "median_original_event_energy_fraction": 0.7253828860747495,
+          "meaningful": true
+        }
+      ]
+    },
+    {
+      "template_event": 4,
+      "allocations": [
+        {
+          "event": 0,
+          "lag_frames": -465,
+          "gain": 2.5875930576952766,
+          "explained_energy": 100.07860624683165
+        },
+        {
+          "event": 2,
+          "lag_frames": -12,
+          "gain": 5.874898819271447,
+          "explained_energy": 515.8816457075402
+        },
+        {
+          "event": 3,
+          "lag_frames": -50,
+          "gain": 3.290034273522753,
+          "explained_energy": 161.78942751117754
+        },
+        {
+          "event": 4,
+          "lag_frames": 0,
+          "gain": 1.0,
+          "explained_energy": 14.946836844288887
+        },
+        {
+          "event": 6,
+          "lag_frames": 12,
+          "gain": 4.65950412110001,
+          "explained_energy": 324.5104556793673
+        }
+      ],
+      "comparisons": [
+        {
+          "candidate": 0,
+          "energy": 104.53934223495594,
+          "explained_fractions": [
+            1.0,
+            0.11214894861623767,
+            0.9571182136352363,
+            0.9573108774550658,
+            0.9573529467839486,
+            0.0,
+            0.9572678872576936,
+            0.16781119745709452
+          ],
+          "members": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ],
+          "input_energy_fraction": 0.01434695323274018,
+          "median_original_event_energy_fraction": 0.021791183906591852,
+          "meaningful": true
+        },
+        {
+          "candidate": 1,
+          "energy": 0.05881235078923387,
+          "explained_fractions": [
+            0.1678109047371105,
+            1.0,
+            0.1166120722308505,
+            0.17028896938718252,
+            0.17029870507892078,
+            0.0,
+            0.11696840677917912,
+            0.9999999563707525
+          ],
+          "members": [
+            1,
+            7
+          ],
+          "input_energy_fraction": 0.002720618970236049,
+          "median_original_event_energy_fraction": 0.13763944092099997,
+          "meaningful": true
+        },
+        {
+          "candidate": 2,
+          "energy": 516.0203528430764,
+          "explained_fractions": [
+            0.9573539313755733,
+            0.11663030815678052,
+            1.0,
+            0.9999989698467137,
+            0.9999999764602265,
+            0.0,
+            0.9999999999992589,
+            0.1702981861070115
+          ],
+          "members": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ],
+          "input_energy_fraction": 0.014866947876830143,
+          "median_original_event_energy_fraction": 0.022763934940930052,
+          "meaningful": true
+        },
+        {
+          "candidate": 3,
+          "energy": 161.80035914594188,
+          "explained_fractions": [
+            0.9573539335581212,
+            0.11533497518882045,
+            0.9997852507429301,
+            1.0,
+            0.9999999764587227,
+            0.0,
+            0.9999415982514754,
+            0.17029817957982887
+          ],
+          "members": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ],
+          "input_energy_fraction": 0.01486522351959198,
+          "median_original_event_energy_fraction": 0.022762524096437517,
+          "meaningful": true
+        },
+        {
+          "candidate": 4,
+          "energy": 14.946836844288887,
+          "explained_fractions": [
+            0.9573295957985022,
+            0.1138090452101667,
+            0.9997311983243066,
+            0.9999324375123637,
+            1.0,
+            0.0,
+            0.9998875374248901,
+            0.17027161215283135
+          ],
+          "members": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ],
+          "input_energy_fraction": 0.014864439682596474,
+          "median_original_event_energy_fraction": 0.022761293462678443,
+          "meaningful": true
+        },
+        {
+          "candidate": 6,
+          "energy": 324.54695506567805,
+          "explained_fractions": [
+            0.9573539297758675,
+            0.11663030757789927,
+            0.9998436433350416,
+            0.9999989698417517,
+            0.999999976459674,
+            0.0,
+            1.0,
+            0.1702981830208988
+          ],
+          "members": [
+            0,
+            2,
+            3,
+            4,
+            6
+          ],
+          "input_energy_fraction": 0.014865874384270058,
+          "median_original_event_energy_fraction": 0.022763853544720544,
+          "meaningful": true
+        },
+        {
+          "candidate": 7,
+          "energy": 204.4221286836191,
+          "explained_fractions": [
+            0.1678067795942469,
+            0.6682888192555352,
+            0.17025210885867106,
+            0.17028637293649704,
+            0.17027109527181042,
+            0.0,
+            0.17027872999109797,
+            1.0
+          ],
+          "members": [
+            1,
+            7
+          ],
+          "input_energy_fraction": 0.00272035952544034,
+          "median_original_event_energy_fraction": 0.13763877855376944,
+          "meaningful": true
+        }
+      ]
+    },
+    {
+      "template_event": 1,
+      "allocations": [
+        {
+          "event": 1,
+          "lag_frames": 0,
+          "gain": 1.0,
+          "explained_energy": 0.05881235078923387
+        },
+        {
+          "event": 7,
+          "lag_frames": -52,
+          "gain": 72.1186464513409,
+          "explained_energy": 204.42211976483543
+        }
+      ],
+      "comparisons": [
+        {
+          "candidate": 0,
+          "energy": 4.460735988125926,
+          "explained_fractions": [
+            1.0,
+            0.0028485183005914783,
+            4.808285879669486e-05,
+            0.00019135871822752837,
+            0.0,
+            0.0,
+            0.00011493483776696334,
+            0.004277150587199739
+          ],
+          "members": [
+            0
+          ],
+          "input_energy_fraction": 5.935009599647025e-05,
+          "median_original_event_energy_fraction": 0.00100399526777173,
+          "meaningful": true
+        },
+        {
+          "candidate": 1,
+          "energy": 0.05881235078923387,
+          "explained_fractions": [
+            0.004262559475071074,
+            1.0,
+            0.07352697055744377,
+            0.13409874808175032,
+            0.0,
+            0.0,
+            0.17576747315600233,
+            0.9999999563707525
+          ],
+          "members": [
+            1,
+            7
+          ],
+          "input_energy_fraction": 0.002720618970236049,
+          "median_original_event_energy_fraction": 0.13763944092099997,
+          "meaningful": true
+        },
+        {
+          "candidate": 2,
+          "energy": 0.13870713554356343,
+          "explained_fractions": [
+            0.0005723043179108921,
+            0.23688304157691373,
+            1.0,
+            0.9935403055047587,
+            0.0,
+            0.0,
+            0.9999999934775462,
+            0.046305446636846485
+          ],
+          "members": [
+            2,
+            3,
+            6
+          ],
+          "input_energy_fraction": 2.4756287910200976e-06,
+          "median_original_event_energy_fraction": 2.560090726291155e-06,
+          "meaningful": false,
+          "rejection": "Negligible relative to input and original events; retained in residual"
+        },
+        {
+          "candidate": 3,
+          "energy": 0.010931634762765291,
+          "explained_fractions": [
+            0.00057235842653907,
+            0.11311490749206925,
+            0.20359447704242095,
+            1.0,
+            0.0,
+            0.0,
+            0.48669572412245693,
+            0.04628029440472908
+          ],
+          "members": [
+            3
+          ],
+          "input_energy_fraction": 1.4544540952333895e-07,
+          "median_original_event_energy_fraction": 1.1037085413279183e-06,
+          "meaningful": false,
+          "rejection": "Negligible relative to input and original events; retained in residual"
+        },
+        {
+          "candidate": 6,
+          "energy": 0.03649938630928197,
+          "explained_fractions": [
+            0.0005722644974919276,
+            0.2368830874785819,
+            0.4183196048137926,
+            0.9935402919047752,
+            0.0,
+            0.0,
+            1.0,
+            0.04629392114101264
+          ],
+          "members": [
+            3,
+            6
+          ],
+          "input_energy_fraction": 6.301302395447682e-07,
+          "median_original_event_energy_fraction": 1.8283348246589813e-06,
+          "meaningful": false,
+          "rejection": "Negligible relative to input and original events; retained in residual"
+        },
+        {
+          "candidate": 7,
+          "energy": 204.4221286836191,
+          "explained_fractions": [
+            0.004274965608019481,
+            0.6682888192555352,
+            4.053710987345255e-06,
+            1.6123463065211587e-05,
+            0.0,
+            0.0,
+            9.68827054785831e-06,
+            1.0
+          ],
+          "members": [
+            1,
+            7
+          ],
+          "input_energy_fraction": 0.00272035952544034,
+          "median_original_event_energy_fraction": 0.13763877855376944,
+          "meaningful": true
+        }
+      ]
+    },
+    {
+      "comparisons": [
+        {
+          "candidate": 0,
+          "energy": 4.460735988125926,
+          "explained_fractions": [
+            1.0,
+            0.0,
+            4.808285879669486e-05,
+            0.00019135871822752837,
+            0.0,
+            0.0,
+            0.00011493483776696334,
+            0.00030507696659851227
+          ],
+          "members": [
+            0
+          ],
+          "input_energy_fraction": 5.935009599647025e-05,
+          "median_original_event_energy_fraction": 0.00100399526777173,
+          "meaningful": true
+        },
+        {
+          "candidate": 2,
+          "energy": 0.13870713554356343,
+          "explained_fractions": [
+            0.0005723043179108921,
+            0.0,
+            1.0,
+            0.9935403055047587,
+            0.0,
+            0.0,
+            0.9999999934775462,
+            0.6556574651485028
+          ],
+          "members": [
+            2,
+            3,
+            6,
+            7
+          ],
+          "input_energy_fraction": 2.475706594204062e-06,
+          "median_original_event_energy_fraction": 1.8283348238151533e-06,
+          "meaningful": false,
+          "rejection": "Negligible relative to input and original events; retained in residual"
+        },
+        {
+          "candidate": 3,
+          "energy": 0.010931634762765291,
+          "explained_fractions": [
+            0.00057235842653907,
+            0.0,
+            0.20359447704242095,
+            1.0,
+            0.0,
+            0.0,
+            0.48669572412245693,
+            0.6546095994149251
+          ],
+          "members": [
+            3,
+            7
+          ],
+          "input_energy_fraction": 1.455230883629699e-07,
+          "median_original_event_energy_fraction": 5.557852112377724e-07,
+          "meaningful": false,
+          "rejection": "Negligible relative to input and original events; retained in residual"
+        },
+        {
+          "candidate": 6,
+          "energy": 0.03649938630928197,
+          "explained_fractions": [
+            0.0005722644974919276,
+            0.0,
+            0.4183196048137926,
+            0.9935402919047752,
+            0.0,
+            0.0,
+            1.0,
+            0.6533000319936594
+          ],
+          "members": [
+            3,
+            6,
+            7
+          ],
+          "input_energy_fraction": 6.302077629853983e-07,
+          "median_original_event_energy_fraction": 1.0965789063287336e-06,
+          "meaningful": false,
+          "rejection": "Negligible relative to input and original events; retained in residual"
+        },
+        {
+          "candidate": 7,
+          "energy": 8.918780055789244e-06,
+          "explained_fractions": [
+            0.0003049224950768394,
+            0.0,
+            5.7396586182945646e-05,
+            0.00022805151358949445,
+            0.0,
+            0.0,
+            0.00013671698174666367,
+            1.0
+          ],
+          "members": [
+            7
+          ],
+          "input_energy_fraction": 1.186643759889681e-10,
+          "median_original_event_energy_fraction": 1.201003033663609e-08,
+          "meaningful": false,
+          "rejection": "Negligible relative to input and original events; retained in residual"
+        }
+      ],
+      "stop": "No meaningful recurring candidate; rejected candidates remain in residual"
+    }
+  ],
+  "component_count": 3,
+  "experiment": "1B",
+  "significance_policy": {
+    "input_energy_fraction_min": 1e-05,
+    "median_event_energy_fraction_min": 0.0001,
+    "combination": "either criterion suffices"
+  },
+  "residual_energy_fraction": 8.361370776268287e-05,
+  "warnings": [
+    "Templates are observed events, not proven independent sources.",
+    "An exact reconstruction with residual does not establish separation quality."
+  ],
+  "input_sha256": "624ce55536c04d2660848dce5d9927041924816ef08ad7daefc3702c26fe2918",
+  "parameters": {
+    "threshold": 0.015,
+    "max_lag_ms": 5,
+    "match_fraction": 0.65,
+    "max_components": 4
+  },
+  "outputs": [
+    {
+      "file": "component_01.wav",
+      "peak": 2.797904826654835
+    },
+    {
+      "file": "component_02.wav",
+      "peak": 1.2629819062563807
+    },
+    {
+      "file": "component_03.wav",
+      "peak": 0.7950190898150532
+    }
+  ],
+  "baseline_residual_energy_fraction": 2.11367511777203
+}

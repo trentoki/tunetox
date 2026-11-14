@@ -1,0 +1,37 @@
+{
+  "outputs": [
+    {
+      "file": "component_01.wav",
+      "sha256": "b8612e23d58c4f14ec0b6bd6c029a935154e6065306c9d5c064dea5a8aa2143e",
+      "format": "IEEE float32 WAV",
+      "sample_rate": 44100,
+      "channels": 2,
+      "frames": 176400,
+      "peak": 1.1671013832092285
+    },
+    {
+      "file": "component_02.wav",
+      "sha256": "506dfd6553db410e8eef70c63accb75d3c620fe6042f58351833a126be4a39a9",
+      "format": "IEEE float32 WAV",
+      "sample_rate": 44100,
+      "channels": 2,
+      "frames": 176400,
+      "peak": 1.007178783416748
+    },
+    {
+      "file": "residual.wav",
+      "sha256": "94688c53aadbf12ee0ce9a2026453386466137ce05f818f3b261b09d5142e96f",
+      "format": "IEEE float32 WAV",
+      "sample_rate": 44100,
+      "channels": 2,
+      "frames": 176400,
+      "peak": 0.1494349241256714
+    }
+  ],
+  "max_export_reconstruction_error": 7.638209353899583e-08,
+  "prior_files_unchanged": 132,
+  "input_hash_verified_after_run": true,
+  "algorithm_unchanged": true,
+  "listening_performed": false,
+  "stage2_run": false
+}

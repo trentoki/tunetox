@@ -1,0 +1,35 @@
+{
+  "reconstruction_max_abs_error": 2.966735834775136e-08,
+  "wav_files": [
+    {
+      "file": "baseline_component.wav",
+      "peak": 0.6905978322029114
+    },
+    {
+      "file": "baseline_residual.wav",
+      "peak": 1.1996433734893799
+    },
+    {
+      "file": "component_01.wav",
+      "peak": 0.9641880989074707
+    },
+    {
+      "file": "component_02.wav",
+      "peak": 0.0768732875585556
+    },
+    {
+      "file": "component_03.wav",
+      "peak": 0.30449703335762024
+    },
+    {
+      "file": "component_04.wav",
+      "peak": 0.022153310477733612
+    },
+    {
+      "file": "residual.wav",
+      "peak": 0.0403410829603672
+    }
+  ],
+  "detected_events": 7,
+  "residual_energy_fraction": 0.0002646618995423532
+}

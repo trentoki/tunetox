@@ -1,0 +1,1106 @@
+[
+  {
+    "cycle": 271,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor outside time bound"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 239,
+        "gap_periods": 52.735517164278576,
+        "relative_period_change": 0.10911304343429795
+      },
+      {
+        "side": "following",
+        "cycle": 272,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.014909614424982953,
+        "direct_similarity": 0.9978105833581129,
+        "phase_tolerant_similarity": 0.9978105833581129,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9958789138867774,
+    "phase_tolerant_target_similarity": 0.9958789138867774,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 353,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9925921399712623,
+    "phase_tolerant_target_similarity": 0.993511929261274,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 358,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor outside time bound"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 353,
+        "gap_periods": 59.12615876890658,
+        "relative_period_change": 0.11202987702879019
+      },
+      {
+        "side": "following",
+        "cycle": 359,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0007470609881639056,
+        "direct_similarity": 0.9989406959997343,
+        "phase_tolerant_similarity": 0.9989406959997343,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9948760642891492,
+    "phase_tolerant_target_similarity": 0.9964899645680465,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 428,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor period mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 427,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.005400042435840469,
+        "direct_similarity": 0.9990503712501104,
+        "phase_tolerant_similarity": 0.9990503712501104,
+        "comparison_shift_positions": 0
+      },
+      {
+        "side": "following",
+        "cycle": 429,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.023439406501369553
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9961235501807734,
+    "phase_tolerant_target_similarity": 0.9966958122858687,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 459,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor outside time bound"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 429,
+        "gap_periods": 65.28470788594667,
+        "relative_period_change": 0.09974277899945494
+      },
+      {
+        "side": "following",
+        "cycle": 460,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0013154418767901133,
+        "direct_similarity": 0.9998393692707237,
+        "phase_tolerant_similarity": 0.9998393692707237,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9984336926196492,
+    "phase_tolerant_target_similarity": 0.9984336926196492,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 491,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor period mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 490,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.009619753223642502,
+        "direct_similarity": 0.9962730048373847,
+        "phase_tolerant_similarity": 0.998155274339704,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 492,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.023183087325822083
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9975994437010263,
+    "phase_tolerant_target_similarity": 0.998623092556588,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 535,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor period mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 534,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.00967621512266803,
+        "direct_similarity": 0.996187373359874,
+        "phase_tolerant_similarity": 0.9981569065795695,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 536,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.023324468546045862
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9975989766474515,
+    "phase_tolerant_target_similarity": 0.9986069798178528,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 560,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor geometry mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 558,
+        "gap_periods": 0.0172728347047371,
+        "relative_period_change": 0.01717095139503777,
+        "direct_similarity": 0.9753389925516105,
+        "phase_tolerant_similarity": 0.9948546887151256,
+        "comparison_shift_positions": 0.5
+      },
+      {
+        "side": "following",
+        "cycle": 561,
+        "gap_periods": 0.0,
+        "relative_period_change": 7.899429768820632e-05,
+        "direct_similarity": 0.9996984825797659,
+        "phase_tolerant_similarity": 0.9996984825797659,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9963236191618611,
+    "phase_tolerant_target_similarity": 0.9963236191618611,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 562,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "target shape similarity too low",
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9949205930899802,
+    "phase_tolerant_target_similarity": 0.9949205930899802,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 573,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 562,
+        "gap_periods": 69.79752605639628,
+        "relative_period_change": 0.05529880847267021
+      },
+      {
+        "side": "following",
+        "cycle": 574,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.001318673570136708,
+        "direct_similarity": 0.998476030700106,
+        "phase_tolerant_similarity": 0.9985634225081242,
+        "comparison_shift_positions": -0.25
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9945927567087431,
+    "phase_tolerant_target_similarity": 0.9980937342118376,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0,
+    "waived_predecessor_reasons": [
+      "reliable previous neighbor outside time bound"
+    ],
+    "silence_supported_onset": true
+  },
+  {
+    "cycle": 685,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor period mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 684,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0018667462002082136,
+        "direct_similarity": 0.9950374599588739,
+        "phase_tolerant_similarity": 0.9981804182056154,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 686,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.020850491299276075
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9950983534754937,
+    "phase_tolerant_target_similarity": 0.9962860300642243,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 703,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "unsupported competing-family relationship"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9894130480112951,
+    "phase_tolerant_target_similarity": 0.9967425670426009,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 705,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor geometry mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 703,
+        "gap_periods": 0.016496964902038412,
+        "relative_period_change": 0.009663515689277813,
+        "direct_similarity": 0.9629517765108504,
+        "phase_tolerant_similarity": 0.9940728597019162,
+        "comparison_shift_positions": 0.5
+      },
+      {
+        "side": "following",
+        "cycle": 706,
+        "gap_periods": 0.0,
+        "relative_period_change": 5.47641468506832e-07,
+        "direct_similarity": 0.9997224620087857,
+        "phase_tolerant_similarity": 0.9997224620087857,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9960848283840016,
+    "phase_tolerant_target_similarity": 0.9960848283840016,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 859,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor period mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 858,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.009525815012156214,
+        "direct_similarity": 0.9964035848417555,
+        "phase_tolerant_similarity": 0.9981513608886863,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 860,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.022959114276042136
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9975996285018273,
+    "phase_tolerant_target_similarity": 0.9986473572263144,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 903,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor period mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 902,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.009588788185278418,
+        "direct_similarity": 0.996317416809072,
+        "phase_tolerant_similarity": 0.9981541439761948,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 904,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.023108017437549866
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9975995436626357,
+    "phase_tolerant_target_similarity": 0.9986314025909473,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 947,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor period mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 946,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.009647633810152212,
+        "direct_similarity": 0.9962315762111387,
+        "phase_tolerant_similarity": 0.9981561536618797,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 948,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0232520541927701
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9975992621732062,
+    "phase_tolerant_target_similarity": 0.9986153124893059,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1063,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 1062,
+        "gap_periods": 0.0,
+        "relative_period_change": 5.613062258280621e-05,
+        "direct_similarity": 0.999521324804884,
+        "phase_tolerant_similarity": 0.999521324804884,
+        "comparison_shift_positions": 0
+      },
+      {
+        "side": "following",
+        "cycle": 1064,
+        "gap_periods": 0.0,
+        "relative_period_change": 7.894353991177994e-06,
+        "direct_similarity": 0.9994950552642418,
+        "phase_tolerant_similarity": 0.9994950552642418,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "identity_interpretation": "Waveform render supported; source/family identity still ambiguous.",
+    "original_target_similarity": 0.9985777496220614,
+    "phase_tolerant_target_similarity": 0.9985777496220614,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1072,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable following neighbor outside time bound"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 1070,
+        "gap_periods": 0.016154747565441555,
+        "relative_period_change": 0.01596569891789823,
+        "direct_similarity": 0.9768004086927373,
+        "phase_tolerant_similarity": 0.9956838825036844,
+        "comparison_shift_positions": 0.5
+      },
+      {
+        "side": "following",
+        "cycle": 1076,
+        "gap_periods": 1.8664565769081838,
+        "relative_period_change": 0.06626177410895462
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9960595572189291,
+    "phase_tolerant_target_similarity": 0.9960595572189291,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1076,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 1078,
+    "newly_recognized": true,
+    "render_family": 3,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 1083,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 1082,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.004995959275729378,
+        "direct_similarity": 0.997512698666161,
+        "phase_tolerant_similarity": 0.997512698666161,
+        "comparison_shift_positions": 0
+      },
+      {
+        "side": "following",
+        "cycle": 1084,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0006512296185215982,
+        "direct_similarity": 0.999077133267006,
+        "phase_tolerant_similarity": 0.999077133267006,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "identity_interpretation": "Waveform render supported; source/family identity still ambiguous.",
+    "original_target_similarity": 0.9967578195796414,
+    "phase_tolerant_target_similarity": 0.9972077512788411,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1084,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 1083,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0006516539949041888,
+        "direct_similarity": 0.999077133267006,
+        "phase_tolerant_similarity": 0.999077133267006,
+        "comparison_shift_positions": 0
+      },
+      {
+        "side": "following",
+        "cycle": 1085,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0017516410415644446,
+        "direct_similarity": 0.9993801027664356,
+        "phase_tolerant_similarity": 0.9993801027664356,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "identity_interpretation": "Waveform render supported; source/family identity still ambiguous.",
+    "original_target_similarity": 0.9953584370226399,
+    "phase_tolerant_target_similarity": 0.9967059225303861,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1330,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 1329,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.00235356545258969,
+        "direct_similarity": 0.9985043374238385,
+        "phase_tolerant_similarity": 0.9985043374238385,
+        "comparison_shift_positions": 0
+      },
+      {
+        "side": "following",
+        "cycle": 1331,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.0021109078401564396,
+        "direct_similarity": 0.9994314701624788,
+        "phase_tolerant_similarity": 0.9994314701624788,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "identity_interpretation": "Waveform render supported; source/family identity still ambiguous.",
+    "original_target_similarity": 0.9956252360109752,
+    "phase_tolerant_target_similarity": 0.9967574286900857,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1331,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9965585055847435,
+    "phase_tolerant_target_similarity": 0.9970541945633816,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1332,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 1333,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 1334,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.994896832350382,
+    "phase_tolerant_target_similarity": 0.9964685207564971,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1335,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.997825452038584,
+    "phase_tolerant_target_similarity": 0.997825452038584,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1336,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 1343,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 1345,
+    "newly_recognized": true,
+    "render_family": 2,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 1346,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 1347,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 1348,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "unsupported competing-family relationship"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9958886858425574,
+    "phase_tolerant_target_similarity": 0.9959524411816477,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1350,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 1348,
+        "gap_periods": 0.012189667262748467,
+        "relative_period_change": 0.0005463208607650039,
+        "direct_similarity": 0.9944552337281841,
+        "phase_tolerant_similarity": 0.9979628536524308,
+        "comparison_shift_positions": 0.25
+      },
+      {
+        "side": "following",
+        "cycle": 1351,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.014660277175442493,
+        "direct_similarity": 0.9978058112442345,
+        "phase_tolerant_similarity": 0.9978058112442345,
+        "comparison_shift_positions": 0
+      }
+    ],
+    "target_gates_passed": true,
+    "identity_interpretation": "Waveform render supported; source/family identity still ambiguous.",
+    "original_target_similarity": 0.9955210352371991,
+    "phase_tolerant_target_similarity": 0.9960616134027609,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1619,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9955982424310861,
+    "phase_tolerant_target_similarity": 0.9959773803931059,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1620,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9958566901591119,
+    "phase_tolerant_target_similarity": 0.9958566901591119,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1623,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "unsupported competing-family relationship",
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.995749160329161,
+    "phase_tolerant_target_similarity": 0.9961165272713757,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1625,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9957000053745483,
+    "phase_tolerant_target_similarity": 0.9958565322927622,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1626,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.995990739527241,
+    "phase_tolerant_target_similarity": 0.995990739527241,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1627,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 1628,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 1635,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 1638,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "reliable previous neighbor geometry mismatch"
+    ],
+    "neighbors": [
+      {
+        "side": "previous",
+        "cycle": 1637,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.004364136203233726,
+        "direct_similarity": 0.9837774541805963,
+        "phase_tolerant_similarity": 0.9937730682594239,
+        "comparison_shift_positions": -0.5
+      },
+      {
+        "side": "following",
+        "cycle": 1639,
+        "gap_periods": 0.0,
+        "relative_period_change": 0.002403657383658331,
+        "direct_similarity": 0.9978672646765568,
+        "phase_tolerant_similarity": 0.9986170575132833,
+        "comparison_shift_positions": 0.25
+      }
+    ],
+    "target_gates_passed": true,
+    "original_target_similarity": 0.9967371367074132,
+    "phase_tolerant_target_similarity": 0.9967371367074132,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1835,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9964489230747788,
+    "phase_tolerant_target_similarity": 0.9964489230747788,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 1851,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 1853,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9971777029248855,
+    "phase_tolerant_target_similarity": 0.9972609985048646,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 2039,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9972768419778961,
+    "phase_tolerant_target_similarity": 0.9972768419778961,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 2041,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9972787454660917,
+    "phase_tolerant_target_similarity": 0.9972787454660917,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 2043,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.997281951698384,
+    "phase_tolerant_target_similarity": 0.997281951698384,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 2048,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 2049,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "unsupported competing-family relationship",
+      "target shape similarity too low",
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9865480365671909,
+    "phase_tolerant_target_similarity": 0.9871603285902268,
+    "comparison_shift_positions": -0.25,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 2051,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 2052,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "unsupported competing-family relationship"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9965022336054766,
+    "phase_tolerant_target_similarity": 0.9965022336054766,
+    "comparison_shift_positions": 0,
+    "synthesis_phase_shift": 0
+  },
+  {
+    "cycle": 2218,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 2219,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 2220,
+    "newly_recognized": true,
+    "render_family": 1,
+    "identity_family": null,
+    "reasons": [],
+    "frozen_exemplar_match": true
+  },
+  {
+    "cycle": 2228,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "no supported recurring exemplar"
+    ]
+  },
+  {
+    "cycle": 2230,
+    "newly_recognized": false,
+    "render_family": null,
+    "identity_family": null,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "neighbors": [],
+    "target_gates_passed": false,
+    "original_target_similarity": 0.9982406410759491,
+    "phase_tolerant_target_similarity": 0.998436104086667,
+    "comparison_shift_positions": 0.25,
+    "synthesis_phase_shift": 0
+  }
+]

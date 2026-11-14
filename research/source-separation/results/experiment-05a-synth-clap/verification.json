@@ -1,0 +1,16 @@
+{
+  "prior_research_files_verified": 506,
+  "focused_5a_controls_passed": 5,
+  "unchanged_1c_tests_passed": 11,
+  "all_float32_stereo_full_length": true,
+  "finite_samples": true,
+  "conservation_max_abs_error": 1.4901161193847656e-08,
+  "recombined_reference_max_abs_error": 2.9802322387695312e-08,
+  "reference_above_unity_preserved": true,
+  "source_hashes_and_exports_verified": true,
+  "assignment_map_partition_verified": true,
+  "no_isolated_source_inputs": true,
+  "baseline_1c_bit_identical": true,
+  "adapted_5a_benchmark_regression": true,
+  "listening_performed": false
+}

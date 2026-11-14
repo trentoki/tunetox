@@ -1,0 +1,823 @@
+{
+  "experiment": "4P",
+  "input_sha256": "5c2ca6a14081b7fed47f295f1f737f2c8b6e1138e6f31fec98b8277013c90134",
+  "activity_window_frames": 2048,
+  "activity_hop_frames": 441,
+  "activity_rms_cutoff": 0.0036930339895759794,
+  "quiet_block_frames": 88,
+  "quiet_block_rms_cutoff": 0.0049206032192058505,
+  "sustained_quiet_min_frames": 2048,
+  "saved_quiet_intervals_frames": [
+    [
+      5984,
+      11000
+    ],
+    [
+      16984,
+      22000
+    ],
+    [
+      27984,
+      33088
+    ],
+    [
+      38984,
+      44088
+    ],
+    [
+      50072,
+      55088
+    ],
+    [
+      61072,
+      66088
+    ],
+    [
+      72160,
+      77176
+    ],
+    [
+      83160,
+      88176
+    ]
+  ],
+  "representative_cases": [
+    {
+      "cycle": 702,
+      "start_seconds": 1.890408970833411,
+      "end_seconds": 2.000582536341631,
+      "candidate_rms": 0.0010195615168621614,
+      "duration_frames": 4858.65423891251,
+      "frame_index": 192,
+      "frame_window": [
+        84672,
+        86720
+      ],
+      "frame_rms": 5.159519233399013e-30,
+      "frame_active": false,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.0,
+      "block_rms_max": 0.05676007794415513,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 4808,
+      "periodicity": 0.0,
+      "rejection_reasons": [
+        "below relative activity screen",
+        "uncertain local periodicity",
+        "crossing spacing disagrees with estimated period"
+      ],
+      "decision": null,
+      "model_energy": 0.0,
+      "residual_energy": 0.010099837251649493
+    },
+    {
+      "cycle": 703,
+      "start_seconds": 2.000582536341631,
+      "end_seconds": 2.00226725786311,
+      "candidate_rms": 0.08794561350697104,
+      "duration_frames": 74.29621909721754,
+      "frame_index": 198,
+      "frame_window": [
+        87318,
+        89366
+      ],
+      "frame_rms": 0.0648210139277951,
+      "frame_active": true,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.05676007794415513,
+      "block_rms_max": 0.09451538257474859,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 0,
+      "periodicity": 0.9672199710479368,
+      "rejection_reasons": [],
+      "decision": {
+        "cycle": 703,
+        "newly_recognized": false,
+        "render_family": null,
+        "identity_family": null,
+        "reasons": [
+          "unsupported competing-family relationship"
+        ],
+        "neighbors": [],
+        "target_gates_passed": false,
+        "original_target_similarity": 0.9894130480112951,
+        "phase_tolerant_target_similarity": 0.9967425670426009,
+        "comparison_shift_positions": -0.25,
+        "synthesis_phase_shift": 0
+      },
+      "model_energy": 0.0,
+      "residual_energy": 1.1446957783973941
+    },
+    {
+      "cycle": 705,
+      "start_seconds": 2.002295321851714,
+      "end_seconds": 2.0039964825664494,
+      "candidate_rms": 0.08737107423953697,
+      "duration_frames": 75.0211875198438,
+      "frame_index": 198,
+      "frame_window": [
+        87318,
+        89366
+      ],
+      "frame_rms": 0.0648210139277951,
+      "frame_active": true,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.08559164840379742,
+      "block_rms_max": 0.09451538257474859,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 0,
+      "periodicity": 0.9672199710479368,
+      "rejection_reasons": [],
+      "decision": {
+        "cycle": 705,
+        "newly_recognized": false,
+        "render_family": null,
+        "identity_family": null,
+        "reasons": [
+          "reliable previous neighbor geometry mismatch"
+        ],
+        "neighbors": [
+          {
+            "side": "previous",
+            "cycle": 703,
+            "gap_periods": 0.016496964902038412,
+            "relative_period_change": 0.0001403661377002985,
+            "original_single_neighbor_deviation": 0.009663515689277813,
+            "direct_similarity": 0.9629517765108504,
+            "phase_tolerant_similarity": 0.9940728597019162,
+            "comparison_shift_positions": 0.5
+          },
+          {
+            "side": "following",
+            "cycle": 706,
+            "gap_periods": 0.0,
+            "relative_period_change": 0.0001403661377002985,
+            "original_single_neighbor_deviation": 5.47641468506832e-07,
+            "direct_similarity": 0.9997224620087857,
+            "phase_tolerant_similarity": 0.9997224620087857,
+            "comparison_shift_positions": 0
+          }
+        ],
+        "target_gates_passed": true,
+        "local_period_estimate": {
+          "reference_cycle_ids": [
+            703,
+            706,
+            707,
+            708
+          ],
+          "flank_counts": [
+            1,
+            3
+          ],
+          "period_frames": 75.01065708550595,
+          "reference_periods_frames": [
+            74.29621909721754,
+            75.0211464351305,
+            75.01356880208186,
+            75.00774536893005
+          ],
+          "flank_medians": [
+            74.29621909721754,
+            75.01356880208186
+          ],
+          "relative_median_absolute_deviation": 8.932774835702569e-05,
+          "target_deviation": 0.0001403661377002985
+        },
+        "robust_period_used": true,
+        "original_target_similarity": 0.9960848283840016,
+        "phase_tolerant_target_similarity": 0.9960848283840016,
+        "comparison_shift_positions": 0,
+        "synthesis_phase_shift": 0
+      },
+      "model_energy": 0.0,
+      "residual_energy": 1.145055692065602
+    },
+    {
+      "cycle": 117,
+      "start_seconds": 0.3860940165893812,
+      "end_seconds": 0.3889486273805085,
+      "candidate_rms": 0.002094248986888238,
+      "duration_frames": 125.88833588871421,
+      "frame_index": 36,
+      "frame_window": [
+        15876,
+        17924
+      ],
+      "frame_rms": 0.05254041314247825,
+      "frame_active": true,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.00204690138884082,
+      "block_rms_max": 0.0028921471523926296,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 126,
+      "periodicity": 0.948646539557793,
+      "rejection_reasons": [],
+      "decision": null,
+      "model_energy": 0.0010877766654288907,
+      "residual_energy": 2.935117324566441e-05
+    },
+    {
+      "cycle": 239,
+      "start_seconds": 0.887204227673419,
+      "end_seconds": 0.8895636463177474,
+      "candidate_rms": 0.001173097724831039,
+      "duration_frames": 104.05036221488263,
+      "frame_index": 87,
+      "frame_window": [
+        38367,
+        40415
+      ],
+      "frame_rms": 0.03323446532166055,
+      "frame_active": true,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.0010815168072170031,
+      "block_rms_max": 0.0029962339936614913,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 104,
+      "periodicity": 0.9274884956541305,
+      "rejection_reasons": [],
+      "decision": null,
+      "model_energy": 0.0002876411107459682,
+      "residual_energy": 4.812346595329351e-06
+    },
+    {
+      "cycle": 428,
+      "start_seconds": 1.3856593971942093,
+      "end_seconds": 1.3875769904646298,
+      "candidate_rms": 0.0031643515288211728,
+      "duration_frames": 84.56586322554358,
+      "frame_index": 136,
+      "frame_window": [
+        59976,
+        62024
+      ],
+      "frame_rms": 0.05282680913153519,
+      "frame_active": true,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.0015708839427679545,
+      "block_rms_max": 0.004335501206575597,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 85,
+      "periodicity": 0.9875685510362222,
+      "rejection_reasons": [],
+      "decision": {
+        "cycle": 428,
+        "newly_recognized": false,
+        "render_family": null,
+        "identity_family": null,
+        "reasons": [
+          "reliable following neighbor period mismatch"
+        ],
+        "neighbors": [
+          {
+            "side": "previous",
+            "cycle": 427,
+            "gap_periods": 0.0,
+            "relative_period_change": 0.005400042435840469,
+            "original_single_neighbor_deviation": 0.005400042435840469,
+            "direct_similarity": 0.9990503712501104,
+            "phase_tolerant_similarity": 0.9990503712501104,
+            "comparison_shift_positions": 0
+          },
+          {
+            "side": "following",
+            "cycle": 429,
+            "gap_periods": 0.0,
+            "relative_period_change": 0.023439406501369553,
+            "original_single_neighbor_deviation": 0.023439406501369553
+          }
+        ],
+        "target_gates_passed": true,
+        "local_period_estimate": {
+          "fallback": "target overlaps boundary/silence bracket"
+        },
+        "robust_period_used": false,
+        "original_target_similarity": 0.9961235501807734,
+        "phase_tolerant_target_similarity": 0.9966958122858687,
+        "comparison_shift_positions": 0.25,
+        "synthesis_phase_shift": 0
+      },
+      "model_energy": 0.0,
+      "residual_energy": 0.0017022305016519918
+    },
+    {
+      "cycle": 685,
+      "start_seconds": 1.8860129737295244,
+      "end_seconds": 1.8876251327890374,
+      "candidate_rms": 0.002883764187989179,
+      "duration_frames": 71.09621452452848,
+      "frame_index": 186,
+      "frame_window": [
+        82026,
+        84074
+      ],
+      "frame_rms": 0.05252798357305352,
+      "frame_active": true,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.0026779007136243584,
+      "block_rms_max": 0.0026779007136243584,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 71,
+      "periodicity": 0.9660849351747952,
+      "rejection_reasons": [],
+      "decision": {
+        "cycle": 685,
+        "newly_recognized": false,
+        "render_family": null,
+        "identity_family": null,
+        "reasons": [
+          "reliable following neighbor period mismatch"
+        ],
+        "neighbors": [
+          {
+            "side": "previous",
+            "cycle": 684,
+            "gap_periods": 0.0,
+            "relative_period_change": 0.0018667462002082136,
+            "original_single_neighbor_deviation": 0.0018667462002082136,
+            "direct_similarity": 0.9950374599588739,
+            "phase_tolerant_similarity": 0.9981804182056154,
+            "comparison_shift_positions": 0.25
+          },
+          {
+            "side": "following",
+            "cycle": 686,
+            "gap_periods": 0.0,
+            "relative_period_change": 0.020850491299276075,
+            "original_single_neighbor_deviation": 0.020850491299276075
+          }
+        ],
+        "target_gates_passed": true,
+        "local_period_estimate": {
+          "fallback": "target overlaps boundary/silence bracket"
+        },
+        "robust_period_used": false,
+        "original_target_similarity": 0.9950983534754937,
+        "phase_tolerant_target_similarity": 0.9962860300642243,
+        "comparison_shift_positions": 0.25,
+        "synthesis_phase_shift": 0
+      },
+      "model_energy": 0.0,
+      "residual_energy": 0.0011808856166539024
+    },
+    {
+      "cycle": 1835,
+      "start_seconds": 3.986933747884369,
+      "end_seconds": 3.9893373531191134,
+      "candidate_rms": 0.08759911586721907,
+      "duration_frames": 105.99899085221114,
+      "frame_index": 396,
+      "frame_window": [
+        174636,
+        176684
+      ],
+      "frame_rms": 0.086976561890937,
+      "frame_active": true,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.08891430271974227,
+      "block_rms_max": 0.09513786798923336,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 0,
+      "periodicity": 0.8992410052374685,
+      "rejection_reasons": [],
+      "decision": {
+        "cycle": 1835,
+        "newly_recognized": false,
+        "render_family": null,
+        "identity_family": null,
+        "reasons": [
+          "period confidence insufficient"
+        ],
+        "neighbors": [],
+        "target_gates_passed": false,
+        "original_target_similarity": 0.9964489230747788,
+        "phase_tolerant_target_similarity": 0.9964489230747788,
+        "comparison_shift_positions": 0,
+        "synthesis_phase_shift": 0
+      },
+      "model_energy": 0.0,
+      "residual_energy": 1.626804281352316
+    },
+    {
+      "cycle": 1840,
+      "start_seconds": 3.998973733371134,
+      "end_seconds": 4.00054216623986,
+      "candidate_rms": 0.08748279051085824,
+      "duration_frames": 69.16788951083436,
+      "frame_index": 398,
+      "frame_window": [
+        175518,
+        177566
+      ],
+      "frame_rms": 0.08663547887398458,
+      "frame_active": true,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.08098160688938126,
+      "block_rms_max": 0.08098160688938126,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 0,
+      "periodicity": 0.9593249305027584,
+      "rejection_reasons": [
+        "crossing spacing disagrees with estimated period"
+      ],
+      "decision": null,
+      "model_energy": 0.0,
+      "residual_energy": 1.0561469317082055
+    },
+    {
+      "cycle": 1852,
+      "start_seconds": 4.0099759739781256,
+      "end_seconds": 4.0124709385013695,
+      "candidate_rms": 0.0867800956055112,
+      "duration_frames": 110.0279354750528,
+      "frame_index": 399,
+      "frame_window": [
+        175959,
+        178007
+      ],
+      "frame_rms": 0.08656446082262909,
+      "frame_active": true,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.06499209627087676,
+      "block_rms_max": 0.08692376007057515,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 0,
+      "periodicity": 0.9967228569037463,
+      "rejection_reasons": [
+        "neighbor cycle geometry is unstable"
+      ],
+      "decision": null,
+      "model_energy": 0.0,
+      "residual_energy": 1.656772698526366
+    },
+    {
+      "cycle": 1853,
+      "start_seconds": 4.0124709385013695,
+      "end_seconds": 4.015002443134577,
+      "candidate_rms": 0.08744756923190675,
+      "duration_frames": 111.63935432446306,
+      "frame_index": 399,
+      "frame_window": [
+        175959,
+        178007
+      ],
+      "frame_rms": 0.08656446082262909,
+      "frame_active": true,
+      "frame_cutoff": 0.0036930339895759794,
+      "block_rms_min": 0.08692376007057515,
+      "block_rms_max": 0.09784343104680994,
+      "block_cutoff": 0.0049206032192058505,
+      "sustained_quiet_overlap_frames": 0,
+      "periodicity": 0.9967228569037463,
+      "rejection_reasons": [],
+      "decision": {
+        "cycle": 1853,
+        "newly_recognized": false,
+        "render_family": null,
+        "identity_family": null,
+        "reasons": [
+          "reliable previous neighbor outside time bound"
+        ],
+        "neighbors": [
+          {
+            "side": "previous",
+            "cycle": 1851,
+            "gap_periods": 0.9855658530169665,
+            "relative_period_change": 0.02833502329764881,
+            "original_single_neighbor_deviation": 0.02833502329764881
+          },
+          {
+            "side": "following",
+            "cycle": 1854,
+            "gap_periods": 0.0,
+            "relative_period_change": 0.009688344694505746,
+            "original_single_neighbor_deviation": 0.009688344694505746,
+            "direct_similarity": 0.9940800237271711,
+            "phase_tolerant_similarity": 0.9980397708107264,
+            "comparison_shift_positions": 0.25
+          }
+        ],
+        "target_gates_passed": true,
+        "local_period_estimate": {
+          "fallback": "target overlaps boundary/silence bracket"
+        },
+        "robust_period_used": false,
+        "original_target_similarity": 0.9971777029248855,
+        "phase_tolerant_target_similarity": 0.9972609985048646,
+        "comparison_shift_positions": -0.25,
+        "synthesis_phase_shift": 0
+      },
+      "model_energy": 0.0,
+      "residual_energy": 1.7129453296634838
+    }
+  ],
+  "all_remaining_significant_gaps": [
+    {
+      "start_seconds": 0.0,
+      "end_seconds": 0.0019047619047619048,
+      "original_energy": 0.8503291837504885,
+      "candidate_ids": [
+        1
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 0.2494331065759637,
+      "end_seconds": 0.25151927437641725,
+      "original_energy": 0.4276882027486347,
+      "candidate_ids": [
+        69,
+        70
+      ],
+      "activity_rejected_candidate_ids": [
+        69
+      ],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 0.4988662131519274,
+      "end_seconds": 0.5024036281179138,
+      "original_energy": 1.6295679866866686,
+      "candidate_ids": [
+        125,
+        126
+      ],
+      "activity_rejected_candidate_ids": [
+        125
+      ],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 0.7502947845804989,
+      "end_seconds": 0.7523809523809524,
+      "original_energy": 1.5659349173135046,
+      "candidate_ids": [
+        180,
+        181
+      ],
+      "activity_rejected_candidate_ids": [
+        180
+      ],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 0.9997278911564625,
+      "end_seconds": 1.0017687074829933,
+      "original_energy": 1.0664844533857702,
+      "candidate_ids": [
+        269,
+        270,
+        271
+      ],
+      "activity_rejected_candidate_ids": [
+        269
+      ],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 1.2491609977324263,
+      "end_seconds": 1.2519047619047619,
+      "original_energy": 1.1968615910751017,
+      "candidate_ids": [
+        357,
+        358
+      ],
+      "activity_rejected_candidate_ids": [
+        357
+      ],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 1.7500226757369615,
+      "end_seconds": 1.7510430839002267,
+      "original_energy": 0.23934853041505777,
+      "candidate_ids": [
+        572,
+        573
+      ],
+      "activity_rejected_candidate_ids": [
+        572
+      ],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 1.999455782312925,
+      "end_seconds": 2.004013605442177,
+      "original_energy": 2.299861644899134,
+      "candidate_ids": [
+        702,
+        703,
+        704,
+        705,
+        706
+      ],
+      "activity_rejected_candidate_ids": [
+        702
+      ],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 2.497732426303855,
+      "end_seconds": 2.506326530612245,
+      "original_energy": 7.243246219486336,
+      "candidate_ids": [
+        1071,
+        1072,
+        1073,
+        1074,
+        1075,
+        1076,
+        1077,
+        1078
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 2.999387755102041,
+      "end_seconds": 3.0087074829931972,
+      "original_energy": 5.609135043789728,
+      "candidate_ids": [
+        1337,
+        1338,
+        1339,
+        1340,
+        1341,
+        1342,
+        1343,
+        1344,
+        1345
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 3.015124716553288,
+      "end_seconds": 3.0172789115646257,
+      "original_energy": 1.4473085241022332,
+      "candidate_ids": [
+        1348,
+        1349,
+        1350
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 3.4892063492063494,
+      "end_seconds": 3.491360544217687,
+      "original_energy": 1.4473299981389283,
+      "candidate_ids": [
+        1623,
+        1624,
+        1625
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 3.4999319727891156,
+      "end_seconds": 3.510204081632653,
+      "original_energy": 6.144663150869227,
+      "candidate_ids": [
+        1629,
+        1630,
+        1631,
+        1632,
+        1633,
+        1634,
+        1635,
+        1636,
+        1637
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 3.512607709750567,
+      "end_seconds": 3.514988662131519,
+      "original_energy": 1.6481942681807726,
+      "candidate_ids": [
+        1638,
+        1639
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 3.986938775510204,
+      "end_seconds": 3.9893424036281178,
+      "original_energy": 1.626804281352316,
+      "candidate_ids": [
+        1835,
+        1836
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 3.9989795918367346,
+      "end_seconds": 4.015011337868481,
+      "original_energy": 10.076474326728004,
+      "candidate_ids": [
+        1840,
+        1841,
+        1842,
+        1843,
+        1844,
+        1845,
+        1846,
+        1847,
+        1848,
+        1849,
+        1850,
+        1851,
+        1852,
+        1853,
+        1854
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 4.497165532879818,
+      "end_seconds": 4.507687074829932,
+      "original_energy": 10.215977557139759,
+      "candidate_ids": [
+        2043,
+        2044,
+        2045,
+        2046,
+        2047,
+        2048,
+        2049,
+        2050
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 4.510544217687075,
+      "end_seconds": 4.516303854875283,
+      "original_energy": 3.840866331224732,
+      "candidate_ids": [
+        2051,
+        2052,
+        2053
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 4.997369614512472,
+      "end_seconds": 5.016825396825396,
+      "original_energy": 13.177949895433674,
+      "candidate_ids": [
+        2221,
+        2222,
+        2223,
+        2224,
+        2225,
+        2226,
+        2227,
+        2228,
+        2229,
+        2230,
+        2231
+      ],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    },
+    {
+      "start_seconds": 5.997120181405895,
+      "end_seconds": 6.0,
+      "original_energy": 2.168214107375645,
+      "candidate_ids": [],
+      "activity_rejected_candidate_ids": [],
+      "sustained_quiet_overlap_frames": 0
+    }
+  ],
+  "near_zero_run_example": {
+    "sample_start": 261350,
+    "sample_end_exclusive": 261361,
+    "length_frames": 11,
+    "diagnostic_sample_cutoff": 0.010811281204223634,
+    "containing_2ms_block_rms": 0.0942006826513618,
+    "block_cutoff": 0.0049206032192058505,
+    "sustained_quiet_overlap": false
+  },
+  "continuous_passage_min_block_rms": 0.054014859461926024,
+  "continuous_passage_quiet_intervals": 0,
+  "frame_activity_flags_checked": 596,
+  "timings": {
+    "load_and_rms_seconds": 0.358037542,
+    "trace_and_preservation_seconds": 0.18975037499999997,
+    "total_before_json_seconds": 0.547789459
+  },
+  "peak_process_rss_bytes": 236060672,
+  "prior_files_verified": 477,
+  "source_sha256": "0ecfcaf4455344d780b7bb21bba90d772790f9e355e74145a904760477d2c1ff",
+  "no_algorithm_or_audio_changes": true
+}

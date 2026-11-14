@@ -1,0 +1,2974 @@
+{
+  "experiment": "4H",
+  "input_sha256": "5c2ca6a14081b7fed47f295f1f737f2c8b6e1138e6f31fec98b8277013c90134",
+  "sample_rate": 44100,
+  "channels": 2,
+  "frames": 264600,
+  "analysis_scope": "Only the 194 originally ambiguous cycles still omitted by frozen 4F-B are evaluated for added rendering.",
+  "timings": {
+    "setup_load_and_hash_seconds": 0.525725209,
+    "recognition_analysis_seconds": 0.03664124999999996,
+    "synthesis_seconds": 0.26224649999999994,
+    "residual_and_three_wav_exports_seconds": 0.053018624999999986,
+    "evaluation_and_preservation_seconds": 0.33293554199999986,
+    "total_run_before_json_seconds": 1.210569875
+  },
+  "peak_process_rss_bytes": 339787776,
+  "memory_scope": "Whole-process high-water RSS including metadata, original/baseline/new PCM, export QA and artifact metrics; excludes tests and HTML generation.",
+  "baseline_metrics": {
+    "coverage_fraction": 0.7653325774754346,
+    "covered_frames": 202507,
+    "reconstructed_energy_ratio": 0.8771321096301291,
+    "residual_energy_ratio": 0.11099356840562982,
+    "reconstruction_rmse": 0.02666252774894362,
+    "modeled_error_to_modeled_input_ratio": 0.014155067638724064,
+    "new_cycles_error_to_new_cycles_input_ratio": 0.012895562732506515,
+    "maximum_reconstruction_error": 0.2702820301055908,
+    "float32_sum_maximum_error": 7.450580596923828e-09,
+    "waveform_max_adjacent_step": 0.20775830745697021
+  },
+  "baseline_timings": {
+    "load_verify_preservation_seconds": 0.236146042,
+    "method_preparation_seconds": 0.027315707999999994,
+    "synthesis_seconds": 0.25706212500000003,
+    "residual_export_and_readback_seconds": 0.06499166600000006,
+    "evaluation_and_preservation_seconds": 0.41482491599999993,
+    "total_before_report_seconds": 1.0003433339999999
+  },
+  "baseline_peak_process_rss_bytes": 289144832,
+  "metrics": {
+    "additional_cycles": 75,
+    "total_rendered_cycles": 2013,
+    "remaining_ambiguous_cycles": 119,
+    "coverage_fraction": 0.7886999244142101,
+    "covered_frames": 208690,
+    "reconstructed_energy_ratio": 0.9031484225009108,
+    "residual_energy_ratio": 0.08415142529454636,
+    "reconstruction_rmse": 0.023215773151518654,
+    "modeled_error_to_modeled_input_ratio": 0.014179542651339326,
+    "additional_cycles_error_ratio": 0.015112197145284502,
+    "float32_sum_maximum_error": 7.450580596923828e-09,
+    "energetic_new_cycles_over_25pct_error": 0
+  },
+  "model": {
+    "accepted_cycles": 2013,
+    "excluded_cycles": [
+      {
+        "cycle": 43,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 44,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 45,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 46,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 47,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 48,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 49,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 50,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 51,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 52,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 53,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 54,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 55,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 56,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 57,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 58,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 59,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 60,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 61,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 62,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 63,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 64,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 65,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 66,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 67,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 68,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 69,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 118,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 119,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 120,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 121,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 122,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 123,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 124,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 125,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 179,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 180,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 233,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 235,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 240,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 241,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 242,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 243,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 244,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 245,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 246,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 247,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 248,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 249,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 250,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 251,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 252,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 253,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 254,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 255,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 256,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 257,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 258,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 259,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 260,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 261,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 262,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 263,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 264,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 265,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 266,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 267,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 268,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 269,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 270,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 271,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 276,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 282,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 286,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 287,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 289,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 293,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 294,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 296,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 300,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 301,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 303,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 307,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 308,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 310,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 314,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 315,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 317,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 321,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 322,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 323,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 327,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 328,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 329,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 333,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 334,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 335,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 339,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 340,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 341,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 345,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 346,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 348,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 352,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 353,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 354,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 355,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 356,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 357,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 358,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 383,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 390,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 408,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 415,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 422,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 426,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 428,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 430,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 431,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 432,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 433,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 434,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 435,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 436,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 437,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 438,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 439,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 440,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 441,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 442,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 443,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 444,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 445,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 446,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 447,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 448,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 449,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 450,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 451,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 452,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 453,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 454,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 455,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 456,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 457,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 458,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 459,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 463,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 465,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 467,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 478,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 480,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 482,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 486,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 491,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 493,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 495,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 497,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 507,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 509,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 511,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 522,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 524,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 526,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 530,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 535,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 537,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 539,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 541,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 551,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 553,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 555,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 557,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 559,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 560,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 562,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 563,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 564,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 565,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 566,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 567,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 568,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 569,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 570,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 571,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 572,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 573,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 576,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 578,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 585,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 587,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 589,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 596,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 598,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 600,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 604,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 607,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 609,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 611,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 615,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 618,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 620,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 628,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 630,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 637,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 639,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 641,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 645,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 648,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 650,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 652,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 656,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 659,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 661,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 669,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 671,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 675,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 678,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 680,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 682,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 685,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 687,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 688,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 689,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 690,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 691,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 692,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 693,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 694,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 695,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 696,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 697,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 698,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 699,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 700,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 701,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 702,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 703,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 704,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 705,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 714,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 716,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 718,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 729,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 731,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 733,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 743,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 745,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 747,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 758,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 760,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 762,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 766,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 773,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 775,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 777,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 787,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 789,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 791,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 802,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 804,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 806,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 810,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 817,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 819,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 821,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 831,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 833,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 835,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 846,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 848,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 850,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 854,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 859,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 861,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 863,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 865,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 875,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 877,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 879,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 890,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 892,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 894,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 898,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 903,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 905,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 907,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 909,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 919,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 921,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 923,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 934,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 936,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 938,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 942,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 947,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 949,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 951,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 953,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 963,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 965,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 967,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 978,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 980,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 982,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 986,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 992,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 994,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 996,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 998,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1008,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1010,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1012,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1023,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1025,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1027,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1031,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1037,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1039,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1041,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1052,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1054,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1056,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1063,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1067,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1069,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1071,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1072,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1073,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1074,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1075,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1076,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1077,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1078,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1081,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1083,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1084,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1088,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1095,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1120,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1127,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1145,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1152,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1170,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1177,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1195,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1202,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1209,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1227,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1234,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1252,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1259,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1277,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1284,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1309,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1316,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1330,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1331,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1332,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1333,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1334,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1335,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1336,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1337,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1338,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1339,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1340,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1341,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1342,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1343,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1344,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1345,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1346,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1347,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1348,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1349,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1350,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1355,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1361,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1367,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1373,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1379,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1383,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1384,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1386,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1390,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1391,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1393,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1397,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1398,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1400,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1404,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1405,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1407,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1411,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1412,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1414,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1418,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1419,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1420,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1424,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1425,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1426,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1430,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1431,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1432,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1436,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1437,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1438,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1442,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1443,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1444,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1448,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1449,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1450,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1454,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1455,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1460,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1466,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1472,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1478,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1484,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1490,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1496,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1502,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1508,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1514,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1518,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1519,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1521,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1525,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1526,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1528,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1532,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1533,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1535,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1539,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1540,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1542,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1546,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1547,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1548,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1552,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1553,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1554,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1558,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1559,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1560,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1564,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1565,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1566,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1570,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1571,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1572,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1576,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1577,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1578,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1582,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1583,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1588,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1589,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1594,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1600,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1606,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1612,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1618,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1619,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1620,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1623,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1624,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1625,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1626,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1627,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1628,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1629,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1630,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1631,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1632,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1633,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1634,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1635,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1636,
+        "status": "provisional"
+      },
+      {
+        "cycle": 1638,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1835,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 1840,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1841,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1842,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1843,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1844,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1845,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1846,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1847,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1848,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1849,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1850,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1851,
+        "status": "provisional"
+      },
+      {
+        "cycle": 1852,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 1853,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 2039,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 2041,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 2043,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2044,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2045,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2046,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2047,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2048,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2049,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2051,
+        "status": "provisional"
+      },
+      {
+        "cycle": 2052,
+        "status": "ambiguous"
+      },
+      {
+        "cycle": 2218,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2219,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2220,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2221,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2222,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2223,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2224,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2225,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2226,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2227,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2228,
+        "status": "provisional"
+      },
+      {
+        "cycle": 2229,
+        "status": "unreliable"
+      },
+      {
+        "cycle": 2230,
+        "status": "ambiguous"
+      }
+    ],
+    "accepted_runs": 268,
+    "accepted_families": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "modeled_cycle_time_seconds": 4.735683537317748,
+    "join_model": "Cubic Hermite on min(0.5 ms, 15% cycle duration) per edge. Shared model value/slope at adjacent accepted joins; zero value/slope at gaps."
+  },
+  "new_cycle_metrics": [
+    {
+      "cycle": 277,
+      "start_seconds": 1.0124738419324488,
+      "end_seconds": 1.0146009039268178,
+      "error_energy_ratio": 0.015808280492122028,
+      "render_to_original_rms_ratio": 0.9719730328723357,
+      "render_peak": 0.17249931395053864,
+      "original_peak": 0.18328361213207245
+    },
+    {
+      "cycle": 283,
+      "start_seconds": 1.0231995242132945,
+      "end_seconds": 1.0253264746285857,
+      "error_energy_ratio": 0.0154895100605767,
+      "render_to_original_rms_ratio": 0.9719574911895622,
+      "render_peak": 0.17249195277690887,
+      "original_peak": 0.18433617055416107
+    },
+    {
+      "cycle": 290,
+      "start_seconds": 1.033925202523527,
+      "end_seconds": 1.0360520504657937,
+      "error_energy_ratio": 0.01518293205024862,
+      "render_to_original_rms_ratio": 0.9719412102504174,
+      "render_peak": 0.17248472571372986,
+      "original_peak": 0.18537747859954834
+    },
+    {
+      "cycle": 297,
+      "start_seconds": 1.0446508768300076,
+      "end_seconds": 1.046777631245953,
+      "error_energy_ratio": 0.01488815155894996,
+      "render_to_original_rms_ratio": 0.9719242793157425,
+      "render_peak": 0.172477588057518,
+      "original_peak": 0.18640732765197754
+    },
+    {
+      "cycle": 304,
+      "start_seconds": 1.0553765471084335,
+      "end_seconds": 1.0575032167217573,
+      "error_energy_ratio": 0.014605013832358033,
+      "render_to_original_rms_ratio": 0.9719067902576817,
+      "render_peak": 0.17247051000595093,
+      "original_peak": 0.1874253749847412
+    },
+    {
+      "cycle": 311,
+      "start_seconds": 1.066102213421047,
+      "end_seconds": 1.0682288067246546,
+      "error_energy_ratio": 0.014333401178606887,
+      "render_to_original_rms_ratio": 0.9718887872832982,
+      "render_peak": 0.17246346175670624,
+      "original_peak": 0.18843096494674683
+    },
+    {
+      "cycle": 318,
+      "start_seconds": 1.0768278757554919,
+      "end_seconds": 1.0789544012153895,
+      "error_energy_ratio": 0.014073282952459878,
+      "render_to_original_rms_ratio": 0.9718703752233786,
+      "render_peak": 0.17245647311210632,
+      "original_peak": 0.18942345678806305
+    },
+    {
+      "cycle": 349,
+      "start_seconds": 1.1304574650573074,
+      "end_seconds": 1.1325812128088055,
+      "error_energy_ratio": 0.014846511986865835,
+      "render_to_original_rms_ratio": 0.9705644021107802,
+      "render_peak": 0.032150041311979294,
+      "original_peak": 0.03727851063013077
+    },
+    {
+      "cycle": 483,
+      "start_seconds": 1.5312743379035962,
+      "end_seconds": 1.5329758140666208,
+      "error_energy_ratio": 0.014635379800417753,
+      "render_to_original_rms_ratio": 0.9806000709629811,
+      "render_peak": 0.1675204038619995,
+      "original_peak": 0.2113366276025772
+    },
+    {
+      "cycle": 498,
+      "start_seconds": 1.5517054872883989,
+      "end_seconds": 1.5534068704888753,
+      "error_energy_ratio": 0.014587787923520038,
+      "render_to_original_rms_ratio": 0.9816403001602237,
+      "render_peak": 0.16798847913742065,
+      "original_peak": 0.21192598342895508
+    },
+    {
+      "cycle": 527,
+      "start_seconds": 1.5908662185057645,
+      "end_seconds": 1.5925676815342575,
+      "error_energy_ratio": 0.014623711163671983,
+      "render_to_original_rms_ratio": 0.9807433692007042,
+      "render_peak": 0.16758590936660767,
+      "original_peak": 0.21143056452274323
+    },
+    {
+      "cycle": 542,
+      "start_seconds": 1.6112973628161011,
+      "end_seconds": 1.6129987343697136,
+      "error_energy_ratio": 0.01458856597833022,
+      "render_to_original_rms_ratio": 0.9817764502194861,
+      "render_peak": 0.1680482029914856,
+      "original_peak": 0.21198536455631256
+    },
+    {
+      "cycle": 574,
+      "start_seconds": 1.7526358816451082,
+      "end_seconds": 1.7542454309711946,
+      "error_energy_ratio": 0.014235456969425873,
+      "render_to_original_rms_ratio": 0.9765104704859593,
+      "render_peak": 0.16556388139724731,
+      "original_peak": 0.21215344965457916
+    },
+    {
+      "cycle": 583,
+      "start_seconds": 1.7638830685927864,
+      "end_seconds": 1.7654929665648635,
+      "error_energy_ratio": 0.016078547427456562,
+      "render_to_original_rms_ratio": 0.978650369075437,
+      "render_peak": 0.16589561104774475,
+      "original_peak": 0.21061119437217712
+    },
+    {
+      "cycle": 590,
+      "start_seconds": 1.770319227576913,
+      "end_seconds": 1.7719041295865174,
+      "error_energy_ratio": 0.011013069316411033,
+      "render_to_original_rms_ratio": 0.985877107014698,
+      "render_peak": 0.16344468295574188,
+      "original_peak": 0.1892555058002472
+    },
+    {
+      "cycle": 594,
+      "start_seconds": 1.7767402370808438,
+      "end_seconds": 1.7783500199122704,
+      "error_energy_ratio": 0.015225565064421473,
+      "render_to_original_rms_ratio": 0.9784144612020019,
+      "render_peak": 0.16582654416561127,
+      "original_peak": 0.2114228904247284
+    },
+    {
+      "cycle": 601,
+      "start_seconds": 1.7831756759386472,
+      "end_seconds": 1.7847616754129054,
+      "error_energy_ratio": 0.011137319128037611,
+      "render_to_original_rms_ratio": 0.9861820366454944,
+      "render_peak": 0.16332414746284485,
+      "original_peak": 0.18602754175662994
+    },
+    {
+      "cycle": 605,
+      "start_seconds": 1.789597375676636,
+      "end_seconds": 1.7912070458671998,
+      "error_energy_ratio": 0.014727425848778742,
+      "render_to_original_rms_ratio": 0.9768714923245176,
+      "render_peak": 0.16572251915931702,
+      "original_peak": 0.21193382143974304
+    },
+    {
+      "cycle": 612,
+      "start_seconds": 1.7960320115076553,
+      "end_seconds": 1.7976203141483438,
+      "error_energy_ratio": 0.011882650656201975,
+      "render_to_original_rms_ratio": 0.9855547570864059,
+      "render_peak": 0.16357603669166565,
+      "original_peak": 0.18265976011753082
+    },
+    {
+      "cycle": 616,
+      "start_seconds": 1.8024544860803726,
+      "end_seconds": 1.804064043676287,
+      "error_energy_ratio": 0.014274313492574471,
+      "render_to_original_rms_ratio": 0.9765542212452262,
+      "render_peak": 0.1655852049589157,
+      "original_peak": 0.212147057056427
+    },
+    {
+      "cycle": 626,
+      "start_seconds": 1.8153115693578594,
+      "end_seconds": 1.816921011360222,
+      "error_energy_ratio": 0.014197128599415302,
+      "render_to_original_rms_ratio": 0.9766098551240344,
+      "render_peak": 0.1654149889945984,
+      "original_peak": 0.21206535398960114
+    },
+    {
+      "cycle": 631,
+      "start_seconds": 1.8201378962791313,
+      "end_seconds": 1.8217226832155362,
+      "error_energy_ratio": 0.01100809839328461,
+      "render_to_original_rms_ratio": 0.9858392326370283,
+      "render_peak": 0.1634584367275238,
+      "original_peak": 0.18962225317955017
+    },
+    {
+      "cycle": 635,
+      "start_seconds": 1.8265588298049642,
+      "end_seconds": 1.8281686258876348,
+      "error_energy_ratio": 0.015314429397161601,
+      "render_to_original_rms_ratio": 0.9784444296565917,
+      "render_peak": 0.16583651304244995,
+      "original_peak": 0.2113437056541443
+    },
+    {
+      "cycle": 642,
+      "start_seconds": 1.8329943565236455,
+      "end_seconds": 1.8345802169625753,
+      "error_energy_ratio": 0.011115203304780951,
+      "render_to_original_rms_ratio": 0.986148564107094,
+      "render_peak": 0.1633385270833969,
+      "original_peak": 0.18641191720962524
+    },
+    {
+      "cycle": 646,
+      "start_seconds": 1.8394159717467846,
+      "end_seconds": 1.8410256550309942,
+      "error_energy_ratio": 0.014792049132530679,
+      "render_to_original_rms_ratio": 0.9769061859030844,
+      "render_peak": 0.1657363474369049,
+      "original_peak": 0.21188950538635254
+    },
+    {
+      "cycle": 653,
+      "start_seconds": 1.845850706424838,
+      "end_seconds": 1.8474386686709543,
+      "error_energy_ratio": 0.011741179154200306,
+      "render_to_original_rms_ratio": 0.9856773799388715,
+      "render_peak": 0.16352446377277374,
+      "original_peak": 0.18305973708629608
+    },
+    {
+      "cycle": 657,
+      "start_seconds": 1.8522730853800793,
+      "end_seconds": 1.853882656240859,
+      "error_energy_ratio": 0.014318150980863314,
+      "render_to_original_rms_ratio": 0.9765930293938626,
+      "render_peak": 0.1656029373407364,
+      "original_peak": 0.2121373862028122
+    },
+    {
+      "cycle": 667,
+      "start_seconds": 1.8651301717870925,
+      "end_seconds": 1.866739627512716,
+      "error_energy_ratio": 0.014221592972683382,
+      "render_to_original_rms_ratio": 0.9766523967219988,
+      "render_peak": 0.1654367297887802,
+      "original_peak": 0.2120898813009262
+    },
+    {
+      "cycle": 672,
+      "start_seconds": 1.8699565636766393,
+      "end_seconds": 1.8715412381309222,
+      "error_energy_ratio": 0.011005098712994812,
+      "render_to_original_rms_ratio": 0.9858003426309696,
+      "render_peak": 0.16347211599349976,
+      "original_peak": 0.1899867206811905
+    },
+    {
+      "cycle": 676,
+      "start_seconds": 1.8763780153971412,
+      "end_seconds": 1.8779879104812258,
+      "error_energy_ratio": 0.013564738458982631,
+      "render_to_original_rms_ratio": 0.978190130934395,
+      "render_peak": 0.09712781757116318,
+      "original_peak": 0.1259032040834427
+    },
+    {
+      "cycle": 683,
+      "start_seconds": 1.8828140889263107,
+      "end_seconds": 1.8843978051782126,
+      "error_energy_ratio": 0.01328126712380368,
+      "render_to_original_rms_ratio": 0.9848335410692852,
+      "render_peak": 0.016718052327632904,
+      "original_peak": 0.019548511132597923
+    },
+    {
+      "cycle": 719,
+      "start_seconds": 2.0210246971530808,
+      "end_seconds": 2.0227262353557407,
+      "error_energy_ratio": 0.014707929986005718,
+      "render_to_original_rms_ratio": 0.9799329971812457,
+      "render_peak": 0.1672118902206421,
+      "original_peak": 0.210855633020401
+    },
+    {
+      "cycle": 734,
+      "start_seconds": 2.041455870503606,
+      "end_seconds": 2.04315730872661,
+      "error_energy_ratio": 0.014605726799987841,
+      "render_to_original_rms_ratio": 0.9810161902091595,
+      "render_peak": 0.16770994663238525,
+      "original_peak": 0.2115991860628128
+    },
+    {
+      "cycle": 763,
+      "start_seconds": 2.0806165812074084,
+      "end_seconds": 2.0823181053211557,
+      "error_energy_ratio": 0.01468913660055653,
+      "render_to_original_rms_ratio": 0.980083426204646,
+      "render_peak": 0.16728198528289795,
+      "original_peak": 0.21097016334533691
+    },
+    {
+      "cycle": 778,
+      "start_seconds": 2.10104774907134,
+      "end_seconds": 2.102749174771573,
+      "error_energy_ratio": 0.014598810633553557,
+      "render_to_original_rms_ratio": 0.9811550732389074,
+      "render_peak": 0.16777272522449493,
+      "original_peak": 0.2116796225309372
+    },
+    {
+      "cycle": 807,
+      "start_seconds": 2.140208464510241,
+      "end_seconds": 2.141909974693772,
+      "error_energy_ratio": 0.014671907166749145,
+      "render_to_original_rms_ratio": 0.9802323092520517,
+      "render_peak": 0.16735106706619263,
+      "original_peak": 0.21108023822307587
+    },
+    {
+      "cycle": 822,
+      "start_seconds": 2.160639626982379,
+      "end_seconds": 2.1623410403391206,
+      "error_energy_ratio": 0.014593613773244002,
+      "render_to_original_rms_ratio": 0.981292428943759,
+      "render_peak": 0.16783462464809418,
+      "original_peak": 0.21175558865070343
+    },
+    {
+      "cycle": 851,
+      "start_seconds": 2.199800347018446,
+      "end_seconds": 2.2015018435220557,
+      "error_energy_ratio": 0.014656176959408587,
+      "render_to_original_rms_ratio": 0.9803796299944736,
+      "render_peak": 0.16741910576820374,
+      "original_peak": 0.2111855447292328
+    },
+    {
+      "cycle": 866,
+      "start_seconds": 2.2202315042263234,
+      "end_seconds": 2.2219329054636336,
+      "error_energy_ratio": 0.01459001318620625,
+      "render_to_original_rms_ratio": 0.9814303316505402,
+      "render_peak": 0.16789597272872925,
+      "original_peak": 0.21182675659656525
+    },
+    {
+      "cycle": 895,
+      "start_seconds": 2.2593922287727914,
+      "end_seconds": 2.2610937118012617,
+      "error_energy_ratio": 0.014642075688112955,
+      "render_to_original_rms_ratio": 0.9805253709696197,
+      "render_peak": 0.16748616099357605,
+      "original_peak": 0.21128641068935394
+    },
+    {
+      "cycle": 910,
+      "start_seconds": 2.279823380800364,
+      "end_seconds": 2.281524770095009,
+      "error_energy_ratio": 0.014588100778232412,
+      "render_to_original_rms_ratio": 0.9815692124224508,
+      "render_peak": 0.16795721650123596,
+      "original_peak": 0.21189342439174652
+    },
+    {
+      "cycle": 939,
+      "start_seconds": 2.3189841097654478,
+      "end_seconds": 2.320685579550244,
+      "error_energy_ratio": 0.01462953798225792,
+      "render_to_original_rms_ratio": 0.9806695220193286,
+      "render_peak": 0.1675521731376648,
+      "original_peak": 0.21138256788253784
+    },
+    {
+      "cycle": 954,
+      "start_seconds": 2.3394152566834965,
+      "end_seconds": 2.341116634246107,
+      "error_energy_ratio": 0.014587920569078454,
+      "render_to_original_rms_ratio": 0.9817063340404114,
+      "render_peak": 0.1680174469947815,
+      "original_peak": 0.2119552046060562
+    },
+    {
+      "cycle": 983,
+      "start_seconds": 2.378575990030756,
+      "end_seconds": 2.3802774467789924,
+      "error_energy_ratio": 0.014618652305682095,
+      "render_to_original_rms_ratio": 0.9808120999283031,
+      "render_peak": 0.16761724650859833,
+      "original_peak": 0.21147429943084717
+    },
+    {
+      "cycle": 999,
+      "start_seconds": 2.3990071319150212,
+      "end_seconds": 2.40070849789103,
+      "error_energy_ratio": 0.014589595554932836,
+      "render_to_original_rms_ratio": 0.9818416537422707,
+      "render_peak": 0.168076753616333,
+      "original_peak": 0.21201243996620178
+    },
+    {
+      "cycle": 1028,
+      "start_seconds": 2.4381678695998903,
+      "end_seconds": 2.4398693135200755,
+      "error_energy_ratio": 0.014609348080743042,
+      "render_to_original_rms_ratio": 0.9809532027448391,
+      "render_peak": 0.16768138110637665,
+      "original_peak": 0.211561381816864
+    },
+    {
+      "cycle": 1057,
+      "start_seconds": 2.477328578160143,
+      "end_seconds": 2.479030108588128,
+      "error_energy_ratio": 0.014697400988949368,
+      "render_to_original_rms_ratio": 0.9800159513269213,
+      "render_peak": 0.1672505885362625,
+      "original_peak": 0.21091921627521515
+    },
+    {
+      "cycle": 1356,
+      "start_seconds": 3.0279838294536634,
+      "end_seconds": 3.030111315336227,
+      "error_energy_ratio": 0.01691586750794817,
+      "render_to_original_rms_ratio": 0.9720170755571634,
+      "render_peak": 0.17252394556999207,
+      "original_peak": 0.1798335313796997
+    },
+    {
+      "cycle": 1362,
+      "start_seconds": 3.0387095251733367,
+      "end_seconds": 3.0408368678263575,
+      "error_energy_ratio": 0.016556863688077236,
+      "render_to_original_rms_ratio": 0.9720045343743466,
+      "render_peak": 0.1725160777568817,
+      "original_peak": 0.1809188723564148
+    },
+    {
+      "cycle": 1368,
+      "start_seconds": 3.0494352166399157,
+      "end_seconds": 3.051562426340496,
+      "error_energy_ratio": 0.016210714223961316,
+      "render_to_original_rms_ratio": 0.971990820609158,
+      "render_peak": 0.17250841856002808,
+      "original_peak": 0.18199469149112701
+    },
+    {
+      "cycle": 1374,
+      "start_seconds": 3.0601609038523714,
+      "end_seconds": 3.0622879905905425,
+      "error_energy_ratio": 0.015877025250037497,
+      "render_to_original_rms_ratio": 0.9719762233604973,
+      "render_peak": 0.172500878572464,
+      "original_peak": 0.18306027352809906
+    },
+    {
+      "cycle": 1380,
+      "start_seconds": 3.070886586997425,
+      "end_seconds": 3.073013560166246,
+      "error_energy_ratio": 0.015555708534444258,
+      "render_to_original_rms_ratio": 0.9719608286119147,
+      "render_peak": 0.17249348759651184,
+      "original_peak": 0.1841152012348175
+    },
+    {
+      "cycle": 1387,
+      "start_seconds": 3.081612266146125,
+      "end_seconds": 3.0837391349469874,
+      "error_energy_ratio": 0.015246560321475092,
+      "render_to_original_rms_ratio": 0.9719447013996723,
+      "render_peak": 0.17248623073101044,
+      "original_peak": 0.1851588636636734
+    },
+    {
+      "cycle": 1394,
+      "start_seconds": 3.092337941302107,
+      "end_seconds": 3.09446471469584,
+      "error_energy_ratio": 0.014949341332478421,
+      "render_to_original_rms_ratio": 0.9719278994552842,
+      "render_peak": 0.17247909307479858,
+      "original_peak": 0.18619120121002197
+    },
+    {
+      "cycle": 1401,
+      "start_seconds": 3.1030636124282687,
+      "end_seconds": 3.1051902992099056,
+      "error_energy_ratio": 0.0146637410586459,
+      "render_to_original_rms_ratio": 0.9719105258452276,
+      "render_peak": 0.1724720001220703,
+      "original_peak": 0.18721172213554382
+    },
+    {
+      "cycle": 1408,
+      "start_seconds": 3.1137892795537883,
+      "end_seconds": 3.1159158882712474,
+      "error_energy_ratio": 0.014389708974470046,
+      "render_to_original_rms_ratio": 0.9718926356592954,
+      "render_peak": 0.17246495187282562,
+      "original_peak": 0.1882200539112091
+    },
+    {
+      "cycle": 1415,
+      "start_seconds": 3.1245149427530268,
+      "end_seconds": 3.1266414818258323,
+      "error_energy_ratio": 0.014127179372274732,
+      "render_to_original_rms_ratio": 0.9718742830564395,
+      "render_peak": 0.17245794832706451,
+      "original_peak": 0.18921524286270142
+    },
+    {
+      "cycle": 1461,
+      "start_seconds": 3.2060333216869514,
+      "end_seconds": 3.2081616193120968,
+      "error_energy_ratio": 0.01875924065758564,
+      "render_to_original_rms_ratio": 0.9720577631416066,
+      "render_peak": 0.1725633144378662,
+      "original_peak": 0.1851804107427597
+    },
+    {
+      "cycle": 1467,
+      "start_seconds": 3.216759038775126,
+      "end_seconds": 3.2188871400050965,
+      "error_energy_ratio": 0.018336424969845264,
+      "render_to_original_rms_ratio": 0.9720515037668845,
+      "render_peak": 0.1725543588399887,
+      "original_peak": 0.183942049741745
+    },
+    {
+      "cycle": 1473,
+      "start_seconds": 3.2274847511901683,
+      "end_seconds": 3.229612668212991,
+      "error_energy_ratio": 0.017928199770289525,
+      "render_to_original_rms_ratio": 0.9720436383273958,
+      "render_peak": 0.17254573106765747,
+      "original_peak": 0.18268071115016937
+    },
+    {
+      "cycle": 1479,
+      "start_seconds": 3.238210458878316,
+      "end_seconds": 3.240338203300346,
+      "error_energy_ratio": 0.017533730582048157,
+      "render_to_original_rms_ratio": 0.972034536067329,
+      "render_peak": 0.17253728210926056,
+      "original_peak": 0.18139682710170746
+    },
+    {
+      "cycle": 1485,
+      "start_seconds": 3.248936161893179,
+      "end_seconds": 3.251063745162105,
+      "error_energy_ratio": 0.017152893647697412,
+      "render_to_original_rms_ratio": 0.9720242767742578,
+      "render_peak": 0.17252908647060394,
+      "original_peak": 0.18009088933467865
+    },
+    {
+      "cycle": 1491,
+      "start_seconds": 3.2596618603687615,
+      "end_seconds": 3.261789293621476,
+      "error_energy_ratio": 0.01678540252477165,
+      "render_to_original_rms_ratio": 0.9720127807461169,
+      "render_peak": 0.17252108454704285,
+      "original_peak": 0.18022434413433075
+    },
+    {
+      "cycle": 1497,
+      "start_seconds": 3.2703875545948207,
+      "end_seconds": 3.272514848318611,
+      "error_energy_ratio": 0.01643115089543137,
+      "render_to_original_rms_ratio": 0.9719997187048711,
+      "render_peak": 0.17251332104206085,
+      "original_peak": 0.18130625784397125
+    },
+    {
+      "cycle": 1503,
+      "start_seconds": 3.281113244492606,
+      "end_seconds": 3.2832404088989713,
+      "error_energy_ratio": 0.016089422198938493,
+      "render_to_original_rms_ratio": 0.9719857148532083,
+      "render_peak": 0.1725056916475296,
+      "original_peak": 0.18237850069999695
+    },
+    {
+      "cycle": 1509,
+      "start_seconds": 3.2918389302321174,
+      "end_seconds": 3.29396597512291,
+      "error_energy_ratio": 0.01576023461235791,
+      "render_to_original_rms_ratio": 0.9719707909068962,
+      "render_peak": 0.1724982112646103,
+      "original_peak": 0.18344031274318695
+    },
+    {
+      "cycle": 1515,
+      "start_seconds": 3.302564611921203,
+      "end_seconds": 3.304691546612464,
+      "error_energy_ratio": 0.01544330136035802,
+      "render_to_original_rms_ratio": 0.9719551245612439,
+      "render_peak": 0.17249086499214172,
+      "original_peak": 0.18449124693870544
+    },
+    {
+      "cycle": 1522,
+      "start_seconds": 3.3132902896661847,
+      "end_seconds": 3.3154171231707883,
+      "error_energy_ratio": 0.015138501788138166,
+      "render_to_original_rms_ratio": 0.9719387316609487,
+      "render_peak": 0.1724836528301239,
+      "original_peak": 0.1855308562517166
+    },
+    {
+      "cycle": 1529,
+      "start_seconds": 3.324015963383367,
+      "end_seconds": 3.32614270466336,
+      "error_energy_ratio": 0.014845445898204182,
+      "render_to_original_rms_ratio": 0.9719217279294015,
+      "render_peak": 0.17247654497623444,
+      "original_peak": 0.18655899167060852
+    },
+    {
+      "cycle": 1536,
+      "start_seconds": 3.3347416330509434,
+      "end_seconds": 3.3368682908388565,
+      "error_energy_ratio": 0.014564033120705986,
+      "render_to_original_rms_ratio": 0.9719041457991641,
+      "render_peak": 0.17246946692466736,
+      "original_peak": 0.18757523596286774
+    },
+    {
+      "cycle": 1543,
+      "start_seconds": 3.3454672987760725,
+      "end_seconds": 3.347593881526103,
+      "error_energy_ratio": 0.0142941365353982,
+      "render_to_original_rms_ratio": 0.9718860833687969,
+      "render_peak": 0.17246243357658386,
+      "original_peak": 0.18857893347740173
+    },
+    {
+      "cycle": 1595,
+      "start_seconds": 3.4377113603545935,
+      "end_seconds": 3.439839586001107,
+      "error_energy_ratio": 0.018605732340658897,
+      "render_to_original_rms_ratio": 0.9720556960663423,
+      "render_peak": 0.17256006598472595,
+      "original_peak": 0.18473847210407257
+    },
+    {
+      "cycle": 1601,
+      "start_seconds": 3.4484370757254195,
+      "end_seconds": 3.450565109494051,
+      "error_energy_ratio": 0.018188215906037936,
+      "render_to_original_rms_ratio": 0.9720488420036779,
+      "render_peak": 0.172551229596138,
+      "original_peak": 0.1834917813539505
+    },
+    {
+      "cycle": 1607,
+      "start_seconds": 3.459162786450688,
+      "end_seconds": 3.4612906402025128,
+      "error_energy_ratio": 0.017784998680017643,
+      "render_to_original_rms_ratio": 0.9720404901617741,
+      "render_peak": 0.17254267632961273,
+      "original_peak": 0.18222229182720184
+    },
+    {
+      "cycle": 1613,
+      "start_seconds": 3.469888492468732,
+      "end_seconds": 3.472016177741846,
+      "error_energy_ratio": 0.01739546484420474,
+      "render_to_original_rms_ratio": 0.9720309711703957,
+      "render_peak": 0.17253431677818298,
+      "original_peak": 0.1809304654598236
+    }
+  ],
+  "artifact_sample_steps": {
+    "original": {
+      "maximum_cycle_boundary_sample_step": 0.011279618367552757,
+      "median_cycle_boundary_sample_step": 0.00510867073899135,
+      "maximum_whole_waveform_sample_step": 0.20067544654011726,
+      "rms_whole_waveform_sample_step": 0.023951636676543486
+    },
+    "4f_b_at_4h_boundaries": {
+      "maximum_cycle_boundary_sample_step": 0.005638398011797108,
+      "median_cycle_boundary_sample_step": 0.0023887050338089466,
+      "maximum_whole_waveform_sample_step": 0.20775830745697021,
+      "rms_whole_waveform_sample_step": 0.01595089886163851
+    },
+    "4h": {
+      "maximum_cycle_boundary_sample_step": 0.005638398011797108,
+      "median_cycle_boundary_sample_step": 0.002663610619492829,
+      "maximum_whole_waveform_sample_step": 0.20902135968208313,
+      "rms_whole_waveform_sample_step": 0.01626431939844259
+    }
+  },
+  "neighbor_policy": {
+    "maximum_gap_periods": 0.1,
+    "comparison_shift_positions": [
+      -0.5,
+      -0.25,
+      0,
+      0.25,
+      0.5
+    ],
+    "neighbor_shape_min": 0.995,
+    "neighbor_period_change_max": 0.02,
+    "all_target_gates": "Unchanged calls to frozen 4F-B chooser; only its neighbor rejection reasons are replaced."
+  },
+  "new_cycle_ids": [
+    277,
+    283,
+    290,
+    297,
+    304,
+    311,
+    318,
+    349,
+    483,
+    498,
+    527,
+    542,
+    574,
+    583,
+    590,
+    594,
+    601,
+    605,
+    612,
+    616,
+    626,
+    631,
+    635,
+    642,
+    646,
+    653,
+    657,
+    667,
+    672,
+    676,
+    683,
+    719,
+    734,
+    763,
+    778,
+    807,
+    822,
+    851,
+    866,
+    895,
+    910,
+    939,
+    954,
+    983,
+    999,
+    1028,
+    1057,
+    1356,
+    1362,
+    1368,
+    1374,
+    1380,
+    1387,
+    1394,
+    1401,
+    1408,
+    1415,
+    1461,
+    1467,
+    1473,
+    1479,
+    1485,
+    1491,
+    1497,
+    1503,
+    1509,
+    1515,
+    1522,
+    1529,
+    1536,
+    1543,
+    1595,
+    1601,
+    1607,
+    1613
+  ],
+  "baseline_cycle_ids_preserved": true,
+  "source_identity_labels_merged": false,
+  "renderer": "Exact frozen 4F sampler-injected renderer with exact frozen 4D base_value_slope (64-position linear). No 4F-A sampler.",
+  "synthesis_phase_shifts_applied": false,
+  "cycle_detection_or_pitch_changed": false,
+  "original_fallback_used": false,
+  "midi_used": false,
+  "normalized_or_clipped": false,
+  "listening_performed": false,
+  "outputs": {
+    "reconstructed.wav": "124cf3dbddaca2e39bd56464f945935a87932b78d43472442e56fce5db84447f",
+    "residual.wav": "cd42610b203b8fbc453d815cf83573206d1d09897f0b1e34408beb04ae61f2d0",
+    "original_reference.wav": "f6bb9b2d6266e756292a52f72904a5d5a06202b31e444a76ee48942a36ca1aa7"
+  },
+  "baseline_report_sha256": "072111ea7b7e61d5268d8cc02259242c0097a248825f7976f36f3a563370ce6a",
+  "discovery_report_sha256": "95f9baf574073818e5469c2bfb7b94d463e2d656f8cd68989ebd8b04c8da8b74",
+  "frozen_code_sha256": {
+    "/Volumes/OWC Express 1M2/TuneToss/research/source-separation/results/experiment-04f-independent/methods.py": "ab9f952f5b2d6c540c5d236be0e088e67159e88d38ffb1305bb25ec9371b1d11",
+    "/Volumes/OWC Express 1M2/TuneToss/research/source-separation/results/experiment-04f-independent/render.py": "aeaa7032e9309f646c0fb1be502df355b58ac08a3bbd83a14e6c00f6aef098d1",
+    "/Volumes/OWC Express 1M2/TuneToss/research/source-separation/results/experiment-04d-majorsaw-reconstruction/reconstruct.py": "b89894e0a319b71c583cbeb5e852131bf908874692cb5a22f962e5110e217487",
+    "/Volumes/OWC Express 1M2/TuneToss/research/source-separation/results/experiment-04g-gap-family-diagnostics/contextualize.py": "77a0edc5f82679db3d64462a3f064729a1f4ef93644c1e83bfc3c3efc42d193b"
+  },
+  "source_sha256": {
+    "recognition.py": "4667c2bb2012616e23fde1e4ff5e87c9dfdc1669a91ce914484792524d4cd438",
+    "run.py": "eb73f8afda976c55eada212f1fc07e282c8a34368ce34048bfcbbd49ed0d089b"
+  },
+  "prior_research_files_verified_unchanged": 318,
+  "limits": [
+    "Fractional phase comparison slightly interpolates/smooths descriptors; matching is not proof of common physical origin.",
+    "No new listening has been performed. Sample-step and error checks do not certify absence of audible artifacts.",
+    "All 64-position high-frequency limitations remain intentionally unchanged."
+  ]
+}

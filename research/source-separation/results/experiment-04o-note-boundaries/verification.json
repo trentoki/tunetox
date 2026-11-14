@@ -1,0 +1,10 @@
+{
+  "prior_files_verified": 469,
+  "reused_diagnostic_tests_passed": 3,
+  "four_local_energy_partitions_checked": true,
+  "conservation_checked": true,
+  "no_accepted_rendering_omissions_in_selected_regions": true,
+  "source_syntax_and_svg_geometry_checked": true,
+  "no_audio_exports_or_algorithm_changes": true,
+  "browser_preview_or_listening": false
+}

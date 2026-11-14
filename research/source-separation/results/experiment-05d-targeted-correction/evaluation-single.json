@@ -1,0 +1,1071 @@
+{
+  "dataset": "single",
+  "baseline_5a": {
+    "source_models": 5,
+    "periodic_structures": 1,
+    "periodic_coverage_fraction": 0.8262736205593348,
+    "residual_energy_ratio": 0.03541727184479217,
+    "continuity_gaps": {
+      "count_at_least_1ms": 21,
+      "duration_seconds": 0.13392290249433106,
+      "maximum_seconds": 0.01945578231292517,
+      "locations_seconds": [
+        [
+          0.0,
+          0.0019047619047619048
+        ],
+        [
+          0.2494331065759637,
+          0.25151927437641725
+        ],
+        [
+          0.4988662131519274,
+          0.5024036281179138
+        ],
+        [
+          0.7502947845804989,
+          0.7523809523809524
+        ],
+        [
+          0.9997278911564625,
+          1.0017687074829933
+        ],
+        [
+          1.2491609977324263,
+          1.2519047619047619
+        ],
+        [
+          1.4985941043083901,
+          1.5006349206349205
+        ],
+        [
+          1.6334013605442177,
+          1.6351473922902495
+        ],
+        [
+          1.7500226757369615,
+          1.7510430839002267
+        ],
+        [
+          1.999455782312925,
+          2.004013605442177
+        ],
+        [
+          2.497732426303855,
+          2.512063492063492
+        ],
+        [
+          2.999387755102041,
+          3.0087074829931972
+        ],
+        [
+          3.015124716553288,
+          3.0172789115646257
+        ],
+        [
+          3.4892063492063494,
+          3.491360544217687
+        ],
+        [
+          3.4999319727891156,
+          3.510204081632653
+        ],
+        [
+          3.512607709750567,
+          3.514988662131519
+        ],
+        [
+          3.977301587301587,
+          3.9893424036281178
+        ],
+        [
+          3.9989795918367346,
+          4.015011337868481
+        ],
+        [
+          4.497165532879818,
+          4.516303854875283
+        ],
+        [
+          4.997369614512472,
+          5.016825396825396
+        ],
+        [
+          5.997120181405895,
+          6.0
+        ]
+      ]
+    },
+    "periodic_high_confidence_frames": 507,
+    "periodic_pitch_range_hz": [
+      311.24099406361097,
+      620.8156131663209
+    ],
+    "additive_max_error": 5.587935447692871e-09
+  },
+  "5d": {
+    "source_models": 5,
+    "periodic_structures": 1,
+    "periodic_coverage_fraction": 0.8262736205593348,
+    "residual_energy_ratio": 0.03541727184479217,
+    "continuity_gaps": {
+      "count_at_least_1ms": 21,
+      "duration_seconds": 0.13392290249433106,
+      "maximum_seconds": 0.01945578231292517,
+      "locations_seconds": [
+        [
+          0.0,
+          0.0019047619047619048
+        ],
+        [
+          0.2494331065759637,
+          0.25151927437641725
+        ],
+        [
+          0.4988662131519274,
+          0.5024036281179138
+        ],
+        [
+          0.7502947845804989,
+          0.7523809523809524
+        ],
+        [
+          0.9997278911564625,
+          1.0017687074829933
+        ],
+        [
+          1.2491609977324263,
+          1.2519047619047619
+        ],
+        [
+          1.4985941043083901,
+          1.5006349206349205
+        ],
+        [
+          1.6334013605442177,
+          1.6351473922902495
+        ],
+        [
+          1.7500226757369615,
+          1.7510430839002267
+        ],
+        [
+          1.999455782312925,
+          2.004013605442177
+        ],
+        [
+          2.497732426303855,
+          2.512063492063492
+        ],
+        [
+          2.999387755102041,
+          3.0087074829931972
+        ],
+        [
+          3.015124716553288,
+          3.0172789115646257
+        ],
+        [
+          3.4892063492063494,
+          3.491360544217687
+        ],
+        [
+          3.4999319727891156,
+          3.510204081632653
+        ],
+        [
+          3.512607709750567,
+          3.514988662131519
+        ],
+        [
+          3.977301587301587,
+          3.9893424036281178
+        ],
+        [
+          3.9989795918367346,
+          4.015011337868481
+        ],
+        [
+          4.497165532879818,
+          4.516303854875283
+        ],
+        [
+          4.997369614512472,
+          5.016825396825396
+        ],
+        [
+          5.997120181405895,
+          6.0
+        ]
+      ]
+    },
+    "periodic_high_confidence_frames": 507,
+    "periodic_pitch_range_hz": [
+      311.24099406361097,
+      620.8156131663209
+    ],
+    "additive_max_error": 5.587935447692871e-09
+  },
+  "new_cycles_provisional": 0,
+  "new_frames": 0,
+  "new_region_error_ratio_to_mixture_or_single_input": 0.0,
+  "direct_5a_samples_unchanged": true,
+  "transient_estimates_unchanged": true,
+  "new_boundaries": [],
+  "maximum_new_boundary_step": 0,
+  "special": {
+    "4q_residual_energy_ratio": 0.013946948465628963,
+    "4q_coverage_fraction": 0.8649962207105064,
+    "4q_comparison_scope": "Single-source control includes original PCM provisional support, so it is not the same separation method",
+    "false_extra_transient_models": 4,
+    "nonperiodic_model_energy_ratio": 0.0005706818208144362
+  },
+  "meta": {
+    "source": "5A unchanged functions on single-synth input",
+    "transient_recognized_events": 12,
+    "detected_change_events": 24
+  },
+  "decisions": {
+    "applied": true,
+    "family": 1,
+    "fits": [
+      {
+        "phase": 0.97265625,
+        "gain": 0.002685280979902858,
+        "correlation": 0.4704406127297254,
+        "explained_energy": 0.01579674257655944,
+        "first_frame": 5750,
+        "end_frame": 6881,
+        "f0": 311.83963659150277,
+        "center_seconds": 0.14321995464852608,
+        "pitch_confidence": 0.9301374191792986,
+        "reference_cycle_count": 347,
+        "reference_scale": 0.08844184246558176,
+        "presence": {
+          "present": false,
+          "supported_windows": 2,
+          "informative_windows": 7,
+          "correlations": [
+            0.9844885010005011,
+            0.9090540139615915,
+            0.5839376449729052,
+            0.007854168115488279,
+            0.0027984223900198927,
+            -0.00639665100493738,
+            -0.02223210787130249
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.515625,
+        "gain": 5.917391037241029e-09,
+        "correlation": 0.010185942922745692,
+        "explained_energy": 7.663021642268228e-14,
+        "first_frame": 6192,
+        "end_frame": 7323,
+        "f0": 311.8311262878663,
+        "center_seconds": 0.15321995464852609,
+        "pitch_confidence": 0.9623211586191556,
+        "reference_cycle_count": 347,
+        "reference_scale": 0.08844184246558176,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 7,
+          "correlations": [
+            0.024172682488832028,
+            0.007725744363117434,
+            -0.00028554362390831415,
+            -0.008607771608496954,
+            -0.010110025780555582,
+            0.011413543909010927,
+            0.003402305413748378
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.6015625,
+        "gain": 0.05569697308577479,
+        "correlation": 0.7950342201586927,
+        "explained_energy": 6.077328668591771,
+        "first_frame": 10662,
+        "end_frame": 11673,
+        "f0": 349.0113673823684,
+        "center_seconds": 0.2532199546485261,
+        "pitch_confidence": 0.9191688997710501,
+        "reference_cycle_count": 216,
+        "reference_scale": 0.08724363291735517,
+        "presence": {
+          "present": true,
+          "supported_windows": 4,
+          "informative_windows": 6,
+          "correlations": [
+            0.0,
+            0.0,
+            0.8665199935672007,
+            0.9983366367736234,
+            0.9971088711996827,
+            0.9970841222728729
+          ]
+        },
+        "reasons": [
+          "fewer than three consecutive supported complete cycles in original gap"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.490234375,
+        "gain": 0.0020684152862817332,
+        "correlation": 0.45323918070783886,
+        "explained_energy": 0.008362896379574106,
+        "first_frame": 16836,
+        "end_frame": 17846,
+        "f0": 349.19848001009956,
+        "center_seconds": 0.3932199546485261,
+        "pitch_confidence": 0.9284376082738617,
+        "reference_cycle_count": 216,
+        "reference_scale": 0.08724363291735517,
+        "presence": {
+          "present": false,
+          "supported_windows": 2,
+          "informative_windows": 6,
+          "correlations": [
+            0.9216338774454368,
+            0.9333299324319289,
+            0.08883383801093798,
+            0.012956268100296162,
+            -0.003449018411150097,
+            -0.030937297436955367
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.515625,
+        "gain": 3.6361902645243794e-10,
+        "correlation": 0.01991032109810375,
+        "explained_energy": 2.5820022062030494e-16,
+        "first_frame": 17278,
+        "end_frame": 18287,
+        "f0": 349.55587728021004,
+        "center_seconds": 0.40321995464852606,
+        "pitch_confidence": 0.9522553267661982,
+        "reference_cycle_count": 216,
+        "reference_scale": 0.08724363291735517,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 6,
+          "correlations": [
+            0.046317826642971356,
+            0.0046389320427974,
+            -0.007583037762172561,
+            0.012164381611058659,
+            -0.004780838964953333,
+            -0.03769072228549248
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.396484375,
+        "gain": 0.013436963723541575,
+        "correlation": 0.3907822912152773,
+        "explained_energy": 0.3150971649306373,
+        "first_frame": 21300,
+        "end_frame": 22201,
+        "f0": 391.7065106295885,
+        "center_seconds": 0.4932199546485261,
+        "pitch_confidence": 0.9206232256759274,
+        "reference_cycle_count": 242,
+        "reference_scale": 0.0869887191786603,
+        "presence": {
+          "present": false,
+          "supported_windows": 2,
+          "informative_windows": 6,
+          "correlations": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.9091328828090062,
+            0.999999774708936
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.3125,
+        "gain": 0.05627158823550513,
+        "correlation": 0.7947577003628973,
+        "explained_energy": 5.514612853373992,
+        "first_frame": 21742,
+        "end_frame": 22641,
+        "f0": 392.55230145193764,
+        "center_seconds": 0.5032199546485261,
+        "pitch_confidence": 0.9474335880755989,
+        "reference_cycle_count": 242,
+        "reference_scale": 0.0869887191786603,
+        "presence": {
+          "present": true,
+          "supported_windows": 4,
+          "informative_windows": 6,
+          "correlations": [
+            0.0,
+            0.49675163130800554,
+            0.9934841680735866,
+            0.996031806132268,
+            0.9941226070932171,
+            0.9999904660734189
+          ]
+        },
+        "reasons": [
+          "fewer than three consecutive supported complete cycles in original gap"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.19921875,
+        "gain": 0.0016199682075311139,
+        "correlation": 0.4768141790264194,
+        "explained_energy": 0.0045694968488940325,
+        "first_frame": 27916,
+        "end_frame": 28815,
+        "f0": 392.2828899075792,
+        "center_seconds": 0.6432199546485261,
+        "pitch_confidence": 0.9648765371550093,
+        "reference_cycle_count": 242,
+        "reference_scale": 0.0869887191786603,
+        "presence": {
+          "present": false,
+          "supported_windows": 1,
+          "informative_windows": 6,
+          "correlations": [
+            0.9149675643432584,
+            0.7867639143403402,
+            0.006110769974931208,
+            -0.0032083646872027175,
+            0.01077360939891017,
+            0.03582809321821838
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.484375,
+        "gain": 3.078046317606222e-11,
+        "correlation": 0.01509342416687113,
+        "explained_energy": 1.6503920822316374e-18,
+        "first_frame": 28358,
+        "end_frame": 29257,
+        "f0": 392.62762860161547,
+        "center_seconds": 0.6532199546485261,
+        "pitch_confidence": 0.9878020776498375,
+        "reference_cycle_count": 242,
+        "reference_scale": 0.0869887191786603,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 6,
+          "correlations": [
+            0.03436776597458856,
+            0.00034842927273242115,
+            -0.017150997527872424,
+            0.008181688126894892,
+            -0.010482943415071635,
+            0.0493415574255456
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.35546875,
+        "gain": 0.05700694502671474,
+        "correlation": 0.7999043147339114,
+        "explained_energy": 5.347955041439572,
+        "first_frame": 32792,
+        "end_frame": 33642,
+        "f0": 414.87732453080565,
+        "center_seconds": 0.7532199546485261,
+        "pitch_confidence": 0.9175906787164192,
+        "reference_cycle_count": 253,
+        "reference_scale": 0.08629397280680222,
+        "presence": {
+          "present": true,
+          "supported_windows": 3,
+          "informative_windows": 5,
+          "correlations": [
+            0.0,
+            0.668276939031003,
+            0.9960306954522614,
+            0.995299839210725,
+            0.9966626370053528
+          ]
+        },
+        "reasons": [
+          "fewer than three consecutive supported complete cycles in original gap"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.4921875,
+        "gain": 0.001215284702374299,
+        "correlation": 0.4483519602158893,
+        "explained_energy": 0.0024348797063565176,
+        "first_frame": 38966,
+        "end_frame": 39817,
+        "f0": 414.5904089842799,
+        "center_seconds": 0.8932199546485261,
+        "pitch_confidence": 0.9274884956541305,
+        "reference_cycle_count": 253,
+        "reference_scale": 0.08629397280680222,
+        "presence": {
+          "present": false,
+          "supported_windows": 1,
+          "informative_windows": 5,
+          "correlations": [
+            0.9200847252117879,
+            0.6709552199136337,
+            -0.007687193622438121,
+            0.0024388767937469033,
+            0.0050101899791945214
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.5,
+        "gain": 4.355296292405421e-11,
+        "correlation": 0.016299239835298896,
+        "explained_energy": 3.1356627598290604e-18,
+        "first_frame": 39406,
+        "end_frame": 40259,
+        "f0": 413.72618142290895,
+        "center_seconds": 0.9032199546485261,
+        "pitch_confidence": 0.9596459717565137,
+        "reference_cycle_count": 253,
+        "reference_scale": 0.08629397280680222,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 5,
+          "correlations": [
+            0.037508037157508514,
+            0.0021587441537828027,
+            -0.007922182858757015,
+            0.0006968408542937584,
+            0.007184507171671564
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.037109375,
+        "gain": 0.00883622606200727,
+        "correlation": 0.3277138261810157,
+        "explained_energy": 0.11455295232752681,
+        "first_frame": 43422,
+        "end_frame": 44180,
+        "f0": 465.23872595663977,
+        "center_seconds": 0.9932199546485261,
+        "pitch_confidence": 0.91395715129104,
+        "reference_cycle_count": 290,
+        "reference_scale": 0.08662529629769171,
+        "presence": {
+          "present": false,
+          "supported_windows": 1,
+          "informative_windows": 5,
+          "correlations": [
+            0.0,
+            0.0,
+            0.0,
+            0.4186196787766797,
+            0.9930818731253858
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.6875,
+        "gain": 0.06210272133584642,
+        "correlation": 0.8351652348356734,
+        "explained_energy": 5.672613127333034,
+        "first_frame": 43862,
+        "end_frame": 44621,
+        "f0": 465.00082580709886,
+        "center_seconds": 1.003219954648526,
+        "pitch_confidence": 0.93192167530962,
+        "reference_cycle_count": 290,
+        "reference_scale": 0.08662529629769171,
+        "presence": {
+          "present": true,
+          "supported_windows": 3,
+          "informative_windows": 5,
+          "correlations": [
+            0.0,
+            0.7986103235469805,
+            0.992427376357388,
+            0.9916379625096818,
+            0.9805874763574627
+          ]
+        },
+        "reasons": [
+          "fewer than three consecutive supported complete cycles in original gap"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.947265625,
+        "gain": 0.0007561848127665676,
+        "correlation": 0.4462002895455295,
+        "explained_energy": 0.0008395865117964226,
+        "first_frame": 50037,
+        "end_frame": 50795,
+        "f0": 465.6474950901783,
+        "center_seconds": 1.143219954648526,
+        "pitch_confidence": 0.9424956913888569,
+        "reference_cycle_count": 290,
+        "reference_scale": 0.08662529629769171,
+        "presence": {
+          "present": false,
+          "supported_windows": 1,
+          "informative_windows": 5,
+          "correlations": [
+            0.8903482244918725,
+            0.232920028820101,
+            -0.014579810404547795,
+            -0.009430474093130584,
+            -0.0006568702985350114
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.51171875,
+        "gain": 1.7832400327801902e-12,
+        "correlation": 0.016622178492745453,
+        "explained_energy": 4.665189568185301e-21,
+        "first_frame": 50478,
+        "end_frame": 51235,
+        "f0": 466.14404703589014,
+        "center_seconds": 1.153219954648526,
+        "pitch_confidence": 0.9611093633182543,
+        "reference_cycle_count": 290,
+        "reference_scale": 0.08662529629769171,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 5,
+          "correlations": [
+            0.03611270862878716,
+            -0.030019230231646443,
+            -0.0006955063715789516,
+            -0.0036488142055727518,
+            0.008622745959884492
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.5,
+        "gain": 0.0042959607353909406,
+        "correlation": 0.24026471498986834,
+        "explained_energy": 0.0240997131645323,
+        "first_frame": 54489,
+        "end_frame": 55163,
+        "f0": 523.7499299450013,
+        "center_seconds": 1.243219954648526,
+        "pitch_confidence": 0.9387333901992791,
+        "reference_cycle_count": 325,
+        "reference_scale": 0.08662867162383174,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 4,
+          "correlations": [
+            0.0,
+            0.0,
+            0.0,
+            0.5429337698112129
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.693359375,
+        "gain": 0.06433480034615961,
+        "correlation": 0.8495454801586876,
+        "explained_energy": 5.399290292570547,
+        "first_frame": 54930,
+        "end_frame": 55604,
+        "f0": 523.7807771358001,
+        "center_seconds": 1.253219954648526,
+        "pitch_confidence": 0.9619085850636477,
+        "reference_cycle_count": 325,
+        "reference_scale": 0.08662867162383174,
+        "presence": {
+          "present": true,
+          "supported_windows": 3,
+          "informative_windows": 4,
+          "correlations": [
+            0.0,
+            0.9744263321933562,
+            0.9952682720841944,
+            0.9892144808767146
+          ]
+        },
+        "reasons": [
+          "fewer than three consecutive supported complete cycles in original gap"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.95703125,
+        "gain": 0.0005254309764049188,
+        "correlation": 0.43720610648397024,
+        "explained_energy": 0.0003600772573221538,
+        "first_frame": 61104,
+        "end_frame": 61777,
+        "f0": 524.0622808022763,
+        "center_seconds": 1.393219954648526,
+        "pitch_confidence": 0.9756349140932261,
+        "reference_cycle_count": 325,
+        "reference_scale": 0.08662867162383174,
+        "presence": {
+          "present": false,
+          "supported_windows": 1,
+          "informative_windows": 4,
+          "correlations": [
+            0.8745794081758441,
+            0.05467074147601463,
+            -0.01471489834200456,
+            -0.013302549938971484
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.51171875,
+        "gain": 1.4757053975825618e-12,
+        "correlation": 0.01635197443080565,
+        "explained_energy": 2.837425508528841e-21,
+        "first_frame": 61546,
+        "end_frame": 62219,
+        "f0": 523.9874771819636,
+        "center_seconds": 1.403219954648526,
+        "pitch_confidence": 0.99507909739949,
+        "reference_cycle_count": 325,
+        "reference_scale": 0.08662867162383174,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 4,
+          "correlations": [
+            0.0308961231241069,
+            0.015659948768933868,
+            0.011209014133228752,
+            0.006641073482537244
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.0,
+        "gain": 0,
+        "correlation": 0.0,
+        "explained_energy": 0.0,
+        "first_frame": 65550,
+        "end_frame": 66152,
+        "f0": 586.0138134321136,
+        "center_seconds": 1.493219954648526,
+        "pitch_confidence": 0.9268468053268786,
+        "reference_cycle_count": 366,
+        "reference_scale": 0.08692241980763904,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 4,
+          "correlations": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.732421875,
+        "gain": 0.0003053013281902259,
+        "correlation": 0.40048814224672175,
+        "explained_energy": 0.00010914819839564806,
+        "first_frame": 72164,
+        "end_frame": 72767,
+        "f0": 585.4739474120071,
+        "center_seconds": 1.643219954648526,
+        "pitch_confidence": 0.9677001999891265,
+        "reference_cycle_count": 347,
+        "reference_scale": 0.08692038430693401,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 4,
+          "correlations": [
+            0.7830440150572714,
+            0.012622674043277268,
+            -0.002609283571284515,
+            -0.01964519338094065
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.46875,
+        "gain": 1.2164684194870886e-13,
+        "correlation": 0.025556983681327756,
+        "explained_energy": 1.7156202250091815e-23,
+        "first_frame": 72606,
+        "end_frame": 73207,
+        "f0": 587.4304408587822,
+        "center_seconds": 1.653219954648526,
+        "pitch_confidence": 0.9731780843606279,
+        "reference_cycle_count": 369,
+        "reference_scale": 0.0869220279493673,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 4,
+          "correlations": [
+            0.04532963221999125,
+            -0.010790829444771268,
+            0.002824073486621891,
+            0.041646782070513956
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.0,
+        "gain": 0,
+        "correlation": 0.0,
+        "explained_energy": 0.0,
+        "first_frame": 76592,
+        "end_frame": 77160,
+        "f0": 620.7470764178612,
+        "center_seconds": 1.743219954648526,
+        "pitch_confidence": 0.9287792013646397,
+        "reference_cycle_count": 84,
+        "reference_scale": 0.08623342411059887,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 4,
+          "correlations": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.458984375,
+        "gain": 0.0003413309998103336,
+        "correlation": 0.4025497257200671,
+        "explained_energy": 0.00012851798911828272,
+        "first_frame": 83206,
+        "end_frame": 83775,
+        "f0": 620.1208899592458,
+        "center_seconds": 1.893219954648526,
+        "pitch_confidence": 0.9603265286809348,
+        "reference_cycle_count": 81,
+        "reference_scale": 0.08623800966596909,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 4,
+          "correlations": [
+            0.7046429818452062,
+            0.004009738231460859,
+            0.03611123194148194,
+            -0.0032233071417569676
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.466796875,
+        "gain": 1.317027035086633e-13,
+        "correlation": 0.02723616596384253,
+        "explained_energy": 1.910211721895701e-23,
+        "first_frame": 83648,
+        "end_frame": 84217,
+        "f0": 620.1155043877951,
+        "center_seconds": 1.903219954648526,
+        "pitch_confidence": 0.974330363541019,
+        "reference_cycle_count": 81,
+        "reference_scale": 0.08623800966596909,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 4,
+          "correlations": [
+            0.04766234084466203,
+            -0.004934900552937639,
+            0.02420557961179117,
+            -0.002078508837364443
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.0,
+        "gain": 0,
+        "correlation": 0.0,
+        "explained_energy": 0.0,
+        "first_frame": 87600,
+        "end_frame": 88202,
+        "f0": 585.9250510318753,
+        "center_seconds": 1.993219954648526,
+        "pitch_confidence": 0.9299581023975902,
+        "reference_cycle_count": 366,
+        "reference_scale": 0.08692241980763904,
+        "presence": {
+          "present": false,
+          "supported_windows": 0,
+          "informative_windows": 4,
+          "correlations": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "reasons": [
+          "insufficient local presence"
+        ],
+        "accepted_complete_cycles": 0
+      },
+      {
+        "phase": 0.552734375,
+        "gain": 0.061636274484315315,
+        "correlation": 0.8293473530117182,
+        "explained_energy": 4.431455742132138,
+        "first_frame": 88041,
+        "end_frame": 88643,
+        "f0": 585.8318254830734,
+        "center_seconds": 2.003219954648526,
+        "pitch_confidence": 0.9531952645427646,
+        "reference_cycle_count": 366,
+        "reference_scale": 0.08692241980763904,
+        "presence": {
+          "present": true,
+          "supported_windows": 3,
+          "informative_windows": 4,
+          "correlations": [
+            0.15361206611731976,
+            0.9841241067894686,
+            0.9888064216838955,
+            0.9807077807152403
+          ]
+        },
+        "reasons": [
+          "fewer than three consecutive supported complete cycles in original gap"
+        ],
+        "accepted_complete_cycles": 0
+      }
+    ],
+    "new_occurrences": [],
+    "new_cycle_count": 0,
+    "new_frames": 0,
+    "render_model": "unchanged 5A 256-position table and frozen Hermite joins; new support only",
+    "policy": {
+      "periods_per_probe": 8,
+      "phase_positions": 64,
+      "phase_refinement_positions": 512,
+      "pitch_confidence_min": 0.9,
+      "reference_period_tolerance": 0.02,
+      "minimum_reference_cycles": 3,
+      "maximum_gain_over_reference": 1.2,
+      "presence_correlation": 0.85,
+      "minimum_supported_windows": 3,
+      "minimum_proposed_complete_cycles": 3
+    }
+  },
+  "timings": {
+    "baseline_load_or_compute_seconds": 32.891484541,
+    "correction_seconds": 1.0531170830000036,
+    "total_evaluation_seconds": 37.142040541
+  },
+  "peak_process_rss_bytes": 395673600,
+  "source_sha256": {
+    "correction.py": "e3cb672e5f231a64a0d9463628ed9de40fc2484d346962c971fed6adbfc88eb5",
+    "evaluate.py": "a80d178710da02471662de78864773413d46b7cbab65fd4362332dfb3c54c56f"
+  }
+}

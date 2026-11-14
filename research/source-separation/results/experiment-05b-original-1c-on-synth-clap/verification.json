@@ -1,0 +1,10 @@
+{
+  "unchanged_1c_tests_passed": 11,
+  "original_algorithm_historical_hash_verified": true,
+  "retained_decoder_only_adapter": true,
+  "prior_research_files_verified": 549,
+  "float32_stereo_exports_verified": true,
+  "additive_conservation_max_error": 1.4901161193847656e-08,
+  "no_new_algorithm_or_production_changes": true,
+  "listening_performed": false
+}

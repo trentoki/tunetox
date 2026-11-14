@@ -1,0 +1,4 @@
+{
+  "all_python_sources_compile_in_memory": true,
+  "note": "An initial py_compile attempt could not write the host cache directory; the completed syntax check compiles in memory without cache writes."
+}

@@ -1,0 +1,28 @@
+{
+  "prior_research_files_verified_unchanged": 212,
+  "algorithm_01c_unchanged": true,
+  "input_sha256_matches": true,
+  "tests_passed": 6,
+  "listening_performed": false,
+  "original_reference_matches_every_decoded_sample": true,
+  "float32_sum_maximum_error": 7.450580596923828e-09,
+  "svg_xml_and_finite_coordinates_checked": true,
+  "rendered_preview_inspected": false,
+  "source_and_output_sha256": {
+    "report.json": "2a1b795234f63046fe8f57cda05a411f65416f9977e76173a728e91ec0abb514",
+    "figures.html": "02e9e6aed079ced8bbf01c27dc173963eeafe9d7642322c3ab6630bc736591da",
+    "original_reference.wav": "f6bb9b2d6266e756292a52f72904a5d5a06202b31e444a76ee48942a36ca1aa7",
+    "preservation.json": "3af22e5b610740f4b2ba634f7c0adc9ff202781ee8ce2c7ec21a0559e88e96e7",
+    "README.md": "9479f3146f73a6044af78c5b6935166e70015d924a1a854b3bd82cc6bc58f069",
+    "waveform-comparisons.svg": "bb682b053900d1b5e73391f3544997695dd4518161baf4f7f7f6500bf84387cc",
+    "test_reconstruct.py": "9aa84aaa73c850157fd908fb1a63cb0bb43541044e8dfe7326247580ecf2b620",
+    "plots.py": "295983b7b7b36d3ba0cdc8c1420e21292caed11e3d1d0253795eb29d2fd66923",
+    "residual.wav": "81e4916bc5e36869c413f2023a3ae8291e8df89e4f3c6890df31df3800f7a95d",
+    "boundary-step-evaluation.json": "f3d59e6582d127124e7437a342fb895e3c99bde0487f84fae6dadb321e578733",
+    "verification.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reconstruct.py": "b89894e0a319b71c583cbeb5e852131bf908874692cb5a22f962e5110e217487",
+    "reconstructed.wav": "8c997cba6cf280094e28ae75f2d498422787d5e60b6be10072678cdbf95ded50",
+    "occurrence-decisions.json": "f2fafe5dcbe6323501e6c952b73877f27c4ea2cdd44655f0cd4be5c3a1436094",
+    "recording-envelopes.svg": "6e86e993ae2b700fc720536f1dd74963459b99e7ce9225fbf287caaba7b02ec2"
+  }
+}

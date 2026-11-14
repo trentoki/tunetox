@@ -1,0 +1,9 @@
+{
+  "input": "/Volumes/OWC Express 1M2/TuneToss/research/source-separation/audio/VarVolDPTE Kick 111 Clap 808.aif",
+  "input_sha256": "624ce55536c04d2660848dce5d9927041924816ef08ad7daefc3702c26fe2918",
+  "algorithm_sha256": "69743fe42cebcaf948d375e9f132fcaa7993fd4422ace60415a1bcc2ba0771d5",
+  "algorithm_unchanged": true,
+  "adapter": "AIFC fl32 big-endian decode only; no scaling, clipping or resampling",
+  "reference_files_used": [],
+  "elapsed_seconds": 145.079943333
+}

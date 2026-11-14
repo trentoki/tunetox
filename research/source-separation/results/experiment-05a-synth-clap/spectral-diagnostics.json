@@ -1,0 +1,12 @@
+[
+  {
+    "source": "source_1",
+    "median_spectral_centroid_hz": 1066.7461476011254,
+    "median_energy_fraction_above_5khz": 0.030522616855095178
+  },
+  {
+    "source": "source_2",
+    "median_spectral_centroid_hz": 2139.8687007266017,
+    "median_energy_fraction_above_5khz": 0.07378946222086358
+  }
+]

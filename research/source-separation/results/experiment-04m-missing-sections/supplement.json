@@ -1,0 +1,59 @@
+{
+  "period_evidence": [
+    {
+      "cycle": 491,
+      "crossing_duration_frames": 75.72614578841603,
+      "following_crossing_duration_frames": 73.97057993775525,
+      "crossing_period_change": 0.023183087325822083,
+      "sharp_edge_intervals_frames": [
+        75.05914979097724,
+        75.0606123473408
+      ],
+      "sharp_edge_interval_change": 1.9485384095352387e-05,
+      "caveat": "Maximum-slope parabolic proxy; not physical edge ground truth."
+    },
+    {
+      "cycle": 535,
+      "crossing_duration_frames": 75.73111288348446,
+      "following_crossing_duration_frames": 73.96472492307657,
+      "crossing_period_change": 0.023324468546045862,
+      "sharp_edge_intervals_frames": [
+        75.05915161331359,
+        75.06075514131226
+      ],
+      "sharp_edge_interval_change": 2.1363524156603475e-05,
+      "caveat": "Maximum-slope parabolic proxy; not physical edge ground truth."
+    },
+    {
+      "cycle": 428,
+      "crossing_duration_frames": 84.56586322554358,
+      "following_crossing_duration_frames": 82.58368958126084,
+      "crossing_period_change": 0.023439406501369553,
+      "sharp_edge_intervals_frames": [
+        84.20802174310666,
+        84.16292471400811
+      ],
+      "sharp_edge_interval_change": 0.0005355431485627449,
+      "caveat": "Maximum-slope parabolic proxy; not physical edge ground truth."
+    },
+    {
+      "cycle": 685,
+      "crossing_duration_frames": 71.09621452452848,
+      "following_crossing_duration_frames": 69.61382352217333,
+      "crossing_period_change": 0.020850491299276075,
+      "sharp_edge_intervals_frames": [
+        70.95088918827241,
+        70.82749229148612
+      ],
+      "sharp_edge_interval_change": 0.0017391874604819613,
+      "caveat": "Maximum-slope parabolic proxy; not physical edge ground truth."
+    }
+  ],
+  "seventh_rendered_error_partition": {
+    "join_zone": 0.08828308199779725,
+    "central_shape_zone": 0.9844607330170356,
+    "within_2_samples_of_sharp_edge": 0.5788842807730499
+  },
+  "rejected_but_reliable_neighbor_examples": [],
+  "supplement_analysis_seconds": 0.189697834
+}

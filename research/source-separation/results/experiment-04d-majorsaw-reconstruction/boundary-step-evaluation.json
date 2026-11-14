@@ -1,0 +1,20 @@
+{
+  "scope": "Sample steps at integer frames immediately after modeled cycle boundaries; not a perceptual click detector or continuous-time derivative test.",
+  "measurements": {
+    "original": {
+      "maximum_boundary_adjacent_sample_step": 0.011279618367552757,
+      "median_boundary_adjacent_sample_step": 0.004474325891351327,
+      "boundary_count": 1863
+    },
+    "reconstructed": {
+      "maximum_boundary_adjacent_sample_step": 0.004229071433655918,
+      "median_boundary_adjacent_sample_step": 0.0021485608885996044,
+      "boundary_count": 1863
+    },
+    "residual": {
+      "maximum_boundary_adjacent_sample_step": 0.010602333582937717,
+      "median_boundary_adjacent_sample_step": 0.002982485602842644,
+      "boundary_count": 1863
+    }
+  }
+}

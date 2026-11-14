@@ -1,0 +1,43 @@
+{
+  "experiment": "5B",
+  "input_path": "/Volumes/OWC Express 1M2/TuneToss/research/source-separation/audio/MajorsawwackClap.aif",
+  "input_sha256": "5eb47bcae4b439165ee318ac9eca95c05f508ae08e7e229860ca0746429f7b23",
+  "algorithm_path": "/Volumes/OWC Express 1M2/TuneToss/research/source-separation/experiment_01c.py",
+  "algorithm_sha256": "eb8fd4895b4a62fe7d57c97c6004685d184a00258ca8fe29b68115c89994a6d7",
+  "algorithm_unchanged": true,
+  "only_compatibility_change": "read_audio replaced by retained AIFC fl32 big-endian decoder; exact float32 samples, no scaling/resampling/quantization",
+  "settings": {
+    "threshold": 0.015,
+    "max_lag_ms": 5,
+    "presence_window_ms": 4,
+    "local_correlation_min": 0.85,
+    "max_components": 4
+  },
+  "references_used": [],
+  "methods_4n_4q_5a_used_for_separation": false,
+  "component_count": 1,
+  "detected_events": 7,
+  "residual_energy_ratio_float64": 0.9021924372757643,
+  "residual_energy_ratio_exported": 0.902192437302349,
+  "recombined_definition": "sum of separated components plus explicit residual; components_only.wav excludes residual",
+  "conservation_max_error": 1.4901161193847656e-08,
+  "recombined_reference_max_error": 1.4901161193847656e-08,
+  "timings": {
+    "unchanged_1c_run_seconds": 60.730289875000004,
+    "total_before_json_seconds": 62.157172208
+  },
+  "peak_process_rss_bytes": 329547776,
+  "source_sha256": "d02c0a610bbc03608d50c90ffbf8db450022bc9be9db7f65a4b8dd31a2beeecd",
+  "outputs": {
+    "original_reference.wav": "312c94b5f9d4499530601bca2cc9426b6385204561dd5462cd3aad0e9f16de08",
+    "recombined.wav": "956813a6f383984adb0006e4cd7e8fd04cffe8993c81eace1173a2f0cc110074",
+    "components_only.wav": "b98ac747b0afff00dd97b6710adb107085e49f8838819fd7e95c3a47f35fb2f3",
+    "separation/baseline_component.wav": "e0f7f4c6f48cff58728d1090a5e14cbe3883b9354899522d20223f78ee4ec2df",
+    "separation/component_01.wav": "b98ac747b0afff00dd97b6710adb107085e49f8838819fd7e95c3a47f35fb2f3",
+    "separation/residual.wav": "1dd32505d4c5f0708a7190d8aa585bc1b8aec316e0fd270c35ce3061b701718d",
+    "separation/baseline_residual.wav": "4134a52121678434374c18fdfc74f1c07861343c8e5158bb9b8a6e69dd61e345"
+  },
+  "prior_files_verified": 549,
+  "normalization_or_clipping": false,
+  "listening_performed": false
+}

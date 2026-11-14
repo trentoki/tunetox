@@ -1,0 +1,45 @@
+{
+  "benchmark": "corrected varvol2 1C",
+  "algorithm_sha256": "eb8fd4895b4a62fe7d57c97c6004685d184a00258ca8fe29b68115c89994a6d7",
+  "settings": {
+    "threshold": 0.015,
+    "max_lag_ms": 5,
+    "presence_window_ms": 4,
+    "local_correlation_min": 0.85,
+    "max_components": 4
+  },
+  "input_sha256": "5eab41d64b97a895b0c5ef6ffe81cf146e2d91e595bfb1245f1079e29a4298d4",
+  "wav_comparison": {
+    "baseline_component.wav": {
+      "new_sha256": "7237e1771e39eeb5ce1c0c38f5d90ebe3727af5598abbb8e2c596cb92c0ba14d",
+      "old_sha256": "7237e1771e39eeb5ce1c0c38f5d90ebe3727af5598abbb8e2c596cb92c0ba14d",
+      "identical": true
+    },
+    "component_02.wav": {
+      "new_sha256": "506dfd6553db410e8eef70c63accb75d3c620fe6042f58351833a126be4a39a9",
+      "old_sha256": "506dfd6553db410e8eef70c63accb75d3c620fe6042f58351833a126be4a39a9",
+      "identical": true
+    },
+    "component_01.wav": {
+      "new_sha256": "b8612e23d58c4f14ec0b6bd6c029a935154e6065306c9d5c064dea5a8aa2143e",
+      "old_sha256": "b8612e23d58c4f14ec0b6bd6c029a935154e6065306c9d5c064dea5a8aa2143e",
+      "identical": true
+    },
+    "residual.wav": {
+      "new_sha256": "94688c53aadbf12ee0ce9a2026453386466137ce05f818f3b261b09d5142e96f",
+      "old_sha256": "94688c53aadbf12ee0ce9a2026453386466137ce05f818f3b261b09d5142e96f",
+      "identical": true
+    },
+    "baseline_residual.wav": {
+      "new_sha256": "c0204976dbdb3285a7a529743c04a9f49c27548c1f20367cfc86d2781a7703e6",
+      "old_sha256": "c0204976dbdb3285a7a529743c04a9f49c27548c1f20367cfc86d2781a7703e6",
+      "identical": true
+    }
+  },
+  "fitted_allocations_identical": true,
+  "component_count": 2,
+  "residual_energy_fraction": 5.791004096856732e-05,
+  "elapsed_seconds": 149.82085745799998,
+  "peak_process_rss_bytes": 136642560,
+  "quality_regression": "No output change versus saved 1C; source purity was not newly validated."
+}

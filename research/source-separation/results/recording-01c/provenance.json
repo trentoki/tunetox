@@ -1,0 +1,9 @@
+{
+  "input": "/Volumes/OWC Express 1M2/TuneToss/research/source-separation/audio/DPTE Kick 111 Clap 808.aif",
+  "input_sha256": "0c6bea617d855b24862a9bd42255681324898d394268ad895140d517209e6748",
+  "algorithm_sha256": "eb8fd4895b4a62fe7d57c97c6004685d184a00258ca8fe29b68115c89994a6d7",
+  "algorithm_unchanged": true,
+  "adapter": "AIFC fl32 big-endian decode only; no scaling, clipping or resampling",
+  "reference_files_used": [],
+  "elapsed_seconds": 127.3111545
+}

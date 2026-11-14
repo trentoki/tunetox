@@ -1,0 +1,22 @@
+{
+  "prior_files_verified": 482,
+  "focused_tests_passed": 4,
+  "baseline_bit_identical_to_4n": true,
+  "recognized_samples_bit_identical": true,
+  "provisional_samples_exactly_original": true,
+  "provisional_residual_exactly_zero": true,
+  "actual_nonquiet_output_holes_samples": 0,
+  "unassigned_original_samples_below_digital_quiet_cutoff": true,
+  "float32_stereo_6_seconds_verified": true,
+  "assignment_csv_partition_complete": true,
+  "conservation_max_error": 3.725290298461914e-09,
+  "largest_boundary_step_increase_vs_4n": {
+    "frame": 199169,
+    "seconds": 4.516303854875283,
+    "4q_step": 0.004348086990056288,
+    "original_step": 0.0044300032532191835,
+    "4n_step": 9.066948081226656e-08,
+    "4q_minus_original_step_max": 8.191626316289558e-05
+  },
+  "listening_performed": false
+}

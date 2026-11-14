@@ -1,0 +1,8 @@
+{
+  "midi_validation_required": false,
+  "user_confirmed_audio_only_scope": true,
+  "audio_analysis_complete": true,
+  "historical_report_midi_notes": "Report and summary were recorded before the user clarified MIDI was optional; they do not indicate a blocker.",
+  "prior_research_files_verified_unchanged": 230,
+  "final_readme_sha256": "9a6fbd335ec6aca42e40ebd96fef961a6b02dbd53574fad2e367b7472a603957"
+}

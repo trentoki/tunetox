@@ -1,0 +1,9 @@
+{
+  "prior_research_files_verified": 445,
+  "tests_passed": 3,
+  "energy_partitions_and_exact_gap_residuals_checked": true,
+  "conservation_max_error": 7.450580596923828e-09,
+  "source_syntax_and_svg_geometry_checked": true,
+  "no_wav_or_algorithm_changes": true,
+  "browser_or_listening_validation": false
+}
