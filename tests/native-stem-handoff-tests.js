@@ -68,7 +68,7 @@ async function runNativeStemHandoffTests() {
   const transportEvents=[];const remove=guarded.mixer.getDeck(1).subscribe(type=>transportEvents.push(type));
   const beforeRejected=JSON.stringify(guarded.state.decks);
   const automationBefore=JSON.stringify(guarded.gains.map(g=>g.events));
-  await rejects(()=>guarded.actions.setMainVolume(1,0.4,'rejected-playing-volume'),'Unsupported playing volume rejects before scheduling');
+  await rejects(()=>guarded.actions.setMainVolume(1,-0.4,'rejected-playing-volume'),'Out-of-range playing volume rejects before scheduling');
   check(guarded.mixer.getDeck(1).getState().isPlaying&&transportEvents.length===0,'Rejected volume cannot pause Deck 1');
   check(JSON.stringify(guarded.state.decks)===beforeRejected&&JSON.stringify(guarded.gains.map(g=>g.events))===automationBefore,
     'Rejected playing volume preserves state and all native automation');
@@ -93,7 +93,7 @@ async function runNativeStemHandoffTests() {
   deadline.audio.currentTime=0.2;deadline.actions.setStemLevel(2,'voice',0.5,'deadline-sharing');
   const rejectionAutomation=JSON.stringify(deadline.gains.map(g=>g.events));
   const rejectionDomain=JSON.stringify(deadline.state.decks);
-  await rejects(()=>deadline.actions.setMainVolume(2,0.6,'unsupported-deck-two'),'Unsupported Deck 2 volume rejects while both decks play');
+  await rejects(()=>deadline.actions.setMainVolume(2,1.6,'unsupported-deck-two'),'Out-of-range Deck 2 volume rejects while both decks play');
   check(deadline.mixer.getDeck(1).getState().isPlaying&&deadline.mixer.getDeck(2).getState().isPlaying,
     'Rejected Deck 2 gesture leaves both native sessions playing');
   check(JSON.stringify(deadline.gains.map(g=>g.events))===rejectionAutomation&&JSON.stringify(deadline.state.decks)===rejectionDomain,
@@ -102,7 +102,7 @@ async function runNativeStemHandoffTests() {
   deadline.mixer.getDeck(2).pause();deadline.audio.currentTime=0.3;
   deadline.actions.setMainVolume(2,0.5,'retained-owner-volume');
   check(deadline.mixer.getDeck(1).getState().isPlaying,'Accepted paused-owner volume redistribution does not normally pause Deck 1');
-  // Simulate native calls taking longer than the one-quantum scheduling reservation.
+  // Simulate native calls exceeding even the reserved batch boundary; fail-closed must remain.
   const originalSet=deadline.gains[0].gain.setValueAtTime;
   deadline.gains[0].gain.setValueAtTime=function(value,time) {
     originalSet(value,time);deadline.audio.currentTime=time+0.01;
@@ -154,14 +154,14 @@ async function runNativeStemHandoffTests() {
   check(voice(4)===0.7&&near(voice(1)+voice(2)+voice(3),0.3),'Live fader has priority with proportional receivers');
   check(f.displays['deck.1.stem.voice.level']===voice(1),'Automatic receiver fader projection synchronized');
   check(f.state.decks[1].stems.allocatedLevels.flow===0,'Untouched zero category never introduced');
-  await rejects(()=>f.actions.setMainVolume(1,0.2,'unsupported'),'Unsupported live main-volume adjustment rejects');
+  await rejects(()=>f.actions.setMainVolume(1,1.2,'unsupported'),'Out-of-range live Main rejects');
   check(f.state.decks[0].volume===1,'Rejected volume does not commit domain state');
-  const liveBefore=JSON.stringify(f.state.participation);
-  await rejects(()=>f.actions.setParticipation(4,false),'Unsafe audible exclusion rejects instead of exceeding cap');
-  check(JSON.stringify(f.state.participation)===liveBefore,'Rejected participation leaves authoritative store unchanged');
+  const liveBefore=JSON.stringify(f.state.decks.map(d=>d.stems));
+  f.actions.setParticipation(4,false);
+  check(JSON.stringify(f.state.decks.map(d=>d.stems))===liveBefore && !f.state.participation.byDeck[4].stemHandoff,'Live exclusion preserves allocations and accepts independent cohort');
   f.mixer.getDeck(3).pause();f.actions.setParticipation(3,false);
   check(!f.state.participation.byDeck[3].stemHandoff&&owner(3),'Checkbox excludes retained paused owner');
-  f.actions.setParticipation(3,true);check(f.state.participation.byDeck[3].stemHandoff,'Reenable checkbox rebalances');
+  f.actions.setParticipation(3,true);check(f.state.participation.byDeck[3].stemHandoff,'Reenable checkbox preserves allocations');
   f.actions.setEnabled(false);const before=voice(2);set(1,0.01);
   check(voice(2)===before,'Global OFF leaves other controls independent');f.actions.setEnabled(true);
   // Replacement releases the old song; no auto-entry until new successful Play.

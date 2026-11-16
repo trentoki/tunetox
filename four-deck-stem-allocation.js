@@ -1,4 +1,5 @@
-// Phase 1 only: pure one-category allocation. Not loaded by the application.
+// Pure one-category allocation. F2 opts into incremental direct-stem transfers;
+// existing callers retain the F1 request-weighted path.
 // active means retained membership after first Play (including Pause), not isPlaying.
 // Caller supplies post-event membership/requests and pre-event allocated levels.
 // Authorization/eligibility and relationship establishment remain caller-owned.
@@ -34,7 +35,10 @@ function calculateFourDeckStemAllocation(input) {
   if (priority) allocations[priority.id] = priority.requestedLevel;
   const redistribute = enabled && !['preparation', 'preserve'].includes(trigger) &&
     (!priority || members.includes(priority));
-  if (redistribute) {
+  let transfer = null;
+  if (redistribute && input.incremental && ['directGesture','entry'].includes(trigger)) {
+    transfer = allocateIncrementalStemGesture({ ...input, ordered, members, priority, allocations });
+  } else if (redistribute) {
     const priorityGain = priority ? priority.volume * priority.requestedLevel : 0;
     const receivers = members.filter(deck => deck !== priority);
     const rows = receivers.map(deck => {
@@ -72,6 +76,47 @@ function calculateFourDeckStemAllocation(input) {
   const combinedGain = members.reduce((sum, deck) => sum + effectiveGains[deck.id], 0);
   return Object.freeze({ allocationsByDeck: Object.freeze(allocations), requestedLevelsByDeck: Object.freeze(requests),
     effectiveGainsByDeck: Object.freeze(effectiveGains), activeDeckIds: Object.freeze(members.map(deck => deck.id)),
-    combinedGain, deficit: Math.max(0, 1 - combinedGain), excess: Math.max(0, combinedGain - 1),
+    transfer, combinedGain, deficit: Math.max(0, 1 - combinedGain), excess: Math.max(0, combinedGain - 1),
     relationshipEstablished, status: !redistribute ? 'preserved' : Math.abs(combinedGain - 1) <= 1e-12 ? 'balanced' : 'constrained' });
+}
+
+// F2 opt-in: preserve committed peer gains; transfer only the direct effective-gain
+// delta. Main actions and lifecycle allocations deliberately retain their old path.
+function allocateIncrementalStemGesture(input) {
+  const { members, priority, allocations, authorizationCeiling, relationshipEstablished } = input;
+  const { previousGain, history } = input.incremental;
+  requireUnitGain(previousGain);
+  if (!Array.isArray(history) || new Set(history).size !== history.length ||
+      history.some(id => ![1,2,3,4].includes(id))) throw new TypeError('Invalid stem touch history.');
+  const peers = members.filter(deck => deck !== priority);
+  const gains = new Map(peers.map(deck => [deck.id, deck.volume * deck.allocatedLevel]));
+  const totalBefore = previousGain + [...gains.values()].reduce((sum,gain)=>sum+gain,0);
+  const delta = priority.volume * priority.requestedLevel - previousGain;
+  let transferred = 0;
+  if (delta > 0) {
+    // Available headroom is used first. Only existing positive allocations donate;
+    // stale requests and automatically zeroed peers cannot suddenly appear here.
+    const needed = Math.min(delta, Math.max(0,totalBefore + delta - 1));
+    const donors = peers.filter(deck => gains.get(deck.id)>0);
+    const available = donors.reduce((sum,deck)=>sum+gains.get(deck.id),0);
+    transferred = Math.min(needed,available);
+    if (available>0) for (const deck of donors) {
+      const gain=gains.get(deck.id);
+      gains.set(deck.id,Math.max(0,gain-transferred*(gain/available)));
+    }
+  } else if (delta < 0 && relationshipEstablished) {
+    let remaining=Math.min(-delta,Math.max(0,1-(totalBefore+delta)));
+    for (const id of [...history].reverse()) {
+      const deck=peers.find(peer=>peer.id===id);
+      if (!deck || !deck.returnEligible || deck.requestedLevel===0 || deck.volume===0 || authorizationCeiling===null) continue;
+      const current=gains.get(id), ceiling=Math.min(deck.volume,authorizationCeiling);
+      const amount=Math.min(remaining,Math.max(0,ceiling-current));
+      gains.set(id,current+amount);remaining-=amount;transferred+=amount;
+      if (remaining<=1e-12) break;
+    }
+  }
+  for (const deck of peers) if (deck.volume>0) allocations[deck.id]=Math.min(1,gains.get(deck.id)/deck.volume);
+  return Object.freeze({ previousGain, delta, transferred,
+    unreturnedGain: delta<0 ? Math.max(0,-delta-transferred):0,
+    preexistingExcess:Math.max(0,totalBefore-1) });
 }

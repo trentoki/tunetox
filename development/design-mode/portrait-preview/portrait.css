@@ -1,0 +1,42 @@
+/* H5.3 scoped corrections; no prior layout or production styles are edited. */
+.h53-popover { position:fixed;z-index:200;width:152px;padding:4px;overflow-y:auto;overscroll-behavior:contain;touch-action:none;background:#132b3b;border:1px solid var(--accent,#62e8e0);border-radius:6px;box-shadow:0 7px 24px #000a; }
+.h53-popover button { display:block;width:100%;min-height:36px;background:transparent;border:0;border-radius:3px;color:#c8dce6;font:12px/1.2 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-align:left;padding:6px 9px;touch-action:none; }
+.h53-popover [aria-selected=true] { color:#08161f;background:var(--accent); }
+.h53-choice { touch-action:none;-webkit-touch-callout:none; }
+.h53-app .h52-transition .h52-fx-type { min-height:40px;height:40px; }
+.h53-app .h52-transition-overview { display:block;position:relative; }
+.h53-app .h52-overview-wave { height:100%; }
+.h53-overview-deck { position:absolute;top:2px;left:38px;z-index:7;font-size:9px;line-height:10px;pointer-events:none;color:var(--accent); }
+.h53-app .h52-overview-song { display:block;position:absolute;bottom:2px;left:38px;right:38px;z-index:7;pointer-events:none; }
+.h53-partner-touch { position:absolute;inset:0 36px;width:calc(100% - 72px);height:100%;border:0;background:transparent;color:transparent;font-size:0;z-index:4; }
+.h53-overview-nudges { position:absolute;inset:0;z-index:5;pointer-events:none; }
+.h53-overview-nudges button { position:absolute;top:0;bottom:0;width:36px;border:0;background:#10253055;color:var(--accent);font-size:16px;text-shadow:0 1px 3px #000,0 0 2px #000;pointer-events:auto;touch-action:none; }
+.h53-overview-nudges button:first-child { left:0; }
+.h53-overview-nudges button:last-child { right:0; }
+.h53-overview-nudges [data-pressed=true] { background:color-mix(in srgb,var(--accent) 35%,#112635);box-shadow:inset 0 0 0 1px var(--accent); }
+.h53-app .h52-overview-marker { z-index:6; }
+@media (min-width:701px) and (min-height:650px) {
+ .h53-app .h3-controls { overflow:clip;overscroll-behavior:none;touch-action:none; }
+ .h53-app .h3-controls .performance-controls { min-height:0;padding:2px 0;grid-template-rows:minmax(68px,1fr) minmax(90px,1fr);gap:4px; }
+}
+/* Reclaim only decorative space on the shortest tablet portrait defaults, so
+   44px knobs remain reachable rather than clipping the locked panel. */
+@media (min-width:701px) and (min-height:650px) and (orientation:portrait) and (max-height:1050px) {
+ .h53-app [data-mode=controls].h3-deck { --h1-overviewHeight:24px;--h1-header:40px;--h1-headerGap:2px; }
+}
+/* Phone Transition merges the old transport-Main area into the overview workspace.
+   Existing Play/Queue nodes remain live; Main is still present in both strips. */
+@media (max-width:700px) and (orientation:portrait) {
+ .h53-app [data-mode=transition].h3-deck { --h53-overview:calc(max(66px,var(--h1-overviewHeight) + 32px) + var(--h1-transport));grid-template-rows:var(--h1-header) var(--h3-song-height) minmax(0,1fr); }
+ .h53-app [data-mode=transition]>.h3-center { grid-row:3; }
+ .h53-app [data-mode=transition]>.h1-transport { position:absolute;z-index:8;left:var(--h1-padding);top:calc(var(--h1-padding) + var(--h1-header) + var(--h3-song-height) + var(--h1-headerGap)*2 + (var(--h53-overview) - 76px)/2);width:44px;height:76px;display:grid;grid-template-columns:44px;grid-template-rows:36px 36px;gap:4px; }
+ .h53-app [data-mode=transition]>.h1-transport>.mix-control { display:none; }
+ .h53-app [data-mode=transition] .h52-transition { grid-template-rows:var(--h53-overview) minmax(0,1fr); }
+ .h53-app [data-mode=transition] .h52-transition-overviews { margin-left:48px; }
+}
+@media (max-width:700px) and (orientation:portrait) and (max-height:520px) {
+ .h53-app [data-mode=transition].h3-deck { --h53-overview:92px; }
+}
+/* Override the older .h1-app button manipulation rule at the actual source.
+   Otherwise a vertical choice can become browser panning and receive pointercancel. */
+.h53-app .h53-choice { touch-action:none; }

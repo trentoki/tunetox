@@ -174,6 +174,28 @@ function createFourStemPlayer(createContext = () => new AudioContext(), options 
       return true;
     } finally { if (version === loadVersion) loading = false; }
   }
+  // Internal loading boundary for repeated songs in one shared-context mixer.
+  // AudioBuffers are borrowed read-only; each player still owns its own sources,
+  // offsets, gain nodes and lifecycle. No PCM is copied or modified here.
+  async function loadDecodedBuffers(shared) {
+    if (options.guardStart) options.guardStart();
+    validateStemBuffers(shared);
+    const audio = getContext();
+    if (shared.transients.sampleRate !== audio.sampleRate) throw new Error('Shared PCM must match the native context sample rate.');
+    const resumed = audio.resume();
+    const version = ++loadVersion;
+    stop(); loading = true; notify('replacement');
+    try {
+      await resumed;
+      if (version !== loadVersion || closed) return false;
+      if (audio.state !== 'running') throw new Error('AudioContext is not running. Tap Load again.');
+      buffers = Object.freeze({ ...shared }); position = 0;
+      return true;
+    } finally { if (version === loadVersion) loading = false; }
+  }
+  function getDecodedBuffers() {
+    return buffers && !loading && !closed ? Object.freeze({ ...buffers }) : null;
+  }
   async function startPlayback(prepareStart = null) {
     try {
       const result = await startPlaybackAttempt(prepareStart);
@@ -269,22 +291,20 @@ function createFourStemPlayer(createContext = () => new AudioContext(), options 
   }
   function envelopeValue(ramp, fallback, time) {
     if (!ramp) return fallback;
+    if (time <= ramp.start) return ramp.from;
     if (time >= ramp.end) return ramp.target;
     return ramp.from + (ramp.target - ramp.from) * Math.max(0, (time - ramp.start) / (ramp.end - ramp.start));
   }
   function prepareRetarget(target, when) {
     if (!session) return null;
-    if (target.mainVolume !== mainVolume || (session.volume.ramp && session.volume.ramp.end > when)) {
-      throw new Error('Coordinated retarget requires a settled, unchanged main volume.');
-    }
     const transport = envelopeValue(session.transportRamp, session.transportLevel, when);
     const from = {};
     for (const name of prototypeStemNames) {
       from[name] = transport * envelopeValue(session.paths[name].ramp, levels[name], when);
     }
-    return { from, volume: mainVolume, session };
+    return { from, volume: envelopeValue(session.volume.ramp, mainVolume, when), session };
   }
-  function applyRetarget(target, when, prepared) {
+  function applyRetarget(target, when, prepared, decreaseFirst = false) {
     if (!prepared) {
       for (const name of prototypeStemNames) levels[name] = target.levels[name];
       mainVolume = target.mainVolume;
@@ -299,8 +319,14 @@ function createFourStemPlayer(createContext = () => new AudioContext(), options 
     }
     parameter.setValueAtTime(1, when);
     session.transportRamp = null; session.transportLevel = 1;
+    // Main and stems remain separate physical gains. Only a potentially unsafe
+    // product-of-ramps plan delays increases until all reductions finish.
+    rampGain(session.volume, mainVolume, target.mainVolume, when, prepared.volume,
+      decreaseFirst && target.mainVolume > prepared.volume ? smoothingSeconds : 0);
+    mainVolume = target.mainVolume;
     for (const name of prototypeStemNames) {
-      rampGain(session.paths[name], levels[name], target.levels[name], when, prepared.from[name]);
+      rampGain(session.paths[name], levels[name], target.levels[name], when, prepared.from[name],
+        decreaseFirst && target.levels[name] > prepared.from[name] ? smoothingSeconds : 0);
       levels[name] = target.levels[name];
     }
   }
@@ -314,10 +340,9 @@ function createFourStemPlayer(createContext = () => new AudioContext(), options 
     if (path) rampGain(path, levels[name], value, when);
     levels[name] = value;
   }
-  function rampGain(path, previousTarget, value, when = context.currentTime, effectiveFrom) {
+  function rampGain(path, previousTarget, value, when = context.currentTime, effectiveFrom, holdSeconds = 0) {
     const now = when, ramp = path.ramp;
-    const from = ramp ? (now >= ramp.end ? ramp.target :
-      ramp.from + (ramp.target - ramp.from) * Math.max(0, (now - ramp.start) / (ramp.end - ramp.start))) : previousTarget;
+    const from = envelopeValue(ramp, previousTarget, now);
     const parameter = path.gain.gain;
     parameter.cancelScheduledValues(now);
     // For future batch times, retain the unfinished segment whose endpoint was cancelled.
@@ -325,8 +350,9 @@ function createFourStemPlayer(createContext = () => new AudioContext(), options 
     if (ramp && now > ramp.start && now < ramp.end) parameter.linearRampToValueAtTime(from, now);
     const anchor = effectiveFrom === undefined ? from : effectiveFrom;
     parameter.setValueAtTime(anchor, now);
-    parameter.linearRampToValueAtTime(value, now + smoothingSeconds);
-    path.ramp = { start: now, end: now + smoothingSeconds, from: anchor, target: value };
+    if (holdSeconds) parameter.setValueAtTime(anchor, now + holdSeconds);
+    parameter.linearRampToValueAtTime(value, now + holdSeconds + smoothingSeconds);
+    path.ramp = { start: now + holdSeconds, end: now + holdSeconds + smoothingSeconds, from: anchor, target: value };
   }
   function setMainVolume(value, when) {
     if (options.guardGainWrite) options.guardGainWrite();
@@ -389,7 +415,7 @@ function createFourStemPlayer(createContext = () => new AudioContext(), options 
         [name, meter.read()])))
     });
   }
-  return Object.freeze({ loadFiles, play, pause, stop, eject, close, setStemLevel, setMainVolume, subscribe,
+  return Object.freeze({ loadFiles, loadDecodedBuffers, getDecodedBuffers, play, pause, stop, eject, close, setStemLevel, setMainVolume, subscribe,
     startCoordinated: startPlayback, getGainSettledTime, getDiagnostics,
     prepareRetarget, applyRetarget, getStartTime: () => session?.startedAt || 0,
     getState: () => ({ loaded: !!buffers, loading, closed, isPlaying: !!session,
@@ -451,6 +477,28 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
   }
   function outputNode() { return outputMeter ? outputMeter.input : context.destination; }
   let protectedScheduling = false, writingSnapshot = false;
+  // Same provisional reservation as coordinated starts. Keep the 10 ms gain ramp;
+  // reserve time for validation and the complete native automation batch first.
+  const retargetLeadSeconds = 0.020;
+  let lastRetargetReservation = null;
+  function capacityIds(snapshot, ids) {
+    return ids.filter(id => snapshot[id].capacityMember !== false);
+  }
+  function quadraticMaximum(initial, linear, quadratic) {
+    let peak = Math.max(initial, initial + linear + quadratic);
+    if (quadratic < 0) {
+      const u = -linear / (2 * quadratic);
+      if (u > 0 && u < 1) peak = Math.max(peak, initial + linear * u + quadratic * u * u);
+    }
+    return peak;
+  }
+  function validateCapacity(previous, next, snapshot, message) {
+    // Explicit policy changes can preserve independent gains above unity on joining.
+    // They cannot increase that excess. Ordinary callers retain the strict unity cap.
+    const explicitMembership = deckIds.every(id => typeof snapshot[id].capacityMember === 'boolean');
+    const limit = explicitMembership ? Math.max(1, previous) : 1;
+    if ((!explicitMembership && previous > 1 + 1e-12) || next > limit + 1e-12) throw new Error(message);
+  }
   function guardGainWrite() {
     if (protectedScheduling && !writingSnapshot) throw new Error('Use a coordinated mixer snapshot for gain changes.');
   }
@@ -465,6 +513,7 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
     for (const id of deckIds) {
       const target = snapshot[id];
       if (!target || getDeck(id).getState().closed) throw new Error('Gain target/deck unavailable.');
+      if (target.capacityMember !== undefined && typeof target.capacityMember !== 'boolean') throw new Error('Invalid capacity membership.');
       for (const value of [target.mainVolume, ...prototypeStemNames.map(name => target.levels?.[name])]) {
         if (!Number.isFinite(value) || value < 0 || value > 1) throw new Error('Invalid gain snapshot.');
       }
@@ -474,7 +523,8 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
     validateGainSnapshot(snapshot);
     // A shared future boundary keeps the whole batch ahead of rendering. No context is
     // created by state changes; initial targets are retained until explicit Load/Play.
-    const when = scheduledTime === undefined ? (context ? context.currentTime + 128 / context.sampleRate : undefined) : scheduledTime;
+    const lead = protectedScheduling && !writingSnapshot ? retargetLeadSeconds : (context ? 128 / context.sampleRate : 0);
+    const when = scheduledTime === undefined ? (context ? context.currentTime + lead : undefined) : scheduledTime;
     if (protectedScheduling && !writingSnapshot) return retargetSnapshot(snapshot, when);
     for (const id of deckIds) {
       const deck = getDeck(id), previous = deck.getState(), target = snapshot[id];
@@ -491,6 +541,7 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
     // A source not yet started must stay silent until its scheduled start boundary.
     const when = Math.max(requestedTime, ...deckIds.map(id => getDeck(id).getStartTime()));
     const playing = deckIds.filter(id => getDeck(id).getState().isPlaying);
+    const capped = capacityIds(snapshot, playing);
     const audibleTargetsChanged = playing.some(id => {
       const previous = getDeck(id).getState(), target = snapshot[id];
       return previous.mainVolume !== target.mainVolume ||
@@ -500,29 +551,54 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
       // Preparation-only snapshots must not restart/normalize another deck's envelopes.
       // Keep full target validation and the audible cap; store only silent coefficients.
       for (const name of prototypeStemNames) {
-        const total = playing.reduce((sum,id) => sum + snapshot[id].mainVolume * snapshot[id].levels[name],0);
-        if (total > 1 + 1e-12) throw new Error('Coordinated retarget exceeds stem capacity.');
+        const total = capped.reduce((sum,id) => sum + snapshot[id].mainVolume * snapshot[id].levels[name],0);
+        validateCapacity(total, total, snapshot, 'Coordinated retarget exceeds stem capacity.');
       }
       for (const id of deckIds) if (!playing.includes(id)) getDeck(id).applyRetarget(snapshot[id],when,null);
       return when;
     }
     const prepared = Object.fromEntries(deckIds.map(id => [id, getDeck(id).prepareRetarget(snapshot[id], when)]));
-    for (const name of prototypeStemNames) {
-      let initial = 0, final = 0;
-      for (const id of deckIds) if (prepared[id]) {
-        initial += prepared[id].volume * prepared[id].from[name];
-        final += snapshot[id].mainVolume * snapshot[id].levels[name];
-      }
-      if (initial > 1 + 1e-12 || final > 1 + 1e-12) throw new Error('Coordinated retarget exceeds stem capacity.');
+    let decreaseFirst = false;
+    for (const id of playing) for (const name of prototypeStemNames) {
+      const main = prepared[id].volume, stem = prepared[id].from[name];
+      const mainDelta = snapshot[id].mainVolume - main, stemDelta = snapshot[id].levels[name] - stem;
+      const peak = quadraticMaximum(main * stem, main * stemDelta + stem * mainDelta, mainDelta * stemDelta);
+      // Do not overshoot an individual's authorized endpoint, even when the total
+      // cohort has spare capacity. Independent decks also avoid unintended boosts.
+      if (peak > Math.max(main * stem, snapshot[id].mainVolume * snapshot[id].levels[name]) + 1e-12) decreaseFirst = true;
     }
+    for (const name of prototypeStemNames) {
+      let initial = 0, final = 0, linear = 0, quadratic = 0;
+      for (const id of capped) if (prepared[id]) {
+        const main = prepared[id].volume, stem = prepared[id].from[name];
+        const mainDelta = snapshot[id].mainVolume - main;
+        const stemDelta = snapshot[id].levels[name] - stem;
+        initial += main * stem;
+        final += snapshot[id].mainVolume * snapshot[id].levels[name];
+        linear += main * stemDelta + stem * mainDelta;
+        quadratic += mainDelta * stemDelta;
+      }
+      validateCapacity(initial, final, snapshot, 'Coordinated retarget exceeds stem capacity.');
+      // Sum(Main(u) * Stem(u)) = initial + linear*u + quadratic*u².
+      // A concave interior maximum can exceed both validated endpoints.
+      if (quadraticMaximum(initial, linear, quadratic) > Math.max(1, initial) + 1e-12) decreaseFirst = true;
+    }
+    // A reservation lost during preparation has made no native writes. Reject safely;
+    // only an actual partial native batch needs shared fail-closed cleanup.
+    if (context.currentTime >= when) throw new Error('Retarget reservation expired before native writes. Retry.');
+    lastRetargetReservation = { beganAt:context.currentTime, scheduledTime:when, leadSeconds:retargetLeadSeconds,
+      gainPlan:decreaseFirst ? 'reductions-then-increases' : 'simultaneous', gainDuration:decreaseFirst ? .020 : .010 };
     try {
-      for (const id of deckIds) getDeck(id).applyRetarget(snapshot[id], when, prepared[id]);
+      for (const id of deckIds) getDeck(id).applyRetarget(snapshot[id], when, prepared[id], decreaseFirst);
       if (context.currentTime >= when) throw new Error('Coordinated retarget deadline missed. Retry.');
     } catch (error) {
       // Native AudioParam operations are not transactional. Fail closed rather than
       // leave an unknown partial batch audible. No domain membership is committed here.
       failClosed(error, 'retarget', when);
       throw error;
+    } finally {
+      lastRetargetReservation = Object.freeze({ ...lastRetargetReservation, finishedAt:context.currentTime,
+        deadlineMissed:context.currentTime >= when });
     }
     return when;
   }
@@ -533,7 +609,8 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
     validateGainSnapshot(snapshot);
     // Own a validated copy across audio.resume(); caller mutations cannot alter the plan.
     const targets = Object.fromEntries(deckIds.map(deckId => [deckId, {
-      mainVolume: snapshot[deckId].mainVolume, levels: { ...snapshot[deckId].levels }
+      mainVolume: snapshot[deckId].mainVolume, levels: { ...snapshot[deckId].levels },
+      capacityMember: snapshot[deckId].capacityMember
     }]));
     const joining = getDeck(id);
     coordinatedStartPending = true;
@@ -547,13 +624,13 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
           }
         }
         for (const name of prototypeStemNames) {
-          const previous = playing.reduce((sum, deckId) => {
+          const previous = capacityIds(targets, playing).reduce((sum, deckId) => {
             const state = getDeck(deckId).getState();
             return sum + state.mainVolume * state.levels[name];
           }, 0);
-          const next = [...playing, id].reduce((sum, deckId) =>
+          const next = capacityIds(targets, [...playing, id]).reduce((sum, deckId) =>
             sum + targets[deckId].mainVolume * targets[deckId].levels[name], 0);
-          if (previous > 1 + 1e-12 || next > 1 + 1e-12) throw new Error('Coordinated start exceeds stem capacity.');
+          validateCapacity(previous, next, targets, 'Coordinated start exceeds stem capacity.');
         }
         // Wait for existing envelopes, then linearly interpolate effective gains.
         // With fixed main volumes the sum is a convex combination of capped endpoints.
@@ -563,7 +640,8 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
           const others = { ...targets };
           // The joining graph already has its target coefficients and a 0 -> 1 transport.
           // Keep its stored coefficients untouched until the player commits success.
-          others[id] = { mainVolume: joining.getState().mainVolume, levels: joining.getState().levels };
+          others[id] = { mainVolume: joining.getState().mainVolume, levels: joining.getState().levels,
+            capacityMember: targets[id].capacityMember };
           writingSnapshot = true;
           try { applyGainSnapshot(others, when); }
           catch (error) { failClosed(error, 'start', when); throw error; }
@@ -686,7 +764,7 @@ function createNativeStemMixer(createContext = () => new AudioContext(), ids = [
       diagnosticToneActive:!!tone || toneStarting, lastDiagnosticTone:lastTone,
       freshDiagnosticToneActive:!!temporaryProbe,lastFreshDiagnosticTone:lastFreshTone,
       freshOutputMeter:temporaryProbe?.meter?.read() ?? null,
-      protectedScheduling, coordinatedStartPending, lastSchedulingFailure,
+      protectedScheduling, coordinatedStartPending, lastSchedulingFailure, lastRetargetReservation,
       outputMeter: outputMeter ? outputMeter.read() : Object.freeze({available:false, error:outputMeterError}),
       outputRoute: outputMeter ? 'deck transport -> shared analyser -> destination' : 'deck transport -> destination',
       decks: Object.freeze(Object.fromEntries(deckIds.map(id => [id, getDeck(id).getDiagnostics()])))

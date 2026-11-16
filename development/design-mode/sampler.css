@@ -1,0 +1,43 @@
+/* Shared sampler experiment: scoped to the preferred modular landscape variant. */
+.shared-sampler, .stem-sampler-trigger, .overlay-main { display: none; }
+@media (orientation: landscape) and (min-width: 900px) and (max-width: 1600px) and (min-height: 650px) {
+  .design-app[data-layout="full"][data-arrangement="slices"] .column-library-navigation { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .design-app[data-layout="full"][data-arrangement="slices"] .overlay-main { display: block; grid-column: 1 / -1; height: 56px; }
+  .design-app[data-layout="full"][data-arrangement="slices"] .overlay-main input { display: block; height: 44px; }
+  .design-app[data-layout="full"][data-arrangement="slices"] .stem-label-static { display: none; }
+  .design-app[data-layout="full"][data-arrangement="slices"] .stem-sampler-trigger { display: inline-block; min-height: 28px; border: 0; border-radius: 4px; background: #18303b; color: var(--accent); padding: 2px 6px; font-size: 10px; margin-top: -6px; }
+  .design-app[data-layout="full"][data-arrangement="slices"] .stem-controls .control-caption { height: 12px; position: relative; }
+  .design-app[data-layout="full"][data-arrangement="slices"][data-sampler="open"] .deck-grid { display: none; }
+  .design-app[data-sampler="open"] .shared-sampler { display: grid; grid-template-rows: 100px minmax(0,1fr); min-height: 0; gap: 6px; }
+  .sampler-deck-previews { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 6px; min-height: 0; }
+  .sampler-deck-preview { display: grid; grid-template-rows: 16px 16px minmax(0,1fr) 12px; min-width: 0; min-height: 0; padding: 4px 6px; background: #111b29; border: 1px solid #34445a; border-top: 2px solid var(--accent); border-radius: 5px; }
+  .sampler-deck-preview strong { color: var(--accent); font-size: 10px; }
+  .sampler-deck-preview > span { font-size: 9px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sampler-mini-wave { color: var(--accent); min-height: 0; overflow: hidden; }
+  .sampler-mini-wave .example-wave { width: 100%; height: 100%; position: static; transform: none; }
+  .sampler-preview-position { color: #a5b6ca; font-size: 8px !important; }
+  .sampler-performance { min-height: 0; display: grid; grid-template-rows: 61px 22px minmax(0,1fr); gap: 4px; border: 1px solid #35495c; border-radius: 7px; background: #0d1723; padding: 6px; }
+  .sampler-toolbar { display: grid; grid-template-columns: 90px 110px minmax(120px,1fr) minmax(100px,1fr) 125px; gap: 10px; align-items: center; }
+  .sampler-toolbar label { display: flex; flex-wrap: wrap; gap: 3px; font-size: 10px; color: #b6c9d9; }
+  .sampler-toolbar select { display: block; width: 100%; height: 36px; background: #152838; color: var(--accent); border: 1px solid #486278; border-radius: 4px; font-size: 12px; }
+  .sampler-range output { margin-left: auto; color: var(--accent); }
+  .sampler-range input { height: 36px; }
+  .sampler-close { height: 44px; border: 1px solid var(--accent); background: #173440; color: var(--accent); border-radius: 5px; font-size: 11px; }
+  .sampler-source-label { margin: 0; font-size: 10px; color: var(--accent); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .sampler-pads { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); grid-template-rows: repeat(5,minmax(0,1fr)); min-height: 0; gap: 6px; }
+  .sampler-pad { min-width: 0; min-height: 44px; border: 1px solid #436478; border-radius: 7px; background: linear-gradient(145deg,#1a3042,#111d2c); color: var(--accent); touch-action: manipulation; display: flex; align-items: center; justify-content: space-between; padding: 7px 12px; }
+  .sampler-pad strong { font-size: 18px; }
+  .sampler-pad span { font-size: 10px; color: #bacddd; }
+  .sampler-pad:active, .sampler-pad.was-triggered { background: #315868; border-color: var(--accent); box-shadow: inset 0 0 10px #7af4de33; }
+}
+@media (orientation: landscape) and (min-width: 900px) and (max-width: 1600px) and (min-height: 650px) {
+  /* Override the vertical deck waveform rule for compact horizontal previews. */
+  .design-app[data-layout="full"][data-arrangement="slices"] .sampler-mini-wave .example-wave {
+    position: static; left: auto; top: auto; width: 100%; height: 100%; min-height: 0; transform: none;
+  }
+}
+
+.sampler-deck-preview { position: relative; }
+.sampler-mini-wave { position: relative; }
+.sampler-playhead { position: absolute; top: 0; bottom: 0; width: 1px; background: white; pointer-events: none; }
+.sampler-preview-play { position: absolute; top: 3px; right: 4px; height: 26px; width: 30px; border: 1px solid var(--accent); border-radius: 4px; background: #172938; color: var(--accent); font-size: 12px; }

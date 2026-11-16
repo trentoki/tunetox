@@ -1,0 +1,41 @@
+/* H2 layer only: H1's layout/styles and the live G2 build remain unchanged. */
+:root { --h1-matching:44px;--h1-overviewHeight:44px;--h1-waveHeight:280px;--h1-stemSection:176px;--h1-sectionGap:6px; }
+.h2-app .h1-deck { position:relative;grid-template-rows:36px var(--h1-transport) var(--h1-navigation) var(--h1-overviewHeight) minmax(0,1fr); }
+.h2-app .h1-song { grid-row:1;gap:5px; }
+.h2-app .h1-deck-id { width:36px;min-width:36px;height:36px;font-size:15px;border:1px solid #3b5367;border-radius:5px;background:#142736;text-decoration:none; }
+.h2-app .h1-deck-id[aria-expanded=true] { border-color:var(--accent);background:#254450; }
+.h2-app .h1-song-title { font-size:11px; }
+.h2-indicators { display:flex;gap:3px;font-size:8px;flex:none; }
+.h2-indicators span { color:#657783;border-bottom:2px solid transparent;padding:2px 1px; }
+.h2-indicators [data-enabled=true] { color:var(--accent);border-color:var(--accent); }
+.h2-app .h2-menu { position:absolute;top:43px;left:5px;z-index:20;width:calc(100% - 10px);max-height:calc(100% - 48px);overflow:auto;overscroll-behavior:contain;touch-action:pan-y pinch-zoom;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:6px;border:1px solid var(--accent);border-radius:6px;background:#142838;box-shadow:0 8px 20px #000a; }
+.h2-app .h2-menu button { height:var(--h1-matching);min-height:40px;font-size:10px; }
+.h2-app .h1-transport { grid-row:2; }
+.h2-app .h1-page-nav { grid-row:3; }
+.h2-app .h2-overview { grid-row:4;height:100%;min-height:0;color:var(--accent); }
+.h2-app .h1-content { grid-row:5; }
+.h2-app .h1-deck>.column-library { grid-row:5; }
+.h2-app .h1-deck[data-page=library],
+.h2-app:not(.h2-overview-controls) .h1-deck[data-page=controls] { grid-template-rows:36px var(--h1-transport) var(--h1-navigation) 0 minmax(0,1fr); }
+.h2-app .h1-deck[data-page=library]>.h2-overview,
+.h2-app:not(.h2-overview-controls) .h1-deck[data-page=controls]>.h2-overview { visibility:hidden; }
+.h2-app .h1-wave.has-stems { display:grid;height:100%;grid-template-rows:minmax(80px,1fr) 18px max(var(--h1-stemSection),calc(var(--h1-fader) * 4));gap:var(--h1-sectionGap);overflow:auto;overscroll-behavior:contain;touch-action:pan-y pinch-zoom;scrollbar-width:thin; }
+.h2-app.h2-wave-fixed .h1-wave.has-stems { grid-template-rows:var(--h1-waveHeight) 18px max(var(--h1-stemSection),calc(var(--h1-fader) * 4));align-content:start; }
+.h2-app .h1-stems { height:max(var(--h1-stemSection),calc(var(--h1-fader) * 4));grid-template-rows:repeat(4,minmax(var(--h1-fader),1fr)); }
+.h2-app .h1-stems .mix-control,.h2-app .h1-stems input[type=range] { height:100%; }
+.h2-app .h1-controls { gap:var(--h1-sectionGap); }
+.h2-app .h1-controls .performance-controls { order:0;flex:none; }
+.h2-app .h1-controls .h1-stems { order:1;margin-top:auto;flex:none; }
+.h2-app .h1-cue { gap:var(--h1-sectionGap); }
+.h2-overview-choice { display:flex;align-items:center;gap:10px;min-height:44px;font-size:12px; }
+.h2-overview-choice input { width:24px;height:24px;accent-color:#62e8e0; }
+.h2-layout-note { font-size:11px; }
+@media (max-width:700px) {
+ .h2-app .h2-menu { grid-template-columns:minmax(0,1fr); }
+ .h2-app .h1-song { gap:3px; }
+ .h2-app .h1-song-title { font-size:10px; }
+ .h2-indicators { gap:1px;font-size:7px; }
+ .h2-app .h1-page-nav button { font-size:8px; }
+}
+.h2-app .h1-deck[data-page=performance] .h1-content,
+.h2-app.h2-overview-controls .h1-deck[data-page=controls] .h1-content { padding-top:max(0px,calc(var(--h1-sectionGap) - 3px)); }

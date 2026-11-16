@@ -982,3 +982,213 @@ rendering remains in tests/four-stem-player-tests.html. Four-deck Safari listeni
 performed by the agent. Decoded PCM memory is substantial (~1.84 GB for sixteen five-minute
 stereo 48 kHz stems, before overhead). Long-file memory, sustained CPU, native reclamation,
 transport clicks and clipping remain manual measurements. No limiter or memory cap was added.
+
+## Envelope Analysis Lab — independent analysis-only experiment
+
+See [methods, limits and Safari procedure](experimental/envelope-lab/README.md).
+Entry: http://127.0.0.1:8000/experimental/envelope-lab/index.html .
+It decodes local audio without playback and retains RMS/onset arrays, supports four
+window lengths, waveform/envelope inspection and visual tempo scaling. No existing audio
+engine, DSP, experimental toggles or harness changed. Frequency bands are deferred.
+The referenced BPM estimator was not found in this checkout; equivalence is not claimed.
+Pure calculation tests pass; browser/Safari/device verification remains outstanding.
+
+### Source-separation Experiment 1C — isolated staged research
+
+`research/source-separation/README_01C.md` documents the new opt-in experimental
+separator and separate diagnostic-only relationship CLI. Stage 1 replaces the
+whole-event 65% recurrence gate with local waveform-presence evidence and extends
+observation windows to retain quiet tails. Stage 2 compares anonymous component
+and residual fragments with signed gains and time shifts; it never reassigns audio.
+Experiments 1/1B and existing results are preserved with a SHA-256 manifest. This
+research does not change production DSP or establish general source separation.
+Overlapping tails, correlated-source gain bias and fractional phase remain limits.
+
+### Experiment 4C — cycle-shape discovery diagnostic
+
+`research/source-separation/diagnostic_04c/` contains an independent diagnostic
+using observed cycle boundaries and 64-position signed stereo signatures, with
+separate timing, pitch, raw amplitude and uncertainty records. It reuses only
+4B's standalone numerical/decoding utilities, never 1C or production DSP.
+Results and figures under `results/experiment-04c-majorsaw-shapes/` preserve the
+baseline's dominant cross-pitch family, several small variants, many ambiguous
+assignments and threshold sensitivity. The diagnostic reports absolute peak/RMS
+separately from normalized envelope similarity; no source identity or separation
+is established. Seven synthetic tests passed. Runtime was 2.54 seconds before
+report export, peak process RSS 128.25 MiB. Full JSON storage is larger than input;
+no compression or full-song performance claim is made. No audio is reassigned.
+
+### Repair R1 physical verification — Phase 1D.2 starting baseline
+
+The user confirmed Repair R1 authorization tests 1–6 on iPad Pro 11-inch M4,
+iPadOS 26.6.1 Safari, built-in speakers: zero-level protection, joining without
+premature normalization, bidirectional redistribution, full-capacity sharing and
+authorization-ceiling behavior. This is physical evidence for that two-deck scope.
+Independent Handoff-OFF combinations, four-deck handoff and extended stability
+remain physically unverified. Phase 1D.2 live Main behavior is not yet verified.
+The pre-change source archive and per-file hashes are preserved under
+`development/playable/baselines/phase1d-repair-r1.*`.
+
+## Playable Phase 1D.2 live Main checkpoint
+
+R1's scoped two-deck authorization pass is recorded above. Live Main is a new,
+physically unverified checkpoint at `/handoff-main?build=1d2-m1`, header LIVE MAIN M1.
+The existing native Main GainNode now participates in validated retargets. Main scales
+current allocated stems, preserving stored requested levels and existing authorization.
+Quadratic ramp-peak validation selects simultaneous 10 ms or conservative reductions-
+then-increases (10 ms each). Main/stem gains remain separate; transport is not restarted.
+The latter can cause a short dip; neither Chrome checks nor deterministic envelopes
+prove click-free physical output. See development/playable/PHASE_1D2.md for rollback,
+mathematics, exact retest steps and evidence. Do not begin Phase 1E before listening.
+
+### Phase 1E starting verification record
+
+R1 remains the physically verified two-deck handoff/authorization baseline (tests
+1–6 reported). LIVE MAIN M1 appears correct in physical iPad Safari testing, including
+live Main adjustments. A small Flow fader jump was reported; percentage-driven
+geometry is a hypothesis, not yet proof of a visual-only issue. Specific independent
+OFF combinations, four-deck handoff and extended stability have not been explicitly
+physically confirmed. Phase 1E integration is unverified. The complete M1 source and
+approved UI are archived with SHA-256 hashes in playable/baselines/phase1d2-live-main-m1.*.
+
+## Phase 1E P1 — approved UI native-audio checkpoint
+
+New LAN entry `/performance?build=1e-p1`, footer **1E P1**, reuses approved Design Mode
+modules without changing their source or the Phase 1D.2 audio algorithms. Real Load,
+Play/Pause, Main, stems and Handoff are connected; Stop/Release and live diagnostics
+are under Audio. Other processing controls are inactive; waveform art is illustrative.
+See development/playable/PHASE_1E.md for retest steps, scope and measured drag geometry.
+M1's Flow track width changed with readout length in browser reproduction. New P1 tracks
+remain stable during actual native-range mouse/touch tests, with UI/native agreement.
+This does not prove the original physical jump was visual-only. Hardware audibility,
+Safari pointer behavior, interruptions and long-run stability remain physical checks.
+
+### Phase 1F starting baseline — physical Phase 1E P1 result
+
+The user confirmed initial P1 testing on iPad: both prepared songs loaded and stem
+handoff worked through the integrated UI. This is not an exhaustive pass for four
+decks, OFF combinations, Main-zero behavior or extended stability. The earlier Flow
+layout fix has browser evidence; no separate physical drag-jump resolution is assumed.
+P1 source/UI/test hashes and a reproducible archive are preserved under
+`development/playable/baselines/phase1e-p1.*` before Phase 1F changes.
+
+### Phase 1F F1 — experimental four-deck native integration
+
+F1 enables four persistent loaded/playing slots through the same production
+allocator and native scheduler. Existing §21 authorization, direct-gesture priority,
+zero-request protection and Handoff-OFF independence are preserved; no distribution
+math changes. Repeated songs share validated decoded PCM with independent native
+voices and transport. Initial P1 physical two-song/handoff results remain the rollback
+baseline; F1 four-deck Safari verification is pending.
+
+Main zero is unchanged: effective gain Main × allocation becomes zero after ramp,
+without clearing ownership, coefficients, positive requests or session-high history.
+Explicit stem zero has request weight zero; its historical eligibility latch need not
+clear. Main zero is not a new explicit stem-mute rule. See
+`development/playable/PHASE_1F.md` for exact semantics, automated evidence, sampled
+1.4–1.5 GiB desktop renderer memory risk, rollback hashes and physical instructions.
+Existing Phase 2B / 1D.2 / 1E algorithm references remain authoritative; four-deck
+automated integration passes do not establish physical Safari stability or audibility.
+
+### Phase 1F F2 — approved incremental gesture experiment (physical review pending)
+
+For the opt-in F2 build, ordinary direct stem gestures preserve existing peers and
+transfer only the effective-gain delta: current positive donors reduce proportionally
+only as needed; established-sharing returns use reverse per-category direct-touch
+order, respecting positive requests, eligibility, authorization and Main limits.
+Explicit zero remains protected. No forced equalization or one-owner restriction.
+The user confirmed first-held-touch priority within a category; distinct categories
+remain independent. Touch without movement changes history only. F1 had sequential
+input handling, not a physical first-touch lock. Main actions and lifecycle allocation
+paths retain F1 semantics; no authorization or graph changes are approved here.
+
+This narrowly supersedes F1's request-weighted full peer recalculation for direct
+stem gestures in F2 only. Historical multi-deck/input unresolved notes above do not
+override this scoped approval. Unreturnable gain remains headroom; a still-over-cap
+proposal rejects atomically rather than masking an existing mismatch through a
+large normalization. See `development/playable/PHASE_1F_F2.md` for reproduction,
+source rollback, tests, constraints and physical steps. Initial F1 physical testing
+revealed redistribution jumps, not a complete four-deck verification pass.
+
+### Phase 1F F3 — physical F2 baseline and first-Play correction
+
+User physically confirms F2 incremental three/four-deck handoff, manual-zero
+protection, independent categories and first-held-touch priority; no audible
+clicks/dropouts were observed in that test. This is not extended stability certification.
+F2 is archived as `development/playable/baselines/phase1f-f2.*` before F3 changes.
+
+The reported first-Play issue was reproduced deterministically and with actual song
+buffers: a silent new participant could turn an existing automatic-zero/100 split
+into 50/50 through legacy entry request weighting. F3 opts first entry into the same
+incremental transfer calculator with previous effective contribution zero. Silent
+entry preserves peers; nonzero entry takes only necessary gain from current donors.
+Play does not update direct-touch history or authorization. This scopes the F2
+legacy-entry exception down; direct gestures, Main and all other lifecycle paths,
+audio scheduling/ramps, buffering and UI remain unchanged. F2 remains separately
+accessible. F3 is experimental and requires physical Safari verification; see
+`development/playable/PHASE_1F_F3.md` for evidence, limits and exact retest steps.
+
+### Phase 1G G1 — persistent-audio checkpoint; lifecycle work pending
+
+F3 first-entry correction is physically confirmed by the user. Paused gestures and
+loaded-silent Release redistribution remain reported issues. F3 is preserved in
+`development/playable/baselines/phase1f-f3.*`. G1 implements the highest-priority
+storage workstream independently, using encoded IndexedDB blobs and metadata with
+explicit native loading; listing/import never decodes all stored songs. Imports
+are atomic; duplicates are byte-compared; originals remain read-only. Assignments
+are manual restore hints, never automatic transport or authorization.
+
+User selected the existing HTTP LAN address for first storage review. Cached audio
+needs no media server access, but app-shell opening still requires the Mac server;
+fully offline shell delivery awaits secure-origin setup. No persistent-storage or
+Safari eviction guarantee is made. See `development/playable/PHASE_1G_STORAGE.md`.
+
+Approved next lifecycle behavior (NOT implemented in G1): only playing and Handoff-
+enabled decks join live redistribution; Pause preserves faders without restoring
+others, paused stem gestures prepare only that deck, Resume gives prepared levels
+incremental entry priority. This supersedes retained-paused-membership notes only
+when that separately tested workstream is implemented. Silent Release must preserve
+peer allocations; diagnosis/correction is pending. G1 retains F3 lifecycle behavior.
+The Advanced resume-preview indicator is recorded as deferred, with no UI or logic.
+
+### Phase 1G G2 — live-only handoff / non-redistributing Release (experimental)
+
+G1 is now the approved physical storage baseline: two songs survived Safari reload,
+loaded without retransfers and played with handoff. F2 gestures/F3 first entry are
+physically confirmed. G1 is preserved in playable/baselines/phase1g-g1.*; no expanded
+storage retention or stability certification is implied.
+
+G2 implements the approved live-only rule: paused/stopped/ended decks retain
+prepared faders but do not donate, receive or redistribute live allocation. Pause
+does not restore peers. Resume re-enters incrementally with current prepared
+coefficients, not historic suppressed requests. Native playing state and proposed
+entry determine live capacity; the authoritative participation store is retained.
+Release preserves peer gains and skips legacy departure normalization. Loaded
+silent Release reproduced 0/100 -> 50/50 from Playing and Paused before correction.
+
+This scoped G2 behavior supersedes prior retained-paused-capacity and departure-
+rebalance notes for G2 only; earlier rollback hosts preserve their prior behavior.
+F2/F3 math, Main/authorization, native timing, storage, touch protection and layout
+remain unchanged. Physical G2 verification is pending. Evidence and exact tests:
+`development/playable/PHASE_1G_G2.md`. Next UI/Cue/matching ideas remain deferred.
+
+### Phase 1H H1 — separate compact Design Mode (not live integration)
+
+User physically confirms G2 persistent storage, paused preparation, Resume handoff
+and Release behavior. G2 source/route are preserved; its source snapshot is
+`development/playable/baselines/phase1g-g2.*`. This does not add extended stability
+or storage-retention claims.
+
+H1 is isolated under `development/design-mode/compact/`, reusing shared simulated
+UI state/library/knob components. Four fixed tablet columns and the explicitly
+requested 2×2 phone grid are prototype-only; the current G2 single-deck phone view
+and older Design Mode variants remain unchanged. Per-deck Tempo/Pitch occupy the
+header; matching and compact Play/Main stay stationary above page content.
+Waveform/Cue share one toggle; Cue prototypes contain repeat/loop/jump controls.
+Controls contains stems/EQ/FX. Layout variables are temporary design controls.
+
+No native audio, allocation, transport timing, IndexedDB or production musical rules
+are changed. H1 matching/Handoff/Cue functionality is simulated and must not be
+reported as implemented audio. See `development/design-mode/compact/README.md`
+for exact range semantics, geometry, review images, tests and phone space tradeoffs.
+H1 awaits physical design review; no subsequent live integration is authorized here.

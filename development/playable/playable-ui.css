@@ -1,0 +1,15 @@
+/* Phase 1E overrides only. Approved Design Mode CSS remains untouched. */
+.level-value { display:inline-block; inline-size:5ch; min-inline-size:5ch; max-inline-size:5ch; flex:0 0 5ch; text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.control-caption { min-width:0; }
+.mix-control { min-width:0; }
+.mix-control input { inline-size:100%; min-inline-size:0; }
+.stem-sampler-trigger:disabled { opacity:1; cursor:default; }
+.audio-inactive { opacity:.45; }
+.audio-inactive .knob-label::after { content:' · OFF'; font-size:8px; }
+.design-footer #design-status { flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+#audio-open { padding:0 5px; min-height:20px; font:inherit; color:#73e8dd; background:#142232; border:1px solid #38556a; border-radius:3px; }
+#audio-diagnostics { max-width:min(95vw,900px); width:900px; max-height:85dvh; color:#edf7ff; background:#101a29; border:1px solid #5bdaca; padding:14px; }
+#audio-diagnostics::backdrop { background:#000b; }
+#audio-details { white-space:pre-wrap; overflow-wrap:anywhere; overflow-y:auto; max-height:55dvh; font-size:11px; touch-action:pan-y; }
+#audio-actions { display:flex; flex-wrap:wrap; gap:5px; }
+#audio-actions button,#audio-close { min-height:40px; padding:5px; }

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta http-equiv="Cache-Control" content="no-store"><title>TuneTox — iPad Audio Verification</title>
+<style>
+body{font:17px system-ui;background:#10141c;color:#edf4ff;margin:0;padding:24px;max-width:1000px}button{font:inherit;min-height:48px;padding:10px 18px;margin:5px;border:1px solid #78dacc;border-radius:8px;background:#233543;color:white}#play{background:#125449;font-weight:bold}button:disabled{opacity:.45}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}td,th{text-align:left;padding:5px;border-bottom:1px solid #344052}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}output{display:block;margin:12px 0}small{color:#acbfd3}
+</style></head><body>
+<h1>TuneTox — iPad Audio Verification</h1><small>Phase 1A · fixture v1 · real native four-stem engine · generated audio only</small>
+<p>Start with the iPad speaker volume low. Expect a steady, modest 440 Hz tone for four seconds. No audio starts until you press Play.</p>
+<button id="play">Enable Audio / Play Test</button><button id="stop" disabled>Stop</button><button id="replay" disabled>Replay</button>
+<output id="status" aria-live="polite">Ready — audio context not created.</output>
+<output id="checks">Programmatic checks: awaiting test.</output>
+<table><thead><tr><th>Signal stage</th><th>RMS</th><th>Peak</th></tr></thead><tbody id="meters"></tbody></table>
+<p>Nonzero meters demonstrate internal signal only. They cannot confirm speaker output.</p>
+<button id="heard" disabled>I heard the tone</button><button id="silent" disabled>I did not hear it</button>
+<output id="physical" aria-live="polite">Physical audibility: NOT CONFIRMED.</output>
+<p>If interrupted or silent, return to this page and press Replay. No automatic resume, device rerouting, or new context is attempted. Stop ends the signal immediately.</p>
+<details><summary>Diagnostics — select/copy after the test</summary><pre id="diagnostics"></pre></details>
+<script src="../experimental/four-stem-player.js"></script><script src="ipad-audio-verification.js"></script>
+</body></html>

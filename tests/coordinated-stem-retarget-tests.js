@@ -49,7 +49,7 @@ async function runCoordinatedStemRetargetTests() {
   original.audio.currentTime=original.start+0.005;
   const reversal=original.snapshot(0);reversal[1].levels=original.levels(1);
   const when=original.mixer.applyGainSnapshot(reversal);
-  check(Math.abs(when-boundary)<1e-12,'Retarget uses next render boundary, not a fade-end delay');
+  check(Math.abs(when-(original.audio.currentTime+.020))<1e-12,'Retarget reserves 20 ms for a full native batch');
   check(Math.abs(combined(original,when-1e-10)-combined(original,when+1e-10))<1e-7,'Transport folding preserves effective continuity');
   scan(original,original.start,original.start+0.04);await original.mixer.close();
   for(const count of [1,2,3])for(const fraction of [0,0.1,0.25,0.5,0.9]) {
@@ -97,8 +97,8 @@ async function runCoordinatedStemRetargetTests() {
   await scaled.mixer.close();
   const rejected=await setup();rejected.audio.currentTime=rejected.start+0.002;
   const before=JSON.stringify(rejected.gains.map(g=>g.events));
-  const volume=rejected.snapshot(0);volume[1].mainVolume=0.2;
-  await rejects(()=>rejected.mixer.applyGainSnapshot(volume),'Changing main volumes explicitly rejects');
+  const volume=rejected.snapshot(0);volume[1].mainVolume=1.2;
+  await rejects(()=>rejected.mixer.applyGainSnapshot(volume),'Invalid Main volume rejects before writes');
   await rejects(()=>rejected.mixer.getDeck(1).setStemLevel('voice',1),'Direct gain writes cannot bypass protected scheduler');
   await rejects(()=>rejected.mixer.applyGainSnapshot(rejected.snapshot(1)),'Over-capacity target rejects');
   check(before===JSON.stringify(rejected.gains.map(g=>g.events)),'Unsupported plans do not mutate automation');

@@ -1,0 +1,86 @@
+/* The wrapper is transparent to the physically reviewed iPad Controls layout. */
+.vertical-mixer-strip { display: contents; }
+.phone-controls-footer { display: none; }
+.effect-control { position: relative; }
+.effect-assignment-menu { position: absolute; z-index: 8; bottom: 100%; left: 0; min-width: 110px; padding: 4px; border: 1px solid #628299; border-radius: 6px; background: #0d1c29; box-shadow: 0 4px 18px #000b; }
+.effect-control:last-child .effect-assignment-menu { left: auto; right: 0; }
+.effect-assignment-menu button { display: block; width: 100%; min-height: 32px; border: 0; border-bottom: 1px solid #314d61; border-radius: 3px; padding: 4px 7px; background: #173142; color: #d5edea; font-size: 12px; text-align: left; }
+.effect-assignment-menu button:focus-visible { outline: 2px solid #ffe292; }
+@media (max-width: 600px) and (orientation: portrait) {
+  .design-app:has(.phone-controls-footer:not([hidden])) .mixer { grid-template-rows: minmax(0,1fr) auto; gap: 4px; }
+  .phone-controls-footer { display: grid; gap: 4px; }
+  .phone-controls-switch { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 5px; }
+  .phone-controls-switch button { height: 36px; border: 1px solid #47677c; border-radius: 5px; background: #172c3a; color: #c5dce8; font-size: 12px; }
+  .phone-controls-switch button[aria-pressed="true"] { background: #62e8e0; color: #08151b; }
+  .phone-controls-footer .transition-pair { display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; min-height: 34px; }
+  .phone-controls-footer .transition-pair select { height: 34px; }
+  .performance-controls { grid-template-columns: minmax(0,1fr); grid-template-rows: minmax(348px,1fr) 104px; gap: 8px; min-height: 0; height: 100%; }
+  .vertical-mixer-strip { display: grid; position: relative; grid-template-columns: minmax(64px,1fr) minmax(72px,1fr); grid-template-rows: repeat(4,minmax(72px,1fr)) 48px; width: min(100%,220px); gap: 2px 12px; align-items: center; }
+  .performance-transport, .performance-eq, .performance-middle { display: contents !important; }
+  .performance-transport .mix-control { display: grid; grid-template-rows: 18px minmax(0,1fr); grid-column: 1; grid-row: 1 / 5; width: 76px; height: calc(100% - 44px); min-height: 180px; align-self: start; justify-self: center; }
+  .performance-transport .control-caption { font-size: 10px; color: var(--accent); }
+  .performance-transport input[type="range"] { display: block; writing-mode: vertical-lr; direction: rtl; width: 64px; height: 100%; min-height: 160px; margin: 0 auto; padding: 0; touch-action: none; background: transparent; }
+  .vertical-mixer-strip > .performance-transport > .performance-play { position: absolute; bottom: 52px; left: calc(25% - 22px); min-width: 44px; width: 44px; height: 36px; }
+  .vertical-mixer-strip .performance-knob[data-control="filter"] { grid-column: 2; grid-row: 1; }
+  .vertical-mixer-strip .performance-knob[data-control="high"] { grid-column: 2; grid-row: 2; }
+  .vertical-mixer-strip .performance-knob[data-control="mid"] { grid-column: 2; grid-row: 3; }
+  .vertical-mixer-strip .performance-knob[data-control="low"] { grid-column: 2; grid-row: 4; }
+  .vertical-mixer-strip .knob-dial { height: 52px; width: 52px; }
+  .vertical-mixer-strip .knob-needle { height: 21px; transform-origin: center 21px; }
+  .vertical-mixer-strip .knob-label, .vertical-mixer-strip .knob-value { font-size: 10px; }
+  .performance-loop { display: grid; grid-column: 1 / -1; grid-row: 5; gap: 3px; }
+  .performance-loop button { height: 34px; }
+  .performance-effects { align-self: end; grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .performance-effects .knob-dial { width: 48px; height: 48px; }
+  .effect-control select { height: 30px; }
+  .slice-controls-overlay { display: block !important; }
+  .slice-controls-overlay .overlay-caption { display: none; }
+  .design-deck[data-column-mode="waveform"] .slice-controls-overlay, .design-deck[data-column-mode="library"] .slice-controls-overlay { display: none !important; }
+  .phone-transition { grid-template-rows: minmax(0,1fr) 104px !important; gap: 5px; }
+  .transition-card { display: grid; grid-template-rows: 15px 15px 12px 22px minmax(0,1fr); padding: 4px; gap: 1px; }
+  .transition-card h2 { margin: 0; font-size: 11px; }
+  .transition-wave { height: 22px; }
+  .transition-card .performance-controls { display: grid; grid-template-rows: minmax(280px,1fr); height: 100%; gap: 0; padding: 0; }
+  .transition-card .vertical-mixer-strip { width: 100%; grid-template-columns: minmax(50px,1fr) minmax(64px,1fr); grid-template-rows: repeat(4,minmax(68px,1fr)); gap: 2px 3px; }
+  .transition-card .performance-transport .mix-control { width: 60px; height: calc(100% - 40px); min-height: 160px; }
+  .transition-card .performance-transport input[type="range"] { width: 56px; min-height: 140px; }
+  .transition-card .performance-play { bottom: 1px !important; }
+  .transition-card .performance-loop, .transition-card .performance-effects { display: none; }
+  .transition-card .performance-knob { gap: 2px; }
+  .transition-card .knob-dial { width: 48px; height: 48px; }
+  .transition-effects { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 4px; padding: 2px 5px; align-self: end; }
+  .transition-effects .effect-control { min-width: 0; }
+  .transition-effects .knob-dial { height: 48px; width: 48px; }
+  .transition-effects .knob-label { display: none; }
+}
+@media (max-width: 600px) and (orientation: portrait) and (max-height: 740px) {
+  .performance-controls { grid-template-rows: minmax(292px,1fr) 92px; gap: 5px; }
+  .vertical-mixer-strip { grid-template-rows: repeat(4,minmax(62px,1fr)) 40px; gap: 1px 9px; }
+  .vertical-mixer-strip .knob-dial, .transition-card .knob-dial { width: 44px; height: 44px; }
+  .vertical-mixer-strip .knob-needle { height: 17px; transform-origin: center 17px; }
+  .vertical-mixer-strip .knob-label, .vertical-mixer-strip .knob-value { font-size: 9px; }
+  .vertical-mixer-strip .performance-play { bottom: 43px !important; }
+  .performance-loop button { height: 28px; }
+  .performance-effects .knob-dial, .transition-effects .knob-dial { width: 44px; height: 44px; }
+  .phone-transition { grid-template-rows: minmax(0,1fr) 92px !important; }
+  .transition-card .performance-controls { grid-template-rows: minmax(248px,1fr); }
+  .transition-card .vertical-mixer-strip { grid-template-rows: repeat(4,minmax(60px,1fr)); }
+  .transition-card .performance-play { bottom: 1px !important; }
+}
+@media (orientation: landscape) and (min-width: 900px) and (max-width: 1600px) and (min-height: 650px) {
+  /* Waveform only: tighten title and matching row without changing Controls. */
+  .design-app[data-layout="full"][data-arrangement="slices"] [data-column-mode="waveform"],
+  .design-app[data-layout="sidebar"][data-arrangement="slices"] [data-slice-view="waveform"] { grid-template-rows: 32px 22px 36px minmax(90px,1fr) 224px; row-gap: 1px; }
+}
+@media (max-width: 600px) and (orientation: portrait) {
+  .vertical-mixer-strip .performance-knob { display: grid; grid-template-columns: auto auto; grid-template-rows: 12px auto; gap: 2px 4px; justify-content: center; justify-items: center; align-content: center; }
+  .vertical-mixer-strip .knob-label { grid-row: 1; grid-column: 1; }
+  .vertical-mixer-strip .knob-value { grid-row: 1; grid-column: 2; }
+  .vertical-mixer-strip .knob-dial { grid-row: 2; grid-column: 1 / -1; }
+  .slice-controls-overlay { padding: 2px !important; }
+}
+@media (max-width: 600px) and (orientation: portrait) and (max-height: 740px) {
+  .performance-controls { grid-template-rows: minmax(284px,1fr) 92px; }
+  .vertical-mixer-strip { grid-template-rows: repeat(4,minmax(58px,1fr)) 44px; }
+  .performance-loop button { height: 32px; }
+}

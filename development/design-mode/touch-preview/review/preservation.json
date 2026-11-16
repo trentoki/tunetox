@@ -1,0 +1,10 @@
+{
+  "preTaskFilesUnchanged": 254,
+  "G2FilesUnchanged": 190,
+  "G2ArchiveSHA256": "382b12b2fb9e99c9e517b6b837f3217997c1194b94d4fc3a96a4cf1f02fefb77",
+  "documentExceptions": [
+    "EXPERIMENTAL_AUDIO.md",
+    "RULES.md",
+    "TUNEFLOW_DESIGN.md"
+  ]
+}

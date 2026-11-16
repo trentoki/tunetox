@@ -1154,3 +1154,424 @@ observations requested at 150 and 500 ms, including context state/time and read-
 audio-session/activation state where available. Captures remain available after temporary
 context closure. Missing/delayed/unavailable readings or measurement errors are not zero
 signal. No browser audio-session policy is changed.
+
+### Separate Design Mode milestone (2026-11-13)
+
+Implemented only in `development/design-mode/`: an independent simulated visual preview, four visible decks (2×2 in portrait), global controls above the mixer, and exactly two library panels below it: Playlists left, Songs right. The compact neon-on-dark prototype uses provisional 40% mixer / 26% playlist proportions with minimum-height usability adjustments. It does not initialize audio, persist a library, or change production behavior. Simulated fader values are visual examples, not changes to approved startup or handoff rules. Actual iPad appearance/touch review is pending before further work.
+
+### Playable 0.1 Phase 1D — focused handoff repair (implemented; iPad retest pending)
+
+This supersedes the historical Phase 2B restrictions on independent/OFF capacity and
+immediate native participation rebalancing. Native coordinated plans now identify
+capacity members from global permission, per-deck participation and retained native
+ownership. OFF decks play independently outside that cohort; unit-gain validation
+still applies to every deck. Main remains temporarily locked during live playback.
+
+Per-deck/global OFF and ON preserve current allocated coefficients, eligibility,
+authorization and ownership. Re-enabling does not normalize independent gains that
+already exceed unity in aggregate: those preserved gains may stay level or decrease,
+not grow above their existing aggregate. The next value-changing participating stem
+gesture invokes the unchanged priority allocator and returns that category to its
+normal cohort cap. Pause/Stop retain ownership; Release remains a departure.
+
+### Repair R1 physical verification — Phase 1D.2 starting baseline
+
+The user confirmed Repair R1 authorization tests 1–6 on iPad Pro 11-inch M4,
+iPadOS 26.6.1 Safari, built-in speakers: zero-level protection, joining without
+premature normalization, bidirectional redistribution, full-capacity sharing and
+authorization-ceiling behavior. This is physical evidence for that two-deck scope.
+Independent Handoff-OFF combinations, four-deck handoff and extended stability
+remain physically unverified. Phase 1D.2 live Main behavior is not yet verified.
+The pre-change source archive and per-file hashes are preserved under
+`development/playable/baselines/phase1d-repair-r1.*`.
+
+### Phase 1D.2 — live Main gains (implemented; new physical verification pending)
+
+The separate `handoff-main` test page enables Main during native playback. A direct
+Main gesture scales its deck's currently allocated stem coefficients; it does not
+restore suppressed historical stem requests. Those requests remain stored. Effective
+authorization remains Main × allocated stem, with the existing qualifying-gesture
+high-water, zero eligibility and participating-cap rules. OFF decks remain independent.
+
+Native Main and stem nodes retain 10 ms linear ramps. The scheduler checks the
+interior product of their ramps, not only endpoint gains. If simultaneous ramps would
+overshoot an individual's endpoint bound or the cohort cap, reductions precede
+increases in two 10 ms stages. Ordinary safe changes remain simultaneous. Neither
+path changes transport position; native partial-failure protection remains active.
+The older R1 test page retains its Main UI lock as a reference presentation. R1's
+physical authorization pass does not verify this new Main scheduling behavior.
+
+### Phase 1E starting verification record
+
+R1 remains the physically verified two-deck handoff/authorization baseline (tests
+1–6 reported). LIVE MAIN M1 appears correct in physical iPad Safari testing, including
+live Main adjustments. A small Flow fader jump was reported; percentage-driven
+geometry is a hypothesis, not yet proof of a visual-only issue. Specific independent
+OFF combinations, four-deck handoff and extended stability have not been explicitly
+physically confirmed. Phase 1E integration is unverified. The complete M1 source and
+approved UI are archived with SHA-256 hashes in playable/baselines/phase1d2-live-main-m1.*.
+
+### Phase 1E P1 — initial approved-UI audio integration (experimental; physical review pending)
+
+The separate `/performance?build=1e-p1` entry reuses the physically reviewed Design Mode
+components/layouts. Its four deck slots project actual native transport and the
+existing appState.decks/participation values. Loaded song identity is committed only
+when native loading succeeds. Main, stems and Handoff invoke the existing Phase 1D.2
+native actions. No allocation, authorization, scheduling or DSP algorithm changes.
+This implements an integration checkpoint, not a production release or adoption of
+older, different phone-layout roadmap sketches over the current approved prototype.
+
+The initial test host allows two loaded decks at a time, in any of four slots, with
+explicit Release before replacing an already loaded song. These are temporary memory
+safeguards, not four-deck product rules. Main begins at zero; test-session handoff begins
+OFF as in the playable fixtures. Normal application initialization is unchanged.
+EQ/filter/FX/loops/sampler, matching, tempo/pitch processing and scrubbing are inactive;
+waveforms are illustrative, while elapsed/remaining time comes from the native engine.
+Playlist/song browsing, links and membership remain session-only presentation state.
+
+Section 21's Main/stem distinction, direct-gesture priority, zero eligibility,
+authorization high-water and preserve-on-toggle behavior remain governed by the same
+production actions. Fixed-width percentage fields and stable track geometry apply
+only in the new entry. M1's reported Flow jump is not declared visual-only or physically
+resolved; browser measurements confirmed a layout defect and the new entry awaits
+physical drag/listening verification.
+
+### Phase 1F starting baseline — physical Phase 1E P1 result
+
+The user confirmed initial P1 testing on iPad: both prepared songs loaded and stem
+handoff worked through the integrated UI. This is not an exhaustive pass for four
+decks, OFF combinations, Main-zero behavior or extended stability. The earlier Flow
+layout fix has browser evidence; no separate physical drag-jump resolution is assumed.
+P1 source/UI/test hashes and a reproducible archive are preserved under
+`development/playable/baselines/phase1e-p1.*` before Phase 1F changes.
+
+### Phase 1F F1 — experimental four-deck native integration
+
+F1 enables four persistent loaded/playing slots through the same production
+allocator and native scheduler. Existing §21 authorization, direct-gesture priority,
+zero-request protection and Handoff-OFF independence are preserved; no distribution
+math changes. Repeated songs share validated decoded PCM with independent native
+voices and transport. Initial P1 physical two-song/handoff results remain the rollback
+baseline; F1 four-deck Safari verification is pending.
+
+Main zero is unchanged: effective gain Main × allocation becomes zero after ramp,
+without clearing ownership, coefficients, positive requests or session-high history.
+Explicit stem zero has request weight zero; its historical eligibility latch need not
+clear. Main zero is not a new explicit stem-mute rule. See
+`development/playable/PHASE_1F.md` for exact semantics, automated evidence, sampled
+1.4–1.5 GiB desktop renderer memory risk, rollback hashes and physical instructions.
+Existing Phase 2B / 1D.2 / 1E algorithm references remain authoritative; four-deck
+automated integration passes do not establish physical Safari stability or audibility.
+
+### Phase 1F F2 — approved incremental gesture experiment (physical review pending)
+
+For the opt-in F2 build, ordinary direct stem gestures preserve existing peers and
+transfer only the effective-gain delta: current positive donors reduce proportionally
+only as needed; established-sharing returns use reverse per-category direct-touch
+order, respecting positive requests, eligibility, authorization and Main limits.
+Explicit zero remains protected. No forced equalization or one-owner restriction.
+The user confirmed first-held-touch priority within a category; distinct categories
+remain independent. Touch without movement changes history only. F1 had sequential
+input handling, not a physical first-touch lock. Main actions and lifecycle allocation
+paths retain F1 semantics; no authorization or graph changes are approved here.
+
+This narrowly supersedes F1's request-weighted full peer recalculation for direct
+stem gestures in F2 only. Historical multi-deck/input unresolved notes above do not
+override this scoped approval. Unreturnable gain remains headroom; a still-over-cap
+proposal rejects atomically rather than masking an existing mismatch through a
+large normalization. See `development/playable/PHASE_1F_F2.md` for reproduction,
+source rollback, tests, constraints and physical steps. Initial F1 physical testing
+revealed redistribution jumps, not a complete four-deck verification pass.
+
+### Phase 1F F3 — physical F2 baseline and first-Play correction
+
+User physically confirms F2 incremental three/four-deck handoff, manual-zero
+protection, independent categories and first-held-touch priority; no audible
+clicks/dropouts were observed in that test. This is not extended stability certification.
+F2 is archived as `development/playable/baselines/phase1f-f2.*` before F3 changes.
+
+The reported first-Play issue was reproduced deterministically and with actual song
+buffers: a silent new participant could turn an existing automatic-zero/100 split
+into 50/50 through legacy entry request weighting. F3 opts first entry into the same
+incremental transfer calculator with previous effective contribution zero. Silent
+entry preserves peers; nonzero entry takes only necessary gain from current donors.
+Play does not update direct-touch history or authorization. This scopes the F2
+legacy-entry exception down; direct gestures, Main and all other lifecycle paths,
+audio scheduling/ramps, buffering and UI remain unchanged. F2 remains separately
+accessible. F3 is experimental and requires physical Safari verification; see
+`development/playable/PHASE_1F_F3.md` for evidence, limits and exact retest steps.
+
+### Phase 1G G1 — persistent-audio checkpoint; lifecycle work pending
+
+F3 first-entry correction is physically confirmed by the user. Paused gestures and
+loaded-silent Release redistribution remain reported issues. F3 is preserved in
+`development/playable/baselines/phase1f-f3.*`. G1 implements the highest-priority
+storage workstream independently, using encoded IndexedDB blobs and metadata with
+explicit native loading; listing/import never decodes all stored songs. Imports
+are atomic; duplicates are byte-compared; originals remain read-only. Assignments
+are manual restore hints, never automatic transport or authorization.
+
+User selected the existing HTTP LAN address for first storage review. Cached audio
+needs no media server access, but app-shell opening still requires the Mac server;
+fully offline shell delivery awaits secure-origin setup. No persistent-storage or
+Safari eviction guarantee is made. See `development/playable/PHASE_1G_STORAGE.md`.
+
+Approved next lifecycle behavior (NOT implemented in G1): only playing and Handoff-
+enabled decks join live redistribution; Pause preserves faders without restoring
+others, paused stem gestures prepare only that deck, Resume gives prepared levels
+incremental entry priority. This supersedes retained-paused-membership notes only
+when that separately tested workstream is implemented. Silent Release must preserve
+peer allocations; diagnosis/correction is pending. G1 retains F3 lifecycle behavior.
+The Advanced resume-preview indicator is recorded as deferred, with no UI or logic.
+
+### Phase 1G G2 — live-only handoff / non-redistributing Release (experimental)
+
+G1 is now the approved physical storage baseline: two songs survived Safari reload,
+loaded without retransfers and played with handoff. F2 gestures/F3 first entry are
+physically confirmed. G1 is preserved in playable/baselines/phase1g-g1.*; no expanded
+storage retention or stability certification is implied.
+
+G2 implements the approved live-only rule: paused/stopped/ended decks retain
+prepared faders but do not donate, receive or redistribute live allocation. Pause
+does not restore peers. Resume re-enters incrementally with current prepared
+coefficients, not historic suppressed requests. Native playing state and proposed
+entry determine live capacity; the authoritative participation store is retained.
+Release preserves peer gains and skips legacy departure normalization. Loaded
+silent Release reproduced 0/100 -> 50/50 from Playing and Paused before correction.
+
+This scoped G2 behavior supersedes prior retained-paused-capacity and departure-
+rebalance notes for G2 only; earlier rollback hosts preserve their prior behavior.
+F2/F3 math, Main/authorization, native timing, storage, touch protection and layout
+remain unchanged. Physical G2 verification is pending. Evidence and exact tests:
+`development/playable/PHASE_1G_G2.md`. Next UI/Cue/matching ideas remain deferred.
+
+### Phase 1H H1 — separate compact Design Mode (not live integration)
+
+User physically confirms G2 persistent storage, paused preparation, Resume handoff
+and Release behavior. G2 source/route are preserved; its source snapshot is
+`development/playable/baselines/phase1g-g2.*`. This does not add extended stability
+or storage-retention claims.
+
+H1 is isolated under `development/design-mode/compact/`, reusing shared simulated
+UI state/library/knob components. Four fixed tablet columns and the explicitly
+requested 2×2 phone grid are prototype-only; the current G2 single-deck phone view
+and older Design Mode variants remain unchanged. Per-deck Tempo/Pitch occupy the
+header; matching and compact Play/Main stay stationary above page content.
+Waveform/Cue share one toggle; Cue prototypes contain repeat/loop/jump controls.
+Controls contains stems/EQ/FX. Layout variables are temporary design controls.
+
+No native audio, allocation, transport timing, IndexedDB or production musical rules
+are changed. H1 matching/Handoff/Cue functionality is simulated and must not be
+reported as implemented audio. See `development/design-mode/compact/README.md`
+for exact range semantics, geometry, review images, tests and phone space tradeoffs.
+H1 awaits physical design review; no subsequent live integration is authorized here.
+
+### Phase 1H H2 — flexible Design Mode experiment
+
+H2 is a separate visual/interaction prototype under `development/design-mode/flexible/`.
+H1 remains unchanged for comparison; G2 audio/storage/routes remain untouched.
+The user likes H1's horizontal waveform orientation; H2 retains it, without discarding
+H1's arrangement. Matching moves into independent per-deck D-label popovers with
+status indicators. One combined Waveform+Stems/Cue selector shares a pinned overview;
+Play/Main and header stay fixed. Controls keeps EQ/FX above bottom-positioned stems.
+Overview visibility on Controls is an experimental layout toggle, not a finalized
+product setting. Temporary design controls expose heights, spacing and density.
+
+All musical functionality remains simulated. No sampler, live integration, DSP or
+production musical rule changes are implemented. H2 recovers 27 CSS px per deck at
+the checked defaults without increasing deck heights. Small phone 2×2 content scrolls
+below the pinned overview; all stems cannot be simultaneously visible there with
+full-sized controls. See `development/design-mode/flexible/README.md` for measurements,
+comparison captures, tests, limitations and the physical-review checkpoint.
+
+
+## Phase 1H H3 — fixed-stem Design Mode experiment (2026-11-15)
+
+Implemented separately at `development/design-mode/fixed/`; physical review pending.
+H3 uses four tablet columns and restores a single full-width selected phone deck,
+with four persistent simulated decks. This phone presentation is limited to H3;
+H1/H2 remain unchanged comparison builds. Wave/Cue/Controls share one center,
+selected by tap or captured continuous slide. Overview, transport and one fixed
+stem group remain stationary. Library takes over the entire deck and returns to
+its previous presentation without changing simulated playback. Eight cue previews
+include Shift deletion. A secondary matching-popover timing preview explores
+BeatMatch-following quantization with an independent override; it does not establish
+or implement production quantization behavior. Live dimensions and H3 reset remain
+available. No G2, storage, allocator, audio lifecycle or musical rules are changed.
+See `development/design-mode/fixed/README.md` for measurements, screenshots, checks
+and short-phone inner-scroll tradeoffs. Stop at physical review.
+
+
+## Phase 1H H4 — responsive Library/queue prototype (2026-11-16)
+
+H4 is isolated at `development/design-mode/responsive/`, based on H3's approved
+UI direction. G2 playable audio/storage and H1–H3 comparison builds remain unchanged.
+All H4 playback, gain, matching, cues and queue actions are simulated; physical UI
+review is pending. This does not authorize live queue behavior or change production
+musical rules.
+
+Implemented: independent in-memory portrait/landscape dimensions and current-
+orientation reset; requested landscape targets with safe center contraction;
+expanded Cue/Controls within the fixed center; stationary overview/stems/transport;
+full-panel Library Songs/Playlists/Links tap/slide navigation, contextual sorting,
+shared normal/Manage row geometry, expanded manual links and membership checkboxes.
+Manage playlist navigation retains its original linking source and browser context.
+External playlist source groups are explicitly fictional, with no service access.
+H3's four landscape columns, tablet portrait 2×2 and single selected phone deck
+remain the responsive presentation; no deck state changes on rotation.
+
+A successful simulated load returns only its destination to Wave. Playing decks
+queue without replacing the current waveform or levels; empty/nonplaying decks
+load without autoplay. A compact NEXT indicator exposes title/artist; explicit
+Swap consumes the queued song, starts its preview at zero and inherits outgoing
+levels without altering peers. Queue overflow policy was unspecified: H4 retains
+one slot and reports an occupied queue instead of silently overwriting it. Expanded
+queue policies and real swap timing remain unresolved for future approval.
+
+See `development/design-mode/responsive/README.md` for exact presets, measured
+sizes, screenshots, tests and short-screen internal-scroll compromises. All earlier
+rollback routes remain available. Stop at H4 physical review; no audio integration.
+
+
+## Phase 1H H5 — phone performance/Transition/Wave prototype (2026-11-16)
+
+User reports very positive physical H4 feedback. H5 is a separate Design Mode at
+`development/design-mode/performance-preview/`; H1–H4 and G2 remain unchanged.
+No new playable audio or storage verification is implied. H5 physical review is pending.
+
+Implemented experimentally: independent phone dimension preset; phone deck-button
+position indicators and deliberate downward slide to choose Wave/Cue/Controls/
+Transition on release, with a tap/keyboard alternative; compact vertical phone stems
+and captured track/handle gestures; two-deck Transition bound to the same deck values.
+Main moves to Controls/Transition; the space beside Play becomes a distinct empty/
+ready queue control with deliberate simulated Swap. H4 occupied-queue protection,
+load-to-Wave, tablet presets, horizontal tablet stems, matching and Library workflow
+remain. Library sorting uses continuous sliding, selection uses background only,
+and Back/Manage use local SVG icons.
+
+Wave ± simulates next-boundary integer beat skipping at displayed tempo with BeatMatch
+on, and labeled temporary ±5% nudging off, without changing the Tempo value. A separate
+lower surface scrubs the preview position in either state. This uses an assumed
+uniform preview beat clock, not analyzed audio, DSP or production scheduling. Pending
+request replacement, paused pending requests and scrub cancellation are prototype
+policies only. No meaningful-stem entrance detection or live Swap is implemented.
+
+See `development/design-mode/performance-preview/README.md` for exact interaction
+semantics, tests, comparison screenshots and small-phone inner-scroll compromises.
+Stop at physical review; no live integration, storage, research or G2 algorithm changes.
+
+
+## Phase 1H H5.1 — isolated correction pass (2026-11-16)
+
+H5 was physically reviewed on iPad/iPhone: retain its successful indicators,
+phone vertical stems/slide navigation, Library sorting/icons and moving waveform;
+correct the reported UI regressions separately at
+`development/design-mode/corrections-preview/`. G2 and H1–H5 remain unchanged.
+
+H5.1 restores compact Play / EMPTY-or-READY Swap / Main in one 36px row. Main is
+available throughout performance views. Phone selected-deck taps cycle the four
+views; different-deck taps select without cycling; downward slide still commits a
+highlighted view on release. The extra phone view badge is removed. Transition is
+phone-only; tablets retain H4's three views and expanded layouts. Wave skip/nudge
+zones now overlay its upper corners; lower scrubbing is reversed (left advances,
+right rewinds). Captured pointer ownership separates the interactions. Explicit
+stem rail/handle geometry aligns numeric, visible and touch endpoints while keeping
+the full handle visible. All activity remains simulated; no real DSP or timing changes.
+
+The guarded load route queues on playing decks without changing current song,
+position, playing flag, Main or stems; occupied queues reject replacements. Swap
+starts the queued preview and inherits levels. An explicit real-clock served-browser
+sequence passed in H5.1 AND unchanged H5, so the physical H5 queue defect was not
+reproduced or causally explained. Do not claim that physical failure resolved until
+H5.1 is retested on-device. No new audio/storage verification is implied.
+
+See `development/design-mode/corrections-preview/README.md` for tests, endpoint
+measurements, screenshots, short-screen inner-scroll limitations and physical steps.
+Stop at physical review; no live integration or further features are authorized here.
+
+
+## Phase 1H H5.2 — approved cue UI contract / isolated refinement (2026-11-16)
+
+User physically reviewed H5.1. H5.2 is a separate Design Mode implementation at
+`development/design-mode/final-preview/`; H1–H5.1 and G2 remain unchanged. Physical
+H5.2 review is pending; no production audio/storage/DSP or handoff changes are made.
+
+Approved UI contract: tablet primary views are Wave + Cue / Controls. Phone retains
+those plus Transition via colored-deck navigation. Wave stays visible with cue pads
+in the lower workspace; Controls owns the single four-stem group. For playing,
+paused and never-started loaded songs, empty cue sets the exact playhead position;
+assigned cue jumps preserving transport state; held Shift deletes only an assigned
+cue; Shift+empty does nothing. Cue actions never affect the queued song. Pads and
+zoom markers show cues. This supersedes earlier prototype cue quantization controls,
+which are removed; native matching/beat-grid behavior is not altered.
+
+Compact Play / EMPTY–READY Swap / Main, overview, guarded queue loading, inherited
+Swap levels, Library, SVG icons and presets are retained. Phone Transition uses two
+read-only full-song overviews and right-header partner slide/tap selection. Each
+side has Main | High/Mid/Low | Filter/FX-type/FX-amount. Captured Main pointer mapping
+fixes endpoints independently of unchanged stem controls. Both strips fit without
+scrolling, with 44px knobs through the tested 320×480 viewport. At reduced heights,
+decorative title spacing/readouts compact before touch targets are reduced.
+
+FX type and beat length now use vertical slide/tap choices with keyboard alternatives;
+no native performance dropdowns remain. Phone skip/nudge zones move to the waveform
+side edges at mid-height; left scrub advances, right rewinds. All scheduling is the
+same assumed simulated beat clock, not production audio. Session-only cue sets are
+associated with the deck's song; no cue persistence or audio analysis is implemented.
+
+See `development/design-mode/final-preview/README.md` for tests, screenshots, Shift
+release-order traces and the physical checklist. Stop at physical review before
+any production audio work or integration.
+
+
+## Phase 1H H5.3 — portrait correction / themed choices (2026-11-16)
+
+H5.2 was physically reviewed positively on iPad/iPhone. H5.3 is isolated at
+`development/design-mode/portrait-preview/`; physical H5.3 review remains pending.
+G2, H1–H5.2, native audio/storage/DSP/handoff/beat analysis remain unchanged.
+
+Implemented: iPad Controls is non-scrolling while its gestures remain active and
+Library scrolling is retained. Tight tablet portrait defaults reclaim small header /
+overview spacing to keep 44px knobs visible. FX selectors now open dark, deck-accent
+body-level popovers: tap then choose, or hold/slide/release; keyboard alternatives
+remain and amount values are independent. Portal positioning avoids locked-panel
+clipping. No native performance dropdown or new effect DSP is introduced.
+
+Phone Transition retains both approved three-column strips and endpoint-correct
+Main faders. Full-song overview edges now independently nudge their respective decks
+using the existing temporary preview rate, or the same next-boundary beat skip when
+BeatMatch is on. Centers never seek/scrub. Right overview center taps cycle partners;
+hold/slide selects through a themed picker, excluding the primary and preserving
+positions/playback. Touch ownership separates central selection from edge nudges.
+
+For phone Transition only, existing Play/Queue form a narrow stack beside taller
+paired overviews and redundant standard Main is hidden. Both mixer Main faders bind
+the same existing deck state. Other phone views and all iPad transport remain the
+compact Play / EMPTY–READY Swap / Main. No new Main state or playback engine exists.
+
+See `development/design-mode/portrait-preview/README.md` for exact gestures, tests,
+screenshots, viewport fit and the physical review checklist. Stop after review build;
+no production audio integration, phone landscape redesign or sampler work is authorized.
+
+## Phase 1H H5.3.1 — touch stabilization prototype (2026-11-16)
+
+The user physically reviewed H5.3 on iPad/iPhone and approved its overall layout,
+while reporting touch reliability issues. That supersedes the earlier H5.3
+review-pending status, not its archived implementation. H5.3.1 is a separate,
+simulated build at `development/design-mode/touch-preview/`; physical review is pending.
+
+Approved interaction correction: continuous controls retain their initiating pointer
+until release/cancel; independent controls support simultaneous touches. Main faders
+retain their visual dimensions and endpoints while using larger invisible hit areas.
+Performance browser zoom, accidental selection and callouts are suppressed in layers;
+Library scrolling, editable search and keyboard access remain available. Browser/OS
+accessibility behavior is not a guarantee that every Safari zoom path can be blocked.
+
+FX selector quick taps now cycle once without opening a menu. Deliberate hold opens
+the existing themed picker; sliding highlights and release commits once. Enter cycles,
+Arrow keys open choices; amount knobs remain separate. Partner selection retains its
+H5.3 interaction. No musical rules, production audio, G2 storage, previous builds,
+layout dimensions, source-separation research or sampler behavior are changed.
+
+See `development/design-mode/touch-preview/README.md` for verification and device
+checks. Stop for physical review before any production integration.

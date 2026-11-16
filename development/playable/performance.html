@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>TUNETOX — PLAYABLE 1E</title>
+  <link rel="stylesheet" href="/ui/design-mode.css?v=1e-p1">
+  <link rel="stylesheet" href="/ui/landscape-variants.css?v=1e-p1">
+  <link rel="stylesheet" href="/ui/sampler.css?v=1e-p1">
+  <link rel="stylesheet" href="/ui/performance.css?v=1e-p1">
+  <link rel="stylesheet" href="/ui/phone.css?v=1e-p1">
+  <link rel="stylesheet" href="/ui/navigation-revision.css?v=1e-p1">
+  <link rel="stylesheet" href="/ui/mixer-strip.css?v=1e-p1">
+  <link rel="stylesheet" href="/ui/phone-compact.css?v=1e-p1">
+  <link rel="stylesheet" href="/ui/transition-single-fx.css?v=1e-p1">
+  <link rel="stylesheet" href="/ui/viewport.css?v=1e-p1">
+  <link rel="stylesheet" href="/ui/interaction-cleanup.css?v=1e-p1">
+  <script defer src="/playable-namespace.js?v=1e-p1"></script>
+  <script defer src="/ui/sampler-state.js?v=1e-p1"></script>
+  <script defer src="/ui/state.js?v=1e-p1"></script>
+  <script defer src="/ui/components.js?v=1e-p1"></script>
+  <script defer src="/ui/drag-drop.js?v=1e-p1"></script>
+  <script defer src="/ui/library-context.js?v=1e-p1"></script>
+  <script defer src="/ui/layout-preview.js?v=1e-p1"></script>
+  <script defer src="/ui/column-library.js?v=1e-p1"></script>
+  <script defer src="/ui/sampler-view.js?v=1e-p1"></script>
+  <script defer src="/ui/vertical-fader.js?v=1e-p1"></script>
+  <script defer src="/ui/effect-assignment.js?v=1e-p1"></script>
+  <script defer src="/ui/knob-reset.js?v=1e-p1"></script>
+  <script defer src="/ui/performance-controls.js?v=1e-p1"></script>
+  <script defer src="/ui/phone-view.js?v=1e-p1"></script>
+  <script defer src="/ui/waveform-navigation.js?v=1e-p1"></script>
+  <script defer src="/ui/viewport.js?v=1e-p1"></script>
+  <script defer src="/four-stem-player.js?v=1e-p1"></script>
+<script defer src="/handoff-deps/participation.js?v=1e-p1"></script>
+<script defer src="/handoff-deps/stem-state.js?v=1e-p1"></script>
+<script defer src="/handoff-deps/two-deck-stem-handoff.js?v=1e-p1"></script>
+<script defer src="/handoff-deps/four-deck-stem-allocation.js?v=1e-p1"></script>
+<script defer src="/handoff-deps/app.js?v=1e-p1"></script>
+<script defer src="/handoff-deps/experimental/stem-handoff-audio-bridge.js?v=1e-p1"></script>
+<script defer src="/handoff-deps/native-stem-handoff.js?v=1e-p1"></script>
+<script defer src="/playable-controller.js?v=1e-p1"></script>
+<script defer src="/playable-app.js?v=1e-p1"></script>
+<link rel="stylesheet" href="/playable-ui.css?v=1e-p1">
+</head>
+<body>
+  <div class="design-app">
+    <header class="design-header">
+      <h1><span class="brand-mark" aria-hidden="true">▥</span> TUNETOX — PLAYABLE 1E</h1>
+      <span class="mode-badge">P1 AUDIO</span>
+    </header>
+    <section class="mixer" aria-label="Four-deck native audio mixer">
+      <div class="global-strip" aria-label="Inactive tempo and pitch controls">
+        <label class="global-control">TEMPO <output id="tempo-value" for="demo-tempo">120.0</output>
+          <input id="demo-tempo" type="range" min="90" max="150" step="0.5" value="120" aria-label="Simulated global tempo">
+        </label>
+        <label class="global-control">PITCH <output id="pitch-value" for="demo-pitch">+0.0</output>
+          <input id="demo-pitch" type="range" min="-6" max="6" step="0.1" value="0" aria-label="Simulated global pitch in semitones">
+        </label>
+        <button id="reset-demo" class="quiet-button" type="button">Audio diagnostics</button>
+      </div>
+      <div id="design-decks" class="deck-grid"></div>
+    </section>
+    <main class="library" aria-label="Prepared song library">
+      <section id="playlist-panel" class="library-panel" aria-labelledby="playlist-heading">
+        <header class="panel-heading"><h2 id="playlist-heading">Playlists</h2><span class="prepared-label">SESSION</span></header>
+        <label class="search-label"><span class="visually-hidden">Search prepared playlists</span><input id="playlist-search" type="search" placeholder="Search" autocomplete="off"></label>
+        <div id="playlist-list" class="panel-list" tabindex="0" aria-label="Example playlists"></div>
+        <div class="panel-footnote">Session library · no persistence</div>
+      </section>
+      <section id="song-panel" class="library-panel" aria-labelledby="song-heading">
+        <header class="panel-heading"><h2 id="song-heading">Songs</h2><span id="song-count" class="prepared-label"></span></header>
+        <label class="search-label"><span class="visually-hidden">Search prepared songs and artists</span><input id="song-search" type="search" placeholder="Search songs or artists" autocomplete="off"></label>
+        <div id="song-list" class="panel-list" tabindex="0" aria-label="Example songs"></div>
+        <div class="load-bar">
+          <div class="selected-track"><span class="eyebrow">SELECTED SESSION</span><strong id="selected-title">Select a song</strong></div>
+          <div id="library-load-targets" class="load-targets" aria-label="Load selected prepared into a simulated deck"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="design-footer"><span id="design-status" role="status" aria-live="polite">Select an prepared song, then load it into a deck.</span><span id="design-build" title="Phase 1E build P1">1E P1</span><button id="audio-open" type="button">Audio</button><span>EQ/FX OFF</span></footer>
+  </div>
+  <dialog id="audio-diagnostics"><h2>Phase 1E P1 — Native audio diagnostics</h2><button id="audio-close" type="button">Close</button><div id="audio-actions"></div><p>Original rate/pitch. Waveforms illustrative. Two loaded decks maximum in this initial integration.</p><pre id="audio-details"></pre></dialog><noscript>JavaScript is required for native audio.</noscript>
+</body>
+</html>
