@@ -87,6 +87,8 @@ ASSETS = {'/': (PROJECT / 'development/playable/hypnotic.html', 'text/html'),
           '/four-stem-player.js': (PROJECT / 'experimental/four-stem-player.js', 'text/javascript')}
 # Preserve the existing public URLs while resolving organized source locations.
 HANDOFF_PATHS = {
+    'native-stem-handoff.js': 'development/audio/handoff/native-stem-handoff.js',
+    'experimental/stem-handoff-audio-bridge.js': 'development/audio/handoff/stem-handoff-audio-bridge.js',
     'stem-state.js': 'development/audio/handoff/stem-state.js',
     'two-deck-stem-handoff.js': 'development/audio/handoff/two-deck-stem-handoff.js',
     'four-deck-stem-allocation.js': 'development/audio/handoff/four-deck-stem-allocation.js',

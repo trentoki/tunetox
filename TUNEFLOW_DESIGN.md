@@ -2419,3 +2419,20 @@ accessibility zoom, callouts, browser chrome and touch cancellation still requir
 review. Previous preview and G2 hashes are recorded in the new build's review directory.
 See its README for exact tests and the physical checklist. Production integration,
 phone landscape redesign and sampler work remain outside this task.
+
+
+## Handoff file organization (2026-11-18)
+
+On `organization/tunetox-architecture`, the existing Handoff implementations now
+live under `development/audio/handoff/`: `stem-state.js`,
+`two-deck-stem-handoff.js`, `four-deck-stem-allocation.js`,
+`native-stem-handoff.js`, and `stem-handoff-audio-bridge.js`.
+This is a file-location change only: source bytes, function names, algorithms,
+load order, native scheduling and lifecycle behavior are preserved. Application,
+prototype and test filesystem paths are updated. The playable server retains the
+existing `/handoff-deps/...` URLs using an explicit source-path mapping.
+Historical phase documents, baseline archives and hash manifests retain their
+original paths and contents. They describe snapshots, not current imports.
+H5.3.1 remains simulated Design Mode; no integration or UI changes are included.
+See `development/audio/handoff/README.md` and `tests/handoff-path-tests.py` for the
+current map and executable-reference checks.
