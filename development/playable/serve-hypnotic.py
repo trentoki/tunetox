@@ -85,9 +85,15 @@ ASSETS = {'/': (PROJECT / 'development/playable/hypnotic.html', 'text/html'),
           '/two-deck.js': (PROJECT / 'development/playable/two-deck.js', 'text/javascript'),
           '/hypnotic.js': (PROJECT / 'development/playable/hypnotic.js', 'text/javascript'),
           '/four-stem-player.js': (PROJECT / 'experimental/four-stem-player.js', 'text/javascript')}
+# Preserve the existing public URLs while resolving organized source locations.
+HANDOFF_PATHS = {
+    'stem-state.js': 'development/audio/handoff/stem-state.js',
+    'two-deck-stem-handoff.js': 'development/audio/handoff/two-deck-stem-handoff.js',
+    'four-deck-stem-allocation.js': 'development/audio/handoff/four-deck-stem-allocation.js',
+}
 # Exact production dependencies for the isolated handoff host.
 for module in ('participation.js', 'stem-state.js', 'two-deck-stem-handoff.js', 'four-deck-stem-allocation.js', 'app.js', 'experimental/stem-handoff-audio-bridge.js', 'native-stem-handoff.js'):
-    ASSETS['/handoff-deps/' + module] = (PROJECT / module, 'text/javascript')
+    ASSETS['/handoff-deps/' + module] = (PROJECT / HANDOFF_PATHS.get(module, module), 'text/javascript')
 
 
 UI_FILES = ('design-mode.css', 'landscape-variants.css', 'sampler.css', 'performance.css', 'phone.css', 'navigation-revision.css', 'mixer-strip.css', 'phone-compact.css', 'transition-single-fx.css', 'viewport.css', 'interaction-cleanup.css', 'sampler-state.js', 'state.js', 'components.js', 'drag-drop.js', 'library-context.js', 'layout-preview.js', 'column-library.js', 'sampler-view.js', 'vertical-fader.js', 'effect-assignment.js', 'knob-reset.js', 'performance-controls.js', 'phone-view.js', 'waveform-navigation.js', 'viewport.js')

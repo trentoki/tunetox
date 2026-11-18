@@ -2,7 +2,7 @@
 // Run: osascript -l JavaScript tests/handoff-regression-investigation.js
 ObjC.import('Foundation');
 function read(path) { return ObjC.unwrap($.NSString.stringWithContentsOfFileEncodingError(path,$.NSUTF8StringEncoding,null)); }
-const files=['participation.js','stem-state.js','two-deck-stem-handoff.js','four-deck-stem-allocation.js','app.js','experimental/four-stem-player.js','experimental/stem-handoff-audio-bridge.js','native-stem-handoff.js','tests/coordinated-stem-start-tests.js'];
+const files=['participation.js','development/audio/handoff/stem-state.js','development/audio/handoff/two-deck-stem-handoff.js','development/audio/handoff/four-deck-stem-allocation.js','app.js','experimental/four-stem-player.js','experimental/stem-handoff-audio-bridge.js','native-stem-handoff.js','tests/coordinated-stem-start-tests.js'];
 let source=files.map(read).join('\n');
 source += `
 (async()=>{
