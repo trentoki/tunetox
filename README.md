@@ -82,7 +82,7 @@ If something fails, note the device, operating system, browser, expected result,
 
 This is **one application**, not separate interface and audio products. Its root `index.html` is the intended entry page. The interface currently loads existing modules from `development/`, `experimental/`, and root files; those locations are **not yet the final proposed folder organization**. Do not move or delete them without mapping dependencies and testing.
 
-Before making significant changes, read `AGENTS.md` (workflow and safeguards), `RULES.md` (approved behavior), and `TUNEFLOW_DESIGN.md` (design context). These documents contain historical terminology; treat that as background rather than separate D1 applications.
+Before making significant changes, read `AGENTS.md` (workflow and safeguards), `RULES.md` (approved behavior), and `TUNETOX_PLAN.md` (roadmap and design context). These documents contain historical terminology; treat that as background rather than separate D1 applications.
 
 **Rules:** Keep one clear application entry point, avoid duplicated musical logic, make small reversible changes, test real playback and Handoff, and preserve the protected working baseline.
 
