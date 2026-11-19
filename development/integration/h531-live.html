@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>TUNETOX — H5.3.1 LIVE AUDIO TEST</title>
+  <link rel="stylesheet" href="../design-mode/design-mode.css?v=DM-20261114-M1">
+  <link rel="stylesheet" href="../design-mode/landscape-variants.css?v=DM-20261114-M1">
+  <link rel="stylesheet" href="../design-mode/sampler.css?v=DM-20261114-M1">
+  <link rel="stylesheet" href="../design-mode/performance.css?v=DM-20261114-M1">
+  <link rel="stylesheet" href="../design-mode/phone.css?v=DM-20261114-M1">
+  <link rel="stylesheet" href="../design-mode/navigation-revision.css?v=DM-20261114-M1">
+  <link rel="stylesheet" href="../design-mode/mixer-strip.css?v=DM-20261114-M1">
+  <link rel="stylesheet" href="../design-mode/phone-compact.css?v=DM-20261114-M1">
+  <link rel="stylesheet" href="../design-mode/transition-single-fx.css?v=DM-20261114-M1">
+  <link rel="stylesheet" href="../design-mode/viewport.css?v=DM-20261114-M1">
+  <link rel="stylesheet" href="../design-mode/interaction-cleanup.css?v=DM-20261114-M1">
+  <script defer src="../../participation.js"></script>
+  <script defer src="../../development/audio/handoff/stem-state.js"></script>
+  <script defer src="../../development/audio/handoff/two-deck-stem-handoff.js"></script>
+  <script defer src="../../development/audio/handoff/four-deck-stem-allocation.js"></script>
+  <script defer src="../../app.js"></script>
+  <script defer src="../../audio-engine.js"></script>
+  <script defer src="../../experimental/four-stem-player.js"></script>
+  <script defer src="../../development/audio/handoff/stem-handoff-audio-bridge.js"></script>
+  <script defer src="../../stem-source-router.js"></script>
+  <script defer src="../../development/audio/handoff/native-stem-handoff.js"></script>
+  <script defer src="../../main-stem-integration.js"></script>
+  <script defer src="h531-stem-mapping.js"></script>
+  <script defer src="h531-stem-gesture-adapter.js"></script>
+  <script defer src="h531-transport-adapter.js"></script>
+  <script defer src="h531-audio-controls.js"></script>
+  <script defer src="../design-mode/example-data.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/sampler-state.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/state.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/components.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/drag-drop.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/library-context.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/layout-preview.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/column-library.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/sampler-view.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/vertical-fader.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/effect-assignment.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/knob-reset.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/performance-controls.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/phone-view.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/waveform-navigation.js?v=DM-20261114-M1"></script>
+  <script defer src="../design-mode/viewport.js?v=DM-20261114-M1"></script>
+  <script defer src="h531-live-app.js"></script>
+</head>
+<body>
+  <div class="design-app">
+    <header class="design-header">
+      <h1><span class="brand-mark" aria-hidden="true">▥</span> TUNETOX — LIVE AUDIO TEST</h1>
+      <span class="mode-badge">REAL STEM AUDIO · EXPERIMENTAL</span>
+    </header>
+    <details id="live-file-panel" open style="padding:8px 14px"><summary>Load four stem files per deck (real audio)</summary><div id="live-file-inputs"></div><p style="font-size:12px">Select one file for each stem category, then Load. Set MAIN and stem faders above zero before Play. Example library, tempo, pitch, effects, sampler and matching controls remain previews.</p></details>
+    <section class="mixer" aria-label="Four-deck audio mixer">
+      <div class="global-strip" aria-label="Preview-only global controls">
+        <label class="global-control">TEMPO <output id="tempo-value" for="demo-tempo">120.0</output>
+          <input id="demo-tempo" type="range" min="90" max="150" step="0.5" value="120" aria-label="Simulated global tempo">
+        </label>
+        <label class="global-control">PITCH <output id="pitch-value" for="demo-pitch">+0.0</output>
+          <input id="demo-pitch" type="range" min="-6" max="6" step="0.1" value="0" aria-label="Simulated global pitch in semitones">
+        </label>
+        <button id="reset-demo" class="quiet-button" type="button">Reset demo</button>
+      </div>
+      <div id="design-decks" class="deck-grid"></div>
+    </section>
+    <main class="library" aria-label="Example library">
+      <section id="playlist-panel" class="library-panel" aria-labelledby="playlist-heading">
+        <header class="panel-heading"><h2 id="playlist-heading">Playlists</h2><span class="example-label">EXAMPLE</span></header>
+        <label class="search-label"><span class="visually-hidden">Search example playlists</span><input id="playlist-search" type="search" placeholder="Search" autocomplete="off"></label>
+        <div id="playlist-list" class="panel-list" tabindex="0" aria-label="Example playlists"></div>
+        <div class="panel-footnote">Fictional library</div>
+      </section>
+      <section id="song-panel" class="library-panel" aria-labelledby="song-heading">
+        <header class="panel-heading"><h2 id="song-heading">Songs</h2><span id="song-count" class="example-label"></span></header>
+        <label class="search-label"><span class="visually-hidden">Search example songs and artists</span><input id="song-search" type="search" placeholder="Search songs or artists" autocomplete="off"></label>
+        <div id="song-list" class="panel-list" tabindex="0" aria-label="Example songs"></div>
+        <div class="load-bar">
+          <div class="selected-track"><span class="eyebrow">SELECTED EXAMPLE</span><strong id="selected-title">Select a song</strong></div>
+          <div id="library-load-targets" class="load-targets" aria-label="Load selected example into a simulated deck"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="design-footer"><span id="design-status" role="status" aria-live="polite">Select an example song, then load it into a deck.</span><span id="design-build" title="Design Mode build DM-20261114-M1">DEV M1-1114</span><span>LIVE AUDIO TEST · OTHER FEATURES PREVIEW</span></footer>
+  </div>
+  <noscript>This live audio test requires JavaScript.</noscript>
+</body>
+</html>
