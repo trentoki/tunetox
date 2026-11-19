@@ -24,6 +24,15 @@ Source inspected: `development/integration/h531-approved-live-app.js` on the `tu
 | Deck play button | `h.createDeck` → `actions.play` | Native audio action; accessibility label still says simulated | Pending |
 | Deck main/stem sliders | `h.createDeck` → `actions.level` | Native audio actions | Pending |
 | Deck queue button | `h.createDeck` → `actions.swap` | Example/presentation queue | Pending |
+| Matching menu toggles | `h.createMatching` → `actions.toggle` | Handoff is native; beat/tune matching toggles are preview in this host | Pending |
+| Cue pads and hold buttons | `h.createCue` → `actions.cue` | Presentation only in this host; pointer/keyboard interactions exist | Pending |
+| Effect assignment selectors | `h.createEffects` → `actions.performance('effectAssignment')` | Presentation only in this host | Pending |
+
+## Additional findings
+
+- Matching, cue, and effect controls live in separate UI component files, but their host action destinations determine whether they affect sound. A visual component can be reused without promising native behavior.
+- Cue controls have pointer and keyboard event paths; any future status styling must preserve their interaction and accessibility.
+- Several components use the word *simulated* in accessible labels. Those labels should eventually distinguish native-connected actions from preview controls, but no label changes have been made yet.
 
 ## Important boundaries
 
