@@ -410,12 +410,7 @@ lifecycle or tests are modified by this documentation update.
 ## 19. Unified four-deck system and independent capabilities — confirmed future direction
 
 One underlying four-deck architecture serves all layouts. Hidden decks remain independently
-operational; presentation must not create separate two-/four-deck audio modes. Preferred
-phone portrait direction is four visible decks in a 2×2 grid with a full-width global-controls
-strip above. The mixer provisionally occupies 40% of the application screen; below it are
-playlists left and songs right, with playlists provisionally 26% of library width. These
-proportions require device testing, including how the strip contributes to mixer height.
-This supersedes the two-visible-deck phone direction; retain iPad layout flexibility. Layout changes do not reset transport, musical settings
+operational; presentation must not create separate two-/four-deck audio modes. Earlier phone portrait proposals specified a 2×2 deck grid, a 40% mixer share, and a 26% playlist width. **These are historical proposals, not current layout requirements.** Current UI layout must follow newly approved specifications; retain flexibility to open library views from different decks. Layout changes do not reset transport, musical settings
 or stem levels, and alone never trigger synchronization.
 
 Beatmatching, tune matching and stem handoff are independent capabilities with independently selectable deck participation (section 16). Preserve default-enabled matching and no-reset disable behavior. Handoff uses separate per-deck
@@ -429,14 +424,16 @@ visibility as future synchronization policy.
 
 ## 20. Shared cross-platform library and search — confirmed plus proposed interaction
 
-**Current approved library direction:** Library views may be opened from different decks within the four-deck interface, while sharing one underlying library implementation and established internal layout. Search supports playlists, songs, artists, BPM, and musical key. Earlier fixed phone proportions and independent/linked/single-panel proposals are historical, not current requirements. In the
+**Current approved library direction:** Library views may be opened from different decks within the four-deck interface, while sharing one underlying library implementation and established internal layout. Search supports playlists, songs, artists, BPM, and musical key. Earlier fixed phone proportions and independent/linked/single-panel proposals are historical, not current requirements.
+
+**Historical interaction proposals (not approved current layout requirements):** Earlier designs described independent panels, linked playlist/song panels, and single-panel presentations, including their navigation and scroll-state behavior. Retain the following research for possible future evaluation, but do not implement these modes or fixed panel arrangements without renewed approval.
+In the
 independent-panel presentation, each panel shows playlists, opens playlist songs, supports
 Back and universal search, and preserves its own navigation, selection and scroll. Neither
 independent panel has a permanent playlists-only or songs-only role. Linked presentation
 coordinates playlist selection on the left with songs on the right. Shared data/search/actions,
 components and responsive CSS serve all layouts; preserve navigation state across switches
-where practical. The previous every-platform independent-panel default is superseded on phone
-by the approved linked presentation. Optional layout selection and exact narrow-screen behavior
+where practical. The former phone linked-panel direction has been superseded by the current library-view direction. Optional layout selection and exact narrow-screen behavior
 remain proposals, not a different app or authorization to implement UI.
 
 Search context changes ranking only: playlist view boosts playlists; playlist-song view boosts
@@ -1049,7 +1046,7 @@ continuation, UI/MIDI bindings and persistence. No general automatic allocator i
 
 ## 23. Visual reference, implementation status and boundaries
 
-v40 is the visual/interaction benchmark; retain/improve perceived functionality, usability and
+v40 was a historical visual/interaction benchmark; retain/improve perceived functionality, usability and
 polish with shared readable architecture. The experimental interface is not final design.
 Main visual implementation remains in its planned phase. Earlier choices must support
 intuitive drag/drop, generous touch targets, accessible alternatives and efficient iPhone/iPad
@@ -1465,7 +1462,7 @@ Do not expand the deadline or suppress shared safety cleanup based only on the r
 existing DOM nodes into persistent card headers, transport strips, fader rows and expandable
 file/advanced panels. It creates no playback/domain events or timers. `mixer.css` supplies the
 2×2 desktop layout, responsive spacing, deck accents and overlay panels. Fixed IDs, listeners,
-player/context ownership and component closures remain intact. v40 is a reference direction;
+player/context ownership and component closures remain intact. v40 was a historical reference direction;
 no v40 visual asset was found in this checkout for direct comparison.
 
 The reusable stem component adds output elements refreshed from domain allocations and an
