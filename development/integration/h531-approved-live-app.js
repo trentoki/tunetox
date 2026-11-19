@@ -81,7 +81,7 @@
    }catch(error){status.textContent='Load failed: '+error.message;console.error(error);}
   });fieldset.append(load);filesRoot.append(fieldset);
  }
- function syncAudio(){syncParticipation();for(const deck of state.decks){const levels=audio.getLevels(deck.id);deck.volume=levels.volume;deck.stems=levels.stems;deck.playing=audio.getPlaybackState(deck.id).playing;}}
+ function syncAudio(){syncParticipation();for(const deck of state.decks){const levels=audio.getLevels(deck.id);deck.volume=levels.volume;deck.stems=levels.stems;deck.playing=audio.getPlaybackState(deck.id).playing;const transport=native.router.getState(deck.id);deck.position=Number.isFinite(transport.position)?transport.position:0;}}
  function safe(action){try{const result=action();if(result&&typeof result.then==='function')result.then(()=>{syncAudio();render();}).catch(error=>{status.textContent=error.message;console.error(error);});else{syncAudio();render();}}catch(error){status.textContent=error.message;console.error(error);}}
  state.decks.forEach(deck=>{deck.songId=null;deck.playing=false;deck.volume=0;deck.stems=[0,0,0,0];});
  const announce=text=>{document.getElementById('h1-status').textContent=text+' · preview only (no audio effect)';};
@@ -103,12 +103,8 @@
  const header=d.compact.createHeader(()=>state,render,announce),tools=d.compact.createDesignTools();
  function render(){d.h51ReconcileViews(state);cards.forEach(card=>card.render());header.render();columns.render();}
  syncAudio();render();
- // Illustrative playback clock only. Native audio/transport is never constructed.
+ // Render actual native transport position; never advance a simulated clock.
  setInterval(()=>{syncAudio();render();},250);
- let previous=performance.now();
- function tick(elapsed){for(const deck of state.decks){if(deck.playing)deck.position+=elapsed;}render();}
- if(!window.H5_TEST_CLOCK)setInterval(()=>{const now=performance.now(),elapsed=Math.min(.5,(now-previous)/1000);previous=now;if(document.visibilityState==='visible')tick(elapsed);},33);
- if(window.H5_TEST_CLOCK)d.h5Test={advance:tick};
  window.addEventListener('resize',()=>requestAnimationFrame(render));
  window.addEventListener('blur',()=>{for(const deck of state.decks){deck.compact.repeat=false;deck.wave.nudge=0;}render();});
  // Read-only snapshot / presentation test hooks, deliberately no production actions.
