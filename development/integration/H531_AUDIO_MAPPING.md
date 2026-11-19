@@ -29,3 +29,16 @@ Status: planning only. This branch begins from `organization/tunetox-architectur
 - Identify the *active* four-deck native mixer bootstrap, its action methods, and how the browser loads those modules.
 - Identify how that host publishes allocation/transport changes and how it maps song/stem sources.
 - Build a minimal, separately loadable adapter with focused tests; no changes to the approved visual baseline until the wiring is verified.
+
+## Verified root mixer bootstrap (2026-11-18)
+- Root `index.html` loads `main-stem-integration.js` before `audio-controls.js`, followed by `mixer-layout.js`. Design Mode `index.html` is a separate simulated page.
+- `audio-controls.js` constructs `mainStemIntegration = createMainStemIntegration(completeSongEngine)`, then chooses `mainStemIntegration.router` as `audioEngine`.
+- `main-stem-integration.js` creates `createNativeStemMixer()`, `createNativeStemHandoffActions(appState, mixer, onCommit)`, and `createStemSourceRouter(complete, mixer, bridge)`. It exposes `{ router, mount, mixer, handoff }` to the root page; the Handoff onCommit callback calls `refreshAll()`.
+- `stem-source-router.js` routes `play(id)` through `nativeActions.play(id)` when the deck is in stems mode, while complete-song mode uses the existing complete-song engine. It exposes `pause(id)`, `eject(id)`, `getState(id)`, `getSourceMode(id)`, `setSourceMode(id, mode)`, and `loadStems(id, files)`.
+- `native-stem-handoff.js` exports `setStemLevel(id, name, value, gestureId)`, `setMainVolume(id, value, gestureId)`, `play(id)`, `setParticipation(id, value)`, and `synchronizeAudio()`. Its onCommit supplies direct/automatic control identifiers.
+- The root page's current four-stem source is explicitly native experimental playback without tempo/pitch processing. Do not imply that BeatMatch/TuneMatch or real prepared library imports are integrated.
+
+## Next isolated implementation gate
+- Inspect the exact Design Mode deck/stem shape and root appState allocation shape before implementing a read-only translation adapter. Never pass the Design Mode simulated state into native actions.
+- Preserve browser audio gesture activation, async Play, file/stem loading, and source-mode routing. A fader-only prototype must not claim playable audio without actual loaded stems.
+- Implement an independent adapter module and focused tests on this branch; do not edit Design Mode or root mixer files yet.
