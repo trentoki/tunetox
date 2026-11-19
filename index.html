@@ -1,84 +1,85 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <base href="development/integration/">
+  <title>TuneTox D1</title>
+  <link rel="stylesheet" href="../design-mode/design-mode.css?v=h531">
+  <link rel="stylesheet" href="../design-mode/performance.css?v=h531">
+  <link rel="stylesheet" href="../design-mode/interaction-cleanup.css?v=h531">
+  <link rel="stylesheet" href="../design-mode/compact/compact.css?v=h531">
+  <script>window.addEventListener('error',function(event){window.h1BootError=event.message;var s=document.getElementById('h1-status');if(s)s.textContent='H5.3.1 BOOT ERROR: '+event.message;});</script>
+  <script defer src="../../participation.js"></script>
+  <script defer src="../../development/audio/handoff/stem-state.js"></script>
+  <script defer src="../../development/audio/handoff/two-deck-stem-handoff.js"></script>
+  <script defer src="../../development/audio/handoff/four-deck-stem-allocation.js"></script>
+  <script defer src="../../app.js"></script>
+  <script defer src="../../experimental/four-stem-player.js"></script>
+  <script defer src="../../development/audio/handoff/stem-handoff-audio-bridge.js"></script>
+  <script defer src="../../development/audio/handoff/native-stem-handoff.js"></script>
+  <script defer src="../design-mode/example-data.js?v=h531"></script>
+  <script defer src="../design-mode/sampler-state.js?v=h531"></script>
+  <script defer src="../design-mode/state.js?v=h531"></script>
+  <script defer src="../design-mode/components.js?v=h531"></script>
+  <script defer src="../design-mode/vertical-fader.js?v=h531"></script>
+  <script defer src="../design-mode/effect-assignment.js?v=h531"></script>
+  <script defer src="../design-mode/touch-preview/ownership.js?v=h531"></script>
+  <script defer src="../design-mode/touch-preview/knob-reset.js?v=h531"></script>
+  <script defer src="../design-mode/touch-preview/performance-controls.js?v=h531"></script>
+  <script defer src="../design-mode/phone-view.js?v=h531"></script>
+  <script defer src="../design-mode/drag-drop.js?v=h531"></script>
+  <script defer src="../design-mode/library-context.js?v=h531"></script>
+  <script defer src="../design-mode/performance-preview/library.js?v=h531"></script>
+  <script defer src="../design-mode/viewport.js?v=h531"></script>
+  <script defer src="../design-mode/compact/state.js?v=h531"></script>
+  <script defer src="../design-mode/compact/header.js?v=h531"></script>
 
-  <title>TuneToss</title>
-  <link rel="stylesheet" href="mixer.css">
+  <script defer src="../design-mode/performance-preview/design-tools.js?v=h531"></script>
+  <script defer src="../design-mode/fixed/state.js?v=h531"></script>
+  <script defer src="../design-mode/responsive/state.js?v=h531"></script>
+  <script defer src="../design-mode/responsive/queue-state.js?v=h531"></script>
+  <script defer src="../design-mode/performance-preview/state.js?v=h531"></script>
+  <script defer src="../design-mode/corrections-preview/state.js?v=h531"></script>
+  <script defer src="../design-mode/final-preview/state.js?v=h531"></script>
+  <script defer src="../design-mode/performance-preview/selector.js?v=h531"></script>
+  <script defer src="../design-mode/final-preview/matching.js?v=h531"></script>
+  <script defer src="../design-mode/performance-preview/icons.js?v=h531"></script>
+  <script defer src="../design-mode/performance-preview/touch-fader.js?v=h531"></script>
+  <script defer src="../design-mode/corrections-preview/touch-fader.js?v=h531"></script>
+  <script defer src="../design-mode/final-preview/wave.js?v=h531"></script>
+  <script defer src="../design-mode/final-preview/choices.js?v=h531"></script>
+  <script defer src="../design-mode/final-preview/effects.js?v=h531"></script>
+  <script defer src="../design-mode/touch-preview/popover.js?v=h531"></script>
+  <script defer src="../design-mode/touch-preview/effects.js?v=h531"></script>
+  <script defer src="../design-mode/touch-preview/overview-nudge.js?v=h531"></script>
+  <script defer src="../design-mode/touch-preview/faders.js?v=h531"></script>
+  <script defer src="../design-mode/portrait-preview/transition.js?v=h531"></script>
+  <script defer src="../design-mode/final-preview/cues.js?v=h531"></script>
+  <script defer src="../interface/decks/h531-deck.js?v=shared-01"></script>
+  <script defer src="../design-mode/final-preview/navigation.js?v=h531"></script>
+  <script defer src="../design-mode/touch-preview/browser-guards.js?v=h531"></script>
+  <script defer src="h531-approved-live-app.js?v=direct-06"></script>
+  <link rel="stylesheet" href="../design-mode/fixed/fixed.css?v=h531">
+  <link rel="stylesheet" href="../design-mode/responsive/responsive.css?v=h531">
+  <link rel="stylesheet" href="../design-mode/performance-preview/performance-preview.css?v=h531">
+  <link rel="stylesheet" href="../design-mode/corrections-preview/corrections.css?v=h531">
+  <link rel="stylesheet" href="../design-mode/final-preview/final.css?v=h531">
+  <link rel="stylesheet" href="../design-mode/portrait-preview/portrait.css?v=h531">
+  <link rel="stylesheet" href="../design-mode/touch-preview/touch.css?v=h531">
 </head>
 <body>
-  <header class="app-header">
-    <div><h1>TuneToss</h1><span class="app-subtitle">Four-deck live mixer</span></div>
-    <details class="app-help"><summary>Testing notes</summary><div>
-      <p>Prepare main volume before Play. Live volume changes may reject safely.</p>
-      <p>First Play admits handoff ownership; Pause retains it, Eject releases it.</p>
-      <p>Assign four distinct aligned files, then Load selected stems to decode. Selection alone does not load audio.</p>
-      <p>Native stems have no tempo or pitch processing. Complete-song tempo also changes pitch.</p>
-      <p>Deck 1 SoundTouch/Signalsmith experiments retain their existing behavior. Eject before changing source.</p>
-      <p>Accent-color Settings and waveform backgrounds are deferred.</p>
-    </div></details>
+ <div class="design-app h1-app h3-app h4-app h5-app h51-app h52-app h53-app h531-app">
+  <header class="h1-header">
+   <div class="h1-brand"><h1>TuneTox D1</h1><button id="h531-files-open" type="button">Audio files</button><button id="h1-tools-open" type="button">Design tools</button></div>
+   <div id="h1-tuning" aria-label="Preview tempo and pitch"></div>
   </header>
-  <main id="audio-decks" aria-label="Four-deck mixer"></main>
-  <details id="global-diagnostics"><summary>Audio experiments & diagnostics</summary><div id="diagnostic-panels"></div></details>
-
-  <template id="audio-deck-template">
-  <section>
-    <h2></h2>
-    <p data-experiment hidden>
-      <label>Experimental Deck 1 mode
-        <select data-input="playback-mode">
-          <option value="normal">Normal Playback</option>
-          <option value="soundtouch">SoundTouchJS</option>
-          <option value="signalsmith">Signalsmith</option>
-        </select>
-      </label>
-    </p>
-    <p data-comparison hidden>
-      <label>Comparison output level <input data-input="comparison-level" type="range" min="0" max="1" step="0.01" value="1"></label>
-      <span>Trim only (maximum −12 dB). Match perceived levels; lower if clipping is reported.</span>
-    </p>
-    <label>Audio file <input type="file" ></label>
-    <button data-action="load-selected" type="button" hidden disabled>Load selected file</button>
-    <p>
-      <label>Original BPM <input data-input="original-bpm" type="number" min="0" step="any" disabled></label>
-      <label>Target BPM <input data-input="target-bpm" type="number" min="0" step="any" disabled></label>
-      <button data-action="tempo" type="button" disabled>Apply tempo</button>
-    </p>
-    <p data-display="tempo" role="status">BPM unknown — playback rate 1.000×</p>
-    <p>
-      <button data-action="play" type="button" disabled>Play</button>
-      <button data-action="pause" type="button" disabled>Pause</button>
-      <button data-action="stop" type="button" hidden disabled>Stop</button>
-      <button data-action="eject" type="button" disabled>Eject</button>
-    </p>
-    <p data-display="status" role="status">No audio file loaded.</p>
-    <p data-display="position">0.0 / 0.0 seconds</p>
-  </section>
-  </template>
-
-  <script src="participation.js"></script>
-  <script src="development/audio/handoff/stem-state.js"></script>
-  <script src="development/audio/handoff/two-deck-stem-handoff.js"></script>
-  <script src="development/audio/handoff/four-deck-stem-allocation.js"></script>
-  <script src="app.js"></script>
-  <script src="audio-engine.js"></script>
-  <script src="experimental/comparison-output.js"></script>
-  <script src="experimental/deck-one-transport.js"></script>
-  <script src="experimental/signalsmith-diagnostics.js"></script>
-  <script src="experimental/signalsmith-transport.js"></script>
-  <script src="experimental/four-stem-player.js"></script>
-  <script src="development/audio/handoff/stem-handoff-audio-bridge.js"></script>
-  <script src="experimental/stem-file-assignments.js"></script>
-<script src="experimental/stem-controls.js"></script>
-  <script src="stem-source-router.js"></script>
-  <script src="development/audio/handoff/native-stem-handoff.js"></script>
-  <script src="main-stem-integration.js"></script>
-  <script src="audio-controls.js"></script>
-  <script src="experimental/signalsmith-diagnostics-controls.js"></script>
-  <script src="experimental/signalsmith-context-controls.js"></script>
-  <script src="mixer-layout.js"></script>
+  <main id="h1-decks" aria-label="Four-deck mixer"></main>
+  <footer class="h1-footer"><span id="h1-status" role="status">Load real stems using the Audio files button</span><span>TuneTox D1</span></footer>
+ </div>
+ <dialog id="h1-tools" aria-labelledby="h1-tools-heading"><h2 id="h1-tools-heading">Layout laboratory · H5.3.1</h2><p>Temporary presentation controls only. Deck state is preserved.</p><div id="h1-layout-inputs"></div><button id="h1-layout-reset" type="button">Reset to H5.3.1 defaults</button><button id="h1-tools-close" type="button">Return to mixer</button></dialog>
+ <dialog id="h531-files" aria-label="Load real stem files"><h2>Load real stem files</h2><div id="h531-file-inputs"></div><p>Choose Transients, Flow, Tune, and Voice for a deck. Raise Main and a stem before Play. Other controls remain previews until connected.</p><button id="h531-files-close" type="button">Return to mixer</button></dialog>
+ <noscript>This live audio build requires JavaScript.</noscript>
 </body>
 </html>
