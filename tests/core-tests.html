@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TuneTox core tests</title></head>
+<body>
+<h1>TuneTox core tests</h1>
+<p>These checks test allocation, authorization and Handoff session rules. They do not replace a real playback check.</p>
+<button id="run" disabled>Loading tests…</button>
+<pre id="results">Waiting for scripts.</pre>
+<script src="../app/integration/participation.js"></script>
+<script src="../app/audio/handoff/stem-state.js"></script>
+<script src="../app/audio/handoff/two-deck-stem-handoff.js"></script>
+<script src="../app/audio/handoff/four-deck-stem-allocation.js"></script>
+<script src="../app/integration/app.js"></script>
+<script src="four-deck-stem-allocation-tests.js"></script>
+<script src="stem-authorization-tests.js"></script>
+<script src="stem-handoff-lifecycle-tests.js"></script>
+<script>
+const button = document.getElementById('run');
+const results = document.getElementById('results');
+button.disabled = false;
+button.textContent = 'Run core tests';
+button.addEventListener('click', () => {
+  const cases = [
+    ['Four-deck allocation', runFourDeckStemAllocationTests],
+    ['Stem authorization', runStemAuthorizationTests],
+    ['Handoff lifecycle', runStemHandoffLifecycleTests]
+  ];
+  let passed = 0;
+  const lines = [];
+  for (const [name, run] of cases) {
+    try { run(); passed++; lines.push('PASS — ' + name); }
+    catch (error) { lines.push('FAIL — ' + name + ': ' + (error?.stack || error)); }
+  }
+  results.textContent = lines.join('\n') + '\n\n' + passed + ' of ' + cases.length + ' groups passed.';
+});
+</script>
+</body>
+</html>
