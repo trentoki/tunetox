@@ -1,8 +1,20 @@
 # TuneTox D1
 
-TuneTox is a four-deck DJ application for playing and mixing music using separate sound parts called **stems**. This is the shared application for everyone on the team.
+TuneTox is a four-deck music performance and mixing application.
 
-**Status:** D1 is being prepared and tested. The interface and audio have worked in earlier Mac/iPhone tests, but this cleaned entry point and a fresh download have **not yet been tested**. Do not assume every control is functional.
+TuneTox features **Handoff**, which allows DJs to easily control stems from multiple songs. Each song contains four stems: the beat (typically drums), the bass, the tune (typically chords and background instruments), and the voice (a vocal or lead instrument).
+
+With Handoff enabled, raising the volume of a stem on one deck automatically lowers the corresponding stem volumes on other participating decks as needed. DJs can use this feature to effortlessly blend the beat, bass, tune, and voice of up to four decks without worrying about their stems overlapping in volume. The available volume for each stem type is shared among Handoff-enabled decks.
+
+Each deck has three main views: **Controls, Waveform/Cue, and Library**. This simplifies navigation and performance. Opening the library on one deck doesn't block the other decks. Changing a stem level, loading a song, or scrubbing through a song's waveform is always just a click away.
+
+Songs sent to a deck that's already loaded and playing are stored in that deck's queue, meaning four songs can be playing while another four are queued. No more frantically searching for a song at the last second or accidentally ending a song that's already playing!
+
+TuneTox's planned **Song Sampler** will allow DJs to perform using samples from currently playing songs. DJs will be able to take over any stem and play their own beats, basslines, tunes, or lead melodies using samples from those songs.
+
+TuneTox is also designed to include standard DJ features such as beatmatching, tempo adjustment, and pitch shifting. It will also feature **Tune Matching**, which automatically adjusts a song's pitch to align its musical key with other tune-matched songs.
+
+**Development status:** This introduction describes TuneTox's intended features. Not all are functional in the current D1 build. The verification checklist below distinguishes work still to be tested.
 
 ## Open TuneTox
 
