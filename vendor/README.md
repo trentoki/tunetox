@@ -1,4 +1,6 @@
-# Optional audio libraries
+# TuneTox D1 playback and optional audio libraries
+
+**TuneTox D1 uses native Web Audio playback** in `app/audio/`. Pitch-preserving tempo stretching is not a required D1 feature. In earlier TuneToss experiments, Deck 1 offered Normal Playback, SoundTouchJS, and Signalsmith Stretch for comparison; neither stretching library was the default engine.
 
 These libraries are retained for future TuneTox audio experiments. **Neither library is currently loaded by the TuneTox D1 application entry page (`index.html`).** The working D1 audio player is in `app/audio/`. Keeping a library here does not mean its sound quality, compatibility, performance, or licensing obligations have been fully evaluated for release.
 
