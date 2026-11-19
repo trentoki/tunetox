@@ -3,7 +3,17 @@
  const d=globalThis.TuneToxDesign,m=d.model;let state=d.compact.createState();
  // Use the established F2/F3/G2 allocator and lifecycle fixes, not the legacy request-weighted path.
  const native=createMainStemIntegration(createAudioEngine(), { incremental:true, firstPlayIncremental:true, liveLifecycle:true });
- const audio=createH531AudioControls({appState,handoff:native.handoff,router:native.router});
+ const stemNames=['transients','flow','tune','voice'];
+ // G2's native Handoff actions are the sole musical command path.
+ // Presentation components call these actions directly; no H5 audio adapter or preview allocation.
+ let gestureNumber=0;
+ const gestureId=()=> 'h531-ui-'+(++gestureNumber);
+ const audio={
+  setStemLevel:(id,index,value)=>native.handoff.setStemLevel(id,stemNames[index],Math.round(value*100)/100,gestureId()),
+  setMainVolume:(id,value)=>native.handoff.setMainVolume(id,value,gestureId()),
+  togglePlayback:id=>native.router.getState(id).isPlaying?native.router.pause(id):native.handoff.play(id),
+  getLevels:id=>({stems:stemNames.map(name=>appState.decks[id-1].stems.allocatedLevels[name]),volume:appState.decks[id-1].volume})
+ };
  // Diagnostic snapshot: real native state, not the design-mode preview.
  window.TuneToxLiveDiagnostics=()=>({
   build:'h531-native-diagnostics-20261118',
