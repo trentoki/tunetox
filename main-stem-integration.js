@@ -1,5 +1,5 @@
 // Main-page opt-in adapter. No participation/default resets and no context until Load.
-function createMainStemIntegration(complete) {
+function createMainStemIntegration(complete, nativeOptions = {}) {
   const mixer = createNativeStemMixer();
   const origins = {}, refreshers = [], participationInputs = [];
   function refreshAll() {
@@ -10,7 +10,7 @@ function createMainStemIntegration(complete) {
     if (details.directControl) origins[details.directControl] = 'direct human input';
     for (const id of details.automaticControls) origins[id] = 'automatic allocation';
     refreshAll();
-  });
+  }, nativeOptions);
   const router = createStemSourceRouter(complete, mixer, bridge);
   bridge.synchronizeAudio();
   function mount(section, id) {
