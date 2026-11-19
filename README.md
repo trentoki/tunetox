@@ -48,11 +48,35 @@ The downloaded folder contains the complete TuneTox application. You don't need 
 
 ## What you should see
 
-A TuneTox D1 interface with four decks and mixing controls. Seeing the interface **does not yet verify audio playback**.
+TuneTox D1 uses a four-deck interface. Its layout adapts to different screen sizes.
 
-The **Audio files** control loads your own stem files (Transients, Flow, Tune, Voice). Prepare the main volume and stem levels before playback. Test audio files are not guaranteed to be included in the download.
+### Mac and Windows
 
-If something fails, note the step, operating system, browser, expected result, actual result, and any error message.
+The interface displays four decks side by side. Each deck provides access to its waveform and cue controls, mixing controls, and library.
+
+### iPad
+
+The interface adapts to the iPad's screen size and orientation. In landscape, the four-deck layout is available. In portrait, the layout adjusts to fit the narrower screen.
+
+### iPhone
+
+In portrait orientation, TuneTox displays **one selected deck at a time**, with buttons to switch between Decks 1–4.
+
+The selected deck provides access to its waveform and cue controls, mixing controls, and library. A **Transition** view also provides controls for working with two decks together.
+
+All four decks remain part of the application even when only one is displayed.
+
+**iPhone landscape orientation has not been created yet.**
+
+### Audio and testing
+
+Seeing the interface **does not yet verify audio playback**.
+
+Use the **Audio files** button at the top of the application to load your own stem files (Transients, Flow, Tune, Voice). Raise Main and the appropriate stem levels before pressing Play.
+
+Test audio files are not guaranteed to be included in the download.
+
+If something fails, note the device, operating system, browser, expected result, actual result, and any error message.
 
 ## For developers
 
