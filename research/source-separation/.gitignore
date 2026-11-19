@@ -1,6 +1,0 @@
-__pycache__/
-*.pyc
-/audio/*
-!/audio/.gitkeep
-/results/*
-!/results/.gitkeep

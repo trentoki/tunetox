@@ -1,9 +1,0 @@
-{
-  "code_inspection_and_diagnostic_preparation_wall_seconds": 71.89745903015137,
-  "analysis_execution_wall_seconds": 1.551461917,
-  "testing_wall_seconds": 0.077958125,
-  "interpretation_and_reporting_wall_seconds": 156.1074519157789,
-  "total_timed_investigation_wall_seconds": 229.6343309879303,
-  "analysis_peak_rss_mib": 243.03125,
-  "scope": "Timed from initial work marker; reporting includes interpretation between tool calls; no full benchmarks or audio exports."
-}

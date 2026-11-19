@@ -1,8 +1,0 @@
-{
-  "prior_files_verified": 477,
-  "reused_diagnostic_tests_passed": 3,
-  "saved_frame_flags_and_quiet_intervals_reproduced": true,
-  "continuous_passage_no_false_silence": true,
-  "zero_run_and_threshold_checks_passed": true,
-  "no_audio_exports_or_algorithm_changes": true
-}
