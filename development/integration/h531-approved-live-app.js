@@ -13,6 +13,42 @@
  document.getElementById('h531-files-open').addEventListener('click',()=>fileDialog.showModal());
  document.getElementById('h531-files-close').addEventListener('click',()=>fileDialog.close());
  const filesRoot=document.getElementById('h531-file-inputs');
+ // Quick test loader: one four-file selection can populate any or all decks.
+ const quick=document.createElement('fieldset');
+ const quickTitle=document.createElement('legend');quickTitle.textContent='Quick load — select four files once';
+ const quickInput=document.createElement('input');quickInput.type='file';quickInput.multiple=true;quickInput.accept='audio/*,.wav,.aiff,.aif,.mp3,.m4a';
+ const quickNote=document.createElement('p');quickNote.textContent='Names are optional. Files are assigned by recognized stem names, then selection order. Reuse the same four files across decks for handoff tests.';
+ const quickButtons=document.createElement('div');
+ quick.append(quickTitle,quickInput,quickNote,quickButtons);filesRoot.append(quick);
+ function selectedQuickFiles(){
+  const files=Array.from(quickInput.files);
+  if(files.length!==4)throw Error('Choose exactly four audio files together.');
+  const assigned={},remaining=[];
+  const aliases={transients:/transient|drum|percuss|beat|kick|snare/i,flow:/flow|bass|low/i,tune:/tune|other|music|instrument|melod/i,voice:/voice|vocal|lead|sing/i};
+  for(const file of files){const match=names.filter(name=>aliases[name].test(file.name));if(match.length===1&&!assigned[match[0]])assigned[match[0]]=file;else remaining.push(file);}
+  for(const name of names)if(!assigned[name])assigned[name]=remaining.shift();
+  return assigned;
+ }
+ async function quickLoadDeck(id,selected){
+  if(!native.router.setSourceMode(id,'stems')&&native.router.getSourceMode(id)!=='stems')throw Error('Deck '+id+': eject before changing source');
+  await native.router.loadStems(id,selected);
+  const songId='quick-'+id+'-'+Date.now();
+  d.data.songs.push({id:songId,title:'Test stems · Deck '+id,artist:'Local audio',bpm:120,key:'—',duration:'0:00',color:'#80baff'});
+  state.decks[id-1].songId=songId;state.decks[id-1].position=0;
+ }
+ for(const target of [1,2,3,4,'all']){
+  const button=document.createElement('button');button.type='button';button.textContent=target==='all'?'Load all 4 decks':'Load Deck '+target;
+  button.addEventListener('click',async()=>{
+   button.disabled=true;
+   try{
+    const selected=selectedQuickFiles(),targets=target==='all'?[1,2,3,4]:[target];
+    for(const id of targets){status.textContent='Quick loading Deck '+id+' of '+targets.join(', ')+'…';await quickLoadDeck(id,selected);}
+    syncAudio();render();status.textContent='Quick load complete: '+targets.map(id=>'D'+id).join(', ')+'. Raise Main and stems, then Play.';fileDialog.close();
+   }catch(error){status.textContent='Quick load: '+error.message;console.error(error);}
+   finally{button.disabled=false;}
+  });quickButtons.append(button);
+ }
+
  for(const id of [1,2,3,4]){
   const fieldset=document.createElement('fieldset');const legend=document.createElement('legend');legend.textContent='Deck '+id;fieldset.append(legend);
   const inputs={};
