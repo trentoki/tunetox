@@ -1,9 +1,9 @@
-# TuneToss — Instructions for Codex
+# TuneTox — Developer and coding-assistant instructions
 
 ## Project purpose
-TuneToss names the entire current project, including the DJ application and broader music/audio research. Do not retain TuneFlow as a separate research-project name; any future name is undecided. Preserve historical names and technical identifiers only where needed for accuracy or compatibility.
+TuneTox is the current working product name for this DJ application. The repository and older historical material may still use TuneToss or TuneFlow; preserve historical names and technical identifiers where needed for accuracy or compatibility. Do not perform a codebase-wide or repository rename without separate approval.
 
-TuneToss is an evolving, offline-first DJ and music application built with readable JavaScript, HTML, and CSS. It should ultimately work across desktop browsers, iPad, and iPhone, with installable/PWA behavior planned. The human is the product designer and final decision-maker. The application is designed around **four underlying decks**, regardless of how many are visible at once.
+TuneTox is an evolving, offline-first DJ and music application built with readable JavaScript, HTML, and CSS. It should ultimately work across desktop browsers, iPad, and iPhone, with installable/PWA behavior planned. The human is the product designer and final decision-maker. The application is designed around **four underlying decks**, regardless of how many are visible at once.
 
 ## Documentation authority
 - `AGENTS.md` is the authoritative development workflow and safeguard document, incorporating the intended replacement formerly named AGENTS_updated.md.
@@ -30,37 +30,22 @@ These standards apply to human contributors and AI coding agents alike.
 - **Review design separately from correctness.** Assess readability and maintainability independently of automated test success. Working code is not automatically well-designed. Review names, responsibility boundaries, dependency clarity, duplication, nesting and file size; keep tests understandable and representative of intended behavior. Identify existing violations and recommend focused improvements, but do not use this standard as permission for a broad cleanup.
 
 ### Folder responsibilities
-The current organization is incremental; this map does not authorize moving unrelated files.
+The active D1 app is served from the repository-root `index.html`. Its current JavaScript/CSS modules live under `app/interface/`, `app/audio/`, and `app/integration/`. Maintain current working paths (including legacy relative paths in `index.html`) until a separately authorized path migration is tested.
 
-```text
-development/
-  audio/
-    handoff/       Shared Handoff state, allocation, native adapter and audio bridge
-  design-mode/     Simulated UI, shared presentation modules and retained H-series builds
-  playable/        Real-audio integration hosts, local storage/server tools and baseline records
-  metadata-demo.*  Retained metadata/synchronization demonstration
-research/
-  source-separation/
-    diagnostic_*/  Independent analysis implementations and tests
-    tests/         Research regression tests
-    audio/         Read-only original research inputs
-    results/       Historical experiment implementations AND generated artifacts
-```
+`tests/` contains the focused D1 regression and audible-output browser checks. `vendor/` retains pinned optional stretch libraries, not currently loaded by D1; read `vendor/README.md` before considering them for integration. `docs/` contains D1 inventories and audits; check them against live source before relying on implementation-status claims.
 
-Research remains independent of production playback. Files under `results/` can be executable dependencies; do not treat the directory as disposable output. Existing root application files, `experimental/` implementations, root `tests/` and pinned `vendor/` code retain their current roles until a specific migration is approved. Directory names alone do not establish whether code is active, experimental or historical.
-
-H5.3.1 (`development/design-mode/touch-preview/`) is the preferred visual and interaction reference, including its layout, proportions and overall feel; its behavior remains simulated. G2 is the protected real-audio foundation. Future integration must preserve the approved interface and verified engine rather than blindly replacing either. Preserve earlier prototypes, source snapshots, baseline records and unrelated/untracked files during organization work.
+Historical `development/`, `experimental/`, and `research/` paths mentioned elsewhere in project documentation refer to earlier prototypes, not directories currently present in this branch. The original TuneToss checkout and protected Git baseline remain historical references. Do not treat those historical paths as executable current dependencies, and do not delete approved design decisions simply because their implementation paths are old.
 
 ## Architecture and product-design safeguards
 1. **One four-deck system.** Decks 1–4 are persistent underlying objects. Showing two decks, four decks, or switching visible pairs is a UI/layout decision, not a different audio mode. Changing layouts must not itself synchronize, reset, unload, or interrupt any deck. The older interface-dependent synchronization behavior in existing code/docs is legacy behavior to be reconciled in a separately approved implementation task; do not silently rewrite it.
 2. **Three separate capabilities.** Beatmatching, tune matching and stem handoff must be independently configurable through the authoritative participation store. Preserve current-sounding-pitch reference rules. Terminology updates do not authorize code renaming.
-3. **Stem foundation safeguards.** Follow RULES.md section 21: all decks participate by default; future startup main volumes are 0; Deck 1 stem levels are 1 and Decks 2–4 levels are 0. Initialization does not authorize automatic gain increases. Preserve session-high authorization from qualifying direct human gestures. Enabling handoff does not normalize levels; immediate equal-reduction joining and instantaneous caps are superseded. Do not invent convergence or multi-deck distribution math. This is approved future behavior, not implemented audio.
+3. **Stem foundation safeguards.** Follow RULES.md section 21: all decks participate by default; future startup main volumes are 0; Deck 1 stem levels are 1 and Decks 2–4 levels are 0. Initialization does not authorize automatic gain increases. Preserve session-high authorization from qualifying direct human gestures. Enabling handoff does not normalize levels; immediate equal-reduction joining and instantaneous caps are superseded. Do not invent convergence or multi-deck distribution math. Distinguish approved target behavior from the currently implemented and verified D1 audio/Handoff behavior; inspect the current source and tests before asserting either.
 4. **Saved preferences.** Plan offline-capable, versioned local settings, including per-deck default stem-handoff participation, distinct from temporary session changes. Do not claim settings sync between devices unless that feature is actually built.
 5. **Cross-platform consistency first.** Prefer one recognizable interface, shared components, responsive CSS, and common actions across desktop, iPad, and iPhone. Do not create separate platform-specific applications or interaction models without a clear usability/technical reason and approval. Treat TuneFlow v40 as a visual/interaction reference, not necessarily a code reference.
 6. **Shared library functionality.** Preserve shared navigation, search, selection, scroll and drag/drop behavior. Search playlists, songs and artists at every navigation level; context affects ranking, not category availability. The approved phone portrait layout uses playlists left and songs right below the mixer. Other platforms retain the documented independent-panel direction; optional independent/linked/single presentations share one implementation.
 7. **Layout proposals.** Independent two-panel, linked two-panel and single-panel modes remain shared-component proposals where appropriate; exact selection controls remain unresolved. Preserve navigation state across presentation changes where practical. Do not treat a presentation mode as a separate library or audio engine.
 8. **Phone portrait direction.** Four visible decks in a 2×2 grid with a full-width global-controls strip above; provisional mixer share 40% of the application screen. Below: playlists left, songs right, provisional playlist width 26% of library width. Validate proportions and touch ergonomics on devices before finalizing UI. This supersedes the two-visible-deck direction and does not authorize UI work.
-9. **Audio protection.** Do not alter playback engines, DSP, worklets, Signalsmith upstream code, audio lifecycle, or experimental toggles as a side effect of UI/library/documentation tasks. Keep the Signalsmith persistent-context and 5 ms release experiments separately documented and tested; automated success does not establish Safari click-free playback or native memory reclamation.
+9. **Audio protection.** Do not alter playback engines, DSP, worklets, Signalsmith upstream code, audio lifecycle, or experimental toggles as a side effect of UI/library/documentation tasks. Signalsmith and SoundTouchJS were used in historical stretching experiments but are not connected to D1 playback. D1 currently uses native Web Audio; stretching is not a required D1 feature. Preserve vendor license/provenance notices. Automated success does not establish Safari click-free playback or native memory reclamation.
 10. **State ownership.** Keep the existing four-deck appState.decks array and authoritative appState.participation store. Proposed structures such as decksById are design sketches, not authorization for a state rewrite or competing participation store.
 11. **MIDI-ready actions.** Design controls with stable identities and reusable actions, without prematurely implementing MIDI mapping or tying behavior to a specific UI layout.
 
@@ -72,14 +57,13 @@ H5.3.1 (`development/design-mode/touch-preview/`) is the preferred visual and in
 5. Run relevant automated tests and perform the independent readability/maintainability review above; report these as separate checks. Explicitly distinguish checks actually executed, not run, and still needed, including browser/device/manual verification. Report failures and limitations accurately; claim an audit only for the scope actually examined.
 6. Update the relevant documentation, then report precisely which files and behavior changed, verification results, remaining risks/limitations, and the next recommended step. When commits are authorized, make small, independently verified commits with meaningful descriptions of what changed, why and how it was checked. Stage explicit related paths; do not indiscriminately include untracked files.
 
-### Existing macOS JXA testing workflow
-Run the main suite from the repository root using the existing macOS JavaScript for Automation (JXA) runner:
+### Current Safari browser testing workflow
+Serve the repository root using a local HTTP server, then open these test pages in Safari:
 
-```sh
-osascript -l JavaScript tests/run-tests.js
-```
+- `tests/core-tests.html` — run the three core test groups: four-deck allocation, stem authorization, and Handoff lifecycle.
+- `tests/native-output-browser-tests.html` — run the audible native Web Audio output check.
 
-Run relevant focused JXA runners and browser/path/server checks for the affected subsystem as well. For organization changes, verify executable references and behavior before each related commit; preserve module contents when the task is relocation only. Do not install dependencies or replace the testing framework merely to run existing checks. Some browser/research runners write artifacts: inspect their output behavior before running them during a read-only task or when historical results must remain unchanged. Automated checks do not prove physical Safari audibility, gesture reliability or long-term stability.
+These four testing areas passed a user-run Safari verification on November 19, 2026. That is a bounded verification, not exhaustive regression coverage or a promise that future changes will pass. Re-run relevant tests after changes, and perform physical listening checks for audio behavior. The old `tests/run-tests.js` JXA runner and historical test suite are not present in this active branch. Do not instruct contributors to run deleted tests.
 
 ## Engineering quality, security and release safeguards
 - **Original audio safety:** Treat browser-selected audio files as read-only inputs. Do not rename, move, overwrite, delete or otherwise modify original audio outside the project. Do not run bulk filename corrections against a music library. Any proposed renaming or conversion requires explicit approval and must operate on copies in an appropriate project workspace. Investigate with exact existing filenames.
@@ -98,5 +82,7 @@ Run relevant focused JXA runners and browser/path/server checks for the affected
 - `AGENTS.md`: durable Codex collaboration instructions and safeguards.
 - `RULES.md`: evolving approved user-facing behavior and clearly labeled implementation notes.
 - `TUNEFLOW_DESIGN.md`: design context, roadmap, decisions, and open questions.
-- `index.html`, `app.js`, and relevant JavaScript/CSS modules: actual current implementation.
-- `EXPERIMENTAL_AUDIO.md`: experimental audio implementation, diagnostics, limits, and manual validation.
+- `index.html` and `app/`: actual current D1 implementation.
+- `tests/core-tests.html` and `tests/native-output-browser-tests.html`: current Safari test entry points.
+- `vendor/README.md`: optional third-party audio libraries, historical experiments, and license references.
+- `docs/`: D1 architecture inventories and control audit (verify status against current source).
