@@ -18,8 +18,12 @@ Source inspected: `development/integration/h531-approved-live-app.js` on the `tu
 | Queue swap | `actions.swap` → `d.h4Queue.swap`, preview notice | Example/presentation state | Pending |
 | Performance controls | `actions.performance` → `m.setPerformanceControl` | Presentation-state action; audio connection not shown | Pending |
 | Partner selection | `actions.partner` → `d.h5.setPartner` | Presentation-state action; audio connection not shown | Pending |
-| Library columns | `d.createColumnLibraries` | Requires deeper component audit | Pending |
-| Design tools | `d.compact.createDesignTools` | Presentation tools; requires deeper audit | Pending |
+| Library columns | `d.createColumnLibraries` → local `h4Queue.load`, `m.dropSong`, local browsing | Example/in-memory library, not native song loading | Pending |
+| Design tools | `d.compact.createDesignTools` → in-memory layout values and presets | Presentation/layout only | Pending |
+| Header tempo and pitch pads | `d.compact.createHeader` → `m.adjustMatchedControl`, preview notice | Presentation only; no native tempo/pitch audio effect | Pending |
+| Deck play button | `h.createDeck` → `actions.play` | Native audio action; accessibility label still says simulated | Pending |
+| Deck main/stem sliders | `h.createDeck` → `actions.level` | Native audio actions | Pending |
+| Deck queue button | `h.createDeck` → `actions.swap` | Example/presentation queue | Pending |
 
 ## Important boundaries
 
@@ -35,7 +39,7 @@ A consistent visual status (for example, red-shaded areas for preview-only contr
 
 ## Next checks
 
-1. Trace nested dependencies and the implementation of presentation-only controls.
+1. Trace remaining nested dependencies and controls; distinguish UI accessibility labels from actual action behavior.
 2. Test the root `index.html` in a real browser.
 3. Test local stem loading and playback.
 4. Verify native stem/Handoff behavior against approved rules.
