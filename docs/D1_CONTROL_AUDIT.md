@@ -28,6 +28,14 @@ Source inspected: `development/integration/h531-approved-live-app.js` on the `tu
 | Cue pads and hold buttons | `h.createCue` → `actions.cue` | Presentation only in this host; pointer/keyboard interactions exist | Pending |
 | Effect assignment selectors | `h.createEffects` → `actions.performance('effectAssignment')` | Presentation only in this host | Pending |
 
+## Waveform, navigation, and drag/drop component audit
+
+- `development/design-mode/final-preview/wave.js` routes skip, nudge, and scrub gestures through `actions.wave`. The D1 host routes these to `d.h5.waveAction` (presentation state), **not** the native player seek API. Its 12-second scrub window is explicitly labeled a preview in source.
+- `development/design-mode/final-preview/navigation.js` handles deck view selection and menu interaction; these are interface navigation, not musical processing.
+- `development/design-mode/drag-drop.js` provides mouse/touch drag-and-drop event handling; the host library callback changes example playlist membership via `m.dropSong`. This does **not** establish native audio loading.
+- `development/design-mode/touch-preview/faders.js` wraps range inputs for touch interaction. The host determines audio behavior: main and stem sliders call native actions despite the historically named wrapper.
+- These are static code inspections only. Pointer/touch and keyboard behavior remain untested in the new root entry.
+
 ## Additional findings
 
 - Matching, cue, and effect controls live in separate UI component files, but their host action destinations determine whether they affect sound. A visual component can be reused without promising native behavior.
