@@ -1,7 +1,8 @@
 // Separate H5.1 host: no production app, audio lifecycle, IndexedDB or media imports.
 (() => {
  const d=globalThis.TuneToxDesign,m=d.model;let state=d.compact.createState();
- const native=createMainStemIntegration(createAudioEngine());
+ // Use the established F2/F3/G2 allocator and lifecycle fixes, not the legacy request-weighted path.
+ const native=createMainStemIntegration(createAudioEngine(), { incremental:true, firstPlayIncremental:true, liveLifecycle:true });
  const audio=createH531AudioControls({appState,handoff:native.handoff,router:native.router});
  const names=['transients','flow','tune','voice'];
  const status=document.getElementById('h1-status');
