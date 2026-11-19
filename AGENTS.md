@@ -14,12 +14,42 @@ TuneToss is an evolving, offline-first DJ and music application built with reada
 ## How to collaborate
 - Start each substantial task by reading `AGENTS.md`, `RULES.md`, `TUNEFLOW_DESIGN.md`, and relevant source and test files. Source code and tests show what is **implemented**; `RULES.md` records **approved product behavior**; the design document provides context, roadmap, and open questions.
 - Explain proposed changes in plain English before significant edits: what, why, which files, and how to test. Keep changes small, independently testable, and grouped by related subsystem. Do not abruptly switch from an unfinished subsystem to an unrelated one without agreement.
-- Ask before major rewrites, new frameworks/dependencies, architectural changes, or resolving unspecified musical behavior. Do not silently invent DJ rules.
-- Keep code beginner-friendly: descriptive names, short functions, clear comments, and straightforward JavaScript. Avoid duplicated logic and unnecessary abstractions; document architectural/responsibility changes. Explain unfamiliar syntax when useful.
+- Obtain approval before broad refactoring, major rewrites, architectural changes, dependency installations, new frameworks, project-wide renaming, or resolving unspecified musical behavior. Do not silently invent DJ rules.
+- Keep code human-readable and beginner-friendly: descriptive, consistent file/function/variable/data-structure names, short functions, focused modules, clear comments, and straightforward JavaScript. Avoid duplicated logic, unnecessary abstractions, deeply nested control flow, and excessively large files. Explain unfamiliar syntax when useful.
 - Separate application state, pure musical/decision logic, UI presentation, and audio/DSP side effects. Prefer shared, input-independent actions that can later be invoked by mouse, touch, keyboard, or MIDI.
 - Preserve working behavior. For meaningful behavior changes, add/update automated regression and edge-case tests, including negative cases and transitions, plus relevant browser integration tests. Never claim real audio behavior or production readiness from unit/state-only tests.
 - Clearly distinguish **implemented**, **approved but not implemented**, **experimental**, and **unresolved** behavior in reports and documentation.
 - When a product decision is approved, update `RULES.md`; update `TUNEFLOW_DESIGN.md` and the roadmap as needed. Keep `AGENTS.md` relatively stable and update it only when collaboration practices or durable safeguards change.
+
+## Function-first organization and code quality
+These standards apply to human contributors and AI coding agents alike.
+
+- **Function first, platform second.** Organize by responsibility (audio, Handoff, interface, library, state), then isolate necessary platform-specific adapters within the owning subsystem. Do not create competing iPad/iPhone/desktop application trees or duplicate musical logic. Keep audio processing, application state, interface presentation and platform handling clearly separated.
+- **Explicit dependencies.** Make public interfaces, inputs/outputs, side effects and load-order requirements easy to trace. When moving a module, inspect executable HTML/script paths, test runners and server mappings separately from documentation and historical references. Update active paths without rewriting historical snapshot records.
+- **Explain complex behavior.** Document important architectural decisions, module responsibilities, public interfaces, invariants and non-obvious algorithms. For audio changes, explain allocation and authorization math, requested versus committed values, units, timing/ramp constraints, state transitions, cancellation and failure behavior. Comments should explain intent and constraints, not merely repeat statements.
+- **Review design separately from correctness.** Assess readability and maintainability independently of automated test success. Working code is not automatically well-designed. Review names, responsibility boundaries, dependency clarity, duplication, nesting and file size; keep tests understandable and representative of intended behavior. Identify existing violations and recommend focused improvements, but do not use this standard as permission for a broad cleanup.
+
+### Folder responsibilities
+The current organization is incremental; this map does not authorize moving unrelated files.
+
+```text
+development/
+  audio/
+    handoff/       Shared Handoff state, allocation, native adapter and audio bridge
+  design-mode/     Simulated UI, shared presentation modules and retained H-series builds
+  playable/        Real-audio integration hosts, local storage/server tools and baseline records
+  metadata-demo.*  Retained metadata/synchronization demonstration
+research/
+  source-separation/
+    diagnostic_*/  Independent analysis implementations and tests
+    tests/         Research regression tests
+    audio/         Read-only original research inputs
+    results/       Historical experiment implementations AND generated artifacts
+```
+
+Research remains independent of production playback. Files under `results/` can be executable dependencies; do not treat the directory as disposable output. Existing root application files, `experimental/` implementations, root `tests/` and pinned `vendor/` code retain their current roles until a specific migration is approved. Directory names alone do not establish whether code is active, experimental or historical.
+
+H5.3.1 (`development/design-mode/touch-preview/`) is the preferred visual and interaction reference, including its layout, proportions and overall feel; its behavior remains simulated. G2 is the protected real-audio foundation. Future integration must preserve the approved interface and verified engine rather than blindly replacing either. Preserve earlier prototypes, source snapshots, baseline records and unrelated/untracked files during organization work.
 
 ## Architecture and product-design safeguards
 1. **One four-deck system.** Decks 1–4 are persistent underlying objects. Showing two decks, four decks, or switching visible pairs is a UI/layout decision, not a different audio mode. Changing layouts must not itself synchronize, reset, unload, or interrupt any deck. The older interface-dependent synchronization behavior in existing code/docs is legacy behavior to be reconciled in a separately approved implementation task; do not silently rewrite it.
@@ -39,8 +69,17 @@ TuneToss is an evolving, offline-first DJ and music application built with reada
 2. Identify the smallest coherent next task in the agreed roadmap; state expected behavior and unresolved decisions.
 3. Propose targeted edits and a reproducible test plan before significant implementation.
 4. Implement only the authorized scope, preserving unrelated code and behavior.
-5. Run relevant automated tests; explicitly distinguish checks actually executed, not run, and still needed, including browser/device/manual verification. Report failures and limitations accurately; claim an audit only for the scope actually examined.
-6. Update the relevant documentation, then report precisely which files and behavior changed, verification results, remaining risks/limitations, and the next recommended step.
+5. Run relevant automated tests and perform the independent readability/maintainability review above; report these as separate checks. Explicitly distinguish checks actually executed, not run, and still needed, including browser/device/manual verification. Report failures and limitations accurately; claim an audit only for the scope actually examined.
+6. Update the relevant documentation, then report precisely which files and behavior changed, verification results, remaining risks/limitations, and the next recommended step. When commits are authorized, make small, independently verified commits with meaningful descriptions of what changed, why and how it was checked. Stage explicit related paths; do not indiscriminately include untracked files.
+
+### Existing macOS JXA testing workflow
+Run the main suite from the repository root using the existing macOS JavaScript for Automation (JXA) runner:
+
+```sh
+osascript -l JavaScript tests/run-tests.js
+```
+
+Run relevant focused JXA runners and browser/path/server checks for the affected subsystem as well. For organization changes, verify executable references and behavior before each related commit; preserve module contents when the task is relocation only. Do not install dependencies or replace the testing framework merely to run existing checks. Some browser/research runners write artifacts: inspect their output behavior before running them during a read-only task or when historical results must remain unchanged. Automated checks do not prove physical Safari audibility, gesture reliability or long-term stability.
 
 ## Engineering quality, security and release safeguards
 - **Original audio safety:** Treat browser-selected audio files as read-only inputs. Do not rename, move, overwrite, delete or otherwise modify original audio outside the project. Do not run bulk filename corrections against a music library. Any proposed renaming or conversion requires explicit approval and must operate on copies in an appropriate project workspace. Investigate with exact existing filenames.
