@@ -4,7 +4,10 @@
  // Use the established F2/F3/G2 allocator and lifecycle fixes, not the legacy request-weighted path.
  // All four decks join the same shared Handoff relationship by default.
  // Participation defaults are supplied by the authoritative application state.
- const native=createMainStemIntegration(createAudioEngine(), { incremental:true, firstPlayIncremental:true, liveLifecycle:true });
+ const mixer=createNativeStemMixer();
+ const handoff=createNativeStemHandoffActions(appState,mixer,()=>{}, {incremental:true,firstPlayIncremental:true,liveLifecycle:true});
+ handoff.synchronizeAudio();
+ const native={mixer,handoff,player:id=>mixer.getDeck(id)};
  const stemNames=['transients','flow','tune','voice'];
  // G2's native Handoff actions are the sole musical command path.
  // Presentation components call these actions directly; no H5 audio adapter or preview allocation.
@@ -13,7 +16,7 @@
  const audio={
   setStemLevel:(id,index,value)=>native.handoff.setStemLevel(id,stemNames[index],Math.round(value*100)/100,gestureId()),
   setMainVolume:(id,value)=>native.handoff.setMainVolume(id,value,gestureId()),
-  togglePlayback:id=>native.router.getState(id).isPlaying?native.router.pause(id):native.handoff.play(id),
+  togglePlayback:id=>native.player(id).getState().isPlaying?native.player(id).pause():native.handoff.play(id),
   getLevels:id=>({stems:stemNames.map(name=>appState.decks[id-1].stems.allocatedLevels[name]),volume:appState.decks[id-1].volume})
  };
  // Diagnostic snapshot: real native state, not the design-mode preview.
@@ -22,7 +25,7 @@
   handoff:native.handoff.getDiagnostics(),
   decks:appState.decks.map(deck=>({
    id:deck.id,main:deck.volume,
-   playing:native.router.getState(deck.id).isPlaying,
+   playing:native.player(deck.id).getState().isPlaying,
    handoff:appState.participation.byDeck[deck.id].stemHandoff,
    requested:{...deck.stems.requestedLevels},
    allocated:{...deck.stems.allocatedLevels}
@@ -53,8 +56,7 @@
   return assigned;
  }
  async function quickLoadDeck(id,selected){
-  if(!native.router.setSourceMode(id,'stems')&&native.router.getSourceMode(id)!=='stems')throw Error('Deck '+id+': eject before changing source');
-  await native.router.loadStems(id,selected);
+  await native.player(id).loadFiles(selected);
   const songId='quick-'+id+'-'+Date.now();
   d.data.songs.push({id:songId,title:'Test stems · Deck '+id,artist:'Local audio',bpm:120,key:'—',duration:'0:00',color:'#80baff'});
   state.decks[id-1].songId=songId;state.decks[id-1].position=0;
@@ -82,8 +84,7 @@
    if(names.some(name=>!selected[name])){status.textContent='Select all four stem files for Deck '+id;return;}
    try{
     status.textContent='Loading Deck '+id+'…';
-    if(!native.router.setSourceMode(id,'stems')&&native.router.getSourceMode(id)!=='stems')throw Error('Eject deck before changing source');
-    await native.router.loadStems(id,selected);
+    await native.player(id).loadFiles(selected);
     const songId='local-'+id+'-'+Date.now();
     d.data.songs.push({id:songId,title:selected.transients.name.replace(/\.[^.]+$/,''),artist:'Local audio',bpm:120,key:'—',duration:'0:00',color:'#80baff'});
     state.decks[id-1].songId=songId;state.decks[id-1].position=0;
@@ -91,7 +92,7 @@
    }catch(error){status.textContent='Load failed: '+error.message;console.error(error);}
   });fieldset.append(load);filesRoot.append(fieldset);
  }
- function syncAudio(){for(const deck of state.decks){const transport=native.router.getState(deck.id);deck.position=Number.isFinite(transport.position)?transport.position:0;}}
+ function syncAudio(){for(const deck of state.decks){const transport=native.player(deck.id).getState();deck.position=Number.isFinite(transport.position)?transport.position:0;}}
  function safe(action){try{const result=action();if(result&&typeof result.then==='function')result.then(()=>{syncAudio();render();}).catch(error=>{status.textContent=error.message;console.error(error);});else{syncAudio();render();}}catch(error){status.textContent=error.message;console.error(error);}}
  // Expose live musical values to the existing H5 visual components without copying them.
  state.decks.forEach(deck=>{
@@ -99,7 +100,7 @@
   Object.defineProperties(deck,{
    stems:{get:()=>audio.getLevels(deck.id).stems,configurable:true,enumerable:true},
    volume:{get:()=>appState.decks[deck.id-1].volume,configurable:true,enumerable:true},
-   playing:{get:()=>native.router.getState(deck.id).isPlaying===true,configurable:true,enumerable:true},
+   playing:{get:()=>native.player(deck.id).getState().isPlaying===true,configurable:true,enumerable:true},
    handoff:{get:()=>appState.participation.byDeck[deck.id].stemHandoff,configurable:true,enumerable:true}
   });
  });
