@@ -17,9 +17,7 @@
   }))
  });
 
- // Native participation is authoritative; the UI never keeps an independent handoff toggle.
- function syncParticipation(){for(const deck of state.decks)deck.handoff=appState.participation.byDeck[deck.id].stemHandoff;}
- syncParticipation();
+ // Native musical state is authoritative; visual decks retain only presentation state.
  const names=['transients','flow','tune','voice'];
  const status=document.getElementById('h1-status');
  const fileDialog=document.getElementById('h531-files');
@@ -81,9 +79,18 @@
    }catch(error){status.textContent='Load failed: '+error.message;console.error(error);}
   });fieldset.append(load);filesRoot.append(fieldset);
  }
- function syncAudio(){syncParticipation();for(const deck of state.decks){const levels=audio.getLevels(deck.id);deck.volume=levels.volume;deck.stems=levels.stems;deck.playing=audio.getPlaybackState(deck.id).playing;const transport=native.router.getState(deck.id);deck.position=Number.isFinite(transport.position)?transport.position:0;}}
+ function syncAudio(){for(const deck of state.decks){const transport=native.router.getState(deck.id);deck.position=Number.isFinite(transport.position)?transport.position:0;}}
  function safe(action){try{const result=action();if(result&&typeof result.then==='function')result.then(()=>{syncAudio();render();}).catch(error=>{status.textContent=error.message;console.error(error);});else{syncAudio();render();}}catch(error){status.textContent=error.message;console.error(error);}}
- state.decks.forEach(deck=>{deck.songId=null;deck.playing=false;deck.volume=0;deck.stems=[0,0,0,0];});
+ // Expose live musical values to the existing H5 visual components without copying them.
+ state.decks.forEach(deck=>{
+  deck.songId=null;
+  Object.defineProperties(deck,{
+   stems:{get:()=>audio.getLevels(deck.id).stems,configurable:true,enumerable:true},
+   volume:{get:()=>appState.decks[deck.id-1].volume,configurable:true,enumerable:true},
+   playing:{get:()=>native.router.getState(deck.id).isPlaying===true,configurable:true,enumerable:true},
+   handoff:{get:()=>appState.participation.byDeck[deck.id].stemHandoff,configurable:true,enumerable:true}
+  });
+ });
  const announce=text=>{document.getElementById('h1-status').textContent=text+' · preview only (no audio effect)';};
  const actions={
   swap(id){if(d.h4Queue.swap(state,id))announce('Queued example swapped on D'+id);render();},
