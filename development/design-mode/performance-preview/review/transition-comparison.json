@@ -1,0 +1,38 @@
+{
+  "sideBySide": {
+    "scrollHeight": 392,
+    "dial": {
+      "x": 290.5,
+      "y": 331,
+      "width": 44,
+      "height": 44,
+      "top": 331,
+      "right": 334.5,
+      "bottom": 375,
+      "left": 290.5
+    },
+    "fader": {
+      "x": 199,
+      "y": 350,
+      "width": 44,
+      "height": 174,
+      "top": 350,
+      "right": 243,
+      "bottom": 524,
+      "left": 199
+    }
+  },
+  "stacked": {
+    "scrollHeight": 597,
+    "dial": {
+      "x": 196.5,
+      "y": 569,
+      "width": 44,
+      "height": 44,
+      "top": 569,
+      "right": 240.5,
+      "bottom": 613,
+      "left": 196.5
+    }
+  }
+}

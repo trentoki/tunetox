@@ -1,0 +1,17 @@
+[
+  {
+    "type": "pointerup",
+    "target": "h52-choice h53-choice h53-partner-touch",
+    "id": 9
+  },
+  {
+    "call": true,
+    "id": 1,
+    "value": 4
+  },
+  {
+    "type": "lostpointercapture",
+    "target": "h52-choice h53-choice h53-partner-touch",
+    "id": 9
+  }
+]

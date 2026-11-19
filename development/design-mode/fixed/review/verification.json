@@ -1,0 +1,17 @@
+{
+  "h3State": 38,
+  "h3Browser": 74,
+  "h1State": 41,
+  "h1Browser": 70,
+  "h2State": {
+    "inherited": 44,
+    "h2": 21
+  },
+  "h2Browser": 62,
+  "originalState": 77,
+  "originalBrowser": 1084,
+  "preservedPreTaskFiles": 111,
+  "g2ProtectedFiles": 190,
+  "g2ArchiveUnchanged": true,
+  "physicalSafariReview": "pending"
+}

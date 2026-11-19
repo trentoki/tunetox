@@ -1,0 +1,52 @@
+[
+  {
+    "width": 1194,
+    "height": 834,
+    "deckWidth": 285.5,
+    "deckHeight": 528,
+    "visibleDecks": 4,
+    "centerHeight": 168,
+    "overviewHeight": 40,
+    "stemHeight": 176
+  },
+  {
+    "width": 1024,
+    "height": 768,
+    "deckWidth": 243,
+    "deckHeight": 528,
+    "visibleDecks": 4,
+    "centerHeight": 168,
+    "overviewHeight": 40,
+    "stemHeight": 176
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "deckWidth": 380,
+    "deckHeight": 528,
+    "visibleDecks": 1,
+    "centerHeight": 168,
+    "overviewHeight": 40,
+    "stemHeight": 176
+  },
+  {
+    "width": 375,
+    "height": 667,
+    "deckWidth": 365,
+    "deckHeight": 528,
+    "visibleDecks": 1,
+    "centerHeight": 168,
+    "overviewHeight": 40,
+    "stemHeight": 176
+  },
+  {
+    "width": 320,
+    "height": 568,
+    "deckWidth": 310,
+    "deckHeight": 446,
+    "visibleDecks": 1,
+    "centerHeight": 86,
+    "overviewHeight": 40,
+    "stemHeight": 176
+  }
+]

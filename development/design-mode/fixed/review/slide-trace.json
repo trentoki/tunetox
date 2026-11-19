@@ -1,0 +1,44 @@
+[
+  {
+    "type": "pointerdown",
+    "x": 183.5,
+    "id": 2,
+    "mode": "wave"
+  },
+  {
+    "type": "pointermove",
+    "x": 227.5,
+    "id": 2,
+    "mode": "cue"
+  },
+  {
+    "type": "pointermove",
+    "x": 271.5,
+    "id": 2,
+    "mode": "controls"
+  },
+  {
+    "type": "pointermove",
+    "x": 328.5,
+    "id": 2,
+    "mode": "controls"
+  },
+  {
+    "type": "pointermove",
+    "x": 183.5,
+    "id": 2,
+    "mode": "wave"
+  },
+  {
+    "type": "pointermove",
+    "x": 126.5,
+    "id": 2,
+    "mode": "wave"
+  },
+  {
+    "type": "lostpointercapture",
+    "x": 126.5,
+    "id": 2,
+    "mode": "wave"
+  }
+]

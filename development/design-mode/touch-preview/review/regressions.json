@@ -1,0 +1,17 @@
+{
+  "previousBrowserSuites": {
+    "compact": 70,
+    "flexible": 62,
+    "fixed": 74,
+    "responsive": 106,
+    "performance-preview": 106,
+    "corrections-preview": 143,
+    "final-preview": 114,
+    "portrait-preview": 108
+  },
+  "newStateChecks": 102,
+  "newBrowserChecks": 109,
+  "focusedTouchChecks": 48,
+  "geometryComparisons": 16,
+  "physicalSafari": "pending"
+}

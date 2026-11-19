@@ -1,0 +1,30 @@
+[
+  {
+    "viewport": "1194x834",
+    "g2DeckHeight": 730,
+    "g2VisibleDecks": 4,
+    "h1DeckHeight": 720,
+    "h1VisibleDecks": 4
+  },
+  {
+    "viewport": "1024x768",
+    "g2DeckHeight": 664,
+    "g2VisibleDecks": 4,
+    "h1DeckHeight": 654,
+    "h1VisibleDecks": 4
+  },
+  {
+    "viewport": "390x844",
+    "g2DeckHeight": 650,
+    "g2VisibleDecks": 1,
+    "h1DeckHeight": 361,
+    "h1VisibleDecks": 4
+  },
+  {
+    "viewport": "320x568",
+    "g2DeckHeight": 386,
+    "g2VisibleDecks": 1,
+    "h1DeckHeight": 223,
+    "h1VisibleDecks": 4
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "width": 1194,
+    "height": 834,
+    "h1": {
+      "deckHeight": 720,
+      "usableBelowNav": 563,
+      "zoomHeight": 241.40625,
+      "overviewHeight": 112.59375
+    },
+    "h2": {
+      "deckHeight": 720,
+      "usableBelowNav": 590,
+      "zoomHeight": 334,
+      "overviewHeight": 44
+    }
+  },
+  {
+    "width": 1024,
+    "height": 768,
+    "h1": {
+      "deckHeight": 654,
+      "usableBelowNav": 497,
+      "zoomHeight": 188.609375,
+      "overviewHeight": 99.390625
+    },
+    "h2": {
+      "deckHeight": 654,
+      "usableBelowNav": 524,
+      "zoomHeight": 268,
+      "overviewHeight": 44
+    }
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "h1": {
+      "deckHeight": 361,
+      "usableBelowNav": 204,
+      "zoomHeight": 135.203125,
+      "overviewHeight": 40.796875
+    },
+    "h2": {
+      "deckHeight": 361,
+      "usableBelowNav": 231,
+      "zoomHeight": 80,
+      "overviewHeight": 44
+    }
+  },
+  {
+    "width": 320,
+    "height": 568,
+    "h1": {
+      "deckHeight": 223,
+      "usableBelowNav": 66,
+      "zoomHeight": 12,
+      "overviewHeight": 26
+    },
+    "h2": {
+      "deckHeight": 223,
+      "usableBelowNav": 93,
+      "zoomHeight": 80,
+      "overviewHeight": 44
+    }
+  }
+]

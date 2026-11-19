@@ -1,0 +1,53 @@
+[
+  {
+    "event": "pointerdown",
+    "modifier": "shift",
+    "detail": 0,
+    "pointerType": "touch"
+  },
+  {
+    "kind": "shift",
+    "value": true,
+    "shift": false,
+    "cue": 0,
+    "position": 0.39649999999999996,
+    "queue": "blue"
+  },
+  {
+    "event": "pointerdown",
+    "cue": "0",
+    "detail": 0,
+    "pointerType": "touch"
+  },
+  {
+    "kind": "cue",
+    "value": {
+      "index": 0,
+      "shift": false
+    },
+    "shift": true,
+    "cue": 0,
+    "position": 0.39649999999999996,
+    "queue": "blue"
+  },
+  {
+    "event": "pointerup",
+    "modifier": "shift",
+    "detail": 0,
+    "pointerType": "touch"
+  },
+  {
+    "kind": "shift",
+    "value": false,
+    "shift": true,
+    "cue": null,
+    "position": 0.4614000000953674,
+    "queue": "blue"
+  },
+  {
+    "event": "pointerup",
+    "cue": "0",
+    "detail": 0,
+    "pointerType": "touch"
+  }
+]

@@ -1,0 +1,1316 @@
+[
+  {
+    "width": 430,
+    "height": 932,
+    "transition": {
+      "x": 11,
+      "y": 210,
+      "width": 408,
+      "height": 684,
+      "top": 210,
+      "right": 419,
+      "bottom": 894,
+      "left": 11
+    },
+    "dimensions": [
+      {
+        "class": "h52-transition",
+        "h": 684,
+        "sh": 684,
+        "w": 408,
+        "sw": 408
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 608,
+        "sh": 608,
+        "w": 408,
+        "sw": 408
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 608,
+        "sh": 608,
+        "w": 201,
+        "sw": 201
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 608,
+        "sh": 608,
+        "w": 80,
+        "sw": 80
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 608,
+        "sh": 608,
+        "w": 80,
+        "sw": 80
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 608,
+        "sh": 608,
+        "w": 201,
+        "sw": 201
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 608,
+        "sh": 608,
+        "w": 80,
+        "sw": 80
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 608,
+        "sh": 608,
+        "w": 80,
+        "sw": 80
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "transition": {
+      "x": 11,
+      "y": 210,
+      "width": 368,
+      "height": 596,
+      "top": 210,
+      "right": 379,
+      "bottom": 806,
+      "left": 11
+    },
+    "dimensions": [
+      {
+        "class": "h52-transition",
+        "h": 596,
+        "sh": 596,
+        "w": 368,
+        "sw": 368
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 520,
+        "sh": 520,
+        "w": 368,
+        "sw": 368
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 520,
+        "sh": 520,
+        "w": 181,
+        "sw": 181
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 520,
+        "sh": 520,
+        "w": 70,
+        "sw": 70
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 520,
+        "sh": 520,
+        "w": 70,
+        "sw": 70
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 520,
+        "sh": 520,
+        "w": 181,
+        "sw": 181
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 520,
+        "sh": 520,
+        "w": 70,
+        "sw": 70
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 520,
+        "sh": 520,
+        "w": 70,
+        "sw": 70
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "height": 724,
+    "transition": {
+      "x": 11,
+      "y": 210,
+      "width": 368,
+      "height": 476,
+      "top": 210,
+      "right": 379,
+      "bottom": 686,
+      "left": 11
+    },
+    "dimensions": [
+      {
+        "class": "h52-transition",
+        "h": 476,
+        "sh": 476,
+        "w": 368,
+        "sw": 368
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 400,
+        "sh": 400,
+        "w": 368,
+        "sw": 368
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 400,
+        "sh": 400,
+        "w": 181,
+        "sw": 181
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 400,
+        "sh": 400,
+        "w": 70,
+        "sw": 70
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 400,
+        "sh": 400,
+        "w": 70,
+        "sw": 70
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 400,
+        "sh": 400,
+        "w": 181,
+        "sw": 181
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 400,
+        "sh": 400,
+        "w": 70,
+        "sw": 70
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 400,
+        "sh": 400,
+        "w": 70,
+        "sw": 70
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      }
+    ]
+  },
+  {
+    "width": 375,
+    "height": 667,
+    "transition": {
+      "x": 11,
+      "y": 210,
+      "width": 353,
+      "height": 419,
+      "top": 210,
+      "right": 364,
+      "bottom": 629,
+      "left": 11
+    },
+    "dimensions": [
+      {
+        "class": "h52-transition",
+        "h": 419,
+        "sh": 419,
+        "w": 353,
+        "sw": 353
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 343,
+        "sh": 343,
+        "w": 353,
+        "sw": 353
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 343,
+        "sh": 343,
+        "w": 174,
+        "sw": 174
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 343,
+        "sh": 343,
+        "w": 66,
+        "sw": 66
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 343,
+        "sh": 343,
+        "w": 66,
+        "sw": 66
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 343,
+        "sh": 343,
+        "w": 174,
+        "sw": 174
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 343,
+        "sh": 343,
+        "w": 66,
+        "sw": 66
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 343,
+        "sh": 343,
+        "w": 66,
+        "sw": 66
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "height": 568,
+    "transition": {
+      "x": 11,
+      "y": 210,
+      "width": 298,
+      "height": 320,
+      "top": 210,
+      "right": 309,
+      "bottom": 530,
+      "left": 11
+    },
+    "dimensions": [
+      {
+        "class": "h52-transition",
+        "h": 320,
+        "sh": 320,
+        "w": 298,
+        "sw": 298
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 244,
+        "sh": 244,
+        "w": 298,
+        "sw": 298
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 244,
+        "sh": 244,
+        "w": 146,
+        "sw": 146
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 244,
+        "sh": 244,
+        "w": 52,
+        "sw": 52
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 244,
+        "sh": 244,
+        "w": 52,
+        "sw": 52
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 244,
+        "sh": 244,
+        "w": 146,
+        "sw": 146
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 244,
+        "sh": 244,
+        "w": 52,
+        "sw": 52
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 244,
+        "sh": 244,
+        "w": 52,
+        "sw": 52
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      }
+    ]
+  },
+  {
+    "width": 320,
+    "height": 480,
+    "transition": {
+      "x": 11,
+      "y": 210,
+      "width": 298,
+      "height": 232,
+      "top": 210,
+      "right": 309,
+      "bottom": 442,
+      "left": 11
+    },
+    "dimensions": [
+      {
+        "class": "h52-transition",
+        "h": 232,
+        "sh": 232,
+        "w": 298,
+        "sw": 298
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 174,
+        "sh": 174,
+        "w": 298,
+        "sw": 298
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 174,
+        "sh": 174,
+        "w": 146,
+        "sw": 146
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 174,
+        "sh": 174,
+        "w": 52,
+        "sw": 52
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 174,
+        "sh": 174,
+        "w": 52,
+        "sw": 52
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 174,
+        "sh": 174,
+        "w": 146,
+        "sw": 146
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 174,
+        "sh": 174,
+        "w": 52,
+        "sw": 52
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 174,
+        "sh": 174,
+        "w": 52,
+        "sw": 52
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-transition-mixers",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-mixer-strip",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-eq-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      },
+      {
+        "class": "h52-filter-fx-column",
+        "h": 0,
+        "sh": 0,
+        "w": 0,
+        "sw": 0
+      }
+    ]
+  }
+]

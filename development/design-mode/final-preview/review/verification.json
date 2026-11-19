@@ -1,0 +1,38 @@
+{
+  "browserChecks": 114,
+  "stateChecks": 81,
+  "physicalSafari": "pending",
+  "h51": {
+    "state": 178,
+    "browser": 143
+  },
+  "h5": {
+    "state": 140,
+    "browser": 106
+  },
+  "h4": {
+    "state": 77,
+    "browser": 106
+  },
+  "h3": {
+    "state": 38,
+    "browser": 74
+  },
+  "h2": {
+    "inheritedState": 44,
+    "state": 21,
+    "browser": 62
+  },
+  "h1": {
+    "state": 41,
+    "browser": 70
+  },
+  "originalDesignMode": {
+    "state": 77,
+    "browser": 1084
+  },
+  "preTaskFilesUnchanged": 203,
+  "g2ProtectedFilesUnchanged": 190,
+  "g2ArchiveUnchanged": true,
+  "nativeAudioRegressions": "Not rerun; UI-only scope with protected sources/archive unchanged"
+}

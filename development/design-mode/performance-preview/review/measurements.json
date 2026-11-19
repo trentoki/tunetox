@@ -1,0 +1,274 @@
+[
+  {
+    "width": 1194,
+    "height": 834,
+    "center": {
+      "x": 20,
+      "y": 223,
+      "width": 273.5,
+      "height": 326,
+      "top": 223,
+      "right": 293.5,
+      "bottom": 549,
+      "left": 20
+    },
+    "stems": {
+      "x": 20,
+      "y": 552,
+      "width": 273.5,
+      "height": 244,
+      "top": 552,
+      "right": 293.5,
+      "bottom": 796,
+      "left": 20
+    },
+    "fader": {
+      "x": 98,
+      "y": 552,
+      "width": 195.5,
+      "height": 61,
+      "top": 552,
+      "right": 293.5,
+      "bottom": 613,
+      "left": 98
+    }
+  },
+  {
+    "width": 1024,
+    "height": 768,
+    "center": {
+      "x": 20,
+      "y": 223,
+      "width": 231,
+      "height": 260,
+      "top": 223,
+      "right": 251,
+      "bottom": 483,
+      "left": 20
+    },
+    "stems": {
+      "x": 20,
+      "y": 486,
+      "width": 231,
+      "height": 244,
+      "top": 486,
+      "right": 251,
+      "bottom": 730,
+      "left": 20
+    },
+    "fader": {
+      "x": 98,
+      "y": 486,
+      "width": 153,
+      "height": 61,
+      "top": 486,
+      "right": 251,
+      "bottom": 547,
+      "left": 98
+    }
+  },
+  {
+    "width": 834,
+    "height": 1194,
+    "center": {
+      "x": 11,
+      "y": 217,
+      "width": 396,
+      "height": 168,
+      "top": 217,
+      "right": 407,
+      "bottom": 385,
+      "left": 11
+    },
+    "stems": {
+      "x": 11,
+      "y": 388,
+      "width": 396,
+      "height": 144,
+      "top": 388,
+      "right": 407,
+      "bottom": 532,
+      "left": 11
+    },
+    "fader": {
+      "x": 89,
+      "y": 388,
+      "width": 318,
+      "height": 36,
+      "top": 388,
+      "right": 407,
+      "bottom": 424,
+      "left": 89
+    }
+  },
+  {
+    "width": 768,
+    "height": 1024,
+    "center": {
+      "x": 11,
+      "y": 217,
+      "width": 363,
+      "height": 143,
+      "top": 217,
+      "right": 374,
+      "bottom": 360,
+      "left": 11
+    },
+    "stems": {
+      "x": 11,
+      "y": 363,
+      "width": 363,
+      "height": 144,
+      "top": 363,
+      "right": 374,
+      "bottom": 507,
+      "left": 11
+    },
+    "fader": {
+      "x": 89,
+      "y": 363,
+      "width": 285,
+      "height": 36,
+      "top": 363,
+      "right": 374,
+      "bottom": 399,
+      "left": 89
+    }
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "center": {
+      "x": 11,
+      "y": 261,
+      "width": 368,
+      "height": 390,
+      "top": 261,
+      "right": 379,
+      "bottom": 651,
+      "left": 11
+    },
+    "stems": {
+      "x": 11,
+      "y": 654,
+      "width": 368,
+      "height": 152,
+      "top": 654,
+      "right": 379,
+      "bottom": 806,
+      "left": 11
+    },
+    "fader": {
+      "x": 33.5,
+      "y": 684,
+      "width": 44,
+      "height": 122,
+      "top": 684,
+      "right": 77.5,
+      "bottom": 806,
+      "left": 33.5
+    }
+  },
+  {
+    "width": 390,
+    "height": 724,
+    "center": {
+      "x": 11,
+      "y": 261,
+      "width": 368,
+      "height": 270,
+      "top": 261,
+      "right": 379,
+      "bottom": 531,
+      "left": 11
+    },
+    "stems": {
+      "x": 11,
+      "y": 534,
+      "width": 368,
+      "height": 152,
+      "top": 534,
+      "right": 379,
+      "bottom": 686,
+      "left": 11
+    },
+    "fader": {
+      "x": 33.5,
+      "y": 564,
+      "width": 44,
+      "height": 122,
+      "top": 564,
+      "right": 77.5,
+      "bottom": 686,
+      "left": 33.5
+    }
+  },
+  {
+    "width": 375,
+    "height": 667,
+    "center": {
+      "x": 11,
+      "y": 261,
+      "width": 353,
+      "height": 213,
+      "top": 261,
+      "right": 364,
+      "bottom": 474,
+      "left": 11
+    },
+    "stems": {
+      "x": 11,
+      "y": 477,
+      "width": 353,
+      "height": 152,
+      "top": 477,
+      "right": 364,
+      "bottom": 629,
+      "left": 11
+    },
+    "fader": {
+      "x": 31.625,
+      "y": 507,
+      "width": 44,
+      "height": 122,
+      "top": 507,
+      "right": 75.625,
+      "bottom": 629,
+      "left": 31.625
+    }
+  },
+  {
+    "width": 320,
+    "height": 568,
+    "center": {
+      "x": 11,
+      "y": 261,
+      "width": 298,
+      "height": 114,
+      "top": 261,
+      "right": 309,
+      "bottom": 375,
+      "left": 11
+    },
+    "stems": {
+      "x": 11,
+      "y": 378,
+      "width": 298,
+      "height": 152,
+      "top": 378,
+      "right": 309,
+      "bottom": 530,
+      "left": 11
+    },
+    "fader": {
+      "x": 24.75,
+      "y": 408,
+      "width": 44,
+      "height": 122,
+      "top": 408,
+      "right": 68.75,
+      "bottom": 530,
+      "left": 24.75
+    }
+  }
+]

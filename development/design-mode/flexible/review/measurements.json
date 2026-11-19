@@ -1,0 +1,38 @@
+[
+  {
+    "width": 1194,
+    "height": 834,
+    "deckHeight": 720,
+    "contentHeight": 543,
+    "overviewHeight": 44,
+    "waveformHeight": 334,
+    "stemHeight": 176
+  },
+  {
+    "width": 1024,
+    "height": 768,
+    "deckHeight": 654,
+    "contentHeight": 477,
+    "overviewHeight": 44,
+    "waveformHeight": 268,
+    "stemHeight": 176
+  },
+  {
+    "width": 390,
+    "height": 844,
+    "deckHeight": 361,
+    "contentHeight": 184,
+    "overviewHeight": 44,
+    "waveformHeight": 80,
+    "stemHeight": 176
+  },
+  {
+    "width": 320,
+    "height": 568,
+    "deckHeight": 223,
+    "contentHeight": 46,
+    "overviewHeight": 44,
+    "waveformHeight": 80,
+    "stemHeight": 176
+  }
+]
