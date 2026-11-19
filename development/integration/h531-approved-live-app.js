@@ -4,6 +4,19 @@
  // Use the established F2/F3/G2 allocator and lifecycle fixes, not the legacy request-weighted path.
  const native=createMainStemIntegration(createAudioEngine(), { incremental:true, firstPlayIncremental:true, liveLifecycle:true });
  const audio=createH531AudioControls({appState,handoff:native.handoff,router:native.router});
+ // Diagnostic snapshot: real native state, not the design-mode preview.
+ window.TuneToxLiveDiagnostics=()=>({
+  build:'h531-native-diagnostics-20261118',
+  handoff:native.handoff.getDiagnostics(),
+  decks:appState.decks.map(deck=>({
+   id:deck.id,main:deck.volume,
+   playing:native.router.getState(deck.id).isPlaying,
+   handoff:appState.participation.byDeck[deck.id].stemHandoff,
+   requested:{...deck.stems.requestedLevels},
+   allocated:{...deck.stems.allocatedLevels}
+  }))
+ });
+
  // Native participation is authoritative; the UI never keeps an independent handoff toggle.
  function syncParticipation(){for(const deck of state.decks)deck.handoff=appState.participation.byDeck[deck.id].stemHandoff;}
  syncParticipation();
