@@ -13,6 +13,7 @@ The application is designed around **four underlying decks**.
 - `AGENTS.md` is the authoritative development workflow and safeguard document.
 - `RULES.md` specifies approved product behavior and clearly labeled historical implementation.
 - `TUNETOX_PLAN.md` specifies architecture, development context, roadmap, and unresolved decisions.
+- Approved technical specifications in `specs/` are authoritative extensions of `RULES.md` for their respective subsystems. They must remain consistent with approved product rules.
 
 ## Workflow and Collaboration
 
@@ -76,6 +77,18 @@ These standards apply to all developers.
   Review naming, responsibility boundaries (which parts of the code are responsible for which tasks), dependency clarity, duplicated logic, nesting (code structures placed inside other structures), and file size. Keep tests understandable and representative of intended behavior.
 
   Identify existing problems and recommend focused improvements, but do not treat this requirement as permission to reorganize or rewrite large portions of working code without approval.
+
+### English-language technical specifications and code comments
+
+Maintain detailed technical specifications for complex musical behavior in a shared `specs/` folder, organized by subsystem.
+
+Specifications should explain approved behavior, calculations, constraints, and important edge cases in clear English.
+
+Relevant code comments should explain how the implementation follows these specifications, including the reasoning behind non-obvious decisions. Reference the corresponding specification where useful.
+
+When approved behavior changes, update the relevant specifications, code comments, and tests together.
+
+Avoid unnecessary duplication: specifications provide the complete explanation, while code comments provide the context needed to understand the implementation.
 
 ### Folder responsibilities
 
