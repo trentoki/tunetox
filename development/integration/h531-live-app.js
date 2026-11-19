@@ -2,6 +2,8 @@
 (() => {
   const design = globalThis.TuneToxDesign, model = design.model, components = design.components;
   let state = model.createState();
+  // The live test must not launch in the rejected vertical-slices experiment.
+  state.arrangement = 'quadrants';
   // The live page shares presentation components, not Design Mode's simulated audio.
   const complete = createAudioEngine();
   const native = createMainStemIntegration(complete);
