@@ -18,7 +18,13 @@ TuneTox is also designed to include standard DJ features such as beatmatching, t
 
 ## Open TuneTox
 
-First, obtain access to this private GitHub repository. On its main page, choose **Code → Download ZIP**, then unzip the downloaded file.
+### Download TuneTox
+
+Open the TuneTox GitHub page using the link provided.
+
+Click the green **Code** button, select **Download ZIP**, and extract the downloaded folder.
+
+The downloaded folder contains the complete TuneTox application. You don't need to install a code editor.
 
 ### Mac
 
@@ -36,7 +42,9 @@ First, obtain access to this private GitHub repository. On its main page, choose
 4. Paste `py -m http.server 8000` and press Enter.
 5. Keep PowerShell open. In your browser, visit **http://localhost:8000**.
 
-If port 8000 is already in use, stop the other local server first. Stop TuneTox's server with **Control+C** in Terminal or PowerShell.
+**Stopping TuneTox:** To stop the application, return to Terminal (Mac) or PowerShell (Windows) and press **Control+C**. You can then close the window.
+
+**Troubleshooting:** If port 8000 is already in use, stop the other local server before starting TuneTox.
 
 ## What you should see
 
