@@ -1,0 +1,18 @@
+/* Shared Manage layout: checkbox changes membership; name navigates independently. */
+.manage-song-details { margin: 0 0 8px; font-size: 11px; color: #b7c9d9; }
+.manage-links-disclosure { margin-bottom: 8px; }
+.manage-links-disclosure summary { min-height: 36px; cursor: pointer; color: var(--cyan); font-size: 12px; }
+.manage-playlist-row { display: grid; grid-template-columns: 32px minmax(0,1fr); align-items: center; border-bottom: 1px solid #2a3e51; min-height: 44px; }
+.manage-playlist-row input { width: 22px; height: 22px; margin: 4px; accent-color: var(--cyan); }
+.manage-playlist-name { display: block; min-width: 0; width: 100%; min-height: 44px; padding: 6px; border: 0; background: transparent; color: #d2e3ef; text-align: left; font-size: 12px; }
+.manage-playlist-name:hover, .manage-playlist-name:focus-visible { background: #193242; }
+.waveform-navigate { cursor: default; }
+@media (max-width: 600px) and (orientation: portrait) {
+  .design-deck .effect-control .performance-knob { grid-template-columns: minmax(44px,1fr) 24px !important; }
+  .effect-control .knob-value { width: 24px; min-width: 24px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .transition-single-fx .performance-knob { grid-template-columns: 44px 24px; }
+  .transition-single-fx .effect-control { grid-template-columns: minmax(72px,1fr) 70px; }
+}
+
+#design-build { flex-shrink: 0; color: #8ba1b5; font-size: 8px; white-space: nowrap; }
+.manage-build-tag { font-size: 8px; color: #8ba1b5; font-weight: 400; }
