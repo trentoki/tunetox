@@ -2,6 +2,9 @@
 (() => {
  const d=globalThis.TuneToxDesign,m=d.model;let state=d.compact.createState();
  // Use the established F2/F3/G2 allocator and lifecycle fixes, not the legacy request-weighted path.
+ // Match G2's explicit opt-in baseline: no deck participates until its Handoff control is enabled.
+ // This prevents the default all-ON participation records from silently joining a live session.
+ for(const id of [1,2,3,4])createParticipationActions(appState).set(id,'stemHandoff',false);
  const native=createMainStemIntegration(createAudioEngine(), { incremental:true, firstPlayIncremental:true, liveLifecycle:true });
  const stemNames=['transients','flow','tune','voice'];
  // G2's native Handoff actions are the sole musical command path.
