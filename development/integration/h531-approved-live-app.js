@@ -4,6 +4,9 @@
  // Use the established F2/F3/G2 allocator and lifecycle fixes, not the legacy request-weighted path.
  const native=createMainStemIntegration(createAudioEngine(), { incremental:true, firstPlayIncremental:true, liveLifecycle:true });
  const audio=createH531AudioControls({appState,handoff:native.handoff,router:native.router});
+ // Native participation is authoritative; the UI never keeps an independent handoff toggle.
+ function syncParticipation(){for(const deck of state.decks)deck.handoff=appState.participation.byDeck[deck.id].stemHandoff;}
+ syncParticipation();
  const names=['transients','flow','tune','voice'];
  const status=document.getElementById('h1-status');
  const fileDialog=document.getElementById('h531-files');
@@ -29,7 +32,7 @@
    }catch(error){status.textContent='Load failed: '+error.message;console.error(error);}
   });fieldset.append(load);filesRoot.append(fieldset);
  }
- function syncAudio(){for(const deck of state.decks){const levels=audio.getLevels(deck.id);deck.volume=levels.volume;deck.stems=levels.stems;deck.playing=audio.getPlaybackState(deck.id).playing;}}
+ function syncAudio(){syncParticipation();for(const deck of state.decks){const levels=audio.getLevels(deck.id);deck.volume=levels.volume;deck.stems=levels.stems;deck.playing=audio.getPlaybackState(deck.id).playing;}}
  function safe(action){try{const result=action();if(result&&typeof result.then==='function')result.then(()=>{syncAudio();render();}).catch(error=>{status.textContent=error.message;console.error(error);});else{syncAudio();render();}}catch(error){status.textContent=error.message;console.error(error);}}
  state.decks.forEach(deck=>{deck.songId=null;deck.playing=false;deck.volume=0;deck.stems=[0,0,0,0];});
  const announce=text=>{document.getElementById('h1-status').textContent=text+' · preview only (no audio effect)';};
@@ -41,7 +44,7 @@
   page(id,page){d.compact.changePage(state,id,page);render();},
   level(id,index,value){safe(()=>index===null?audio.setMainVolume(id,value):audio.setStemLevel(id,index,value));},
   play(id){safe(()=>audio.togglePlayback(id));},
-  toggle(id,key){const deck=d.compact.deck(state,id);m.setDeckControl(state,id,key,!deck[key]);if(key==='beatMatch'){deck.wave.nudge=0;deck.wave.pending=null;}announce(key+' preview only; no audio allocation');render();},
+  toggle(id,key){const deck=d.compact.deck(state,id);if(key==='handoff'){safe(()=>native.handoff.setParticipation(id,!appState.participation.byDeck[id].stemHandoff));return;}m.setDeckControl(state,id,key,!deck[key]);if(key==='beatMatch'){deck.wave.nudge=0;deck.wave.pending=null;}announce(key+' preview only; no audio allocation');render();},
   performance(id,key,value,index){m.setPerformanceControl(state,id,key,value,index);render();},
   cue(id,kind,value){d.compact.cueAction(state,id,kind,value);announce('D'+id+' '+kind+' position preview');render();}
  };
