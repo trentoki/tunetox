@@ -1,29 +1,12 @@
 /* H5 only; H4's tablet frame and orientation presets remain the base. */
 .h5-icon { width:22px;height:22px;display:inline-block;vertical-align:middle;flex:none;background:none; }
-.h5-app .song-row[aria-pressed=true],.h5-app .playlist-row[aria-pressed=true] { box-shadow:none; }
-.h5-app .h3-library-top>button::after { content:none; }
-.h5-app .song-manage { display:grid;place-items:center; }
-.h5-app .h4-library-contextbar button { display:flex;align-items:center;gap:3px; }
-.h5-app .h4-arrange { grid-template-columns:minmax(0,1fr) 36px; }
-.h5-app .h5-sort,.h5-app .h5-playlist-sort { height:32px; }
-.h5-app .h5-sort button { font-size:9px; }
 .h5-app .h1-transport { grid-template-columns:36px minmax(0,1fr); }
 .h5-queue { display:flex;align-items:center;justify-content:center;gap:5px;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;background:#15313d;color:var(--accent);border:1px solid var(--accent);border-radius:4px;font-size:11px;padding:2px 6px; }
 .h5-queue>span { overflow:hidden;text-overflow:ellipsis; }
 .h5-queue:disabled { border-color:#3b5363;color:#8da4b2;background:#11232f;opacity:1; }
 .h5-app .h3-wave { grid-template-rows:36px minmax(0,1fr) 16px; }
-.h5-wave-tools { display:flex;gap:4px;align-items:stretch;min-width:0; }
-.h5-wave-tools button { min-width:40px;border:1px solid var(--accent);background:#183440;color:var(--accent);border-radius:4px;font-size:22px;touch-action:none; }
-.h5-wave-tools select { width:64px;min-width:0;font-size:10px;background:#142a36;color:var(--accent);border:1px solid #426071; }
-.h5-wave-tools output { flex:1;align-self:center;min-width:0;font-size:9px;text-align:center;color:var(--accent); }
-.h5-wave-tools[data-pending=true] { border-bottom:1px dashed var(--accent); }
+.h5-wave-tools button { touch-action:none; }
 .h5-app .h1-zoom { touch-action:none;cursor:ew-resize; }
-.h5-controls-head { display:grid;grid-template-columns:minmax(0,1fr) 72px;gap:4px;min-height:36px; }
-.h5-controls-head .mix-control { display:grid;grid-template-columns:70px minmax(0,1fr);gap:3px;min-width:0; }
-.h5-controls-head .control-caption { display:flex;gap:2px;align-items:center;font-size:9px; }
-.h5-controls-head button,.h5-transition button { border:1px solid #436073;border-radius:4px;color:var(--accent);background:#16313d;font-size:10px;padding:2px; }
-.h5-app .h3-controls { display:grid;grid-template-rows:36px minmax(166px,1fr);gap:4px; }
-.h5-app .h3-controls .performance-controls { min-height:166px; }
 .h5-view-open { display:none;min-height:32px;background:#183541;border:1px solid var(--accent);border-radius:4px;color:var(--accent);font-size:10px; }
 .h5-app [data-mode=transition] .h5-view-open { display:block; }
 .h5-app [data-mode=transition] .h3-song-row>.h3-selector { display:none; }
@@ -43,7 +26,6 @@
 .h5-transition .vertical-mixer-strip { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;align-items:center; }
 .h5-transition .vertical-mixer-strip>.mix-control { grid-column:1/-1;display:grid;grid-template-columns:48px minmax(0,1fr);font-size:9px;gap:3px;min-width:0; }
 .h5-transition .performance-effects { grid-template-columns:minmax(0,1fr); }
-.h5-transition .knob-dial { width:44px;height:44px; }
 .h5-transition .effect-control { min-width:0;position:relative; }
 /* The visual handle is 24px; the actual thumb and track hit surface are 44px. */
 .h5-app .h3-stems input[type=range] { touch-action:none;min-height:44px;margin:0; }
@@ -81,17 +63,12 @@
  .h5-transition .effect-control select { height:28px; }
  .h5-app .h3-stems .mix-control input { min-height:44px; }
 }
-.h5-app .h3-stems .mix-control { overflow:hidden; }
-.h5-app .h3-stems input[type=range] { appearance:none;-webkit-appearance:none;background:transparent;min-height:0; }
-.h5-app .h3-stems input::-webkit-slider-runnable-track { height:8px;background:#355468;border-radius:4px; }
-.h5-app .h3-stems input::-webkit-slider-thumb { margin-top:-18px; }
 @media (max-width:700px) and (orientation:portrait) {
  .h5-app .h3-stems input[type=range] { width:max(44px,var(--h1-fader));min-height:44px; }
  .h5-app .h3-stems input::-webkit-slider-runnable-track { width:8px;height:100%; }
  .h5-app .h3-stems input::-webkit-slider-thumb { margin-top:0; }
 }
 /* A column-flex caption must not reinterpret the fixed 5ch value WIDTH as height. */
-.h5-app .h3-stems .level-value,.h5-transition .level-value { flex:0 0 12px;block-size:12px;min-block-size:12px;line-height:12px; }
 .h5-transition input[type=range] { appearance:none;-webkit-appearance:none;background:transparent; }
 .h5-transition input::-webkit-slider-runnable-track { height:8px;background:#355468;border-radius:4px; }
 .h5-transition input::-webkit-slider-thumb { appearance:none;-webkit-appearance:none;width:44px;height:44px;margin-top:-18px;background:radial-gradient(circle,var(--accent) 0 11px,transparent 12px);border:0;box-shadow:none; }

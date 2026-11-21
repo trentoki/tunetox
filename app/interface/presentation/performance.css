@@ -1,25 +1,11 @@
 /* Shared controls appear only in the refined Controls surface and phone Transition. */
 .performance-controls, .phone-play, .phone-song-progress { display: none; }
-.performance-controls { color: #cad8e7; }
-.performance-transport { display: flex; align-items: center; gap: 5px; }
-.performance-transport .mix-control { flex: 1; min-width: 0; height: 44px; }
-.performance-transport input { height: 32px; display: block; }
-.performance-play { min-width: 38px; height: 44px; border: 1px solid var(--accent); border-radius: 5px; background: #142b37; color: var(--accent); }
-.performance-eq, .performance-effects { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 4px; }
-.performance-knob { display: flex; flex-direction: column; align-items: center; min-width: 0; gap: 2px; }
-.knob-label, .knob-value { font-size: 9px; color: #b8cada; }
-.knob-value { font-variant-numeric: tabular-nums; color: var(--accent); }
-.knob-dial { height: 44px; width: 44px; border: 2px solid #446075; border-radius: 50%; background: radial-gradient(circle at 35% 30%,#2a4356,#0d1924); touch-action: none; position: relative; cursor: ns-resize; user-select: none; }
-.knob-dial:focus-visible { outline: 2px solid #ffe293; outline-offset: 2px; }
-.knob-needle { position: absolute; width: 2px; height: 17px; left: calc(50% - 1px); top: 3px; background: var(--accent); transform-origin: center 17px; pointer-events: none; }
-.performance-middle { display: grid; grid-template-columns: 54px minmax(0,1fr); gap: 5px; align-items: center; }
 .performance-loop { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 3px; }
 .loop-length { grid-column: 1 / -1; font-size: 9px; color: #a8b9cb; text-align: center; }
 .performance-loop button { min-width: 0; height: 36px; border: 1px solid #39576b; border-radius: 4px; background: #152936; color: var(--accent); font-size: 10px; padding: 2px; }
 .performance-loop .loop-on[aria-pressed="true"] { background: var(--accent); color: #081119; }
-.effect-control { min-width: 0; }
-.effect-control select { width: 100%; min-width: 0; background: #142636; color: var(--accent); border: 1px solid #36566b; border-radius: 4px; height: 28px; font-size: 9px; padding: 0; margin-bottom: 4px; }
-.effect-control .knob-label { display: none; }
+.knob-dial { touch-action:none;cursor:ns-resize;user-select:none; }
+.knob-needle { pointer-events:none; }
 @media (orientation: landscape) and (min-width: 900px) and (max-width: 1600px) and (min-height: 650px) {
   .design-app[data-layout="full"][data-arrangement="slices"] .slice-controls-overlay .overlay-placeholder,
   .design-app[data-layout="full"][data-arrangement="slices"] .slice-controls-overlay > .overlay-main { display: none; }

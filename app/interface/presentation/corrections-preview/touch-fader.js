@@ -1,7 +1,6 @@
 // One geometry for input mapping AND visible endpoints. Native input stays accessible.
 (() => {
- const d=globalThis.TuneToxDesign,attachH5=d.h5AttachStem;
- d.attachVerticalFader=(input,change)=>attachH5(input,change,()=>!!input.closest('.h5-transition-strip')&&d.h51Phone());
+ const d=globalThis.TuneToxDesign;
  const clamp=value=>Math.max(0,Math.min(1,value));
  function geometry(length,value,vertical){const radius=12,travel=Math.max(1,length-radius*2);return radius+(vertical?1-clamp(value):clamp(value))*travel;}
  function fromPoint(length,coordinate,vertical){const value=clamp((coordinate-12)/Math.max(1,length-24));return Math.round((vertical?1-value:value)*100)/100;}
