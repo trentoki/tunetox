@@ -1,0 +1,6900 @@
+[
+  {
+    "cycle": 237,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 271,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 272,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 277,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 278,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 283,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 287,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 290,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 294,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 297,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 301,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 304,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 308,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 311,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 315,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 318,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 322,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 323,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 328,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 329,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 334,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 335,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 340,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 341,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 346,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 349,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 353,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 358,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 359,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 361,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 362,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 365,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 366,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 368,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 369,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 370,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 372,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 373,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 376,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 377,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 378,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 379,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 380,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 383,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 384,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 386,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 387,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 390,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 391,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 393,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 394,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 395,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 397,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 398,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 401,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 402,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 403,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 404,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 405,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 408,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 409,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 411,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 412,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 415,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 416,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 418,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 419,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 420,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 422,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 423,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 424,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 425,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 426,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 427,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 428,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor period/continuity mismatch",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 459,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 469,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 470,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 471,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 472,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 473,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 474,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 483,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 484,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 485,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 486,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 487,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 488,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 491,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor period/continuity mismatch"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 498,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 499,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 500,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 501,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 502,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 503,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 513,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 514,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 515,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 516,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 517,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 518,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 527,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 528,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 529,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 530,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 531,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 532,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 535,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor period/continuity mismatch"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 542,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 543,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 544,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 545,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 546,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 547,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 560,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 561,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 562,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 573,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 574,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 582,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 583,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 590,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 592,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 593,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 594,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 601,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 603,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 604,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 605,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 612,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 614,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 615,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 616,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 624,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 625,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 626,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 631,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 633,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 634,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 635,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 642,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 644,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 645,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 646,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 653,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 655,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 656,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 657,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 665,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 666,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 667,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 672,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 674,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 675,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 676,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 683,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 685,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor period/continuity mismatch",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 703,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unsupported competing-family relationship",
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 705,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 706,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 707,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 708,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 709,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 710,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 719,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 720,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 721,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 722,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 723,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 724,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 725,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 734,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 735,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 736,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 737,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 738,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 739,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 749,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 750,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 751,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 752,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 753,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 754,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 763,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 764,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 765,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 766,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 767,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 768,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 769,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 778,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 779,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 780,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 781,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 782,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 783,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 793,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 794,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 795,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 796,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 797,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 798,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 807,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 808,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 809,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 810,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 811,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 812,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 813,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 822,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 823,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 824,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 825,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 826,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 827,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 837,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 838,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 839,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 840,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 841,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 842,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 851,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 852,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 853,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 854,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 855,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 856,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 859,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor period/continuity mismatch"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 866,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 867,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 868,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 869,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 870,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 871,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 881,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 882,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 883,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 884,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 885,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 886,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 895,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 896,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 897,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 898,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 899,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 900,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 903,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor period/continuity mismatch"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 910,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 911,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 912,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 913,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 914,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 915,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 925,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 926,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 927,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 928,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 929,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 930,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 939,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 940,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 941,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 942,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 943,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 944,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 947,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "neighbor period/continuity mismatch"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 954,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 955,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 956,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 957,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 958,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 959,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 969,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 970,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 971,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 972,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 973,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 974,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 983,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 984,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 985,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 986,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 987,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 988,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 999,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1000,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1001,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1002,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1003,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1004,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1014,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1015,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1016,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1017,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1018,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1019,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1028,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1029,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1030,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1031,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1032,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1033,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1043,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1044,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1045,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1046,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1047,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1048,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1057,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1058,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1059,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1060,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 2,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1061,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1062,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1063,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1083,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1084,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1085,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1088,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1089,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1090,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1091,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1092,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1095,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1096,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1098,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1099,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1102,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1103,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1105,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1106,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1107,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1109,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1110,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1113,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1114,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1115,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1116,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1117,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1120,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1121,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1123,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1124,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1127,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1128,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1130,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1131,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1132,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1134,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1135,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1138,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1139,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1140,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1141,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1142,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1145,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1146,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1148,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1149,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1152,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1153,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1155,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1156,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1157,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1159,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1160,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1162,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1163,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1164,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1165,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1166,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1167,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1170,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1171,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1173,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1174,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1177,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1178,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1180,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1181,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1182,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1184,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1185,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1187,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1188,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1189,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1190,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1191,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1192,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1195,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1196,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1197,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1198,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1199,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1202,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1203,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1205,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1206,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1209,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1210,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1212,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1213,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1214,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1216,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1217,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1220,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1221,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1222,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1223,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1224,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1227,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1228,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1230,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1231,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1234,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1235,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1237,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1238,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1239,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1241,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1242,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1245,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1246,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1247,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1248,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1249,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1252,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1253,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1255,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1256,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1259,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1260,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1262,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1263,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1264,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1266,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1267,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1269,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1270,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1271,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1272,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1273,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1274,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1277,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1278,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1280,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1281,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1284,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1285,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1287,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1288,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1289,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1291,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1292,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1294,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1295,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1296,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1297,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1298,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1299,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1302,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1303,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1304,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1305,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1306,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1309,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1310,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1312,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1313,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1316,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1317,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1319,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1320,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1321,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1323,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1324,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1327,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1328,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1329,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1330,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1350,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1351,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1356,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1357,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1362,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1363,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1368,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1369,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1374,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1375,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1380,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1384,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1387,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1391,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1394,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1398,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1401,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1405,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1408,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1412,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1415,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1419,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1420,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1425,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1426,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1431,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1432,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1437,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1438,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1443,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1444,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1449,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1450,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1455,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1456,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1461,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1462,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1467,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1468,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1473,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1474,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1479,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1480,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1485,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1486,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1491,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1492,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1497,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1498,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1503,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1504,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1509,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1510,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1515,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1519,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1522,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1526,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1529,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1533,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1536,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1540,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1543,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1547,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1548,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1549,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1553,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1554,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1559,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1560,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1565,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1566,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1571,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1572,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1577,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1578,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1583,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1584,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1589,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "target shape similarity too low",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1590,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1595,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1596,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1601,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1602,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1607,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1608,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1613,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1614,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1619,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1620,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1638,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1643,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1648,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1653,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1654,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1659,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1664,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1669,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1670,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1675,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1680,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1685,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1686,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1691,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1696,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1701,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1702,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1707,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1712,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1717,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1718,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1723,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1728,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1733,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1734,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1739,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1744,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1749,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1750,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1755,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1760,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1765,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1766,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1771,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1776,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1781,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1782,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1787,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1792,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1797,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1798,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1803,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1808,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1813,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1814,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1819,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1824,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1829,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1830,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1835,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1853,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient",
+      "unreliable immediate neighbor",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1855,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1857,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1859,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1861,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1863,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1865,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1867,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1869,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1871,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1873,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1875,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1877,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1879,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1881,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1883,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1885,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1887,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1889,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1891,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1893,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1895,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1897,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1899,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1901,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1903,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1905,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1907,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1909,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1911,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1913,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1915,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1917,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1919,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1921,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1923,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1925,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1927,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1929,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1931,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1933,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1935,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1937,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1939,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1941,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1943,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1945,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1947,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1949,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1951,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1953,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1955,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1957,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1959,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1961,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1963,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1965,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1967,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1969,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1971,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1973,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1975,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1977,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1979,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1981,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1983,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1985,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1987,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1989,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1991,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1993,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1995,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1997,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 1999,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2001,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2003,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2005,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2007,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2009,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2011,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2013,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2015,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2017,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2019,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2021,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2023,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2025,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2027,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2029,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2031,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2033,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2035,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2037,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": 1,
+    "render_supported": true,
+    "reasons": [],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2039,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2041,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2052,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "unsupported competing-family relationship",
+      "period confidence insufficient",
+      "neighbor geometry unstable"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  },
+  {
+    "cycle": 2230,
+    "original_status": "ambiguous",
+    "identity_family": null,
+    "render_family": null,
+    "render_supported": false,
+    "reasons": [
+      "period confidence insufficient",
+      "unreliable immediate neighbor"
+    ],
+    "identity_interpretation": "Label remains unresolved; no family merging."
+  }
+]

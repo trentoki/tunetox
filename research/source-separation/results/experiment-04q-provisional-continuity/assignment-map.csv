@@ -1,0 +1,463 @@
+sample_start,sample_end_exclusive,start_seconds,end_seconds,assignment,provenance
+0,3,0.0,6.802721088435374e-05,unassigned,no assignment
+3,84,6.802721088435374e-05,0.0019047619047619048,provisional,original recorded PCM; provisional single-source assumption
+84,6037,0.0019047619047619048,0.13689342403628119,recognized,frozen 4N waveform synthesis
+6037,6582,0.13689342403628119,0.1492517006802721,provisional,original recorded PCM; provisional single-source assumption
+6582,11028,0.1492517006802721,0.25006802721088434,unassigned,no assignment
+11028,11092,0.25006802721088434,0.25151927437641725,provisional,original recorded PCM; provisional single-source assumption
+11092,17153,0.25151927437641725,0.38895691609977323,recognized,frozen 4N waveform synthesis
+17153,17579,0.38895691609977323,0.39861678004535145,provisional,original recorded PCM; provisional single-source assumption
+17579,22053,0.39861678004535145,0.5000680272108844,unassigned,no assignment
+22053,22156,0.5000680272108844,0.5024036281179138,provisional,original recorded PCM; provisional single-source assumption
+22156,28119,0.5024036281179138,0.6376190476190476,recognized,frozen 4N waveform synthesis
+28119,28603,0.6376190476190476,0.64859410430839,provisional,original recorded PCM; provisional single-source assumption
+28603,33078,0.64859410430839,0.7500680272108844,unassigned,no assignment
+33078,33180,0.7500680272108844,0.7523809523809524,provisional,original recorded PCM; provisional single-source assumption
+33180,38701,0.7523809523809524,0.8775736961451247,recognized,frozen 4N waveform synthesis
+38701,38703,0.8775736961451247,0.8776190476190476,provisional,original recorded PCM; provisional single-source assumption
+38703,38807,0.8776190476190476,0.8799773242630385,recognized,frozen 4N waveform synthesis
+38807,38809,0.8799773242630385,0.8800226757369615,provisional,original recorded PCM; provisional single-source assumption
+38809,39230,0.8800226757369615,0.8895691609977324,recognized,frozen 4N waveform synthesis
+39230,39657,0.8895691609977324,0.8992517006802722,provisional,original recorded PCM; provisional single-source assumption
+39657,44103,0.8992517006802722,1.0000680272108844,unassigned,no assignment
+44103,44178,1.0000680272108844,1.0017687074829933,provisional,original recorded PCM; provisional single-source assumption
+44178,44649,1.0017687074829933,1.0124489795918368,recognized,frozen 4N waveform synthesis
+44649,44651,1.0124489795918368,1.0124943310657597,provisional,original recorded PCM; provisional single-source assumption
+44651,45122,1.0124943310657597,1.0231746031746032,recognized,frozen 4N waveform synthesis
+45122,45124,1.0231746031746032,1.023219954648526,provisional,original recorded PCM; provisional single-source assumption
+45124,45406,1.023219954648526,1.0296145124716554,recognized,frozen 4N waveform synthesis
+45406,45408,1.0296145124716554,1.0296598639455783,provisional,original recorded PCM; provisional single-source assumption
+45408,45595,1.0296598639455783,1.0339002267573696,recognized,frozen 4N waveform synthesis
+45595,45597,1.0339002267573696,1.0339455782312925,provisional,original recorded PCM; provisional single-source assumption
+45597,45879,1.0339455782312925,1.0403401360544218,recognized,frozen 4N waveform synthesis
+45879,45881,1.0403401360544218,1.0403854875283447,provisional,original recorded PCM; provisional single-source assumption
+45881,46068,1.0403854875283447,1.044625850340136,recognized,frozen 4N waveform synthesis
+46068,46070,1.044625850340136,1.044671201814059,provisional,original recorded PCM; provisional single-source assumption
+46070,46352,1.044671201814059,1.0510657596371882,recognized,frozen 4N waveform synthesis
+46352,46354,1.0510657596371882,1.051111111111111,provisional,original recorded PCM; provisional single-source assumption
+46354,46541,1.051111111111111,1.0553514739229024,recognized,frozen 4N waveform synthesis
+46541,46543,1.0553514739229024,1.0553968253968253,provisional,original recorded PCM; provisional single-source assumption
+46543,46825,1.0553968253968253,1.0617913832199546,recognized,frozen 4N waveform synthesis
+46825,46827,1.0617913832199546,1.0618367346938775,provisional,original recorded PCM; provisional single-source assumption
+46827,47014,1.0618367346938775,1.066077097505669,recognized,frozen 4N waveform synthesis
+47014,47016,1.066077097505669,1.0661224489795917,provisional,original recorded PCM; provisional single-source assumption
+47016,47298,1.0661224489795917,1.072517006802721,recognized,frozen 4N waveform synthesis
+47298,47300,1.072517006802721,1.072562358276644,provisional,original recorded PCM; provisional single-source assumption
+47300,47487,1.072562358276644,1.0768027210884354,recognized,frozen 4N waveform synthesis
+47487,47489,1.0768027210884354,1.0768480725623584,provisional,original recorded PCM; provisional single-source assumption
+47489,47771,1.0768480725623584,1.0832426303854876,recognized,frozen 4N waveform synthesis
+47771,47773,1.0832426303854876,1.0832879818594103,provisional,original recorded PCM; provisional single-source assumption
+47773,48244,1.0832879818594103,1.093968253968254,recognized,frozen 4N waveform synthesis
+48244,48246,1.093968253968254,1.094013605442177,provisional,original recorded PCM; provisional single-source assumption
+48246,48717,1.094013605442177,1.1046938775510204,recognized,frozen 4N waveform synthesis
+48717,48719,1.1046938775510204,1.1047392290249434,provisional,original recorded PCM; provisional single-source assumption
+48719,49190,1.1047392290249434,1.1154195011337869,recognized,frozen 4N waveform synthesis
+49190,49192,1.1154195011337869,1.1154648526077098,provisional,original recorded PCM; provisional single-source assumption
+49192,49663,1.1154648526077098,1.1261451247165533,recognized,frozen 4N waveform synthesis
+49663,49665,1.1261451247165533,1.1261904761904762,provisional,original recorded PCM; provisional single-source assumption
+49665,49852,1.1261904761904762,1.1304308390022675,recognized,frozen 4N waveform synthesis
+49852,49854,1.1304308390022675,1.1304761904761904,provisional,original recorded PCM; provisional single-source assumption
+49854,50136,1.1304761904761904,1.1368707482993197,recognized,frozen 4N waveform synthesis
+50136,50647,1.1368707482993197,1.1484580498866213,provisional,original recorded PCM; provisional single-source assumption
+50647,55128,1.1484580498866213,1.2500680272108844,unassigned,no assignment
+55128,55209,1.2500680272108844,1.2519047619047619,provisional,original recorded PCM; provisional single-source assumption
+55209,61108,1.2519047619047619,1.3856689342403627,recognized,frozen 4N waveform synthesis
+61108,61193,1.3856689342403627,1.387596371882086,provisional,original recorded PCM; provisional single-source assumption
+61193,61275,1.387596371882086,1.3894557823129252,recognized,frozen 4N waveform synthesis
+61275,61709,1.3894557823129252,1.399297052154195,provisional,original recorded PCM; provisional single-source assumption
+61709,66153,1.399297052154195,1.5000680272108844,unassigned,no assignment
+66153,66178,1.5000680272108844,1.5006349206349205,provisional,original recorded PCM; provisional single-source assumption
+66178,66477,1.5006349206349205,1.5074149659863945,recognized,frozen 4N waveform synthesis
+66477,66479,1.5074149659863945,1.5074603174603174,provisional,original recorded PCM; provisional single-source assumption
+66479,66552,1.5074603174603174,1.5091156462585034,recognized,frozen 4N waveform synthesis
+66552,66554,1.5091156462585034,1.5091609977324263,provisional,original recorded PCM; provisional single-source assumption
+66554,66627,1.5091609977324263,1.5108163265306123,recognized,frozen 4N waveform synthesis
+66627,66629,1.5108163265306123,1.5108616780045352,provisional,original recorded PCM; provisional single-source assumption
+66629,67378,1.5108616780045352,1.527845804988662,recognized,frozen 4N waveform synthesis
+67378,67380,1.527845804988662,1.527891156462585,provisional,original recorded PCM; provisional single-source assumption
+67380,67453,1.527891156462585,1.529546485260771,recognized,frozen 4N waveform synthesis
+67453,67455,1.529546485260771,1.529591836734694,provisional,original recorded PCM; provisional single-source assumption
+67455,67528,1.529591836734694,1.5312471655328799,recognized,frozen 4N waveform synthesis
+67528,67530,1.5312471655328799,1.5312925170068028,provisional,original recorded PCM; provisional single-source assumption
+67530,68279,1.5312925170068028,1.5482766439909297,recognized,frozen 4N waveform synthesis
+68279,68281,1.5482766439909297,1.5483219954648526,provisional,original recorded PCM; provisional single-source assumption
+68281,68354,1.5483219954648526,1.5499773242630386,recognized,frozen 4N waveform synthesis
+68354,68356,1.5499773242630386,1.5500226757369615,provisional,original recorded PCM; provisional single-source assumption
+68356,68429,1.5500226757369615,1.5516780045351475,recognized,frozen 4N waveform synthesis
+68429,68431,1.5516780045351475,1.5517233560090702,provisional,original recorded PCM; provisional single-source assumption
+68431,69105,1.5517233560090702,1.5670068027210884,recognized,frozen 4N waveform synthesis
+69105,69107,1.5670068027210884,1.5670521541950113,provisional,original recorded PCM; provisional single-source assumption
+69107,69180,1.5670521541950113,1.5687074829931973,recognized,frozen 4N waveform synthesis
+69180,69182,1.5687074829931973,1.5687528344671202,provisional,original recorded PCM; provisional single-source assumption
+69182,69255,1.5687528344671202,1.5704081632653062,recognized,frozen 4N waveform synthesis
+69255,69257,1.5704081632653062,1.5704535147392291,provisional,original recorded PCM; provisional single-source assumption
+69257,70006,1.5704535147392291,1.587437641723356,recognized,frozen 4N waveform synthesis
+70006,70008,1.587437641723356,1.587482993197279,provisional,original recorded PCM; provisional single-source assumption
+70008,70081,1.587482993197279,1.589138321995465,recognized,frozen 4N waveform synthesis
+70081,70083,1.589138321995465,1.5891836734693878,provisional,original recorded PCM; provisional single-source assumption
+70083,70156,1.5891836734693878,1.5908390022675738,recognized,frozen 4N waveform synthesis
+70156,70158,1.5908390022675738,1.5908843537414965,provisional,original recorded PCM; provisional single-source assumption
+70158,70907,1.5908843537414965,1.6078684807256236,recognized,frozen 4N waveform synthesis
+70907,70909,1.6078684807256236,1.6079138321995465,provisional,original recorded PCM; provisional single-source assumption
+70909,70982,1.6079138321995465,1.6095691609977325,recognized,frozen 4N waveform synthesis
+70982,70984,1.6095691609977325,1.6096145124716554,provisional,original recorded PCM; provisional single-source assumption
+70984,71057,1.6096145124716554,1.6112698412698412,recognized,frozen 4N waveform synthesis
+71057,71059,1.6112698412698412,1.6113151927437641,provisional,original recorded PCM; provisional single-source assumption
+71059,71733,1.6113151927437641,1.6265986394557823,recognized,frozen 4N waveform synthesis
+71733,71735,1.6265986394557823,1.6266439909297052,provisional,original recorded PCM; provisional single-source assumption
+71735,71808,1.6266439909297052,1.6282993197278912,recognized,frozen 4N waveform synthesis
+71808,71810,1.6282993197278912,1.6283446712018141,provisional,original recorded PCM; provisional single-source assumption
+71810,71883,1.6283446712018141,1.63,recognized,frozen 4N waveform synthesis
+71883,71885,1.63,1.6300453514739228,provisional,original recorded PCM; provisional single-source assumption
+71885,71958,1.6300453514739228,1.6317006802721088,recognized,frozen 4N waveform synthesis
+71958,71960,1.6317006802721088,1.6317460317460317,provisional,original recorded PCM; provisional single-source assumption
+71960,72033,1.6317460317460317,1.6334013605442177,recognized,frozen 4N waveform synthesis
+72033,72110,1.6334013605442177,1.6351473922902495,provisional,original recorded PCM; provisional single-source assumption
+72110,72185,1.6351473922902495,1.6368480725623582,recognized,frozen 4N waveform synthesis
+72185,72693,1.6368480725623582,1.6483673469387754,provisional,original recorded PCM; provisional single-source assumption
+72693,77178,1.6483673469387754,1.7500680272108844,unassigned,no assignment
+77178,77221,1.7500680272108844,1.7510430839002267,provisional,original recorded PCM; provisional single-source assumption
+77221,77432,1.7510430839002267,1.7558276643990929,recognized,frozen 4N waveform synthesis
+77432,77434,1.7558276643990929,1.7558730158730158,provisional,original recorded PCM; provisional single-source assumption
+77434,77503,1.7558730158730158,1.757437641723356,recognized,frozen 4N waveform synthesis
+77503,77505,1.757437641723356,1.7574829931972789,provisional,original recorded PCM; provisional single-source assumption
+77505,77928,1.7574829931972789,1.7670748299319727,recognized,frozen 4N waveform synthesis
+77928,77930,1.7670748299319727,1.7671201814058957,provisional,original recorded PCM; provisional single-source assumption
+77930,77999,1.7671201814058957,1.7686848072562358,recognized,frozen 4N waveform synthesis
+77999,78001,1.7686848072562358,1.7687301587301587,provisional,original recorded PCM; provisional single-source assumption
+78001,78070,1.7687301587301587,1.7702947845804988,recognized,frozen 4N waveform synthesis
+78070,78072,1.7702947845804988,1.7703401360544218,provisional,original recorded PCM; provisional single-source assumption
+78072,78495,1.7703401360544218,1.7799319727891156,recognized,frozen 4N waveform synthesis
+78495,78497,1.7799319727891156,1.7799773242630386,provisional,original recorded PCM; provisional single-source assumption
+78497,78566,1.7799773242630386,1.7815419501133787,recognized,frozen 4N waveform synthesis
+78566,78568,1.7815419501133787,1.7815873015873016,provisional,original recorded PCM; provisional single-source assumption
+78568,78637,1.7815873015873016,1.7831519274376417,recognized,frozen 4N waveform synthesis
+78637,78639,1.7831519274376417,1.7831972789115647,provisional,original recorded PCM; provisional single-source assumption
+78639,79062,1.7831972789115647,1.7927891156462585,recognized,frozen 4N waveform synthesis
+79062,79064,1.7927891156462585,1.7928344671201815,provisional,original recorded PCM; provisional single-source assumption
+79064,79133,1.7928344671201815,1.7943990929705216,recognized,frozen 4N waveform synthesis
+79133,79135,1.7943990929705216,1.7944444444444445,provisional,original recorded PCM; provisional single-source assumption
+79135,79204,1.7944444444444445,1.7960090702947846,recognized,frozen 4N waveform synthesis
+79204,79206,1.7960090702947846,1.7960544217687076,provisional,original recorded PCM; provisional single-source assumption
+79206,79629,1.7960544217687076,1.8056462585034014,recognized,frozen 4N waveform synthesis
+79629,79631,1.8056462585034014,1.8056916099773244,provisional,original recorded PCM; provisional single-source assumption
+79631,79700,1.8056916099773244,1.8072562358276645,recognized,frozen 4N waveform synthesis
+79700,79702,1.8072562358276645,1.8073015873015874,provisional,original recorded PCM; provisional single-source assumption
+79702,80196,1.8073015873015874,1.8185034013605441,recognized,frozen 4N waveform synthesis
+80196,80198,1.8185034013605441,1.818548752834467,provisional,original recorded PCM; provisional single-source assumption
+80198,80267,1.818548752834467,1.8201133786848072,recognized,frozen 4N waveform synthesis
+80267,80269,1.8201133786848072,1.82015873015873,provisional,original recorded PCM; provisional single-source assumption
+80269,80692,1.82015873015873,1.829750566893424,recognized,frozen 4N waveform synthesis
+80692,80694,1.829750566893424,1.829795918367347,provisional,original recorded PCM; provisional single-source assumption
+80694,80763,1.829795918367347,1.831360544217687,recognized,frozen 4N waveform synthesis
+80763,80765,1.831360544217687,1.83140589569161,provisional,original recorded PCM; provisional single-source assumption
+80765,80834,1.83140589569161,1.83297052154195,recognized,frozen 4N waveform synthesis
+80834,80836,1.83297052154195,1.833015873015873,provisional,original recorded PCM; provisional single-source assumption
+80836,81259,1.833015873015873,1.8426077097505669,recognized,frozen 4N waveform synthesis
+81259,81261,1.8426077097505669,1.8426530612244898,provisional,original recorded PCM; provisional single-source assumption
+81261,81330,1.8426530612244898,1.84421768707483,recognized,frozen 4N waveform synthesis
+81330,81332,1.84421768707483,1.8442630385487528,provisional,original recorded PCM; provisional single-source assumption
+81332,81401,1.8442630385487528,1.845827664399093,recognized,frozen 4N waveform synthesis
+81401,81403,1.845827664399093,1.8458730158730159,provisional,original recorded PCM; provisional single-source assumption
+81403,81826,1.8458730158730159,1.8554648526077098,recognized,frozen 4N waveform synthesis
+81826,81828,1.8554648526077098,1.8555102040816327,provisional,original recorded PCM; provisional single-source assumption
+81828,81897,1.8555102040816327,1.8570748299319728,recognized,frozen 4N waveform synthesis
+81897,81899,1.8570748299319728,1.8571201814058957,provisional,original recorded PCM; provisional single-source assumption
+81899,82393,1.8571201814058957,1.8683219954648527,recognized,frozen 4N waveform synthesis
+82393,82395,1.8683219954648527,1.8683673469387756,provisional,original recorded PCM; provisional single-source assumption
+82395,82464,1.8683673469387756,1.8699319727891157,recognized,frozen 4N waveform synthesis
+82464,82466,1.8699319727891157,1.8699773242630386,provisional,original recorded PCM; provisional single-source assumption
+82466,82889,1.8699773242630386,1.8795691609977325,recognized,frozen 4N waveform synthesis
+82889,82891,1.8795691609977325,1.8796145124716552,provisional,original recorded PCM; provisional single-source assumption
+82891,82960,1.8796145124716552,1.8811791383219956,recognized,frozen 4N waveform synthesis
+82960,82962,1.8811791383219956,1.8812244897959183,provisional,original recorded PCM; provisional single-source assumption
+82962,83031,1.8812244897959183,1.8827891156462584,recognized,frozen 4N waveform synthesis
+83031,83033,1.8827891156462584,1.8828344671201813,provisional,original recorded PCM; provisional single-source assumption
+83033,83174,1.8828344671201813,1.886031746031746,recognized,frozen 4N waveform synthesis
+83174,83245,1.886031746031746,1.887641723356009,provisional,original recorded PCM; provisional single-source assumption
+83245,83314,1.887641723356009,1.8892063492063491,recognized,frozen 4N waveform synthesis
+83314,83735,1.8892063492063491,1.8987528344671203,provisional,original recorded PCM; provisional single-source assumption
+83735,88203,1.8987528344671203,2.0000680272108844,unassigned,no assignment
+88203,88377,2.0000680272108844,2.004013605442177,provisional,original recorded PCM; provisional single-source assumption
+88377,88976,2.004013605442177,2.017596371882086,recognized,frozen 4N waveform synthesis
+88976,88978,2.017596371882086,2.017641723356009,provisional,original recorded PCM; provisional single-source assumption
+88978,89051,2.017641723356009,2.019297052154195,recognized,frozen 4N waveform synthesis
+89051,89053,2.019297052154195,2.019342403628118,provisional,original recorded PCM; provisional single-source assumption
+89053,89126,2.019342403628118,2.020997732426304,recognized,frozen 4N waveform synthesis
+89126,89128,2.020997732426304,2.021043083900227,provisional,original recorded PCM; provisional single-source assumption
+89128,89877,2.021043083900227,2.0380272108843536,recognized,frozen 4N waveform synthesis
+89877,89879,2.0380272108843536,2.0380725623582765,provisional,original recorded PCM; provisional single-source assumption
+89879,89952,2.0380725623582765,2.0397278911564625,recognized,frozen 4N waveform synthesis
+89952,89954,2.0397278911564625,2.0397732426303854,provisional,original recorded PCM; provisional single-source assumption
+89954,90027,2.0397732426303854,2.0414285714285714,recognized,frozen 4N waveform synthesis
+90027,90029,2.0414285714285714,2.0414739229024943,provisional,original recorded PCM; provisional single-source assumption
+90029,90703,2.0414739229024943,2.0567573696145125,recognized,frozen 4N waveform synthesis
+90703,90705,2.0567573696145125,2.0568027210884354,provisional,original recorded PCM; provisional single-source assumption
+90705,90778,2.0568027210884354,2.0584580498866214,recognized,frozen 4N waveform synthesis
+90778,90780,2.0584580498866214,2.0585034013605443,provisional,original recorded PCM; provisional single-source assumption
+90780,90853,2.0585034013605443,2.0601587301587303,recognized,frozen 4N waveform synthesis
+90853,90855,2.0601587301587303,2.0602040816326532,provisional,original recorded PCM; provisional single-source assumption
+90855,91604,2.0602040816326532,2.07718820861678,recognized,frozen 4N waveform synthesis
+91604,91606,2.07718820861678,2.077233560090703,provisional,original recorded PCM; provisional single-source assumption
+91606,91679,2.077233560090703,2.078888888888889,recognized,frozen 4N waveform synthesis
+91679,91681,2.078888888888889,2.0789342403628117,provisional,original recorded PCM; provisional single-source assumption
+91681,91754,2.0789342403628117,2.0805895691609977,recognized,frozen 4N waveform synthesis
+91754,91756,2.0805895691609977,2.0806349206349206,provisional,original recorded PCM; provisional single-source assumption
+91756,92505,2.0806349206349206,2.0976190476190477,recognized,frozen 4N waveform synthesis
+92505,92507,2.0976190476190477,2.0976643990929706,provisional,original recorded PCM; provisional single-source assumption
+92507,92580,2.0976643990929706,2.0993197278911566,recognized,frozen 4N waveform synthesis
+92580,92582,2.0993197278911566,2.0993650793650795,provisional,original recorded PCM; provisional single-source assumption
+92582,92655,2.0993650793650795,2.1010204081632655,recognized,frozen 4N waveform synthesis
+92655,92657,2.1010204081632655,2.101065759637188,provisional,original recorded PCM; provisional single-source assumption
+92657,93331,2.101065759637188,2.116349206349206,recognized,frozen 4N waveform synthesis
+93331,93333,2.116349206349206,2.116394557823129,provisional,original recorded PCM; provisional single-source assumption
+93333,93406,2.116394557823129,2.118049886621315,recognized,frozen 4N waveform synthesis
+93406,93408,2.118049886621315,2.118095238095238,provisional,original recorded PCM; provisional single-source assumption
+93408,93481,2.118095238095238,2.119750566893424,recognized,frozen 4N waveform synthesis
+93481,93483,2.119750566893424,2.119795918367347,provisional,original recorded PCM; provisional single-source assumption
+93483,94232,2.119795918367347,2.136780045351474,recognized,frozen 4N waveform synthesis
+94232,94234,2.136780045351474,2.136825396825397,provisional,original recorded PCM; provisional single-source assumption
+94234,94307,2.136825396825397,2.138480725623583,recognized,frozen 4N waveform synthesis
+94307,94309,2.138480725623583,2.138526077097506,provisional,original recorded PCM; provisional single-source assumption
+94309,94382,2.138526077097506,2.1401814058956914,recognized,frozen 4N waveform synthesis
+94382,94384,2.1401814058956914,2.1402267573696143,provisional,original recorded PCM; provisional single-source assumption
+94384,95133,2.1402267573696143,2.1572108843537414,recognized,frozen 4N waveform synthesis
+95133,95135,2.1572108843537414,2.1572562358276643,provisional,original recorded PCM; provisional single-source assumption
+95135,95208,2.1572562358276643,2.1589115646258503,recognized,frozen 4N waveform synthesis
+95208,95210,2.1589115646258503,2.1589569160997732,provisional,original recorded PCM; provisional single-source assumption
+95210,95283,2.1589569160997732,2.1606122448979592,recognized,frozen 4N waveform synthesis
+95283,95285,2.1606122448979592,2.160657596371882,provisional,original recorded PCM; provisional single-source assumption
+95285,95959,2.160657596371882,2.1759410430839004,recognized,frozen 4N waveform synthesis
+95959,95961,2.1759410430839004,2.1759863945578233,provisional,original recorded PCM; provisional single-source assumption
+95961,96034,2.1759863945578233,2.1776417233560093,recognized,frozen 4N waveform synthesis
+96034,96036,2.1776417233560093,2.177687074829932,provisional,original recorded PCM; provisional single-source assumption
+96036,96109,2.177687074829932,2.1793424036281177,recognized,frozen 4N waveform synthesis
+96109,96111,2.1793424036281177,2.1793877551020406,provisional,original recorded PCM; provisional single-source assumption
+96111,96860,2.1793877551020406,2.1963718820861677,recognized,frozen 4N waveform synthesis
+96860,96862,2.1963718820861677,2.1964172335600907,provisional,original recorded PCM; provisional single-source assumption
+96862,96935,2.1964172335600907,2.1980725623582766,recognized,frozen 4N waveform synthesis
+96935,96937,2.1980725623582766,2.1981179138321996,provisional,original recorded PCM; provisional single-source assumption
+96937,97010,2.1981179138321996,2.1997732426303855,recognized,frozen 4N waveform synthesis
+97010,97012,2.1997732426303855,2.1998185941043085,provisional,original recorded PCM; provisional single-source assumption
+97012,97761,2.1998185941043085,2.2168027210884356,recognized,frozen 4N waveform synthesis
+97761,97763,2.2168027210884356,2.2168480725623585,provisional,original recorded PCM; provisional single-source assumption
+97763,97836,2.2168480725623585,2.218503401360544,recognized,frozen 4N waveform synthesis
+97836,97838,2.218503401360544,2.218548752834467,provisional,original recorded PCM; provisional single-source assumption
+97838,97911,2.218548752834467,2.220204081632653,recognized,frozen 4N waveform synthesis
+97911,97913,2.220204081632653,2.220249433106576,provisional,original recorded PCM; provisional single-source assumption
+97913,98587,2.220249433106576,2.235532879818594,recognized,frozen 4N waveform synthesis
+98587,98589,2.235532879818594,2.235578231292517,provisional,original recorded PCM; provisional single-source assumption
+98589,98662,2.235578231292517,2.237233560090703,recognized,frozen 4N waveform synthesis
+98662,98664,2.237233560090703,2.237278911564626,provisional,original recorded PCM; provisional single-source assumption
+98664,98737,2.237278911564626,2.238934240362812,recognized,frozen 4N waveform synthesis
+98737,98739,2.238934240362812,2.238979591836735,provisional,original recorded PCM; provisional single-source assumption
+98739,99488,2.238979591836735,2.255963718820862,recognized,frozen 4N waveform synthesis
+99488,99490,2.255963718820862,2.2560090702947844,provisional,original recorded PCM; provisional single-source assumption
+99490,99563,2.2560090702947844,2.2576643990929703,recognized,frozen 4N waveform synthesis
+99563,99565,2.2576643990929703,2.2577097505668933,provisional,original recorded PCM; provisional single-source assumption
+99565,99638,2.2577097505668933,2.2593650793650792,recognized,frozen 4N waveform synthesis
+99638,99640,2.2593650793650792,2.259410430839002,provisional,original recorded PCM; provisional single-source assumption
+99640,100389,2.259410430839002,2.2763945578231293,recognized,frozen 4N waveform synthesis
+100389,100391,2.2763945578231293,2.276439909297052,provisional,original recorded PCM; provisional single-source assumption
+100391,100464,2.276439909297052,2.278095238095238,recognized,frozen 4N waveform synthesis
+100464,100466,2.278095238095238,2.278140589569161,provisional,original recorded PCM; provisional single-source assumption
+100466,100539,2.278140589569161,2.279795918367347,recognized,frozen 4N waveform synthesis
+100539,100541,2.279795918367347,2.27984126984127,provisional,original recorded PCM; provisional single-source assumption
+100541,101215,2.27984126984127,2.295124716553288,recognized,frozen 4N waveform synthesis
+101215,101217,2.295124716553288,2.2951700680272107,provisional,original recorded PCM; provisional single-source assumption
+101217,101290,2.2951700680272107,2.2968253968253967,recognized,frozen 4N waveform synthesis
+101290,101292,2.2968253968253967,2.2968707482993196,provisional,original recorded PCM; provisional single-source assumption
+101292,101365,2.2968707482993196,2.2985260770975056,recognized,frozen 4N waveform synthesis
+101365,101367,2.2985260770975056,2.2985714285714285,provisional,original recorded PCM; provisional single-source assumption
+101367,102116,2.2985714285714285,2.3155555555555556,recognized,frozen 4N waveform synthesis
+102116,102118,2.3155555555555556,2.3156009070294785,provisional,original recorded PCM; provisional single-source assumption
+102118,102191,2.3156009070294785,2.3172562358276645,recognized,frozen 4N waveform synthesis
+102191,102193,2.3172562358276645,2.3173015873015874,provisional,original recorded PCM; provisional single-source assumption
+102193,102266,2.3173015873015874,2.3189569160997734,recognized,frozen 4N waveform synthesis
+102266,102268,2.3189569160997734,2.3190022675736963,provisional,original recorded PCM; provisional single-source assumption
+102268,103017,2.3190022675736963,2.335986394557823,recognized,frozen 4N waveform synthesis
+103017,103019,2.335986394557823,2.336031746031746,provisional,original recorded PCM; provisional single-source assumption
+103019,103092,2.336031746031746,2.337687074829932,recognized,frozen 4N waveform synthesis
+103092,103094,2.337687074829932,2.337732426303855,provisional,original recorded PCM; provisional single-source assumption
+103094,103167,2.337732426303855,2.3393877551020408,recognized,frozen 4N waveform synthesis
+103167,103169,2.3393877551020408,2.3394331065759637,provisional,original recorded PCM; provisional single-source assumption
+103169,103843,2.3394331065759637,2.354716553287982,recognized,frozen 4N waveform synthesis
+103843,103845,2.354716553287982,2.354761904761905,provisional,original recorded PCM; provisional single-source assumption
+103845,103918,2.354761904761905,2.356417233560091,recognized,frozen 4N waveform synthesis
+103918,103920,2.356417233560091,2.3564625850340137,provisional,original recorded PCM; provisional single-source assumption
+103920,103993,2.3564625850340137,2.3581179138321997,recognized,frozen 4N waveform synthesis
+103993,103995,2.3581179138321997,2.3581632653061226,provisional,original recorded PCM; provisional single-source assumption
+103995,104744,2.3581632653061226,2.3751473922902493,recognized,frozen 4N waveform synthesis
+104744,104746,2.3751473922902493,2.375192743764172,provisional,original recorded PCM; provisional single-source assumption
+104746,104819,2.375192743764172,2.376848072562358,recognized,frozen 4N waveform synthesis
+104819,104821,2.376848072562358,2.376893424036281,provisional,original recorded PCM; provisional single-source assumption
+104821,104894,2.376893424036281,2.378548752834467,recognized,frozen 4N waveform synthesis
+104894,104896,2.378548752834467,2.37859410430839,provisional,original recorded PCM; provisional single-source assumption
+104896,105570,2.37859410430839,2.3938775510204082,recognized,frozen 4N waveform synthesis
+105570,105572,2.3938775510204082,2.393922902494331,provisional,original recorded PCM; provisional single-source assumption
+105572,105645,2.393922902494331,2.395578231292517,recognized,frozen 4N waveform synthesis
+105645,105647,2.395578231292517,2.39562358276644,provisional,original recorded PCM; provisional single-source assumption
+105647,105720,2.39562358276644,2.397278911564626,recognized,frozen 4N waveform synthesis
+105720,105722,2.397278911564626,2.397324263038549,provisional,original recorded PCM; provisional single-source assumption
+105722,105795,2.397324263038549,2.3989795918367345,recognized,frozen 4N waveform synthesis
+105795,105797,2.3989795918367345,2.3990249433106574,provisional,original recorded PCM; provisional single-source assumption
+105797,106471,2.3990249433106574,2.4143083900226756,recognized,frozen 4N waveform synthesis
+106471,106473,2.4143083900226756,2.4143537414965985,provisional,original recorded PCM; provisional single-source assumption
+106473,106546,2.4143537414965985,2.4160090702947845,recognized,frozen 4N waveform synthesis
+106546,106548,2.4160090702947845,2.4160544217687074,provisional,original recorded PCM; provisional single-source assumption
+106548,106621,2.4160544217687074,2.4177097505668934,recognized,frozen 4N waveform synthesis
+106621,106623,2.4177097505668934,2.4177551020408163,provisional,original recorded PCM; provisional single-source assumption
+106623,107372,2.4177551020408163,2.4347392290249434,recognized,frozen 4N waveform synthesis
+107372,107374,2.4347392290249434,2.4347845804988664,provisional,original recorded PCM; provisional single-source assumption
+107374,107447,2.4347845804988664,2.4364399092970523,recognized,frozen 4N waveform synthesis
+107447,107449,2.4364399092970523,2.4364852607709753,provisional,original recorded PCM; provisional single-source assumption
+107449,107522,2.4364852607709753,2.438140589569161,recognized,frozen 4N waveform synthesis
+107522,107524,2.438140589569161,2.4381859410430837,provisional,original recorded PCM; provisional single-source assumption
+107524,108198,2.4381859410430837,2.453469387755102,recognized,frozen 4N waveform synthesis
+108198,108200,2.453469387755102,2.453514739229025,provisional,original recorded PCM; provisional single-source assumption
+108200,108273,2.453514739229025,2.455170068027211,recognized,frozen 4N waveform synthesis
+108273,108275,2.455170068027211,2.4552154195011338,provisional,original recorded PCM; provisional single-source assumption
+108275,108348,2.4552154195011338,2.4568707482993197,recognized,frozen 4N waveform synthesis
+108348,108350,2.4568707482993197,2.4569160997732427,provisional,original recorded PCM; provisional single-source assumption
+108350,109099,2.4569160997732427,2.4739002267573698,recognized,frozen 4N waveform synthesis
+109099,109101,2.4739002267573698,2.4739455782312927,provisional,original recorded PCM; provisional single-source assumption
+109101,109174,2.4739455782312927,2.4756009070294787,recognized,frozen 4N waveform synthesis
+109174,109176,2.4756009070294787,2.475646258503401,provisional,original recorded PCM; provisional single-source assumption
+109176,109249,2.475646258503401,2.477301587301587,recognized,frozen 4N waveform synthesis
+109249,109251,2.477301587301587,2.47734693877551,provisional,original recorded PCM; provisional single-source assumption
+109251,110000,2.47734693877551,2.494331065759637,recognized,frozen 4N waveform synthesis
+110000,110002,2.494331065759637,2.49437641723356,provisional,original recorded PCM; provisional single-source assumption
+110002,110075,2.49437641723356,2.496031746031746,recognized,frozen 4N waveform synthesis
+110075,110077,2.496031746031746,2.496077097505669,provisional,original recorded PCM; provisional single-source assumption
+110077,110150,2.496077097505669,2.497732426303855,recognized,frozen 4N waveform synthesis
+110150,110529,2.497732426303855,2.506326530612245,provisional,original recorded PCM; provisional single-source assumption
+110529,110780,2.506326530612245,2.512018140589569,recognized,frozen 4N waveform synthesis
+110780,110782,2.512018140589569,2.512063492063492,provisional,original recorded PCM; provisional single-source assumption
+110782,132273,2.512063492063492,2.999387755102041,recognized,frozen 4N waveform synthesis
+132273,132684,2.999387755102041,3.0087074829931972,provisional,original recorded PCM; provisional single-source assumption
+132684,132967,3.0087074829931972,3.015124716553288,recognized,frozen 4N waveform synthesis
+132967,133062,3.015124716553288,3.0172789115646257,provisional,original recorded PCM; provisional single-source assumption
+133062,133533,3.0172789115646257,3.0279591836734694,recognized,frozen 4N waveform synthesis
+133533,133535,3.0279591836734694,3.0280045351473923,provisional,original recorded PCM; provisional single-source assumption
+133535,134006,3.0280045351473923,3.038684807256236,recognized,frozen 4N waveform synthesis
+134006,134008,3.038684807256236,3.038730158730159,provisional,original recorded PCM; provisional single-source assumption
+134008,134479,3.038730158730159,3.049410430839002,recognized,frozen 4N waveform synthesis
+134479,134481,3.049410430839002,3.049455782312925,provisional,original recorded PCM; provisional single-source assumption
+134481,134952,3.049455782312925,3.060136054421769,recognized,frozen 4N waveform synthesis
+134952,134954,3.060136054421769,3.0601814058956918,provisional,original recorded PCM; provisional single-source assumption
+134954,135425,3.0601814058956918,3.070861678004535,recognized,frozen 4N waveform synthesis
+135425,135427,3.070861678004535,3.070907029478458,provisional,original recorded PCM; provisional single-source assumption
+135427,135709,3.070907029478458,3.077301587301587,recognized,frozen 4N waveform synthesis
+135709,135711,3.077301587301587,3.07734693877551,provisional,original recorded PCM; provisional single-source assumption
+135711,135898,3.07734693877551,3.0815873015873017,recognized,frozen 4N waveform synthesis
+135898,135900,3.0815873015873017,3.0816326530612246,provisional,original recorded PCM; provisional single-source assumption
+135900,136182,3.0816326530612246,3.088027210884354,recognized,frozen 4N waveform synthesis
+136182,136184,3.088027210884354,3.0880725623582768,provisional,original recorded PCM; provisional single-source assumption
+136184,136371,3.0880725623582768,3.092312925170068,recognized,frozen 4N waveform synthesis
+136371,136373,3.092312925170068,3.0923582766439908,provisional,original recorded PCM; provisional single-source assumption
+136373,136655,3.0923582766439908,3.09875283446712,recognized,frozen 4N waveform synthesis
+136655,136657,3.09875283446712,3.098798185941043,provisional,original recorded PCM; provisional single-source assumption
+136657,136844,3.098798185941043,3.1030385487528345,recognized,frozen 4N waveform synthesis
+136844,136846,3.1030385487528345,3.1030839002267574,provisional,original recorded PCM; provisional single-source assumption
+136846,137128,3.1030839002267574,3.1094784580498867,recognized,frozen 4N waveform synthesis
+137128,137130,3.1094784580498867,3.1095238095238096,provisional,original recorded PCM; provisional single-source assumption
+137130,137317,3.1095238095238096,3.113764172335601,recognized,frozen 4N waveform synthesis
+137317,137319,3.113764172335601,3.113809523809524,provisional,original recorded PCM; provisional single-source assumption
+137319,137601,3.113809523809524,3.1202040816326533,recognized,frozen 4N waveform synthesis
+137601,137603,3.1202040816326533,3.1202494331065758,provisional,original recorded PCM; provisional single-source assumption
+137603,137790,3.1202494331065758,3.1244897959183673,recognized,frozen 4N waveform synthesis
+137790,137792,3.1244897959183673,3.12453514739229,provisional,original recorded PCM; provisional single-source assumption
+137792,138074,3.12453514739229,3.1309297052154195,recognized,frozen 4N waveform synthesis
+138074,138076,3.1309297052154195,3.1309750566893424,provisional,original recorded PCM; provisional single-source assumption
+138076,138547,3.1309750566893424,3.141655328798186,recognized,frozen 4N waveform synthesis
+138547,138549,3.141655328798186,3.141700680272109,provisional,original recorded PCM; provisional single-source assumption
+138549,139020,3.141700680272109,3.1523809523809523,recognized,frozen 4N waveform synthesis
+139020,139022,3.1523809523809523,3.152426303854875,provisional,original recorded PCM; provisional single-source assumption
+139022,139493,3.152426303854875,3.163106575963719,recognized,frozen 4N waveform synthesis
+139493,139495,3.163106575963719,3.163151927437642,provisional,original recorded PCM; provisional single-source assumption
+139495,139966,3.163151927437642,3.173832199546485,recognized,frozen 4N waveform synthesis
+139966,139968,3.173832199546485,3.173877551020408,provisional,original recorded PCM; provisional single-source assumption
+139968,140439,3.173877551020408,3.1845578231292517,recognized,frozen 4N waveform synthesis
+140439,140441,3.1845578231292517,3.1846031746031747,provisional,original recorded PCM; provisional single-source assumption
+140441,140912,3.1846031746031747,3.1952834467120184,recognized,frozen 4N waveform synthesis
+140912,140914,3.1952834467120184,3.195328798185941,provisional,original recorded PCM; provisional single-source assumption
+140914,141385,3.195328798185941,3.2060090702947845,recognized,frozen 4N waveform synthesis
+141385,141387,3.2060090702947845,3.2060544217687075,provisional,original recorded PCM; provisional single-source assumption
+141387,141858,3.2060544217687075,3.216734693877551,recognized,frozen 4N waveform synthesis
+141858,141860,3.216734693877551,3.216780045351474,provisional,original recorded PCM; provisional single-source assumption
+141860,142331,3.216780045351474,3.2274603174603174,recognized,frozen 4N waveform synthesis
+142331,142333,3.2274603174603174,3.2275056689342403,provisional,original recorded PCM; provisional single-source assumption
+142333,142804,3.2275056689342403,3.238185941043084,recognized,frozen 4N waveform synthesis
+142804,142806,3.238185941043084,3.238231292517007,provisional,original recorded PCM; provisional single-source assumption
+142806,143277,3.238231292517007,3.24891156462585,recognized,frozen 4N waveform synthesis
+143277,143279,3.24891156462585,3.248956916099773,provisional,original recorded PCM; provisional single-source assumption
+143279,143750,3.248956916099773,3.259637188208617,recognized,frozen 4N waveform synthesis
+143750,143752,3.259637188208617,3.2596825396825397,provisional,original recorded PCM; provisional single-source assumption
+143752,144223,3.2596825396825397,3.2703628117913834,recognized,frozen 4N waveform synthesis
+144223,144225,3.2703628117913834,3.270408163265306,provisional,original recorded PCM; provisional single-source assumption
+144225,144696,3.270408163265306,3.2810884353741496,recognized,frozen 4N waveform synthesis
+144696,144698,3.2810884353741496,3.2811337868480726,provisional,original recorded PCM; provisional single-source assumption
+144698,145169,3.2811337868480726,3.2918140589569163,recognized,frozen 4N waveform synthesis
+145169,145171,3.2918140589569163,3.291859410430839,provisional,original recorded PCM; provisional single-source assumption
+145171,145642,3.291859410430839,3.3025396825396824,recognized,frozen 4N waveform synthesis
+145642,145644,3.3025396825396824,3.3025850340136054,provisional,original recorded PCM; provisional single-source assumption
+145644,145926,3.3025850340136054,3.3089795918367346,recognized,frozen 4N waveform synthesis
+145926,145928,3.3089795918367346,3.3090249433106576,provisional,original recorded PCM; provisional single-source assumption
+145928,146115,3.3090249433106576,3.313265306122449,recognized,frozen 4N waveform synthesis
+146115,146117,3.313265306122449,3.313310657596372,provisional,original recorded PCM; provisional single-source assumption
+146117,146399,3.313310657596372,3.3197052154195013,recognized,frozen 4N waveform synthesis
+146399,146401,3.3197052154195013,3.319750566893424,provisional,original recorded PCM; provisional single-source assumption
+146401,146588,3.319750566893424,3.3239909297052153,recognized,frozen 4N waveform synthesis
+146588,146590,3.3239909297052153,3.324036281179138,provisional,original recorded PCM; provisional single-source assumption
+146590,146872,3.324036281179138,3.3304308390022674,recognized,frozen 4N waveform synthesis
+146872,146874,3.3304308390022674,3.3304761904761904,provisional,original recorded PCM; provisional single-source assumption
+146874,147061,3.3304761904761904,3.334716553287982,recognized,frozen 4N waveform synthesis
+147061,147063,3.334716553287982,3.334761904761905,provisional,original recorded PCM; provisional single-source assumption
+147063,147345,3.334761904761905,3.341156462585034,recognized,frozen 4N waveform synthesis
+147345,147347,3.341156462585034,3.341201814058957,provisional,original recorded PCM; provisional single-source assumption
+147347,147534,3.341201814058957,3.3454421768707485,recognized,frozen 4N waveform synthesis
+147534,147536,3.3454421768707485,3.345487528344671,provisional,original recorded PCM; provisional single-source assumption
+147536,147818,3.345487528344671,3.3518820861678003,recognized,frozen 4N waveform synthesis
+147818,147820,3.3518820861678003,3.351927437641723,provisional,original recorded PCM; provisional single-source assumption
+147820,148291,3.351927437641723,3.362607709750567,recognized,frozen 4N waveform synthesis
+148291,148293,3.362607709750567,3.36265306122449,provisional,original recorded PCM; provisional single-source assumption
+148293,148764,3.36265306122449,3.3733333333333335,recognized,frozen 4N waveform synthesis
+148764,148766,3.3733333333333335,3.3733786848072564,provisional,original recorded PCM; provisional single-source assumption
+148766,149237,3.3733786848072564,3.3840589569160997,recognized,frozen 4N waveform synthesis
+149237,149239,3.3840589569160997,3.3841043083900226,provisional,original recorded PCM; provisional single-source assumption
+149239,149710,3.3841043083900226,3.3947845804988663,recognized,frozen 4N waveform synthesis
+149710,149712,3.3947845804988663,3.3948299319727893,provisional,original recorded PCM; provisional single-source assumption
+149712,150183,3.3948299319727893,3.4055102040816325,recognized,frozen 4N waveform synthesis
+150183,150185,3.4055102040816325,3.4055555555555554,provisional,original recorded PCM; provisional single-source assumption
+150185,150656,3.4055555555555554,3.416235827664399,recognized,frozen 4N waveform synthesis
+150656,150658,3.416235827664399,3.416281179138322,provisional,original recorded PCM; provisional single-source assumption
+150658,151129,3.416281179138322,3.4269614512471653,recognized,frozen 4N waveform synthesis
+151129,151131,3.4269614512471653,3.4270068027210883,provisional,original recorded PCM; provisional single-source assumption
+151131,151602,3.4270068027210883,3.437687074829932,recognized,frozen 4N waveform synthesis
+151602,151604,3.437687074829932,3.437732426303855,provisional,original recorded PCM; provisional single-source assumption
+151604,152075,3.437732426303855,3.4484126984126986,recognized,frozen 4N waveform synthesis
+152075,152077,3.4484126984126986,3.4484580498866215,provisional,original recorded PCM; provisional single-source assumption
+152077,152548,3.4484580498866215,3.459138321995465,recognized,frozen 4N waveform synthesis
+152548,152550,3.459138321995465,3.4591836734693877,provisional,original recorded PCM; provisional single-source assumption
+152550,153021,3.4591836734693877,3.4698639455782314,recognized,frozen 4N waveform synthesis
+153021,153023,3.4698639455782314,3.4699092970521543,provisional,original recorded PCM; provisional single-source assumption
+153023,153494,3.4699092970521543,3.4805895691609976,recognized,frozen 4N waveform synthesis
+153494,153496,3.4805895691609976,3.4806349206349205,provisional,original recorded PCM; provisional single-source assumption
+153496,153874,3.4806349206349205,3.4892063492063494,recognized,frozen 4N waveform synthesis
+153874,153969,3.4892063492063494,3.491360544217687,provisional,original recorded PCM; provisional single-source assumption
+153969,154347,3.491360544217687,3.4999319727891156,recognized,frozen 4N waveform synthesis
+154347,154800,3.4999319727891156,3.510204081632653,provisional,original recorded PCM; provisional single-source assumption
+154800,154906,3.510204081632653,3.512607709750567,recognized,frozen 4N waveform synthesis
+154906,155011,3.512607709750567,3.514988662131519,provisional,original recorded PCM; provisional single-source assumption
+155011,175824,3.514988662131519,3.986938775510204,recognized,frozen 4N waveform synthesis
+175824,175930,3.986938775510204,3.9893424036281178,provisional,original recorded PCM; provisional single-source assumption
+175930,176355,3.9893424036281178,3.9989795918367346,recognized,frozen 4N waveform synthesis
+176355,177062,3.9989795918367346,4.015011337868481,provisional,original recorded PCM; provisional single-source assumption
+177062,198325,4.015011337868481,4.497165532879818,recognized,frozen 4N waveform synthesis
+198325,198789,4.497165532879818,4.507687074829932,provisional,original recorded PCM; provisional single-source assumption
+198789,198915,4.507687074829932,4.510544217687075,recognized,frozen 4N waveform synthesis
+198915,199169,4.510544217687075,4.516303854875283,provisional,original recorded PCM; provisional single-source assumption
+199169,220384,4.516303854875283,4.997369614512472,recognized,frozen 4N waveform synthesis
+220384,221242,4.997369614512472,5.016825396825396,provisional,original recorded PCM; provisional single-source assumption
+221242,264473,5.016825396825396,5.997120181405895,recognized,frozen 4N waveform synthesis
+264473,264600,5.997120181405895,6.0,provisional,original recorded PCM; provisional single-source assumption

@@ -1,0 +1,7675 @@
+[
+  {
+    "start_frame": 6036.778050182261,
+    "end_frame": 11091.556551279838,
+    "expected_period_frames": 133.79506973839398,
+    "inferred_period_count": 38,
+    "left_cycle_ids": [
+      40,
+      41,
+      42
+    ],
+    "right_cycle_ids": [
+      70,
+      71,
+      72
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 1,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 17152.634467480424,
+    "end_frame": 22155.940699360533,
+    "expected_period_frames": 119.21146457389113,
+    "inferred_period_count": 42,
+    "left_cycle_ids": [
+      115,
+      116,
+      117
+    ],
+    "right_cycle_ids": [
+      126,
+      127,
+      128
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 2,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 28118.495579512022,
+    "end_frame": 33179.41761184766,
+    "expected_period_frames": 109.37324403865932,
+    "inferred_period_count": 46,
+    "left_cycle_ids": [
+      176,
+      177,
+      178
+    ],
+    "right_cycle_ids": [
+      181,
+      182,
+      183
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 3,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 38700.784887024136,
+    "end_frame": 38702.0202153263,
+    "expected_period_frames": 105.97049542621244,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      230,
+      231,
+      232
+    ],
+    "right_cycle_ids": [
+      234,
+      236,
+      237
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 4,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 38806.873532883365,
+    "end_frame": 38808.06851108998,
+    "expected_period_frames": 105.94639070912308,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      231,
+      232,
+      234
+    ],
+    "right_cycle_ids": [
+      236,
+      237,
+      238
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 5,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 39229.75680261266,
+    "end_frame": 44270.90211944568,
+    "expected_period_frames": 99.63156064712166,
+    "inferred_period_count": 51,
+    "left_cycle_ids": [
+      237,
+      238,
+      239
+    ],
+    "right_cycle_ids": [
+      272,
+      273,
+      274
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "unstable flank amplitude / ending",
+      "unrelated flank families",
+      "flank geometry is not coherent",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 6,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 44648.96108929967,
+    "end_frame": 44650.096429221,
+    "expected_period_frames": 93.86580526958642,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      273,
+      274,
+      275
+    ],
+    "right_cycle_ids": [
+      277,
+      278,
+      279
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 7,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 45121.966799984795,
+    "end_frame": 45123.099017806286,
+    "expected_period_frames": 93.87036860025182,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      279,
+      280,
+      281
+    ],
+    "right_cycle_ids": [
+      283,
+      284,
+      285
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 8,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 45405.893422770045,
+    "end_frame": 45501.01556215351,
+    "expected_period_frames": 93.87786684696039,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      283,
+      284,
+      285
+    ],
+    "right_cycle_ids": [
+      288,
+      290,
+      291
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 9,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.010984875860183641,
+      "correlation": 0.994546416267359,
+      "source_to_prediction_rms_ratio": 1.016073667121293,
+      "per_cycle": [
+        {
+          "error_ratio": 0.010984875860183641,
+          "correlation": 0.994546416267359,
+          "source_to_prediction_rms_ratio": 1.016073667121293
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -91
+    ]
+  },
+  {
+    "start_frame": 45594.972782533085,
+    "end_frame": 45596.10143128754,
+    "expected_period_frames": 93.8756073167715,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      284,
+      285,
+      288
+    ],
+    "right_cycle_ids": [
+      290,
+      291,
+      292
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 10,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 45878.89513203754,
+    "end_frame": 45974.005798949605,
+    "expected_period_frames": 93.88362466858234,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      290,
+      291,
+      292
+    ],
+    "right_cycle_ids": [
+      295,
+      297,
+      298
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 11,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.011257459943898016,
+      "correlation": 0.9944102135442612,
+      "source_to_prediction_rms_ratio": 1.0162978073101216,
+      "per_cycle": [
+        {
+          "error_ratio": 0.011257459943898016,
+          "correlation": 0.9944102135442612,
+          "source_to_prediction_rms_ratio": 1.0162978073101216
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -111
+    ]
+  },
+  {
+    "start_frame": 46067.9790540328,
+    "end_frame": 46069.10366820333,
+    "expected_period_frames": 93.88156241319666,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      291,
+      292,
+      295
+    ],
+    "right_cycle_ids": [
+      297,
+      298,
+      299
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 12,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 46351.897008231266,
+    "end_frame": 46446.99556736971,
+    "expected_period_frames": 93.88996545485134,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      297,
+      298,
+      299
+    ],
+    "right_cycle_ids": [
+      302,
+      304,
+      305
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 13,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01155206407338481,
+      "correlation": 0.9942629202717265,
+      "source_to_prediction_rms_ratio": 1.0165330210133414,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01155206407338481,
+          "correlation": 0.9942629202717265,
+          "source_to_prediction_rms_ratio": 1.0165330210133414
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -131
+    ]
+  },
+  {
+    "start_frame": 46540.98562853622,
+    "end_frame": 46542.10572748192,
+    "expected_period_frames": 93.89071060545757,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      298,
+      299,
+      302
+    ],
+    "right_cycle_ids": [
+      304,
+      305,
+      306
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 14,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 46824.8990561841,
+    "end_frame": 46919.98608046861,
+    "expected_period_frames": 93.89889523251259,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      304,
+      305,
+      306
+    ],
+    "right_cycle_ids": [
+      309,
+      311,
+      312
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 15,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.011860620028474666,
+      "correlation": 0.9941083621751418,
+      "source_to_prediction_rms_ratio": 1.0167533270886944,
+      "per_cycle": [
+        {
+          "error_ratio": 0.011860620028474666,
+          "correlation": 0.9941083621751418,
+          "source_to_prediction_rms_ratio": 1.0167533270886944
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -151
+    ]
+  },
+  {
+    "start_frame": 47013.99251088923,
+    "end_frame": 47015.10761186817,
+    "expected_period_frames": 93.90104723205877,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      305,
+      306,
+      309
+    ],
+    "right_cycle_ids": [
+      311,
+      312,
+      313
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 16,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 47297.901277394776,
+    "end_frame": 47392.97730236691,
+    "expected_period_frames": 93.90903687281389,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      311,
+      312,
+      313
+    ],
+    "right_cycle_ids": [
+      316,
+      318,
+      319
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 17,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01217899993363748,
+      "correlation": 0.9939486521075038,
+      "source_to_prediction_rms_ratio": 1.016960738409281,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01217899993363748,
+          "correlation": 0.9939486521075038,
+          "source_to_prediction_rms_ratio": 1.016960738409281
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -171
+    ]
+  },
+  {
+    "start_frame": 47486.99971206904,
+    "end_frame": 47488.109320817195,
+    "expected_period_frames": 93.91139279842537,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      312,
+      313,
+      316
+    ],
+    "right_cycle_ids": [
+      318,
+      319,
+      320
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 18,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 47770.903669407344,
+    "end_frame": 47961.11086471861,
+    "expected_period_frames": 93.80294135590884,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      318,
+      319,
+      320
+    ],
+    "right_cycle_ids": [
+      324,
+      325,
+      326
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 19,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013910260315117676,
+      "correlation": 0.9930560150655684,
+      "source_to_prediction_rms_ratio": 1.0155799829478278,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01202644622935988,
+          "correlation": 0.994012311533844,
+          "source_to_prediction_rms_ratio": 1.0155489375600586
+        },
+        {
+          "error_ratio": 0.015793975592078426,
+          "correlation": 0.9920997112183053,
+          "source_to_prediction_rms_ratio": 1.0156110295543526
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -191,
+      -192
+    ]
+  },
+  {
+    "start_frame": 48243.906234681104,
+    "end_frame": 48434.112241108676,
+    "expected_period_frames": 93.8082902770293,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      324,
+      325,
+      326
+    ],
+    "right_cycle_ids": [
+      330,
+      331,
+      332
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 20,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013860112970976514,
+      "correlation": 0.9930817194579327,
+      "source_to_prediction_rms_ratio": 1.015608882894781,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012223238721246742,
+          "correlation": 0.9939122627589014,
+          "source_to_prediction_rms_ratio": 1.0155354318935241
+        },
+        {
+          "error_ratio": 0.015496875709151346,
+          "correlation": 0.9922511177899737,
+          "source_to_prediction_rms_ratio": 1.0156823448304428
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -201,
+      -202
+    ]
+  },
+  {
+    "start_frame": 48716.908976838415,
+    "end_frame": 48907.11344475802,
+    "expected_period_frames": 93.81408237170763,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      330,
+      331,
+      332
+    ],
+    "right_cycle_ids": [
+      336,
+      337,
+      338
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 21,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013815332497565771,
+      "correlation": 0.9931047006506416,
+      "source_to_prediction_rms_ratio": 1.0156377771246483,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012426335843850922,
+          "correlation": 0.9938090148138679,
+          "source_to_prediction_rms_ratio": 1.0155218417235647
+        },
+        {
+          "error_ratio": 0.015204212906232355,
+          "correlation": 0.9924002975550434,
+          "source_to_prediction_rms_ratio": 1.0157537425339178
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -211,
+      -212
+    ]
+  },
+  {
+    "start_frame": 49189.91190291628,
+    "end_frame": 49380.11447872243,
+    "expected_period_frames": 93.79502274045808,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      336,
+      337,
+      338
+    ],
+    "right_cycle_ids": [
+      342,
+      343,
+      344
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 22,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013815204081303436,
+      "correlation": 0.9931050758773624,
+      "source_to_prediction_rms_ratio": 1.0156747341943415,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012522562293281126,
+          "correlation": 0.993758709842512,
+          "source_to_prediction_rms_ratio": 1.015358171253738
+        },
+        {
+          "error_ratio": 0.01510771822374941,
+          "correlation": 0.9924511953329803,
+          "source_to_prediction_rms_ratio": 1.0159915621047932
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -221,
+      -222
+    ]
+  },
+  {
+    "start_frame": 49662.85674199907,
+    "end_frame": 49757.92205182586,
+    "expected_period_frames": 93.90512337229666,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      342,
+      343,
+      344
+    ],
+    "right_cycle_ids": [
+      347,
+      349,
+      350
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank amplitude / ending"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 23,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 49851.96091468183,
+    "end_frame": 49853.17420902725,
+    "expected_period_frames": 93.90207933532292,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      343,
+      344,
+      347
+    ],
+    "right_cycle_ids": [
+      349,
+      350,
+      351
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 24,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 50135.813617232445,
+    "end_frame": 55292.435597835734,
+    "expected_period_frames": 89.04091616378355,
+    "inferred_period_count": 58,
+    "left_cycle_ids": [
+      349,
+      350,
+      351
+    ],
+    "right_cycle_ids": [
+      359,
+      360,
+      361
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 25,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 57315.26080130779,
+    "end_frame": 57399.43979787765,
+    "expected_period_frames": 84.29448482652879,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      380,
+      381,
+      382
+    ],
+    "right_cycle_ids": [
+      384,
+      385,
+      386
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 26,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01358484653911399,
+      "correlation": 0.9932815641995634,
+      "source_to_prediction_rms_ratio": 1.0210488418340469,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01358484653911399,
+          "correlation": 0.9932815641995634,
+          "source_to_prediction_rms_ratio": 1.0210488418340469
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -261
+    ]
+  },
+  {
+    "start_frame": 57905.216631320385,
+    "end_frame": 57989.4237451714,
+    "expected_period_frames": 84.23665618733867,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      387,
+      388,
+      389
+    ],
+    "right_cycle_ids": [
+      391,
+      392,
+      393
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 27,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013929357253141584,
+      "correlation": 0.9930967717485994,
+      "source_to_prediction_rms_ratio": 1.0203695463285933,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013929357253141584,
+          "correlation": 0.9930967717485994,
+          "source_to_prediction_rms_ratio": 1.0203695463285933
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -271
+    ]
+  },
+  {
+    "start_frame": 59422.2712359949,
+    "end_frame": 59506.443958131575,
+    "expected_period_frames": 84.2831529397481,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      405,
+      406,
+      407
+    ],
+    "right_cycle_ids": [
+      409,
+      410,
+      411
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 28,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01346932123805529,
+      "correlation": 0.993342429589707,
+      "source_to_prediction_rms_ratio": 1.0211862479425902,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01346932123805529,
+          "correlation": 0.993342429589707,
+          "source_to_prediction_rms_ratio": 1.0211862479425902
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -281
+    ]
+  },
+  {
+    "start_frame": 60012.22938838899,
+    "end_frame": 60096.42815382269,
+    "expected_period_frames": 84.25062466928648,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      412,
+      413,
+      414
+    ],
+    "right_cycle_ids": [
+      416,
+      417,
+      418
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 29,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013852544820958594,
+      "correlation": 0.9931386573815932,
+      "source_to_prediction_rms_ratio": 1.0205780501689306,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013852544820958594,
+          "correlation": 0.9931386573815932,
+          "source_to_prediction_rms_ratio": 1.0205780501689306
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -291
+    ]
+  },
+  {
+    "start_frame": 60602.17782929207,
+    "end_frame": 60686.42493866338,
+    "expected_period_frames": 84.19729429573272,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      419,
+      420,
+      421
+    ],
+    "right_cycle_ids": [
+      423,
+      424,
+      425
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank amplitude / ending"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 30,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 60939.33907471334,
+    "end_frame": 61023.470212289125,
+    "expected_period_frames": 84.10559950761308,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      423,
+      424,
+      425
+    ],
+    "right_cycle_ids": [
+      427,
+      429,
+      460
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "unrelated flank families"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 31,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 61107.57941626463,
+    "end_frame": 61192.14527949017,
+    "expected_period_frames": 83.3464467783815,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      424,
+      425,
+      427
+    ],
+    "right_cycle_ids": [
+      429,
+      460,
+      461
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "unrelated flank families"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 32,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 61274.72896907143,
+    "end_frame": 66252.28903545154,
+    "expected_period_frames": 78.79428246192765,
+    "inferred_period_count": 63,
+    "left_cycle_ids": [
+      425,
+      427,
+      429
+    ],
+    "right_cycle_ids": [
+      460,
+      461,
+      462
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "unrelated flank families",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 33,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 66476.99278997404,
+    "end_frame": 66478.04210417424,
+    "expected_period_frames": 74.84943958995427,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      460,
+      461,
+      462
+    ],
+    "right_cycle_ids": [
+      464,
+      466,
+      468
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 34,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 66551.97753270966,
+    "end_frame": 66553.12579878831,
+    "expected_period_frames": 74.85444735646888,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      461,
+      462,
+      464
+    ],
+    "right_cycle_ids": [
+      466,
+      468,
+      469
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 35,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 66626.98269189068,
+    "end_frame": 66628.18281411607,
+    "expected_period_frames": 74.86154920986155,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      462,
+      464,
+      466
+    ],
+    "right_cycle_ids": [
+      468,
+      469,
+      470
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 36,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 67377.98491377367,
+    "end_frame": 67379.0751807338,
+    "expected_period_frames": 74.82822038545419,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      475,
+      476,
+      477
+    ],
+    "right_cycle_ids": [
+      479,
+      481,
+      483
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 37,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 67452.9771467658,
+    "end_frame": 67454.14812045523,
+    "expected_period_frames": 74.84274986263335,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      476,
+      477,
+      479
+    ],
+    "right_cycle_ids": [
+      481,
+      483,
+      484
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 38,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 67527.98900033017,
+    "end_frame": 67529.19830154859,
+    "expected_period_frames": 74.83877557957021,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      477,
+      479,
+      481
+    ],
+    "right_cycle_ids": [
+      483,
+      484,
+      485
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 39,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 67754.27440644566,
+    "end_frame": 67829.2845961985,
+    "expected_period_frames": 75.01066793764767,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      483,
+      484,
+      485
+    ],
+    "right_cycle_ids": [
+      487,
+      488,
+      489
+    ],
+    "render_family": 2,
+    "reasons": [
+      "no stable dominant learned exemplar"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 40,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 68129.28312789577,
+    "end_frame": 68205.00927368419,
+    "expected_period_frames": 74.48331077625335,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      488,
+      489,
+      490
+    ],
+    "right_cycle_ids": [
+      492,
+      494,
+      496
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 41,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013108806302365446,
+      "correlation": 0.9934271423628804,
+      "source_to_prediction_rms_ratio": 1.0091647699122328,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013108806302365446,
+          "correlation": 0.9934271423628804,
+          "source_to_prediction_rms_ratio": 1.0091647699122328
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -411
+    ]
+  },
+  {
+    "start_frame": 68278.97985362195,
+    "end_frame": 68280.10389884221,
+    "expected_period_frames": 74.48331077625335,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      489,
+      490,
+      492
+    ],
+    "right_cycle_ids": [
+      494,
+      496,
+      498
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 42,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 68353.97912256354,
+    "end_frame": 68355.16772599959,
+    "expected_period_frames": 74.48412944555457,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      490,
+      492,
+      494
+    ],
+    "right_cycle_ids": [
+      496,
+      498,
+      499
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 43,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 68428.99770531022,
+    "end_frame": 68430.21198941839,
+    "expected_period_frames": 74.49237700190133,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      492,
+      494,
+      496
+    ],
+    "right_cycle_ids": [
+      498,
+      499,
+      500
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 44,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 69104.99156132773,
+    "end_frame": 69106.04682711128,
+    "expected_period_frames": 74.84812456882355,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      504,
+      505,
+      506
+    ],
+    "right_cycle_ids": [
+      508,
+      510,
+      512
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 45,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 69179.97734341891,
+    "end_frame": 69181.12896922679,
+    "expected_period_frames": 74.85392699791555,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      505,
+      506,
+      508
+    ],
+    "right_cycle_ids": [
+      510,
+      512,
+      513
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 46,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 69254.98340450582,
+    "end_frame": 69256.18500702769,
+    "expected_period_frames": 74.85983072221279,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      506,
+      508,
+      510
+    ],
+    "right_cycle_ids": [
+      512,
+      513,
+      514
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 47,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 70005.98407349612,
+    "end_frame": 70007.07927331085,
+    "expected_period_frames": 74.82099772323272,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      519,
+      520,
+      521
+    ],
+    "right_cycle_ids": [
+      523,
+      525,
+      527
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 48,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 70080.97727358296,
+    "end_frame": 70082.15090117579,
+    "expected_period_frames": 74.83525044840644,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      520,
+      521,
+      523
+    ],
+    "right_cycle_ids": [
+      525,
+      527,
+      528
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 49,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 70155.99002842579,
+    "end_frame": 70157.20023610421,
+    "expected_period_frames": 74.83132356198621,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      521,
+      523,
+      525
+    ],
+    "right_cycle_ids": [
+      527,
+      528,
+      529
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 50,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 70382.27501868148,
+    "end_frame": 70457.28493851211,
+    "expected_period_frames": 75.01038615717698,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      527,
+      528,
+      529
+    ],
+    "right_cycle_ids": [
+      531,
+      532,
+      533
+    ],
+    "render_family": 2,
+    "reasons": [
+      "no stable dominant learned exemplar"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 51,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 70757.28353419623,
+    "end_frame": 70833.01464707972,
+    "expected_period_frames": 74.480319851682,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      532,
+      533,
+      534
+    ],
+    "right_cycle_ids": [
+      536,
+      538,
+      540
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 52,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013089087639317208,
+      "correlation": 0.9934370243289479,
+      "source_to_prediction_rms_ratio": 1.0091374892122353,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013089087639317208,
+          "correlation": 0.9934370243289479,
+          "source_to_prediction_rms_ratio": 1.0091374892122353
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -521
+    ]
+  },
+  {
+    "start_frame": 70906.9793720028,
+    "end_frame": 70908.10746245965,
+    "expected_period_frames": 74.480319851682,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      533,
+      534,
+      536
+    ],
+    "right_cycle_ids": [
+      538,
+      540,
+      542
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 53,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 70981.97956452727,
+    "end_frame": 70983.17017246682,
+    "expected_period_frames": 74.48152363341069,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      534,
+      536,
+      538
+    ],
+    "right_cycle_ids": [
+      540,
+      542,
+      543
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 54,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 71056.99906582528,
+    "end_frame": 71058.21370019006,
+    "expected_period_frames": 74.48929732442048,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      536,
+      538,
+      540
+    ],
+    "right_cycle_ids": [
+      542,
+      543,
+      544
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 55,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 71732.94074810267,
+    "end_frame": 71734.09906456027,
+    "expected_period_frames": 74.23851770681358,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      548,
+      549,
+      550
+    ],
+    "right_cycle_ids": [
+      552,
+      554,
+      556
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 56,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 71807.92828024685,
+    "end_frame": 71809.1720348697,
+    "expected_period_frames": 73.79387703128305,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      549,
+      550,
+      552
+    ],
+    "right_cycle_ids": [
+      554,
+      556,
+      558
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 57,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 71882.93057324569,
+    "end_frame": 71884.22386249885,
+    "expected_period_frames": 73.79387703128305,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      550,
+      552,
+      554
+    ],
+    "right_cycle_ids": [
+      556,
+      558,
+      561
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 58,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 71957.9504510385,
+    "end_frame": 71959.25960875029,
+    "expected_period_frames": 73.74392866393464,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      552,
+      554,
+      556
+    ],
+    "right_cycle_ids": [
+      558,
+      561,
+      574
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 59,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 72032.98892770217,
+    "end_frame": 72109.30213130303,
+    "expected_period_frames": 73.72795374576526,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      554,
+      556,
+      558
+    ],
+    "right_cycle_ids": [
+      561,
+      574,
+      575
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "phase closure mismatch"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 60,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 72184.31364511691,
+    "end_frame": 77291.24238054927,
+    "expected_period_frames": 72.35385691002739,
+    "inferred_period_count": 71,
+    "left_cycle_ids": [
+      556,
+      558,
+      561
+    ],
+    "right_cycle_ids": [
+      574,
+      575,
+      577
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 61,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 77431.95546551894,
+    "end_frame": 77433.18120692403,
+    "expected_period_frames": 70.41766058928624,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      561,
+      574,
+      575
+    ],
+    "right_cycle_ids": [
+      577,
+      579,
+      580
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 62,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 77502.93603284765,
+    "end_frame": 77504.10438569388,
+    "expected_period_frames": 70.41766058928624,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      574,
+      575,
+      577
+    ],
+    "right_cycle_ids": [
+      579,
+      580,
+      581
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 63,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 77927.99857528057,
+    "end_frame": 77929.21560939927,
+    "expected_period_frames": 69.83255098319205,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      582,
+      583,
+      584
+    ],
+    "right_cycle_ids": [
+      586,
+      588,
+      590
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 64,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 77998.94708592513,
+    "end_frame": 78000.16640325871,
+    "expected_period_frames": 69.83255098319205,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      583,
+      584,
+      586
+    ],
+    "right_cycle_ids": [
+      588,
+      590,
+      591
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 65,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 78069.93732660155,
+    "end_frame": 78071.07793614187,
+    "expected_period_frames": 69.83255098319205,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      584,
+      586,
+      588
+    ],
+    "right_cycle_ids": [
+      590,
+      591,
+      592
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 66,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 78494.98169844992,
+    "end_frame": 78496.20629787805,
+    "expected_period_frames": 69.86716951787821,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      593,
+      594,
+      595
+    ],
+    "right_cycle_ids": [
+      597,
+      599,
+      601
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 67,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 78565.94108613805,
+    "end_frame": 78567.14936971334,
+    "expected_period_frames": 69.86716951787821,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      594,
+      595,
+      597
+    ],
+    "right_cycle_ids": [
+      599,
+      601,
+      602
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 68,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 78636.9411319343,
+    "end_frame": 78638.04730889434,
+    "expected_period_frames": 69.86716951787821,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      595,
+      597,
+      599
+    ],
+    "right_cycle_ids": [
+      601,
+      602,
+      603
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 69,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 78850.23586722728,
+    "end_frame": 78921.24426733964,
+    "expected_period_frames": 70.46451610932854,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      601,
+      602,
+      603
+    ],
+    "right_cycle_ids": [
+      605,
+      606,
+      608
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 70,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01230759405076526,
+      "correlation": 0.9939413450586341,
+      "source_to_prediction_rms_ratio": 1.0215807826388472,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01230759405076526,
+          "correlation": 0.9939413450586341,
+          "source_to_prediction_rms_ratio": 1.0215807826388472
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -701
+    ]
+  },
+  {
+    "start_frame": 79061.96779144624,
+    "end_frame": 79063.19540970966,
+    "expected_period_frames": 69.9310129068981,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      603,
+      605,
+      606
+    ],
+    "right_cycle_ids": [
+      608,
+      610,
+      612
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 71,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 79132.93740741527,
+    "end_frame": 79134.12978432185,
+    "expected_period_frames": 69.9310129068981,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      605,
+      606,
+      608
+    ],
+    "right_cycle_ids": [
+      610,
+      612,
+      613
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 72,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 79203.94766368129,
+    "end_frame": 79205.0117074876,
+    "expected_period_frames": 69.9310129068981,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      606,
+      608,
+      610
+    ],
+    "right_cycle_ids": [
+      612,
+      613,
+      614
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 73,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 79417.24033524176,
+    "end_frame": 79488.24283614443,
+    "expected_period_frames": 70.51281821708835,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      612,
+      613,
+      614
+    ],
+    "right_cycle_ids": [
+      616,
+      617,
+      619
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 74,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013650987376645595,
+      "correlation": 0.9932546100533072,
+      "source_to_prediction_rms_ratio": 1.0215421856593425,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013650987376645595,
+          "correlation": 0.9932546100533072,
+          "source_to_prediction_rms_ratio": 1.0215421856593425
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -741
+    ]
+  },
+  {
+    "start_frame": 79628.95660219718,
+    "end_frame": 79630.1828045999,
+    "expected_period_frames": 70.41575189771538,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      614,
+      616,
+      617
+    ],
+    "right_cycle_ids": [
+      619,
+      621,
+      622
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 75,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 79699.93603924644,
+    "end_frame": 79701.10723287845,
+    "expected_period_frames": 70.41575189771538,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      616,
+      617,
+      619
+    ],
+    "right_cycle_ids": [
+      621,
+      622,
+      623
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 76,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 80195.94793939046,
+    "end_frame": 80197.16823886521,
+    "expected_period_frames": 70.4327480998254,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      625,
+      626,
+      627
+    ],
+    "right_cycle_ids": [
+      629,
+      631,
+      632
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 77,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 80266.93704904636,
+    "end_frame": 80268.08122590969,
+    "expected_period_frames": 70.4327480998254,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      626,
+      627,
+      629
+    ],
+    "right_cycle_ids": [
+      631,
+      632,
+      633
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 78,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 80691.98350793913,
+    "end_frame": 80693.20746297739,
+    "expected_period_frames": 69.86275657373335,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      634,
+      635,
+      636
+    ],
+    "right_cycle_ids": [
+      638,
+      640,
+      642
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 79,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 80762.94166695523,
+    "end_frame": 80764.15148440418,
+    "expected_period_frames": 69.86275657373335,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      635,
+      636,
+      638
+    ],
+    "right_cycle_ids": [
+      640,
+      642,
+      643
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 80,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 80833.94055219484,
+    "end_frame": 80835.05112269276,
+    "expected_period_frames": 69.86275657373335,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      636,
+      638,
+      640
+    ],
+    "right_cycle_ids": [
+      642,
+      643,
+      644
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 81,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 81047.23522069822,
+    "end_frame": 81118.2443540332,
+    "expected_period_frames": 70.46173909522622,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      642,
+      643,
+      644
+    ],
+    "right_cycle_ids": [
+      646,
+      647,
+      649
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 82,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.012162629331208041,
+      "correlation": 0.9940156043147388,
+      "source_to_prediction_rms_ratio": 1.021595125918182,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012162629331208041,
+          "correlation": 0.9940156043147388,
+          "source_to_prediction_rms_ratio": 1.021595125918182
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -821
+    ]
+  },
+  {
+    "start_frame": 81258.96927020892,
+    "end_frame": 81260.19676534372,
+    "expected_period_frames": 69.92183461294917,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      644,
+      646,
+      647
+    ],
+    "right_cycle_ids": [
+      649,
+      651,
+      653
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 83,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 81329.93771578488,
+    "end_frame": 81331.13221549535,
+    "expected_period_frames": 69.92183461294917,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      646,
+      647,
+      649
+    ],
+    "right_cycle_ids": [
+      651,
+      653,
+      654
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 84,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 81400.94674966752,
+    "end_frame": 81402.01615333535,
+    "expected_period_frames": 69.92183461294917,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      647,
+      649,
+      651
+    ],
+    "right_cycle_ids": [
+      653,
+      654,
+      655
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 85,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 81614.23990744453,
+    "end_frame": 81685.2430652615,
+    "expected_period_frames": 70.50560500705615,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      653,
+      654,
+      655
+    ],
+    "right_cycle_ids": [
+      657,
+      658,
+      660
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 86,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013485233067099596,
+      "correlation": 0.9933392391413016,
+      "source_to_prediction_rms_ratio": 1.0215398189805853,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013485233067099596,
+          "correlation": 0.9933392391413016,
+          "source_to_prediction_rms_ratio": 1.0215398189805853
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -861
+    ]
+  },
+  {
+    "start_frame": 81825.95777572229,
+    "end_frame": 81827.18437304808,
+    "expected_period_frames": 70.41400130360853,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      655,
+      657,
+      658
+    ],
+    "right_cycle_ids": [
+      660,
+      662,
+      663
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 87,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 81896.93607885421,
+    "end_frame": 81898.11003263395,
+    "expected_period_frames": 70.41400130360853,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      657,
+      658,
+      660
+    ],
+    "right_cycle_ids": [
+      662,
+      663,
+      664
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 88,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 82392.94882477909,
+    "end_frame": 82394.17004464338,
+    "expected_period_frames": 70.43057046693139,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      666,
+      667,
+      668
+    ],
+    "right_cycle_ids": [
+      670,
+      672,
+      673
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 89,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 82463.93680666882,
+    "end_frame": 82465.0844581398,
+    "expected_period_frames": 70.43057046693139,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      667,
+      668,
+      670
+    ],
+    "right_cycle_ids": [
+      672,
+      673,
+      674
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 90,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 82677.22753483913,
+    "end_frame": 82748.27047901393,
+    "expected_period_frames": 70.44025832100306,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      672,
+      673,
+      674
+    ],
+    "right_cycle_ids": [
+      676,
+      677,
+      679
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank amplitude / ending"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 91,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 82888.93285488465,
+    "end_frame": 82890.24250033322,
+    "expected_period_frames": 69.7717466295071,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      674,
+      676,
+      677
+    ],
+    "right_cycle_ids": [
+      679,
+      681,
+      683
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 92,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 82959.89448503127,
+    "end_frame": 82961.19291036853,
+    "expected_period_frames": 69.7717466295071,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      676,
+      677,
+      679
+    ],
+    "right_cycle_ids": [
+      681,
+      683,
+      684
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "unstable flank amplitude / ending",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 93,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 83030.89451691866,
+    "end_frame": 83032.1013216503,
+    "expected_period_frames": 69.68380460636399,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      677,
+      679,
+      681
+    ],
+    "right_cycle_ids": [
+      683,
+      684,
+      686
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "unrelated flank families",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 94,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 83173.17214147202,
+    "end_frame": 83244.26835599655,
+    "expected_period_frames": 70.53540991085902,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      681,
+      683,
+      684
+    ],
+    "right_cycle_ids": [
+      686,
+      706,
+      707
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "unrelated flank families",
+      "no stable dominant learned exemplar"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 95,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 83313.88217951873,
+    "end_frame": 88376.24488118042,
+    "expected_period_frames": 73.11833924088569,
+    "inferred_period_count": 69,
+    "left_cycle_ids": [
+      683,
+      684,
+      686
+    ],
+    "right_cycle_ids": [
+      706,
+      707,
+      708
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unstable flank amplitude / ending",
+      "unrelated flank families",
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 96,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 88975.98933896213,
+    "end_frame": 88977.05570039076,
+    "expected_period_frames": 74.8444673742415,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      711,
+      712,
+      713
+    ],
+    "right_cycle_ids": [
+      715,
+      717,
+      719
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 97,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 89050.97710132564,
+    "end_frame": 89052.13493806163,
+    "expected_period_frames": 74.85302428730938,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      712,
+      713,
+      715
+    ],
+    "right_cycle_ids": [
+      717,
+      719,
+      720
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 98,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 89125.98489650464,
+    "end_frame": 89127.18914445087,
+    "expected_period_frames": 74.8558805640132,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      713,
+      715,
+      717
+    ],
+    "right_cycle_ids": [
+      719,
+      720,
+      721
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 99,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 89876.9825951974,
+    "end_frame": 89878.08696769006,
+    "expected_period_frames": 74.79517129023588,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      726,
+      727,
+      728
+    ],
+    "right_cycle_ids": [
+      730,
+      732,
+      734
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 100,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 89951.97764024812,
+    "end_frame": 89953.15614289521,
+    "expected_period_frames": 74.80884134953521,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      727,
+      728,
+      730
+    ],
+    "right_cycle_ids": [
+      732,
+      734,
+      735
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 101,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 90026.99213698253,
+    "end_frame": 90028.20388920903,
+    "expected_period_frames": 74.80500371871312,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      728,
+      730,
+      732
+    ],
+    "right_cycle_ids": [
+      734,
+      735,
+      736
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 102,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 90702.99756735309,
+    "end_frame": 90704.02473048725,
+    "expected_period_frames": 74.85427732096286,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      740,
+      741,
+      742
+    ],
+    "right_cycle_ids": [
+      744,
+      746,
+      748
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 103,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 90777.9785652588,
+    "end_frame": 90779.1141737779,
+    "expected_period_frames": 74.85640474854154,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      741,
+      742,
+      744
+    ],
+    "right_cycle_ids": [
+      746,
+      748,
+      749
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 104,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 90852.98053227013,
+    "end_frame": 90854.17478963574,
+    "expected_period_frames": 74.8666045163045,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      742,
+      744,
+      746
+    ],
+    "right_cycle_ids": [
+      748,
+      749,
+      750
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 105,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 91603.98826914471,
+    "end_frame": 91605.06015888693,
+    "expected_period_frames": 74.84209987604845,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      755,
+      756,
+      757
+    ],
+    "right_cycle_ids": [
+      759,
+      761,
+      763
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 106,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 91678.97703958696,
+    "end_frame": 91680.13794497507,
+    "expected_period_frames": 74.8525845815966,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      756,
+      757,
+      759
+    ],
+    "right_cycle_ids": [
+      761,
+      763,
+      764
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 107,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 91753.98573070651,
+    "end_frame": 91755.1912312467,
+    "expected_period_frames": 74.8533450625473,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      757,
+      759,
+      761
+    ],
+    "right_cycle_ids": [
+      763,
+      764,
+      765
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 108,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 91980.27215064653,
+    "end_frame": 92055.28330657608,
+    "expected_period_frames": 75.0116773279442,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      763,
+      764,
+      765
+    ],
+    "right_cycle_ids": [
+      767,
+      768,
+      769
+    ],
+    "render_family": 2,
+    "reasons": [
+      "no stable dominant learned exemplar"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 109,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 92504.98190601924,
+    "end_frame": 92506.09083814464,
+    "expected_period_frames": 74.76597032018617,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      770,
+      771,
+      772
+    ],
+    "right_cycle_ids": [
+      774,
+      776,
+      778
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 110,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 92579.97789390288,
+    "end_frame": 92581.15878560838,
+    "expected_period_frames": 74.77930493511667,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      771,
+      772,
+      774
+    ],
+    "right_cycle_ids": [
+      776,
+      778,
+      779
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 111,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 92654.99329235718,
+    "end_frame": 92656.20573404609,
+    "expected_period_frames": 74.77551149680949,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      772,
+      774,
+      776
+    ],
+    "right_cycle_ids": [
+      778,
+      779,
+      780
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 112,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 93330.9961365084,
+    "end_frame": 93332.02979339591,
+    "expected_period_frames": 74.85308259300655,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      784,
+      785,
+      786
+    ],
+    "right_cycle_ids": [
+      788,
+      790,
+      792
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 113,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 93405.97821400927,
+    "end_frame": 93407.11755516834,
+    "expected_period_frames": 74.85580772841786,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      785,
+      786,
+      788
+    ],
+    "right_cycle_ids": [
+      790,
+      792,
+      793
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 114,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 93480.98109284643,
+    "end_frame": 93482.17712054796,
+    "expected_period_frames": 74.86527663665765,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      786,
+      788,
+      790
+    ],
+    "right_cycle_ids": [
+      792,
+      793,
+      794
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 115,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 94231.98725038016,
+    "end_frame": 94233.06453323667,
+    "expected_period_frames": 74.83923709289229,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      799,
+      800,
+      801
+    ],
+    "right_cycle_ids": [
+      803,
+      805,
+      807
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 116,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 94306.97701654265,
+    "end_frame": 94308.14090226893,
+    "expected_period_frames": 74.85216154446971,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      800,
+      801,
+      803
+    ],
+    "right_cycle_ids": [
+      805,
+      807,
+      808
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 117,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 94381.98660530639,
+    "end_frame": 94383.19328490162,
+    "expected_period_frames": 74.8503022600562,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      801,
+      803,
+      805
+    ],
+    "right_cycle_ids": [
+      807,
+      808,
+      809
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 118,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 94608.27280858092,
+    "end_frame": 94683.2836864685,
+    "expected_period_frames": 75.01138742334297,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      807,
+      808,
+      809
+    ],
+    "right_cycle_ids": [
+      811,
+      812,
+      813
+    ],
+    "render_family": 2,
+    "reasons": [
+      "no stable dominant learned exemplar"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 119,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 95132.98126400718,
+    "end_frame": 95134.09463831823,
+    "expected_period_frames": 74.69807225550903,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      814,
+      815,
+      816
+    ],
+    "right_cycle_ids": [
+      818,
+      820,
+      822
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 120,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 95207.978191169,
+    "end_frame": 95209.16138260245,
+    "expected_period_frames": 74.71104303725588,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      815,
+      816,
+      818
+    ],
+    "right_cycle_ids": [
+      820,
+      822,
+      823
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 121,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 95282.99449056973,
+    "end_frame": 95284.20754992291,
+    "expected_period_frames": 74.70729390831548,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      816,
+      818,
+      820
+    ],
+    "right_cycle_ids": [
+      822,
+      823,
+      824
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 122,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 95958.99476397652,
+    "end_frame": 95960.03475729525,
+    "expected_period_frames": 74.85181322028075,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      828,
+      829,
+      830
+    ],
+    "right_cycle_ids": [
+      832,
+      834,
+      836
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 123,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 96033.97790745688,
+    "end_frame": 96035.12087655337,
+    "expected_period_frames": 74.85523866882431,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      829,
+      830,
+      832
+    ],
+    "right_cycle_ids": [
+      834,
+      836,
+      837
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 124,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 96108.98169654669,
+    "end_frame": 96110.17941169743,
+    "expected_period_frames": 74.86387343831302,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      830,
+      832,
+      834
+    ],
+    "right_cycle_ids": [
+      836,
+      837,
+      838
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 125,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 96859.98628377733,
+    "end_frame": 96861.06882450107,
+    "expected_period_frames": 74.835682949677,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      843,
+      844,
+      845
+    ],
+    "right_cycle_ids": [
+      847,
+      849,
+      851
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 126,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 96934.97703567684,
+    "end_frame": 96936.14380876755,
+    "expected_period_frames": 74.85060489686293,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      844,
+      845,
+      847
+    ],
+    "right_cycle_ids": [
+      849,
+      851,
+      852
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 127,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 97009.98752471067,
+    "end_frame": 97011.19530351348,
+    "expected_period_frames": 74.84655604940781,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      845,
+      847,
+      849
+    ],
+    "right_cycle_ids": [
+      851,
+      852,
+      853
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 128,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 97236.27345333375,
+    "end_frame": 97311.28405585472,
+    "expected_period_frames": 75.01109961813927,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      851,
+      852,
+      853
+    ],
+    "right_cycle_ids": [
+      855,
+      856,
+      857
+    ],
+    "render_family": 2,
+    "reasons": [
+      "no stable dominant learned exemplar"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 129,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 97611.282721506,
+    "end_frame": 97687.00090628874,
+    "expected_period_frames": 74.48801033623022,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      856,
+      857,
+      858
+    ],
+    "right_cycle_ids": [
+      860,
+      862,
+      864
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 130,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01313920140251468,
+      "correlation": 0.9934119093075674,
+      "source_to_prediction_rms_ratio": 1.0092064311301385,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01313920140251468,
+          "correlation": 0.9934119093075674,
+          "source_to_prediction_rms_ratio": 1.0092064311301385
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1301
+    ]
+  },
+  {
+    "start_frame": 97760.98066861428,
+    "end_frame": 97762.09836930608,
+    "expected_period_frames": 74.48801033623022,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      857,
+      858,
+      860
+    ],
+    "right_cycle_ids": [
+      862,
+      864,
+      866
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 131,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 97835.97852992004,
+    "end_frame": 97837.16393561385,
+    "expected_period_frames": 74.48833484349598,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      858,
+      860,
+      862
+    ],
+    "right_cycle_ids": [
+      864,
+      866,
+      867
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 132,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 97910.99573326229,
+    "end_frame": 97912.20933638087,
+    "expected_period_frames": 74.49720293225982,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      860,
+      862,
+      864
+    ],
+    "right_cycle_ids": [
+      866,
+      867,
+      868
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 133,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 98586.99344890303,
+    "end_frame": 98588.03962456982,
+    "expected_period_frames": 74.85045137788256,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      872,
+      873,
+      874
+    ],
+    "right_cycle_ids": [
+      876,
+      878,
+      880
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 134,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 98661.97764852579,
+    "end_frame": 98663.12413700027,
+    "expected_period_frames": 74.85469812623342,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      873,
+      874,
+      876
+    ],
+    "right_cycle_ids": [
+      878,
+      880,
+      881
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 135,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 98736.98234164363,
+    "end_frame": 98738.18166492158,
+    "expected_period_frames": 74.86237479989359,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      874,
+      876,
+      878
+    ],
+    "right_cycle_ids": [
+      880,
+      881,
+      882
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 136,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 99487.98536633384,
+    "end_frame": 99489.07303648084,
+    "expected_period_frames": 74.83113068591774,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      887,
+      888,
+      889
+    ],
+    "right_cycle_ids": [
+      891,
+      893,
+      895
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 137,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 99562.97709816536,
+    "end_frame": 99564.14666406263,
+    "expected_period_frames": 74.84579738004686,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      888,
+      889,
+      891
+    ],
+    "right_cycle_ids": [
+      893,
+      895,
+      896
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 138,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 99637.98848617057,
+    "end_frame": 99639.1972888801,
+    "expected_period_frames": 74.84179773139476,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      889,
+      891,
+      893
+    ],
+    "right_cycle_ids": [
+      895,
+      896,
+      897
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 139,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 99864.27408575258,
+    "end_frame": 99939.28441536402,
+    "expected_period_frames": 75.01081429411715,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      895,
+      896,
+      897
+    ],
+    "right_cycle_ids": [
+      899,
+      900,
+      901
+    ],
+    "render_family": 2,
+    "reasons": [
+      "no stable dominant learned exemplar"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 140,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 100239.28296510689,
+    "end_frame": 100315.00645239338,
+    "expected_period_frames": 74.48489087638154,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      900,
+      901,
+      902
+    ],
+    "right_cycle_ids": [
+      904,
+      906,
+      908
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 141,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013119171812631275,
+      "correlation": 0.9934219474056035,
+      "source_to_prediction_rms_ratio": 1.0091789588242324,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013119171812631275,
+          "correlation": 0.9934219474056035,
+          "source_to_prediction_rms_ratio": 1.0091789588242324
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1411
+    ]
+  },
+  {
+    "start_frame": 100388.98012001523,
+    "end_frame": 100390.10203162841,
+    "expected_period_frames": 74.48489087638154,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      901,
+      902,
+      904
+    ],
+    "right_cycle_ids": [
+      906,
+      908,
+      910
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 142,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 100463.97891114713,
+    "end_frame": 100465.16644471545,
+    "expected_period_frames": 74.48552921404917,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      902,
+      904,
+      906
+    ],
+    "right_cycle_ids": [
+      908,
+      910,
+      911
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 143,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 100538.99702120583,
+    "end_frame": 100540.21109329605,
+    "expected_period_frames": 74.49400049430551,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      904,
+      906,
+      908
+    ],
+    "right_cycle_ids": [
+      910,
+      911,
+      912
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 144,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 101214.99218916103,
+    "end_frame": 101216.04439803823,
+    "expected_period_frames": 74.84895944555319,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      916,
+      917,
+      918
+    ],
+    "right_cycle_ids": [
+      920,
+      922,
+      924
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 145,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 101289.9774354997,
+    "end_frame": 101291.12733803772,
+    "expected_period_frames": 74.8541826922592,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      917,
+      918,
+      920
+    ],
+    "right_cycle_ids": [
+      922,
+      924,
+      925
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 146,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 101364.98303181173,
+    "end_frame": 101366.18387788087,
+    "expected_period_frames": 74.86074113773066,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      918,
+      920,
+      922
+    ],
+    "right_cycle_ids": [
+      924,
+      925,
+      926
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 147,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 102115.98450023314,
+    "end_frame": 102117.07716897846,
+    "expected_period_frames": 74.82503360466944,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      931,
+      932,
+      933
+    ],
+    "right_cycle_ids": [
+      935,
+      937,
+      939
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 148,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 102190.97720282334,
+    "end_frame": 102192.14947005332,
+    "expected_period_frames": 74.83943045669002,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      932,
+      933,
+      935
+    ],
+    "right_cycle_ids": [
+      937,
+      939,
+      940
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 149,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 102265.98949128998,
+    "end_frame": 102267.19924065625,
+    "expected_period_frames": 74.83547896581877,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      933,
+      935,
+      937
+    ],
+    "right_cycle_ids": [
+      939,
+      940,
+      941
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 150,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 102492.27470391472,
+    "end_frame": 102567.28476323879,
+    "expected_period_frames": 75.01053083712759,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      939,
+      940,
+      941
+    ],
+    "right_cycle_ids": [
+      943,
+      944,
+      945
+    ],
+    "render_family": 2,
+    "reasons": [
+      "no stable dominant learned exemplar"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 151,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 102867.28330870204,
+    "end_frame": 102943.01188478728,
+    "expected_period_frames": 74.48185491329787,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      944,
+      945,
+      946
+    ],
+    "right_cycle_ids": [
+      948,
+      950,
+      952
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 152,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013099237280641886,
+      "correlation": 0.9934319379734254,
+      "source_to_prediction_rms_ratio": 1.0091515872660655,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013099237280641886,
+          "correlation": 0.9934319379734254,
+          "source_to_prediction_rms_ratio": 1.0091515872660655
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1521
+    ]
+  },
+  {
+    "start_frame": 103016.97961591744,
+    "end_frame": 103018.10562847348,
+    "expected_period_frames": 74.48185491329787,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      945,
+      946,
+      948
+    ],
+    "right_cycle_ids": [
+      950,
+      952,
+      954
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 153,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 103091.97933196348,
+    "end_frame": 103093.16891261218,
+    "expected_period_frames": 74.48285282218421,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      946,
+      948,
+      950
+    ],
+    "right_cycle_ids": [
+      952,
+      954,
+      955
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 154,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 103166.99835666716,
+    "end_frame": 103168.2128197422,
+    "expected_period_frames": 74.49087892857642,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      948,
+      950,
+      952
+    ],
+    "right_cycle_ids": [
+      954,
+      955,
+      956
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 155,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 103842.99098610065,
+    "end_frame": 103844.04907731172,
+    "expected_period_frames": 74.84730005019082,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      960,
+      961,
+      962
+    ],
+    "right_cycle_ids": [
+      964,
+      966,
+      968
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 156,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 103917.97726783807,
+    "end_frame": 103919.130480687,
+    "expected_period_frames": 74.85369356012961,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      961,
+      962,
+      964
+    ],
+    "right_cycle_ids": [
+      966,
+      968,
+      969
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 157,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 103992.98376266616,
+    "end_frame": 103994.18605400158,
+    "expected_period_frames": 74.85893584805308,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      962,
+      964,
+      966
+    ],
+    "right_cycle_ids": [
+      968,
+      969,
+      970
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 158,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 104743.98368602218,
+    "end_frame": 104745.08122299875,
+    "expected_period_frames": 74.81645106499491,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      975,
+      976,
+      977
+    ],
+    "right_cycle_ids": [
+      979,
+      981,
+      983
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 159,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 104818.9773485109,
+    "end_frame": 104820.15222903105,
+    "expected_period_frames": 74.83056471698364,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      976,
+      977,
+      979
+    ],
+    "right_cycle_ids": [
+      981,
+      983,
+      984
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 160,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 104893.99053956683,
+    "end_frame": 104895.20116035634,
+    "expected_period_frames": 74.82665995480784,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      977,
+      979,
+      981
+    ],
+    "right_cycle_ids": [
+      983,
+      984,
+      985
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 161,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 105120.27530921242,
+    "end_frame": 105195.28509946245,
+    "expected_period_frames": 75.01025006745476,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      983,
+      984,
+      985
+    ],
+    "right_cycle_ids": [
+      987,
+      988,
+      989
+    ],
+    "render_family": 2,
+    "reasons": [
+      "no stable dominant learned exemplar"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 162,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 105569.99975002337,
+    "end_frame": 105571.01720482847,
+    "expected_period_frames": 74.33896121372527,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      989,
+      990,
+      991
+    ],
+    "right_cycle_ids": [
+      993,
+      995,
+      997
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 163,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 105644.97915526175,
+    "end_frame": 105646.1091613519,
+    "expected_period_frames": 74.33896121372527,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      990,
+      991,
+      993
+    ],
+    "right_cycle_ids": [
+      995,
+      997,
+      999
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 164,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 105719.97979203444,
+    "end_frame": 105721.17134049884,
+    "expected_period_frames": 74.33896121372527,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      991,
+      993,
+      995
+    ],
+    "right_cycle_ids": [
+      997,
+      999,
+      1000
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 165,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 105794.99973834513,
+    "end_frame": 105796.21451745243,
+    "expected_period_frames": 74.48783714888123,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      993,
+      995,
+      997
+    ],
+    "right_cycle_ids": [
+      999,
+      1000,
+      1001
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 166,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 106470.98983826226,
+    "end_frame": 106472.05366480071,
+    "expected_period_frames": 74.84541257732053,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1005,
+      1006,
+      1007
+    ],
+    "right_cycle_ids": [
+      1009,
+      1011,
+      1013
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 167,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 106545.97714335856,
+    "end_frame": 106547.13356710211,
+    "expected_period_frames": 74.8532266819675,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1006,
+      1007,
+      1009
+    ],
+    "right_cycle_ids": [
+      1011,
+      1013,
+      1014
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 168,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 106620.98453489089,
+    "end_frame": 106622.18819366848,
+    "expected_period_frames": 74.8568968602849,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1007,
+      1009,
+      1011
+    ],
+    "right_cycle_ids": [
+      1013,
+      1014,
+      1015
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 169,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 107371.98292339209,
+    "end_frame": 107373.0852008303,
+    "expected_period_frames": 74.8034670574416,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1020,
+      1021,
+      1022
+    ],
+    "right_cycle_ids": [
+      1024,
+      1026,
+      1028
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 170,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 107446.97754083444,
+    "end_frame": 107448.15493797543,
+    "expected_period_frames": 74.81727904723812,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1021,
+      1022,
+      1024
+    ],
+    "right_cycle_ids": [
+      1026,
+      1028,
+      1029
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 171,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 107521.99163088376,
+    "end_frame": 107523.20304935516,
+    "expected_period_frames": 74.81342074801796,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1022,
+      1024,
+      1026
+    ],
+    "right_cycle_ids": [
+      1028,
+      1029,
+      1030
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 172,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 107748.27590016962,
+    "end_frame": 107823.28542492782,
+    "expected_period_frames": 75.0099712807787,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1028,
+      1029,
+      1030
+    ],
+    "right_cycle_ids": [
+      1032,
+      1033,
+      1034
+    ],
+    "render_family": 2,
+    "reasons": [
+      "no stable dominant learned exemplar"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 173,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 108197.99823058498,
+    "end_frame": 108199.02241895684,
+    "expected_period_frames": 74.85479493274033,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1034,
+      1035,
+      1036
+    ],
+    "right_cycle_ids": [
+      1038,
+      1040,
+      1042
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 174,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 108272.97873888965,
+    "end_frame": 108274.11263150164,
+    "expected_period_frames": 74.85668391024956,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1035,
+      1036,
+      1038
+    ],
+    "right_cycle_ids": [
+      1040,
+      1042,
+      1043
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 175,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 108347.98029304332,
+    "end_frame": 108349.173728279,
+    "expected_period_frames": 74.86718196174479,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1036,
+      1038,
+      1040
+    ],
+    "right_cycle_ids": [
+      1042,
+      1043,
+      1044
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 176,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 109098.98874459966,
+    "end_frame": 109100.05816270725,
+    "expected_period_frames": 74.84322031302145,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1049,
+      1050,
+      1051
+    ],
+    "right_cycle_ids": [
+      1053,
+      1055,
+      1057
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 177,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 109173.97706320054,
+    "end_frame": 109175.13659764723,
+    "expected_period_frames": 74.85278012068011,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1050,
+      1051,
+      1053
+    ],
+    "right_cycle_ids": [
+      1055,
+      1057,
+      1058
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 178,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 109248.9853495539,
+    "end_frame": 109250.1902968623,
+    "expected_period_frames": 74.85454156441119,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1051,
+      1053,
+      1055
+    ],
+    "right_cycle_ids": [
+      1057,
+      1058,
+      1059
+    ],
+    "render_family": 1,
+    "reasons": [
+      "no stable dominant learned exemplar",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 179,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 109700.28975070736,
+    "end_frame": 109775.28640015969,
+    "expected_period_frames": 75.00330948116607,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1060,
+      1061,
+      1062
+    ],
+    "right_cycle_ids": [
+      1064,
+      1065,
+      1066
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 180,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.008473578743654446,
+      "correlation": 0.9957906123785315,
+      "source_to_prediction_rms_ratio": 1.0128894217409867,
+      "per_cycle": [
+        {
+          "error_ratio": 0.008473578743654446,
+          "correlation": 0.9957906123785315,
+          "source_to_prediction_rms_ratio": 1.0128894217409867
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1801
+    ]
+  },
+  {
+    "start_frame": 109999.98220909979,
+    "end_frame": 110001.08910614645,
+    "expected_period_frames": 74.78156330398633,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1064,
+      1065,
+      1066
+    ],
+    "right_cycle_ids": [
+      1068,
+      1070,
+      1079
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unrelated flank families",
+      "flank geometry is not coherent",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 181,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 110074.97777410928,
+    "end_frame": 110076.15760225596,
+    "expected_period_frames": 74.84987576893764,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1065,
+      1066,
+      1068
+    ],
+    "right_cycle_ids": [
+      1070,
+      1079,
+      1080
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unrelated flank families",
+      "flank geometry is not coherent",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 182,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 110149.99276666538,
+    "end_frame": 110611.44474039959,
+    "expected_period_frames": 79.36145534968819,
+    "inferred_period_count": 6,
+    "left_cycle_ids": [
+      1066,
+      1068,
+      1070
+    ],
+    "right_cycle_ids": [
+      1079,
+      1080,
+      1082
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "unrelated flank families",
+      "flank geometry is not coherent",
+      "gap not one or two supported periods",
+      "phase closure mismatch"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 183,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 110779.87008650714,
+    "end_frame": 110781.06708602978,
+    "expected_period_frames": 84.18925096650491,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1070,
+      1079,
+      1080
+    ],
+    "right_cycle_ids": [
+      1082,
+      1085,
+      1086
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "context is interrupted",
+      "unrelated flank families",
+      "flank geometry is not coherent",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 184,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 110865.80974409456,
+    "end_frame": 111034.39761515701,
+    "expected_period_frames": 84.24608252665348,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1079,
+      1080,
+      1082
+    ],
+    "right_cycle_ids": [
+      1085,
+      1086,
+      1087
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unrelated flank families",
+      "flank geometry is not coherent"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 185,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 111287.29001810665,
+    "end_frame": 111371.45188118577,
+    "expected_period_frames": 84.27401412798645,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1085,
+      1086,
+      1087
+    ],
+    "right_cycle_ids": [
+      1089,
+      1090,
+      1091
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 186,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013226824517102099,
+      "correlation": 0.9934699915282995,
+      "source_to_prediction_rms_ratio": 1.0214529084940833,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013226824517102099,
+          "correlation": 0.9934699915282995,
+          "source_to_prediction_rms_ratio": 1.0214529084940833
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1861
+    ]
+  },
+  {
+    "start_frame": 111877.2521738635,
+    "end_frame": 111961.43647571302,
+    "expected_period_frames": 84.28242287941248,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1092,
+      1093,
+      1094
+    ],
+    "right_cycle_ids": [
+      1096,
+      1097,
+      1098
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 187,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013670119018444725,
+      "correlation": 0.9932363919021593,
+      "source_to_prediction_rms_ratio": 1.0209275564226934,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013670119018444725,
+          "correlation": 0.9932363919021593,
+          "source_to_prediction_rms_ratio": 1.0209275564226934
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1871
+    ]
+  },
+  {
+    "start_frame": 113984.26304123,
+    "end_frame": 114068.44067744745,
+    "expected_period_frames": 84.29214318796585,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1117,
+      1118,
+      1119
+    ],
+    "right_cycle_ids": [
+      1121,
+      1122,
+      1123
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 188,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013561199577908755,
+      "correlation": 0.9932940512152165,
+      "source_to_prediction_rms_ratio": 1.0210792511113906,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013561199577908755,
+          "correlation": 0.9932940512152165,
+          "source_to_prediction_rms_ratio": 1.0210792511113906
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1881
+    ]
+  },
+  {
+    "start_frame": 114574.21937607562,
+    "end_frame": 114658.42467950658,
+    "expected_period_frames": 84.23947429219697,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1124,
+      1125,
+      1126
+    ],
+    "right_cycle_ids": [
+      1128,
+      1129,
+      1130
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 189,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013914277611192747,
+      "correlation": 0.9931050508831967,
+      "source_to_prediction_rms_ratio": 1.0204152066644314,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013914277611192747,
+          "correlation": 0.9931050508831967,
+          "source_to_prediction_rms_ratio": 1.0204152066644314
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1891
+    ]
+  },
+  {
+    "start_frame": 116091.27336509436,
+    "end_frame": 116175.4448269392,
+    "expected_period_frames": 84.28190592680039,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1142,
+      1143,
+      1144
+    ],
+    "right_cycle_ids": [
+      1146,
+      1147,
+      1148
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 190,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.0134440498112336,
+      "correlation": 0.9933557015674676,
+      "source_to_prediction_rms_ratio": 1.0212129127810932,
+      "per_cycle": [
+        {
+          "error_ratio": 0.0134440498112336,
+          "correlation": 0.9933557015674676,
+          "source_to_prediction_rms_ratio": 1.0212129127810932
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1901
+    ]
+  },
+  {
+    "start_frame": 116681.23198217264,
+    "end_frame": 116765.42907139378,
+    "expected_period_frames": 84.25376089888596,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1149,
+      1150,
+      1151
+    ],
+    "right_cycle_ids": [
+      1153,
+      1154,
+      1155
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 191,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013834789358100407,
+      "correlation": 0.9931482586993132,
+      "source_to_prediction_rms_ratio": 1.020619460552383,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013834789358100407,
+          "correlation": 0.9931482586993132,
+          "source_to_prediction_rms_ratio": 1.020619460552383
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1911
+    ]
+  },
+  {
+    "start_frame": 118198.28318129196,
+    "end_frame": 118282.4489278464,
+    "expected_period_frames": 84.27683349029394,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1167,
+      1168,
+      1169
+    ],
+    "right_cycle_ids": [
+      1171,
+      1172,
+      1173
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 192,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013320077881480999,
+      "correlation": 0.9934208956888146,
+      "source_to_prediction_rms_ratio": 1.0213485311896937,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013320077881480999,
+          "correlation": 0.9934208956888146,
+          "source_to_prediction_rms_ratio": 1.0213485311896937
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1921
+    ]
+  },
+  {
+    "start_frame": 118788.24390538817,
+    "end_frame": 118872.43338410754,
+    "expected_period_frames": 84.26968239137932,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1174,
+      1175,
+      1176
+    ],
+    "right_cycle_ids": [
+      1178,
+      1179,
+      1180
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 193,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013743350794484181,
+      "correlation": 0.9931973699930638,
+      "source_to_prediction_rms_ratio": 1.0208048132981673,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013743350794484181,
+          "correlation": 0.9931973699930638,
+          "source_to_prediction_rms_ratio": 1.0208048132981673
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1931
+    ]
+  },
+  {
+    "start_frame": 120305.29252376048,
+    "end_frame": 120389.45298518517,
+    "expected_period_frames": 84.27313981837506,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1192,
+      1193,
+      1194
+    ],
+    "right_cycle_ids": [
+      1196,
+      1197,
+      1198
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 194,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013191743525302273,
+      "correlation": 0.9934884092740742,
+      "source_to_prediction_rms_ratio": 1.0214881808864045,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013191743525302273,
+          "correlation": 0.9934884092740742,
+          "source_to_prediction_rms_ratio": 1.0214881808864045
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1941
+    ]
+  },
+  {
+    "start_frame": 120895.25519757463,
+    "end_frame": 120979.43762836816,
+    "expected_period_frames": 84.28748568738956,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1199,
+      1200,
+      1201
+    ],
+    "right_cycle_ids": [
+      1203,
+      1204,
+      1205
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 195,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01364127116934893,
+      "correlation": 0.9932517010154651,
+      "source_to_prediction_rms_ratio": 1.020970804074415,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01364127116934893,
+          "correlation": 0.9932517010154651,
+          "source_to_prediction_rms_ratio": 1.020970804074415
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1951
+    ]
+  },
+  {
+    "start_frame": 121485.20975001219,
+    "end_frame": 121569.42143424904,
+    "expected_period_frames": 84.22999678508495,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1206,
+      1207,
+      1208
+    ],
+    "right_cycle_ids": [
+      1210,
+      1211,
+      1212
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 196,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013963510963359207,
+      "correlation": 0.9930779183747958,
+      "source_to_prediction_rms_ratio": 1.020257309433018,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013963510963359207,
+          "correlation": 0.9930779183747958,
+          "source_to_prediction_rms_ratio": 1.020257309433018
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1961
+    ]
+  },
+  {
+    "start_frame": 123002.26591156593,
+    "end_frame": 123086.44181544181,
+    "expected_period_frames": 84.28898577296786,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1224,
+      1225,
+      1226
+    ],
+    "right_cycle_ids": [
+      1228,
+      1229,
+      1230
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 197,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013529972458948717,
+      "correlation": 0.9933105168834657,
+      "source_to_prediction_rms_ratio": 1.021117470055561,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013529972458948717,
+          "correlation": 0.9933105168834657,
+          "source_to_prediction_rms_ratio": 1.021117470055561
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1971
+    ]
+  },
+  {
+    "start_frame": 123592.22288908064,
+    "end_frame": 123676.42588660133,
+    "expected_period_frames": 84.24322393516195,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1231,
+      1232,
+      1233
+    ],
+    "right_cycle_ids": [
+      1235,
+      1236,
+      1237
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 198,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013893849576510268,
+      "correlation": 0.9931162199662096,
+      "source_to_prediction_rms_ratio": 1.0204731368642965,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013893849576510268,
+          "correlation": 0.9931162199662096,
+          "source_to_prediction_rms_ratio": 1.0204731368642965
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1981
+    ]
+  },
+  {
+    "start_frame": 125109.27609446623,
+    "end_frame": 125193.4459513426,
+    "expected_period_frames": 84.28038134433154,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1249,
+      1250,
+      1251
+    ],
+    "right_cycle_ids": [
+      1253,
+      1254,
+      1255
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 199,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01341077002929711,
+      "correlation": 0.9933731568866466,
+      "source_to_prediction_rms_ratio": 1.0212462620505358,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01341077002929711,
+          "correlation": 0.9933731568866466,
+          "source_to_prediction_rms_ratio": 1.0212462620505358
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -1991
+    ]
+  },
+  {
+    "start_frame": 125699.23530321632,
+    "end_frame": 125783.43025627818,
+    "expected_period_frames": 84.25793497425184,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1256,
+      1257,
+      1258
+    ],
+    "right_cycle_ids": [
+      1260,
+      1261,
+      1262
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 200,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01381093963458287,
+      "correlation": 0.9931611180180873,
+      "source_to_prediction_rms_ratio": 1.020671951136875,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01381093963458287,
+          "correlation": 0.9931611180180873,
+          "source_to_prediction_rms_ratio": 1.020671951136875
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2001
+    ]
+  },
+  {
+    "start_frame": 127216.28577796397,
+    "end_frame": 127300.45003960165,
+    "expected_period_frames": 84.27568890653492,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1274,
+      1275,
+      1276
+    ],
+    "right_cycle_ids": [
+      1278,
+      1279,
+      1280
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 201,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013285219803489045,
+      "correlation": 0.993439268060616,
+      "source_to_prediction_rms_ratio": 1.0213891596529083,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013285219803489045,
+          "correlation": 0.993439268060616,
+          "source_to_prediction_rms_ratio": 1.0213891596529083
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2011
+    ]
+  },
+  {
+    "start_frame": 127806.24704856666,
+    "end_frame": 127890.43454920778,
+    "expected_period_frames": 84.27434628457559,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1281,
+      1282,
+      1283
+    ],
+    "right_cycle_ids": [
+      1285,
+      1286,
+      1287
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 202,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013716469955353588,
+      "correlation": 0.9932117212812936,
+      "source_to_prediction_rms_ratio": 1.020852143108638,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013716469955353588,
+          "correlation": 0.9932117212812936,
+          "source_to_prediction_rms_ratio": 1.020852143108638
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2021
+    ]
+  },
+  {
+    "start_frame": 129913.25817870398,
+    "end_frame": 129997.43877690614,
+    "expected_period_frames": 84.29271000532026,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1306,
+      1307,
+      1308
+    ],
+    "right_cycle_ids": [
+      1310,
+      1311,
+      1312
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 203,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013611751249355849,
+      "correlation": 0.9932673379654743,
+      "source_to_prediction_rms_ratio": 1.0210127050517768,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013611751249355849,
+          "correlation": 0.9932673379654743,
+          "source_to_prediction_rms_ratio": 1.0210127050517768
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2031
+    ]
+  },
+  {
+    "start_frame": 130503.21341282346,
+    "end_frame": 130587.4226585883,
+    "expected_period_frames": 84.23347160573758,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1313,
+      1314,
+      1315
+    ],
+    "right_cycle_ids": [
+      1317,
+      1318,
+      1319
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 204,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013946034675899475,
+      "correlation": 0.9930875750199584,
+      "source_to_prediction_rms_ratio": 1.0203156374043165,
+      "per_cycle": [
+        {
+          "error_ratio": 0.013946034675899475,
+          "correlation": 0.9930875750199584,
+          "source_to_prediction_rms_ratio": 1.0203156374043165
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2041
+    ]
+  },
+  {
+    "start_frame": 131683.08736985576,
+    "end_frame": 133154.91242331703,
+    "expected_period_frames": 89.13375715359871,
+    "inferred_period_count": 17,
+    "left_cycle_ids": [
+      1327,
+      1328,
+      1329
+    ],
+    "right_cycle_ids": [
+      1351,
+      1352,
+      1353
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "gap not one or two supported periods",
+      "phase closure mismatch"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 205,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 133532.94448058243,
+    "end_frame": 133534.08687890656,
+    "expected_period_frames": 93.85541594124516,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1352,
+      1353,
+      1354
+    ],
+    "right_cycle_ids": [
+      1356,
+      1357,
+      1358
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 206,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 134005.94938092044,
+    "end_frame": 134007.09006014414,
+    "expected_period_frames": 93.85797808146162,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1358,
+      1359,
+      1360
+    ],
+    "right_cycle_ids": [
+      1362,
+      1363,
+      1364
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 207,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 134478.95452340343,
+    "end_frame": 134480.09305382028,
+    "expected_period_frames": 93.86114152547088,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1364,
+      1365,
+      1366
+    ],
+    "right_cycle_ids": [
+      1368,
+      1369,
+      1370
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 208,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 134951.9599197365,
+    "end_frame": 134953.09585988958,
+    "expected_period_frames": 93.86492771039775,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1370,
+      1371,
+      1372
+    ],
+    "right_cycle_ids": [
+      1374,
+      1375,
+      1376
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 209,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 135424.96557388868,
+    "end_frame": 135426.09848658644,
+    "expected_period_frames": 93.8693523103575,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1376,
+      1377,
+      1378
+    ],
+    "right_cycle_ids": [
+      1380,
+      1381,
+      1382
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 210,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 135708.89308283888,
+    "end_frame": 135804.0175231576,
+    "expected_period_frames": 93.87674569217779,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1380,
+      1381,
+      1382
+    ],
+    "right_cycle_ids": [
+      1385,
+      1387,
+      1388
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 211,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.010930867108927394,
+      "correlation": 0.994573392076291,
+      "source_to_prediction_rms_ratio": 1.0160283437411683,
+      "per_cycle": [
+        {
+          "error_ratio": 0.010930867108927394,
+          "correlation": 0.994573392076291,
+          "source_to_prediction_rms_ratio": 1.0160283437411683
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2111
+    ]
+  },
+  {
+    "start_frame": 135897.97149779697,
+    "end_frame": 135899.1009370441,
+    "expected_period_frames": 93.87444437869999,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1381,
+      1382,
+      1385
+    ],
+    "right_cycle_ids": [
+      1387,
+      1388,
+      1389
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 212,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 136181.89475778723,
+    "end_frame": 136277.00792549213,
+    "expected_period_frames": 93.88234773100703,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1387,
+      1388,
+      1389
+    ],
+    "right_cycle_ids": [
+      1392,
+      1394,
+      1395
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 213,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.011197670981156635,
+      "correlation": 0.9944400955916517,
+      "source_to_prediction_rms_ratio": 1.0162492312034197,
+      "per_cycle": [
+        {
+          "error_ratio": 0.011197670981156635,
+          "correlation": 0.9944400955916517,
+          "source_to_prediction_rms_ratio": 1.0162492312034197
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2131
+    ]
+  },
+  {
+    "start_frame": 136370.9777068361,
+    "end_frame": 136372.10321142292,
+    "expected_period_frames": 93.880244003798,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1388,
+      1389,
+      1392
+    ],
+    "right_cycle_ids": [
+      1394,
+      1395,
+      1396
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 214,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 136654.89659851068,
+    "end_frame": 136749.99767005906,
+    "expected_period_frames": 93.88862668910588,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1394,
+      1395,
+      1396
+    ],
+    "right_cycle_ids": [
+      1399,
+      1401,
+      1402
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 215,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.011488292160156564,
+      "correlation": 0.9942948328077522,
+      "source_to_prediction_rms_ratio": 1.0164847233860188,
+      "per_cycle": [
+        {
+          "error_ratio": 0.011488292160156564,
+          "correlation": 0.9942948328077522,
+          "source_to_prediction_rms_ratio": 1.0164847233860188
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2151
+    ]
+  },
+  {
+    "start_frame": 136843.98421677365,
+    "end_frame": 136845.10530808664,
+    "expected_period_frames": 93.88852538948413,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1395,
+      1396,
+      1399
+    ],
+    "right_cycle_ids": [
+      1401,
+      1402,
+      1403
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 216,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 137127.89860937916,
+    "end_frame": 137222.9880173161,
+    "expected_period_frames": 93.89676068867266,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1401,
+      1402,
+      1403
+    ],
+    "right_cycle_ids": [
+      1406,
+      1408,
+      1409
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 217,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.011794756991762738,
+      "correlation": 0.9941413732086195,
+      "source_to_prediction_rms_ratio": 1.0167080219327242,
+      "per_cycle": [
+        {
+          "error_ratio": 0.011794756991762738,
+          "correlation": 0.9941413732086195,
+          "source_to_prediction_rms_ratio": 1.0167080219327242
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2171
+    ]
+  },
+  {
+    "start_frame": 137316.99103462906,
+    "end_frame": 137318.10722832207,
+    "expected_period_frames": 93.89887096847815,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1402,
+      1403,
+      1406
+    ],
+    "right_cycle_ids": [
+      1408,
+      1409,
+      1410
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 218,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 137600.90079530206,
+    "end_frame": 137695.97909841628,
+    "expected_period_frames": 93.90689618779288,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1408,
+      1409,
+      1410
+    ],
+    "right_cycle_ids": [
+      1413,
+      1415,
+      1416
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 219,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.0121110826092997,
+      "correlation": 0.9939827395801487,
+      "source_to_prediction_rms_ratio": 1.0169180014977433,
+      "per_cycle": [
+        {
+          "error_ratio": 0.0121110826092997,
+          "correlation": 0.9939827395801487,
+          "source_to_prediction_rms_ratio": 1.0169180014977433
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2191
+    ]
+  },
+  {
+    "start_frame": 137789.99816616788,
+    "end_frame": 137791.10897540848,
+    "expected_period_frames": 93.90920728462515,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1409,
+      1410,
+      1413
+    ],
+    "right_cycle_ids": [
+      1415,
+      1416,
+      1417
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 220,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 138073.90314978262,
+    "end_frame": 138264.11055288534,
+    "expected_period_frames": 93.80186877974484,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1415,
+      1416,
+      1417
+    ],
+    "right_cycle_ids": [
+      1421,
+      1422,
+      1423
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 221,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013921525652169595,
+      "correlation": 0.9930502444594966,
+      "source_to_prediction_rms_ratio": 1.0155739075384815,
+      "per_cycle": [
+        {
+          "error_ratio": 0.011985822611121272,
+          "correlation": 0.9940329658661959,
+          "source_to_prediction_rms_ratio": 1.0155518386467577
+        },
+        {
+          "error_ratio": 0.01585713381595364,
+          "correlation": 0.9920675289800415,
+          "source_to_prediction_rms_ratio": 1.0155959767872054
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2211,
+      -2212
+    ]
+  },
+  {
+    "start_frame": 138546.90568007145,
+    "end_frame": 138737.11196541664,
+    "expected_period_frames": 93.80712720149313,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1421,
+      1422,
+      1423
+    ],
+    "right_cycle_ids": [
+      1427,
+      1428,
+      1429
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 222,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01387023698425619,
+      "correlation": 0.9930765276904757,
+      "source_to_prediction_rms_ratio": 1.0156027780667782,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012181183887499869,
+          "correlation": 0.9939336424872118,
+          "source_to_prediction_rms_ratio": 1.0155382522624705
+        },
+        {
+          "error_ratio": 0.015559180575659972,
+          "correlation": 0.992219363552442,
+          "source_to_prediction_rms_ratio": 1.0156673119877158
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2221,
+      -2222
+    ]
+  },
+  {
+    "start_frame": 139019.90838393362,
+    "end_frame": 139210.1132047799,
+    "expected_period_frames": 93.81282397930045,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1427,
+      1428,
+      1429
+    ],
+    "right_cycle_ids": [
+      1433,
+      1434,
+      1435
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 223,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013824322372342249,
+      "correlation": 0.9931000845650604,
+      "source_to_prediction_rms_ratio": 1.0156316961847995,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012383008938846616,
+          "correlation": 0.9938310406401278,
+          "source_to_prediction_rms_ratio": 1.0155247508382843
+        },
+        {
+          "error_ratio": 0.015265520022741742,
+          "correlation": 0.9923690442632945,
+          "source_to_prediction_rms_ratio": 1.0157386667306456
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2231,
+      -2232
+    ]
+  },
+  {
+    "start_frame": 139492.91127047312,
+    "end_frame": 139683.11427491263,
+    "expected_period_frames": 93.8189758266235,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1433,
+      1434,
+      1435
+    ],
+    "right_cycle_ids": [
+      1439,
+      1440,
+      1441
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 224,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01378377664928446,
+      "correlation": 0.9931209194217201,
+      "source_to_prediction_rms_ratio": 1.0156608926580135,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012590873019255606,
+          "correlation": 0.9937253743716697,
+          "source_to_prediction_rms_ratio": 1.0155111400302301
+        },
+        {
+          "error_ratio": 0.014976566115676793,
+          "correlation": 0.9925163656331157,
+          "source_to_prediction_rms_ratio": 1.0158106972140923
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2241,
+      -2242
+    ]
+  },
+  {
+    "start_frame": 139965.9143469947,
+    "end_frame": 140156.11517976254,
+    "expected_period_frames": 93.825602074794,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1439,
+      1440,
+      1441
+    ],
+    "right_cycle_ids": [
+      1445,
+      1446,
+      1447
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 225,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01374872742663594,
+      "correlation": 0.9931389700193,
+      "source_to_prediction_rms_ratio": 1.0156906940306896,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012804569332218399,
+          "correlation": 0.9936167517869042,
+          "source_to_prediction_rms_ratio": 1.0154977564450545
+        },
+        {
+          "error_ratio": 0.01469278145089603,
+          "correlation": 0.9926610952005469,
+          "source_to_prediction_rms_ratio": 1.0158837203437652
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2251,
+      -2252
+    ]
+  },
+  {
+    "start_frame": 140438.91761736962,
+    "end_frame": 140629.1159206667,
+    "expected_period_frames": 93.83272573571594,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1445,
+      1446,
+      1447
+    ],
+    "right_cycle_ids": [
+      1451,
+      1452,
+      1453
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 226,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013719278159213772,
+      "correlation": 0.9931541784369425,
+      "source_to_prediction_rms_ratio": 1.0157204862955513,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01302390210433149,
+          "correlation": 0.9935052669642238,
+          "source_to_prediction_rms_ratio": 1.0154839783194192
+        },
+        {
+          "error_ratio": 0.014414567551135052,
+          "correlation": 0.9928030239870187,
+          "source_to_prediction_rms_ratio": 1.015957130091744
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2261,
+      -2262
+    ]
+  },
+  {
+    "start_frame": 140911.9210795002,
+    "end_frame": 141006.93231042256,
+    "expected_period_frames": 94.51029759204539,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1451,
+      1452,
+      1453
+    ],
+    "right_cycle_ids": [
+      1456,
+      1457,
+      1458
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 227,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.014379887975861688,
+      "correlation": 0.9927883097423094,
+      "source_to_prediction_rms_ratio": 1.0102335630236006,
+      "per_cycle": [
+        {
+          "error_ratio": 0.014379887975861688,
+          "correlation": 0.9927883097423094,
+          "source_to_prediction_rms_ratio": 1.0102335630236006
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2271
+    ]
+  },
+  {
+    "start_frame": 141384.92473663815,
+    "end_frame": 141386.06948639455,
+    "expected_period_frames": 93.8511263634282,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1457,
+      1458,
+      1459
+    ],
+    "right_cycle_ids": [
+      1461,
+      1462,
+      1463
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 228,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 141857.92859651463,
+    "end_frame": 141859.07360998305,
+    "expected_period_frames": 93.85102844561334,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1463,
+      1464,
+      1465
+    ],
+    "right_cycle_ids": [
+      1467,
+      1468,
+      1469
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 229,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 142330.93266350427,
+    "end_frame": 142332.07752748643,
+    "expected_period_frames": 93.85148186467995,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1469,
+      1470,
+      1471
+    ],
+    "right_cycle_ids": [
+      1473,
+      1474,
+      1475
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 230,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 142803.93694949927,
+    "end_frame": 142805.08123653373,
+    "expected_period_frames": 93.85249520979414,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1475,
+      1476,
+      1477
+    ],
+    "right_cycle_ids": [
+      1479,
+      1480,
+      1481
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 231,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 143276.94146367488,
+    "end_frame": 143278.0847394892,
+    "expected_period_frames": 93.85408497748722,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1481,
+      1482,
+      1483
+    ],
+    "right_cycle_ids": [
+      1485,
+      1486,
+      1487
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 232,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 143749.94621333177,
+    "end_frame": 143751.0880422624,
+    "expected_period_frames": 93.85626852973655,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1487,
+      1488,
+      1489
+    ],
+    "right_cycle_ids": [
+      1491,
+      1492,
+      1493
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 233,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 144222.9511980589,
+    "end_frame": 144224.0911576316,
+    "expected_period_frames": 93.85904322456918,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1493,
+      1494,
+      1495
+    ],
+    "right_cycle_ids": [
+      1497,
+      1498,
+      1499
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 234,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 144695.95643216703,
+    "end_frame": 144697.09408212392,
+    "expected_period_frames": 93.86242851930729,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1499,
+      1500,
+      1501
+    ],
+    "right_cycle_ids": [
+      1503,
+      1504,
+      1505
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 235,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 145168.96192005527,
+    "end_frame": 145170.09682323638,
+    "expected_period_frames": 93.86644160145079,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1505,
+      1506,
+      1507
+    ],
+    "right_cycle_ids": [
+      1509,
+      1510,
+      1511
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 236,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 145641.96767007266,
+    "end_frame": 145643.09938572504,
+    "expected_period_frames": 93.87110393823241,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1511,
+      1512,
+      1513
+    ],
+    "right_cycle_ids": [
+      1515,
+      1516,
+      1517
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 237,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 145925.89366530106,
+    "end_frame": 146021.01416443332,
+    "expected_period_frames": 93.8786743334058,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1515,
+      1516,
+      1517
+    ],
+    "right_cycle_ids": [
+      1520,
+      1522,
+      1523
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 238,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.011023549682887669,
+      "correlation": 0.994527097366397,
+      "source_to_prediction_rms_ratio": 1.0161059116810454,
+      "per_cycle": [
+        {
+          "error_ratio": 0.011023549682887669,
+          "correlation": 0.994527097366397,
+          "source_to_prediction_rms_ratio": 1.0161059116810454
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2381
+    ]
+  },
+  {
+    "start_frame": 146114.97369321552,
+    "end_frame": 146116.10177427874,
+    "expected_period_frames": 93.87644316760998,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1516,
+      1517,
+      1520
+    ],
+    "right_cycle_ids": [
+      1522,
+      1523,
+      1524
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 239,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 146398.89539892745,
+    "end_frame": 146494.00428891598,
+    "expected_period_frames": 93.88453862983442,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1522,
+      1523,
+      1524
+    ],
+    "right_cycle_ids": [
+      1527,
+      1529,
+      1530
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 240,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.011300199619921044,
+      "correlation": 0.9943888495217631,
+      "source_to_prediction_rms_ratio": 1.0163322720548729,
+      "per_cycle": [
+        {
+          "error_ratio": 0.011300199619921044,
+          "correlation": 0.9943888495217631,
+          "source_to_prediction_rms_ratio": 1.0163322720548729
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2401
+    ]
+  },
+  {
+    "start_frame": 146587.98000862263,
+    "end_frame": 146589.1039852065,
+    "expected_period_frames": 93.88250507717021,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1523,
+      1524,
+      1527
+    ],
+    "right_cycle_ids": [
+      1529,
+      1530,
+      1531
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 241,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 146871.89730026794,
+    "end_frame": 146966.99411349968,
+    "expected_period_frames": 93.89090315565409,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1529,
+      1530,
+      1531
+    ],
+    "right_cycle_ids": [
+      1534,
+      1536,
+      1537
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 242,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.011597155343809852,
+      "correlation": 0.9942403488828013,
+      "source_to_prediction_rms_ratio": 1.0165665494210903,
+      "per_cycle": [
+        {
+          "error_ratio": 0.011597155343809852,
+          "correlation": 0.9942403488828013,
+          "source_to_prediction_rms_ratio": 1.0165665494210903
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2421
+    ]
+  },
+  {
+    "start_frame": 147060.9866293633,
+    "end_frame": 147062.1060175466,
+    "expected_period_frames": 93.89224522166478,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1530,
+      1531,
+      1534
+    ],
+    "right_cycle_ids": [
+      1536,
+      1537,
+      1538
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 243,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 147344.89937484683,
+    "end_frame": 147439.9847352473,
+    "expected_period_frames": 93.90039877135132,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1536,
+      1537,
+      1538
+    ],
+    "right_cycle_ids": [
+      1541,
+      1543,
+      1544
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 244,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.011907222941817331,
+      "correlation": 0.9940849984348822,
+      "source_to_prediction_rms_ratio": 1.0167848656752994,
+      "per_cycle": [
+        {
+          "error_ratio": 0.011907222941817331,
+          "correlation": 0.9940849984348822,
+          "source_to_prediction_rms_ratio": 1.0167848656752994
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2441
+    ]
+  },
+  {
+    "start_frame": 147533.9935582103,
+    "end_frame": 147535.1078760248,
+    "expected_period_frames": 93.90258019036264,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1537,
+      1538,
+      1541
+    ],
+    "right_cycle_ids": [
+      1543,
+      1544,
+      1545
+    ],
+    "render_family": 1,
+    "reasons": [
+      "context is interrupted",
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 245,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 147817.90162181534,
+    "end_frame": 148008.10956096934,
+    "expected_period_frames": 93.79872334019456,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1543,
+      1544,
+      1545
+    ],
+    "right_cycle_ids": [
+      1549,
+      1550,
+      1551
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 246,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01395731012640194,
+      "correlation": 0.9930319216057278,
+      "source_to_prediction_rms_ratio": 1.0155554428873796,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01186399939204691,
+          "correlation": 0.9940949053495207,
+          "source_to_prediction_rms_ratio": 1.0155605332116955
+        },
+        {
+          "error_ratio": 0.016050539906608836,
+          "correlation": 0.9919689896507626,
+          "source_to_prediction_rms_ratio": 1.0155503528364593
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2461,
+      -2462
+    ]
+  },
+  {
+    "start_frame": 148290.90403884082,
+    "end_frame": 148481.11107917718,
+    "expected_period_frames": 93.80370693781879,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1549,
+      1550,
+      1551
+    ],
+    "right_cycle_ids": [
+      1555,
+      1556,
+      1557
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 247,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013902478908420243,
+      "correlation": 0.9930600018843841,
+      "source_to_prediction_rms_ratio": 1.0155842732448586,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012055200783079964,
+          "correlation": 0.9939976923216349,
+          "source_to_prediction_rms_ratio": 1.0155469316937302
+        },
+        {
+          "error_ratio": 0.015749655664625283,
+          "correlation": 0.992122295289716,
+          "source_to_prediction_rms_ratio": 1.0156216168659749
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2471,
+      -2472
+    ]
+  },
+  {
+    "start_frame": 148763.9066301411,
+    "end_frame": 148954.11243036995,
+    "expected_period_frames": 93.80912082448776,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1555,
+      1556,
+      1557
+    ],
+    "right_cycle_ids": [
+      1561,
+      1562,
+      1563
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 248,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013853130573302631,
+      "correlation": 0.9930853009445705,
+      "source_to_prediction_rms_ratio": 1.015613181775283,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012252933221258719,
+          "correlation": 0.9938971669807675,
+          "source_to_prediction_rms_ratio": 1.0155334580741906
+        },
+        {
+          "error_ratio": 0.01545321537123202,
+          "correlation": 0.9922733706622939,
+          "source_to_prediction_rms_ratio": 1.0156929186457175
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2481,
+      -2482
+    ]
+  },
+  {
+    "start_frame": 149236.90939909307,
+    "end_frame": 149427.11360802955,
+    "expected_period_frames": 93.8149794498895,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1561,
+      1562,
+      1563
+    ],
+    "right_cycle_ids": [
+      1567,
+      1568,
+      1569
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 249,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013809133243362687,
+      "correlation": 0.9931078844221329,
+      "source_to_prediction_rms_ratio": 1.0156420361256955,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012456943429860421,
+          "correlation": 0.9937934552478495,
+          "source_to_prediction_rms_ratio": 1.0155198021997422
+        },
+        {
+          "error_ratio": 0.015161206820809828,
+          "correlation": 0.9924222218715265,
+          "source_to_prediction_rms_ratio": 1.0157643036875723
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2491,
+      -2492
+    ]
+  },
+  {
+    "start_frame": 149709.91235353707,
+    "end_frame": 149900.11461827587,
+    "expected_period_frames": 93.82129945739871,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1567,
+      1568,
+      1569
+    ],
+    "right_cycle_ids": [
+      1573,
+      1574,
+      1575
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 250,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013770550740387464,
+      "correlation": 0.993127726041866,
+      "source_to_prediction_rms_ratio": 1.0156715930194524,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012666957301642995,
+          "correlation": 0.9936867001283229,
+          "source_to_prediction_rms_ratio": 1.015506376251727
+        },
+        {
+          "error_ratio": 0.014874032808002749,
+          "correlation": 0.9925686527569967,
+          "source_to_prediction_rms_ratio": 1.0158368737673844
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2501,
+      -2502
+    ]
+  },
+  {
+    "start_frame": 150182.91549909138,
+    "end_frame": 150373.11546421328,
+    "expected_period_frames": 93.82810135836189,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1573,
+      1574,
+      1575
+    ],
+    "right_cycle_ids": [
+      1579,
+      1580,
+      1581
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 251,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.013737505388039188,
+      "correlation": 0.9931447597242125,
+      "source_to_prediction_rms_ratio": 1.015701401801518,
+      "per_cycle": [
+        {
+          "error_ratio": 0.012882674433141353,
+          "correlation": 0.9935770512635714,
+          "source_to_prediction_rms_ratio": 1.015492843741248
+        },
+        {
+          "error_ratio": 0.014592237601571207,
+          "correlation": 0.9927123824302228,
+          "source_to_prediction_rms_ratio": 1.0159100643003982
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2511,
+      -2512
+    ]
+  },
+  {
+    "start_frame": 150655.91883801078,
+    "end_frame": 150750.9356513684,
+    "expected_period_frames": 94.50605959769746,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1579,
+      1580,
+      1581
+    ],
+    "right_cycle_ids": [
+      1584,
+      1585,
+      1586
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 252,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.014146762912758588,
+      "correlation": 0.9929061280500424,
+      "source_to_prediction_rms_ratio": 1.0102544317767206,
+      "per_cycle": [
+        {
+          "error_ratio": 0.014146762912758588,
+          "correlation": 0.9929061280500424,
+          "source_to_prediction_rms_ratio": 1.0102544317767206
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2521
+    ]
+  },
+  {
+    "start_frame": 151128.9223704644,
+    "end_frame": 151223.9305097525,
+    "expected_period_frames": 94.51267017477949,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1585,
+      1586,
+      1587
+    ],
+    "right_cycle_ids": [
+      1590,
+      1591,
+      1592
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 253,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.01451126607256414,
+      "correlation": 0.9927219142675721,
+      "source_to_prediction_rms_ratio": 1.0102214251084833,
+      "per_cycle": [
+        {
+          "error_ratio": 0.01451126607256414,
+          "correlation": 0.9927219142675721,
+          "source_to_prediction_rms_ratio": 1.0102214251084833
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2531
+    ]
+  },
+  {
+    "start_frame": 151601.92609853484,
+    "end_frame": 151603.07099163756,
+    "expected_period_frames": 93.8510262167838,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1591,
+      1592,
+      1593
+    ],
+    "right_cycle_ids": [
+      1595,
+      1596,
+      1597
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 254,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 152074.93003323735,
+    "end_frame": 152076.075039491,
+    "expected_period_frames": 93.85112949818722,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1597,
+      1598,
+      1599
+    ],
+    "right_cycle_ids": [
+      1601,
+      1602,
+      1603
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 255,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 152547.93417743235,
+    "end_frame": 152549.07888247535,
+    "expected_period_frames": 93.85178257344523,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1603,
+      1604,
+      1605
+    ],
+    "right_cycle_ids": [
+      1607,
+      1608,
+      1609
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 256,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 153020.93854354208,
+    "end_frame": 153022.08251787108,
+    "expected_period_frames": 93.85299892858893,
+    "inferred_period_count": 0,
+    "left_cycle_ids": [
+      1609,
+      1610,
+      1611
+    ],
+    "right_cycle_ids": [
+      1613,
+      1614,
+      1615
+    ],
+    "render_family": 1,
+    "reasons": [
+      "gap not one or two supported periods"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 257,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 153493.94314099572,
+    "end_frame": 153684.1165952312,
+    "expected_period_frames": 94.5244929008768,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      1615,
+      1616,
+      1617
+    ],
+    "right_cycle_ids": [
+      1621,
+      1622,
+      1637
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 258,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 153873.05112880413,
+    "end_frame": 154799.71479129978,
+    "expected_period_frames": 100.23202950095583,
+    "inferred_period_count": 9,
+    "left_cycle_ids": [
+      1617,
+      1621,
+      1622
+    ],
+    "right_cycle_ids": [
+      1637,
+      1639,
+      1640
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "context is interrupted",
+      "gap not one or two supported periods",
+      "phase closure mismatch"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 259,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 154905.01547342096,
+    "end_frame": 155010.77771637557,
+    "expected_period_frames": 105.65857063599105,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1621,
+      1622,
+      1637
+    ],
+    "right_cycle_ids": [
+      1639,
+      1640,
+      1641
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 260,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 175823.77828170068,
+    "end_frame": 175929.7772725529,
+    "expected_period_frames": 106.06698185826826,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      1832,
+      1833,
+      1834
+    ],
+    "right_cycle_ids": [
+      1836,
+      1837,
+      1838
+    ],
+    "render_family": 1,
+    "reasons": [],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 261,
+    "accepted_inference": true,
+    "verification": {
+      "error_ratio": 0.015061169055537808,
+      "correlation": 0.9924925972922048,
+      "source_to_prediction_rms_ratio": 1.0179595797923218,
+      "per_cycle": [
+        {
+          "error_ratio": 0.015061169055537808,
+          "correlation": 0.9924925972922048,
+          "source_to_prediction_rms_ratio": 1.0179595797923218
+        }
+      ],
+      "reasons": [],
+      "scope": "Read-only verification of one neighbor prediction. No target waveform fallback, gain fit or phase optimization."
+    },
+    "inferred_cycle_ids": [
+      -2611
+    ]
+  },
+  {
+    "start_frame": 176354.741641667,
+    "end_frame": 177061.60774223486,
+    "expected_period_frames": 109.559267663004,
+    "inferred_period_count": 6,
+    "left_cycle_ids": [
+      1837,
+      1838,
+      1839
+    ],
+    "right_cycle_ids": [
+      1854,
+      1855,
+      1856
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "gap not one or two supported periods",
+      "phase closure mismatch"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 262,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 197874.4640092666,
+    "end_frame": 197986.88642056976,
+    "expected_period_frames": 112.58084012284235,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      2036,
+      2037,
+      2038
+    ],
+    "right_cycle_ids": [
+      2040,
+      2042,
+      2050
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unrelated flank families",
+      "flank geometry is not coherent"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 263,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 198099.46518990415,
+    "end_frame": 198211.8918346066,
+    "expected_period_frames": 112.58084012284235,
+    "inferred_period_count": 1,
+    "left_cycle_ids": [
+      2037,
+      2038,
+      2040
+    ],
+    "right_cycle_ids": [
+      2042,
+      2050,
+      2053
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "context is interrupted",
+      "unrelated flank families",
+      "flank geometry is not coherent"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 264,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 198324.46636863385,
+    "end_frame": 198788.2711761536,
+    "expected_period_frames": 119.32731502164097,
+    "inferred_period_count": 4,
+    "left_cycle_ids": [
+      2038,
+      2040,
+      2042
+    ],
+    "right_cycle_ids": [
+      2050,
+      2053,
+      2054
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "context is interrupted",
+      "unrelated flank families",
+      "flank geometry is not coherent",
+      "gap not one or two supported periods",
+      "phase closure mismatch"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 265,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 198914.95541195647,
+    "end_frame": 199168.98098297734,
+    "expected_period_frames": 126.07934377224592,
+    "inferred_period_count": 2,
+    "left_cycle_ids": [
+      2040,
+      2042,
+      2050
+    ],
+    "right_cycle_ids": [
+      2053,
+      2054,
+      2055
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "context is interrupted",
+      "unrelated flank families",
+      "flank geometry is not coherent"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 266,
+    "accepted_inference": false
+  },
+  {
+    "start_frame": 220004.98405638454,
+    "end_frame": 221241.65475237917,
+    "expected_period_frames": 133.8091324550187,
+    "inferred_period_count": 9,
+    "left_cycle_ids": [
+      2215,
+      2216,
+      2217
+    ],
+    "right_cycle_ids": [
+      2231,
+      2232,
+      2233
+    ],
+    "render_family": 1,
+    "reasons": [
+      "unstable flank periods or transition",
+      "gap not one or two supported periods",
+      "phase closure mismatch"
+    ],
+    "inferred": true,
+    "identity_family": null,
+    "proposal": 267,
+    "accepted_inference": false
+  }
+]

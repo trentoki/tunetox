@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TuneTox browser smoke tests</title>
+  <style>
+    body { font: 16px/1.4 system-ui, sans-serif; margin: 2rem; }
+    iframe { border: 1px solid #888; height: 480px; width: 100%; }
+    button { font: inherit; margin: 1rem 0; padding: .5rem .8rem; }
+    .pass { color: #075d20; }
+    .fail { color: #a00; }
+  </style>
+</head>
+<body>
+  <h1>TuneTox browser smoke tests</h1>
+  <p>Loads the real root page. These checks verify startup and control routing; they do not verify audible playback.</p>
+  <button id="run-routing" type="button" disabled>Run live routing checks</button>
+  <pre id="results">Loading the TuneTox application…</pre>
+  <iframe id="application" title="TuneTox application"></iframe>
+  <script src="browser-smoke-tests.js"></script>
+</body>
+</html>
