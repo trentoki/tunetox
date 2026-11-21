@@ -41,7 +41,7 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
 2. The two primary library areas are **Playlists** and **Songs**, including an **All Songs** collection. Playlist membership need not duplicate underlying audio files.
 3. Search songs, artists, and playlists, including BPM and key filters. Ranking and grouping describe musical relationships without prescribing what musicians should combine or unnecessarily hiding discoverable content.
 4. Preserve playlist and song navigation, selection, scrolling, and useful browsing context across views. Library functionality is shared regardless of which deck opens it.
-5. Support drag-and-drop songs to playlists and decks, multiple-song selection and playlist operations, accessible alternatives to touch dragging, playlist renaming, undo for supported edits, and avoidance of unintended duplicate imports.
+5. Support drag-and-drop songs to playlists and decks, and drag a song onto another song to create a user-defined link; support multiple-song selection and playlist operations, accessible alternatives to touch dragging, playlist renaming, undo for supported edits, and avoidance of unintended duplicate imports.
 6. User-created links between songs must be visible and navigable, distinct from automatic analysis. Connections may affect display, grouping, and order without preventing independent browsing or sorting.
 7. Song loading, queueing, and replacement obey Sections 1 and 3 and do not interrupt other decks. BPM-first versus key-first ordering, linked-song placement, sorting priority, and precise drag semantics belong in `specs/library.md`; retain earlier decisions and discussions rather than inventing new ones.
 
@@ -68,9 +68,9 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
 ## 7. Interface and Customization
 
 1. One expressive, responsive interface adapts across devices without changing the four-deck musical system. Keep controls compact, readable, tactile, and immediately responsive.
-2. The two primary application areas are **Mixer** and **Library**. Library distinguishes Playlists and Songs and maintains useful navigation context.
-3. Present prominent zoomed waveforms and compact full-song overviews, with accurate position, cue, and transport feedback.
-4. Approved recent design direction includes **Wave/Cue** and **Controls** performance views, plus **Transition** on phones; preserve current reviewed interaction contracts rather than treating older experimental measurements as final requirements.
+2. The primary interface consists of **four decks**. Each deck can independently display **Wave/Cue**, **Controls**, or **Library**. The Library view distinguishes Playlists and Songs and maintains useful navigation context.
+3. The **Wave/Cue** view presents prominent zoomed waveforms, compact full-song overviews, cue controls, and accurate playback-position and transport feedback.
+4. Each deck supports switching among **Wave/Cue**, **Controls**, and **Library** views; phones additionally support the approved **Transition** view. Switching views does not interrupt playback or change musical participation. Preserve current reviewed interaction contracts rather than treating older experimental measurements as final requirements.
 5. Responsive deck arrangements and phone navigation are refined through physical device testing. Visibility never determines musical participation.
 6. Support deck accent colors, coordinated waveforms/controls, themes, accessible input alternatives, and isolated Design Mode experiments. Never merge prototypes into working audio without review.
 7. Detailed view gestures, cue behavior, dimensions, navigation, and customization belong in `specs/interface.md`; historical v40 is inspiration, not a mandatory implementation.
