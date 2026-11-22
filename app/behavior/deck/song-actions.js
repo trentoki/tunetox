@@ -10,3 +10,12 @@ function loadSong(deck, song) {
 function loadQueue(deck, song) {
   deck.queue = song;
 }
+
+// Load immediately when stopped; otherwise replace the prepared song.
+function loadToDeck(deck, song) {
+  if (deck.isPlaying) {
+    loadQueue(deck, song);
+  } else {
+    loadSong(deck, song);
+  }
+}
