@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TuneTox — Clean Deck Prototype</title>
+  <style>
+    body { font: 16px system-ui; background: #15131e; color: white; padding: 24px; }
+    #decks { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    section { padding: 18px; border: 1px solid #665b8b; border-radius: 12px; }
+    button, input { margin: 5px; }
+  </style>
+</head>
+<body>
+  <h1>TuneTox — Deck Prototype</h1>
+  <p>Select an audio file. While playing, select another to replace the queue.</p>
+  <main id="decks"></main>
+  <script type="module">
+    import { buildDeck } from "../app/behavior/mixer/deck.js";
+    import { designDeck } from "../app/visual/mixer/deck.js";
+    const container = document.querySelector("#decks");
+    for (let number = 1; number <= 4; number++) {
+      const section = document.createElement("section");
+      section.setAttribute("aria-label", "Deck " + number);
+      section.append("Deck " + number);
+      container.append(section);
+      designDeck(buildDeck(), section);
+    }
+  </script>
+</body>
+</html>
