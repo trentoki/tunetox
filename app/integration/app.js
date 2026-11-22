@@ -7,7 +7,7 @@ function createDeck(id) {
 
     // Song and playback state.
     song: null,
-    cue: null,
+    queue: null,
     isPlaying: false,
 
     // Current playback settings.
