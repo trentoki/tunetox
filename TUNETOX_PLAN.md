@@ -130,6 +130,23 @@ Shared musical behavior should remain consistent regardless of whether an action
 Organize files and folders according to their responsibilities, with descriptive names and understandable relationships.
 Prefer improving existing working code over unnecessary rewrites. Preserve verified functionality during restructuring.
 
+### 4.5 Target Architecture (Approved Direction; Not Yet Implemented)
+
+The following describes the agreed organizational direction, **not** the current folder layout or a request to move working code immediately. Existing files must be inventoried, dependencies traced, and changes separately approved and tested before relocation.
+
+- `interface/visual/`: visual presentation, layout, styling, and visible controls.
+- `interface/behavior/decks.js` (proposed): maintain each of the four decks' information and settings, including loaded and queued songs, playback commands, volume, EQ, tempo, pitch, manually corrected key information, stem settings, and whether BeatMatch, TuneMatch, and Handoff participation are enabled. This does not itself perform audio processing.
+- `audio/analysis/`: determine musical information such as keys, rhythms, and other analyzed song characteristics; keep analysis distinct from matching.
+- `audio/matching/`: shared tempo and pitch coordination across participating decks, using musical information supplied by analysis or user corrections.
+- `audio/handoff/`: shared stem-allocation and handoff calculations.
+- `audio/transport/`: actual playback timing, positioning, and transport execution; user playback commands are represented in deck behavior.
+- `audio/engine/`: audio execution and processing, including applying deck volume and EQ settings.
+- `audio/sampler/`: retained as a planned subsystem; exact separation of sampler visual, behavior, and audio responsibilities remains to be finalized.
+
+Loading or queueing a song is a deck behavior; reading and decoding its audio data belongs on the audio side. A deck's setting is distinct from the shared algorithm that responds to it and from the audio processing that applies it.
+
+**Open organization questions:** whether the existing `participation.js` should remain a distinct file (and where); the eventual location of audio-file loading, diagnostics, and test-host code; and the final layout for sampler behavior and shared utilities. No folder renames, file moves, or runtime changes are authorized by this subsection alone.
+
 ### 4.5 Integration and Extensibility
 New capabilities should integrate with existing systems through clear boundaries.
 The architecture should accommodate experimentation and future expansion without requiring unrelated systems to be rebuilt.
