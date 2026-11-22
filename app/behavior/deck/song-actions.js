@@ -12,7 +12,7 @@ function loadQueue(deck, song) {
 }
 
 // Load immediately when stopped; otherwise replace the prepared song.
-function loadToDeck(deck, song) {
+function sendToDeck(deck, song) {
   if (deck.isPlaying) {
     loadQueue(deck, song);
   } else {
