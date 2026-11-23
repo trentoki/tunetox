@@ -57,7 +57,8 @@ decks.forEach((deck, index) => {
   label.append("Load D" + number);
   const input = document.createElement("input");
   input.type = "file";
-  input.accept = "audio/*";
+  // Do not filter the Files picker: iPadOS may gray out valid audio files for audio/*.
+  // Decode validation still occurs in the audio loading layer.
   input.setAttribute("aria-label", "Load audio for Deck " + number);
   label.append(input);
   loaders.append(label);
