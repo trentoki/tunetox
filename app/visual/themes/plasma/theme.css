@@ -1,12 +1,37 @@
-/* Plasma Purple reskin: appearance only. Sliders retain native behavior.
-   Theme authors can override --accent per deck without editing mixer code. */
-:root[data-theme="plasma"] { --plasma-glow: 0 0 7px currentColor, 0 0 15px currentColor; }
-[data-theme="plasma"] .deck {
-  border-top-color: var(--accent);
-  box-shadow: inset 0 1px 10px color-mix(in srgb, var(--accent) 17%, transparent);
-}
+/* Plasma theme: sharp, dimensional handles and subtle illumination inside tracks.
+   No changes to input geometry, value, interaction, or audio behavior. */
+[data-theme="plasma"] .deck { border-top-color: var(--accent); }
+
+/* Avoid filtering the entire input: it blurs the thumb as well as the track. */
 [data-theme="plasma"] .deck input[type="range"] { accent-color: var(--accent); }
-[data-theme="plasma"] .deck input[type="range"]:not(:disabled) {
-  filter: drop-shadow(0 0 4px var(--accent));
+
+[data-theme="plasma"] .deck input[type="range"]::-webkit-slider-runnable-track {
+  background: linear-gradient(180deg, #121320 0%, color-mix(in srgb, var(--accent) 32%, #171b2a) 48%, #10121e 100%);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, #293143);
+  box-shadow: inset 0 1px 3px #05060a;
 }
-[data-theme="plasma"] .deck .waveform-overview svg { filter: drop-shadow(0 0 3px var(--accent)); }
+[data-theme="plasma"] .deck input[type="range"]::-moz-range-track {
+  background: linear-gradient(180deg, #121320 0%, color-mix(in srgb, var(--accent) 32%, #171b2a) 48%, #10121e 100%);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, #293143);
+  box-shadow: inset 0 1px 3px #05060a;
+}
+
+/* Crisp edges; light appears inside the handle, never as an outer blur. */
+[data-theme="plasma"] .deck input[type="range"]::-webkit-slider-thumb {
+  background: radial-gradient(circle at 36% 27%, #fff 0%, color-mix(in srgb, var(--accent) 55%, white) 20%, var(--accent) 52%, #252035 100%);
+  border: 1px solid color-mix(in srgb, var(--accent) 48%, #252035);
+  box-shadow: inset 0 1px 2px #ffffff80, inset 0 -3px 4px #080a19a6, 0 1px 2px #000a;
+}
+[data-theme="plasma"] .deck input[type="range"]::-moz-range-thumb {
+  background: radial-gradient(circle at 36% 27%, #fff 0%, color-mix(in srgb, var(--accent) 55%, white) 20%, var(--accent) 52%, #252035 100%);
+  border: 1px solid color-mix(in srgb, var(--accent) 48%, #252035);
+  box-shadow: inset 0 1px 2px #ffffff80, inset 0 -3px 4px #080a19a6, 0 1px 2px #000a;
+}
+
+/* Main volume retains its filled-track indication and rectangular grip. */
+[data-theme="plasma"] .deck .main-volume-fader input::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--main-volume-fill, 0%), #242738 var(--main-volume-fill, 0%), #242738 100%);
+}
+[data-theme="plasma"] .deck .main-volume-fader input::-moz-range-track {
+  background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--main-volume-fill, 0%), #242738 var(--main-volume-fill, 0%), #242738 100%);
+}
