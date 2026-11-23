@@ -1,4 +1,4 @@
-import { buildAudio, loadAudio, startAudio, pauseAudio, ejectAudio } from "../../audio/deck-audio.js";
+import { buildAudio, loadAudio, startAudio, pauseAudio, ejectAudio, setAudioMainVolume } from "../../audio/deck-audio.js";
 
 // Behavior: deck decisions and state. Visual controls are defined elsewhere.
 export function buildDeck() {
@@ -6,8 +6,19 @@ export function buildDeck() {
     song: null,
     queue: null,
     isPlaying: false,
+    mainVolume: 0,
     audio: buildAudio()
   };
+}
+
+// One authoritative requested Main value per deck, in normalized 0–1 units.
+// Reject invalid input before changing state or touching the audio graph.
+export function setMainVolume(deck, value) {
+  if (!Number.isFinite(value) || value < 0 || value > 1) {
+    throw new RangeError("Main volume must be a number from 0 to 1.");
+  }
+  setAudioMainVolume(deck.audio, value);
+  deck.mainVolume = value;
 }
 
 // Loaded songs only, in deck order; queued songs are not Library results.

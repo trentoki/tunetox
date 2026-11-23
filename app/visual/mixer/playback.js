@@ -160,7 +160,13 @@ export function createPlaybackDeck(number, deck, actions) {
   selector.append(upperToggle, lowerToggle);
   const play = button("play-pause-button", "▶", "Play Deck " + number, actions.togglePlayback);
   const queue = button("queue-button", "EMPTY", "Queue empty", actions.playQueue);
-  const main = previewRange("main-volume-fader", "MAIN 100%", 100);
+  const main = previewRange("main-volume-fader", "MAIN 0%", 0);
+  const mainPercentage = element("output", "", "MAIN 0%");
+  main.querySelector("span").replaceChildren(mainPercentage);
+  const mainInput = main.querySelector("input");
+  mainInput.disabled = false;
+  mainInput.setAttribute("aria-label", "Main volume for Deck " + number);
+  mainInput.addEventListener("input", () => actions.setMainVolume(Number(mainInput.value) / 100));
   const overview = element("div", "waveform-overview");
   overview.append(waveform(number));
   const overviewPosition = element("span", "playhead");
@@ -215,6 +221,11 @@ export function createPlaybackDeck(number, deck, actions) {
   node.append(performance, library);
 
   function render() {
+    const percentage = Math.round(deck.mainVolume * 100);
+    mainPercentage.textContent = "MAIN " + percentage + "%";
+    mainInput.value = String(percentage);
+    mainInput.style.setProperty("--main-volume-fill", percentage + "%");
+    mainInput.setAttribute("aria-valuetext", percentage + "%");
     performance.hidden = workspace !== "performance-view";
     library.hidden = workspace !== "library-view";
     wave.node.hidden = upperView !== "wave-view";

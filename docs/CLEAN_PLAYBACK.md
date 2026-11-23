@@ -20,6 +20,8 @@ ELECTRON_RUN_AS_NODE=1 '/Applications/Visual Studio Code.app/Contents/MacOS/Code
 
 Use **Load D1–D4** in the global header to select local audio. Load does not start playback. Press a deck's triangle to Play; press its pause symbol to Pause and retain position. All four decks start in Performance with **Wave + Cues**.
 
+All four **Main Volume** faders start at **0%**: Play advances the song silently until you raise that deck's Main. The existing fader displays its actual requested percentage in 1% steps. Each deck retains its Main across pause/resume, loading, queue swaps, and view changes. Volume changes do not start playback or affect other decks.
+
 Each deck has two independent toggle buttons in the original compact header selector slot: **Wave ↔ Stems** and **Cues ↔ Controls**. Each button shows its current view. No extra selector rows occupy the content sections. Stems contains the four disabled stem faders; Controls contains only filter, EQ and effects. Changing either selection leaves the other section and other decks unchanged. Library and its back arrow preserve both selections and playback.
 
 Loading while a deck is playing prepares its queue. The READY button invokes the existing Clean Deck Play Queue action. A further load replaces that queue, as in the preserved prototype.
@@ -30,7 +32,7 @@ Loading while a deck is playing prepares its queue. The READY button invokes the
 - [playback.js](../app/visual/mixer/playback.js): creates the shared visual component with approved names, view switching, and state rendering.
 - [playback.css](../app/visual/mixer/playback.css): H5.3.1 section arrangement, deck accents, and shared landscape/portrait styling.
 - [deck.js](../app/behavior/mixer/deck.js): load/queue/playback behavior, the loaded-song-list helper, and createPlaybackCoordinator for one deck's guarded actions and ended/error handling. The coordinator was consolidated here without changing its operation or notification order. Presentation callbacks keep rendering and status messages in Visual; Audio manages file URLs. The Clean Deck prototype continues using the existing direct actions without adopting the guarded API. No separate Integration layer or duplicate deck state is introduced.
-- [deck-audio.js](../app/audio/deck-audio.js): unchanged native playback operations, plus temporary audio URL creation/tracking/revocation. Only URLs absent from every loaded and queued song are released; the host's cleanup timing is preserved. Original files are never modified.
+- [deck-audio.js](../app/audio/deck-audio.js): native media transport, one shared Web Audio context, and one media-source/Main GainNode path per deck, plus temporary audio URL management. Playback resumes the context and starts the existing media element from the initiating gesture. Only URLs absent from every loaded and queued song are released. Original files are never modified.
 
 The older [index.html](../legacy-reference/index.html), [clean-deck.html](../legacy-reference/development/clean-deck.html), and their legacy interface files are preserved under [legacy-reference](../legacy-reference/). Clean Deck shares the active Behavior and Audio modules via adjusted imports, without copies. Guide/reference materials remain in their existing documentation locations.
 
@@ -50,15 +52,21 @@ Physical iPad Safari verification remains required: reload the application, repe
 
 This checkpoint connects Load, Play, Pause, and the existing queue action. Workspace and performance-view navigation work without replacing players. Current time is read from the actual media player.
 
-Waveforms are deterministic illustrations, not analysis of loaded audio. Tempo, pitch, participation, main volume, EQ, effects, stems, cues, loops, and library manipulation remain disabled visual previews. No persistence, analysis, DSP, matching, or handoff has been added.
+Waveforms are deterministic illustrations, not analysis of loaded audio. Tempo, pitch, participation, EQ, effects, stems, cues, loops, and library manipulation remain disabled visual previews. Main Volume is connected; no persistence, analysis, matching, or Handoff has been added.
 
-Playback uses the Clean Deck prototype's unchanged native Audio defaults, including its full-volume player. The disabled main-volume preview reads 100% to avoid implying attenuation that is not applied. The approved product startup target of main volume 0% with stems 100% is not implemented by this checkpoint; applying it would change the requested preserved playback behavior. Visible stem labels retain H5.3.1 wording; approved data-stem attributes do not redefine audio categories.
+Behavior stores mainVolume in 0–1 units, initially zero, and rejects non-finite/out-of-range values before changing state or audio. Audio applies a 15 ms linear gain ramp; rapid changes retarget from the modeled current ramp value and Main zero reaches exact silence. UI percentages represent requested gain; the short ramp is not displayed as a separate setting. Native media volume stays at unity; per-deck GainNodes provide attenuation without relying on iOS media-element volume. The four stem faders still show 100% as inactive previews. Visible stem labels retain H5.3.1 wording; approved data-stem attributes do not redefine audio categories.
+
+The legacy Clean Deck prototype shares these modules and therefore now also starts silent at Main zero. Its preserved interface has no Main fader; use the active application for audible Main Volume testing. Its transport/queue actions remain available. No legacy code was altered to add controls.
+
+Safari listening procedure: reload tunetox.html; confirm all four Main values are 0%. Load a familiar song and press Play: time should advance silently. Slowly raise Main through 25%, 50%, and 100%; listen for increasing level, then return to 0% and confirm silence. Play another deck and change only its fader; verify independence. Retest Pause/resume, READY queue swap, Library round trips, rapid fader movements, and orientation changes. Check for clicks, dropouts, stuck audio, and lost first-gesture activation. Device volume remains under your hardware control. Physical Safari/iPad listening is still required; browser signal measurements alone do not establish audible quality or touch compatibility.
 
 The preserved prototype's queue replacement and manual Play Queue behavior differ from some future product rules. This task intentionally preserves the prototype rather than implementing those migrations. Natural end retains the song and does not automatically play the queue.
 
 Original files are read through browser-selected File objects only. No file writes or uploads occur. Replaced blob URLs are revoked only after they are absent from every active and queued song.
 
 ## Verification performed
+
+Main Volume checks passed in Chromium: startup zero gain, enabled 0% faders, finite/range validation, independent measured post-gain signal at 0/25/50/100%, rapid retarget settling, mute without stopping playback, retained volume across Pause/resume/queue/view changes, suspended-context resume, and context-resume rejection recovery. Existing playback and synthetic touch checks also passed. At 1114×685 and 768×1031, header heights remained 160px and 152px respectively, the fader geometry stayed stable across percentage changes, and no outer horizontal overflow was detected. These are automated browser measurements, not physical Safari or listening verification.
 
 [Browser checks](../tests/visual-playback-tests.html) create generated quiet WAV tones and observe actual native media players in an isolated test frame. Run them with the **Run checks** button.
 

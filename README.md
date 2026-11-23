@@ -10,7 +10,7 @@ node tests/serve-visual-playback.cjs
 
 Visit http://127.0.0.1:8080/tunetox.html. The server accepts loopback/private IPv4 clients for local-network testing. See [Clean Playback usage and limitations](docs/CLEAN_PLAYBACK.md) for the current Mac runtime command and device-verification limits.
 
-The active application has four decks with Load, Play/Pause/resume, and manual queued playback. Visual, Behavior, and Audio live in `app/visual/`, `app/behavior/`, and `app/audio/`. Musical controls and waveforms remain previews. Run [current regression checks](tests/visual-playback-tests.html) through the same server.
+The active application has four decks with Load, Play/Pause/resume, manual queued playback, and independent Main Volume. All Main faders start at 0%: raise a deck's Main after pressing Play to hear it. Visual, Behavior, and Audio live in `app/visual/`, `app/behavior/`, and `app/audio/`. Other musical controls and waveforms remain previews. Run [current regression checks](tests/visual-playback-tests.html) through the same server.
 
 ## Preserved legacy references
 

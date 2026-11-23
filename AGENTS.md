@@ -120,7 +120,7 @@ As TuneTox develops, preserve useful historical research, experiments, decisions
 2. **Three independently configurable musical capabilities.** Beatmatching, Tune Matching, and Stem Handoff are distinct but interconnected systems. Each deck's participation in these capabilities must be independently configurable and recorded in one authoritative participation store (the shared application state that determines which decks participate in each system).
 
    Preserve the approved musical matching rules, including using the current sounding pitch when determining pitch relationships between decks. Changes to terminology or code structure must preserve established behavior and be reviewed and tested before implementation.
-3. **Stem foundation safeguards.** All four decks should initialize with their main volumes at 0% and their four stem levels at 100%. This startup behavior is approved but not yet implemented.
+3. **Stem foundation safeguards.** All four decks should initialize with their main volumes at 0% and their four stem levels at 100%. Main Volume now initializes at 0% with real per-deck gain; the four 100% stem faders remain inactive previews, not connected stem audio.
 
    **This is an intentional safety feature:** Starting with main volumes at 0% prevents unintended audible output while allowing stem levels to be prepared at 100%.
 
@@ -142,7 +142,7 @@ As TuneTox develops, preserve useful historical research, experiments, decisions
 
    Intentional improvements to audio functionality are encouraged when included in an approved development task. Make such changes carefully, preserve established musical behavior unless a change is explicitly approved, and verify the results through appropriate automated tests and real browser/audio testing.
 
-   The current Clean Playback application uses native HTML Audio elements. The preserved D1 application uses native Web Audio. Earlier Signalsmith Stretch and SoundTouchJS experiments remain historical or optional resources; neither library is loaded by the current application. Pitch-preserving tempo stretching is not a required D1 feature.
+   The current Clean Playback application uses native HTML Audio elements routed through per-deck Web Audio Main GainNodes in one shared context. The preserved D1 application uses its separate native Web Audio stem engine. Earlier Signalsmith Stretch and SoundTouchJS experiments remain historical or optional resources; neither library is loaded by the current application. Pitch-preserving tempo stretching is not a required D1 feature.
 
    Preserve third-party library licenses, attribution, and provenance (records identifying where external code originated). Automated test success alone does not establish that Safari playback is free of audible clicks or that native audio memory is properly released.
 8. **State ownership.** Maintain a single authoritative source for shared application state (the information that represents the application's current condition), so different parts of TuneTox do not maintain conflicting versions of the same information.

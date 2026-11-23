@@ -16,7 +16,7 @@ The new [Clean Playback entry](../tunetox.html) uses a persistent performance he
 - Each component owns only its two presentation selections and workspace. Changing one section cannot modify the other section, another deck, deck behavior, or audio state.
 - Library round trips preserve both selections. View nodes and audio players remain mounted; visibility changes use the existing hidden attribute contract.
 - Two keyboard-operable toggle buttons share the original compact performance-header selector slot. performance-upper-toggle switches Wave/Stems; performance-lower-toggle switches Cues/Controls. Their visible labels show the current view; aria-pressed is true for Stems or Controls. There are no selector rows inside either content section and no added header height.
-- Original child control names, data-cue, data-frequency-band and data-stem identities remain unchanged. Musical controls remain inactive.
+- Original child control names, data-cue, data-frequency-band and data-stem identities remain unchanged. Main Volume is now active at 0% startup with a live percentage; its caption reserves the prior 100% caption width to preserve the fader geometry. Other musical controls remain inactive. See [Main Volume contract](controls-settings.md#implemented-main-volume).
 
 The Version 1 PDF and its annotated screenshots record the preceding combined layout. Preserve them as historical styling references. The editable guide begins with a current-layout addendum; its original pages are explicitly historical. Playback behavior and audio modules are unchanged by this interface task.
 

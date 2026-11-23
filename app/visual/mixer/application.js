@@ -1,4 +1,4 @@
-import { buildDeck, sendToDeck, getLoadedSongs, createPlaybackCoordinator } from "../../behavior/mixer/deck.js";
+import { buildDeck, sendToDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume } from "../../behavior/mixer/deck.js";
 import { createAudioFileURLs } from "../../audio/deck-audio.js";
 import { createPlaybackDeck } from "./playback.js";
 import { installTouchGuards } from "./touch-guards.js";
@@ -30,6 +30,10 @@ function releaseUnusedURLs() {
 decks.forEach((deck, index) => {
   const number = index + 1;
   const view = createPlaybackDeck(number, deck, {
+    setMainVolume(value) {
+      setMainVolume(deck, value);
+      view.render();
+    },
     togglePlayback() {
       return playback.togglePlayback();
     },

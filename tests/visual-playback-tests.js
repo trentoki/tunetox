@@ -1,11 +1,24 @@
 import { runTouchGuardChecks } from "./touch-guard-tests.js";
-import { getLoadedSongs, createPlaybackCoordinator } from "../app/behavior/mixer/deck.js";
+import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume } from "../app/behavior/mixer/deck.js";
 import { createAudioFileURLs } from "../app/audio/deck-audio.js";
 const frame = document.getElementById("application");
 const output = document.getElementById("results");
 const run = document.getElementById("run");
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 function assert(value, message) { if (!value) throw new Error(message); }
+function checkMainVolumeState() {
+  const first = buildDeck(), second = buildDeck();
+  assert(first.mainVolume === 0 && second.mainVolume === 0, "Main must initialize at zero");
+  for (const value of [0, .5, 1, .99, .1, .6]) setMainVolume(first, value);
+  assert(first.mainVolume === .6 && second.mainVolume === 0, "Main state is not deck-local");
+  for (const invalid of [NaN, Infinity, -Infinity, -.01, 1.01, "0.5", null, undefined]) {
+    let rejected = false;
+    try { setMainVolume(first, invalid); } catch (error) { rejected = error instanceof RangeError; }
+    assert(rejected && first.mainVolume === .6 && second.mainVolume === 0,
+      "Invalid Main value changed state or was not rejected");
+  }
+  setMainVolume(first, 0);
+}
 function checkAudioFileResources() {
   const resources = createAudioFileURLs();
   const originalRevoke = URL.revokeObjectURL;
@@ -36,14 +49,15 @@ function checkAudioFileResources() {
 async function checkPlaybackCoordination() {
   // Controlled players let this check hold Play pending without timing races.
   function fixture() {
-    const audio = new EventTarget();
+    const deck = buildDeck();
+    const audio = deck.audio;
     let starts = 0, pauses = 0;
     audio.play = async () => { starts++; };
     audio.pause = () => { pauses++; };
     audio.load = () => {};
     const song = { name: "Current", url: "current" };
     const queue = { name: "Queued", url: "queued" };
-    const deck = { audio, song, queue, isPlaying: false };
+    Object.assign(deck, { song, queue });
     const notices = [];
     const callbacks = {
       busyChanged: busy => notices.push(busy),
@@ -121,12 +135,20 @@ run.addEventListener("click", async () => {
   try {
     checkAudioFileResources();
     pass("loaded-song list and audio URL retention/replacement/cleanup");
+    checkMainVolumeState();
+    pass("Main starts at zero, stays deck-local, and rejects invalid values without state changes");
     await checkPlaybackCoordination();
     pass("coordinator blocks overlapping actions per deck; rejection recovers; ended/error retain songs and queue");
     const source = await (await fetch("../tunetox.html")).text();
-    // Observe actual native players only in the test frame, with no production diagnostics API.
+    // Observe real players and gain nodes only in the isolated test frame.
+    // No production diagnostics interface or alternate audio implementation.
     const observer = '<base href="' + new URL("../", location.href).href + '">' +
-      '<script>window.__players=[];const NativeAudio=window.Audio;window.Audio=function(...args){const p=new NativeAudio(...args);window.__players.push(p);return p;};<\/script>';
+      '<script>window.__players=[];window.__contexts=[];window.__gains=[];window.__sources=[];' +
+      'const NativeAudio=window.Audio;window.Audio=function(...args){const p=new NativeAudio(...args);window.__players.push(p);return p;};' +
+      'const NativeContext=window.AudioContext;window.AudioContext=class extends NativeContext{' +
+      'constructor(...args){super(...args);window.__contexts.push(this);}' +
+      'createGain(){const g=super.createGain();window.__gains.push(g);return g;}' +
+      'createMediaElementSource(p){const s=super.createMediaElementSource(p);window.__sources.push(s);return s;}};<\/script>';
     frame.srcdoc = source.replace("<head>", "<head>" + observer);
     await new Promise(resolve => frame.addEventListener("load", resolve, { once: true }));
     const doc = frame.contentDocument, win = frame.contentWindow;
@@ -134,6 +156,9 @@ run.addEventListener("click", async () => {
     players = win.__players;
     assert(players.length === 4, "Expected four native media players");
     pass("four deck components and four native players");
+    assert(win.__contexts.length === 1 && win.__gains.length === 4 && win.__sources.length === 4,
+      "Expected one shared context and one source/Main gain per deck");
+    assert(win.__gains.every(gain => gain.gain.value === 0), "Audio must start with zero gain");
     const viewport = doc.querySelector('meta[name="viewport"]').content;
     assert(viewport.includes("width=device-width") && viewport.includes("initial-scale=1"), "Responsive viewport changed");
     assert(win.getComputedStyle(doc.querySelector(".app")).touchAction === "manipulation",
@@ -158,6 +183,31 @@ run.addEventListener("click", async () => {
     };
     const deck = number => doc.querySelector('.deck[data-deck="' + number + '"]');
     const play = number => deck(number).querySelector(".play-pause-button");
+    const mainInput = number => deck(number).querySelector(".main-volume-fader input");
+    const volume = (number, percent) => {
+      const input = mainInput(number);
+      input.value = String(percent);
+      input.dispatchEvent(new win.Event("input", { bubbles: true }));
+      assert(input.getAttribute("aria-valuetext") === percent + "%" &&
+        deck(number).querySelector(".main-volume-fader span").textContent === "MAIN " + percent + "%",
+        "Main percentage did not reflect Behavior state");
+    };
+    assert([1,2,3,4].every(n => !mainInput(n).disabled && mainInput(n).value === "0"),
+      "All four Main faders must be enabled at zero");
+    for (const number of [1,2,3,4]) {
+      const before = mainInput(number).getBoundingClientRect();
+      for (const percent of [0,25,50,75,100]) {
+        volume(number, percent);
+        const after = mainInput(number).getBoundingClientRect();
+        assert(mainInput(number).style.getPropertyValue("--main-volume-fill") === percent + "%",
+          "Main accent fill did not follow its current value");
+        assert(Math.abs(before.x - after.x) < .1 && Math.abs(before.width - after.width) < .1 &&
+          Math.abs(before.height - after.height) < .1,
+          "Main percentage changes shifted the existing fader geometry");
+      }
+      volume(number, 0);
+    }
+    pass("Main fill follows 0/25/50/75/100% on all decks without changing fader geometry");
     const select = (number, section, index) => {
       const toggle = deck(number).querySelector(".performance-" + section + "-toggle");
       if (toggle.getAttribute("aria-pressed") !== String(Boolean(index))) toggle.click();
@@ -213,14 +263,46 @@ run.addEventListener("click", async () => {
     }
     await until(() => players.every(p => p.currentTime > .1), "Playback clocks did not advance");
     pass("all four native players run independently");
+    const context = win.__contexts[0];
+    const meters = win.__gains.map(gain => {
+      const analyser = context.createAnalyser();
+      analyser.fftSize = 2048;
+      gain.connect(analyser);
+      return { analyser, samples: new Float32Array(analyser.fftSize) };
+    });
+    const rms = meter => {
+      meter.analyser.getFloatTimeDomainData(meter.samples);
+      return Math.sqrt(meter.samples.reduce((sum, value) => sum + value * value, 0) / meter.samples.length);
+    };
+    await delay(100);
+    assert(meters.every(meter => rms(meter) < 1e-7), "Playing at Main zero must be silent");
+    const volumeSources = players.map(p => p.src), volumeTimes = players.map(p => p.currentTime);
+    [100,50,25,0].forEach((percent, index) => volume(index + 1, percent));
+    await delay(120);
+    const levels = meters.map(rms);
+    assert(levels[0] > .005 && Math.abs(levels[1] / levels[0] - .5) < .08 &&
+      Math.abs(levels[2] / levels[0] - .25) < .04 && levels[3] < 1e-7,
+      "Measured audio must follow independent 100/50/25/0 percent Main levels");
+    volume(1, 90); volume(1, 10); volume(1, 60);
+    await delay(100);
+    assert(Math.abs(win.__gains[0].gain.value - .6) < 1e-6, "Rapid retarget did not reach final gain");
+    volume(1, 0);
+    await delay(100);
+    assert(rms(meters[0]) < 1e-7 && rms(meters[1]) > .005, "Main zero failed to mute only its deck");
+    volume(1, 60);
+    assert(players.every((p,i) => p.src === volumeSources[i] && !p.paused && p.currentTime > volumeTimes[i]),
+      "Main changes interrupted playback or changed sources");
+    pass("real post-gain signal follows 0/25/50/100%; rapid changes settle; mute and playback remain independent");
     play(1).click();
     await until(() => players[0].paused, "Pause failed");
     const pausedTime = players[0].currentTime;
     await delay(160);
     assert(Math.abs(players[0].currentTime - pausedTime) < .03, "Paused position drifted");
     assert(players.slice(1).every(p => !p.paused), "Pausing Deck 1 affected another deck");
+    await context.suspend();
     play(1).click();
     await until(() => players[0].currentTime > pausedTime + .1, "Resume failed");
+    assert(context.state === "running", "Play did not resume the suspended audio context");
     pass("Pause retains position; resume and deck independence");
 
     const priorSource = players[0].src;
@@ -231,6 +313,8 @@ run.addEventListener("click", async () => {
     deck(1).querySelector(".queue-button").click();
     await until(() => deck(1).querySelector(".song-title").textContent === "Replacement queue.wav" && !players[0].paused, "Queue swap failed");
     pass("existing queue replacement and Play Queue behavior preserved");
+    assert(mainInput(1).value === "60" && Math.abs(win.__gains[0].gain.value - .6) < 1e-6,
+      "Pause/resume or queued playback reset Main volume");
 
     const sources = players.map(p => p.src);
     const positions = players.map(p => p.currentTime);
@@ -259,6 +343,8 @@ run.addEventListener("click", async () => {
       player.removeEventListener("emptied", interrupted);
     }
     pass("every combination and Library round trip preserve all four playing sources, positions and players");
+    assert([60,50,25,0].every((value,i) => Number(mainInput(i+1).value) === value),
+      "View or Library switching reset Main volume");
 
     play(1).click();
     await until(() => players[0].paused, "Pause before rejection failed");
@@ -269,6 +355,16 @@ run.addEventListener("click", async () => {
     assert(play(1).getAttribute("aria-label") === "Play Deck 1" && !play(1).disabled, "Failed Play falsely showed success");
     players[0].play = nativePlay;
     pass("rejected playback is reported and transport recovers");
+    const nativeResume = context.resume;
+    context.resume = () => Promise.reject(new Error("Intentional context rejection"));
+    try {
+      play(1).click();
+      await until(() => doc.getElementById("playback-status").textContent.includes("Intentional context rejection"),
+        "Audio-context failure not reported");
+      assert(players[0].paused && !play(1).disabled && play(1).getAttribute("aria-label") === "Play Deck 1",
+        "Context rejection left media running or controls locked");
+    } finally { context.resume = nativeResume; }
+    pass("context resume failure stops that player, reports failure, and releases the operation guard");
 
     players[1].currentTime = players[1].duration - .05;
     await until(() => players[1].ended, "Natural end not observed");

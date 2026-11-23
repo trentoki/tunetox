@@ -45,6 +45,10 @@ h1 small { font-size: 9px; color: #b8afbd; margin-left: 10px; }
 .play-pause-button { grid-column: 1; grid-row: 3; font-size: 16px; }
 .queue-button { grid-column: 2; grid-row: 3; font-size: 8px; color: #90a8b4; }
 .main-volume-fader { grid-column: 3 / 5; grid-row: 3; display: flex; align-items: center; gap: 6px; font-size: 8px; white-space: nowrap; color: var(--accent); }
+/* Reserve the original MAIN 100% caption width so the fader never shifts. */
+.main-volume-fader > span { display: grid; }
+.main-volume-fader > span::before { content: "MAIN 100%"; visibility: hidden; grid-area: 1 / 1; }
+.main-volume-fader output { grid-area: 1 / 1; }
 input[type="range"] { accent-color: var(--accent); min-width: 0; width: 100%; height: 18px; }
 input[type="range"] { appearance: none; -webkit-appearance: none; background: transparent; opacity: 1; }
 /* Horizontal gestures belong to the native fader; vertical scrolling and pinch
@@ -54,7 +58,8 @@ input[type="range"]::-webkit-slider-runnable-track { height: 6px; background: #3
 input[type="range"]::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border: 0; border-radius: 50%; background: var(--accent); margin-top: -8px; }
 input[type="range"]::-moz-range-track { height: 6px; background: #36586c; border-radius: 4px; }
 input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 0; border-radius: 50%; background: var(--accent); }
-.main-volume-fader input::-webkit-slider-runnable-track { height: 3px; background: var(--accent); }
+.main-volume-fader input::-webkit-slider-runnable-track { height: 3px; background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--main-volume-fill, 0%), #36586c var(--main-volume-fill, 0%), #36586c 100%); }
+.main-volume-fader input::-moz-range-track { background: linear-gradient(to right, var(--accent) 0%, var(--accent) var(--main-volume-fill, 0%), #36586c var(--main-volume-fill, 0%), #36586c 100%); }
 .main-volume-fader input::-webkit-slider-thumb { width: 22px; height: 15px; border-radius: 8px; margin-top: -6px; background: white; }
 .main-volume-fader input::-moz-range-thumb { width: 22px; height: 15px; border-radius: 8px; background: white; }
 .waveform-overview { grid-column: 1 / 5; grid-row: 4; position: relative; background: #07131c; border: 1px solid #304c61; border-radius: 3px; overflow: hidden; }
