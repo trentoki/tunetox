@@ -3,11 +3,6 @@ const themes = Object.freeze({
   default: { label: "Default", stylesheet: null },
   plasma: { label: "Plasma Purple", stylesheet: "app/visual/themes/plasma/theme.css" }
 });
-const palettes = Object.freeze({
-  decks: ["#bb6bff", "#ed65d7", "#4dcdf1", "#69e5aa"],
-  uniform: ["#bb6bff", "#bb6bff", "#bb6bff", "#bb6bff"],
-  controls: ["#bb6bff", "#bb6bff", "#bb6bff", "#bb6bff"]
-});
 const defaultColors = ["#bb6bff", "#ed65d7", "#4dcdf1", "#69e5aa"];
 let stylesheet;
 export function installThemeControls(container, deckContainer) {
@@ -40,7 +35,8 @@ export function installThemeControls(container, deckContainer) {
     const mode = modeSelect.value;
     const deckColors = mode === "uniform" ? Array(4).fill(colorInputs[0].value) : colorInputs.map(input => input.value);
     deckContainer.querySelectorAll(".deck").forEach((deck, index) => {
-      deck.style.setProperty("--accent", deckColors[index] || deckColors[0]);
+      if (themeSelect.value === "default") deck.style.removeProperty("--accent");
+      else deck.style.setProperty("--accent", deckColors[index] || deckColors[0]);
     });
     colorInputs.forEach((input, index) => { input.hidden = mode === "uniform" && index > 0; });
   }
