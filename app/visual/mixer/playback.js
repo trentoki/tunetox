@@ -277,6 +277,7 @@ export function createPlaybackDeck(number, deck, actions) {
     mainPercentage.textContent = "MAIN " + percentage + "%";
     mainInput.value = String(percentage);
     mainInput.style.setProperty("--main-volume-fill", percentage + "%");
+    mainFaderSurface.style.setProperty("--main-volume-percent", percentage + "%");
     mainInput.setAttribute("aria-valuetext", percentage + "%");
     performance.hidden = workspace !== "performance-view";
     library.hidden = workspace !== "library-view";
