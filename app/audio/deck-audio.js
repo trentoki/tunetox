@@ -1,3 +1,4 @@
+import { summarizeWaveform } from "./waveform-summary.js";
 // Buffered Signalsmith transport. Visual/Behavior retain the same persistent
 // EventTarget per deck; source-time getters/events replace native media clocks.
 // See specs/controls-settings.md for timeline, cancellation and latency limits.
@@ -121,7 +122,7 @@ export function buildAudio() {
   gate.gain.value = 0;
   gate.connect(mainVolumeGain);
   const deckPlaybackInfo = { deckAudio, gate, node: null, thisSongLoadingCanBeStopped: null, latestReplaceOrRemoveNumber: 0, latestDeckActionNumber: 0, latestTempoOrPitchChangeNumber: 0,
-    loading: false, playing: false, ended: false, error: null, duration: 0,
+    loading: false, playing: false, ended: false, error: null, duration: 0, waveformPeaks: null,
     songPosition: 0, playbackReferencePoint: null, rate: 1, pitch: 0, latency: 0, url: "", timer: null, cutoff: null };
   deckAudioStates.set(deckAudio, deckPlaybackInfo);
   mainVolumes.set(deckAudio, { gain: mainVolumeGain, ramp: { from: 0, to: 0, start: 0, end: 0 } });
@@ -134,7 +135,8 @@ export function buildAudio() {
     ended: { get: () => deckPlaybackInfo.ended },
     readyState: { get: () => deckPlaybackInfo.node && !deckPlaybackInfo.loading ? 2 : 0 },
     src: { get: () => deckPlaybackInfo.url },
-    error: { get: () => deckPlaybackInfo.error }
+    error: { get: () => deckPlaybackInfo.error },
+    waveformPeaks: { get: () => deckPlaybackInfo.waveformPeaks }
   });
   return deckAudio;
 }
@@ -211,6 +213,7 @@ export async function loadAudio(deckAudio, song) {
     newSongAudioProcessor.connect(deckPlaybackInfo.gate);
     deckPlaybackInfo.node = newSongAudioProcessor;
     deckPlaybackInfo.duration = decodedSongAudio.duration;
+    deckPlaybackInfo.waveformPeaks = summarizeWaveform(decodedSongAudio);
     deckPlaybackInfo.latency = latency;
     deckPlaybackInfo.songPosition = 0;
     deckPlaybackInfo.playbackReferencePoint = null;
@@ -347,6 +350,7 @@ export async function ejectAudio(deckAudio) {
   const node = deckPlaybackInfo.node;
   deckPlaybackInfo.node = null;
   deckPlaybackInfo.songPosition = deckPlaybackInfo.duration = 0;
+  deckPlaybackInfo.waveformPeaks = null;
   deckPlaybackInfo.playbackReferencePoint = null;
   deckPlaybackInfo.playing = deckPlaybackInfo.loading = deckPlaybackInfo.ended = false;
   deckPlaybackInfo.error = null;
