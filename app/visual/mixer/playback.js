@@ -227,6 +227,14 @@ export function createPlaybackDeck(number, deck, actions) {
   library.append(libraryHeader, libraryContent);
   node.append(performance, library);
 
+  function updatePlaybackTime() {
+    const songPosition = deck.audio.currentTime;
+    const duration = deck.audio.duration;
+    wave.time.value = formatTime(songPosition) + " / " + formatTime(duration);
+    const fraction = Number.isFinite(duration) && duration > 0 ? songPosition / duration : 0;
+    overviewPosition.style.left = fraction * 100 + "%";
+  }
+
   function render() {
     tempoValue.value = deck.tempoRatio.toFixed(2) + "×";
     tempoInput.value = String(Math.round((Math.log2(deck.tempoRatio) + 1) * 500));
@@ -259,10 +267,7 @@ export function createPlaybackDeck(number, deck, actions) {
     queue.disabled = !deck.queue || busy;
     queue.title = deck.queue?.name || "Queue empty";
     queue.setAttribute("aria-label", deck.queue ? "Play queued song on Deck " + number : "Queue empty");
-    wave.time.value = formatTime(deck.audio.currentTime) + " / " + formatTime(deck.audio.duration);
-    const duration = deck.audio.duration;
-    const fraction = Number.isFinite(duration) && duration > 0 ? deck.audio.currentTime / duration : 0;
-    overviewPosition.style.left = fraction * 100 + "%";
+    updatePlaybackTime();
     // Real time is displayed above; the waveform remains explicitly illustrative.
     results.replaceChildren();
     for (const song of actions.librarySongs()) {
@@ -273,6 +278,6 @@ export function createPlaybackDeck(number, deck, actions) {
     if (!results.children.length) results.append(element("p", "", "No songs loaded. Use Load D1–D4 above."));
   }
 
-  return { node, render, setBusy(value) { busy = value; render(); } };
+  return { node, render, updatePlaybackTime, setBusy(value) { busy = value; render(); } };
 }
 
