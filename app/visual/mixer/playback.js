@@ -134,8 +134,15 @@ export function createPlaybackDeck(number, deck, actions) {
   const header = element("div", "performance-header");
   const participation = button("deck-participation-button", "D" + number, "Deck " + number + " participation (preview)");
   participation.append(element("small", "", "B T H"));
-  const tempo = previewRange("tempo-slider", "Tempo", 120, 240);
-  tempo.append(element("output", "", "120.0"));
+  const tempo = previewRange("tempo-slider", "Tempo", 500, 1000);
+  const tempoInput = tempo.querySelector("input");
+  tempoInput.disabled = false;
+  tempoInput.step = "1";
+  tempoInput.setAttribute("aria-label", "Tempo ratio for Deck " + number);
+  // Log2 scale: endpoints are half/double speed, exact center is unity.
+  tempoInput.addEventListener("input", () => actions.setTempo(2 ** (2 * Number(tempoInput.value) / 1000 - 1)));
+  const tempoValue = element("output", "", "1.00×");
+  tempo.append(tempoValue);
   const pitch = previewRange("pitch-slider", "Pitch", 0, 12);
   pitch.append(element("output", "", "+0.0"));
   const libraryButton = button("library-button", "Library", "Open Library for Deck " + number, () => {
@@ -221,6 +228,10 @@ export function createPlaybackDeck(number, deck, actions) {
   node.append(performance, library);
 
   function render() {
+    tempoValue.value = deck.tempoRatio.toFixed(2) + "×";
+    tempoInput.value = String(Math.round((Math.log2(deck.tempoRatio) + 1) * 500));
+    tempoInput.setAttribute("aria-valuetext", deck.tempoRatio.toFixed(2) + " times original speed");
+    tempoInput.disabled = busy;
     const percentage = Math.round(deck.mainVolume * 100);
     mainPercentage.textContent = "MAIN " + percentage + "%";
     mainInput.value = String(percentage);

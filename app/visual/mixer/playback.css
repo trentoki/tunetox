@@ -36,6 +36,7 @@ h1 small { font-size: 9px; color: #b8afbd; margin-left: 10px; }
 .pitch-slider { grid-column: 2 / 4; width: calc(50% - 2px); justify-self: end; }
 .tempo-slider span, .pitch-slider span { display: block; font-size: 8px; color: #9eb5c5; }
 .tempo-slider input, .pitch-slider input { display: none; }
+.tempo-slider input { display: block; position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
 .tempo-slider output, .pitch-slider output { display: block; font-size: 12px; color: var(--accent); font-weight: 700; }
 .library-button { grid-column: 4; grid-row: 1; font-size: 8px; }
 .performance-header > .song-title { grid-column: 1 / 5; grid-row: 2; padding-right: 146px; align-self: center; font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

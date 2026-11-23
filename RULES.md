@@ -12,6 +12,7 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
 4. A queued-song swap atomically replaces the outgoing song, begins the replacement, and inherits the outgoing deck's current stem levels. Automatic advancement at song end follows this same handoff when a queue is present. Do not silently overwrite an occupied queue.
 5. Original song BPM and key remain distinct from current playback tempo and sounding pitch. Decks retain independent transport. Pitch-preserving time stretching is a desired capability; its DSP and limitations belong in technical specifications.
 6. Layout or view changes never load/unload songs, interrupt playback, reset musical settings, or trigger matching.
+7. Independent Tempo spans 0.5×–2.0×, preserves musical pitch, and uses a logarithmic slider with 1.0× exactly at its center. This ratio does not imply BPM detection or enable musical matching. The independent Pitch slider remains disabled in the current Tempo increment. Seeking uses source seconds; do not claim sample-accurate audible positioning without verification.
 
 ## 2. Musical Matching
 

@@ -14,9 +14,9 @@ The new [Clean Playback entry](../tunetox.html) uses a persistent performance he
 - Lower: Cues (pads and loop controls) or Controls (filter, EQ and effects).
 - Defaults: Wave + Cues in the Performance workspace for all four decks.
 - Each component owns only its two presentation selections and workspace. Changing one section cannot modify the other section, another deck, deck behavior, or audio state.
-- Library round trips preserve both selections. View nodes and audio players remain mounted; visibility changes use the existing hidden attribute contract.
+- Library round trips preserve both selections. View nodes and audio transport identities remain persistent; visibility changes use the existing hidden attribute contract.
 - Two keyboard-operable toggle buttons share the original compact performance-header selector slot. performance-upper-toggle switches Wave/Stems; performance-lower-toggle switches Cues/Controls. Their visible labels show the current view; aria-pressed is true for Stems or Controls. There are no selector rows inside either content section and no added header height.
-- Original child control names, data-cue, data-frequency-band and data-stem identities remain unchanged. Main Volume is now active at 0% startup with a live percentage; its caption reserves the prior 100% caption width to preserve the fader geometry. Other musical controls remain inactive. See [Main Volume contract](controls-settings.md#implemented-main-volume).
+- Original child control names, data-cue, data-frequency-band and data-stem identities remain unchanged. Main Volume is now active at 0% startup with a live percentage; its caption reserves the prior 100% caption width to preserve the fader geometry. Tempo is active in its existing header slot via a transparent native range over the numeric display: 0.5×–2.0× with logarithmic mapping and unity exactly centered. Its display is a ratio, not an invented BPM. Pitch stays disabled. Other musical controls remain inactive. See [control contracts](controls-settings.md).
 
 The Version 1 PDF and its annotated screenshots record the preceding combined layout. Preserve them as historical styling references. The editable guide begins with a current-layout addendum; its original pages are explicitly historical. Playback behavior and audio modules are unchanged by this interface task.
 

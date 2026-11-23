@@ -22,18 +22,20 @@ export function designDeck(deck, container) {
     eject.disabled = deck.isPlaying || deck.song === null;
   }
 
-  send.addEventListener("change", () => {
+  send.addEventListener("change", async () => {
     const file = send.files[0];
     if (!file) return;
     // Keep the file available to the browser's audio player.
-    sendToDeck(deck, { name: file.name, url: URL.createObjectURL(file) });
+    try {
+      await sendToDeck(deck, { name: file.name, url: URL.createObjectURL(file) });
+    } catch (error) { alert("Audio could not load: " + error.message); }
     send.value = "";
     updateDeckDesign();
   });
 
   play.addEventListener("click", async () => {
     try {
-      if (deck.isPlaying) pauseDeck(deck);
+      if (deck.isPlaying) await pauseDeck(deck);
       else await playDeck(deck);
     } catch (error) {
       alert("Playback could not start: " + error.message);
@@ -50,8 +52,8 @@ export function designDeck(deck, container) {
     updateDeckDesign();
   });
 
-  eject.addEventListener("click", () => {
-    ejectSong(deck);
+  eject.addEventListener("click", async () => {
+    await ejectSong(deck);
     updateDeckDesign();
   });
 

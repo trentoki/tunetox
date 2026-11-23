@@ -1,4 +1,4 @@
-import { buildAudio, loadAudio, startAudio, pauseAudio, ejectAudio, setAudioMainVolume } from "../../audio/deck-audio.js";
+import { buildAudio, loadAudio, startAudio, pauseAudio, ejectAudio, seekAudio, setAudioTempo, setAudioMainVolume } from "../../audio/deck-audio.js";
 
 // Behavior: deck decisions and state. Visual controls are defined elsewhere.
 export function buildDeck() {
@@ -7,6 +7,8 @@ export function buildDeck() {
     queue: null,
     isPlaying: false,
     mainVolume: 0,
+    tempoRatio: 1,
+    loadingSong: null,
     audio: buildAudio()
   };
 }
@@ -27,11 +29,14 @@ export function getLoadedSongs(decks) {
   return decks.filter(deck => deck.song).map(deck => deck.song);
 }
 
-export function loadSong(deck, song) {
+export async function loadSong(deck, song) {
   if (deck.isPlaying) return false;
-  loadAudio(deck.audio, song);
-  deck.song = song;
-  return true;
+  deck.loadingSong = song;
+  try {
+    await loadAudio(deck.audio, song);
+    deck.song = song;
+    return true;
+  } finally { if (deck.loadingSong === song) deck.loadingSong = null; }
 }
 
 export function loadQueue(deck, song) {
@@ -41,9 +46,22 @@ export function loadQueue(deck, song) {
 export function sendToDeck(deck, song) {
   if (deck.isPlaying) {
     loadQueue(deck, song);
+    return { kind: "queued", song };
   } else {
-    loadSong(deck, song);
+    return loadSong(deck, song).then(() => ({ kind: "loaded", song }));
   }
+}
+
+export function setTempo(deck, ratio) {
+  if (!Number.isFinite(ratio) || ratio < .5 || ratio > 2) throw new RangeError("Tempo ratio must be from 0.5 to 2.");
+  const applied = setAudioTempo(deck.audio, ratio);
+  deck.tempoRatio = ratio;
+  return applied;
+}
+
+export async function seekDeck(deck, seconds) {
+  await seekAudio(deck.audio, seconds);
+  deck.isPlaying = !deck.audio.paused;
 }
 
 export async function playDeck(deck) {
@@ -52,24 +70,24 @@ export async function playDeck(deck) {
   deck.isPlaying = true;
 }
 
-export function pauseDeck(deck) {
+export async function pauseDeck(deck) {
   if (!deck.isPlaying) return;
-  pauseAudio(deck.audio);
+  await pauseAudio(deck.audio);
   deck.isPlaying = false;
 }
 
-export function ejectSong(deck) {
+export async function ejectSong(deck) {
   if (deck.isPlaying) return;
-  ejectAudio(deck.audio);
+  await ejectAudio(deck.audio);
   deck.song = null;
 }
 
 export async function playQueue(deck) {
   if (deck.queue === null) return;
   const nextSong = deck.queue;
-  pauseAudio(deck.audio);
+  await pauseAudio(deck.audio);
   deck.isPlaying = false;
-  loadSong(deck, nextSong);
+  await loadSong(deck, nextSong);
   deck.queue = null;
   await playDeck(deck);
 }
@@ -87,9 +105,11 @@ export function createPlaybackCoordinator(deck, callbacks) {
     pending = true;
     callbacks.busyChanged(true);
     try {
-      await operation();
-      callbacks.completed();
+      const result = await operation();
+      callbacks.completed(result);
+      return result;
     } catch (error) {
+      deck.isPlaying = !deck.audio.paused;
       callbacks.failed(error);
     } finally {
       pending = false;
@@ -110,6 +130,19 @@ export function createPlaybackCoordinator(deck, callbacks) {
   return {
     isPending: () => pending,
     togglePlayback: () => run(() => deck.isPlaying ? pauseDeck(deck) : playDeck(deck)),
-    playQueue: () => run(() => playQueue(deck))
+    playQueue: () => run(() => playQueue(deck)),
+    sendToDeck(song) {
+      if (pending) return Promise.resolve();
+      // Queue replacement does no asynchronous work: retain immediate replacement
+      // and feedback even when two files are sent in the same event turn.
+      if (deck.isPlaying) {
+        const result = sendToDeck(deck, song);
+        callbacks.completed(result);
+        callbacks.settled();
+        return Promise.resolve(result);
+      }
+      return run(() => sendToDeck(deck, song));
+    },
+    seek: seconds => run(() => seekDeck(deck, seconds))
   };
 }
