@@ -21,21 +21,11 @@ function button(className, text, label, action) {
   return node;
 }
 
-// Deterministic illustration only; no decoding, analysis or audio-derived claims.
-function waveform(seed) {
+function emptyWaveform() {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("viewBox", "0 0 360 160");
   svg.setAttribute("preserveAspectRatio", "none");
   svg.setAttribute("aria-hidden", "true");
-  for (let index = 0; index < 60; index++) {
-    const height = 12 + Math.abs(Math.sin(index * .43 + seed) * Math.cos(index * .17)) * 136;
-    const bar = document.createElementNS(svg.namespaceURI, "rect");
-    bar.setAttribute("x", index * 6);
-    bar.setAttribute("y", (160 - height) / 2);
-    bar.setAttribute("width", 3);
-    bar.setAttribute("height", height);
-    svg.append(bar);
-  }
   return svg;
 }
 
@@ -85,12 +75,12 @@ function previewRange(className, label, value, max = 100) {
 function createWave(number) {
   const node = element("div", "wave-view");
   const wave = element("div", "scrolling-waveform");
-  wave.append(waveform(number), element("span", "playhead"));
-  const caption = element("small", "", "Hold · ±5% nudge     ZOOM · ILLUSTRATIVE");
-  wave.append(caption);
+  const scrollingGraphic = emptyWaveform();
+  const scrollingPlayhead = element("span", "playhead");
+  wave.append(scrollingGraphic, scrollingPlayhead);
   const time = element("output", "current-playback-time", "0:00 / —");
   node.append(wave, time);
-  return { node, time };
+  return { node, time, scrollingPlayhead };
 }
 
 function createCues() {
@@ -204,11 +194,10 @@ export function createPlaybackDeck(number, deck, actions) {
   mainInput.setAttribute("aria-label", "Main volume for Deck " + number);
   mainInput.addEventListener("input", () => actions.setMainVolume(Number(mainInput.value) / 100));
   const overview = element("div", "waveform-overview");
-  const overviewGraphic = waveform(number);
+  const overviewGraphic = emptyWaveform();
   overview.append(overviewGraphic);
   const overviewPosition = element("span", "playhead");
-  const overviewCaption = element("small", "", "FULL SONG · LOAD AUDIO");
-  overview.append(overviewPosition, overviewCaption);
+  overview.append(overviewPosition);
   let displayedPeaks = null;
   header.append(participation, tempo, pitch, libraryButton, title, selector, play, queue, main, overview);
   const content = element("div", "performance-content");
@@ -272,7 +261,8 @@ export function createPlaybackDeck(number, deck, actions) {
     if (peaks !== displayedPeaks) {
       displayedPeaks = peaks;
       drawWaveform(overviewGraphic, peaks);
-      overviewCaption.textContent = peaks ? "FULL SONG · REAL AUDIO" : "FULL SONG · LOAD AUDIO";
+      overviewPosition.hidden = !peaks;
+      wave.scrollingPlayhead.hidden = !peaks;
     }
     tempoValue.value = deck.tempoRatio.toFixed(2) + "×";
     tempoInput.value = String(Math.round((Math.log2(deck.tempoRatio) + 1) * 500));
@@ -306,7 +296,7 @@ export function createPlaybackDeck(number, deck, actions) {
     queue.title = deck.queue?.name || "Queue empty";
     queue.setAttribute("aria-label", deck.queue ? "Play queued song on Deck " + number : "Queue empty");
     updatePlaybackTime();
-    // The full-song waveform is derived from source samples; zoomed view is still illustrative.
+    // Scrolling waveform remains blank until real audio-derived rendering is implemented.
     results.replaceChildren();
     for (const song of actions.librarySongs()) {
       const row = element("div", "search-result");
