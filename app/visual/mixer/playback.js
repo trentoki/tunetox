@@ -39,6 +39,20 @@ function waveform(seed) {
   return svg;
 }
 
+function drawWaveform(svg, peaks) {
+  svg.replaceChildren();
+  if (!peaks?.length) return;
+  for (let index = 0; index < peaks.length; index++) {
+    const height = Math.max(1, peaks[index] * 160);
+    const bar = document.createElementNS(svg.namespaceURI, "rect");
+    bar.setAttribute("x", String(index * 360 / peaks.length));
+    bar.setAttribute("y", String((160 - height) / 2));
+    bar.setAttribute("width", String(360 / peaks.length));
+    bar.setAttribute("height", String(height));
+    svg.append(bar);
+  }
+}
+
 function previewRange(className, label, value, max = 100) {
   const node = element("label", className);
   node.append(element("span", "", label));
@@ -175,9 +189,12 @@ export function createPlaybackDeck(number, deck, actions) {
   mainInput.setAttribute("aria-label", "Main volume for Deck " + number);
   mainInput.addEventListener("input", () => actions.setMainVolume(Number(mainInput.value) / 100));
   const overview = element("div", "waveform-overview");
-  overview.append(waveform(number));
+  const overviewGraphic = waveform(number);
+  overview.append(overviewGraphic);
   const overviewPosition = element("span", "playhead");
-  overview.append(overviewPosition, element("small", "", "FULL SONG · ILLUSTRATIVE"));
+  const overviewCaption = element("small", "", "FULL SONG · LOAD AUDIO");
+  overview.append(overviewPosition, overviewCaption);
+  let displayedPeaks = null;
   header.append(participation, tempo, pitch, libraryButton, title, selector, play, queue, main, overview);
   const content = element("div", "performance-content");
   const upperSection = element("section", "performance-upper-section");
@@ -236,6 +253,12 @@ export function createPlaybackDeck(number, deck, actions) {
   }
 
   function render() {
+    const peaks = deck.audio.waveformPeaks;
+    if (peaks !== displayedPeaks) {
+      displayedPeaks = peaks;
+      drawWaveform(overviewGraphic, peaks);
+      overviewCaption.textContent = peaks ? "FULL SONG · REAL AUDIO" : "FULL SONG · LOAD AUDIO";
+    }
     tempoValue.value = deck.tempoRatio.toFixed(2) + "×";
     tempoInput.value = String(Math.round((Math.log2(deck.tempoRatio) + 1) * 500));
     tempoInput.setAttribute("aria-valuetext", deck.tempoRatio.toFixed(2) + " times original speed");
@@ -268,7 +291,7 @@ export function createPlaybackDeck(number, deck, actions) {
     queue.title = deck.queue?.name || "Queue empty";
     queue.setAttribute("aria-label", deck.queue ? "Play queued song on Deck " + number : "Queue empty");
     updatePlaybackTime();
-    // Real time is displayed above; the waveform remains explicitly illustrative.
+    // The full-song waveform is derived from source samples; zoomed view is still illustrative.
     results.replaceChildren();
     for (const song of actions.librarySongs()) {
       const row = element("div", "search-result");
