@@ -2,6 +2,7 @@ import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, se
 import { createAudioFileURLs } from "../../audio/deck-audio.js";
 import { createPlaybackDeck } from "./playback.js";
 import { installTouchGuards } from "./touch-guards.js";
+import { installThemeControls } from "../themes/theme-manager.js";
 
 // Visual startup: assemble existing deck behavior, audio resources, and views.
 // Each component receives its existing Clean Deck state and deck-bound actions.
@@ -104,3 +105,4 @@ decks.forEach((deck, index) => {
   }
 });
 renderAll();
+installThemeControls(document.querySelector(".mixer-header"), container);
