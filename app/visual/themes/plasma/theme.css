@@ -78,6 +78,7 @@
 }
 [data-theme="plasma"] .main-fader-cap {
   pointer-events: none;
+  display: block;
   position: absolute;
   z-index: 3;
   top: 50%;
