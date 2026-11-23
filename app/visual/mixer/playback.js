@@ -55,7 +55,7 @@ function drawWaveform(svg, summary) {
     peak.setAttribute("y", String(top));
     peak.setAttribute("width", String(width));
     peak.setAttribute("height", String(Math.max(0.5, bottom - top)));
-    peak.setAttribute("opacity", "0.35");
+    peak.setAttribute("opacity", "0.75");
     svg.append(peak);
     // RMS body makes sustained loudness easier to distinguish from brief peaks.
     const bodyHeight = rms[index] * 80 * visualGain;
