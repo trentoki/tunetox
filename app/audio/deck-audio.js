@@ -37,11 +37,11 @@ function notify(deckPlaybackInfo, type) {
   deckPlaybackInfo.deckAudio.dispatchEvent(new Event(type));
 }
 
-function sourcePosition(deckPlaybackInfo, time = context.currentTime) {
-  const segment = deckPlaybackInfo.segment;
-  const position = deckPlaybackInfo.playing && segment
-    ? segment.position + Math.max(0, time - segment.time) * segment.rate : deckPlaybackInfo.position;
-  return Math.max(0, Math.min(deckPlaybackInfo.duration, position));
+function findSongPosition(deckPlaybackInfo, instant = context.currentTime) {
+  const playbackReferencePoint = deckPlaybackInfo.playbackReferencePoint;
+  const songPosition = deckPlaybackInfo.playing && playbackReferencePoint
+    ? playbackReferencePoint.songPosition + Math.max(0, instant - playbackReferencePoint.instant) * playbackReferencePoint.rate : deckPlaybackInfo.songPosition;
+  return Math.max(0, Math.min(deckPlaybackInfo.duration, songPosition));
 }
 
 function mute(deckPlaybackInfo) {
@@ -56,10 +56,10 @@ function stopClock(deckPlaybackInfo) {
 }
 
 function fail(deckPlaybackInfo, error) {
-  deckPlaybackInfo.position = sourcePosition(deckPlaybackInfo);
+  deckPlaybackInfo.songPosition = findSongPosition(deckPlaybackInfo);
   deckPlaybackInfo.playing = false;
   deckPlaybackInfo.error = error;
-  ++deckPlaybackInfo.action;
+  ++deckPlaybackInfo.latestDeckActionNumber;
   mute(deckPlaybackInfo);
   stopClock(deckPlaybackInfo);
   notify(deckPlaybackInfo, "error");
@@ -85,10 +85,10 @@ async function disposeNode(node) {
 function scheduleEnd(deckPlaybackInfo) {
   const now = context.currentTime;
   if (deckPlaybackInfo.cutoff !== null) deckPlaybackInfo.gate.gain.cancelScheduledValues(Math.max(now, deckPlaybackInfo.cutoff));
-  const segment = deckPlaybackInfo.segment;
+  const playbackReferencePoint = deckPlaybackInfo.playbackReferencePoint;
   // Retain the baseline's DSP-tail allowance; the position display is a planned
   // source coordinate, not proof of the exact sample currently at the speakers.
-  deckPlaybackInfo.cutoff = segment.time + (deckPlaybackInfo.duration - segment.position) / segment.rate + deckPlaybackInfo.latency;
+  deckPlaybackInfo.cutoff = playbackReferencePoint.instant + (deckPlaybackInfo.duration - playbackReferencePoint.songPosition) / playbackReferencePoint.rate + deckPlaybackInfo.latency;
   deckPlaybackInfo.gate.gain.setValueAtTime(0, deckPlaybackInfo.cutoff);
 }
 
@@ -97,7 +97,7 @@ function startClock(deckPlaybackInfo) {
   deckPlaybackInfo.timer = setInterval(() => {
     if (!deckPlaybackInfo.playing) return;
     if (context.currentTime >= deckPlaybackInfo.cutoff) {
-      deckPlaybackInfo.position = deckPlaybackInfo.duration;
+      deckPlaybackInfo.songPosition = deckPlaybackInfo.duration;
       deckPlaybackInfo.playing = false;
       deckPlaybackInfo.ended = true;
       mute(deckPlaybackInfo);
@@ -120,15 +120,15 @@ export function buildAudio() {
   const gate = context.createGain();
   gate.gain.value = 0;
   gate.connect(gain);
-  const deckPlaybackInfo = { deckAudio, gate, node: null, thisSongLoadingCanBeStopped: null, generation: 0, action: 0, processing: 0,
+  const deckPlaybackInfo = { deckAudio, gate, node: null, thisSongLoadingCanBeStopped: null, latestReplaceOrRemoveNumber: 0, latestDeckActionNumber: 0, processing: 0,
     loading: false, playing: false, ended: false, error: null, duration: 0,
-    position: 0, segment: null, rate: 1, pitch: 0, latency: 0, url: "", timer: null, cutoff: null };
+    position: 0, playbackReferencePoint: null, rate: 1, pitch: 0, latency: 0, url: "", timer: null, cutoff: null };
   deckAudioStates.set(deckAudio, deckPlaybackInfo);
   mainVolumes.set(deckAudio, { gain, ramp: { from: 0, to: 0, start: 0, end: 0 } });
   // Compatibility is limited to read-only media-style information and events.
   // Transport commands are the exported Audio functions, not fake HTML methods.
   Object.defineProperties(deckAudio, {
-    currentTime: { get: () => sourcePosition(deckPlaybackInfo) },
+    currentTime: { get: () => findSongPosition(deckPlaybackInfo) },
     duration: { get: () => deckPlaybackInfo.duration },
     paused: { get: () => !deckPlaybackInfo.playing },
     ended: { get: () => deckPlaybackInfo.ended },
@@ -161,9 +161,9 @@ export async function loadAudio(deckAudio, song) {
   const thisSongLoadingCanBeStopped = new AbortController();
   const signal = thisSongLoadingCanBeStopped.signal;
   deckPlaybackInfo.thisSongLoadingCanBeStopped = thisSongLoadingCanBeStopped;
-  const generation = ++deckPlaybackInfo.generation;
-  ++deckPlaybackInfo.action;
-  deckPlaybackInfo.position = sourcePosition(deckPlaybackInfo);
+  const latestReplaceOrRemoveNumber = ++deckPlaybackInfo.latestReplaceOrRemoveNumber;
+  ++deckPlaybackInfo.latestDeckActionNumber;
+  deckPlaybackInfo.songPosition = findSongPosition(deckPlaybackInfo);
   deckPlaybackInfo.playing = false;
   deckPlaybackInfo.loading = true;
   deckPlaybackInfo.error = null;
@@ -177,7 +177,7 @@ export async function loadAudio(deckAudio, song) {
     // Resume immediately in the Load gesture, before file reading or module import.
     await timeLimitOrCancel(context.resume(), signal, "Audio context resume");
     if (context.deckPlaybackInfo !== "running") throw new Error("Audio context did not resume. Tap Load again.");
-    if (deckPlaybackInfo.node) await timeLimitOrCancel(deckPlaybackInfo.node.schedule({ active: false, input: deckPlaybackInfo.position }), signal, "Previous song pause");
+    if (deckPlaybackInfo.node) await timeLimitOrCancel(deckPlaybackInfo.node.schedule({ active: false, input: deckPlaybackInfo.songPosition }), signal, "Previous song pause");
     const response = await timeLimitOrCancel(fetch(song.url, { signal }), signal, "Audio file read", 30000);
     if (!response.ok) throw new Error("Audio file could not be read.");
     const bytes = await timeLimitOrCancel(response.arrayBuffer(), signal, "Audio file read", 30000);
@@ -189,7 +189,7 @@ export async function loadAudio(deckAudio, song) {
     const creating = factory(context);
     // If cancelled/timed out before ready, dispose the late result too.
     let accepted = false;
-    creating.then(node => { if (signal.aborted || generation !== deckPlaybackInfo.generation) void disposeNode(node); }, () => {});
+    creating.then(node => { if (signal.aborted || latestReplaceOrRemoveNumber !== deckPlaybackInfo.latestReplaceOrRemoveNumber) void disposeNode(node); }, () => {});
     try {
       candidate = await timeLimitOrCancel(creating, signal, "Signalsmith preparation", 20000);
       accepted = true;
@@ -198,7 +198,7 @@ export async function loadAudio(deckAudio, song) {
     }
     candidate.onprocessorerror = () => {
       const error = new Error("Signalsmith processor failed. Reload the song.");
-      if (generation !== deckPlaybackInfo.generation) return;
+      if (latestReplaceOrRemoveNumber !== deckPlaybackInfo.latestReplaceOrRemoveNumber) return;
       if (deckPlaybackInfo.node === candidate) fail(deckPlaybackInfo, error);
       else thisSongLoadingCanBeStopped.abort();
     };
@@ -206,24 +206,24 @@ export async function loadAudio(deckAudio, song) {
     await timeLimitOrCancel(candidate.addBuffers(channels, channels.map(channel => channel.buffer)), signal, "Signalsmith buffers");
     const latency = await timeLimitOrCancel(candidate.latency(), signal, "Signalsmith latency");
     if (!Number.isFinite(latency) || latency < 0) throw new Error("Invalid Signalsmith latency.");
-    if (signal.aborted || generation !== deckPlaybackInfo.generation) throw new DOMException("Superseded load", "AbortError");
+    if (signal.aborted || latestReplaceOrRemoveNumber !== deckPlaybackInfo.latestReplaceOrRemoveNumber) throw new DOMException("Superseded load", "AbortError");
     const old = deckPlaybackInfo.node;
     candidate.connect(deckPlaybackInfo.gate);
     deckPlaybackInfo.node = candidate;
     deckPlaybackInfo.duration = decoded.duration;
     deckPlaybackInfo.latency = latency;
-    deckPlaybackInfo.position = 0;
-    deckPlaybackInfo.segment = null;
+    deckPlaybackInfo.songPosition = 0;
+    deckPlaybackInfo.playbackReferencePoint = null;
     deckPlaybackInfo.ended = false;
     deckPlaybackInfo.url = song.url;
     deckPlaybackInfo.loading = false;
     notify(deckPlaybackInfo, "loadedmetadata");
     notify(deckPlaybackInfo, "durationchange");
     await disposeNode(old);
-    if (signal.aborted || generation !== deckPlaybackInfo.generation) throw new DOMException("Superseded load", "AbortError");
+    if (signal.aborted || latestReplaceOrRemoveNumber !== deckPlaybackInfo.latestReplaceOrRemoveNumber) throw new DOMException("Superseded load", "AbortError");
   } catch (error) {
     if (candidate && candidate !== deckPlaybackInfo.node) await disposeNode(candidate);
-    if (generation === deckPlaybackInfo.generation) {
+    if (latestReplaceOrRemoveNumber === deckPlaybackInfo.latestReplaceOrRemoveNumber) {
       thisSongLoadingCanBeStopped.abort();
       deckPlaybackInfo.loading = false;
       fail(deckPlaybackInfo, error);
@@ -236,19 +236,19 @@ export async function startAudio(deckAudio) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
   if (!deckPlaybackInfo.node || deckPlaybackInfo.loading) throw new Error("Load a song before pressing Play.");
   if (deckPlaybackInfo.error) throw deckPlaybackInfo.error;
-  const action = ++deckPlaybackInfo.action;
+  const latestDeckActionNumber = ++deckPlaybackInfo.latestDeckActionNumber;
   try {
     await timeLimitOrCancel(context.resume(), deckPlaybackInfo.thisSongLoadingCanBeStopped.signal, "Audio context resume");
-    if (action !== deckPlaybackInfo.action) throw new DOMException("Superseded Play", "AbortError");
+    if (latestDeckActionNumber !== deckPlaybackInfo.latestDeckActionNumber) throw new DOMException("Superseded Play", "AbortError");
     if (context.deckPlaybackInfo !== "running") throw new Error("Audio context did not resume. Tap Play again.");
-    if (deckPlaybackInfo.position >= deckPlaybackInfo.duration) deckPlaybackInfo.position = 0;
+    if (deckPlaybackInfo.songPosition >= deckPlaybackInfo.duration) deckPlaybackInfo.songPosition = 0;
     const when = context.currentTime + deckPlaybackInfo.latency;
     // schedule() sends its command immediately; its reply is only an acknowledgement.
     // Commit the matching clock and gate before waiting, so a delayed reply cannot
-    // discard the opening audio. Later tempo commands now see this active segment.
-    const scheduled = deckPlaybackInfo.node.schedule({ active: true, input: deckPlaybackInfo.position, output: when,
+    // discard the opening audio. Later tempo commands now see this active playbackReferencePoint.
+    const scheduled = deckPlaybackInfo.node.schedule({ active: true, input: deckPlaybackInfo.songPosition, output: when,
       rate: deckPlaybackInfo.rate, semitones: deckPlaybackInfo.pitch });
-    deckPlaybackInfo.segment = { time: when, position: deckPlaybackInfo.position, rate: deckPlaybackInfo.rate };
+    deckPlaybackInfo.playbackReferencePoint = { instant: when, songPosition: deckPlaybackInfo.songPosition, rate: deckPlaybackInfo.rate };
     deckPlaybackInfo.playing = true;
     deckPlaybackInfo.ended = false;
     mute(deckPlaybackInfo);
@@ -257,10 +257,10 @@ export async function startAudio(deckAudio) {
     scheduleEnd(deckPlaybackInfo);
     startClock(deckPlaybackInfo);
     await timeLimitOrCancel(scheduled, deckPlaybackInfo.thisSongLoadingCanBeStopped.signal, "Signalsmith Play");
-    if (action !== deckPlaybackInfo.action) throw new DOMException("Superseded Play", "AbortError");
+    if (latestDeckActionNumber !== deckPlaybackInfo.latestDeckActionNumber) throw new DOMException("Superseded Play", "AbortError");
   } catch (error) {
-    if (action === deckPlaybackInfo.action) {
-      deckPlaybackInfo.position = sourcePosition(deckPlaybackInfo);
+    if (latestDeckActionNumber === deckPlaybackInfo.latestDeckActionNumber) {
+      deckPlaybackInfo.songPosition = findSongPosition(deckPlaybackInfo);
       deckPlaybackInfo.playing = false;
       mute(deckPlaybackInfo);
       stopClock(deckPlaybackInfo);
@@ -271,14 +271,14 @@ export async function startAudio(deckAudio) {
 
 export async function pauseAudio(deckAudio) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
-  ++deckPlaybackInfo.action;
+  ++deckPlaybackInfo.latestDeckActionNumber;
   const now = context.currentTime;
-  deckPlaybackInfo.position = sourcePosition(deckPlaybackInfo);
+  deckPlaybackInfo.songPosition = findSongPosition(deckPlaybackInfo);
   deckPlaybackInfo.playing = false;
   stopClock(deckPlaybackInfo);
   mute(deckPlaybackInfo);
   if (deckPlaybackInfo.node) {
-    const stopped = deckPlaybackInfo.node.schedule({ active: false, input: deckPlaybackInfo.position, output: now, semitones: deckPlaybackInfo.pitch });
+    const stopped = deckPlaybackInfo.node.schedule({ active: false, input: deckPlaybackInfo.songPosition, output: now, semitones: deckPlaybackInfo.pitch });
     if (context.deckPlaybackInfo === "running") await timeLimitOrCancel(stopped, deckPlaybackInfo.thisSongLoadingCanBeStopped.signal, "Signalsmith Pause");
   }
   notify(deckPlaybackInfo, "timeupdate");
@@ -289,14 +289,14 @@ export async function seekAudio(deckAudio, seconds) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
   if (!deckPlaybackInfo.node || deckPlaybackInfo.loading) throw new Error("Load a song before seeking.");
   const wasPlaying = deckPlaybackInfo.playing;
-  const generation = deckPlaybackInfo.generation;
+  const latestReplaceOrRemoveNumber = deckPlaybackInfo.latestReplaceOrRemoveNumber;
   const paused = pauseAudio(deckAudio);
-  const action = deckPlaybackInfo.action;
+  const latestDeckActionNumber = deckPlaybackInfo.latestDeckActionNumber;
   await paused;
-  if (generation !== deckPlaybackInfo.generation || action !== deckPlaybackInfo.action) throw new DOMException("Superseded seek", "AbortError");
-  deckPlaybackInfo.position = Math.max(0, Math.min(deckPlaybackInfo.duration, seconds));
+  if (latestReplaceOrRemoveNumber !== deckPlaybackInfo.latestReplaceOrRemoveNumber || latestDeckActionNumber !== deckPlaybackInfo.latestDeckActionNumber) throw new DOMException("Superseded seek", "AbortError");
+  deckPlaybackInfo.songPosition = Math.max(0, Math.min(deckPlaybackInfo.duration, seconds));
   deckPlaybackInfo.ended = false;
-  if (wasPlaying && deckPlaybackInfo.position < deckPlaybackInfo.duration) await startAudio(deckAudio);
+  if (wasPlaying && deckPlaybackInfo.songPosition < deckPlaybackInfo.duration) await startAudio(deckAudio);
   notify(deckPlaybackInfo, "timeupdate");
 }
 
@@ -304,24 +304,24 @@ export async function seekAudio(deckAudio, seconds) {
 // time is continuous at the old/new-rate boundary. The DSP response has latency.
 async function changeProcessing(deckAudio, value, pitch) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
-  // Slider requests share a transport action, so only their latest reply may
-  // fail that action. A newer Pause/Play also makes an old failure irrelevant.
+  // Slider requests share a transport latestDeckActionNumber, so only their latest reply may
+  // fail that latestDeckActionNumber. A newer Pause/Play also makes an old failure irrelevant.
   const processing = ++deckPlaybackInfo.processing;
-  const action = deckPlaybackInfo.action;
+  const latestDeckActionNumber = deckPlaybackInfo.latestDeckActionNumber;
   if (pitch) deckPlaybackInfo.pitch = value;
   else deckPlaybackInfo.rate = value;
   if (!deckPlaybackInfo.playing) return;
-  const when = Math.max(context.currentTime, deckPlaybackInfo.segment.time);
-  const position = sourcePosition(deckPlaybackInfo, when);
-  deckPlaybackInfo.segment = { time: when, position, rate: deckPlaybackInfo.rate };
+  const when = Math.max(context.currentTime, deckPlaybackInfo.playbackReferencePoint.instant);
+  const position = findSongPosition(deckPlaybackInfo, when);
+  deckPlaybackInfo.playbackReferencePoint = { instant: when, songPosition: position, rate: deckPlaybackInfo.rate };
   scheduleEnd(deckPlaybackInfo);
   const node = deckPlaybackInfo.node;
-  const generation = deckPlaybackInfo.generation, signal = deckPlaybackInfo.thisSongLoadingCanBeStopped.signal;
+  const latestReplaceOrRemoveNumber = deckPlaybackInfo.latestReplaceOrRemoveNumber, signal = deckPlaybackInfo.thisSongLoadingCanBeStopped.signal;
   try {
     await timeLimitOrCancel(node.schedule({ active: true, input: position, output: when,
       rate: deckPlaybackInfo.rate, semitones: deckPlaybackInfo.pitch }), signal, "Signalsmith tempo/pitch");
   } catch (error) {
-    if (deckPlaybackInfo.node === node && deckPlaybackInfo.generation === generation && deckPlaybackInfo.action === action &&
+    if (deckPlaybackInfo.node === node && deckPlaybackInfo.latestReplaceOrRemoveNumber === latestReplaceOrRemoveNumber && deckPlaybackInfo.latestDeckActionNumber === latestDeckActionNumber &&
       deckPlaybackInfo.processing === processing && !signal.aborted) fail(deckPlaybackInfo, error);
     throw error;
   }
@@ -340,14 +340,14 @@ export function setAudioPitch(deckAudio, semitones) {
 export async function ejectAudio(deckAudio) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
   deckPlaybackInfo.thisSongLoadingCanBeStopped?.abort();
-  ++deckPlaybackInfo.generation;
-  ++deckPlaybackInfo.action;
+  ++deckPlaybackInfo.latestReplaceOrRemoveNumber;
+  ++deckPlaybackInfo.latestDeckActionNumber;
   mute(deckPlaybackInfo);
   stopClock(deckPlaybackInfo);
   const node = deckPlaybackInfo.node;
   deckPlaybackInfo.node = null;
-  deckPlaybackInfo.position = deckPlaybackInfo.duration = 0;
-  deckPlaybackInfo.segment = null;
+  deckPlaybackInfo.songPosition = deckPlaybackInfo.duration = 0;
+  deckPlaybackInfo.playbackReferencePoint = null;
   deckPlaybackInfo.playing = deckPlaybackInfo.loading = deckPlaybackInfo.ended = false;
   deckPlaybackInfo.error = null;
   deckPlaybackInfo.url = "";
