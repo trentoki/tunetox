@@ -1,5 +1,4 @@
-import { buildDeck, sendToDeck, getLoadedSongs } from "../../behavior/mixer/deck.js";
-import { createPlaybackCoordinator } from "../../behavior/mixer/playback-coordinator.js";
+import { buildDeck, sendToDeck, getLoadedSongs, createPlaybackCoordinator } from "../../behavior/mixer/deck.js";
 import { createAudioFileURLs } from "../../audio/deck-audio.js";
 import { createPlaybackDeck } from "./playback.js";
 import { installTouchGuards } from "./touch-guards.js";

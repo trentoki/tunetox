@@ -1,6 +1,5 @@
 import { runTouchGuardChecks } from "./touch-guard-tests.js";
-import { createPlaybackCoordinator } from "../app/behavior/mixer/playback-coordinator.js";
-import { getLoadedSongs } from "../app/behavior/mixer/deck.js";
+import { getLoadedSongs, createPlaybackCoordinator } from "../app/behavior/mixer/deck.js";
 import { createAudioFileURLs } from "../app/audio/deck-audio.js";
 const frame = document.getElementById("application");
 const output = document.getElementById("results");
@@ -76,6 +75,12 @@ async function checkPlaybackCoordination() {
   first.deck.audio.play = async () => {};
   await first.coordinator.togglePlayback();
   assert(first.deck.isPlaying, "Coordinator did not recover after rejected Play");
+  assert(first.notices.slice(-4).join("|") === "true|completed|false|settled",
+    "Successful Play notification order changed");
+  await second.coordinator.playQueue();
+  assert(second.deck.isPlaying && second.deck.song.name === "Queued" && second.deck.queue === null &&
+    second.notices.slice(-4).join("|") === "true|completed|false|settled",
+    "Guarded queue playback or its notification order changed");
   const song = first.deck.song, queue = first.deck.queue;
   for (const event of ["ended", "error"]) {
     first.deck.isPlaying = true;
