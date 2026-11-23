@@ -134,6 +134,8 @@ Shared musical behavior should remain consistent regardless of whether an action
 Organize files and folders according to their responsibilities, with descriptive names and understandable relationships.
 Prefer improving existing working code over unnecessary rewrites. Preserve verified functionality during restructuring.
 
+**Current approved organization:** The active [tunetox.html](tunetox.html) uses exactly three application areas: `app/visual/`, `app/behavior/`, and `app/audio/`, with no separate Integration layer. [Visual startup](app/visual/mixer/application.js) assembles the interface, [Behavior coordination](app/behavior/mixer/playback-coordinator.js) manages playback actions, and [Audio](app/audio/deck-audio.js) owns native playback and temporary file URLs. Legacy files remain in their existing locations pending separate cleanup approval. This supersedes the earlier `interface/visual/` and `interface/behavior/` path proposals below; their broader future subsystem descriptions do not establish implemented features.
+
 ### 4.5 Target Architecture (Approved Direction; Not Yet Implemented)
 
 The following describes the agreed organizational direction, **not** the current folder layout or a request to move working code immediately. Existing files must be inventoried, dependencies traced, and changes separately approved and tested before relocation.

@@ -1,9 +1,90 @@
 import { runTouchGuardChecks } from "./touch-guard-tests.js";
+import { createPlaybackCoordinator } from "../app/behavior/mixer/playback-coordinator.js";
+import { getLoadedSongs } from "../app/behavior/mixer/deck.js";
+import { createAudioFileURLs } from "../app/audio/deck-audio.js";
 const frame = document.getElementById("application");
 const output = document.getElementById("results");
 const run = document.getElementById("run");
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 function assert(value, message) { if (!value) throw new Error(message); }
+function checkAudioFileResources() {
+  const resources = createAudioFileURLs();
+  const originalRevoke = URL.revokeObjectURL;
+  const revoked = [];
+  URL.revokeObjectURL = url => { revoked.push(url); originalRevoke.call(URL, url); };
+  const loaded = { name: "Loaded", url: resources.create(new Blob(["loaded"])) };
+  const queued = { name: "Queued", url: resources.create(new Blob(["queued"])) };
+  const unused = resources.create(new Blob(["unused"]));
+  try {
+    const decks = [{ song: loaded, queue: queued }, { song: null, queue: loaded },
+      { song: queued, queue: null }];
+    const songs = getLoadedSongs(decks);
+    assert(songs.length === 2 && songs[0] === loaded && songs[1] === queued,
+      "Loaded-song list must retain deck order and object identity, excluding queues/empty decks");
+    resources.releaseUnused(decks.flatMap(deck => [deck.song?.url, deck.queue?.url]));
+    assert(revoked.length === 1 && revoked[0] === unused, "Cleanup revoked a loaded or queued URL");
+    resources.releaseUnused([loaded.url, "external-source"]);
+    assert(revoked.length === 2 && revoked[1] === queued.url, "Replaced queue URL was not released");
+    resources.releaseUnused([]);
+    resources.releaseUnused([]);
+    assert(revoked.length === 3 && revoked[2] === loaded.url,
+      "Cleanup must release each owned URL once and never revoke external sources");
+  } finally {
+    resources.releaseUnused([]);
+    URL.revokeObjectURL = originalRevoke;
+  }
+}
+async function checkPlaybackCoordination() {
+  // Controlled players let this check hold Play pending without timing races.
+  function fixture() {
+    const audio = new EventTarget();
+    let starts = 0, pauses = 0;
+    audio.play = async () => { starts++; };
+    audio.pause = () => { pauses++; };
+    audio.load = () => {};
+    const song = { name: "Current", url: "current" };
+    const queue = { name: "Queued", url: "queued" };
+    const deck = { audio, song, queue, isPlaying: false };
+    const notices = [];
+    const callbacks = {
+      busyChanged: busy => notices.push(busy),
+      completed: () => notices.push("completed"),
+      failed: error => notices.push(error.message),
+      settled: () => notices.push("settled"),
+      ended: () => notices.push("ended"),
+      mediaFailed: () => notices.push("mediaFailed")
+    };
+    return { deck, notices, coordinator: createPlaybackCoordinator(deck, callbacks),
+      starts: () => starts, pauses: () => pauses };
+  }
+  const first = fixture(), second = fixture();
+  let rejectPlay;
+  first.deck.audio.play = () => new Promise((resolve, reject) => { rejectPlay = reject; });
+  const pending = first.coordinator.togglePlayback();
+  assert(first.coordinator.isPending(), "Pending Play must hold the deck guard");
+  await first.coordinator.togglePlayback();
+  await first.coordinator.playQueue();
+  assert(first.deck.queue?.name === "Queued" && first.pauses() === 0,
+    "Overlapping Play or queued playback must be ignored");
+  await second.coordinator.togglePlayback();
+  assert(second.deck.isPlaying && second.starts() === 1, "A pending deck blocked another deck");
+  rejectPlay(new Error("Held Play rejected"));
+  await pending;
+  assert(!first.coordinator.isPending() && !first.deck.isPlaying &&
+    first.notices.join("|") === "true|Held Play rejected|false|settled",
+    "Rejected Play must release the guard and notify failure/cleanup once");
+  first.deck.audio.play = async () => {};
+  await first.coordinator.togglePlayback();
+  assert(first.deck.isPlaying, "Coordinator did not recover after rejected Play");
+  const song = first.deck.song, queue = first.deck.queue;
+  for (const event of ["ended", "error"]) {
+    first.deck.isPlaying = true;
+    first.deck.audio.dispatchEvent(new Event(event));
+    assert(!first.deck.isPlaying && first.deck.song === song && first.deck.queue === queue,
+      event + " changed loaded/queued songs or left a playing state");
+  }
+  assert(first.notices.slice(-2).join("|") === "ended|mediaFailed", "Media notifications missing");
+}
 async function until(condition, message) {
   for (let i = 0; i < 100; i++) {
     if (condition()) return;
@@ -33,6 +114,10 @@ run.addEventListener("click", async () => {
   const pass = message => { lines.push("PASS " + message); output.textContent = lines.join("\n"); };
   let players = [];
   try {
+    checkAudioFileResources();
+    pass("loaded-song list and audio URL retention/replacement/cleanup");
+    await checkPlaybackCoordination();
+    pass("coordinator blocks overlapping actions per deck; rejection recovers; ended/error retain songs and queue");
     const source = await (await fetch("../tunetox.html")).text();
     // Observe actual native players only in the test frame, with no production diagnostics API.
     const observer = '<base href="' + new URL("../", location.href).href + '">' +

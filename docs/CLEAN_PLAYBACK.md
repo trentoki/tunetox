@@ -26,10 +26,12 @@ Loading while a deck is playing prepares its queue. The READY button invokes the
 
 ## Files and responsibilities
 
-- [visual-playback.js](../app/integration/visual-playback.js): creates four persistent Clean Deck states, binds deck-specific actions, handles local file URLs and browser media events.
+- [application.js](../app/visual/mixer/application.js): Visual startup creates four persistent Clean Deck states, mounts the interface, handles file selection, presents playback notifications, and refreshes playback-time displays. It supplies loaded/queued URL references to Audio for cleanup. The active entry no longer loads anything from app/integration; legacy files remain there unchanged.
+- [playback-coordinator.js](../app/behavior/mixer/playback-coordinator.js): coordinates each deck's Play/Pause and queued playback, blocks overlapping operations, and updates state on native ended/error events. Presentation callbacks leave rendering, messages, touch handling, and the timing of cleanup requests in Visual; Audio performs URL cleanup. The three application areas are Visual, Behavior, and Audio, with no separate Integration layer.
 - [playback.js](../app/visual/mixer/playback.js): creates the shared visual component with approved names, view switching, and state rendering.
 - [playback.css](../app/visual/mixer/playback.css): H5.3.1 section arrangement, deck accents, and shared landscape/portrait styling.
-- [deck.js](../app/behavior/mixer/deck.js) and [deck-audio.js](../app/audio/deck-audio.js): existing behavior and browser Audio playback modules, reused without changes.
+- [deck.js](../app/behavior/mixer/deck.js): existing load/queue/playback behavior, plus a loaded-song-list helper used by the visual Library preview.
+- [deck-audio.js](../app/audio/deck-audio.js): unchanged native playback operations, plus temporary audio URL creation/tracking/revocation. Only URLs absent from every loaded and queued song are released; the host's cleanup timing is preserved. Original files are never modified.
 
 The original [index.html](../index.html), [clean-deck.html](../development/clean-deck.html), all existing interface files, and the guide/reference materials are preserved.
 

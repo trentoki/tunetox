@@ -10,6 +10,12 @@ export function buildDeck() {
   };
 }
 
+// Loaded songs only, in deck order; queued songs are not Library results.
+// Return the existing song objects without creating a second state store.
+export function getLoadedSongs(decks) {
+  return decks.filter(deck => deck.song).map(deck => deck.song);
+}
+
 export function loadSong(deck, song) {
   if (deck.isPlaying) return false;
   loadAudio(deck.audio, song);
