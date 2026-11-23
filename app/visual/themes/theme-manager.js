@@ -21,6 +21,7 @@ export function installThemeControls(container, deckContainer) {
     input.setAttribute("aria-label", "Deck " + (index + 1) + " color");
     return input;
   });
+  let colorsCustomized = false;
   function apply() {
     const theme = themes[themeSelect.value] || themes.default;
     document.documentElement.dataset.theme = themeSelect.value;
@@ -35,14 +36,17 @@ export function installThemeControls(container, deckContainer) {
     const mode = modeSelect.value;
     const deckColors = mode === "uniform" ? Array(4).fill(colorInputs[0].value) : colorInputs.map(input => input.value);
     deckContainer.querySelectorAll(".deck").forEach((deck, index) => {
-      if (themeSelect.value === "default") deck.style.removeProperty("--accent");
+      if (themeSelect.value === "default" && !colorsCustomized) deck.style.removeProperty("--accent");
       else deck.style.setProperty("--accent", deckColors[index] || deckColors[0]);
     });
     colorInputs.forEach((input, index) => { input.hidden = mode === "uniform" && index > 0; });
   }
   themeSelect.addEventListener("change", apply);
   modeSelect.addEventListener("change", apply);
-  colorInputs.forEach(input => input.addEventListener("input", apply));
+  colorInputs.forEach(input => input.addEventListener("input", () => {
+    colorsCustomized = true;
+    apply();
+  }));
   group.append(themeSelect, modeSelect, ...colorInputs);
   container.append(group);
   apply();
