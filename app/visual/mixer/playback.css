@@ -136,3 +136,7 @@ svg { width: 100%; height: 100%; display: block; fill: var(--accent); opacity: .
   #audio-loaders label { padding: 7px 6px; font-size: 10px; }
 }
 
+
+/* Visual-only fader wrapper: keep the original Default layout unchanged. */
+.main-fader-surface { display: contents; }
+.main-fader-cap { display: none; }
