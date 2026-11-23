@@ -122,7 +122,7 @@ export function buildAudio() {
   gate.connect(gain);
   const deckPlaybackInfo = { deckAudio, gate, node: null, thisSongLoadingCanBeStopped: null, latestReplaceOrRemoveNumber: 0, latestDeckActionNumber: 0, processing: 0,
     loading: false, playing: false, ended: false, error: null, duration: 0,
-    position: 0, playbackReferencePoint: null, rate: 1, pitch: 0, latency: 0, url: "", timer: null, cutoff: null };
+    songPosition: 0, playbackReferencePoint: null, rate: 1, pitch: 0, latency: 0, url: "", timer: null, cutoff: null };
   deckAudioStates.set(deckAudio, deckPlaybackInfo);
   mainVolumes.set(deckAudio, { gain, ramp: { from: 0, to: 0, start: 0, end: 0 } });
   // Compatibility is limited to read-only media-style information and events.
@@ -245,7 +245,7 @@ export async function startAudio(deckAudio) {
     const when = context.currentTime + deckPlaybackInfo.latency;
     // schedule() sends its command immediately; its reply is only an acknowledgement.
     // Commit the matching clock and gate before waiting, so a delayed reply cannot
-    // discard the opening audio. Later tempo commands now see this active playbackReferencePoint.
+    // discard the opening audio. Later tempo commands now see this active playback reference point.
     const scheduled = deckPlaybackInfo.node.schedule({ active: true, input: deckPlaybackInfo.songPosition, output: when,
       rate: deckPlaybackInfo.rate, semitones: deckPlaybackInfo.pitch });
     deckPlaybackInfo.playbackReferencePoint = { instant: when, songPosition: deckPlaybackInfo.songPosition, rate: deckPlaybackInfo.rate };
@@ -304,21 +304,21 @@ export async function seekAudio(deckAudio, seconds) {
 // time is continuous at the old/new-rate boundary. The DSP response has latency.
 async function changeProcessing(deckAudio, value, pitch) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
-  // Slider requests share a transport latestDeckActionNumber, so only their latest reply may
-  // fail that latestDeckActionNumber. A newer Pause/Play also makes an old failure irrelevant.
+  // Slider requests share a transport action number, so only their latest reply may
+  // fail that action. A newer Pause/Play also makes an old failure irrelevant.
   const processing = ++deckPlaybackInfo.processing;
   const latestDeckActionNumber = deckPlaybackInfo.latestDeckActionNumber;
   if (pitch) deckPlaybackInfo.pitch = value;
   else deckPlaybackInfo.rate = value;
   if (!deckPlaybackInfo.playing) return;
   const when = Math.max(context.currentTime, deckPlaybackInfo.playbackReferencePoint.instant);
-  const position = findSongPosition(deckPlaybackInfo, when);
-  deckPlaybackInfo.playbackReferencePoint = { instant: when, songPosition: position, rate: deckPlaybackInfo.rate };
+  const songPosition = findSongPosition(deckPlaybackInfo, when);
+  deckPlaybackInfo.playbackReferencePoint = { instant: when, songPosition, rate: deckPlaybackInfo.rate };
   scheduleEnd(deckPlaybackInfo);
   const node = deckPlaybackInfo.node;
   const latestReplaceOrRemoveNumber = deckPlaybackInfo.latestReplaceOrRemoveNumber, signal = deckPlaybackInfo.thisSongLoadingCanBeStopped.signal;
   try {
-    await timeLimitOrCancel(node.schedule({ active: true, input: position, output: when,
+    await timeLimitOrCancel(node.schedule({ active: true, input: songPosition, output: when,
       rate: deckPlaybackInfo.rate, semitones: deckPlaybackInfo.pitch }), signal, "Signalsmith tempo/pitch");
   } catch (error) {
     if (deckPlaybackInfo.node === node && deckPlaybackInfo.latestReplaceOrRemoveNumber === latestReplaceOrRemoveNumber && deckPlaybackInfo.latestDeckActionNumber === latestDeckActionNumber &&
