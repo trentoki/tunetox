@@ -1,0 +1,53 @@
+// Presentation-only theme switching. No deck or audio state is changed.
+const themes = Object.freeze({
+  default: { label: "Default", stylesheet: null },
+  plasma: { label: "Plasma Purple", stylesheet: "app/visual/themes/plasma/theme.css" }
+});
+const palettes = Object.freeze({
+  decks: ["#bb6bff", "#ed65d7", "#4dcdf1", "#69e5aa"],
+  uniform: ["#bb6bff", "#bb6bff", "#bb6bff", "#bb6bff"],
+  controls: ["#bb6bff", "#bb6bff", "#bb6bff", "#bb6bff"]
+});
+const defaultColors = ["#bb6bff", "#ed65d7", "#4dcdf1", "#69e5aa"];
+let stylesheet;
+export function installThemeControls(container, deckContainer) {
+  const group = document.createElement("div");
+  group.className = "theme-controls";
+  const themeSelect = document.createElement("select");
+  themeSelect.setAttribute("aria-label", "Visual theme");
+  for (const [key, theme] of Object.entries(themes)) themeSelect.add(new Option(theme.label, key));
+  const modeSelect = document.createElement("select");
+  modeSelect.setAttribute("aria-label", "Color arrangement");
+  for (const [key, label] of [["decks","Per-deck colors"],["uniform","One color"],["controls","Control colors (future)"]]) modeSelect.add(new Option(label, key));
+  const colorInputs = defaultColors.map((color, index) => {
+    const input = document.createElement("input");
+    input.type = "color";
+    input.value = color;
+    input.setAttribute("aria-label", "Deck " + (index + 1) + " color");
+    return input;
+  });
+  function apply() {
+    const theme = themes[themeSelect.value] || themes.default;
+    document.documentElement.dataset.theme = themeSelect.value;
+    document.documentElement.dataset.colorMode = modeSelect.value;
+    if (stylesheet) { stylesheet.remove(); stylesheet = null; }
+    if (theme.stylesheet) {
+      stylesheet = document.createElement("link");
+      stylesheet.rel = "stylesheet";
+      stylesheet.href = theme.stylesheet;
+      document.head.append(stylesheet);
+    }
+    const mode = modeSelect.value;
+    const deckColors = mode === "uniform" ? Array(4).fill(colorInputs[0].value) : colorInputs.map(input => input.value);
+    deckContainer.querySelectorAll(".deck").forEach((deck, index) => {
+      deck.style.setProperty("--accent", deckColors[index] || deckColors[0]);
+    });
+    colorInputs.forEach((input, index) => { input.hidden = mode === "uniform" && index > 0; });
+  }
+  themeSelect.addEventListener("change", apply);
+  modeSelect.addEventListener("change", apply);
+  colorInputs.forEach(input => input.addEventListener("input", apply));
+  group.append(themeSelect, modeSelect, ...colorInputs);
+  container.append(group);
+  apply();
+}
