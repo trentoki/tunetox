@@ -1,4 +1,27 @@
-# TuneTox D1
+# TuneTox
+
+## Current application
+
+Open [tunetox.html](tunetox.html) through the repository's local server:
+
+```sh
+node tests/serve-visual-playback.cjs
+```
+
+Visit http://127.0.0.1:8080/tunetox.html. The server accepts loopback/private IPv4 clients for local-network testing. See [Clean Playback usage and limitations](docs/CLEAN_PLAYBACK.md) for the current Mac runtime command and device-verification limits.
+
+The active application has four decks with Load, Play/Pause/resume, and manual queued playback. Visual, Behavior, and Audio live in `app/visual/`, `app/behavior/`, and `app/audio/`. Musical controls and waveforms remain previews. Run [current regression checks](tests/visual-playback-tests.html) through the same server.
+
+## Preserved legacy references
+
+- [Older D1 application](legacy-reference/index.html)
+- [Clean Deck prototype](legacy-reference/development/clean-deck.html), sharing active Behavior and Audio modules rather than copies
+- Legacy [core tests](legacy-reference/tests/core-tests.html), [startup/routing checks](legacy-reference/tests/browser-smoke-tests.html), and [native output checks](legacy-reference/tests/native-output-browser-tests.html)
+- [Historical D1 application map](legacy-reference/docs/D1_APPLICATION_MAP.md)
+
+The following introduction and instructions are preserved historical D1 material. Their root-page paths, feature status, and device descriptions are not instructions for the current application; use the links above. Historical source remains recoverable in Git.
+
+## Historical TuneTox D1 README
 
 TuneTox is a four-deck music performance and mixing application.
 

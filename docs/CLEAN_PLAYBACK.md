@@ -10,7 +10,7 @@ With Node available, run:
 node tests/serve-visual-playback.cjs
 ```
 
-Open http://127.0.0.1:8080/tunetox.html. The server listens on the local computer only.
+Open http://127.0.0.1:8080/tunetox.html. The server listens on 0.0.0.0:8080 and accepts loopback/private IPv4 clients for local-network testing.
 
 On the current Mac, the installed Code runtime can also run this dependency-free server:
 
@@ -26,14 +26,14 @@ Loading while a deck is playing prepares its queue. The READY button invokes the
 
 ## Files and responsibilities
 
-- [application.js](../app/visual/mixer/application.js): Visual startup creates four persistent Clean Deck states, mounts the interface, handles file selection, presents playback notifications, and refreshes playback-time displays. It supplies loaded/queued URL references to Audio for cleanup. The active entry no longer loads anything from app/integration; legacy files remain there unchanged.
+- [application.js](../app/visual/mixer/application.js): Visual startup creates four persistent Clean Deck states, mounts the interface, handles file selection, presents playback notifications, and refreshes playback-time displays. It supplies loaded/queued URL references to Audio for cleanup. Legacy application files are preserved under legacy-reference, outside the active dependency tree.
 - [playback-coordinator.js](../app/behavior/mixer/playback-coordinator.js): coordinates each deck's Play/Pause and queued playback, blocks overlapping operations, and updates state on native ended/error events. Presentation callbacks leave rendering, messages, touch handling, and the timing of cleanup requests in Visual; Audio performs URL cleanup. The three application areas are Visual, Behavior, and Audio, with no separate Integration layer.
 - [playback.js](../app/visual/mixer/playback.js): creates the shared visual component with approved names, view switching, and state rendering.
 - [playback.css](../app/visual/mixer/playback.css): H5.3.1 section arrangement, deck accents, and shared landscape/portrait styling.
 - [deck.js](../app/behavior/mixer/deck.js): existing load/queue/playback behavior, plus a loaded-song-list helper used by the visual Library preview.
 - [deck-audio.js](../app/audio/deck-audio.js): unchanged native playback operations, plus temporary audio URL creation/tracking/revocation. Only URLs absent from every loaded and queued song are released; the host's cleanup timing is preserved. Original files are never modified.
 
-The original [index.html](../index.html), [clean-deck.html](../development/clean-deck.html), all existing interface files, and the guide/reference materials are preserved.
+The older [index.html](../legacy-reference/index.html), [clean-deck.html](../legacy-reference/development/clean-deck.html), and their legacy interface files are preserved under [legacy-reference](../legacy-reference/). Clean Deck shares the active Behavior and Audio modules via adjusted imports, without copies. Guide/reference materials remain in their existing documentation locations.
 
 ## Scope and limitations
 
@@ -85,5 +85,7 @@ Compact-header correction: measured every deck against a pre-correction snapshot
 These checks do not establish listening quality, Safari support, touch behavior on physical devices, or release readiness. Actual music playback and listening on the intended devices remain necessary.
 
 ## Documentation revision
+
+Legacy relocation verification (2026-11-22): all 75 approved files were retained under legacy-reference. All eight active entry/module/style files matched the architecture checkpoint byte-for-byte. The current playback/touch suite passed in Chromium. Relocated legacy startup/routing, all three core test groups, and the native output-meter test passed both before and after relocation. All 71 legacy HTML resource paths resolved. The relocated Clean Deck prototype loaded generated audio on four native players; independent Pause and resume were verified. These are browser/state/signal checks, not listening or physical Safari verification. No active Behavior or Audio modules were copied.
 
 The current [naming specification](visual-verification/APPROVED-NAMING.md) and [interface specification](../specs/interface.md) supersede the earlier combined Wave + Cue / Controls switch. The [editable Developer's Guide](visual-verification/TuneTox-Developers-Guide-v1.html) includes a current-layout addendum. The Version 1 PDF and its six images are preserved historical references; that PDF has not been regenerated for this layout.

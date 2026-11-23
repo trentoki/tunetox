@@ -1,3 +1,5 @@
+> Historical reference: relocated with the older D1 application. Original path names and implementation claims below are preserved as historical records, not current application instructions. Some experimental paths were already absent before relocation. See [current application](../../tunetox.html).
+
 # TuneTox D1 — Active File Inventory (Phase 1)
 
 This inventory describes the **current** `tunetox-d1` application entry point. It is a migration aid, not the final folder structure. It does not claim that playback or browser behavior has been tested.

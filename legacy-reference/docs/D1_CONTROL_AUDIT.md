@@ -1,3 +1,5 @@
+> Historical reference: relocated with the older D1 application. Original path names and implementation claims below are preserved as historical records, not current application instructions. Some experimental paths were already absent before relocation. See [current application](../../tunetox.html).
+
 # TuneTox D1 — Control Connection Audit
 
 This document records **source-code connections**, not successful browser or audio tests. It is intended to help developers distinguish native musical behavior from presentation-only interactions.

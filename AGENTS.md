@@ -92,19 +92,19 @@ Avoid unnecessary duplication: specifications provide the complete explanation, 
 
 ### Folder responsibilities
 
-The current TuneTox D1 application starts from `index.html` in the repository's root folder. Its JavaScript and CSS files are organized primarily under `app/interface/`, `app/audio/`, and `app/integration/`.
+The current application starts from [tunetox.html](tunetox.html). Its application code lives in exactly three areas: `app/visual/`, `app/behavior/`, and `app/audio/`. There is no separate Integration layer.
 
-These folders contain interconnected parts of the application with different responsibilities. Preserve working file paths and references, including older relative paths in `index.html`, unless a change has been approved and tested to ensure the application continues to load and function correctly.
+The older D1 application, its interface/audio/integration files, prototypes, and tests are preserved under [legacy-reference/](legacy-reference/). Preserve their working relative paths and script order. The relocated Clean Deck prototype deliberately shares active Behavior and Audio modules; do not duplicate them or assume that prototype is an isolated frozen snapshot.
 
 **Future folder organization:** As TuneTox grows, organize new files according to their responsibilities and relationships with existing code. Prefer extending appropriate existing folders over creating unnecessary new ones. Create new folders when they provide a meaningful improvement in clarity, organization, or maintainability. Avoid duplicating functionality across folders or creating separate application structures for different devices. Keep dependencies and public interfaces clear, and ensure that any reorganization preserves working functionality.
 
-`tests/` contains the focused D1 regression and audible-output browser checks. As TuneTox grows, organize new tests alongside related tests, covering new features, interactions, edge cases, and previously discovered bugs. Keep tests understandable and maintain them as functionality changes.
+`tests/` contains current playback/touch regression checks and the local preview server. Older D1 core, routing, and native-output checks are under `legacy-reference/tests/`. As TuneTox grows, organize new tests alongside related tests, covering new features, interactions, edge cases, and previously discovered bugs. Keep tests understandable and maintain them as functionality changes.
 
 `vendor/` retains pinned optional third-party audio libraries, which are not currently loaded by D1. Read `vendor/README.md` before considering them for integration. As TuneTox grows, document the purpose, version, license, and usage status of each third-party library. Avoid introducing unnecessary dependencies or removing libraries without reviewing their purpose and obtaining appropriate approval.
 
-`docs/` contains D1 inventories and audits. Verify claims about current functionality against the actual source code and tests. As TuneTox grows, organize documentation by subject, keep active documentation consistent with approved decisions and current implementation, and clearly distinguish historical records from current instructions. Preserve useful historical information without allowing outdated documentation to misrepresent the application.
+`docs/` contains current playback documentation and approved visual references. Historical D1 inventories and audits are under `legacy-reference/docs/`. Verify claims about current functionality against the actual source code and tests. Keep active documentation consistent with approved decisions and current implementation, and clearly distinguish historical records from current instructions.
 
-Historical `development/`, `experimental/`, and `research/` paths mentioned elsewhere in project documentation refer to earlier prototypes, not directories currently present in this branch.
+Historical `development/` and `experimental/` paths in older documents may refer to files absent from this branch; the retained Clean Deck entry is now under `legacy-reference/development/`. The separate `research/` tree remains reference material, not an active application dependency.
 
 **TuneToss was an earlier working name for TuneTox.** The original TuneToss checkout and protected Git baseline preserve earlier versions of the same evolving application and remain historical references.
 
@@ -142,12 +142,12 @@ As TuneTox develops, preserve useful historical research, experiments, decisions
 
    Intentional improvements to audio functionality are encouraged when included in an approved development task. Make such changes carefully, preserve established musical behavior unless a change is explicitly approved, and verify the results through appropriate automated tests and real browser/audio testing.
 
-   TuneTox D1 currently uses native Web Audio for playback. Earlier experiments with Signalsmith Stretch and SoundTouchJS are retained as historical or optional resources, but neither library is currently connected to D1 playback. Pitch-preserving tempo stretching is not a required D1 feature.
+   The current Clean Playback application uses native HTML Audio elements. The preserved D1 application uses native Web Audio. Earlier Signalsmith Stretch and SoundTouchJS experiments remain historical or optional resources; neither library is loaded by the current application. Pitch-preserving tempo stretching is not a required D1 feature.
 
    Preserve third-party library licenses, attribution, and provenance (records identifying where external code originated). Automated test success alone does not establish that Safari playback is free of audible clicks or that native audio memory is properly released.
 8. **State ownership.** Maintain a single authoritative source for shared application state (the information that represents the application's current condition), so different parts of TuneTox do not maintain conflicting versions of the same information.
 
-   The current implementation uses `appState.decks` to store information about the four decks and `appState.participation` to manage their participation in Beatmatching, Tune Matching, and Stem Handoff. Keeping participation separate is the preferred approach because these musical systems coordinate relationships between decks.
+   The preserved D1 implementation uses `appState.decks` and `appState.participation` for shared musical state. Keeping participation separate is the preferred approach because these musical systems coordinate relationships between decks. The current Clean Playback host instead creates four persistent deck objects using `buildDeck()` and passes those same objects to views and coordinators; matching and participation remain inactive previews.
 
    Preserve these structures unless an alternative architecture is explicitly approved, implemented, and tested. Do not introduce competing sources of state or reorganize established state structures without reviewing their effects on the rest of the application.
 9. **Flexible MIDI controller mapping.** Design TuneTox's controls around stable identities and reusable actions so they can support mouse, touch, keyboard, and MIDI input without duplicating musical functionality.
@@ -247,7 +247,8 @@ As TuneTox develops, preserve useful historical research, experiments, decisions
 - **`AGENTS.md`** — Development workflow, collaboration practices, and durable architectural and safety safeguards.
 - **`RULES.md`** — Approved TuneTox product behavior, including distinctions between current implementation, future requirements, and historical behavior.
 - **`TUNETOX_PLAN.md`** — Architecture, development roadmap, project context, and unresolved decisions.
-- **`index.html` and `app/`** — The current TuneTox application and its underlying implementation.
+- **`tunetox.html` and `app/`** — The current TuneTox application and its Visual, Behavior, and Audio implementation.
+- **`legacy-reference/`** — Preserved older D1 application, prototypes, tests, and historical documentation.
 - **`tests/`** — Current automated and browser tests. Select tests according to the functionality being changed, as described in the Testing workflow.
 - **`vendor/README.md` and `vendor/`** — Information about optional third-party libraries, their origins, licenses, and historical experiments.
 - **`docs/`** — Architecture inventories, audits, and supporting documentation. Verify claims about current behavior against the actual application code and tests.

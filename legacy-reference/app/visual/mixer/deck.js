@@ -1,4 +1,4 @@
-import { sendToDeck, playDeck, pauseDeck, playQueue, ejectSong } from "../../behavior/mixer/deck.js";
+import { sendToDeck, playDeck, pauseDeck, playQueue, ejectSong } from "../../../../app/behavior/mixer/deck.js";
 
 // Visual: create buttons and display the deck's current state.
 export function designDeck(deck, container) {

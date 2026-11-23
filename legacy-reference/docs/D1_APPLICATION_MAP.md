@@ -1,3 +1,5 @@
+> Historical reference: relocated with the older D1 application. Original path names and implementation claims below are preserved as historical records, not current application instructions. Some experimental paths were already absent before relocation. See [current application](../../tunetox.html).
+
 # TuneTox D1 — Application map
 
 This map describes the active root page and its current boundaries. It is intentionally a dependency map, not permission to move or delete files.

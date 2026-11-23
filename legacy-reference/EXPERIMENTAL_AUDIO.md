@@ -1,3 +1,5 @@
+> Historical reference: relocated with the older D1 application. Original path names and implementation claims below are preserved as historical records, not current application instructions. Some experimental paths were already absent before relocation. See [current application](../tunetox.html).
+
 # Deck 1 pitch-preserving prototype (B2.2)
 
 This is a single-deck experiment, not a production synchronization engine. The original
