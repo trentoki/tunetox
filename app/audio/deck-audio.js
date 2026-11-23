@@ -103,7 +103,7 @@ function startClock(deckPlaybackInfo) {
       mute(deckPlaybackInfo);
       stopClock(deckPlaybackInfo);
       const node = deckPlaybackInfo.node;
-      void timeLimitOrCancel(node.schedule({ active: false }), deckPlaybackInfo.controller?.signal, "Audio end")
+      void timeLimitOrCancel(node.schedule({ active: false }), deckPlaybackInfo.thisSongLoadingCanBeStopped?.signal, "Audio end")
         .catch(error => { if (deckPlaybackInfo.node === node && !deckPlaybackInfo.playing) fail(deckPlaybackInfo, error); });
       notify(deckPlaybackInfo, "ended");
     }
@@ -120,7 +120,7 @@ export function buildAudio() {
   const gate = context.createGain();
   gate.gain.value = 0;
   gate.connect(gain);
-  const deckPlaybackInfo = { deckAudio, gate, node: null, controller: null, generation: 0, action: 0, processing: 0,
+  const deckPlaybackInfo = { deckAudio, gate, node: null, thisSongLoadingCanBeStopped: null, generation: 0, action: 0, processing: 0,
     loading: false, playing: false, ended: false, error: null, duration: 0,
     position: 0, segment: null, rate: 1, pitch: 0, latency: 0, url: "", timer: null, cutoff: null };
   deckAudioStates.set(deckAudio, deckPlaybackInfo);
@@ -153,9 +153,14 @@ export function setAudioMainVolume(deckAudio, value) {
 
 export async function loadAudio(deckAudio, song) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
-  deckPlaybackInfo.controller?.abort();
-  const controller = new AbortController(), signal = controller.signal;
-  deckPlaybackInfo.controller = controller;
+  // A new load supersedes an earlier loading attempt on this deck.
+  if (deckPlaybackInfo.thisSongLoadingCanBeStopped) {
+    deckPlaybackInfo.thisSongLoadingCanBeStopped.abort();
+  }
+  // Save a way for a later load to stop this loading attempt.
+  const thisSongLoadingCanBeStopped = new AbortController();
+  const signal = thisSongLoadingCanBeStopped.signal;
+  deckPlaybackInfo.thisSongLoadingCanBeStopped = thisSongLoadingCanBeStopped;
   const generation = ++deckPlaybackInfo.generation;
   ++deckPlaybackInfo.action;
   deckPlaybackInfo.position = sourcePosition(deckPlaybackInfo);
@@ -195,7 +200,7 @@ export async function loadAudio(deckAudio, song) {
       const error = new Error("Signalsmith processor failed. Reload the song.");
       if (generation !== deckPlaybackInfo.generation) return;
       if (deckPlaybackInfo.node === candidate) fail(deckPlaybackInfo, error);
-      else controller.abort();
+      else thisSongLoadingCanBeStopped.abort();
     };
     const channels = Array.from({ length: decoded.numberOfChannels }, (_, i) => new Float32Array(decoded.getChannelData(i)));
     await timeLimitOrCancel(candidate.addBuffers(channels, channels.map(channel => channel.buffer)), signal, "Signalsmith buffers");
@@ -219,7 +224,7 @@ export async function loadAudio(deckAudio, song) {
   } catch (error) {
     if (candidate && candidate !== deckPlaybackInfo.node) await disposeNode(candidate);
     if (generation === deckPlaybackInfo.generation) {
-      controller.abort();
+      thisSongLoadingCanBeStopped.abort();
       deckPlaybackInfo.loading = false;
       fail(deckPlaybackInfo, error);
     }
@@ -233,7 +238,7 @@ export async function startAudio(deckAudio) {
   if (deckPlaybackInfo.error) throw deckPlaybackInfo.error;
   const action = ++deckPlaybackInfo.action;
   try {
-    await timeLimitOrCancel(context.resume(), deckPlaybackInfo.controller.signal, "Audio context resume");
+    await timeLimitOrCancel(context.resume(), deckPlaybackInfo.thisSongLoadingCanBeStopped.signal, "Audio context resume");
     if (action !== deckPlaybackInfo.action) throw new DOMException("Superseded Play", "AbortError");
     if (context.deckPlaybackInfo !== "running") throw new Error("Audio context did not resume. Tap Play again.");
     if (deckPlaybackInfo.position >= deckPlaybackInfo.duration) deckPlaybackInfo.position = 0;
@@ -251,7 +256,7 @@ export async function startAudio(deckAudio) {
     deckPlaybackInfo.gate.gain.linearRampToValueAtTime(1, when + transportRampSeconds);
     scheduleEnd(deckPlaybackInfo);
     startClock(deckPlaybackInfo);
-    await timeLimitOrCancel(scheduled, deckPlaybackInfo.controller.signal, "Signalsmith Play");
+    await timeLimitOrCancel(scheduled, deckPlaybackInfo.thisSongLoadingCanBeStopped.signal, "Signalsmith Play");
     if (action !== deckPlaybackInfo.action) throw new DOMException("Superseded Play", "AbortError");
   } catch (error) {
     if (action === deckPlaybackInfo.action) {
@@ -274,7 +279,7 @@ export async function pauseAudio(deckAudio) {
   mute(deckPlaybackInfo);
   if (deckPlaybackInfo.node) {
     const stopped = deckPlaybackInfo.node.schedule({ active: false, input: deckPlaybackInfo.position, output: now, semitones: deckPlaybackInfo.pitch });
-    if (context.deckPlaybackInfo === "running") await timeLimitOrCancel(stopped, deckPlaybackInfo.controller.signal, "Signalsmith Pause");
+    if (context.deckPlaybackInfo === "running") await timeLimitOrCancel(stopped, deckPlaybackInfo.thisSongLoadingCanBeStopped.signal, "Signalsmith Pause");
   }
   notify(deckPlaybackInfo, "timeupdate");
 }
@@ -311,7 +316,7 @@ async function changeProcessing(deckAudio, value, pitch) {
   deckPlaybackInfo.segment = { time: when, position, rate: deckPlaybackInfo.rate };
   scheduleEnd(deckPlaybackInfo);
   const node = deckPlaybackInfo.node;
-  const generation = deckPlaybackInfo.generation, signal = deckPlaybackInfo.controller.signal;
+  const generation = deckPlaybackInfo.generation, signal = deckPlaybackInfo.thisSongLoadingCanBeStopped.signal;
   try {
     await timeLimitOrCancel(node.schedule({ active: true, input: position, output: when,
       rate: deckPlaybackInfo.rate, semitones: deckPlaybackInfo.pitch }), signal, "Signalsmith tempo/pitch");
@@ -334,7 +339,7 @@ export function setAudioPitch(deckAudio, semitones) {
 
 export async function ejectAudio(deckAudio) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
-  deckPlaybackInfo.controller?.abort();
+  deckPlaybackInfo.thisSongLoadingCanBeStopped?.abort();
   ++deckPlaybackInfo.generation;
   ++deckPlaybackInfo.action;
   mute(deckPlaybackInfo);
