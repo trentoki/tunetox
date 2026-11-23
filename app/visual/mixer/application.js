@@ -98,7 +98,8 @@ decks.forEach((deck, index) => {
     input.value = "";
   });
 
-  for (const event of ["timeupdate", "loadedmetadata", "durationchange"]) {
+  deck.audio.addEventListener("timeupdate", () => view.updatePlaybackTime());
+  for (const event of ["loadedmetadata", "durationchange"]) {
     deck.audio.addEventListener(event, () => view.render());
   }
 });
