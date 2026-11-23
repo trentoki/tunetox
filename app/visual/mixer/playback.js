@@ -190,6 +190,11 @@ export function createPlaybackDeck(number, deck, actions) {
   const mainPercentage = element("output", "", "MAIN 0%");
   main.querySelector("span").replaceChildren(mainPercentage);
   const mainInput = main.querySelector("input");
+  // Decorative overlay only: the native range input remains the interactive control.
+  const mainFaderSurface = element("div", "main-fader-surface");
+  mainInput.before(mainFaderSurface);
+  mainFaderSurface.append(mainInput);
+  mainFaderSurface.append(element("span", "main-fader-cap"));
   mainInput.disabled = false;
   mainInput.setAttribute("aria-label", "Main volume for Deck " + number);
   mainInput.addEventListener("input", () => actions.setMainVolume(Number(mainInput.value) / 100));
