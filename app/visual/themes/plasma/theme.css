@@ -81,7 +81,7 @@
   position: absolute;
   z-index: 3;
   top: 50%;
-  left: calc(13px + (100% - 26px) * var(--main-volume-fraction, 0));
+  left: clamp(13px, var(--main-volume-percent, 0%), calc(100% - 13px));
   transform: translate(-50%, -50%);
   width: 26px;
   height: 27px;
