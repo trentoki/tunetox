@@ -22,8 +22,8 @@ h1 small { font-size: 9px; color: #b8afbd; margin-left: 10px; }
 #audio-loaders { display: flex; flex-shrink: 0; gap: 6px; }
 #audio-loaders label { position: relative; display: block; padding: 6px 10px; background: #15303c; border: 1px solid #36586c; border-radius: 4px; color: #d3dce9; cursor: pointer; }
 #audio-loaders input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
-.mixer-decks { flex: 1; min-height: 0; min-width: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0,1fr); gap: 7px; }
-.deck { --accent: #5ce0dc; min-width: 0; min-height: 0; height: 100%; border: 1px solid #303c50; border-top: 2px solid var(--accent); border-radius: 6px; background: #101823; padding: 5px; overflow: hidden; }
+.mixer-decks { flex: 1; min-height: 0; min-width: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: minmax(0,1fr); gap: 0; }
+.deck { --accent: #5ce0dc; min-width: 0; min-height: 0; height: 100%; border: 1px solid #303c50; border-top: 2px solid var(--accent); border-radius: 0; background: #101823; padding: 5px; overflow: hidden; }
 .deck[data-deck="2"] { --accent: #f581b3; }
 .deck[data-deck="3"] { --accent: #ffbf70; }
 .deck[data-deck="4"] { --accent: #aa97ff; }
@@ -122,7 +122,7 @@ svg { width: 100%; height: 100%; display: block; fill: var(--accent); opacity: .
 .mixer-footer { color: #8aa3b4; font-size: 9px; min-height: 20px; }
 @media (orientation: portrait), (max-width: 700px) {
   .app { padding: 7px 5px; }
-  .mixer-decks { grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-rows: repeat(2,minmax(0,1fr)); gap: 20px 7px; }
+  .mixer-decks { grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-rows: repeat(2,minmax(0,1fr)); gap: 0; }
   .performance-header { grid-template-rows: 40px 30px 34px 36px; }
   .performance-selector { width: 122px; }
   .performance-header > .song-title { padding-right: 126px; }
