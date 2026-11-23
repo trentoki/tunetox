@@ -1,0 +1,268 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>TuneTox Developer's Guide - Version 1</title><style>@page{size:15in 11in;margin:0}*{box-sizing:border-box}body{margin:0;background:#e2e8f0;font:17px/1.45 Arial,sans-serif;color:#172b3c} .page{width:1440px;height:1056px;padding:52px 60px 55px;background:white;position:relative;break-after:page;overflow:hidden}.page:last-child{break-after:auto}h1{font-size:44px;line-height:1.15;margin:10px 0 24px}h2{font-size:31px;margin:0 0 22px}h3{font-size:21px;margin:20px 0 9px}p{margin:10px 0 15px} .eyebrow{color:#087e8b;letter-spacing:2px;font-size:14px;font-weight:bold;text-transform:uppercase}.lead{font-size:23px;max-width:1050px}footer{position:absolute;bottom:23px;left:60px;right:60px;border-top:1px solid #cbd5e1;padding-top:9px;color:#526777;font-size:12px;display:flex;justify-content:space-between}pre{background:#f0f5f8;border-left:4px solid #087e8b;padding:18px;font:16px/1.5 monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:14px 0}code{font:0.92em monospace;color:#164d65}pre code{font:inherit;color:inherit}.cols{display:grid;grid-template-columns:1fr 1fr;gap:40px}.visual{display:grid;grid-template-columns:850px 1fr;gap:28px;align-items:start}.visual img{display:block;max-width:850px;max-height:775px;width:auto;height:auto}.visual pre{font-size:14px;line-height:1.45;padding:12px}.visual p{font-size:15px}.tag{display:inline-block;padding:5px 10px;background:#e7f5f5;color:#08636c;font-size:13px;font-weight:bold}.note{background:#edf6fa;border-left:4px solid #168498;padding:17px 20px;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:15px;line-height:1.4;margin:14px 0}th{text-align:left;background:#163b4a;color:white;padding:12px}td{vertical-align:top;padding:11px 12px;border-bottom:1px solid #dce5eb}tr:nth-child(even) td{background:#f5f8fa}td:first-child{width:23%}td code{overflow-wrap:anywhere}.compact td{padding:8px 11px}.diagram{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:36px 0}.box{border:2px solid #188a94;border-radius:8px;padding:17px 12px;flex:1;text-align:center;font-size:16px;min-height:105px}.arrow{font-size:24px;color:#087e8b}.cover{background:#0d202e;color:white}.cover h1{font-size:70px;margin-top:85px}.cover .eyebrow{color:#5de1da}.cover footer{color:#b5cbd6}.cover code{color:#8be8e1}.small{font-size:14px;color:#526777}ul,ol{padding-left:24px}li{margin:8px 0}</style></head><body><section class="page"><div class="eyebrow">Current approved structure · 22 November 2026</div><h1>Independent performance sections</h1><div class="cols"><div><pre style="font-size:14px;line-height:1.4"><code>&lt;div class="performance-view"&gt;
+  &lt;div class="performance-header"&gt;&lt;/div&gt;
+  &lt;div class="performance-content"&gt;
+    &lt;section class="performance-upper-section"&gt;
+      &lt;div class="performance-upper-selector"&gt;&lt;/div&gt;
+      &lt;div class="wave-view"&gt;
+        &lt;!-- scrolling-waveform; current-playback-time --&gt;
+      &lt;/div&gt;
+      &lt;div class="stems-view"&gt;
+        &lt;div class="stem-faders"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section class="performance-lower-section"&gt;
+      &lt;div class="performance-lower-selector"&gt;&lt;/div&gt;
+      &lt;div class="cues-view"&gt;
+        &lt;!-- cue-pads; loop-controls --&gt;
+      &lt;/div&gt;
+      &lt;div class="controls"&gt;
+        &lt;!-- filter-knob; eq-knob; effects-controls --&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div><div><p class="tag">CURRENT LAYOUT — SUPERSEDES VERSION 1 HIERARCHY</p><h3>Two independent selections per deck</h3><p>Upper: <strong>Wave / Stems</strong>. Lower: <strong>Cues / Controls</strong>. All four decks default to Wave + Cues in the Performance workspace.</p><p>Each section shows one view at a time. Changing it never resets the other section, another deck, playback or the queue. Library round trips preserve both selections.</p><h3>Preserved child names</h3><p>Upper Stems contains the four existing stem-faders inputs. Lower Controls contains only filter, EQ and effects. Musical controls remain disabled previews.</p><p>The persistent performance-header retains deck participation, tempo, pitch, Library, song title, Play/Pause, queue, main volume and waveform overview.</p><h3>Reading the remaining pages</h3><p>The following 20 pages and original Version 1 PDF are historical references. Their wave-and-cue and performance-selector hierarchy is retired. Their screenshots remain visual styling references, not the current section arrangement.</p><p>The authoritative current inventory is <code>APPROVED-NAMING.md</code>. The old PDF is intentionally preserved, not silently replaced.</p></div></div><footer><span>Current names and structure · Original child controls preserved</span><span>A1</span></footer></section><section class="page cover"><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>TuneTox<br>Developer's Guide</h1><p class="lead">Version 1</p><p class="lead">Reading the visual structure, shared deck components,<br>and their intended connections to application behavior.</p><div style="margin-top:65px;max-width:920px"><p>Four underlying decks. One reusable interface structure.</p><p>Based on the approved H5.3.1 landscape and portrait references and the approved visual naming specification.</p><p style="margin-top:30px;color:#b5cbd6">Prepared 22 November 2026<br>Working developer reference · Human approval governs implementation.</p></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>1</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>How to read the guide</h1><p class="lead">Start with a visible region, find its approved name, then follow its place in the hierarchy and its intended responsibilities.</p><div class="cols"><div><h3>Three kinds of evidence</h3><p><span class="tag">APPROVED VISUAL REFERENCE</span></p><p>The six annotated screenshots are approved working references. Their numbered outlines identify visible regions; they do not expose actual browser DOM boundaries.</p><p><span class="tag">PROPOSED STRUCTURE</span></p><p>Code examples use the new approved names. They illustrate the intended code and do not claim that a migration has already happened.</p><p><span class="tag">EXISTING ARCHITECTURAL CONTEXT</span></p><p>The clean-deck prototype already separates visual, behavior, and audio modules. Page 16 explains the verified source connection.</p></div><div><h3>Reading the annotations</h3><p>Numbers restart for each image. Read a number together with its deck and orientation. The table following each image pair explains every numbered element.</p><p>Nested containers may cover the same visible area. Their slightly inset outlines make the nesting readable; exact CSS boxes must be checked during implementation.</p><p>Examples are structural illustrations. Repeated controls may be abbreviated. No new controls or musical rules are authorized by this guide.</p><h3>Document map</h3><p>3: overall hierarchy<br>4–6: Wave + Cue<br>7–9: Controls<br>10–12: Library<br>13–16: responsibilities and connections<br>17–19: complete naming reference<br>20: implementation notes</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>2</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Overall application hierarchy</h1><div class="cols"><div><pre><code>&lt;div class="app"&gt;
+  &lt;header class="mixer-header"&gt;&lt;/header&gt;
+  &lt;main class="mixer-decks"&gt;
+    &lt;section class="deck"&gt;
+      &lt;div class="performance-view"&gt;
+        &lt;div class="performance-header"&gt;&lt;/div&gt;
+        &lt;div class="performance-content"&gt;
+          &lt;div class="wave-and-cue"&gt;&lt;/div&gt;
+          &lt;div class="controls"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class="library-view"&gt;
+        &lt;div class="library-header"&gt;&lt;/div&gt;
+        &lt;div class="library-content"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+  &lt;footer class="mixer-footer"&gt;&lt;/footer&gt;
+&lt;/div&gt;</code></pre></div><div><span class="tag">PROPOSED STRUCTURAL ILLUSTRATION</span><h3>Four deck instances</h3><p>Repeat the same <code>deck</code> component four times inside <code>mixer-decks</code>. This example shows one instance only.</p><h3>Two levels of alternative views</h3><p><code>performance-view</code> and <code>library-view</code> are alternatives within the same deck.</p><p>Inside <code>performance-content</code>, <code>wave-and-cue</code> and <code>controls</code> are alternatives. They are not additional decks.</p><h3>Persistent performance header</h3><p>The header remains part of the performance view when its content changes between Wave + Cue and Controls.</p><div class="note">Changing a visible view or orientation must not reset, unload, synchronize, or interrupt an underlying deck.</div></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>3</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Deck 1 — Wave + Cue · landscape</h1><div class="visual"><img src="approved-naming-crops/landscape-deck-1-annotated.png" alt="Approved annotated Deck 1, landscape"><div><span class="tag">PROPOSED HTML</span><pre><code>&lt;!-- 1 deck; 2 performance-view --&gt;
+&lt;section class="deck"&gt;
+ &lt;div class="performance-view"&gt;
+  &lt;!-- 3 --&gt;
+  &lt;div class="performance-header"&gt;
+   &lt;!-- Other header controls --&gt;
+   &lt;div class="waveform-overview"&gt;
+   &lt;/div&gt;&lt;!-- 6 --&gt;
+  &lt;/div&gt;
+  &lt;div class="performance-content"&gt;
+   &lt;!-- 4 --&gt;
+   &lt;div class="wave-and-cue"&gt;
+    &lt;!-- 5 --&gt;
+    &lt;div class="scrolling-waveform"&gt;
+    &lt;/div&gt;&lt;!-- 7 --&gt;
+    &lt;output
+     class="current-playback-time"&gt;
+    &lt;/output&gt;&lt;!-- 8 --&gt;
+    &lt;div class="cue-pads"&gt;
+    &lt;/div&gt;&lt;!-- 9 --&gt;
+    &lt;div class="loop-controls"&gt;
+    &lt;/div&gt;&lt;!-- 10 --&gt;
+   &lt;/div&gt;
+  &lt;/div&gt;
+ &lt;/div&gt;
+&lt;/section&gt;</code></pre><p>The same hierarchy applies in both orientations. Header 3 includes overview 6. Content 4 contains the Wave + Cue alternative 5.</p><p class="small">Names and numbers refer to this image. Repeated elements are abbreviated. Preserve the approved appearance.</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>4</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Deck 1 — Wave + Cue · portrait</h1><div class="visual"><img src="approved-naming-crops/portrait-deck-1-annotated.png" alt="Approved annotated Deck 1, portrait"><div><span class="tag">PROPOSED HTML</span><pre><code>&lt;!-- 1 deck; 2 performance-view --&gt;
+&lt;section class="deck"&gt;
+ &lt;div class="performance-view"&gt;
+  &lt;!-- 3 --&gt;
+  &lt;div class="performance-header"&gt;
+   &lt;!-- Other header controls --&gt;
+   &lt;div class="waveform-overview"&gt;
+   &lt;/div&gt;&lt;!-- 6 --&gt;
+  &lt;/div&gt;
+  &lt;div class="performance-content"&gt;
+   &lt;!-- 4 --&gt;
+   &lt;div class="wave-and-cue"&gt;
+    &lt;!-- 5 --&gt;
+    &lt;div class="scrolling-waveform"&gt;
+    &lt;/div&gt;&lt;!-- 7 --&gt;
+    &lt;output
+     class="current-playback-time"&gt;
+    &lt;/output&gt;&lt;!-- 8 --&gt;
+    &lt;div class="cue-pads"&gt;
+    &lt;/div&gt;&lt;!-- 9 --&gt;
+    &lt;div class="loop-controls"&gt;
+    &lt;/div&gt;&lt;!-- 10 --&gt;
+   &lt;/div&gt;
+  &lt;/div&gt;
+ &lt;/div&gt;
+&lt;/section&gt;</code></pre><p>The same hierarchy applies in both orientations. Header 3 includes overview 6. Content 4 contains the Wave + Cue alternative 5.</p><p class="small">Names and numbers refer to this image. Repeated elements are abbreviated. Preserve the approved appearance.</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>5</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Wave + Cue · numbered connections</h1><p>Applies to both Deck 1 images. All selectors below are proposed; JavaScript responsibilities describe intended connections.</p><table class="compact"><thead><tr><th>Reference / approved name</th><th>HTML placement and CSS selector</th><th>Intended JavaScript responsibility</th></tr></thead><tbody><tr><td>1 · <code>deck</code></td><td><code>section</code> inside <code>mixer-decks</code>; CSS <code>.deck</code> sets the card boundary.</td><td>Resolve this instance to its underlying deck; preserve its state across view changes.</td></tr><tr><td>2 · <code>performance-view</code></td><td><code>div</code> inside <code>deck</code>; <code>.performance-view</code> lays out header and content.</td><td>Show the performance workspace for this deck.</td></tr><tr><td>3 · <code>performance-header</code></td><td><code>div</code> inside the performance view; <code>.performance-header</code> arranges persistent controls.</td><td>Present the deck's current song, playback and control values.</td></tr><tr><td>4 · <code>performance-content</code></td><td><code>div</code> following the header; <code>.performance-content</code> sizes switchable content.</td><td>Select the visible content without creating another deck.</td></tr><tr><td>5 · <code>wave-and-cue</code></td><td>Child of content; <code>.wave-and-cue</code> arranges waveform, time, pads and loop strip.</td><td>Present this alternative when selected; keep the same deck state.</td></tr><tr><td>6 · <code>waveform-overview</code></td><td>Child of header; <code>.waveform-overview</code> sizes the full-song preview.</td><td>Display overview and position from deck data; route approved overview interaction to deck behavior.</td></tr><tr><td>7 · <code>scrolling-waveform</code></td><td>Child of Wave + Cue; <code>.scrolling-waveform</code> defines the zoomed display.</td><td>Render waveform and playback position; pass approved gestures to behavior.</td></tr><tr><td>8 · <code>current-playback-time</code></td><td>Output within Wave + Cue; <code>.current-playback-time</code> styles the readout.</td><td>Display the deck's current time; the screenshot's preview values are not live-audio evidence.</td></tr><tr><td>9 · <code>cue-pads</code></td><td>Container within Wave + Cue; <code>.cue-pads</code> lays out eight pads.</td><td>Bind each pad by its approved <code>data-cue</code> value to the deck's cue behavior.</td></tr><tr><td>10 · <code>loop-controls</code></td><td>Container within Wave + Cue; <code>.loop-controls</code> arranges the visible loop strip.</td><td>Route the named loop actions to deck behavior and reflect accepted loop state.</td></tr></tbody></table><p class="small">The individual playhead, cue-pad and loop-button names appear in the complete naming reference. This annotation pass groups the major visible sections.</p><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>6</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Deck 2 — Controls · landscape</h1><div class="visual"><img src="approved-naming-crops/landscape-deck-2-annotated.png" alt="Approved annotated Deck 2, landscape"><div><span class="tag">PROPOSED HTML</span><pre><code>&lt;!-- 1 deck; 2 performance-view --&gt;
+&lt;div class="performance-view"&gt;
+ &lt;div class="performance-header"&gt;
+  &lt;!-- 3; overview is 6 --&gt;
+  &lt;div class="waveform-overview"&gt;
+  &lt;/div&gt;
+ &lt;/div&gt;
+ &lt;div class="performance-content"&gt;
+  &lt;!-- 4 --&gt;
+  &lt;div class="controls"&gt;&lt;!-- 5 --&gt;
+   &lt;div class="filter-knob"&gt;&lt;/div&gt;
+   &lt;!-- 7 --&gt;
+   &lt;div class="eq-knob"
+    data-frequency-band="high"&gt;
+   &lt;/div&gt;&lt;!-- 8 --&gt;
+   &lt;div class="eq-knob"
+    data-frequency-band="mid"&gt;
+   &lt;/div&gt;&lt;!-- 9 --&gt;
+   &lt;div class="eq-knob"
+    data-frequency-band="low"&gt;
+   &lt;/div&gt;&lt;!-- 10 --&gt;
+   &lt;div class="effects-controls"&gt;
+   &lt;/div&gt;&lt;!-- 11 --&gt;
+   &lt;div class="stem-faders"&gt;
+   &lt;/div&gt;&lt;!-- 12 --&gt;
+  &lt;/div&gt;
+ &lt;/div&gt;
+&lt;/div&gt;</code></pre><p>References 8, 9 and 10 are High, Mid and Low, in their visible order. All three share eq-knob; data-frequency-band distinguishes them.</p><p class="small">Names and numbers refer to this image. Repeated elements are abbreviated. Preserve the approved appearance.</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>7</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Deck 2 — Controls · portrait</h1><div class="visual"><img src="approved-naming-crops/portrait-deck-2-annotated.png" alt="Approved annotated Deck 2, portrait"><div><span class="tag">PROPOSED HTML</span><pre><code>&lt;!-- 1 deck; 2 performance-view --&gt;
+&lt;div class="performance-view"&gt;
+ &lt;div class="performance-header"&gt;
+  &lt;!-- 3; overview is 6 --&gt;
+  &lt;div class="waveform-overview"&gt;
+  &lt;/div&gt;
+ &lt;/div&gt;
+ &lt;div class="performance-content"&gt;
+  &lt;!-- 4 --&gt;
+  &lt;div class="controls"&gt;&lt;!-- 5 --&gt;
+   &lt;div class="filter-knob"&gt;&lt;/div&gt;
+   &lt;!-- 7 --&gt;
+   &lt;div class="eq-knob"
+    data-frequency-band="high"&gt;
+   &lt;/div&gt;&lt;!-- 8 --&gt;
+   &lt;div class="eq-knob"
+    data-frequency-band="mid"&gt;
+   &lt;/div&gt;&lt;!-- 9 --&gt;
+   &lt;div class="eq-knob"
+    data-frequency-band="low"&gt;
+   &lt;/div&gt;&lt;!-- 10 --&gt;
+   &lt;div class="effects-controls"&gt;
+   &lt;/div&gt;&lt;!-- 11 --&gt;
+   &lt;div class="stem-faders"&gt;
+   &lt;/div&gt;&lt;!-- 12 --&gt;
+  &lt;/div&gt;
+ &lt;/div&gt;
+&lt;/div&gt;</code></pre><p>References 8, 9 and 10 are High, Mid and Low, in their visible order. All three share eq-knob; data-frequency-band distinguishes them.</p><p class="small">Names and numbers refer to this image. Repeated elements are abbreviated. Preserve the approved appearance.</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>8</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Controls · numbered connections</h1><p>Applies to both Deck 2 images. Knob <code>div</code> elements in the illustration mark visual regions, not a finalized accessible input implementation.</p><table class="compact"><thead><tr><th>Reference / approved name</th><th>HTML placement and CSS selector</th><th>Intended JavaScript responsibility</th></tr></thead><tbody><tr><td>1 · <code>deck</code></td><td><code>section</code> inside <code>mixer-decks</code>; CSS <code>.deck</code> sets the card boundary.</td><td>Resolve this instance to its underlying deck; preserve its state across view changes.</td></tr><tr><td>2 · <code>performance-view</code></td><td><code>div</code> inside <code>deck</code>; <code>.performance-view</code> lays out header and content.</td><td>Show the performance workspace for this deck.</td></tr><tr><td>3 · <code>performance-header</code></td><td><code>div</code> inside the performance view; <code>.performance-header</code> arranges persistent controls.</td><td>Present the deck's current song, playback and control values.</td></tr><tr><td>4 · <code>performance-content</code></td><td><code>div</code> following the header; <code>.performance-content</code> sizes switchable content.</td><td>Select the visible content without creating another deck.</td></tr><tr><td>5 · <code>controls</code></td><td>Alternative child of content; <code>.controls</code> positions processing and stem controls.</td><td>Show Controls for the same deck; preserve its other view state.</td></tr><tr><td>6 · <code>waveform-overview</code></td><td>Inside header; <code>.waveform-overview</code> retains the shared preview.</td><td>Display this deck's overview and playback position.</td></tr><tr><td>7 · <code>filter-knob</code></td><td>Within Controls; <code>.filter-knob</code> styles the visible knob.</td><td>Translate input into the approved filter action; render the accepted value.</td></tr><tr><td>8–10 · <code>eq-knob</code></td><td>Within Controls; <code>.eq-knob[data-frequency-band="high"]</code>, <code>"mid"</code>, <code>"low"</code>.</td><td>Use the band attribute to address High, Mid or Low for this deck; do not infer DSP ranges from the picture.</td></tr><tr><td>11 · <code>effects-controls</code></td><td>Within Controls; <code>.effects-controls</code> pairs each selector with the knob beneath it.</td><td>Keep each effect assignment connected to its corresponding amount control.</td></tr><tr><td>12 · <code>stem-faders</code></td><td>Within Controls; <code>.stem-faders</code> contains four range inputs identified by <code>data-stem</code>.</td><td>Route each stem adjustment to approved behavior and authorization rules; show accepted state.</td></tr></tbody></table><div class="note">The screenshot labels are Transients, Flow, Tune and Voice. The approved new attributes are <code>beat</code>, <code>bass</code>, <code>tune</code> and <code>voice</code>. Attribute names do not authorize changing visible labels or redefining the underlying audio categories. Confirm the adapter mapping before implementation.</div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>9</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Deck 3 — Library · landscape</h1><div class="visual"><img src="approved-naming-crops/landscape-deck-3-annotated.png" alt="Approved annotated Deck 3, landscape"><div><span class="tag">PROPOSED HTML</span><pre><code>&lt;!-- 1 deck; 2 library-view --&gt;
+&lt;div class="library-view"&gt;
+ &lt;div class="library-header"&gt;
+  &lt;!-- 3 --&gt;
+  &lt;div class="section-selector"&gt;
+  &lt;/div&gt;&lt;!-- 5 --&gt;
+  &lt;button
+   class="back-to-performance-button"&gt;
+  &lt;/button&gt;&lt;!-- 6 --&gt;
+ &lt;/div&gt;
+ &lt;div class="library-content"&gt;
+  &lt;!-- 4 --&gt;
+  &lt;div class="song-sort-selector"&gt;
+  &lt;/div&gt;&lt;!-- 7 --&gt;
+  &lt;input class="search"&gt;&lt;!-- 8 --&gt;
+  &lt;div class="search-results"&gt;
+   &lt;!-- 9 --&gt;
+   &lt;div class="search-result"&gt;
+   &lt;/div&gt;&lt;!-- 10: one example --&gt;
+  &lt;/div&gt;
+  &lt;button class="send-to-deck-one"&gt;
+  &lt;/button&gt;&lt;!-- 11 --&gt;
+  &lt;button class="send-to-deck-two"&gt;
+  &lt;/button&gt;&lt;!-- 12 --&gt;
+  &lt;button class="send-to-deck-three"&gt;
+  &lt;/button&gt;&lt;!-- 13 --&gt;
+  &lt;button class="send-to-deck-four"&gt;
+  &lt;/button&gt;&lt;!-- 14 --&gt;
+ &lt;/div&gt;
+&lt;/div&gt;</code></pre><p>Reference 10 marks one result row as an example of the repeated search-result structure. The four send buttons explicitly target Decks 1–4.</p><p class="small">Names and numbers refer to this image. Repeated elements are abbreviated. Preserve the approved appearance.</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>10</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Deck 3 — Library · portrait</h1><div class="visual"><img src="approved-naming-crops/portrait-deck-3-annotated.png" alt="Approved annotated Deck 3, portrait"><div><span class="tag">PROPOSED HTML</span><pre><code>&lt;!-- 1 deck; 2 library-view --&gt;
+&lt;div class="library-view"&gt;
+ &lt;div class="library-header"&gt;
+  &lt;!-- 3 --&gt;
+  &lt;div class="section-selector"&gt;
+  &lt;/div&gt;&lt;!-- 5 --&gt;
+  &lt;button
+   class="back-to-performance-button"&gt;
+  &lt;/button&gt;&lt;!-- 6 --&gt;
+ &lt;/div&gt;
+ &lt;div class="library-content"&gt;
+  &lt;!-- 4 --&gt;
+  &lt;div class="song-sort-selector"&gt;
+  &lt;/div&gt;&lt;!-- 7 --&gt;
+  &lt;input class="search"&gt;&lt;!-- 8 --&gt;
+  &lt;div class="search-results"&gt;
+   &lt;!-- 9 --&gt;
+   &lt;div class="search-result"&gt;
+   &lt;/div&gt;&lt;!-- 10: one example --&gt;
+  &lt;/div&gt;
+  &lt;button class="send-to-deck-one"&gt;
+  &lt;/button&gt;&lt;!-- 11 --&gt;
+  &lt;button class="send-to-deck-two"&gt;
+  &lt;/button&gt;&lt;!-- 12 --&gt;
+  &lt;button class="send-to-deck-three"&gt;
+  &lt;/button&gt;&lt;!-- 13 --&gt;
+  &lt;button class="send-to-deck-four"&gt;
+  &lt;/button&gt;&lt;!-- 14 --&gt;
+ &lt;/div&gt;
+&lt;/div&gt;</code></pre><p>Reference 10 marks one result row as an example of the repeated search-result structure. The four send buttons explicitly target Decks 1–4.</p><p class="small">Names and numbers refer to this image. Repeated elements are abbreviated. Preserve the approved appearance.</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>11</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Library · numbered connections</h1><p>Applies to both Deck 3 images. These are intended responsibilities; exact library operations must follow approved product rules.</p><table class="compact"><thead><tr><th>Reference / approved name</th><th>HTML placement and CSS selector</th><th>Intended JavaScript responsibility</th></tr></thead><tbody><tr><td>1 · <code>deck</code></td><td>Shared deck instance; <code>.deck</code> keeps its card boundary.</td><td>Retain the same underlying deck while its library is open.</td></tr><tr><td>2 · <code>library-view</code></td><td>Alternative to performance view; <code>.library-view</code> fills the workspace.</td><td>Show the shared library UI in this deck's workspace.</td></tr><tr><td>3 · <code>library-header</code></td><td>Child of library view; <code>.library-header</code> arranges selector and back button.</td><td>Present navigation context without changing playback.</td></tr><tr><td>4 · <code>library-content</code></td><td>Child of library view; <code>.library-content</code> sizes content and scrolling.</td><td>Coordinate search, selection and target actions using shared library data.</td></tr><tr><td>5 · <code>section-selector</code></td><td>Within header; <code>.section-selector</code> arranges Songs / Playlists / Links.</td><td>Choose the library section and display the current selection.</td></tr><tr><td>6 · <code>back-to-performance-button</code></td><td>Button within header; same class with a leading dot is its CSS selector.</td><td>Return this deck workspace to performance; preserve playback and deck state.</td></tr><tr><td>7 · <code>song-sort-selector</code></td><td>Within content; <code>.song-sort-selector</code> arranges sort choices.</td><td>Apply approved sorting and show the active choice.</td></tr><tr><td>8 · <code>search</code></td><td>Input within content; <code>.search</code> controls its appearance.</td><td>Apply the query to library search and update results.</td></tr><tr><td>9 · <code>search-results</code></td><td>Content container; <code>.search-results</code> defines the results viewport.</td><td>Render the current result collection and selection state.</td></tr><tr><td>10 · <code>search-result</code></td><td>Repeated result row; <code>.search-result</code> arranges title, artist and visible row content.</td><td>Connect row selection to the corresponding library item.</td></tr><tr><td>11–14 · <code>send-to-deck-one</code> through <code>send-to-deck-four</code></td><td>Four buttons within content; each approved class is its CSS selector.</td><td>Send the selected item to the explicitly named destination under approved loading/queue rules.</td></tr></tbody></table><p class="small">No folder controls are visible here. The row-side icons, sort-direction arrow and selected-title strip remain in the image; no additional names or semantics are invented for them.</p><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>12</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>HTML, CSS and JavaScript</h1><p class="lead">One visible control has three connected responsibilities. Its class identifies structure and styling; its behavior must resolve the correct deck.</p><table class=""><thead><tr><th>Layer</th><th>What it owns</th><th>Play / Pause example</th></tr></thead><tbody><tr><td>HTML</td><td>The element, its semantic role and its place in the component hierarchy.</td><td>A <code>button</code> with class <code>play-pause-button</code> inside this deck's <code>performance-header</code>.</td></tr><tr><td>CSS</td><td>Appearance, dimensions, positioning, responsive layout and visible interaction states.</td><td><code>.performance-header .play-pause-button</code> styles the shared control without deciding which track plays.</td></tr><tr><td>JavaScript</td><td>Input handling, deck resolution, behavior requests, state updates and rendering.</td><td>Handle activation, request Play or Pause for the containing deck, then render the resulting state. Audio failure must not appear as successful playback.</td></tr></tbody></table><div class="cols"><div><pre><code>&lt;div class="performance-header"&gt;
+  &lt;button class="play-pause-button"
+          type="button"
+          aria-label="Play"&gt;
+    ▶
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre><p class="small">Proposed markup fragment. The accessible label and visible state must follow the current deck state.</p></div><div><pre><code>.performance-header .play-pause-button {
+  /* Approved appearance and geometry */
+}
+
+/* Intended flow, not an implemented API:
+   activation -&gt; resolve containing deck
+   -&gt; request deck behavior
+   -&gt; reflect resulting state
+*/</code></pre><p>No new function names are prescribed here. Keyboard, touch, mouse and future MIDI actions should reach the same behavior.</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>13</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Deck identity and reusable components</h1><p class="lead">Class names describe what an element is. Deck identity determines whose state and audio it controls.</p><div class="cols"><div><pre><code>&lt;main class="mixer-decks"&gt;
+  &lt;section class="deck"&gt;
+    &lt;!-- Deck 1 component instance --&gt;
+    &lt;button class="play-pause-button"&gt;
+    &lt;/button&gt;
+  &lt;/section&gt;
+  &lt;section class="deck"&gt;
+    &lt;!-- Deck 2 component instance --&gt;
+    &lt;button class="play-pause-button"&gt;
+    &lt;/button&gt;
+  &lt;/section&gt;
+  &lt;!-- Deck 3 and Deck 4 repeat
+       the same component structure. --&gt;
+&lt;/main&gt;</code></pre><p class="small">This excerpt omits intermediate containers for readability. It does not propose placing Play outside the performance header.</p></div><div><h3>Resolve the instance</h3><p>Rendering can bind actions to its deck instance, or event handling can resolve the containing <code>deck</code>. The implementation mechanism is not selected by this guide.</p><p>Do not introduce separate visual classes such as a Deck 1 Play class and a Deck 2 Play class. All four use <code>play-pause-button</code>.</p><h3>Shared state, stable ownership</h3><p>Preserve the existing authoritative <code>appState.decks</code> and <code>appState.participation</code> structures unless an alternative is explicitly approved.</p><h3>Explicit destination controls</h3><p>The library's approved <code>send-to-deck-one</code> through <code>send-to-deck-four</code> names intentionally specify destinations. They can be shown in a library opened from any deck.</p><div class="note">The Library workspace owner and the destination of a send action are separate concepts.</div></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>14</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Responsive layout principles</h1><p class="lead">Landscape and portrait are two arrangements of the same components, controls and four persistent decks.</p><div class="cols"><div><h3>Landscape reference</h3><p>Four deck workspaces appear across the screen. Deck 1 shows Wave + Cue, Deck 2 shows Controls, and Deck 3 shows Library.</p><p>The narrower cards and taller available workspace affect waveform height, cue-pad dimensions and control spacing.</p><h3>Portrait reference</h3><p>The workspaces form a two-by-two arrangement. Wider, shorter cards change the proportions of the same sections.</p><p>Deck 3 remains the Library view of the same underlying Deck 3; it does not become a different component system.</p></div><div><h3>Names stay constant</h3><pre><code>/* Proposed selector relationships.
+   Exact breakpoint values are not defined. */
+
+.mixer-decks { /* shared deck layout */ }
+.deck { /* shared card */ }
+.performance-header { /* shared header */ }
+.wave-and-cue { /* same view */ }
+.controls { /* same view */ }
+.library-view { /* same workspace */ }</code></pre><p>CSS responds to available screen space. Do not create separate portrait and landscape class vocabularies or duplicate musical behavior.</p></div></div><div class="note">Implementation checks: preserve the approved image proportions and placement; verify scrolling, touch areas, focus, selection and view transitions. Orientation changes must not trigger deck loading, synchronization or audio lifecycle changes.</div><p class="small">No numeric breakpoints, fixed screen requirements or new layout rules are approved by this guide.</p><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>15</span></footer></section>
+<section class="page "><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Code connections · Play / Pause</h1><div class="diagram"><div class="box">User<br>interaction</div><span class="arrow">→</span><div class="box">HTML<br>element</div><span class="arrow">→</span><div class="box">JavaScript<br>event handling</div><span class="arrow">→</span><div class="box">Deck<br>behavior</div><span class="arrow">→</span><div class="box">Audio<br>engine</div><span class="arrow">→</span><div class="box">Updated<br>interface</div></div><p><span class="tag">INTENDED CONNECTION</span> The proposed <code>.play-pause-button</code> belongs to the containing deck. Its event handling requests deck behavior; the audio outcome and resulting state determine the interface update.</p><h3>Existing clean-deck prototype: verified source context</h3><table class=""><thead><tr><th>Responsibility</th><th>Existing module</th><th>Observed connection</th></tr></thead><tbody><tr><td>Visual / event handling</td><td><code>app/visual/mixer/deck.js</code></td><td>Creates a button and attaches a click listener. Calls existing <code>pauseDeck</code> or awaits <code>playDeck</code>, catches playback errors, then calls <code>updateDeckDesign</code>.</td></tr><tr><td>Deck behavior</td><td><code>app/behavior/mixer/deck.js</code></td><td>Existing <code>playDeck</code> returns for an empty deck; otherwise awaits <code>startAudio</code> before setting <code>isPlaying</code>. Existing <code>pauseDeck</code> calls <code>pauseAudio</code> and clears that state.</td></tr><tr><td>Audio</td><td><code>app/audio/deck-audio.js</code></td><td>Existing <code>buildAudio</code> creates a browser <code>Audio</code> player. <code>startAudio</code> awaits its <code>play()</code>; <code>pauseAudio</code> calls its <code>pause()</code>.</td></tr></tbody></table><div class="note">This path is used by <code>development/clean-deck.html</code>. It is architectural context, not the H5.3.1 visual implementation or proof of a completed naming migration. The current root application uses its separate integration/native Web Audio path. No audio behavior was tested while creating this document.</div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>16</span></footer></section>
+<section class="page"><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Complete naming reference · structure & header</h1><p>Names below are the approved HTML classes; prefix each with a dot for its CSS class selector. This is the complete name inventory, with intended responsibilities. The authoritative wording remains in <code>APPROVED-NAMING.md</code>.</p><div class="cols"><div><h3>Application structure</h3><table class="compact"><thead><tr><th>Approved name / selector</th><th>Purpose / intended connection</th></tr></thead><tbody><tr><td><code>app</code></td><td>Entire application.</td></tr><tr><td><code>mixer-header</code></td><td>Global mixer header.</td></tr><tr><td><code>mixer-decks</code></td><td>Container holding the four decks.</td></tr><tr><td><code>mixer-footer</code></td><td>Global mixer footer.</td></tr><tr><td><code>deck</code></td><td>Individual deck container; resolve its underlying deck identity.</td></tr><tr><td><code>performance-view</code></td><td>Performance alternative within a deck.</td></tr><tr><td><code>library-view</code></td><td>Library alternative within the same deck.</td></tr><tr><td><code>performance-header</code></td><td>Persistent portion of the performance interface.</td></tr><tr><td><code>performance-content</code></td><td>Switchable content area.</td></tr><tr><td><code>wave-and-cue</code></td><td>Wave + Cue alternative within performance-content.</td></tr><tr><td><code>controls</code></td><td>Controls alternative within performance-content.</td></tr><tr><td><code>library-header</code></td><td>Header within library-view.</td></tr><tr><td><code>library-content</code></td><td>Content within library-view.</td></tr></tbody></table></div><div><h3>Performance header</h3><table class="compact"><thead><tr><th>Approved name / selector</th><th>Purpose / intended connection</th></tr></thead><tbody><tr><td><code>deck-participation-button</code></td><td>Open the deck's participation interface; reflect authoritative participation state.</td></tr><tr><td><code>tempo-slider</code></td><td>Present tempo input; route changes to approved deck tempo behavior.</td></tr><tr><td><code>pitch-slider</code></td><td>Present pitch input; route changes to approved deck pitch behavior.</td></tr><tr><td><code>library-button</code></td><td>Open this deck's library-view.</td></tr><tr><td><code>song-title</code></td><td>Display the current song title in the performance header.</td></tr><tr><td><code>performance-selector</code></td><td>Choose wave-and-cue or controls.</td></tr><tr><td><code>play-pause-button</code></td><td>Request Play or Pause for the containing deck.</td></tr><tr><td><code>queue-button</code></td><td>Present queue state and route approved queue actions.</td></tr><tr><td><code>main-volume-fader</code></td><td>Request main level changes; reflect accepted deck volume.</td></tr><tr><td><code>waveform-overview</code></td><td>Present full-song waveform and playback position.</td></tr></tbody></table><p class="small">CSS owns visual presentation for these selectors. JavaScript owns interaction and state. Musical calculations and audio processing remain outside visual styling.</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>17</span></footer></section>
+<section class="page"><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Complete naming reference · Wave + Cue & Controls</h1><div class="cols"><div><h3>Wave + Cue</h3><table class="compact"><thead><tr><th>Approved name / selector</th><th>Purpose / intended connection</th></tr></thead><tbody><tr><td><code>scrolling-waveform</code></td><td>Zoomed waveform display in wave-and-cue.</td></tr><tr><td><code>current-playback-time</code></td><td>Readout of current deck playback time.</td></tr><tr><td><code>playhead</code></td><td>Playback-position indicator; derive its display from deck timing.</td></tr><tr><td><code>cue-pads</code></td><td>Container for the eight cue-pad buttons.</td></tr><tr><td><code>cue-pad</code></td><td>Eight individual buttons, identified using data-cue="1" through data-cue="8".</td></tr><tr><td><code>loop-controls</code></td><td>Container for the visible loop controls.</td></tr><tr><td><code>halve-loop-button</code></td><td>Request the approved halve-loop action.</td></tr><tr><td><code>loop-toggle-button</code></td><td>Request the approved loop toggle action.</td></tr><tr><td><code>double-loop-button</code></td><td>Request the approved double-loop action.</td></tr></tbody></table><pre>&lt;button class="cue-pad"
+        data-cue="1"&gt;&lt;/button&gt;
+
+.cue-pad[data-cue="1"]</pre><p class="small">Repeat the cue-pad structure through 8. Repeat and Shift remain visible in the approved reference, but this naming specification supplies no new names or behavior definitions for them.</p></div><div><h3>Controls</h3><table class="compact"><thead><tr><th>Approved name / selector</th><th>Purpose / intended connection</th></tr></thead><tbody><tr><td><code>filter-knob</code></td><td>Filter control; the visual region does not prescribe its accessible input implementation.</td></tr><tr><td><code>eq-knob</code></td><td>Shared class for Low, Mid and High, distinguished by data-frequency-band="low", "mid", or "high".</td></tr><tr><td><code>effects-controls</code></td><td>Container for paired effect selectors and effect knobs.</td></tr><tr><td><code>effect-selector</code></td><td>Select the effect corresponding to the knob directly beneath it.</td></tr><tr><td><code>effect-knob</code></td><td>Adjust the corresponding selected effect under approved behavior.</td></tr><tr><td><code>stem-faders</code></td><td>Container holding four range inputs, distinguished by data-stem="beat", "bass", "tune", or "voice".</td></tr></tbody></table><pre>.eq-knob[data-frequency-band="high"]
+.stem-faders input[data-stem="beat"]
+
+&lt;div class="stem-faders"&gt;
+  &lt;input type="range" data-stem="beat"&gt;
+  &lt;input type="range" data-stem="bass"&gt;
+  &lt;input type="range" data-stem="tune"&gt;
+  &lt;input type="range" data-stem="voice"&gt;
+&lt;/div&gt;</pre><p class="small">Each effect selector corresponds to the effect knob directly beneath it. No amount ranges, DSP formulas, or effect algorithms are introduced here.</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>18</span></footer></section>
+<section class="page"><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Complete naming reference · Library & folders</h1><div class="cols"><div><h3>Library</h3><table class="compact"><thead><tr><th>Approved name / selector</th><th>Purpose / intended connection</th></tr></thead><tbody><tr><td><code>section-selector</code></td><td>Songs / Playlists / Links.</td></tr><tr><td><code>back-to-performance-button</code></td><td>Return the owning deck workspace to its performance view.</td></tr><tr><td><code>song-sort-selector</code></td><td>Present and change approved song sorting.</td></tr><tr><td><code>search</code></td><td>Search input; update library results.</td></tr><tr><td><code>search-results</code></td><td>Container holding the current results.</td></tr><tr><td><code>search-result</code></td><td>Repeated result item.</td></tr><tr><td><code>song-title</code></td><td>Display a song title; the same name is reused in the performance header.</td></tr><tr><td><code>artist</code></td><td>Display the result item's artist.</td></tr><tr><td><code>playlist-title</code></td><td>Display a playlist title when that content is shown.</td></tr><tr><td><code>send-to-deck-one</code></td><td>Send the selection to Deck 1 under approved loading rules.</td></tr><tr><td><code>send-to-deck-two</code></td><td>Send the selection to Deck 2 under approved loading rules.</td></tr><tr><td><code>send-to-deck-three</code></td><td>Send the selection to Deck 3 under approved loading rules.</td></tr><tr><td><code>send-to-deck-four</code></td><td>Send the selection to Deck 4 under approved loading rules.</td></tr></tbody></table></div><div><h3>Folder organization</h3><table class="compact"><thead><tr><th>Approved name / selector</th><th>Purpose / intended connection</th></tr></thead><tbody><tr><td><code>folder-contents</code></td><td>Present a folder's contents.</td></tr><tr><td><code>folder-back-button</code></td><td>Navigate back from the current folder.</td></tr><tr><td><code>folder-title</code></td><td>Display the current folder title.</td></tr><tr><td><code>folder-item</code></td><td>Represent an item in the folder structure.</td></tr><tr><td><code>folder-expand-button</code></td><td>Toggles expansion and collapse.</td></tr><tr><td><code>create-folder-button</code></td><td>Invoke approved folder creation behavior.</td></tr><tr><td><code>rename-folder</code></td><td>Provisional action name; not a finalized HTML/CSS class assignment.</td></tr></tbody></table><div class="note">Folder and playlist organization should remain flexible. Do not invent additional UI controls.</div><p>Folder controls and playlist-title are not visible in the six approved deck references. They are included because the approved naming inventory includes them, not because this guide adds them to the screenshot.</p><p>The specification does not establish the complete nested folder/playlist hierarchy or resolve every operation. Preserve this uncertainty until a focused implementation task is approved.</p><p class="small">For rename-folder, retain the approved spelling as a provisional action name. The guide does not convert it into a mandatory selector.</p></div></div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>19</span></footer></section>
+<section class="page"><div class="eyebrow">Historical Version 1 · See current-layout addendum</div><h1>Future implementation notes</h1><div class="cols"><div><h3>Implement incrementally</h3><ol><li>Choose a small approved visual component and define its exact input/output contract.</li><li>Introduce the approved structural names while preserving H5.3.1 appearance, file loading and behavior.</li><li>Connect the component to shared deck actions and authoritative state without duplicating musical rules.</li><li>Check the matching landscape and portrait references, then verify affected interactions.</li><li>Review the result before extending the migration to another component.</li></ol><h3>Keep boundaries clear</h3><p>Visual code owns presentation. Behavior code owns decisions and state transitions. Audio code owns playback and signal processing. A visual naming migration does not authorize an audio-engine change.</p><p>Do not infer control ranges, playback semantics or matching formulas from screenshots. Consult approved product rules and subsystem specifications.</p></div><div><h3>Preserved source materials</h3><p><code>docs/visual-verification/APPROVED-NAMING.md</code><br>Authoritative naming specification.</p><p><code>docs/visual-verification/approved-naming-crops/</code><br>Original landscape/portrait attachments, six approved crops, six annotated PNGs and their SVG sources, plus the annotation script.</p><p><code>TuneTox-Developers-Guide-v1.html</code><br>Editable document source beside this PDF.</p><h3>Verification and limits</h3><p>This guide specifies intended new code. It does not establish a completed reorganization, audio correctness, device compatibility or release readiness.</p><p>Any implementation must preserve the four underlying decks and shared state. Test meaningful behavior changes; use actual browser playback and listening where audio may be affected.</p><p>The approved screenshots remain the visual authority. Unnamed visible details must be preserved; obtain a focused naming decision before assigning new names.</p></div></div><div class="note">Version 1 records the approved working visual references and naming structure. Future editions should distinguish approved design, implemented code and verified behavior, and retain the supporting source materials.</div><footer><span>H5.3.1 visual reference · Proposed structure unless marked existing</span><span>20</span></footer></section></body></html>

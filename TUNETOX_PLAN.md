@@ -42,6 +42,10 @@ Development priorities and their sequence should be determined collaboratively b
 
 ### 2.1 Current Priorities
 
+**Independent performance sections (2026-11-22):** The new Clean Playback entry now gives each deck an upper Wave/Stems section and a lower Cues/Controls section, defaulting to Wave + Cues on all four decks. Both selections survive Library navigation independently of playback. Stem faders move to upper Stems; lower Controls retains filter, EQ and effects. Musical controls remain previews. This approved structure supersedes the preceding combined switch; see [current names](docs/visual-verification/APPROVED-NAMING.md) and [interface contract](specs/interface.md). The Version 1 PDF and screenshots are historical styling references; its editable source carries a current-layout addendum.
+
+**H5.3.1 Clean Playback checkpoint (2026-11-22):** [tunetox.html](tunetox.html) is the new, separately testable visual entry point. It uses the approved naming specification and shared four-deck presentation around the existing Clean Deck playback behavior. Load, Play, Pause and the preserved queue action are connected; other musical controls remain previews. The old application and prototype are preserved. See [scope, usage and verification](docs/CLEAN_PLAYBACK.md). This checkpoint is not a release or a completed visual/behavior migration.
+
 Identify the work currently receiving attention, why it matters, and any relevant dependencies or obstacles.
 
 Multiple priorities may progress simultaneously.
