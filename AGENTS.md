@@ -112,17 +112,9 @@ Do not treat historical file paths as active dependencies, and do not discard ap
 
 As TuneTox develops, preserve useful historical research, experiments, decisions, and implementation records. Clearly distinguish historical material from current instructions and working code. Before removing or replacing historical material, check whether it contains information or approved decisions that have not yet been preserved elsewhere.
 
-**Accessing the protected baseline:** The protected historical Git branch is `baseline/h531-direct-06-working`. Consult it when investigating earlier functionality, recovering lost implementation details, comparing behavior, or verifying historical decisions. Access it through Git history or a separate working copy without changing the active development branch. Treat the baseline as read-only: do not commit changes to it, delete it, or overwrite it. Any functionality recovered from the baseline must be reviewed, approved where necessary, and tested before integration into the current application.
+**Accessing the protected baseline:** Use the published read-only tag `archive/baseline-h531-direct-06-working`, which replaces the retired historical branch `baseline/h531-direct-06-working`. Consult it when investigating earlier functionality, recovering lost implementation details, comparing behavior, or verifying historical decisions. Access it through Git history or a separate working copy without changing the active development branch. Treat the baseline as read-only: do not commit changes to it, delete it, or overwrite it. Any functionality recovered from the baseline must be reviewed, approved where necessary, and tested before integration into the current application.
 
-**Approved archive migration, not yet executed remotely:** The final branch set
-will be `tunetox-reorganization` and `tunetox-d1`. The baseline's equally read-only
-replacement is `archive/baseline-h531-direct-06-working` at commit
-`33ba695003083562b3c6e3c8e5142955d8e5f100`. Local annotated archive tags have been
-prepared; never move, force-update, delete or repurpose `archive/*` tags without
-explicit human approval. The baseline branch must remain until publication and
-remote retrieval of its exact tag/commit/tree have been verified and branch
-deletion is explicitly approved. Its existing safeguards apply to the archive
-after migration; historical references below identify the same preserved content.
+**Archive publication verified 24 November 2026:** All nine annotated archive tags are published on GitHub. Independent API reads verified every target commit and tree against the manifest. Eight historical branches have been removed. The intended final branches are `tunetox-reorganization` and `tunetox-d1`; `deploy/tunetox-d1-preview` remains untouched pending separate resolution of its hosting dependency. The baseline archive is `archive/baseline-h531-direct-06-working` at `33ba695003083562b3c6e3c8e5142955d8e5f100`. Never move, force-update, delete or repurpose `archive/*` tags without explicit human approval. The baseline safeguards now apply to the archive; historical branch names below identify the same preserved content.
 See [the exact archive manifest and execution prerequisites](docs/BRANCH-ARCHIVE-PLAN.md).
 
 ## Architecture and product-design safeguards

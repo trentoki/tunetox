@@ -42,16 +42,30 @@ Development priorities and their sequence should be determined collaboratively b
 
 ### 2.1 Current Priorities
 
+**iPhone Visual layout (provisionally accepted; visual refinement pending):** The existing shared
+deck component now presents one deck at a time on phone-sized viewports, with four
+tabs, a separately operated expandable empty Transition area, and vertical native
+stem faders. All four mounted decks remain active. Phone-only Visual files live in
+`app/visual/iphone/`; no Behavior/Audio or Queue behavior changes are included.
+See [layout choices and verification limits](specs/interface.md#iphone-single-deck-layout).
+The human has provisionally accepted this layout for the development checkpoint;
+visual refinement is still needed. Physical Safari touch/listening verification
+remains separate from the recorded Chromium checks. Queue remains the next agreed
+roadmap task, but this checkpoint does not begin it or authorize further changes.
+
 **Approved timing cleanup and historical archives:** Play completion now reconciles
 Behavior with Audio if a song ends before the scheduling reply. Natural-end stop
 failures use the existing action identity, so obsolete failures cannot invalidate
 a newer paused seek. Real-worklet regressions cover both and retain current-error
-reporting. Nine exact historical branch tips have verified local annotated archive
-tags; no remote tags or branch deletions have occurred. The final branch set is
-`tunetox-reorganization` and `tunetox-d1`. See the
+reporting. The development checkpoint is committed and pushed as
+`b913bfb238db77014ba5296e7e542f3b9bf73345`. All nine annotated archive tags are
+published; independent GitHub API reads on 24 November 2026 verified their target
+commits and trees against the manifest. Eight historical branches have been removed.
+The intended final branches are `tunetox-reorganization` and `tunetox-d1`;
+`deploy/tunetox-d1-preview` remains untouched pending its separate hosting review. See the
 [archive manifest, safeguards and execution prerequisites](docs/BRANCH-ARCHIVE-PLAN.md).
-External deployment settings and authenticated publishing must be resolved before
-the separately approved archive-publication/branch-removal maintenance operation.
+Archive publication is complete. Leave the remaining deployment branch untouched;
+its hosting dependency will be resolved separately.
 
 **Functional song cues:** Eight Behavior-owned source positions per loaded deck
 now drive the existing pads and passive numbered overview markers in all themes.

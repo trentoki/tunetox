@@ -4,6 +4,68 @@ The new application entry point is [tunetox.html](../tunetox.html). Serve the re
 
 ## Open and test
 
+### iPhone layout review (24 November 2026)
+
+**Checkpoint status:** The iPhone layout is provisionally accepted, with visual
+refinement still needed. Physical Safari/device verification remains separate
+from the automated results below; this is not a release approval.
+
+Phone-sized viewports now show one shared deck at a time with tabs 1–4, an empty
+expandable Transition area and four vertical native stem faders. All four decks
+remain mounted and operational. Tap the separate Transition handle or swipe it
+down/up; deck tabs select only. No transition musical controls are designed yet.
+Short landscape phones scroll the performance workspace so controls remain usable.
+See [viewport thresholds and interaction choices](../specs/interface.md#iphone-single-deck-layout).
+
+The only new production files are
+[phone CSS](../app/visual/iphone/layout.css) and
+[phone navigation](../app/visual/iphone/deck-selector.js). The shared host imports
+the navigation after mounting its existing decks; the entry loads the phone CSS.
+No shared deck component was copied and no Behavior/Audio source was changed.
+The two additional [phone test files](../tests/iphone-layout-tests.html) provide a
+dedicated browser runner and its checks; no framework or dependency was introduced.
+
+Verification completed in isolated headless Chromium:
+
+- Existing full playback/touch and Glass Hardware/Futuristic suites passed.
+- The new phone suite passed with four generated-file transports: switching tabs
+  retains playing/paused state, source clocks, Main/Tempo/stem values, cue markers
+  and recall, prepared queues and READY playback. Context, transport and worklet
+  identities remain unchanged. Keyboard navigation and tablet resize restoration
+  passed. Transition cancellation, horizontal movement, lost capture, resize and
+  compatibility-click regressions passed.
+- Native CDP touch-emulated vertical stem drags, tab taps and transition swipes
+  passed in all three themes at 320×568, 375×667, 390×844, 430×932 and 844×390.
+  No outer horizontal overflow was found. All four stem categories were separately
+  dragged at 390×844 in each theme without changing another deck.
+- Measured header/footer/deck/content/Main/stem geometry exactly matched the
+  committed pre-phone Visual snapshot at 1114×768, 768×1024 and 1024×768 in all
+  three themes. Phone screenshots were inspected, including short landscape.
+- JavaScript syntax, editor diagnostics and Git whitespace checks passed.
+
+Readability review: phone code owns only navigation/transition presentation;
+shared controls and musical actions stay in their existing modules. CSS and JS
+carry the same explicit viewport query. No alternative deck state or audio engine
+was introduced. The checkpoint also includes the earlier approved publication and
+archive-status documentation corrections.
+
+These are automated Chromium results, not physical Safari or listening approval.
+For iPhone/iPad on the Mac's Wi-Fi, start the existing HTTPS server and use its
+printed LAN URL, with the development CA trusted on that device. See
+[HTTPS setup](LOCAL_HTTPS.md). The Mac's LAN IP may change after reconnecting.
+
+Physical review: load familiar songs on several decks, press Play and raise Main
+carefully from zero. Switch tabs while listening, pause one deck, recall cues,
+seek and adjust Main/Tempo; check that hidden decks continue as intended. Open
+Stems and drag each fader; stored levels should change, but stem audio remains
+disconnected. Tap/swipe the Transition handle separately from tabs; test rotation,
+short-screen scrolling, Library return, intentional pinch zoom and each theme.
+Repeat on iPad to confirm its existing multi-deck layout. The layout is
+provisionally accepted with visual refinement pending; Queue remains the next
+agreed roadmap item and is not started by this checkpoint.
+
+### Start the preview server
+
 With Node available, run:
 
 ```sh

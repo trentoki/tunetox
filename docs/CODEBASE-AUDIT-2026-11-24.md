@@ -9,8 +9,11 @@ approval. Passing regression suites do not cover those cases yet.
 
 **Subsequent approved follow-up:** Both timing bugs have now received targeted
 corrections and real-worklet regressions in the existing playback suite. The
-historical prototype is unchanged. Nine local annotated archive tags are prepared,
-but no tags were pushed and no branches were deleted. See the
+historical prototype is unchanged. The checkpoint was committed and pushed as
+`b913bfb238db77014ba5296e7e542f3b9bf73345`. On 24 November 2026, independent
+GitHub API reads verified all nine published annotated tags and their target commits
+and trees against the manifest. Eight historical branches have been removed;
+`deploy/tunetox-d1-preview` remains untouched pending separate hosting review. See the
 [exact archive manifest and maintenance prerequisites](BRANCH-ARCHIVE-PLAN.md).
 The findings and pre-migration observations below remain the original audit record.
 

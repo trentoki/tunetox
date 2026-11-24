@@ -5,6 +5,51 @@ extraction and reconciliation of the remaining historical design rules are pendi
 
 **Scope:** Responsive views, cue controls and tested design interactions.
 
+## iPhone single-deck layout
+
+**Review status:** Provisionally accepted for the development checkpoint; visual
+refinement remains necessary. This is not final visual or release approval and
+does not establish physical Safari touch or listening verification.
+
+The shared host mounts the same four deck components and calls the Visual-only
+`installDeckSelector` afterward. [Phone navigation](../app/visual/iphone/deck-selector.js)
+receives only the mounted deck container, never Behavior/Audio objects or actions.
+[Phone CSS](../app/visual/iphone/layout.css) hides unselected decks without removing
+or rebuilding them. Hidden phone decks are inert for keyboard/accessibility input;
+all decks regain input when the tablet layout returns. Audio continues independently.
+Shared controls, library/workspace selections and the three themes are reused.
+
+Implementation choices for physical review (not new musical rules):
+
+- Phone mode uses width at most 600 CSS pixels, or a coarse-pointer viewport at
+  most 1000 pixels wide and 500 pixels high for phone landscape. CSS and navigation
+  use the same media query. This is a viewport rule, not device-name detection;
+  sufficiently narrow tablet split views also use the compact layout.
+- Deck 1 is initially selected. Selection and transition expansion are temporary
+  Visual state retained through rotation/resizing, not saved preferences.
+- Tabs use standard tablist keyboard arrows/Home/End, selected state and roving
+  focus. The separate transition handle supports tap/Enter/Space and a vertical
+  release displacement of at least 24 CSS pixels, larger than horizontal travel.
+  Down opens, up closes. Cancellation, lost capture, blur and resize abandon an
+  unfinished gesture. Swipes start only on the handle, never the deck tabs.
+- The collapsed handle is 28 pixels high; tabs are 34 pixels high. The empty
+  expanded panel is at most 110 pixels or 18dvh. No musical controls, allocation,
+  matching, Handoff or transition actions are connected.
+- Native stem inputs use vertical writing mode with 100% at the top and 0% below;
+  existing names, values, 1% steps, theme materials and shared input actions remain.
+  Vertical drags adjust the fader; horizontal pan and deliberate pinch remain
+  allowed. Tablet stem orientation and CSS are unchanged.
+- Global Load/theme controls wrap only in phone mode to fit the viewport. No
+  existing controls are removed. Short landscape phones use one global-control
+  row and scroll the performance workspace vertically, including its header, so
+  native stem inputs can be brought fully into view. Other viewports retain the
+  existing fixed deck header and content scrolling.
+
+The dedicated [phone browser checks](../tests/iphone-layout-tests.html) use real
+generated-file playback to verify hidden transports, cues, queues and control
+retention, plus theme/resize navigation. Physical Safari touch and listening are
+separate verification; Chromium touch emulation does not establish device success.
+
 ## Functional cue pads and overview markers
 
 All themes present the same Behavior-owned eight cue positions. Empty pads save

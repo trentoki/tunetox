@@ -1,8 +1,25 @@
 # TuneTox historical archive and branch removal plan
 
-Prepared 24 November 2026. Desired final branches: `tunetox-reorganization` and
-`tunetox-d1`. All nine annotated tags below exist **locally only**. No remote tags,
-branches, settings or commits have been changed. Removal remains approval-gated.
+Prepared and status rechecked 24 November 2026. Desired final branches:
+`tunetox-reorganization` and `tunetox-d1`.
+
+## Current execution status
+
+- The development checkpoint `b913bfb238db77014ba5296e7e542f3b9bf73345` is committed
+  and pushed. Local HEAD, index and all 307 tracked files matched GitHub before
+  this documentation update.
+- All nine annotated archive tags are published. Independent GitHub API reads
+  retrieved every tag object and its target commit; all nine commit and tree IDs
+  exactly match this manifest. This verification did not perform a fresh Git fetch.
+- Eight historical branches are absent from GitHub. The three live branches are
+  `tunetox-reorganization`, `tunetox-d1`, and `deploy/tunetox-d1-preview`.
+- Leave the deployment branch untouched pending separate resolution of its hosting
+  dependency. Its archive tag is already published.
+- Git publication does not establish application website deployment. External
+  hosting settings remain unverified.
+
+The preparation-time checks and execution procedure below remain historical
+records, not instructions to republish tags or repeat completed deletions.
 
 ## Exact archive manifest
 
@@ -65,8 +82,9 @@ git ls-tree -r archive/organization-architecture-ui-verification
 
 Tags preserve Git-tracked content. They do not capture current uncommitted work,
 ignored music, external files, or hosting-service settings. No original music was
-moved, modified or deleted. Remote retrievability cannot be claimed until tag
-publication and an independent fetch have succeeded.
+moved, modified or deleted. Remote tag/commit/tree retrievability has now been
+verified through independent GitHub API reads; a fresh Git fetch was not performed
+in this status check.
 
 ## Dependencies and safeguards
 
