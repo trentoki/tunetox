@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="../">
+<title>Glass Hardware visual prototype checks</title>
+<link rel="stylesheet" href="app/visual/mixer/playback.css">
+<style>html,body{overflow:auto;height:auto}body{padding:12px}#fixtures{height:650px}#results{white-space:pre-wrap}#themes{display:flex;gap:8px;margin:10px 0}</style>
+<h1>Glass Hardware visual prototype checks</h1>
+<p>Visual test doubles only. These checks do not load or control audio.</p>
+<button id="run">Run checks</button>
+<pre id="results">Ready.</pre>
+<div id="themes"></div><main id="fixtures" class="mixer-decks"></main>
+<script type="module">
+import { createPlaybackDeck } from './app/visual/mixer/playback.js';
+import { installThemeControls } from './app/visual/themes/theme-manager.js';
+import { setStemLevel, createPlaybackCoordinator } from './app/behavior/mixer/deck.js';
+const fixtures = document.querySelector('#fixtures');
+let tempoUpdates = 0;
+const states = Array.from({length:4}, () => ({song:null, queue:null, isPlaying:false,
+  cuePositions:Array(8).fill(null), loadingSong:null, mainVolume:0, tempoRatio:1, stemLevels:{beat:1,bass:1,tune:1,voice:1}, audio:Object.assign(new EventTarget(),{currentTime:0,duration:20,readyState:0,paused:true})}));
+const views = states.map((state,index) => {
+  const coordinator=createPlaybackCoordinator(state,{busyChanged(){},completed(){},failed(error){throw error;},settled(){view.render();},ended(){},mediaFailed(){}});
+  const view = createPlaybackDeck(index+1,state,{librarySongs:()=>[],cue:(number,clear)=>coordinator.cue(number,clear),canSeek:()=>coordinator.canSeek(),setTempo(ratio){tempoUpdates++;state.tempoRatio=ratio;view.render();},setMainVolume(){},togglePlayback(){},playQueue(){},
+    setStemLevel(stem,value){setStemLevel(state,stem,value);view.render();}});
+  fixtures.append(view.node); view.render(); return view;
+});
+installThemeControls(document.querySelector('#themes'),fixtures);
+// The base URL matches the real application's theme paths.
+const theme = document.querySelector('[aria-label="Visual theme"]');
+async function select(value) {
+  theme.value=value; theme.dispatchEvent(new Event('change',{bubbles:true}));
+  const link=document.querySelector('link[href^="app/visual/themes/"]');
+  if(link) await new Promise((resolve,reject)=>{link.onload=resolve;link.onerror=reject;});
+}
+const output=document.querySelector('#results');
+const assert=(value,message)=>{if(!value)throw Error(message);};
+const pad=(deck,number)=>views[deck].node.querySelector('[data-cue="'+number+'"]');
+const shift=deck=>views[deck].node.querySelector('.loop-controls button:last-child');
+document.querySelector('#run').addEventListener('click',async()=>{
+  output.textContent=''; output.dataset.result='running';
+  const pass=text=>{output.textContent+='PASS '+text+'\n';};
+  try {
+    states.forEach((state,index)=>{state.song=null;state.audio.readyState=0;state.cuePositions.fill(null);views[index].render();});
+    await select('glass-hardware');
+    assert(getComputedStyle(pad(0,1)).backgroundColor==='rgb(220, 222, 214)','Empty rubber is not off-white');
+    assert(pad(0,1).disabled,'Unloaded decks must not accept real cues');
+    states.forEach((state,index)=>{state.song={name:'Visual fixture '+index};state.audio.readyState=2;views[index].render();});
+    pad(0,1).click();pad(0,8).click();pad(1,2).click();
+    assert(states[0].cuePositions[0]===0&&states[1].cuePositions[0]===null,'Cue assignment is not Behavior-owned/deck-local');
+    assert(pad(0,8).getAttribute('aria-pressed')==='true','Assignment not illuminated');
+    assert(getComputedStyle(pad(0,1)).backgroundColor!==getComputedStyle(pad(0,2)).backgroundColor,'Assignment not illuminated');
+    shift(0).click();pad(0,1).click();pad(0,2).click();shift(0).click();
+    assert(states[0].cuePositions[0]===null&&states[0].cuePositions[1]===null&&states[0].cuePositions[7]===0,'Shift clear changed another cue');
+    pass('off-white rubber; loaded-song Behavior cues, independent assignments and latched Shift clearing');
+    views[0].node.querySelector('.library-button').click();views[0].node.querySelector('.back-to-performance-button').click();
+    assert(![...theme.options].some(option=>option.value==='plasma'),'Obsolete theme restored');
+    for(const name of ['default','futuristic','glass-hardware']) {
+      await select(name);
+      assert(!pad(0,8).disabled&&pad(0,8).getAttribute('aria-pressed')==='true'&&states[0].cuePositions[7]===0,'Theme switch changed real cues');
+    }
+    assert([...fixtures.querySelectorAll('svg')].every(svg=>!svg.children.length),'Fake waveform generated');
+    pass('Library/theme round trips preserve cues; Default functional; no fake waveform');
+    const stem=views[0].node.querySelector('[data-stem="beat"]');
+    for(const percent of [0,1,50,99,100,25]) {
+      stem.value=percent;stem.dispatchEvent(new Event('input',{bubbles:true}));
+      assert(states[0].stemLevels.beat===percent/100&&stem.style.getPropertyValue('--stem-level-fill')===percent+'%','Input/state/illumination disagree');
+    }
+    setStemLevel(states[0],'beat',.63);views[0].render();
+    assert(stem.value==='63'&&stem.closest('label').querySelector('output').textContent==='63%','Programmatic update not rendered');
+    assert(states[0].stemLevels.bass===1&&states[1].stemLevels.beat===1,'Stem states are not independent');
+    for(const bad of [NaN,Infinity,-.01,1.01,'0.5',null]) {
+      let rejected=false;try{setStemLevel(states[0],'beat',bad);}catch{rejected=true;}
+      assert(rejected&&states[0].stemLevels.beat===.63,'Invalid stem input changed state');
+    }
+    let rejected=false;try{setStemLevel(states[0],'unknown',.5);}catch{rejected=true;}
+    assert(rejected,'Unknown stem accepted');
+    pass('real Behavior stem setter; 1% input, independent values, validation, programmatic illumination');
+    const appearance=()=>[...fixtures.querySelectorAll('.deck,.tempo-slider,.pitch-slider,.cue-pad,.filter-knob,input')].map(n=>{
+      const s=getComputedStyle(n);return [s.background,s.borderRadius,s.boxShadow,s.fontFamily,s.color,s.width,s.height,s.opacity];
+    });
+    const glass=JSON.stringify(appearance());
+    await select('default');const original=JSON.stringify(appearance());
+    await select('futuristic');
+    const tempo=views[0].node.querySelector('.tempo-slider input');
+    assert(getComputedStyle(tempo).pointerEvents==='none'&&getComputedStyle(tempo.parentElement).touchAction==='pinch-zoom',
+      'Native horizontal touch behavior must not compete with the roller surface');
+    for(const [position,ratio] of [[0,.5],[500,1],[1000,2],[500,1]]){
+      tempo.value=position;tempo.dispatchEvent(new Event('input',{bubbles:true}));
+      assert(states[0].tempoRatio===ratio,'Roller changed logarithmic Tempo mapping');
+      assert(parseFloat(tempo.parentElement.style.getPropertyValue('--roller-offset'))===-position/1000*120,
+        'Roller markings must travel upward as the value increases');
+    }
+    const label=tempo.parentElement.querySelector('span'),readout=tempo.parentElement.querySelector('output');
+    assert(Math.abs(label.getBoundingClientRect().top-readout.getBoundingClientRect().top)<3&&
+      parseFloat(getComputedStyle(readout).fontSize)<=8,'Readout must be small and beside its label');
+    assert(getComputedStyle(views[0].node.querySelector('.waveform-overview'),'::after').pointerEvents==='none',
+      'Glass cover blocks waveform input');
+    const pitch=views[0].node.querySelector('.pitch-slider input');
+    const before=JSON.stringify(states),calls=tempoUpdates;
+    assert(!pitch.disabled&&pitch.max==='1000','Pitch preview unavailable');
+    pitch.value='800';pitch.dispatchEvent(new Event('input',{bubbles:true}));
+    assert(JSON.stringify(states)===before&&tempoUpdates===calls,'Pitch preview reached musical state');
+    assert(views[0].node.querySelector('.pitch-slider output').value==='80%','Pitch preview not displayed');
+    pad(0,6).click();shift(0).click();pad(0,6).click();shift(0).click();
+    assert(pad(0,6).getAttribute('aria-pressed')==='false'&&pad(0,8).getAttribute('aria-pressed')==='true','Futuristic cue state changed');
+    await select('glass-hardware');assert(JSON.stringify(appearance())===glass,'Glass Hardware appearance changed');
+    assert(pitch.disabled&&pitch.max==='12'&&pitch.value==='0','Glass pitch preview leaked');
+    await select('default');assert(JSON.stringify(appearance())===original,'Default appearance changed');
+    assert(pitch.disabled&&pitch.getAttribute('aria-label')==='Pitch (preview)','Default pitch changed');
+    await select('futuristic');assert(pitch.value==='800','Theme-local pitch preview lost its position');
+    pass('Futuristic Tempo mapping and moving markings; Pitch affects Visual only; shared Behavior cues; Glass/Default appearance restored exactly');
+    output.dataset.result='pass';
+  } catch(error){output.dataset.result='fail';output.textContent+='FAIL '+error.message;}
+});
+</script>
+</html>

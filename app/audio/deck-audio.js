@@ -104,8 +104,13 @@ function startClock(deckPlaybackInfo) {
       mute(deckPlaybackInfo);
       stopClock(deckPlaybackInfo);
       const node = deckPlaybackInfo.node;
+      const action = deckPlaybackInfo.latestDeckActionNumber;
       void timeLimitOrCancel(node.schedule({ active: false }), deckPlaybackInfo.thisSongLoadingCanBeStopped?.signal, "Audio end")
-        .catch(error => { if (deckPlaybackInfo.node === node && !deckPlaybackInfo.playing) fail(deckPlaybackInfo, error); });
+        .catch(error => {
+          // A later paused seek still uses this node, but supersedes this stop.
+          if (deckPlaybackInfo.node === node && deckPlaybackInfo.latestDeckActionNumber === action && !deckPlaybackInfo.playing)
+            fail(deckPlaybackInfo, error);
+        });
       notify(deckPlaybackInfo, "ended");
     }
     notify(deckPlaybackInfo, "timeupdate");
@@ -304,11 +309,11 @@ export async function seekAudio(deckAudio, seconds) {
 }
 
 // Schedule on the same node; never reload buffers for a slider movement. Source
-// time is continuous at the previousSongAudioProcessor/new-rate boundary. The DSP response has latency.
+// time is continuous at the old-rate/new-rate boundary. The DSP response has latency.
 async function changeTempoOrPitch(deckAudio, value, pitch) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
   // Slider requests share a transport action number, so only their latest reply may
-  // fail that action. A newer Pause/Play also makes an previousSongAudioProcessor failure irrelevant.
+  // fail that action. A newer Pause/Play also makes an older request's failure irrelevant.
   const latestTempoOrPitchChangeNumber = ++deckPlaybackInfo.latestTempoOrPitchChangeNumber;
   const latestDeckActionNumber = deckPlaybackInfo.latestDeckActionNumber;
   if (pitch) deckPlaybackInfo.pitch = value;

@@ -10,9 +10,11 @@ node tests/serve-visual-playback.cjs
 
 Visit http://127.0.0.1:8080/tunetox.html. The server accepts loopback/private IPv4 clients for local-network testing. See [Clean Playback usage and limitations](docs/CLEAN_PLAYBACK.md) for the current Mac runtime command and device-verification limits.
 
-The active application has four decks with Load, Play/Pause/resume, manual queued playback, pitch-preserving Tempo (0.5×–2.0×, centered at 1.0×), and independent Main Volume. All Main faders start at 0%: raise a deck's Main after pressing Play to hear it. Visual, Behavior, and Audio live in `app/visual/`, `app/behavior/`, and `app/audio/`. Pitch and other musical controls remain disabled previews; waveforms are illustrative. AudioWorklet requires localhost on this Mac or trusted HTTPS for an iPad; the plain-HTTP LAN address cannot run Signalsmith. Run [current regression checks](tests/visual-playback-tests.html) through the same server.
+The active application has four decks with Load, Play/Pause/resume, manual queued playback, pitch-preserving Tempo (0.5×–2.0×, centered at 1.0×), independent Main Volume, full-song waveform seeking, and eight functional cue pads per loaded deck. Numbered cues appear on the real audio-derived overview; the large scrolling waveform is not implemented. Stem faders edit Behavior-owned levels but have no stem audio connection. Musical Pitch, EQ and effects remain inactive; Futuristic's Pitch Demo is Visual-only. All Main faders start at 0%: raise a deck's Main after pressing Play to hear it. Visual, Behavior, and Audio live in `app/visual/`, `app/behavior/`, and `app/audio/`. AudioWorklet requires localhost on this Mac or trusted HTTPS for an iPad; the plain-HTTP LAN address cannot run Signalsmith. Run [current regression checks](tests/visual-playback-tests.html) through the same server; see [HTTPS setup](docs/LOCAL_HTTPS.md) for iPad access.
 
 ## Preserved legacy references
+
+See the [24 November codebase audit and proposed branch preservation plan](docs/CODEBASE-AUDIT-2026-11-24.md) for confirmed follow-up issues, cleanup scope and verification results.
 
 - [Older D1 application](legacy-reference/index.html)
 - [Clean Deck prototype](legacy-reference/development/clean-deck.html), sharing active Behavior and Audio modules rather than copies

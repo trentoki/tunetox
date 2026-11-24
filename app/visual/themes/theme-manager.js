@@ -1,7 +1,8 @@
 // Presentation-only theme switching. No deck or audio state is changed.
 const themes = Object.freeze({
   default: { label: "Default", stylesheet: null },
-  plasma: { label: "Plasma Purple", stylesheet: "app/visual/themes/plasma/theme.css" }
+  "glass-hardware": { label: "Glass Hardware", stylesheet: "app/visual/themes/glass-hardware/theme.css" },
+  futuristic: { label: "Futuristic", stylesheet: "app/visual/themes/futuristic/theme.css" }
 });
 const defaultColors = ["#bb6bff", "#ed65d7", "#4dcdf1", "#69e5aa"];
 let stylesheet;
@@ -40,6 +41,7 @@ export function installThemeControls(container, deckContainer) {
       else deck.style.setProperty("--accent", deckColors[index] || deckColors[0]);
     });
     colorInputs.forEach((input, index) => { input.hidden = mode === "uniform" && index > 0; });
+    document.dispatchEvent(new Event('tunetox-theme-change'));
   }
   themeSelect.addEventListener("change", apply);
   modeSelect.addEventListener("change", apply);

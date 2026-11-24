@@ -2,9 +2,9 @@
 
 **Current application:** [tunetox.html](../tunetox.html) now uses the pinned Signalsmith Stretch 1.3.2 module for buffered, pitch-preserving Tempo on all four decks. Its embedded WASM/AudioWorklet and license files are unchanged. No package installation or CDN is required. AudioWorklet needs HTTPS or localhost; four-deck Safari listening and long-file performance remain unverified. The D1 descriptions below refer to the older [legacy application](../legacy-reference/index.html), not the current entry.
 
-**TuneTox D1 uses native Web Audio playback** in `app/audio/`. Pitch-preserving tempo stretching is not a required D1 feature. In earlier TuneToss experiments, Deck 1 offered Normal Playback, SoundTouchJS, and Signalsmith Stretch for comparison; neither stretching library was the default engine.
+**The preserved TuneTox D1 uses native Web Audio playback** in `legacy-reference/app/audio/`. Pitch-preserving tempo stretching is not a required D1 feature. In earlier TuneToss experiments, Deck 1 offered Normal Playback, SoundTouchJS, and Signalsmith Stretch for comparison; neither stretching library was the default engine.
 
-These libraries are retained for future TuneTox audio experiments. **Neither library is currently loaded by the TuneTox D1 application entry page (`index.html`).** The working D1 audio player is in `app/audio/`. Keeping a library here does not mean its sound quality, compatibility, performance, or licensing obligations have been fully evaluated for release.
+Signalsmith is active in the current application; SoundTouchJS is retained for historical comparison. **Neither library is loaded by the preserved D1 application entry page (`legacy-reference/index.html`).** Its native audio player is in `legacy-reference/app/audio/`. Keeping a library here does not mean its sound quality, compatibility, performance, or licensing obligations have been fully evaluated for release.
 
 ## Signalsmith Stretch 1.3.2
 - Purpose: tempo stretching and pitch shifting.

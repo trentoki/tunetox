@@ -139,3 +139,11 @@ Before generating the PDF:
 Do not modify application code.
 
 Do not proceed to the PDF until the three deck crops have been approved.
+
+## Functional cue-marker extension
+
+Within `waveform-overview`, `cue-markers` is a noninteractive presentation layer;
+`cue-marker` identifies each numbered cue line (`data-cue-number="1"` through
+`"8"`). Existing cue-pad buttons retain their approved `data-cue="1"` through
+`"8"` identities. Both pads and markers read Behavior-owned song cue positions.
+The existing Shift control clears cues by hold or latch; it is not another cue store.

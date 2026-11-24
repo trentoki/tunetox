@@ -114,13 +114,24 @@ As TuneTox develops, preserve useful historical research, experiments, decisions
 
 **Accessing the protected baseline:** The protected historical Git branch is `baseline/h531-direct-06-working`. Consult it when investigating earlier functionality, recovering lost implementation details, comparing behavior, or verifying historical decisions. Access it through Git history or a separate working copy without changing the active development branch. Treat the baseline as read-only: do not commit changes to it, delete it, or overwrite it. Any functionality recovered from the baseline must be reviewed, approved where necessary, and tested before integration into the current application.
 
+**Approved archive migration, not yet executed remotely:** The final branch set
+will be `tunetox-reorganization` and `tunetox-d1`. The baseline's equally read-only
+replacement is `archive/baseline-h531-direct-06-working` at commit
+`33ba695003083562b3c6e3c8e5142955d8e5f100`. Local annotated archive tags have been
+prepared; never move, force-update, delete or repurpose `archive/*` tags without
+explicit human approval. The baseline branch must remain until publication and
+remote retrieval of its exact tag/commit/tree have been verified and branch
+deletion is explicitly approved. Its existing safeguards apply to the archive
+after migration; historical references below identify the same preserved content.
+See [the exact archive manifest and execution prerequisites](docs/BRANCH-ARCHIVE-PLAN.md).
+
 ## Architecture and product-design safeguards
 
 1. **One four-deck system.** TuneTox has four persistent underlying decks (Decks 1–4), regardless of how many are currently visible. Changing the interface layout must not, by itself, synchronize, reset, unload, or interrupt any deck. Musical synchronization must follow the approved matching rules independently of interface layout.
 2. **Three independently configurable musical capabilities.** Beatmatching, Tune Matching, and Stem Handoff are distinct but interconnected systems. Each deck's participation in these capabilities must be independently configurable and recorded in one authoritative participation store (the shared application state that determines which decks participate in each system).
 
    Preserve the approved musical matching rules, including using the current sounding pitch when determining pitch relationships between decks. Changes to terminology or code structure must preserve established behavior and be reviewed and tested before implementation.
-3. **Stem foundation safeguards.** All four decks should initialize with their main volumes at 0% and their four stem levels at 100%. Main Volume now initializes at 0% with real per-deck gain; the four 100% stem faders remain inactive previews, not connected stem audio.
+3. **Stem foundation safeguards.** All four decks should initialize with their main volumes at 0% and their four stem levels at 100%. Main Volume now initializes at 0% with real per-deck gain; the four stem faders now edit permanent Behavior-owned levels (initially 100%, 1% steps), but stem audio and Handoff remain disconnected.
 
    **This is an intentional safety feature:** Starting with main volumes at 0% prevents unintended audible output while allowing stem levels to be prepared at 100%.
 

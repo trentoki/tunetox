@@ -1,4 +1,4 @@
-import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, setTempo } from "../../behavior/mixer/deck.js";
+import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, setTempo, setStemLevel } from "../../behavior/mixer/deck.js";
 import { createAudioFileURLs } from "../../audio/deck-audio.js";
 import { createPlaybackDeck } from "./playback.js";
 import { installTouchGuards } from "./touch-guards.js";
@@ -40,12 +40,19 @@ decks.forEach((deck, index) => {
       setMainVolume(deck, value);
       view.render();
     },
+    setStemLevel(stem, value) {
+      setStemLevel(deck, stem, value);
+      view.render();
+    },
     togglePlayback() {
       return playback.togglePlayback();
     },
     playQueue() {
       return playback.playQueue();
     },
+    seek(seconds) { return playback.seek(seconds); },
+    canSeek() { return playback.canSeek(); },
+    cue(number, clear) { return playback.cue(number, clear); },
     librarySongs() {
       return getLoadedSongs(decks);
     }

@@ -24,11 +24,11 @@ All four **Main Volume** faders start at **0%**: Play advances the song silently
 
 Tempo now uses Signalsmith: drag horizontally within the existing numeric Tempo box, or focus it and use arrow keys. Far left is 0.50×, center 1.00×, far right 2.00× on a logarithmic scale. Each deck is independent; pitch stays unchanged and the separate Pitch control remains disabled. Load now waits for decode/worklet preparation with that deck's transport disabled; successful Load still never autoplays. READY retains the existing manual queue swap behavior. Main and Tempo are retained across swaps.
 
-**Safari access:** on your Mac use http://127.0.0.1:8080/tunetox.html. For iPad Safari, serve the same files through a trusted HTTPS local origin, then use its HTTPS URL on the iPad. AudioWorklet is unavailable on the plain-HTTP Mac-LAN-IP URL; loading reports this explicitly. The existing server is HTTP-only and no certificate setup or internet publishing is included in this change.
+**Safari access:** on your Mac use http://127.0.0.1:8080/tunetox.html, or the existing trusted HTTPS mode on port 8443. For iPad Safari use the Mac's trusted LAN HTTPS URL; see [local HTTPS setup](LOCAL_HTTPS.md). The user reports working iPad song loading/waveforms. Certificates and server configuration are preserved by the control-foundation sprint. AudioWorklet is unavailable on a plain-HTTP LAN-IP origin.
 
-**Safari Tempo test:** load familiar music on four decks, press Play, and raise each Main from zero. Compare 0.5×/1×/2× and continuous drags: timing should change without transposing voices/instruments. Pause/resume each deck, queue two files successively and invoke READY, and switch Library/views while others run. Repeat after rotation and background/foreground. Listen for transitions, gaps, retained output after Pause, and device overload. Source position is estimated; no sample-accurate audible-seek claim is made. The seek API is covered by focused tests but has no waveform gesture connected yet.
+**Safari Tempo/seek test:** load familiar music on four decks, press Play, and raise Main gradually from zero. Compare 0.5×/1×/2× and continuous drags: timing should change without transposing voices/instruments. Pause/resume each deck, queue two files successively and invoke READY, and switch Library/views while others run. Tap/drag the overview while paused and playing; its marker previews during dragging and release commits through Behavior. Confirm the final coordinate after rapid taps, try Home/End and arrow keys, and check that other decks are unaffected. Repeat after rotation and background/foreground. Listen for transition gaps, retained output after Pause, and overload. No sample-accurate audible-seek claim is made.
 
-Each deck has two independent toggle buttons in the original compact header selector slot: **Wave ↔ Stems** and **Cues ↔ Controls**. Each button shows its current view. No extra selector rows occupy the content sections. Stems contains the four disabled stem faders; Controls contains only filter, EQ and effects. Changing either selection leaves the other section and other decks unchanged. Library and its back arrow preserve both selections and playback.
+Each deck has two independent toggle buttons in the original compact header selector slot: **Wave ↔ Stems** and **Cues ↔ Controls**. Each button shows its current view. No extra selector rows occupy the content sections. Stems contains four Behavior-owned level faders with no stem DSP; Controls contains only inactive filter, EQ and effects previews. Changing either selection leaves the other section and other decks unchanged. Library and its back arrow preserve both selections and playback.
 
 Loading while a deck is playing prepares its queue. The READY button invokes the existing Clean Deck Play Queue action. A further load replaces that queue, as in the preserved prototype.
 
@@ -44,7 +44,7 @@ The older [index.html](../legacy-reference/index.html), [clean-deck.html](../leg
 
 ## Scope and limitations
 
-Touch policy (revised after the CSS-only fix failed on a physical iPad): device-width and initial-scale=1 are retained, with viewport-fit=contain. No maximum-scale or user-scalable restriction is imposed. Actual computed Chromium styles are manipulation for controls/waveforms/Library and pan-y pinch-zoom for native ranges. These desktop measurements cannot establish the iPad's computed values.
+Touch policy (revised after the CSS-only fix failed on a physical iPad): device-width and initial-scale=1 are retained, with viewport-fit=contain. No maximum-scale or user-scalable restriction is imposed. Actual computed Chromium styles are manipulation for buttons/Library, pan-y pinch-zoom for native ranges, and pinch-zoom for the interactive overview and Futuristic rollers. These desktop measurements cannot establish the iPad's computed values.
 
 WebKit documented an iOS bug where manipulation failed to suppress double-tap zoom, corrected in [317443@main](https://commits.webkit.org/317443@main). This is a plausible explanation for the reported failure, not identification of the iPad's Safari version or proof of its installed fix status. The earlier CSS-only claim was insufficient.
 
@@ -58,9 +58,9 @@ Physical iPad Safari verification remains required: reload the application, repe
 
 This checkpoint connects Load, Play, Pause, and the existing queue action. Workspace and performance-view navigation work without replacing players. Current time is read from the actual media player.
 
-Waveforms are deterministic illustrations, not analysis of loaded audio. Pitch, participation, EQ, effects, stems, cues, loops, and library manipulation remain disabled visual previews. Main Volume and pitch-preserving Tempo are connected; no persistence, BPM analysis, matching, or Handoff has been added.
+The full-song overview is drawn from decoded audio peak/RMS summaries; the larger scrolling waveform is still blank, not fake audio data. Main, pitch-preserving Tempo and overview seeking are connected. Stem faders edit permanent Behavior levels without DSP. Pitch is disabled except for Futuristic's explicitly visual-only travel demo; All themes now expose real song-owned cue pads and numbered overview markers. Participation, EQ, effects, loops and library manipulation remain inactive. No persistence, BPM analysis, matching or Handoff has been added. Eject is available in Behavior/the legacy prototype, with no new active-application Eject button.
 
-Behavior stores mainVolume in 0–1 units, initially zero, and rejects non-finite/out-of-range values before changing state or audio. Audio applies a 15 ms linear gain ramp; rapid changes retarget from the modeled current ramp value and Main zero reaches exact silence. UI percentages represent requested gain; the short ramp is not displayed as a separate setting. Per-deck Main GainNodes provide attenuation after Signalsmith; a separate gate mutes transport transitions without changing Main. The four stem faders still show 100% as inactive previews. Visible stem labels retain H5.3.1 wording; approved data-stem attributes do not redefine audio categories.
+Behavior stores mainVolume in 0–1 units, initially zero, and rejects non-finite/out-of-range values before changing state or audio. Audio applies a 15 ms linear gain ramp; rapid changes retarget from the modeled current ramp value and Main zero reaches exact silence. UI percentages represent requested gain; the short ramp is not displayed as a separate setting. Per-deck Main GainNodes provide attenuation after Signalsmith; a separate gate mutes transport transitions without changing Main. The four stem faders initialize at 100% and edit deck.stemLevels through setStemLevel in 1% steps; they do not change sound yet. Visible stem labels retain H5.3.1 wording; approved data-stem attributes do not redefine audio categories.
 
 The legacy Clean Deck prototype shares these modules and therefore now also starts silent at Main zero. Its preserved interface has no Main fader; use the active application for audible Main Volume testing. Its transport/queue actions remain available. The prototype's existing load/pause/eject handlers now await the shared asynchronous operations; no controls were added.
 
@@ -104,3 +104,80 @@ These checks do not establish listening quality, Safari support, touch behavior 
 Legacy relocation verification (2026-11-22): all 75 approved files were retained under legacy-reference. All eight active entry/module/style files matched the architecture checkpoint byte-for-byte. The current playback/touch suite passed in Chromium. Relocated legacy startup/routing, all three core test groups, and the native output-meter test passed both before and after relocation. All 71 legacy HTML resource paths resolved. The relocated Clean Deck prototype loaded generated audio on four native players; independent Pause and resume were verified. These are browser/state/signal checks, not listening or physical Safari verification. No active Behavior or Audio modules were copied.
 
 The current [naming specification](visual-verification/APPROVED-NAMING.md) and [interface specification](../specs/interface.md) supersede the earlier combined Wave + Cue / Controls switch. The [editable Developer's Guide](visual-verification/TuneTox-Developers-Guide-v1.html) includes a current-layout addendum. The Version 1 PDF and its six images are preserved historical references; that PDF has not been regenerated for this layout.
+
+## Four-deck control foundation verification (2026-11-23)
+
+The current playback/touch suite passed before editing and the expanded suite
+passed over existing trusted local HTTPS afterward. Added checks cover real
+Behavior seek batching (including an intermediate end target), all four paused
+overview seeks, immediate preview versus committed Audio position, playing seek,
+keyboard, bounds, rapid final targets, cancellation/lost capture/theme changes,
+per-deck Main/stem isolation, Eject state timing and cancelled Behavior loads.
+The deterministic pointer checks stub only capture because synthetic PointerEvents
+do not register a native active pointer. Separate Chromium native mouse and CDP
+touch-emulated drags passed across Default, Glass Hardware and Futuristic, including
+touch cancellation and no page scrolling. Roller/waveform removal cleanup was
+also checked through native input; Main/stem mouse dragging remained deck-local.
+
+The focused theme/stem/cue suite passed, including computed Default/Glass appearance
+restoration. All three themes retained four decks without horizontal overflow at
+1114×768, 768×1024 and 390×700. Overview heights remain the existing 42px/36px;
+small-screen physical touch comfort needs device review. The shared legacy Clean
+Deck completed generated-file Load/Play/Pause/Eject on all four decks over HTTPS.
+The Mac HTTPS page reported secure context and AudioWorklet available. HTTP still
+serves the same application. No server or certificate changes were made.
+
+These are automated/Chromium results, not physical Safari/iPad or listening
+verification. Seek transitions may have processing latency; continuous audible
+scratching, sample accuracy, long-file memory reclamation and sustained four-deck
+CPU performance are not established. Existing pending-operation guards still
+ignore Play/Pause/Load/queue requests until the operation settles. No new control
+engine or copied deck state was introduced. Recommended next work is physical
+Safari seek/listening verification and sustained transport testing before adding
+another musical subsystem.
+
+Historical pre-cue-upgrade native CDP touch checks moved Main/stem faders independently and verified
+rendered percentages; cue assignment and single-tap Shift clearing passed without
+a song. These remain touch-emulation results, not physical iPad verification.
+
+## Functional cue pads and numbered overview markers
+
+The previous visual-only cue preview is replaced by eight Behavior-owned source
+positions per loaded deck, shared across all three themes. Empty pads save the
+current position without seeking; assigned pads use the existing guarded seek.
+Shift clears without seeking, either held (on-screen or keyboard) or clicked to
+latch. A used on-screen hold does not latch on release. Replacement songs and
+Eject clear cues; queue preparation, view changes and theme changes retain them.
+Cues are temporary for the loaded song, not saved to a library or across reloads.
+The existing end-of-song seek rule still applies: seeking exactly to duration
+leaves transport ended/paused. No Audio or DSP implementation changed.
+
+Numbered accent-colored overview lines derive directly from those positions.
+Their overlays cannot intercept seeking. Coincident cues share a compact row of
+numbers while their lines retain the saved coordinate. Very closely spaced,
+different positions can still overlap labels; no marker editing is introduced.
+The large scrolling waveform remains unimplemented.
+
+Verification: the complete Chromium HTTPS playback/touch suite passed, including
+playing/paused cue assignment and recall, rapid recalls, deletion during a pending
+recall, all four decks, zero/end markers, song replacement, theme retention and
+existing overview/tempo/Main/queue/error regressions. The focused theme/stem suite
+also passed. Native browser mouse/keyboard Shift and emulated two-touch on-screen
+Shift + Cue deletion passed. Portrait/landscape geometry retained four decks and
+no horizontal overflow. Audio, theme stylesheets, server and certificates were
+unchanged. These checks do not establish Safari audible seek quality or physical
+iPad multitouch compatibility.
+
+Manual Mac/iPad Safari check (use the existing trusted HTTPS URL on iPad):
+
+1. Load a real song, leave it paused, seek in its overview and press an empty pad.
+   Its numbered line should appear immediately; playback must stay paused.
+2. Seek elsewhere and recall that pad. Repeat while playing, with Main raised
+   carefully from zero. Recall should retain the playing/paused state.
+3. Hold Shift and press an assigned pad; repeat by clicking Shift to latch it.
+   The pad/marker should clear without moving position. Click again to unlatch.
+4. Repeat on other decks, switch themes and Library views, and check independence.
+   Replace one deck's song and confirm only that deck's cues clear.
+5. Seek through and around marker numbers using mouse/touch, then make rapid cue
+   recalls. Listen for unwanted starts, clicks or dropouts; sample accuracy is not
+   claimed. Report physical-device results separately from automated checks.

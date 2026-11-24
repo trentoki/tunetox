@@ -42,7 +42,51 @@ Development priorities and their sequence should be determined collaboratively b
 
 ### 2.1 Current Priorities
 
-**Signalsmith Tempo:** The four-deck active entry now uses buffered Signalsmith Stretch 1.3.2 with independent 0.5×–2.0× logarithmic Tempo, zero semitone processing, retained Main gains, async load/queue transport, and source-time seek APIs. Pitch stays disabled and waveforms remain illustrative. This supersedes the native HTML Audio backend described by earlier checkpoints. See [current transport contract](specs/controls-settings.md#implemented-tempo-and-source-transport). Physical Mac/iPad Safari listening, long-file resource reclamation and sample-accurate audible seeking remain unverified. The iPad needs trusted HTTPS for AudioWorklet; the existing plain-HTTP LAN server cannot provide it.
+**Approved timing cleanup and historical archives:** Play completion now reconciles
+Behavior with Audio if a song ends before the scheduling reply. Natural-end stop
+failures use the existing action identity, so obsolete failures cannot invalidate
+a newer paused seek. Real-worklet regressions cover both and retain current-error
+reporting. Nine exact historical branch tips have verified local annotated archive
+tags; no remote tags or branch deletions have occurred. The final branch set is
+`tunetox-reorganization` and `tunetox-d1`. See the
+[archive manifest, safeguards and execution prerequisites](docs/BRANCH-ARCHIVE-PLAN.md).
+External deployment settings and authenticated publishing must be resolved before
+the separately approved archive-publication/branch-removal maintenance operation.
+
+**Functional song cues:** Eight Behavior-owned source positions per loaded deck
+now drive the existing pads and passive numbered overview markers in all themes.
+Empty pads assign without transport changes; assigned pads use the existing seek
+batch. The same Shift button supports hold and latch clearing, plus keyboard Shift.
+Song replacement/Eject clears cues; preparing a queue and switching themes/views
+does not. No scrolling waveform or new DSP is introduced. Cue persistence beyond
+the current loaded song/page and physical Safari/iPad cue verification remain future work.
+
+**Four-deck control foundation:** The full-song overview now uses existing guarded
+Behavior/Audio seeking across all themes, with pointer-captured preview/release,
+keyboard access, cancellation and latest-target batching. Main/Tempo remain real
+independent audio controls; stems edit permanent levels without DSP. Eject clears
+Behavior before asynchronous disposal and cancelled loads cannot report success.
+No active Eject button is introduced. Pitch Demo remains Visual-only; cue assignments are now Behavior-owned and functional.
+knobs, matching, loops, Handoff and scrolling waveform rendering remain deferred.
+Chromium automated/native-input checks are recorded in the current playback docs;
+physical iPad seek gestures and listening quality remain unverified by the agent.
+The user reports real iPad loading/waveforms over existing trusted HTTPS; preserve
+that setup and certificates.
+
+**iPad HTTPS development:** The existing preview server now supports optional
+`--https` on port 8443 alongside unchanged HTTP on 8080. See
+[certificate setup and device checks](docs/LOCAL_HTTPS.md). Tool installation and
+Mac/iPad CA trust remain human setup steps; no physical iPad success is claimed.
+Futuristic refinement keeps compact readouts and passive overview glass; a future
+Echo/Reverb/Delay vertical-wheel design is recorded only, with no new musical behavior.
+
+**Stem control foundation:** Existing native stem faders now edit permanent per-deck
+`stemLevels` through `setStemLevel` (0–1, 0.01 steps, initially 1). This supersedes
+earlier descriptions of disabled 100% stem previews below. No stem DSP or Handoff
+is connected. Glass Hardware uses actual rendered Main/stem values for track
+illumination. The unloaded-pad preview is now superseded by functional song-owned cues.
+
+**Signalsmith Tempo:** The four-deck active entry now uses buffered Signalsmith Stretch 1.3.2 with independent 0.5×–2.0× logarithmic Tempo, zero semitone processing, retained Main gains, async load/queue transport, and source-time seek APIs. Pitch has no musical Behavior action (Futuristic offers only a visual travel demo); the full-song overview uses decoded peak/RMS data and the scrolling waveform remains blank. This supersedes the native HTML Audio backend described by earlier checkpoints. See [current transport contract](specs/controls-settings.md#implemented-tempo-and-source-transport). Physical Mac/iPad Safari listening, long-file resource reclamation and sample-accurate audible seeking remain unverified. The iPad needs trusted HTTPS for AudioWorklet; optional HTTPS is available through the existing preview server.
 
 **Main Volume:** The existing four Main faders now control independent Web Audio gains through `deck.mainVolume` / `setMainVolume`, initially zero. Native media transport and queue rules are retained. See the [implemented contract](specs/controls-settings.md#implemented-main-volume) and [Safari listening procedure](docs/CLEAN_PLAYBACK.md). Stems and Handoff remain inactive; this supersedes the prior Main preview/full-volume exception. The shared legacy Clean Deck prototype now also starts at zero but has no Main fader in its preserved UI.
 

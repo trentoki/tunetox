@@ -21,6 +21,7 @@ Thumbs.db
 *.key
 *.p12
 *.pfx
+/.certs/
 credentials*.json
 service-account*.json
 *secrets*.json
@@ -78,6 +79,9 @@ signalsmith-capture-*
 *.tar.gz
 *.bak
 *.backup
+
+# Intentional frozen source reference, requested for Glass Hardware review.
+!docs/visual-verification/Glass-Hardware-Sprint-3-reference.zip
 
 # Keep vendor runtime code (including WASM), package metadata, licenses,
 # provenance/integrity records, source files, tests and documentation tracked.

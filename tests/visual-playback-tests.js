@@ -1,5 +1,5 @@
 import { runTouchGuardChecks } from "./touch-guard-tests.js";
-import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, sendToDeck, setTempo } from "../app/behavior/mixer/deck.js";
+import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, sendToDeck, setTempo, setStemLevel, ejectSong } from "../app/behavior/mixer/deck.js";
 import { createAudioFileURLs, loadAudio, pauseAudio, ejectAudio } from "../app/audio/deck-audio.js";
 const frame = document.getElementById("application");
 const output = document.getElementById("results");
@@ -27,7 +27,7 @@ function checkMainVolumeState() {
 }
 
 async function checkCancelledLoading() {
-  const player = buildDeck().audio, originalFetch = window.fetch;
+  const deck = buildDeck(), player = deck.audio, originalFetch = window.fetch;
   let finishRead, entered = false;
   window.fetch = (url, options) => {
     if (url === "held-test-file") {
@@ -38,17 +38,17 @@ async function checkCancelledLoading() {
   };
   let url;
   try {
-    const loading = loadAudio(player, { url: "held-test-file" }).catch(error => error);
+    const loading = sendToDeck(deck, { name: 'Held', url: "held-test-file" }).catch(error => error);
     await until(() => entered, "Held file read never started");
-    await ejectAudio(player);
+    await ejectSong(deck);
     const error = await loading;
-    assert(error.name === "AbortError" && player.duration === 0 && player.paused,
+    assert(error.name === "AbortError" && player.duration === 0 && player.paused && deck.song === null && deck.loadingSong === null,
       "Eject did not cancel an in-flight load");
     const file = tone(window, "Late.wav");
     finishRead(new Response(await file.arrayBuffer()));
     url = URL.createObjectURL(file);
-    await loadAudio(player, { url });
-    assert(player.src === url && player.readyState === 2 && player.currentTime === 0,
+    await sendToDeck(deck, { name: 'Replacement', url });
+    assert(deck.song.name === 'Replacement' && player.src === url && player.readyState === 2 && player.currentTime === 0,
       "Stale load overwrote its replacement");
   } finally {
     window.fetch = originalFetch;
@@ -57,7 +57,7 @@ async function checkCancelledLoading() {
   }
 }
 // Delay replies, not worklet execution: exercise the real scheduling boundary.
-async function checkTransportRaces(api, player, node, context, gain) {
+async function checkTransportRaces(api, behavior, player, node, context, gain) {
   const original = node.schedule;
   let release;
   function holdNext(predicate) {
@@ -139,6 +139,39 @@ async function checkTransportRaces(api, player, node, context, gain) {
     await delay(100);
     analyser.getFloatTimeDomainData(samples);
     assert(samples.every(value => Math.abs(value) < 1e-7), "Cancelled Play reopened its gain gate");
+
+    // Finish the real source while Play's reply is held, then reconcile Behavior.
+    await api.seekAudio(player, player.duration - .04);
+    holdNext(command => command.active);
+    const deck = { song: { name: 'Timing fixture' }, audio: player, isPlaying: false };
+    const shortPlay = behavior.playDeck(deck);
+    await until(() => release && player.ended, "Short source did not end before Play reply");
+    release.resolve();
+    await shortPlay;
+    assert(!deck.isPlaying && player.paused && player.ended,
+      "Late Play reply restored a playing state after natural end");
+
+    // End failures are still reported if current, but cannot poison a newer seek.
+    for (const supersede of [true, false]) {
+      await api.seekAudio(player, player.duration - .04);
+      holdNext(command => !command.active);
+      await api.startAudio(player);
+      await until(() => release && player.ended, "Natural-end acknowledgement was not held");
+      const endReply = release;
+      if (supersede) await api.seekAudio(player, .25);
+      endReply.reject(new Error('Held natural-end failure'));
+      await delay(0);
+      if (supersede) {
+        assert(player.currentTime === .25 && player.paused && !player.error,
+          "Obsolete natural-end failure poisoned a newer paused seek");
+        await api.startAudio(player);
+        assert(!player.paused, "Playback could not restart after superseded end failure");
+        await api.pauseAudio(player);
+      } else assert(player.error?.message === 'Held natural-end failure' && player.paused,
+        "Current natural-end failure was incorrectly ignored");
+    }
+    // The negative case deliberately fails this fixture; reload for later tests.
+    await api.loadAudio(player, { url: player.src });
   } finally {
     node.schedule = original;
     release?.resolve();
@@ -193,7 +226,20 @@ async function checkPlaybackCoordination() {
     };
     return { deck, notices, coordinator: createPlaybackCoordinator(deck, callbacks) };
   }
-  const first = await fixture(), second = await fixture();
+  const fixtures = await Promise.all(Array.from({ length: 4 }, () => fixture()));
+  const [first, second] = fixtures;
+  for (const [index, item] of fixtures.entries()) {
+    assert(item.deck.cuePositions.length === 8 && item.deck.cuePositions.every(value => value === null), 'Cues must initialize empty');
+    await item.coordinator.seek(index + 1);
+    await item.coordinator.cue(1);
+    assert(item.deck.cuePositions[0] === index + 1 && !item.deck.isPlaying && item.deck.audio.paused,
+      'Paused cue assignment changed playback or captured another deck');
+    await item.coordinator.seek(8);
+    await item.coordinator.cue(1);
+    assert(item.deck.audio.currentTime === index + 1 && item.deck.audio.paused, 'Paused cue recall started playback');
+  }
+  assert(fixtures.every((item,index) => item.deck.cuePositions[0] === index + 1), 'Four-deck cues share positions');
+  fixtures.forEach(item => { item.notices.length = 0; }); // Isolate the existing callback-order assertion from cue setup.
   const nativeResume = AudioContext.prototype.resume;
   let rejectPlay, held = false;
   AudioContext.prototype.resume = function() {
@@ -215,9 +261,38 @@ async function checkPlaybackCoordination() {
     await first.coordinator.togglePlayback();
     assert(first.deck.isPlaying && first.notices.slice(-4).join("|") === "true|completed|false|settled",
       "Successful Play order/recovery changed");
+    const playingPosition = first.deck.audio.currentTime;
+    await first.coordinator.cue(2);
+    assert(first.deck.cuePositions[1] >= playingPosition && first.deck.isPlaying && !first.deck.audio.paused,
+      'Playing cue assignment interrupted playback');
+    await Promise.all([first.coordinator.cue(1), first.coordinator.cue(2), first.coordinator.cue(1)]);
+    assert(first.deck.isPlaying && Math.abs(first.deck.audio.currentTime - first.deck.cuePositions[0]) < .3,
+      'Rapid cue recall lost playing intent or final position');
+    const pendingCue = first.coordinator.cue(2);
+    await first.coordinator.cue(2, true);
+    await pendingCue;
+    assert(first.deck.cuePositions[1] === null && first.deck.isPlaying, 'Pending recall restored a deleted cue');
     await second.coordinator.playQueue();
     assert(second.deck.isPlaying && second.deck.song.name === "Queued" && second.deck.queue === null,
       "Guarded asynchronous queue playback failed");
+    assert(second.deck.cuePositions.every(value => value === null), 'Queue replacement retained old song cues');
+    const otherPosition = second.deck.audio.currentTime;
+    await Promise.all([first.coordinator.seek(first.deck.audio.duration), first.coordinator.seek(8), first.coordinator.seek(3)]);
+    assert(first.deck.isPlaying && !first.deck.audio.paused && Math.abs(first.deck.audio.currentTime - 3) < .3,
+      'Rapid seeks lost the latest target or playing intent after an end target');
+    assert(second.deck.isPlaying && second.deck.audio.currentTime >= otherPosition, 'Seek affected another deck');
+    await first.coordinator.togglePlayback();
+    await first.coordinator.seek(4.25);
+    assert(!first.deck.isPlaying && first.deck.audio.currentTime === 4.25, 'Paused Behavior seek resumed playback');
+    setMainVolume(first.deck, .37); setStemLevel(first.deck, 'beat', .23);
+    assert(second.deck.mainVolume === 0 && second.deck.stemLevels.beat === 1, 'Control state leaked between decks');
+    const secondSong = second.deck.song;
+    const removal = ejectSong(first.deck);
+    assert(first.deck.song === null, 'Eject must clear Behavior before asynchronous Audio disposal');
+    await removal;
+    assert(!first.deck.song && first.deck.audio.duration === 0 && second.deck.song === secondSong &&
+      first.deck.mainVolume === .37 && first.deck.stemLevels.beat === .23 && first.deck.queue,
+      'Eject changed another deck or reset retained controls/queue');
     await pauseAudio(first.deck.audio);
     const song = first.deck.song, queue = first.deck.queue;
     for (const type of ["ended", "error"]) {
@@ -226,9 +301,24 @@ async function checkPlaybackCoordination() {
       assert(!first.deck.isPlaying && first.deck.song === song && first.deck.queue === queue,
         type + " did not retain loaded/queued songs");
     }
+    for (const [index, item] of fixtures.entries()) {
+      if (item.deck.isPlaying) await item.coordinator.togglePlayback();
+      setMainVolume(item.deck, (index + 1) / 10);
+      setStemLevel(item.deck, 'voice', (index + 1) / 10);
+      const others = fixtures.filter(other => other !== item).map(other => ({ deck: other.deck,
+        song: other.deck.song, src: other.deck.audio.src, main: other.deck.mainVolume, voice: other.deck.stemLevels.voice }));
+      await ejectSong(item.deck);
+      assert(item.deck.song === null && item.deck.audio.duration === 0 && item.deck.loadingSong === null &&
+        item.deck.cuePositions.every(value => value === null) &&
+        item.deck.mainVolume === (index + 1) / 10 && item.deck.stemLevels.voice === (index + 1) / 10,
+        'Eject did not clear only its song while retaining deck controls');
+      assert(others.every(other => other.deck.song === other.song && other.deck.audio.src === other.src &&
+        other.deck.mainVolume === other.main && other.deck.stemLevels.voice === other.voice),
+        'Four-deck unload changed another deck');
+    }
   } finally {
     AudioContext.prototype.resume = nativeResume;
-    await Promise.all([first,second].map(item => ejectAudio(item.deck.audio)));
+    await Promise.all(fixtures.map(item => ejectAudio(item.deck.audio)));
     urls.forEach(url => URL.revokeObjectURL(url));
   }
 }
@@ -239,6 +329,135 @@ async function until(condition, message) {
   }
   throw new Error(message);
 }
+
+// Deterministic event/mapping checks use real application audio. Capture alone
+// is stubbed: synthetic PointerEvents do not register a browser active pointer.
+// Native mouse/touch capture is additionally exercised through browser input.
+async function checkOverviewSeeking(doc, win, players) {
+  const surfaces = [...doc.querySelectorAll('.waveform-overview')];
+  const at = (surface, fraction) => surface.getBoundingClientRect().left + surface.getBoundingClientRect().width * fraction;
+  function pointer(surface, type, fraction, id = 1) {
+    surface.dispatchEvent(new win.PointerEvent(type, { bubbles: true, cancelable: true,
+      pointerId: id, pointerType: id === 2 ? 'touch' : 'mouse', isPrimary: true, button: 0, clientX: at(surface, fraction) }));
+  }
+  const restore = surfaces.map(surface => {
+    const names = ['setPointerCapture', 'hasPointerCapture', 'releasePointerCapture'];
+    const originals = names.map(name => surface[name]);
+    let captured = false;
+    surface.setPointerCapture = () => { captured = true; };
+    surface.hasPointerCapture = () => captured;
+    surface.releasePointerCapture = () => { captured = false; };
+    return () => names.forEach((name, i) => { surface[name] = originals[i]; });
+  });
+  const click = (surface, fraction) => { pointer(surface, 'pointerdown', fraction); pointer(surface, 'pointerup', fraction); };
+  try {
+    for (let i = 0; i < 4; i++) {
+      const surface = surfaces[i], others = players.filter((_, index) => index !== i).map(p => p.currentTime);
+      pointer(surface, 'pointerdown', .25);
+      assert(Math.abs(parseFloat(surface.querySelector('.playhead').style.left) - 25) < .01,
+        'Pointerdown did not immediately preview the position');
+      assert(players[i].currentTime === 0, 'Drag preview changed Audio before release');
+      pointer(surface, 'pointermove', .4); pointer(surface, 'pointerup', .4);
+      await until(() => Math.abs(players[i].currentTime - players[i].duration * .4) < .01 &&
+        surface.closest('.deck').querySelector('.play-pause-button').disabled === false, 'Paused overview seek failed');
+      assert(players[i].paused && players.filter((_, index) => index !== i).every((p, index) => p.currentTime === others[index]),
+        'Overview seek resumed or changed another deck');
+      surface.dispatchEvent(new win.KeyboardEvent('keydown', { key: 'Home', bubbles: true, cancelable: true }));
+      await until(() => players[i].currentTime === 0 && !surface.closest('.deck').querySelector('.play-pause-button').disabled,
+        'Keyboard Home did not seek');
+    }
+    const surface = surfaces[0];
+    pointer(surface, 'pointerdown', .6); pointer(surface, 'pointercancel', .6);
+    pointer(surface, 'pointerup', .7);
+    assert(players[0].currentTime === 0 && parseFloat(surface.querySelector('.playhead').style.left) === 0,
+      'Pointer cancellation committed a seek or left its preview');
+    pointer(surface, 'pointerdown', .6); pointer(surface, 'lostpointercapture', .6);
+    pointer(surface, 'pointerup', .7);
+    assert(players[0].currentTime === 0, 'Lost capture committed a seek');
+    pointer(surface, 'pointerdown', .6);
+    doc.dispatchEvent(new win.Event('tunetox-theme-change'));
+    pointer(surface, 'pointerup', .7);
+    assert(players[0].currentTime === 0, 'Theme switching committed an unfinished gesture');
+    pointer(surface, 'pointerdown', .2, 2); pointer(surface, 'pointermove', .65, 2); pointer(surface, 'pointerup', .65, 2);
+    await until(() => Math.abs(players[0].currentTime - players[0].duration * .65) < .01 &&
+      !surface.closest('.deck').querySelector('.play-pause-button').disabled, 'Touch pointer path failed');
+    click(surface, .9); click(surface, .15); click(surface, .35);
+    await until(() => Math.abs(players[0].currentTime - players[0].duration * .35) < .01 &&
+      !surface.closest('.deck').querySelector('.play-pause-button').disabled, 'Rapid overview seeks lost the final coordinate');
+    click(surface, 2);
+    await until(() => players[0].currentTime === players[0].duration && !surface.closest('.deck').querySelector('.play-pause-button').disabled,
+      'Right bound was not clamped');
+    click(surface, -1);
+    await until(() => players[0].currentTime === 0 && !surface.closest('.deck').querySelector('.play-pause-button').disabled,
+      'Left bound was not clamped');
+  } finally { restore.forEach(fn => fn()); }
+}
+async function checkCuePads(doc, win, players) {
+  const cards = [...doc.querySelectorAll('.deck')];
+  const pad = (card, n) => card.querySelector('[data-cue="' + n + '"]');
+  const shift = card => card.querySelector('.loop-controls button:last-child');
+  const marker = (card, n) => card.querySelector('.cue-marker[data-cue-number="' + n + '"]');
+  const idle = card => !card.querySelector('.play-pause-button').disabled;
+  const key = (card, value) => card.querySelector('.waveform-overview').dispatchEvent(new win.KeyboardEvent('keydown', {key:value,bubbles:true,cancelable:true}));
+  for (const [index, card] of cards.entries()) {
+    key(card,'ArrowRight');
+    await until(() => idle(card) && Math.abs(players[index].currentTime - 5) < .01, 'Cue setup seek failed');
+    pad(card,1).click();
+    assert(marker(card,1)?.textContent === '1' && parseFloat(marker(card,1).style.left) === 25 &&
+      players[index].currentTime === 5 && players[index].paused, 'Cue assignment moved Audio or misplaced its marker');
+    shift(card).click();pad(card,1).click();pad(card,2).click();
+    assert(!marker(card,1) && !marker(card,2) && players[index].currentTime === 5, 'Latched Shift deletion sought or assigned an empty cue');
+    shift(card).click();pad(card,1).click();
+    pad(card,1).dispatchEvent(new win.MouseEvent('click',{bubbles:true,shiftKey:true}));
+    assert(!marker(card,1) && players[index].currentTime === 5, 'Keyboard Shift deletion sought');
+    pad(card,1).click();
+    const button=shift(card), names=['setPointerCapture','hasPointerCapture','releasePointerCapture'];
+    const originals=names.map(name=>button[name]);
+    let captured=false;
+    button.setPointerCapture=()=>{captured=true;};button.hasPointerCapture=()=>captured;button.releasePointerCapture=()=>{captured=false;};
+    try {
+      button.dispatchEvent(new win.PointerEvent('pointerdown',{pointerId:11,button:0,isPrimary:true,bubbles:true}));
+      pad(card,1).click();
+      button.dispatchEvent(new win.PointerEvent('pointerup',{pointerId:11,bubbles:true}));button.click();
+      assert(!marker(card,1) && button.getAttribute('aria-pressed')==='false', 'Held Shift failed to clear or accidentally latched on release');
+      pad(card,1).click();
+      button.dispatchEvent(new win.PointerEvent('pointerdown',{pointerId:11,button:0,isPrimary:true,bubbles:true}));
+      pad(card,1).dispatchEvent(new win.PointerEvent('pointerdown',{pointerId:12,pointerType:'touch',isPrimary:false,bubbles:true}));
+      pad(card,1).dispatchEvent(new win.PointerEvent('pointerup',{pointerId:12,pointerType:'touch',isPrimary:false,bubbles:true}));
+      pad(card,1).click(); // A possible compatibility click must not reassign.
+      button.dispatchEvent(new win.PointerEvent('pointerup',{pointerId:11,bubbles:true}));button.click();
+      assert(!marker(card,1), 'Two-finger Shift cue deletion was duplicated');
+    } finally {names.forEach((name,i)=>button[name]=originals[i]);}
+    pad(card,1).click();
+    key(card,'Home');await until(()=>idle(card)&&players[index].currentTime===0,'Cue Home failed');
+    pad(card,2).click();
+    assert(parseFloat(marker(card,2).style.left)===0,'Zero-time cue treated as empty');
+    key(card,'End');await until(()=>idle(card)&&players[index].currentTime===players[index].duration,'Cue End failed');
+    pad(card,3).click();assert(parseFloat(marker(card,3).style.left)===100,'End marker placement changed');
+    pad(card,1).click();pad(card,2).click();pad(card,1).click();
+    await until(()=>idle(card)&&Math.abs(players[index].currentTime-5)<.01,'Rapid paused cues lost final target');
+    assert(players[index].paused,'Paused cues started playback');
+    shift(card).click();pad(card,2).click();pad(card,3).click();shift(card).click();
+    assert(card.querySelectorAll('.cue-marker').length===1 && players[index].currentTime===5,'Deletion changed position or markers');
+  }
+  const theme=doc.querySelector('[aria-label="Visual theme"]');
+  for(const name of ['glass-hardware','futuristic','default']) {
+    theme.value=name;theme.dispatchEvent(new win.Event('change',{bubbles:true}));
+    await until(()=>[...doc.querySelectorAll('link[rel=stylesheet]')].every(link=>link.sheet),'Theme stylesheet did not load');
+    assert(cards.every(card=>marker(card,1)?.textContent==='1'&&parseFloat(marker(card,1).style.left)===25&&
+      pad(card,1).getAttribute('aria-pressed')==='true'),'Theme switching reset functional cues');
+    assert(cards.every(card=>win.getComputedStyle(card.querySelector('.cue-markers')).pointerEvents==='none'&&
+      win.getComputedStyle(marker(card,1)).pointerEvents==='none'),'Cue markers intercept seeking');
+  }
+  const input=doc.querySelectorAll('#audio-loaders input')[3], transfer=new win.DataTransfer();
+  transfer.items.add(tone(win,'Cue replacement.wav',220));input.files=transfer.files;input.dispatchEvent(new win.Event('change',{bubbles:true}));
+  await until(()=>idle(cards[3])&&cards[3].querySelector('.song-title').textContent==='Cue replacement.wav','Cue replacement failed');
+  assert(!marker(cards[3],1)&&cards.slice(0,3).every(card=>marker(card,1)),'Song replacement reset wrong deck cues');
+  for(const [index,card] of cards.entries()) {
+    key(card,'Home');await until(()=>idle(card)&&players[index].currentTime===0,'Cue cleanup seek failed');
+  }
+}
+
 function tone(window, name, initialFrequency = 440, channels = 1) {
   const sampleRate = 8000, samples = sampleRate * 20;
   const bytes = new ArrayBuffer(44 + samples * 2 * channels), data = new DataView(bytes);
@@ -278,10 +497,10 @@ run.addEventListener("click", async () => {
     const observer = '<base href="' + new URL("../", location.href).href + '">' +
       '<script>window.__players=[];window.__contexts=[];window.__gains=[];window.__sources=[];' +
       'const NativeTarget=window.EventTarget;window.EventTarget=class extends NativeTarget{constructor(){super();window.__players.push(this);}};' +
-      'const NativeWorklet=window.AudioWorkletNode;window.AudioWorkletNode=class extends NativeWorklet{constructor(...args){super(...args);window.__sources.push(this);}};' +
+      'const NativeWorklet=window.AudioWorkletNode;window.AudioWorkletNode=class extends NativeWorklet{constructor(...args){super(...args);window.__sources.push(this);}connect(...args){this.__testOutput=args[0];return super.connect(...args);}};' +
       'const NativeContext=window.AudioContext;window.AudioContext=class extends NativeContext{' +
       'constructor(...args){super(...args);window.__contexts.push(this);}' +
-      'createGain(){const g=super.createGain(),connect=g.connect.bind(g),destination=this.destination;g.connect=(...args)=>{if(args[0]===destination)window.__gains.push(g);return connect(...args);};return g;}};<\/script>';
+      'createGain(){const g=super.createGain(),connect=g.connect.bind(g),destination=this.destination;g.connect=(...args)=>{g.__testOutput=args[0];if(args[0]===destination)window.__gains.push(g);return connect(...args);};return g;}};<\/script>';
     frame.srcdoc = source.replace("<head>", "<head>" + observer);
     await new Promise(resolve => frame.addEventListener("load", resolve, { once: true }));
     const doc = frame.contentDocument, win = frame.contentWindow;
@@ -297,9 +516,13 @@ run.addEventListener("click", async () => {
     assert(viewport.includes("width=device-width") && viewport.includes("initial-scale=1"), "Responsive viewport changed");
     assert(win.getComputedStyle(doc.querySelector(".app")).touchAction === "manipulation",
       "Application must suppress double-tap zoom while permitting panning");
-    assert([...doc.querySelectorAll("button, .scrolling-waveform, .waveform-overview, .search-results")]
+    assert([...doc.querySelectorAll("button:not(.glass-preview-shift), .scrolling-waveform, .search-results")]
       .every(node => win.getComputedStyle(node).touchAction === "manipulation"),
       "Controls, waveforms and Library scrollers must suppress double-tap zoom");
+    assert([...doc.querySelectorAll('.glass-preview-shift')].every(node => win.getComputedStyle(node).touchAction === 'none'),
+      'On-screen Shift must support a stationary two-finger chord without browser gestures');
+    assert([...doc.querySelectorAll('.waveform-overview')].every(node => win.getComputedStyle(node).touchAction === 'pinch-zoom'),
+      'Overview gestures must block single-finger panning while preserving pinch');
     assert([...doc.querySelectorAll('input[type="range"]')].every(input =>
       win.getComputedStyle(input).touchAction === "pan-y pinch-zoom"), "Fader gesture policy missing");
     assert([...doc.querySelectorAll(".search-results")].every(results =>
@@ -362,8 +585,10 @@ run.addEventListener("click", async () => {
     assert(doc.querySelectorAll(".controls .stem-faders").length === 0 &&
       doc.querySelectorAll(".stems-view .stem-faders input[data-stem]").length === 16,
       "Stems must exist only in the upper Stems views");
-    assert([...doc.querySelectorAll(".stem-faders input, .cue-pad, .controls button")]
+    assert([...doc.querySelectorAll(".cue-pad, .controls button")]
       .every(control => control.disabled), "Inactive musical controls must remain disabled");
+    assert([...doc.querySelectorAll('.stem-faders input')].every(input => !input.disabled && input.value === '100'),
+      'Permanent stem level controls must initialize at 100%');
     pass("all decks default to Wave + Cues; four stem faders per upper Stems view");
     assert(doc.querySelectorAll(".performance-header .performance-selector button").length === 8 &&
       !doc.querySelector(".performance-content button[class$='-toggle'], .performance-upper-selector, .performance-lower-selector"),
@@ -398,8 +623,17 @@ run.addEventListener("click", async () => {
     assert(players.every(p => p.paused), "Load must not start playback");
     assert([...doc.querySelectorAll(".song-title")].some(n => n.textContent === "Generated Deck 1.wav"), "Filename missing");
     pass("all four loads succeed without autoplay; filenames rendered as text");
-    await checkTransportRaces(audioAPI, players[0], win.__sources[0], win.__contexts[0], win.__gains[0]);
-    pass("delayed Play reply preserves opening audio; startup tempo clock; superseded seeks; obsolete Tempo/Pitch failures");
+    await checkOverviewSeeking(doc, win, players);
+    pass('overview: immediate preview, four paused deck seeks, keyboard, bounds, rapid final target, cancel/lost capture/theme cancellation');
+    await checkCuePads(doc, win, players);
+    pass('four-deck cues: paused assignment/recall, held/latched/keyboard Shift, zero/end markers, rapid recall, passive overlays, theme retention and song reset');
+    // Parallel decoding may create worklets out of deck order. Follow the actual
+    // source -> transport gate -> Main graph, rather than choosing sources[0].
+    const firstDeckSource = win.__sources.find(node => node.__testOutput?.__testOutput === win.__gains[0]);
+    assert(firstDeckSource, 'Could not identify Deck 1 worklet by its Main gain');
+    const behaviorAPI = await win.eval("import('/app/behavior/mixer/deck.js')");
+    await checkTransportRaces(audioAPI, behaviorAPI, players[0], firstDeckSource, win.__contexts[0], win.__gains[0]);
+    pass("delayed Play/end replies; short-song Behavior state; current/obsolete end failures; startup clock; superseded seeks and Tempo/Pitch failures");
 
     for (let number = 1; number <= 4; number++) {
       play(number).click();
@@ -407,6 +641,29 @@ run.addEventListener("click", async () => {
     }
     await until(() => players.every(p => p.currentTime > .1), "Playback clocks did not advance");
     pass("all four persistent transports run independently");
+    const otherSeekTimes = players.slice(0, 3).map(p => p.currentTime);
+    const overview = deck(4).querySelector('.waveform-overview');
+    overview.dispatchEvent(new win.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
+    await until(() => !play(4).disabled && players[3].currentTime >= 5 && !players[3].paused, 'Playing overview seek did not resume');
+    assert(players.slice(0,3).every((p,i) => !p.paused && p.currentTime >= otherSeekTimes[i]), 'Playing overview seek changed another deck');
+    pass('playing overview seek retains playback and other decks');
+    const playingPad = deck(4).querySelector('.cue-pad[data-cue="1"]');
+    const beforeCue = players[3].currentTime;
+    playingPad.click();
+    const playingMarker = deck(4).querySelector('.cue-marker[data-cue-number="1"]');
+    const savedCue = parseFloat(playingMarker.style.left) / 100 * players[3].duration;
+    // CSS serializes percentages with less precision than the source clock.
+    assert(savedCue >= beforeCue - .001 && !players[3].paused && play(4).getAttribute('aria-label') === 'Pause Deck 4',
+      'Playing pad assignment interrupted or toggled playback: ' + JSON.stringify({savedCue, beforeCue, paused:players[3].paused, label:play(4).getAttribute('aria-label')}));
+    overview.dispatchEvent(new win.KeyboardEvent('keydown', { key: 'Home', bubbles: true, cancelable: true }));
+    await until(()=>!play(4).disabled&&players[3].currentTime<1&&!players[3].paused,'Playing cue test Home failed');
+    playingPad.click();
+    await until(()=>!play(4).disabled&&players[3].currentTime>=savedCue&&!players[3].paused,'Playing cue recall did not continue');
+    const deletingAt=players[3].currentTime;
+    playingPad.dispatchEvent(new win.MouseEvent('click',{bubbles:true,shiftKey:true}));
+    assert(!deck(4).querySelector('.cue-marker')&&players[3].currentTime>=deletingAt&&players[3].currentTime-deletingAt<.2,
+      'Deleting a playing cue changed position or left its marker');
+    pass('playing cue pads assign without transport changes, recall through seek, and delete without seeking');
     const context = win.__contexts[0];
     const meters = win.__gains.map(gain => {
       const analyser = context.createAnalyser();

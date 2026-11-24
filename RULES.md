@@ -13,6 +13,7 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
 5. Original song BPM and key remain distinct from current playback tempo and sounding pitch. Decks retain independent transport. Pitch-preserving time stretching is a desired capability; its DSP and limitations belong in technical specifications.
 6. Layout or view changes never load/unload songs, interrupt playback, reset musical settings, or trigger matching.
 7. Independent Tempo spans 0.5×–2.0×, preserves musical pitch, and uses a logarithmic slider with 1.0× exactly at its center. This ratio does not imply BPM detection or enable musical matching. The independent Pitch slider remains disabled in the current Tempo increment. Seeking uses source seconds; do not claim sample-accurate audible positioning without verification.
+8. Each loaded deck song has eight cue positions. An empty pad saves the current source position without seeking or changing playback. An assigned pad recalls through the existing seek mechanism, retaining paused/playing intent; it never toggles transport or starts a paused deck. Shift plus a pad deletes its cue without seeking. The existing Shift button supports hold and click-to-latch clearing; keyboard Shift also clears. Cues remain deck-local through theme/view changes and reset when the loaded song changes or is ejected. Queue preparation alone does not reset the active song's cues. Numbered passive overview markers correspond to these positions. End-of-song seeking retains the existing paused-at-end rule.
 
 ## 2. Musical Matching
 

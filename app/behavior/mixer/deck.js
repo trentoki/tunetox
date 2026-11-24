@@ -8,6 +8,8 @@ export function buildDeck() {
     isPlaying: false,
     mainVolume: 0,
     tempoRatio: 1,
+    stemLevels: { beat: 1, bass: 1, tune: 1, voice: 1 },
+    cuePositions: Array(8).fill(null),
     loadingSong: null,
     audio: buildAudio()
   };
@@ -29,11 +31,21 @@ export function getLoadedSongs(decks) {
   return decks.filter(deck => deck.song).map(deck => deck.song);
 }
 
+// Permanent requested stem settings, independent of Main. No stem DSP/Handoff
+// is connected yet. Keep one value per stem in the same persistent deck state.
+export function setStemLevel(deck, stem, value) {
+  if (!Object.prototype.hasOwnProperty.call(deck.stemLevels, stem)) throw new RangeError("Unknown stem.");
+  if (!Number.isFinite(value) || value < 0 || value > 1) throw new RangeError("Stem level must be from 0 to 1.");
+  deck.stemLevels[stem] = Math.round(value * 100) / 100;
+}
+
 export async function loadSong(deck, song) {
   if (deck.isPlaying) return false;
   deck.loadingSong = song;
   try {
     await loadAudio(deck.audio, song);
+    if (deck.loadingSong !== song || deck.audio.src !== song.url) return false;
+    if (deck.song !== song) deck.cuePositions.fill(null);
     deck.song = song;
     return true;
   } finally { if (deck.loadingSong === song) deck.loadingSong = null; }
@@ -48,7 +60,7 @@ export function sendToDeck(deck, song) {
     loadQueue(deck, song);
     return { kind: "queued", song };
   } else {
-    return loadSong(deck, song).then(() => ({ kind: "loaded", song }));
+    return loadSong(deck, song).then(loaded => loaded ? { kind: "loaded", song } : undefined);
   }
 }
 
@@ -67,7 +79,8 @@ export async function seekDeck(deck, seconds) {
 export async function playDeck(deck) {
   if (deck.song === null) return;
   await startAudio(deck.audio);
-  deck.isPlaying = true;
+  // Audio may already have ended while its scheduling acknowledgement waited.
+  deck.isPlaying = !deck.audio.paused;
 }
 
 export async function pauseDeck(deck) {
@@ -78,8 +91,12 @@ export async function pauseDeck(deck) {
 
 export async function ejectSong(deck) {
   if (deck.isPlaying) return;
-  await ejectAudio(deck.audio);
+  deck.loadingSong = null;
+  const removing = ejectAudio(deck.audio);
   deck.song = null;
+  deck.cuePositions.fill(null);
+  // Clear before asynchronous disposal, so its late reply cannot erase a newer load.
+  await removing;
 }
 
 export async function playQueue(deck) {
@@ -95,10 +112,14 @@ export async function playQueue(deck) {
 // Coordinates one existing deck; never creates a player or copies deck state.
 // The host supplies synchronous presentation callbacks, keeping DOM, messages,
 // and file-URL cleanup outside Behavior. Actions resolve after cleanup, including
-// on playback rejection; a second action while pending is ignored, as before.
+// on playback rejection; overlapping transport actions are ignored. Seek batches
+// are the exception: they retain the latest requested target under the same guard.
 // Create once per deck. Native ended/error events retain the song and queue.
 export function createPlaybackCoordinator(deck, callbacks) {
   let pending = false;
+  let seeking = false, nextSeek;
+  let seekCompletion;
+  const readyToSeek = () => Boolean(deck.song) && !deck.loadingSong && deck.audio.readyState >= 2;
 
   async function run(operation) {
     if (pending) return;
@@ -127,6 +148,31 @@ export function createPlaybackCoordinator(deck, callbacks) {
     callbacks.mediaFailed();
   });
 
+  function seek(seconds) {
+    if (!Number.isFinite(seconds)) return Promise.reject(new RangeError("Seek position must be finite source seconds."));
+    if (!readyToSeek() || (pending && !seeking)) return Promise.resolve();
+    // One guarded batch, with only the latest waiting target retained. Never
+    // overlap worklet transport commands or drop the user's final position.
+    nextSeek = Math.max(0, Math.min(deck.audio.duration, seconds));
+    if (seeking) return seekCompletion;
+    seeking = true;
+    const wasPlaying = deck.isPlaying;
+    seekCompletion = run(async () => {
+      try {
+        while (nextSeek !== undefined) {
+          const target = nextSeek;
+          nextSeek = undefined;
+          await seekDeck(deck, target);
+          // Reaching the end pauses Audio. A newer seek back into the song
+          // must still preserve the batch's original playing intent.
+          if (nextSeek === undefined && wasPlaying && deck.audio.paused && target < deck.audio.duration)
+            await playDeck(deck);
+        }
+      } finally { seeking = false; nextSeek = undefined; }
+    });
+    return seekCompletion;
+  }
+
   return {
     isPending: () => pending,
     togglePlayback: () => run(() => deck.isPlaying ? pauseDeck(deck) : playDeck(deck)),
@@ -143,6 +189,25 @@ export function createPlaybackCoordinator(deck, callbacks) {
       }
       return run(() => sendToDeck(deck, song));
     },
-    seek: seconds => run(() => seekDeck(deck, seconds))
+    canSeek: () => readyToSeek() && (!pending || seeking),
+    seek,
+    cue(number, clear = false) {
+      if (!Number.isInteger(number) || number < 1 || number > 8) throw new RangeError("Cue number must be from 1 to 8.");
+      if (typeof clear !== 'boolean') throw new TypeError("Cue clearing must be a boolean.");
+      if (!readyToSeek()) return Promise.resolve();
+      const index = number - 1;
+      if (clear) {
+        deck.cuePositions[index] = null;
+        callbacks.settled();
+        return Promise.resolve();
+      }
+      const position = deck.cuePositions[index];
+      if (position !== null) return seek(position);
+      // Do not capture the transient paused coordinate of an unfinished seek.
+      if (pending) return Promise.resolve();
+      deck.cuePositions[index] = Math.max(0, Math.min(deck.audio.duration, deck.audio.currentTime));
+      callbacks.settled();
+      return Promise.resolve();
+    }
   };
 }

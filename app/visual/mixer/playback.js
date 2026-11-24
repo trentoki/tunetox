@@ -2,6 +2,8 @@
 // Inputs: one persistent Clean Deck state and bound host actions.
 // Output: a DOM node, render(), and setBusy(). No player creation or DSP here.
 // Class names follow docs/visual-verification/APPROVED-NAMING.md.
+import { installCueControls } from '../themes/glass-hardware/cue-preview.js';
+
 function element(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -58,7 +60,7 @@ function drawWaveform(svg, summary) {
   }
 }
 
-function previewRange(className, label, value, max = 100) {
+function createRangeField(className, label, value, max = 100) {
   const node = element("label", className);
   node.append(element("span", "", label));
   const input = element("input");
@@ -72,7 +74,52 @@ function previewRange(className, label, value, max = 100) {
   return node;
 }
 
-function createWave(number) {
+// Futuristic changes pointer operation only, reusing the native range's input
+// action and keyboard support. 360px covers the full range (180px per octave
+// for Tempo). The anchor is gesture state, never another stored Tempo value.
+function installVerticalRoller(surface, input) {
+  const rollerTravelPixels = 360;
+  let drag = null;
+  let removal;
+  function cancel() {
+    const previous = drag;
+    drag = null;
+    removal?.disconnect();
+    window.removeEventListener('blur', cancel);
+    delete surface.dataset.dragging;
+    if (previous && surface.hasPointerCapture(previous.id)) surface.releasePointerCapture(previous.id);
+  }
+  surface.addEventListener('pointerdown', event => {
+    if (document.documentElement.dataset.theme !== 'futuristic' || input.disabled ||
+      drag || !event.isPrimary || event.button !== 0) return;
+    event.preventDefault(); // Suppress the native horizontal range jump.
+    input.focus({ preventScroll: true });
+    drag = { id: event.pointerId, y: event.clientY, value: Number(input.value) };
+    surface.setPointerCapture(event.pointerId);
+    surface.dataset.dragging = 'true';
+    window.addEventListener('blur', cancel);
+    removal = new MutationObserver(() => { if (!surface.isConnected) cancel(); });
+    removal.observe(document, { childList: true, subtree: true });
+  }, true);
+  surface.addEventListener('pointermove', event => {
+    if (!drag || event.pointerId !== drag.id) return;
+    if (input.disabled || document.documentElement.dataset.theme !== 'futuristic') { cancel(); return; }
+    event.preventDefault();
+    const min = Number(input.min), max = Number(input.max);
+    const value = Math.round(Math.max(min, Math.min(max,
+      drag.value + (drag.y - event.clientY) * (max - min) / rollerTravelPixels)));
+    if (Number(input.value) !== value) {
+      input.value = String(value);
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+  });
+  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) {
+    surface.addEventListener(type, event => { if (drag?.id === event.pointerId) cancel(); });
+  }
+  return cancel;
+}
+
+function createWave() {
   const node = element("div", "wave-view");
   const wave = element("div", "scrolling-waveform");
   const scrollingGraphic = emptyWaveform();
@@ -122,14 +169,19 @@ function createControls() {
   return node;
 }
 
-function createStems() {
+function createStems(actions) {
   const node = element("div", "stems-view");
   const stems = element("div", "stem-faders");
   // Approved attribute identities; visible historical labels remain unchanged.
   for (const [name, stem] of [["Transients", "beat"], ["Flow", "bass"], ["Tune", "tune"], ["Voice", "voice"]]) {
-    const fader = previewRange("", name + " 100%", 100);
+    const fader = createRangeField("", name + " 100%", 100);
     fader.querySelector("span").replaceChildren(document.createTextNode(name), element("output", "", "100%"));
-    fader.querySelector("input").dataset.stem = stem;
+    const input = fader.querySelector("input");
+    input.dataset.stem = stem;
+    input.disabled = false;
+    input.step = "1";
+    input.setAttribute("aria-label", name + " level (stem audio not connected)");
+    input.addEventListener("input", () => actions.setStemLevel(stem, Number(input.value) / 100));
     stems.append(fader);
   }
   node.append(stems);
@@ -153,7 +205,7 @@ export function createPlaybackDeck(number, deck, actions) {
   const header = element("div", "performance-header");
   const participation = button("deck-participation-button", "D" + number, "Deck " + number + " participation (preview)");
   participation.append(element("small", "", "B T H"));
-  const tempo = previewRange("tempo-slider", "Tempo", 500, 1000);
+  const tempo = createRangeField("tempo-slider", "Tempo", 500, 1000);
   const tempoInput = tempo.querySelector("input");
   tempoInput.disabled = false;
   tempoInput.step = "1";
@@ -162,8 +214,19 @@ export function createPlaybackDeck(number, deck, actions) {
   tempoInput.addEventListener("input", () => actions.setTempo(2 ** (2 * Number(tempoInput.value) / 1000 - 1)));
   const tempoValue = element("output", "", "1.00×");
   tempo.append(tempoValue);
-  const pitch = previewRange("pitch-slider", "Pitch", 0, 12);
-  pitch.append(element("output", "", "+0.0"));
+  const pitch = createRangeField("pitch-slider", "Pitch", 0, 12);
+  const pitchInput = pitch.querySelector('input');
+  const pitchValue = element("output", "", "+0.0");
+  pitch.append(pitchValue);
+  // Only a theme-local travel preview. This is not semitones or musical state.
+  let pitchPreviewPosition = 500;
+  pitchInput.addEventListener('input', () => {
+    if (document.documentElement.dataset.theme !== 'futuristic') return;
+    pitchPreviewPosition = Number(pitchInput.value);
+    renderRollers();
+  });
+  const cancelTempoRoller = installVerticalRoller(tempo, tempoInput);
+  const cancelPitchRoller = installVerticalRoller(pitch, pitchInput);
   const libraryButton = button("library-button", "Library", "Open Library for Deck " + number, () => {
     workspace = "library-view";
     render();
@@ -186,7 +249,7 @@ export function createPlaybackDeck(number, deck, actions) {
   selector.append(upperToggle, lowerToggle);
   const play = button("play-pause-button", "▶", "Play Deck " + number, actions.togglePlayback);
   const queue = button("queue-button", "EMPTY", "Queue empty", actions.playQueue);
-  const main = previewRange("main-volume-fader", "MAIN 0%", 0);
+  const main = createRangeField("main-volume-fader", "MAIN 0%", 0);
   const mainPercentage = element("output", "", "MAIN 0%");
   main.querySelector("span").replaceChildren(mainPercentage);
   const mainInput = main.querySelector("input");
@@ -198,6 +261,78 @@ export function createPlaybackDeck(number, deck, actions) {
   overview.append(overviewGraphic);
   const overviewPosition = element("span", "playhead");
   overview.append(overviewPosition);
+  const cueMarkers = element('div', 'cue-markers');
+  cueMarkers.setAttribute('aria-hidden', 'true');
+  overview.append(cueMarkers);
+  overview.setAttribute('role', 'slider');
+  overview.setAttribute('aria-label', 'Song position for Deck ' + number);
+  overview.setAttribute('aria-valuemin', '0');
+  let seekGesture = null, seekPreview = null, previewSource, seekRequest = 0, seekRemoval;
+  const canSeek = () => Boolean(deck.song) && Number.isFinite(deck.audio.duration) && deck.audio.duration > 0 &&
+    typeof actions.seek === 'function' && (actions.canSeek ? actions.canSeek() : !busy);
+  function cancelSeekGesture() {
+    const previous = seekGesture;
+    seekGesture = null;
+    seekRemoval?.disconnect();
+    window.removeEventListener('blur', cancelSeekGesture);
+    if (previous && overview.hasPointerCapture(previous.id)) overview.releasePointerCapture(previous.id);
+    seekPreview = null;
+    updatePlaybackTime();
+  }
+  function previewSeek(clientX) {
+    const rect = overview.getBoundingClientRect();
+    previewSource = deck.audio.src;
+    seekPreview = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width)) * deck.audio.duration;
+    updatePlaybackTime();
+  }
+  function commitSeek(seconds) {
+    const request = ++seekRequest;
+    previewSource = deck.audio.src;
+    seekPreview = seconds;
+    updatePlaybackTime();
+    // A requested marker is temporary feedback, never another advancing clock.
+    // Reconcile to Audio after completion/failure; older replies cannot clear it.
+    Promise.resolve(actions.seek(seconds)).finally(() => {
+      if (request === seekRequest && !seekGesture) { seekPreview = null; updatePlaybackTime(); }
+    }).catch(() => {}); // The host/coordinator owns error reporting.
+  }
+  overview.addEventListener('pointerdown', event => {
+    if (!canSeek() || seekGesture || !event.isPrimary || event.button !== 0) return;
+    event.preventDefault();
+    overview.focus({ preventScroll: true });
+    seekGesture = { id: event.pointerId, source: deck.audio.src };
+    overview.setPointerCapture(event.pointerId);
+    previewSeek(event.clientX);
+    window.addEventListener('blur', cancelSeekGesture);
+    seekRemoval = new MutationObserver(() => { if (!overview.isConnected) cancelSeekGesture(); });
+    seekRemoval.observe(document, { childList: true, subtree: true });
+  });
+  overview.addEventListener('pointermove', event => {
+    if (seekGesture?.id !== event.pointerId) return;
+    if (!canSeek() || deck.audio.src !== seekGesture.source) { cancelSeekGesture(); return; }
+    event.preventDefault();
+    previewSeek(event.clientX);
+  });
+  overview.addEventListener('pointerup', event => {
+    if (seekGesture?.id !== event.pointerId) return;
+    const allowed = canSeek() && deck.audio.src === seekGesture.source;
+    if (allowed) previewSeek(event.clientX);
+    const target = seekPreview;
+    cancelSeekGesture();
+    if (allowed) commitSeek(target);
+  });
+  for (const type of ['pointercancel', 'lostpointercapture']) overview.addEventListener(type, event => {
+    if (seekGesture?.id === event.pointerId) cancelSeekGesture();
+  });
+  overview.addEventListener('keydown', event => {
+    if (!canSeek()) return;
+    const current = seekPreview ?? deck.audio.currentTime;
+    const target = { ArrowLeft: current - 5, ArrowDown: current - 5,
+      ArrowRight: current + 5, ArrowUp: current + 5, Home: 0, End: deck.audio.duration }[event.key];
+    if (target === undefined) return;
+    event.preventDefault();
+    commitSeek(Math.max(0, Math.min(deck.audio.duration, target)));
+  });
   let displayedPeaks = null;
   header.append(participation, tempo, pitch, libraryButton, title, selector, play, queue, main, overview);
   const content = element("div", "performance-content");
@@ -209,9 +344,10 @@ export function createPlaybackDeck(number, deck, actions) {
   lowerSection.id = "deck-" + number + "-lower";
   upperToggle.setAttribute("aria-controls", upperSection.id);
   lowerToggle.setAttribute("aria-controls", lowerSection.id);
-  const wave = createWave(number);
-  const stems = createStems();
+  const wave = createWave();
+  const stems = createStems(actions);
   const cues = createCues();
+  const renderCues = installCueControls(cues, deck, actions);
   const controls = createControls();
   upperSection.append(wave.node, stems);
   lowerSection.append(cues, controls);
@@ -249,14 +385,69 @@ export function createPlaybackDeck(number, deck, actions) {
   node.append(performance, library);
 
   function updatePlaybackTime() {
-    const songPosition = deck.audio.currentTime;
+    if (seekPreview !== null && (!deck.song || previewSource !== deck.audio.src)) seekPreview = null;
+    const songPosition = seekPreview ?? deck.audio.currentTime;
     const duration = deck.audio.duration;
     wave.time.value = formatTime(songPosition) + " / " + formatTime(duration);
     const fraction = Number.isFinite(duration) && duration > 0 ? songPosition / duration : 0;
     overviewPosition.style.left = fraction * 100 + "%";
+    overview.setAttribute('aria-valuemax', String(Number.isFinite(duration) ? duration : 0));
+    overview.setAttribute('aria-valuenow', String(songPosition));
+    overview.setAttribute('aria-valuetext', formatTime(songPosition) + ' of ' + formatTime(duration));
   }
 
+  function renderRollers() {
+    const futuristic = document.documentElement.dataset.theme === 'futuristic';
+    pitchInput.disabled = !futuristic;
+    pitchInput.max = futuristic ? '1000' : '12';
+    pitchInput.value = futuristic ? String(pitchPreviewPosition) : '0';
+    pitchInput.setAttribute('aria-label', futuristic
+      ? 'Pitch roller visual preview for Deck ' + number + '; no audio effect' : 'Pitch (preview)');
+    pitch.querySelector('span').textContent = futuristic ? 'Pitch demo' : 'Pitch';
+    if (futuristic) pitch.title = 'Visual travel preview only — does not change sound';
+    else pitch.removeAttribute('title');
+    pitchValue.value = futuristic ? Math.round(pitchPreviewPosition / 10) + '%' : '+0.0';
+    if (futuristic) pitchInput.setAttribute('aria-valuetext', Math.round(pitchPreviewPosition / 10) + '% preview travel; no audio effect');
+    else pitchInput.removeAttribute('aria-valuetext');
+    for (const [surface, position] of [[tempo, Number(tempoInput.value)], [pitch, pitchPreviewPosition]]) {
+      if (futuristic) surface.style.setProperty('--roller-offset', -position / 1000 * 120 + 'px');
+      else surface.style.removeProperty('--roller-offset');
+    }
+  }
+  document.addEventListener('tunetox-theme-change', () => {
+    cancelTempoRoller(); cancelPitchRoller(); cancelSeekGesture(); renderRollers();
+  });
+
   function render() {
+    if (seekGesture && (!canSeek() || deck.audio.src !== seekGesture.source || workspace !== 'performance-view')) cancelSeekGesture();
+    overview.tabIndex = canSeek() ? 0 : -1;
+    overview.setAttribute('aria-disabled', String(!canSeek()));
+    renderCues();
+    cueMarkers.replaceChildren();
+    if (deck.song && !deck.loadingSong && deck.audio.src === deck.song.url && deck.audio.duration > 0) deck.cuePositions.forEach((position, index) => {
+      if (position === null) return;
+      const marker = element('span', 'cue-marker');
+      marker.dataset.cueNumber = index + 1;
+      if (position / deck.audio.duration < .03) marker.dataset.edge = 'start';
+      else if (position / deck.audio.duration > .97) marker.dataset.edge = 'end';
+      const percent = Math.max(0, Math.min(100, position / deck.audio.duration * 100));
+      marker.style.left = percent + '%';
+      const label = element('span', '', String(index + 1));
+      // Coincident cues share a row of numbers. Percent bounds remain responsive;
+      // the line itself stays at the exact source coordinate, including 0/end.
+      const count = deck.cuePositions.filter(value => value === position).length;
+      const ordinal = deck.cuePositions.slice(0, index).filter(value => value === position).length;
+      label.style.left = `calc(clamp(calc(1px - ${percent}%), ${-count * 6}px, calc(${100 - percent}% - ${count * 12}px)) + ${ordinal * 12}px)`;
+      marker.append(label);
+      cueMarkers.append(marker);
+    });
+    stems.querySelectorAll('input[data-stem]').forEach(input => {
+      const percent = Math.round(deck.stemLevels[input.dataset.stem] * 100);
+      input.value = String(percent);
+      input.style.setProperty('--stem-level-fill', percent + '%');
+      input.setAttribute('aria-valuetext', percent + '%; stem audio not connected');
+      input.closest('label').querySelector('output').textContent = percent + '%';
+    });
     const peaks = deck.audio.waveformPeaks;
     if (peaks !== displayedPeaks) {
       displayedPeaks = peaks;
@@ -268,6 +459,7 @@ export function createPlaybackDeck(number, deck, actions) {
     tempoInput.value = String(Math.round((Math.log2(deck.tempoRatio) + 1) * 500));
     tempoInput.setAttribute("aria-valuetext", deck.tempoRatio.toFixed(2) + " times original speed");
     tempoInput.disabled = busy;
+    renderRollers();
     const percentage = Math.round(deck.mainVolume * 100);
     mainPercentage.textContent = "MAIN " + percentage + "%";
     mainInput.value = String(percentage);
