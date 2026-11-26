@@ -1,4 +1,5 @@
-import { summarizeWaveform } from "./waveform-summary.js";
+import { summarizeOverviewWaveform } from "./waveform/overview-waveform.js";
+import { summarizeScrollingWaveform } from "./waveform/scrolling-waveform.js";
 // Buffered Signalsmith transport. Visual/Behavior retain the same persistent
 // EventTarget per deck; source-time getters/events replace native media clocks.
 // See specs/controls-settings.md for timeline, cancellation and latency limits.
@@ -128,7 +129,7 @@ export function buildAudio() {
   gate.connect(mainVolumeGain);
   const deckPlaybackInfo = { deckAudio, gate, node: null, thisSongLoadingCanBeStopped: null, latestReplaceOrRemoveNumber: 0, latestDeckActionNumber: 0, latestTempoOrPitchChangeNumber: 0,
     replacementLoadingCanBeStopped: null,
-    loading: false, playing: false, ended: false, error: null, duration: 0, waveformPeaks: null,
+    loading: false, playing: false, ended: false, error: null, duration: 0, waveformPeaks: null, scrollingWaveform: null,
     songPosition: 0, playbackReferencePoint: null, rate: 1, pitch: 0, latency: 0, url: "", timer: null, cutoff: null };
   deckAudioStates.set(deckAudio, deckPlaybackInfo);
   mainVolumes.set(deckAudio, { gain: mainVolumeGain, ramp: { from: 0, to: 0, start: 0, end: 0 } });
@@ -142,7 +143,8 @@ export function buildAudio() {
     readyState: { get: () => deckPlaybackInfo.node && !deckPlaybackInfo.loading ? 2 : 0 },
     src: { get: () => deckPlaybackInfo.url },
     error: { get: () => deckPlaybackInfo.error },
-    waveformPeaks: { get: () => deckPlaybackInfo.waveformPeaks }
+    waveformPeaks: { get: () => deckPlaybackInfo.waveformPeaks },
+    scrollingWaveform: { get: () => deckPlaybackInfo.scrollingWaveform }
   });
   return deckAudio;
 }
@@ -217,7 +219,8 @@ export async function loadAudio(deckAudio, song, { preservePlayback = false } = 
     await timeLimitOrCancel(newSongAudioProcessor.addBuffers(channels, channels.map(channel => channel.buffer)), signal, "Signalsmith buffers");
     const latency = await timeLimitOrCancel(newSongAudioProcessor.latency(), signal, "Signalsmith latency");
     if (!Number.isFinite(latency) || latency < 0) throw new Error("Invalid Signalsmith latency.");
-    const waveformPeaks = summarizeWaveform(decodedSongAudio);
+    const waveformPeaks = summarizeOverviewWaveform(decodedSongAudio);
+    const scrollingWaveform = summarizeScrollingWaveform(decodedSongAudio);
     if (signal.aborted || latestReplaceOrRemoveNumber !== deckPlaybackInfo.latestReplaceOrRemoveNumber) throw new DOMException("Superseded load", "AbortError");
     const previousSongAudioProcessor = deckPlaybackInfo.node;
     newSongAudioProcessor.connect(deckPlaybackInfo.gate);
@@ -235,6 +238,7 @@ export async function loadAudio(deckAudio, song, { preservePlayback = false } = 
     deckPlaybackInfo.node = newSongAudioProcessor;
     deckPlaybackInfo.duration = decodedSongAudio.duration;
     deckPlaybackInfo.waveformPeaks = waveformPeaks;
+    deckPlaybackInfo.scrollingWaveform = scrollingWaveform;
     deckPlaybackInfo.latency = latency;
     deckPlaybackInfo.songPosition = 0;
     deckPlaybackInfo.playbackReferencePoint = null;
@@ -381,6 +385,7 @@ export async function ejectAudio(deckAudio) {
   deckPlaybackInfo.node = null;
   deckPlaybackInfo.songPosition = deckPlaybackInfo.duration = 0;
   deckPlaybackInfo.waveformPeaks = null;
+  deckPlaybackInfo.scrollingWaveform = null;
   deckPlaybackInfo.playbackReferencePoint = null;
   deckPlaybackInfo.playing = deckPlaybackInfo.loading = deckPlaybackInfo.ended = false;
   deckPlaybackInfo.error = null;

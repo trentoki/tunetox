@@ -4,6 +4,59 @@ The new application entry point is [tunetox.html](../tunetox.html). Serve the re
 
 ## Open and test
 
+### Detailed four-second waveform refinement (26 November 2026)
+
+The user found the first display too zoomed out for drum hits. The current window
+now spans four source seconds, with a stationary center and fixed source-time
+scale. Higher Tempo scrolls faster without stretching transient shapes. Audio
+retains signed min/max and RMS in approximately 5 ms groups; the full-song overview
+keeps its original 360-column summary. Canvas paints only the visible ~800 groups.
+Visible playing decks use requestAnimationFrame and read Audio's currentTime each
+frame; paused/hidden views do not run an animation loop. Shared seek-on-release,
+cues, Queue, colors and geometry remain. See the [waveform specification](../specs/waveform.md).
+
+Analysis is in [app/audio/waveform/](../app/audio/waveform/) and rendering in
+[app/visual/waveform/](../app/visual/waveform/), with clearly named overview and
+scrolling files in each. The host's existing emptied event now also refreshes the
+view, releasing renderer references when the source is disposed. Behavior and DSP
+are unchanged; no routing layer or second playback position was introduced.
+
+Verification completed in isolated Chromium:
+
+- Playback/touch, Queue, theme and iPhone suites pass. Added checks cover signed
+  single-sample transients at group/channel boundaries, correct RMS/final groups,
+  source-time shape, visible-only rendering and linear one-hour summary storage.
+- Native mouse/touch-emulated four-second seeks and independent Tempo operation
+  passed on all four decks in all themes at desktop, tablet and phone sizes.
+  Layout rectangles match the preceding checkpoint; no horizontal overflow found.
+- Two actual local stereo music WAVs (175 s and 322 s) were loaded read-only,
+  including four-deck playback with one 175 s source and three 322 s sources.
+  Screenshots show distinct transient peaks. Source advances over five seconds
+  were 2.50/5.00/7.50/10.01 s at 0.5×/1×/~1.5×/2×. Original file hashes are unchanged.
+- Those four detailed summaries total 2,733,636 bytes (~2.61 MiB). DevTools reported
+  backing storage of ~405.7 MB while loaded and ~0.203 MB after disposal, a 2.5 s
+  wait and forced garbage collection. These are observed test-page backing-store
+  figures, not full browser/process RAM or proof of native/WASM reclamation.
+- Foreground per-deck animation callback work averaged 0.29 ms, p95 0.60 ms,
+  maximum 0.90 ms in the five-second sample. Headless rAF cadence averaged 77 ms;
+  the idle page also averaged 81 ms. This environment does not establish 60 fps
+  or physical-device smoothness despite low measured callback cost.
+- A separate generated ten-minute mono transient recording decoded, analyzed and
+  played near its end. Its detail arrays used 1,436,748 bytes at the test context's
+  44.1 kHz rate. One-hour array/render bounds were tested without decoding an hour
+  of PCM. Recordings longer than 322 s were synthetic, not additional real music.
+
+Physical iPhone/iPad/Mac Safari touch, visible smoothness, listening and sustained
+native memory/CPU remain necessary. Analysis currently runs on the main thread
+during preparation, so loading very long recordings can still delay UI frames.
+No claim is made about sample-accurate scratching, gapless Queue transitions or
+hour-long real-music playback. Keep original music read-only during manual tests.
+
+### Historical initial scrolling-waveform checkpoint
+
+The following initial increment used 20 seconds and is superseded by the detailed
+four-second refinement above; it remains a record of the preceding implementation.
+
 ### Scrolling-waveform development increment (26 November 2026)
 
 The accepted Queue work was first preserved in local commit `d8c4c7d`. The four

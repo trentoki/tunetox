@@ -1,6 +1,6 @@
 // Visual-only full-song summary; source audio and playback gain are untouched.
 // Every column uses the same amplitude scale and covers the same time interval.
-export function summarizeWaveform(audioBuffer, columns = 360) {
+export function summarizeOverviewWaveform(audioBuffer, columns = 360) {
   const count = Math.max(1, Math.floor(columns));
   const minimum = new Float32Array(count);
   const maximum = new Float32Array(count);

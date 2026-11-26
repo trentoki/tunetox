@@ -42,15 +42,16 @@ Development priorities and their sequence should be determined collaboratively b
 
 ### 2.1 Current Priorities
 
-**DJ-ready sprint — scrolling waveform:** The four shared decks now render existing
-decoded waveform summaries beneath stationary centered playheads. Both waveform
-views share source timing and guarded seek actions. Mouse/touch drags move backward
-when pulled right and forward when pulled left, preview together and seek on
-release. The 20-source-second initial window, coarse 360-column data and physical
-verification limits are documented in the [interface specification](specs/interface.md#implemented-scrolling-waveform).
-No new musical state, Audio/Behavior changes, routing layer or layout redesign is
-included in this increment. The accepted Queue work is separately preserved in
-local checkpoint `d8c4c7d` before these changes.
+**DJ-ready sprint — detailed scrolling waveform:** The user found the initial
+20-second/360-column display too coarse for drum hits. The refinement uses a
+four-source-second window, ~5 ms signed min/max/RMS analysis and visible-only
+canvas rendering. requestAnimationFrame reads Audio timing; Tempo changes speed
+without changing shape. The overview and shared seek/cue/Queue actions remain.
+Analysis lives in app/audio/waveform/ and rendering in app/visual/waveform/ with
+separate overview/scrolling modules. See the [waveform contract](specs/waveform.md)
+and [verification](docs/CLEAN_PLAYBACK.md). Physical Safari smoothness/listening
+and very long real recordings remain review work. EQ has not begun. Earlier local
+checkpoints d8c4c7d (accepted Queue) and b5ff7b9 (initial scrolling) remain preserved.
 
 **DJ-ready performance sprint — Queue (26 November 2026):** Occupied slots now
 retain their accepted song and report rejection instead of silently replacing it.

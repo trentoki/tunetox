@@ -1,5 +1,6 @@
 import { runTouchGuardChecks } from "./touch-guard-tests.js";
 import { checkScrollingWaveforms, assertScrollingAligned } from './scrolling-waveform-tests.js';
+import { checkWaveformDetail } from './waveform-detail-tests.js';
 import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, sendToDeck, setTempo, setStemLevel, ejectSong } from "../app/behavior/mixer/deck.js";
 import { createAudioFileURLs, loadAudio, pauseAudio, ejectAudio } from "../app/audio/deck-audio.js";
 const frame = document.getElementById("application");
@@ -309,7 +310,7 @@ async function checkPlaybackCoordination() {
       const others = fixtures.filter(other => other !== item).map(other => ({ deck: other.deck,
         song: other.deck.song, src: other.deck.audio.src, main: other.deck.mainVolume, voice: other.deck.stemLevels.voice }));
       await ejectSong(item.deck);
-      assert(item.deck.song === null && item.deck.audio.duration === 0 && item.deck.loadingSong === null &&
+      assert(item.deck.song === null && item.deck.audio.duration === 0 && item.deck.audio.scrollingWaveform === null && item.deck.loadingSong === null &&
         item.deck.cuePositions.every(value => value === null) &&
         item.deck.mainVolume === (index + 1) / 10 && item.deck.stemLevels.voice === (index + 1) / 10,
         'Eject did not clear only its song while retaining deck controls');
@@ -484,6 +485,8 @@ run.addEventListener("click", async () => {
   const pass = message => { lines.push("PASS " + message); output.textContent = lines.join("\n"); };
   let players = [], audioAPI;
   try {
+    checkWaveformDetail();
+    pass('5 ms signed transients/RMS, unchanged overview, bounded four-second renderer and linear long-recording storage');
     checkAudioFileResources();
     pass("loaded-song list and audio URL retention/replacement/cleanup");
     checkMainVolumeState();
@@ -497,6 +500,7 @@ run.addEventListener("click", async () => {
     // No production diagnostics interface or alternate audio implementation.
     const observer = '<base href="' + new URL("../", location.href).href + '">' +
       '<script>window.__players=[];window.__contexts=[];window.__gains=[];window.__sources=[];' +
+      'window.__frameCount=0;const nativeFrame=requestAnimationFrame;window.requestAnimationFrame=callback=>nativeFrame(time=>{window.__frameCount++;callback(time);});' +
       'const NativeTarget=window.EventTarget;window.EventTarget=class extends NativeTarget{constructor(){super();window.__players.push(this);}};' +
       'const NativeWorklet=window.AudioWorkletNode;window.AudioWorkletNode=class extends NativeWorklet{constructor(...args){super(...args);window.__sources.push(this);}connect(...args){this.__testOutput=args[0];return super.connect(...args);}};' +
       'const NativeContext=window.AudioContext;window.AudioContext=class extends NativeContext{' +
@@ -647,12 +651,12 @@ run.addEventListener("click", async () => {
     pass("all four persistent transports run independently");
     assertScrollingAligned(doc);
     const scrollingSurfaces = [...doc.querySelectorAll('.scrolling-waveform')];
-    const scrollingGraphics = scrollingSurfaces.map(surface => surface.querySelector('svg'));
-    const firstBars = scrollingGraphics.map(graphic => graphic.firstChild);
-    const beforeScroll = scrollingGraphics.map(graphic => graphic.viewBox.baseVal.x);
+    const scrollingGraphics = scrollingSurfaces.map(surface => surface.querySelector('canvas'));
+    const beforeScroll = scrollingSurfaces.map(surface => Number(surface.getAttribute('aria-valuenow')));
+    const beforeFrames = win.__frameCount;
     await delay(150);
-    assert(scrollingGraphics.every((graphic, index) => graphic.viewBox.baseVal.x > beforeScroll[index] && graphic.firstChild === firstBars[index]),
-      'Playing waveforms did not scroll or unnecessarily rebuilt their summary bars');
+    assert(scrollingSurfaces.every((surface, index) => Number(surface.getAttribute('aria-valuenow')) > beforeScroll[index] && surface.querySelector('canvas') === scrollingGraphics[index]) && win.__frameCount > beforeFrames,
+      'Playing waveforms did not animate or recreated canvas nodes');
     const scrollingBeforeSeek = players[0].currentTime;
     const otherScrollingTimes = players.slice(1).map(player => player.currentTime);
     scrollingSurfaces[0].dispatchEvent(new win.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
@@ -660,7 +664,7 @@ run.addEventListener("click", async () => {
       'Playing scrolling-waveform seek did not retain playback');
     assert(players.slice(1).every((player,index) => !player.paused && player.currentTime >= otherScrollingTimes[index]), 'Scrolling seek interrupted another deck');
     assertScrollingAligned(doc);
-    pass('four moving SVG windows retain their bars; playing scrolling seek retains transport and other decks');
+    pass('four animated windows retain their canvases; playing scrolling seek retains transport and other decks');
     const otherSeekTimes = players.slice(0, 3).map(p => p.currentTime);
     const overview = deck(4).querySelector('.waveform-overview');
     overview.dispatchEvent(new win.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));

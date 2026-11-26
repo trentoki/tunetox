@@ -5,8 +5,7 @@ async function until(test, message) {
   throw Error(message);
 }
 
-// Both surfaces must describe one source position. Comparing their SVG mapping
-// avoids treating a 50 ms Audio notification as sample-accurate live rendering.
+// Both surfaces use the same authoritative position, including animation frames.
 export function assertScrollingAligned(doc) {
   for (const deck of doc.querySelectorAll('.deck')) {
     const overview = deck.querySelector('.waveform-overview');
@@ -14,9 +13,7 @@ export function assertScrollingAligned(doc) {
     const position = Number(overview.getAttribute('aria-valuenow'));
     const duration = Number(overview.getAttribute('aria-valuemax'));
     assert(position === Number(scrolling.getAttribute('aria-valuenow')), 'Waveforms show different positions');
-    const [left, , width] = scrolling.querySelector('svg').getAttribute('viewBox').split(' ').map(Number);
-    if (duration > 0) assert(Math.abs((left + width / 2) / 360 * duration - position) < .00001,
-      'Scrolling center does not map to the overview position');
+    assert(scrolling.querySelector('canvas'), 'Detailed scrolling canvas missing');
     if (scrolling.getClientRects().length) {
       const center = scrolling.getBoundingClientRect().left + scrolling.clientLeft + scrolling.clientWidth / 2;
       assert(Math.abs(scrolling.querySelector('.playhead').getBoundingClientRect().left - center) < 1,
@@ -47,7 +44,7 @@ export async function checkScrollingWaveforms(doc, win, players) {
     !surface.closest('.deck').querySelector('.play-pause-button').disabled, 'Scrolling seek did not settle at ' + seconds);
   try {
     for (const [index, surface] of surfaces.entries()) {
-      assert(surface.querySelectorAll('svg rect').length === 720, 'Scrolling graphic must use actual 360-column peak/RMS data');
+      assert(surface.querySelector('canvas') && players[index].scrollingWaveform.groupSeconds < .0051, 'Detailed 5 ms source data/canvas missing');
       assert(win.getComputedStyle(surface).touchAction === 'pinch-zoom', 'Scrolling drag blocks pinch or permits page panning');
       key(surface, 'Home'); await settled(surface, 0);
       key(surface, 'ArrowRight'); await settled(surface, 5);
@@ -56,9 +53,9 @@ export async function checkScrollingWaveforms(doc, win, players) {
       pointer(surface, 'pointerdown', .5);
       pointer(surface, 'pointermove', .75);
       assert(players[index].currentTime === 10, 'Drag preview changed Audio before release');
-      assert(Math.abs(Number(surface.getAttribute('aria-valuenow')) - 5) < .001, 'Right drag did not move backward');
+      assert(Math.abs(Number(surface.getAttribute('aria-valuenow')) - 9) < .001, 'Right drag did not move backward');
       assertScrollingAligned(doc);
-      pointer(surface, 'pointerup', .75); await settled(surface, 5);
+      pointer(surface, 'pointerup', .75); await settled(surface, 9);
       pointer(surface, 'pointerdown', .75, 2); pointer(surface, 'pointermove', .5, 2); pointer(surface, 'pointerup', .5, 2);
       await settled(surface, 10);
       assert(players[index].paused && players.filter((_, i) => i !== index).every((player, i) => player.currentTime === others[i]),
@@ -78,7 +75,7 @@ export async function checkScrollingWaveforms(doc, win, players) {
         if (card.querySelector('.performance-upper-toggle').textContent !== 'Wave') card.querySelector('.performance-upper-toggle').click();
       }
       pointer(surface, 'pointerdown', .5); pointer(surface, 'pointerup', 3); await settled(surface, 0);
-      pointer(surface, 'pointerdown', .5); pointer(surface, 'pointerup', -3); await settled(surface, players[index].duration);
+      pointer(surface, 'pointerdown', .5); pointer(surface, 'pointerup', -20); await settled(surface, players[index].duration);
       assert(players[index].paused, 'Scrolling to the end did not pause');
       key(surface, 'Home'); await settled(surface, 0);
     }

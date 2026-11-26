@@ -110,7 +110,7 @@ decks.forEach((deck, index) => {
   });
 
   deck.audio.addEventListener("timeupdate", () => view.updatePlaybackTime());
-  for (const event of ["loadedmetadata", "durationchange"]) {
+  for (const event of ["loadedmetadata", "durationchange", "emptied"]) {
     deck.audio.addEventListener(event, () => view.render());
   }
 });

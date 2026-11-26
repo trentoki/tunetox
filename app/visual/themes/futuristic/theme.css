@@ -111,7 +111,7 @@ html[data-theme="futuristic"] { background: #050910; color: #d5e6ef; }
   border: 1px solid #65899e; border-radius: 7px 3px 7px 3px;
   box-shadow: inset 0 0 0 2px #010710, inset 0 3px 5px #000b, 0 1px #c0f5ff33;
 }
-[data-theme="futuristic"] :is(.waveform-overview, .scrolling-waveform) svg { opacity: .95; }
+[data-theme="futuristic"] :is(.waveform-overview, .scrolling-waveform) :is(svg, canvas) { opacity: .95; }
 /* A passive cover above the waveform and playhead; seeking still reaches the window. */
 [data-theme="futuristic"] .waveform-overview::after {
   content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;

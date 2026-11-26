@@ -7,46 +7,27 @@ extraction and reconciliation of the remaining historical design rules are pendi
 
 ## Implemented scrolling waveform
 
-All four shared deck components draw the existing Audio-owned decoded 360-column
-minimum/maximum/RMS summary in both their overview and scrolling SVGs. No new
-Audio/Behavior module or PCM copy is introduced. Each scrolling playhead stays at
-50% of its existing window. Visual moves the SVG viewBox beneath it: at source
-position `p` and duration `d`, its left coordinate is `(p - 10) / d * 360` and its
-width is `20 / d * 360`. The initial implementation therefore shows 20 source
-seconds, centered on the same source position used by the overview and time
-readout. Empty space before zero/after duration is intentional; no repeated or
-invented audio is drawn. The time window is an implementation choice for review,
-not an approved zoom-control design. Former decorative plus/minus placeholders
-are removed without changing the container geometry.
+The scrolling view uses a four-source-second window beneath a stationary centered
+playhead. Its detailed minimum/maximum/RMS summary groups approximately 5 ms of
+decoded audio, independently of the unchanged 360-column full-song overview.
+Canvas renders only visible groups; requestAnimationFrame reads authoritative
+Audio source timing. Tempo changes move the waveform faster without changing its
+source-time shape or scale. See the [waveform analysis/rendering contract](waveform.md)
+for data ownership, calculations, memory, animation and verification limits.
 
-The existing 50 ms Audio timeupdate notifications move the viewBox; they do not
-rebuild bars. Rendering reuses bar nodes until the Audio summary changes on
-Load/Queue/Eject. Tempo changes naturally alter scrolling speed through the source
-clock. Cue recalls and Queue swaps update both windows from that same timing and
-summary reference. Deck accent colors, themes and view/layout ownership are unchanged.
+Both surfaces retain one shared seek preview and Behavior seek action. For a
+scrolling drag, target source seconds = anchor source seconds - horizontal travel
+/ gesture width × 4, clamped to the song. Right moves backward; left moves forward.
+A stationary tap does not jump. Preview updates both views and the time readout;
+release commits while retaining playing/paused intent. Arrow keys still seek by
+five seconds; Home/End reach the bounds. No BPM, zoom controls or audible scratching
+behavior is introduced. Empty space outside the source bounds is intentional.
 
-Both waveform surfaces share one pointer/keyboard seek implementation and one
-temporary preview per deck. For scrolling drags, `target = anchor source seconds -
-(pointer x - anchor x) / gesture width * 20`, clamped to the source bounds. A
-stationary tap does not jump to the point under the finger; the center is the
-grabbed source coordinate. Dragging previews both waveforms and the time readout;
-release commits through the existing guarded Behavior seek. Actual audio continues
-at its current position until release. Playing/paused intent follows existing
-seek rules, including paused-at-end. Keyboard arrows seek by five seconds and
-Home/End reach the bounds on either surface.
-
-Pointer capture supports primary mouse/touch/pen input. Deliberate pinch zoom
-remains available while single-finger page pan is disabled on these surfaces.
-Cancellation, lost capture, source change, view/theme change, blur, resize, removal
-or hiding/inerting the active phone deck discards unfinished gestures. The stored
-anchor and preview are gesture feedback, not a second advancing playback state.
-
-Limits: the reused summary has only 360 columns for the whole song, so long tracks
-show coarse blocks at this scale. Detail extraction, zoom controls, beat grids,
-continuous audible scratching and sample-accurate alignment are not implemented.
-Rendering follows the 50 ms clock notifications rather than a new animation timer.
-Physical Safari touch/listening and sustained long-file performance still require
-device verification.
+Pointer capture supports primary mouse/touch/pen, with deliberate pinch zoom
+available. Cancellation, capture loss, source/view/theme change, blur, resize,
+removal or hiding/inerting the active phone deck discards unfinished gestures.
+Gesture anchors and renderer caches do not create another advancing playback state.
+Deck colors, all three themes, overview cues, Queue and layout geometry remain.
 
 ## iPhone single-deck layout
 

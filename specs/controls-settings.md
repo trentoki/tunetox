@@ -5,6 +5,13 @@ and reconciliation of participation, preferences and deferred controls remain pe
 
 **Scope:** Direct participation, stable control IDs and validated preferences.
 
+Waveform data: Audio exposes the existing read-only waveformPeaks overview and
+the detailed scrollingWaveform summary. The latter contains ~5 ms min/max/RMS
+groups plus source interval/duration metadata; both are accepted/replaced/cleared
+with the source. [Waveform analysis and rendering](waveform.md) specifies the
+four-second scale, animation, ownership, memory and verification limits. These
+summaries do not affect transport or create another playback clock.
+
 ## Implemented song cues
 
 `buildDeck()` owns `cuePositions`: eight source-second values or `null` (empty).

@@ -77,6 +77,9 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
    the existing shared seek action. Both waveforms track the same source position
    across playback, Tempo changes, cues and Queue swaps; display gestures do not
    create a separate playback clock or change another deck.
+   The scrolling window spans four source seconds, independent of BPM. Detailed
+   analysis uses approximately 5 ms sample groups and preserves transient extrema;
+   Tempo changes scrolling speed rather than waveform shape or horizontal scale.
 4. Each deck independently retains both section selections, including across Library round trips. All four decks default to **Wave + Cues**. Switching a section must not reset the other section, another deck, playback, queue state, or musical participation. This supersedes the combined Wave/Cue versus Controls switch.
 5. The iPhone layout displays one existing shared deck at a time, selected immediately by compact tabs 1–4. All four decks remain operational; switching visibility never recreates Audio/Behavior objects or resets playback, songs, queues or control values. A separate handle below the tabs expands downward and collapses upward into an empty Transition area; its musical controls remain undecided. Only on iPhone, the four existing stem faders are vertical and side by side, retaining their names, ranges, values and actions. Preserve all themes and existing iPad/desktop layouts. Responsive thresholds and gestures are documented in `specs/interface.md` and remain subject to physical device review. Visibility never determines musical participation.
 6. Support deck accent colors, coordinated waveforms/controls, themes, accessible input alternatives, and isolated Design Mode experiments. Never merge prototypes into working audio without review.

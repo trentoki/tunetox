@@ -25,7 +25,8 @@ The findings and pre-migration observations below remain the original audit reco
   Main/Tempo/stem levels, cue positions, and guarded playback coordination.
 - [Audio](../app/audio/deck-audio.js): one shared context, per-deck processing and
   gain, source clock, cancellation, bounded worklet waits and object-URL cleanup.
-  [Waveform analysis](../app/audio/waveform-summary.js) reads decoded PCM without
+  [Waveform overview analysis](../app/audio/waveform/overview-waveform.js) (originally
+  app/audio/waveform-summary.js at audit time) reads decoded PCM without
   changing the source or gain.
 - [Visual component](../app/visual/mixer/playback.js): DOM, section selections,
   waveform display, native faders, rollers and seek gestures. Touch protection and

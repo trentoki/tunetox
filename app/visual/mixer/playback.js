@@ -3,6 +3,8 @@
 // Output: a DOM node, render(), and setBusy(). No player creation or DSP here.
 // Class names follow docs/visual-verification/APPROVED-NAMING.md.
 import { installCueControls } from '../themes/glass-hardware/cue-preview.js';
+import { createOverviewWaveform, drawOverviewWaveform } from '../waveform/overview-waveform.js';
+import { createScrollingWaveform, createScrollingRenderer, SCROLLING_WINDOW_SECONDS } from '../waveform/scrolling-waveform.js';
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -21,43 +23,6 @@ function button(className, text, label, action) {
     node.title = "Visual preview — not connected to playback";
   }
   return node;
-}
-
-function emptyWaveform() {
-  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("viewBox", "0 0 360 160");
-  svg.setAttribute("preserveAspectRatio", "none");
-  svg.setAttribute("aria-hidden", "true");
-  return svg;
-}
-
-function drawWaveform(svg, summary) {
-  svg.replaceChildren();
-  if (!summary) return;
-  const { minimum, maximum, rms } = summary;
-  const width = 360 / maximum.length;
-  // Fixed visual gain: no per-section normalization, and no change to sound.
-  const visualGain = 0.55;
-  for (let index = 0; index < maximum.length; index++) {
-    const x = index * width;
-    const top = 80 - maximum[index] * 80 * visualGain;
-    const bottom = 80 - minimum[index] * 80 * visualGain;
-    const peak = document.createElementNS(svg.namespaceURI, "rect");
-    peak.setAttribute("x", String(x));
-    peak.setAttribute("y", String(top));
-    peak.setAttribute("width", String(width));
-    peak.setAttribute("height", String(Math.max(0.5, bottom - top)));
-    peak.setAttribute("opacity", "0.75");
-    svg.append(peak);
-    // RMS body makes sustained loudness easier to distinguish from brief peaks.
-    const bodyHeight = rms[index] * 80 * visualGain;
-    const body = document.createElementNS(svg.namespaceURI, "rect");
-    body.setAttribute("x", String(x));
-    body.setAttribute("y", String(80 - bodyHeight));
-    body.setAttribute("width", String(width));
-    body.setAttribute("height", String(Math.max(0.5, bodyHeight * 2)));
-    svg.append(body);
-  }
 }
 
 function createRangeField(className, label, value, max = 100) {
@@ -122,7 +87,7 @@ function installVerticalRoller(surface, input) {
 function createWave() {
   const node = element("div", "wave-view");
   const wave = element("div", "scrolling-waveform");
-  const scrollingGraphic = emptyWaveform();
+  const scrollingGraphic = createScrollingWaveform();
   const scrollingPlayhead = element("span", "playhead");
   wave.append(scrollingGraphic, scrollingPlayhead);
   const time = element("output", "current-playback-time", "0:00 / —");
@@ -257,7 +222,7 @@ export function createPlaybackDeck(number, deck, actions) {
   mainInput.setAttribute("aria-label", "Main volume for Deck " + number);
   mainInput.addEventListener("input", () => actions.setMainVolume(Number(mainInput.value) / 100));
   const overview = element("div", "waveform-overview");
-  const overviewGraphic = emptyWaveform();
+  const overviewGraphic = createOverviewWaveform();
   overview.append(overviewGraphic);
   const overviewPosition = element("span", "playhead");
   overview.append(overviewPosition);
@@ -268,7 +233,8 @@ export function createPlaybackDeck(number, deck, actions) {
   overview.setAttribute('aria-label', 'Song position for Deck ' + number);
   overview.setAttribute('aria-valuemin', '0');
   const wave = createWave();
-  const scrollingWindowSeconds = 20;
+  const scrollingRenderer = createScrollingRenderer(wave.surface, wave.graphic, updatePlaybackTime);
+  let animationFrame = 0;
   wave.surface.setAttribute('role', 'slider');
   wave.surface.setAttribute('aria-label', 'Scrolling song position for Deck ' + number);
   wave.surface.setAttribute('aria-valuemin', '0');
@@ -292,7 +258,7 @@ export function createPlaybackDeck(number, deck, actions) {
     // Overview is absolute. The scrolling window is a grabbed piece of the same
     // source timeline: pulling it right moves backward, pulling left moves ahead.
     const seconds = surface === overview ? (clientX - rect.left) / rect.width * deck.audio.duration :
-      seekGesture.anchorTime - (clientX - seekGesture.anchorX) / seekGesture.width * scrollingWindowSeconds;
+      seekGesture.anchorTime - (clientX - seekGesture.anchorX) / seekGesture.width * SCROLLING_WINDOW_SECONDS;
     seekPreview = Math.max(0, Math.min(deck.audio.duration, seconds));
     updatePlaybackTime();
   }
@@ -413,15 +379,27 @@ export function createPlaybackDeck(number, deck, actions) {
     overview.setAttribute('aria-valuemax', String(Number.isFinite(duration) ? duration : 0));
     overview.setAttribute('aria-valuenow', String(songPosition));
     overview.setAttribute('aria-valuetext', formatTime(songPosition) + ' of ' + formatTime(duration));
-    // SVG coordinates still describe the existing decoded full-song summary.
-    // Move its view window, never the centered playhead or a separate clock.
-    const span = duration > 0 ? scrollingWindowSeconds / duration * 360 : 360;
-    const left = duration > 0 ? (songPosition - scrollingWindowSeconds / 2) / duration * 360 : 0;
-    wave.graphic.setAttribute('viewBox', `${left} 0 ${span} 160`);
+    scrollingRenderer.draw(deck.audio.scrollingWaveform, songPosition);
     wave.surface.setAttribute('aria-valuemax', String(Number.isFinite(duration) ? duration : 0));
     wave.surface.setAttribute('aria-valuenow', String(songPosition));
     wave.surface.setAttribute('aria-valuetext', formatTime(songPosition) + ' of ' + formatTime(duration));
+    scheduleAnimation();
   }
+
+  function scheduleAnimation() {
+    const animate = node.isConnected && !document.hidden && !node.inert && !deck.audio.paused &&
+      workspace === 'performance-view' && upperView === 'wave-view' && wave.surface.getClientRects().length > 0;
+    if (!animate) {
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+    } else if (!animationFrame) {
+      animationFrame = requestAnimationFrame(() => {
+        animationFrame = 0;
+        updatePlaybackTime(); // Read Audio again; never integrate elapsed frame time.
+      });
+    }
+  }
+  document.addEventListener('visibilitychange', updatePlaybackTime);
 
   function renderRollers() {
     const futuristic = document.documentElement.dataset.theme === 'futuristic';
@@ -481,8 +459,7 @@ export function createPlaybackDeck(number, deck, actions) {
     const peaks = deck.audio.waveformPeaks;
     if (peaks !== displayedPeaks) {
       displayedPeaks = peaks;
-      drawWaveform(overviewGraphic, peaks);
-      drawWaveform(wave.graphic, peaks);
+      drawOverviewWaveform(overviewGraphic, peaks);
       overviewPosition.hidden = !peaks;
       wave.scrollingPlayhead.hidden = !peaks;
     }
