@@ -42,6 +42,20 @@ Development priorities and their sequence should be determined collaboratively b
 
 ### 2.1 Current Priorities
 
+**DJ-ready performance sprint — Queue (26 November 2026):** Occupied slots now
+retain their accepted song and report rejection instead of silently replacing it.
+The user has tested and accepted this Queue increment; preserve it as a separate
+development checkpoint before scrolling-waveform work. Occupied slots
+remain protected.
+READY and natural song end share the guarded swap action. Outgoing audio continues
+while a candidate prepares; successful replacement retains current Main/Tempo/stem
+settings, consumes the slot and clears changed-song cues. Preparation failures keep
+both songs and report the error without an automatic retry loop. See the
+[Queue contract and limitations](specs/queue.md). This is a playable development
+increment, not a gapless or release-readiness claim. Queue correction/removal UI
+and exact seamless/quantized swap timing remain undecided; physical Safari
+listening, long-file and background/resource checks remain necessary.
+
 **iPhone Visual layout (provisionally accepted; visual refinement pending):** The existing shared
 deck component now presents one deck at a time on phone-sized viewports, with four
 tabs, a separately operated expandable empty Transition area, and vertical native
@@ -50,8 +64,8 @@ stem faders. All four mounted decks remain active. Phone-only Visual files live 
 See [layout choices and verification limits](specs/interface.md#iphone-single-deck-layout).
 The human has provisionally accepted this layout for the development checkpoint;
 visual refinement is still needed. Physical Safari touch/listening verification
-remains separate from the recorded Chromium checks. Queue remains the next agreed
-roadmap task, but this checkpoint does not begin it or authorize further changes.
+remains separate from the recorded Chromium checks. This paragraph describes the
+preceding iPhone checkpoint; the Queue sprint above is the current increment.
 
 **Approved timing cleanup and historical archives:** Play completion now reconciles
 Behavior with Audio if a song ends before the scheduling reply. Natural-end stop

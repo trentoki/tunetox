@@ -78,7 +78,8 @@ decks.forEach((deck, index) => {
       if (!busy) view.setBusy(false);
     },
     completed(result) {
-      if (result?.kind) announce("Deck " + number + ": " + result.song.name +
+      if (result?.kind === "queue-full") announce("Deck " + number + ": queue occupied by " + result.song.name + ". New file was not queued.");
+      else if (result?.kind) announce("Deck " + number + ": " + result.song.name +
         (result.kind === "queued" ? " queued." : " loaded. Press Play."));
       else announce("Deck " + number + (deck.isPlaying ? " playing." : " paused."));
     },
@@ -103,7 +104,7 @@ decks.forEach((deck, index) => {
     const file = input.files[0];
     if (!file || playback.isPending()) return;
     const url = audioFileURLs.create(file);
-    // Preserve Clean Deck's sendToDeck decision, including occupied-queue replacement.
+    // Behavior owns loading/queue decisions, including occupied-slot protection.
     await playback.sendToDeck({ name: file.name, url });
     input.value = "";
   });

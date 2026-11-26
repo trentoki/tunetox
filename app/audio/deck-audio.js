@@ -127,6 +127,7 @@ export function buildAudio() {
   gate.gain.value = 0;
   gate.connect(mainVolumeGain);
   const deckPlaybackInfo = { deckAudio, gate, node: null, thisSongLoadingCanBeStopped: null, latestReplaceOrRemoveNumber: 0, latestDeckActionNumber: 0, latestTempoOrPitchChangeNumber: 0,
+    replacementLoadingCanBeStopped: null,
     loading: false, playing: false, ended: false, error: null, duration: 0, waveformPeaks: null,
     songPosition: 0, playbackReferencePoint: null, rate: 1, pitch: 0, latency: 0, url: "", timer: null, cutoff: null };
   deckAudioStates.set(deckAudio, deckPlaybackInfo);
@@ -158,24 +159,28 @@ export function setAudioMainVolume(deckAudio, value) {
   path.ramp = { from, to: value, start: now, end: now + volumeRampSeconds };
 }
 
-export async function loadAudio(deckAudio, song) {
+export async function loadAudio(deckAudio, song, { preservePlayback = false } = {}) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
+  deckPlaybackInfo.replacementLoadingCanBeStopped?.abort();
   // A new load supersedes an earlier loading attempt on this deck.
-  if (deckPlaybackInfo.thisSongLoadingCanBeStopped) {
+  if (!preservePlayback && deckPlaybackInfo.thisSongLoadingCanBeStopped) {
     deckPlaybackInfo.thisSongLoadingCanBeStopped.abort();
   }
   // Save a way for a later load to stop this loading attempt.
   const thisSongLoadingCanBeStopped = new AbortController();
   const signal = thisSongLoadingCanBeStopped.signal;
-  deckPlaybackInfo.thisSongLoadingCanBeStopped = thisSongLoadingCanBeStopped;
+  deckPlaybackInfo.replacementLoadingCanBeStopped = thisSongLoadingCanBeStopped;
+  if (!preservePlayback) deckPlaybackInfo.thisSongLoadingCanBeStopped = thisSongLoadingCanBeStopped;
   const latestReplaceOrRemoveNumber = ++deckPlaybackInfo.latestReplaceOrRemoveNumber;
-  ++deckPlaybackInfo.latestDeckActionNumber;
-  deckPlaybackInfo.songPosition = findSongPosition(deckPlaybackInfo);
-  deckPlaybackInfo.playing = false;
-  deckPlaybackInfo.loading = true;
-  deckPlaybackInfo.error = null;
-  mute(deckPlaybackInfo);
-  stopClock(deckPlaybackInfo);
+  if (!preservePlayback) {
+    ++deckPlaybackInfo.latestDeckActionNumber;
+    deckPlaybackInfo.songPosition = findSongPosition(deckPlaybackInfo);
+    deckPlaybackInfo.playing = false;
+    deckPlaybackInfo.loading = true;
+    deckPlaybackInfo.error = null;
+    mute(deckPlaybackInfo);
+    stopClock(deckPlaybackInfo);
+  }
   let newSongAudioProcessor;
   try {
     if (!globalThis.isSecureContext || !context.audioWorklet) {
@@ -184,7 +189,7 @@ export async function loadAudio(deckAudio, song) {
     // Resume immediately in the Load gesture, before file reading or module import.
     await timeLimitOrCancel(context.resume(), signal, "Audio context resume");
     if (context.state !== "running") throw new Error("Audio context did not resume. Tap Load again.");
-    if (deckPlaybackInfo.node) await timeLimitOrCancel(deckPlaybackInfo.node.schedule({ active: false, input: deckPlaybackInfo.songPosition }), signal, "Previous song pause");
+    if (!preservePlayback && deckPlaybackInfo.node) await timeLimitOrCancel(deckPlaybackInfo.node.schedule({ active: false, input: deckPlaybackInfo.songPosition }), signal, "Previous song pause");
     const response = await timeLimitOrCancel(fetch(song.url, { signal }), signal, "Audio file read", 30000);
     if (!response.ok) throw new Error("Audio file could not be read.");
     const bytes = await timeLimitOrCancel(response.arrayBuffer(), signal, "Audio file read", 30000);
@@ -205,20 +210,31 @@ export async function loadAudio(deckAudio, song) {
     }
     newSongAudioProcessor.onprocessorerror = () => {
       const error = new Error("Signalsmith processor failed. Reload the song.");
-      if (latestReplaceOrRemoveNumber !== deckPlaybackInfo.latestReplaceOrRemoveNumber) return;
       if (deckPlaybackInfo.node === newSongAudioProcessor) fail(deckPlaybackInfo, error);
-      else thisSongLoadingCanBeStopped.abort();
+      else if (latestReplaceOrRemoveNumber === deckPlaybackInfo.latestReplaceOrRemoveNumber) thisSongLoadingCanBeStopped.abort();
     };
     const channels = Array.from({ length: decodedSongAudio.numberOfChannels }, (_, i) => new Float32Array(decodedSongAudio.getChannelData(i)));
     await timeLimitOrCancel(newSongAudioProcessor.addBuffers(channels, channels.map(channel => channel.buffer)), signal, "Signalsmith buffers");
     const latency = await timeLimitOrCancel(newSongAudioProcessor.latency(), signal, "Signalsmith latency");
     if (!Number.isFinite(latency) || latency < 0) throw new Error("Invalid Signalsmith latency.");
+    const waveformPeaks = summarizeWaveform(decodedSongAudio);
     if (signal.aborted || latestReplaceOrRemoveNumber !== deckPlaybackInfo.latestReplaceOrRemoveNumber) throw new DOMException("Superseded load", "AbortError");
     const previousSongAudioProcessor = deckPlaybackInfo.node;
     newSongAudioProcessor.connect(deckPlaybackInfo.gate);
+    if (preservePlayback) {
+      // The old transport runs throughout decode/preparation. Mute only at the
+      // accepted replacement boundary; failed candidates leave it untouched.
+      deckPlaybackInfo.thisSongLoadingCanBeStopped?.abort();
+      ++deckPlaybackInfo.latestDeckActionNumber;
+      deckPlaybackInfo.playing = false;
+      mute(deckPlaybackInfo);
+      stopClock(deckPlaybackInfo);
+      deckPlaybackInfo.thisSongLoadingCanBeStopped = thisSongLoadingCanBeStopped;
+      deckPlaybackInfo.error = null;
+    }
     deckPlaybackInfo.node = newSongAudioProcessor;
     deckPlaybackInfo.duration = decodedSongAudio.duration;
-    deckPlaybackInfo.waveformPeaks = summarizeWaveform(decodedSongAudio);
+    deckPlaybackInfo.waveformPeaks = waveformPeaks;
     deckPlaybackInfo.latency = latency;
     deckPlaybackInfo.songPosition = 0;
     deckPlaybackInfo.playbackReferencePoint = null;
@@ -227,16 +243,24 @@ export async function loadAudio(deckAudio, song) {
     deckPlaybackInfo.loading = false;
     notify(deckPlaybackInfo, "loadedmetadata");
     notify(deckPlaybackInfo, "durationchange");
-    await disposeNode(previousSongAudioProcessor);
+    // Cleanup acknowledgement must not delay the replacement's Play. Disconnect
+    // the outgoing node now; its bounded buffer/port disposal finishes separately.
+    if (preservePlayback) {
+      previousSongAudioProcessor?.disconnect();
+      void disposeNode(previousSongAudioProcessor);
+    } else await disposeNode(previousSongAudioProcessor);
     if (signal.aborted || latestReplaceOrRemoveNumber !== deckPlaybackInfo.latestReplaceOrRemoveNumber) throw new DOMException("Superseded load", "AbortError");
   } catch (error) {
     if (newSongAudioProcessor && newSongAudioProcessor !== deckPlaybackInfo.node) await disposeNode(newSongAudioProcessor);
     if (latestReplaceOrRemoveNumber === deckPlaybackInfo.latestReplaceOrRemoveNumber) {
       thisSongLoadingCanBeStopped.abort();
       deckPlaybackInfo.loading = false;
-      fail(deckPlaybackInfo, error);
+      if (!preservePlayback || deckPlaybackInfo.node === newSongAudioProcessor) fail(deckPlaybackInfo, error);
     }
     throw error;
+  } finally {
+    if (deckPlaybackInfo.replacementLoadingCanBeStopped === thisSongLoadingCanBeStopped)
+      deckPlaybackInfo.replacementLoadingCanBeStopped = null;
   }
 }
 
@@ -347,6 +371,7 @@ export function setAudioPitch(deckAudio, semitones) {
 
 export async function ejectAudio(deckAudio) {
   const deckPlaybackInfo = deckAudioStates.get(deckAudio);
+  deckPlaybackInfo.replacementLoadingCanBeStopped?.abort();
   deckPlaybackInfo.thisSongLoadingCanBeStopped?.abort();
   ++deckPlaybackInfo.latestReplaceOrRemoveNumber;
   ++deckPlaybackInfo.latestDeckActionNumber;

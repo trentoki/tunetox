@@ -771,10 +771,11 @@ run.addEventListener("click", async () => {
     load(0, "First queue.wav");
     load(0, "Replacement queue.wav");
     assert(players[0].src === priorSource && !players[0].paused, "Queuing interrupted playback");
-    assert(deck(1).querySelector(".queue-button").title === "Replacement queue.wav", "Prototype queue replacement changed");
+    assert(deck(1).querySelector(".queue-button").title === "First queue.wav", "Occupied queue was overwritten");
+    assert(doc.querySelector('#playback-status').textContent.includes('queue occupied'), 'Occupied queue feedback missing');
     deck(1).querySelector(".queue-button").click();
-    await until(() => deck(1).querySelector(".song-title").textContent === "Replacement queue.wav" && !players[0].paused, "Queue swap failed");
-    pass("existing queue replacement and Play Queue behavior preserved");
+    await until(() => deck(1).querySelector(".song-title").textContent === "First queue.wav" && !players[0].paused, "Queue swap failed");
+    pass("occupied queue retained with feedback; READY plays the accepted song");
     assert(mainInput(1).value === "60" && Math.abs(win.__gains[0].gain.value - .6) < 1e-6,
       "Pause/resume or queued playback reset Main volume");
     await until(() => players[0].currentTime > .1 && !play(1).disabled,

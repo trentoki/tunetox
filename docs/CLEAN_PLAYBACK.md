@@ -4,6 +4,48 @@ The new application entry point is [tunetox.html](../tunetox.html). Serve the re
 
 ## Open and test
 
+### Queue development increment (26 November 2026)
+
+The user has tested and accepted the Queue functionality. This acceptance is
+recorded separately from the automated results and remaining verification limits.
+
+While playing, Load fills one queue slot. Another file is rejected with an
+occupied-queue message; the current and queued songs are retained. READY swaps to
+the accepted song, and natural end now invokes the same swap automatically, even
+on a hidden phone deck. Outgoing playback continues during candidate preparation.
+Main, Tempo and the current stem settings are retained; changed-song cues clear.
+Invalid candidates retain the current song and queue and report failure. No
+automatic retry loop or new queue-editing controls are introduced. See the
+[Queue specification](../specs/queue.md) and [browser checks](../tests/queue-tests.html).
+
+Natural-end swaps still include decode/preparation and processing lead-in; this
+increment does not promise gapless or beat-quantized transitions. Queue removal/
+replacement presentation remains undecided. Physical Safari listening, long-file
+resource use and background behavior remain unverified. For manual review, load
+familiar music, press Play, raise Main carefully, queue another file and try READY;
+repeat by letting the outgoing song finish, including with a hidden phone deck.
+Confirm settings remain, a third file cannot replace the accepted queue, and
+other decks continue. Listen for gaps, clicks, dropouts and unexpectedly retained
+outgoing sound. The historical results below describe their original checkpoints;
+this section supersedes their manual-only/occupied-replacement Queue behavior.
+
+Chromium verification: the full playback/touch and theme suites passed before
+implementation and after the Queue changes. The new Queue suite passed real
+worklet tests for occupied-slot rejection, measured outgoing signal during held
+preparation, manual and four-deck automatic swaps, latest inherited controls,
+delayed Play/end coordination, corrupt files, automatic failure without retry,
+post-commit Play rejection/recovery and cancelled preparation. The phone suite
+also passed hidden-deck automatic advancement, tabs, cues, settings and READY.
+Syntax, editor diagnostics and whitespace checks passed. These are browser/signal
+checks, not human listening or physical Safari results.
+
+Readability review: Queue decisions remain in the existing Behavior deck module,
+Visual only presents occupied-slot feedback, and the Audio loader reuses its
+existing preparation path with an explicit preserve-playback option. No extra
+application layer, duplicated deck implementation or DSP change was introduced.
+The two cancellation controllers represent the outgoing source lifetime and the
+candidate preparation lifetime; they are not competing musical state stores.
+
 ### iPhone layout review (24 November 2026)
 
 **Checkpoint status:** The iPhone layout is provisionally accepted, with visual
@@ -61,8 +103,8 @@ Stems and drag each fader; stored levels should change, but stem audio remains
 disconnected. Tap/swipe the Transition handle separately from tabs; test rotation,
 short-screen scrolling, Library return, intentional pinch zoom and each theme.
 Repeat on iPad to confirm its existing multi-deck layout. The layout is
-provisionally accepted with visual refinement pending; Queue remains the next
-agreed roadmap item and is not started by this checkpoint.
+provisionally accepted with visual refinement pending. That checkpoint preceded
+the Queue increment recorded above.
 
 ### Start the preview server
 
@@ -92,7 +134,7 @@ Tempo now uses Signalsmith: drag horizontally within the existing numeric Tempo 
 
 Each deck has two independent toggle buttons in the original compact header selector slot: **Wave ↔ Stems** and **Cues ↔ Controls**. Each button shows its current view. No extra selector rows occupy the content sections. Stems contains four Behavior-owned level faders with no stem DSP; Controls contains only inactive filter, EQ and effects previews. Changing either selection leaves the other section and other decks unchanged. Library and its back arrow preserve both selections and playback.
 
-Loading while a deck is playing prepares its queue. The READY button invokes the existing Clean Deck Play Queue action. A further load replaces that queue, as in the preserved prototype.
+Loading while a deck is playing fills its one queue slot. READY invokes the shared guarded swap action; natural end requests the same action. Further files are rejected with feedback while the slot is occupied. An empty or paused deck still loads without autoplay.
 
 ## Files and responsibilities
 
@@ -128,7 +170,7 @@ The legacy Clean Deck prototype shares these modules and therefore now also star
 
 Safari listening procedure: reload tunetox.html; confirm all four Main values are 0%. Load a familiar song and press Play: time should advance silently. Slowly raise Main through 25%, 50%, and 100%; listen for increasing level, then return to 0% and confirm silence. Play another deck and change only its fader; verify independence. Retest Pause/resume, READY queue swap, Library round trips, rapid fader movements, and orientation changes. Check for clicks, dropouts, stuck audio, and lost first-gesture activation. Device volume remains under your hardware control. Physical Safari/iPad listening is still required; browser signal measurements alone do not establish audible quality or touch compatibility.
 
-The preserved prototype's queue replacement and manual Play Queue behavior differ from some future product rules. This task intentionally preserves the prototype rather than implementing those migrations. Natural end retains the song and does not automatically play the queue.
+The historical prototype shares current Behavior/Audio, so its direct queue calls now also protect occupied slots and preserve outgoing audio during preparation. Its historical presenter does not install the active host's automatic-end coordinator or occupied-slot feedback. The active application advances on natural end when queued; without a queue it retains the ended song.
 
 Original files are read through browser-selected File objects only. No file writes or uploads occur. Replaced blob URLs are revoked only after they are absent from every loaded, queued, and currently loading song.
 

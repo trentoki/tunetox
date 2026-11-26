@@ -52,13 +52,14 @@ export async function loadSong(deck, song) {
 }
 
 export function loadQueue(deck, song) {
-  deck.queue = song; // Replaces any previously queued song.
+  if (deck.queue) return false;
+  deck.queue = song;
+  return true;
 }
 
 export function sendToDeck(deck, song) {
   if (deck.isPlaying) {
-    loadQueue(deck, song);
-    return { kind: "queued", song };
+    return loadQueue(deck, song) ? { kind: "queued", song } : { kind: "queue-full", song: deck.queue };
   } else {
     return loadSong(deck, song).then(loaded => loaded ? { kind: "loaded", song } : undefined);
   }
@@ -102,10 +103,17 @@ export async function ejectSong(deck) {
 export async function playQueue(deck) {
   if (deck.queue === null) return;
   const nextSong = deck.queue;
-  await pauseAudio(deck.audio);
-  deck.isPlaying = false;
-  await loadSong(deck, nextSong);
-  deck.queue = null;
+  deck.loadingSong = nextSong;
+  try {
+    // Audio keeps the outgoing source alive until the candidate is ready. Commit
+    // song/cues/queue together only after preparation succeeds (specs/queue.md).
+    await loadAudio(deck.audio, nextSong, { preservePlayback: true });
+    if (deck.loadingSong !== nextSong || deck.audio.src !== nextSong.url) return;
+    if (deck.song !== nextSong) deck.cuePositions.fill(null);
+    deck.song = nextSong;
+    if (deck.queue === nextSong) deck.queue = null;
+    deck.isPlaying = false;
+  } finally { if (deck.loadingSong === nextSong) deck.loadingSong = null; }
   await playDeck(deck);
 }
 
@@ -114,11 +122,13 @@ export async function playQueue(deck) {
 // and file-URL cleanup outside Behavior. Actions resolve after cleanup, including
 // on playback rejection; overlapping transport actions are ignored. Seek batches
 // are the exception: they retain the latest requested target under the same guard.
-// Create once per deck. Native ended/error events retain the song and queue.
+// Create once per deck. Errors retain songs; natural end may advance the queue.
 export function createPlaybackCoordinator(deck, callbacks) {
   let pending = false;
   let seeking = false, nextSeek;
   let seekCompletion;
+  let endedQueue = null;
+  let swappingQueue = false;
   const readyToSeek = () => Boolean(deck.song) && !deck.loadingSong && deck.audio.readyState >= 2;
 
   async function run(operation) {
@@ -136,17 +146,38 @@ export function createPlaybackCoordinator(deck, callbacks) {
       pending = false;
       callbacks.busyChanged(false);
       callbacks.settled();
+      advanceEndedQueue();
     }
   }
 
   deck.audio.addEventListener("ended", () => {
     deck.isPlaying = false;
+    // Only a real natural completion advances. A seek to the end is paused, not
+    // ended. Keep one intent across delayed Play/seek acknowledgements.
+    if (!swappingQueue && deck.audio.ended && deck.song && deck.queue) endedQueue = { song: deck.song, queue: deck.queue };
     callbacks.ended();
+    advanceEndedQueue();
   });
   deck.audio.addEventListener("error", () => {
+    endedQueue = null;
     deck.isPlaying = false;
     callbacks.mediaFailed();
   });
+
+  function advanceEndedQueue() {
+    if (pending || !endedQueue) return;
+    const intent = endedQueue;
+    endedQueue = null; // A failed swap must not trigger an automatic retry loop.
+    if (deck.song === intent.song && deck.queue === intent.queue && deck.audio.ended)
+      void run(swapQueue);
+  }
+
+  async function swapQueue() {
+    swappingQueue = true;
+    endedQueue = null;
+    try { await playQueue(deck); }
+    finally { swappingQueue = false; }
+  }
 
   function seek(seconds) {
     if (!Number.isFinite(seconds)) return Promise.reject(new RangeError("Seek position must be finite source seconds."));
@@ -176,11 +207,10 @@ export function createPlaybackCoordinator(deck, callbacks) {
   return {
     isPending: () => pending,
     togglePlayback: () => run(() => deck.isPlaying ? pauseDeck(deck) : playDeck(deck)),
-    playQueue: () => run(() => playQueue(deck)),
+    playQueue: () => run(swapQueue),
     sendToDeck(song) {
       if (pending) return Promise.resolve();
-      // Queue replacement does no asynchronous work: retain immediate replacement
-      // and feedback even when two files are sent in the same event turn.
+      // One slot, immediate feedback, no silent replacement or audio interruption.
       if (deck.isPlaying) {
         const result = sendToDeck(deck, song);
         callbacks.completed(result);

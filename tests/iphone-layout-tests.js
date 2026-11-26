@@ -142,6 +142,11 @@ run.addEventListener('click', async () => {
     await until(() => !input(0, '.play-pause-button').disabled && players[0].currentTime < 6, 'Retained cue recall failed');
     assert(players[0].paused && players.slice(1).every(player => !player.paused), 'Cue recall changed transport state');
     pass('paused position survives switching; retained cue recalls without interrupting other decks');
+    const audioAPI = await win.eval("import('/app/audio/deck-audio.js')");
+    await audioAPI.seekAudio(players[3], players[3].duration - .1);
+    await until(() => players[3].src !== sources[3] && !players[3].paused && !input(3, '.play-pause-button').disabled, 'Hidden deck did not automatically advance its queue');
+    assert(input(3, '.queue-button').disabled && input(3, '.main-volume-fader input').value === '13', 'Hidden automatic swap lost queue/gain state');
+    pass('hidden phone deck automatically advances its queue while another tab is displayed');
     input(0, '.queue-button').click();
     await until(() => !input(0, '.play-pause-button').disabled && input(0, '.queue-button').disabled && players[0].src !== sources[0], 'Retained queue did not play');
     assert(!players[0].paused && input(0, '.main-volume-fader input').value === '10', 'Queue lost playback/gain');
