@@ -5,6 +5,49 @@ extraction and reconciliation of the remaining historical design rules are pendi
 
 **Scope:** Responsive views, cue controls and tested design interactions.
 
+## Implemented scrolling waveform
+
+All four shared deck components draw the existing Audio-owned decoded 360-column
+minimum/maximum/RMS summary in both their overview and scrolling SVGs. No new
+Audio/Behavior module or PCM copy is introduced. Each scrolling playhead stays at
+50% of its existing window. Visual moves the SVG viewBox beneath it: at source
+position `p` and duration `d`, its left coordinate is `(p - 10) / d * 360` and its
+width is `20 / d * 360`. The initial implementation therefore shows 20 source
+seconds, centered on the same source position used by the overview and time
+readout. Empty space before zero/after duration is intentional; no repeated or
+invented audio is drawn. The time window is an implementation choice for review,
+not an approved zoom-control design. Former decorative plus/minus placeholders
+are removed without changing the container geometry.
+
+The existing 50 ms Audio timeupdate notifications move the viewBox; they do not
+rebuild bars. Rendering reuses bar nodes until the Audio summary changes on
+Load/Queue/Eject. Tempo changes naturally alter scrolling speed through the source
+clock. Cue recalls and Queue swaps update both windows from that same timing and
+summary reference. Deck accent colors, themes and view/layout ownership are unchanged.
+
+Both waveform surfaces share one pointer/keyboard seek implementation and one
+temporary preview per deck. For scrolling drags, `target = anchor source seconds -
+(pointer x - anchor x) / gesture width * 20`, clamped to the source bounds. A
+stationary tap does not jump to the point under the finger; the center is the
+grabbed source coordinate. Dragging previews both waveforms and the time readout;
+release commits through the existing guarded Behavior seek. Actual audio continues
+at its current position until release. Playing/paused intent follows existing
+seek rules, including paused-at-end. Keyboard arrows seek by five seconds and
+Home/End reach the bounds on either surface.
+
+Pointer capture supports primary mouse/touch/pen input. Deliberate pinch zoom
+remains available while single-finger page pan is disabled on these surfaces.
+Cancellation, lost capture, source change, view/theme change, blur, resize, removal
+or hiding/inerting the active phone deck discards unfinished gestures. The stored
+anchor and preview are gesture feedback, not a second advancing playback state.
+
+Limits: the reused summary has only 360 columns for the whole song, so long tracks
+show coarse blocks at this scale. Detail extraction, zoom controls, beat grids,
+continuous audible scratching and sample-accurate alignment are not implemented.
+Rendering follows the 50 ms clock notifications rather than a new animation timer.
+Physical Safari touch/listening and sustained long-file performance still require
+device verification.
+
 ## iPhone single-deck layout
 
 **Review status:** Provisionally accepted for the development checkpoint; visual
@@ -65,8 +108,8 @@ Line position is cue source seconds / duration × 100%, clamped to the window.
 Number labels are kept inside the edges at zero/end. The marker layer and all
 children have pointer-events none and remain above the glass/playhead while the
 playhead advances. Markers rebuild from Behavior on assignment/deletion/song
-changes; they are not maintained by the playback clock. No scrolling waveform is
-implemented. See [cue state/lifecycle contract](controls-settings.md#implemented-song-cues).
+changes; they are not maintained by the playback clock. The scrolling waveform
+above shares the same seek position. See [cue state/lifecycle contract](controls-settings.md#implemented-song-cues).
 
 ## Implemented overview seeking
 

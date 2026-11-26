@@ -42,11 +42,20 @@ Development priorities and their sequence should be determined collaboratively b
 
 ### 2.1 Current Priorities
 
+**DJ-ready sprint — scrolling waveform:** The four shared decks now render existing
+decoded waveform summaries beneath stationary centered playheads. Both waveform
+views share source timing and guarded seek actions. Mouse/touch drags move backward
+when pulled right and forward when pulled left, preview together and seek on
+release. The 20-source-second initial window, coarse 360-column data and physical
+verification limits are documented in the [interface specification](specs/interface.md#implemented-scrolling-waveform).
+No new musical state, Audio/Behavior changes, routing layer or layout redesign is
+included in this increment. The accepted Queue work is separately preserved in
+local checkpoint `d8c4c7d` before these changes.
+
 **DJ-ready performance sprint — Queue (26 November 2026):** Occupied slots now
 retain their accepted song and report rejection instead of silently replacing it.
 The user has tested and accepted this Queue increment; preserve it as a separate
-development checkpoint before scrolling-waveform work. Occupied slots
-remain protected.
+development checkpoint before scrolling-waveform work (local commit `d8c4c7d`).
 READY and natural song end share the guarded swap action. Outgoing audio continues
 while a candidate prepares; successful replacement retains current Main/Tempo/stem
 settings, consumes the slot and clears changed-song cues. Preparation failures keep

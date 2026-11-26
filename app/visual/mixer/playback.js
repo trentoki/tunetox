@@ -127,7 +127,7 @@ function createWave() {
   wave.append(scrollingGraphic, scrollingPlayhead);
   const time = element("output", "current-playback-time", "0:00 / —");
   node.append(wave, time);
-  return { node, time, scrollingPlayhead };
+  return { node, time, surface: wave, graphic: scrollingGraphic, scrollingPlayhead };
 }
 
 function createCues() {
@@ -267,6 +267,11 @@ export function createPlaybackDeck(number, deck, actions) {
   overview.setAttribute('role', 'slider');
   overview.setAttribute('aria-label', 'Song position for Deck ' + number);
   overview.setAttribute('aria-valuemin', '0');
+  const wave = createWave();
+  const scrollingWindowSeconds = 20;
+  wave.surface.setAttribute('role', 'slider');
+  wave.surface.setAttribute('aria-label', 'Scrolling song position for Deck ' + number);
+  wave.surface.setAttribute('aria-valuemin', '0');
   let seekGesture = null, seekPreview = null, previewSource, seekRequest = 0, seekRemoval;
   const canSeek = () => Boolean(deck.song) && Number.isFinite(deck.audio.duration) && deck.audio.duration > 0 &&
     typeof actions.seek === 'function' && (actions.canSeek ? actions.canSeek() : !busy);
@@ -275,14 +280,20 @@ export function createPlaybackDeck(number, deck, actions) {
     seekGesture = null;
     seekRemoval?.disconnect();
     window.removeEventListener('blur', cancelSeekGesture);
-    if (previous && overview.hasPointerCapture(previous.id)) overview.releasePointerCapture(previous.id);
+    window.removeEventListener('resize', cancelSeekGesture);
+    if (previous && previous.surface.hasPointerCapture(previous.id)) previous.surface.releasePointerCapture(previous.id);
     seekPreview = null;
     updatePlaybackTime();
   }
   function previewSeek(clientX) {
-    const rect = overview.getBoundingClientRect();
+    const surface = seekGesture.surface;
+    const rect = surface.getBoundingClientRect();
     previewSource = deck.audio.src;
-    seekPreview = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width)) * deck.audio.duration;
+    // Overview is absolute. The scrolling window is a grabbed piece of the same
+    // source timeline: pulling it right moves backward, pulling left moves ahead.
+    const seconds = surface === overview ? (clientX - rect.left) / rect.width * deck.audio.duration :
+      seekGesture.anchorTime - (clientX - seekGesture.anchorX) / seekGesture.width * scrollingWindowSeconds;
+    seekPreview = Math.max(0, Math.min(deck.audio.duration, seconds));
     updatePlaybackTime();
   }
   function commitSeek(seconds) {
@@ -296,43 +307,52 @@ export function createPlaybackDeck(number, deck, actions) {
       if (request === seekRequest && !seekGesture) { seekPreview = null; updatePlaybackTime(); }
     }).catch(() => {}); // The host/coordinator owns error reporting.
   }
-  overview.addEventListener('pointerdown', event => {
-    if (!canSeek() || seekGesture || !event.isPrimary || event.button !== 0) return;
-    event.preventDefault();
-    overview.focus({ preventScroll: true });
-    seekGesture = { id: event.pointerId, source: deck.audio.src };
-    overview.setPointerCapture(event.pointerId);
-    previewSeek(event.clientX);
-    window.addEventListener('blur', cancelSeekGesture);
-    seekRemoval = new MutationObserver(() => { if (!overview.isConnected) cancelSeekGesture(); });
-    seekRemoval.observe(document, { childList: true, subtree: true });
-  });
-  overview.addEventListener('pointermove', event => {
-    if (seekGesture?.id !== event.pointerId) return;
-    if (!canSeek() || deck.audio.src !== seekGesture.source) { cancelSeekGesture(); return; }
-    event.preventDefault();
-    previewSeek(event.clientX);
-  });
-  overview.addEventListener('pointerup', event => {
-    if (seekGesture?.id !== event.pointerId) return;
-    const allowed = canSeek() && deck.audio.src === seekGesture.source;
-    if (allowed) previewSeek(event.clientX);
-    const target = seekPreview;
-    cancelSeekGesture();
-    if (allowed) commitSeek(target);
-  });
-  for (const type of ['pointercancel', 'lostpointercapture']) overview.addEventListener(type, event => {
-    if (seekGesture?.id === event.pointerId) cancelSeekGesture();
-  });
-  overview.addEventListener('keydown', event => {
-    if (!canSeek()) return;
-    const current = seekPreview ?? deck.audio.currentTime;
-    const target = { ArrowLeft: current - 5, ArrowDown: current - 5,
-      ArrowRight: current + 5, ArrowUp: current + 5, Home: 0, End: deck.audio.duration }[event.key];
-    if (target === undefined) return;
-    event.preventDefault();
-    commitSeek(Math.max(0, Math.min(deck.audio.duration, target)));
-  });
+  for (const surface of [overview, wave.surface]) {
+    surface.addEventListener('pointerdown', event => {
+      if (!canSeek() || seekGesture || !event.isPrimary || event.button !== 0) return;
+      const width = surface.getBoundingClientRect().width;
+      if (!width) return;
+      event.preventDefault();
+      surface.focus({ preventScroll: true });
+      seekGesture = { id: event.pointerId, source: deck.audio.src, surface,
+        anchorX: event.clientX, anchorTime: seekPreview ?? deck.audio.currentTime, width };
+      surface.setPointerCapture(event.pointerId);
+      previewSeek(event.clientX);
+      window.addEventListener('blur', cancelSeekGesture);
+      window.addEventListener('resize', cancelSeekGesture);
+      seekRemoval = new MutationObserver(() => {
+        if (!surface.isConnected || node.inert || surface.closest('[hidden]')) cancelSeekGesture();
+      });
+      seekRemoval.observe(document, { childList: true, subtree: true, attributes: true,
+        attributeFilter: ['hidden', 'inert', 'data-iphone-selected'] });
+    });
+    surface.addEventListener('pointermove', event => {
+      if (seekGesture?.id !== event.pointerId || seekGesture.surface !== surface) return;
+      if (!canSeek() || deck.audio.src !== seekGesture.source) { cancelSeekGesture(); return; }
+      event.preventDefault();
+      previewSeek(event.clientX);
+    });
+    surface.addEventListener('pointerup', event => {
+      if (seekGesture?.id !== event.pointerId || seekGesture.surface !== surface) return;
+      const allowed = canSeek() && deck.audio.src === seekGesture.source;
+      if (allowed) previewSeek(event.clientX);
+      const target = seekPreview;
+      cancelSeekGesture();
+      if (allowed) commitSeek(target);
+    });
+    for (const type of ['pointercancel', 'lostpointercapture']) surface.addEventListener(type, event => {
+      if (seekGesture?.id === event.pointerId && seekGesture.surface === surface) cancelSeekGesture();
+    });
+    surface.addEventListener('keydown', event => {
+      if (!canSeek()) return;
+      const current = seekPreview ?? deck.audio.currentTime;
+      const target = { ArrowLeft: current - 5, ArrowDown: current - 5,
+        ArrowRight: current + 5, ArrowUp: current + 5, Home: 0, End: deck.audio.duration }[event.key];
+      if (target === undefined) return;
+      event.preventDefault();
+      commitSeek(Math.max(0, Math.min(deck.audio.duration, target)));
+    });
+  }
   let displayedPeaks = null;
   header.append(participation, tempo, pitch, libraryButton, title, selector, play, queue, main, overview);
   const content = element("div", "performance-content");
@@ -344,7 +364,6 @@ export function createPlaybackDeck(number, deck, actions) {
   lowerSection.id = "deck-" + number + "-lower";
   upperToggle.setAttribute("aria-controls", upperSection.id);
   lowerToggle.setAttribute("aria-controls", lowerSection.id);
-  const wave = createWave();
   const stems = createStems(actions);
   const cues = createCues();
   const renderCues = installCueControls(cues, deck, actions);
@@ -394,6 +413,14 @@ export function createPlaybackDeck(number, deck, actions) {
     overview.setAttribute('aria-valuemax', String(Number.isFinite(duration) ? duration : 0));
     overview.setAttribute('aria-valuenow', String(songPosition));
     overview.setAttribute('aria-valuetext', formatTime(songPosition) + ' of ' + formatTime(duration));
+    // SVG coordinates still describe the existing decoded full-song summary.
+    // Move its view window, never the centered playhead or a separate clock.
+    const span = duration > 0 ? scrollingWindowSeconds / duration * 360 : 360;
+    const left = duration > 0 ? (songPosition - scrollingWindowSeconds / 2) / duration * 360 : 0;
+    wave.graphic.setAttribute('viewBox', `${left} 0 ${span} 160`);
+    wave.surface.setAttribute('aria-valuemax', String(Number.isFinite(duration) ? duration : 0));
+    wave.surface.setAttribute('aria-valuenow', String(songPosition));
+    wave.surface.setAttribute('aria-valuetext', formatTime(songPosition) + ' of ' + formatTime(duration));
   }
 
   function renderRollers() {
@@ -419,9 +446,12 @@ export function createPlaybackDeck(number, deck, actions) {
   });
 
   function render() {
-    if (seekGesture && (!canSeek() || deck.audio.src !== seekGesture.source || workspace !== 'performance-view')) cancelSeekGesture();
-    overview.tabIndex = canSeek() ? 0 : -1;
-    overview.setAttribute('aria-disabled', String(!canSeek()));
+    if (seekGesture && (!canSeek() || deck.audio.src !== seekGesture.source || workspace !== 'performance-view' ||
+        (seekGesture.surface === wave.surface && upperView !== 'wave-view'))) cancelSeekGesture();
+    for (const surface of [overview, wave.surface]) {
+      surface.tabIndex = canSeek() ? 0 : -1;
+      surface.setAttribute('aria-disabled', String(!canSeek()));
+    }
     renderCues();
     cueMarkers.replaceChildren();
     if (deck.song && !deck.loadingSong && deck.audio.src === deck.song.url && deck.audio.duration > 0) deck.cuePositions.forEach((position, index) => {
@@ -452,6 +482,7 @@ export function createPlaybackDeck(number, deck, actions) {
     if (peaks !== displayedPeaks) {
       displayedPeaks = peaks;
       drawWaveform(overviewGraphic, peaks);
+      drawWaveform(wave.graphic, peaks);
       overviewPosition.hidden = !peaks;
       wave.scrollingPlayhead.hidden = !peaks;
     }
@@ -488,7 +519,6 @@ export function createPlaybackDeck(number, deck, actions) {
     queue.title = deck.queue?.name || "Queue empty";
     queue.setAttribute("aria-label", deck.queue ? "Play queued song on Deck " + number : "Queue empty");
     updatePlaybackTime();
-    // Scrolling waveform remains blank until real audio-derived rendering is implemented.
     results.replaceChildren();
     for (const song of actions.librarySongs()) {
       const row = element("div", "search-result");

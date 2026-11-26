@@ -4,6 +4,47 @@ The new application entry point is [tunetox.html](../tunetox.html). Serve the re
 
 ## Open and test
 
+### Scrolling-waveform development increment (26 November 2026)
+
+The accepted Queue work was first preserved in local commit `d8c4c7d`. The four
+shared Wave views now show existing decoded peak/RMS data beneath a stationary
+centered playhead. A 20-source-second window follows Audio's existing 50 ms clock
+notifications; the full-song overview and time readout use the same position.
+Drag right to move backward or left to move forward. Both views preview the
+target during the drag; release uses the existing guarded seek and retains
+playing/paused intent. Arrow keys and Home/End work on either surface.
+
+The implementation extends only shared Visual rendering/CSS and the common seek
+handlers. Behavior, Audio, vendored DSP, deck accent colors and layout geometry
+are unchanged from the Queue checkpoint. The decorative minus/plus placeholders
+are removed; no zoom control or extra routing layer is added. Details and limits
+are in the [scrolling contract](../specs/interface.md#implemented-scrolling-waveform).
+
+Verification: the playback/touch suite passes decoded-data rendering, stationary
+center mapping, shared previews, directional mouse/touch seeks on four decks,
+bounds, view/theme/resize/cancel/lost-capture cases, continuous four-deck SVG-window
+movement without rebuilding bars, playing seeks, cue alignment and Queue alignment.
+Queue, theme and iPhone suites also pass, including hidden-phone automatic Queue
+advancement. Native CDP mouse and touch-emulated drags on all four decks passed in
+all three themes at 1114×768, 768×1024 and 390×844, with concurrent playback and
+independent Tempo changes. Measured layout rectangles exactly match the preserved
+Queue checkpoint; no horizontal overflow was found. Screenshots were inspected.
+
+Readability review: overview and scrolling gestures share one seek implementation
+and temporary preview. Bar nodes are reused until source data changes; time ticks
+update the SVG viewBox instead of generating waveform DOM or a separate clock.
+No duplicated playback state or independent waveform position store is introduced.
+
+Limitations: 360 columns per whole song look coarse for long recordings, and the
+display follows 50 ms notifications rather than animation-rate interpolation.
+This is seek-on-release, not continuous audible scratching or sample-accurate
+scrubbing. Physical Safari touch/listening and long-file resource checks remain
+necessary. The historical blank-waveform descriptions below are superseded here.
+For Safari review, compare the two positions while playing, drag both directions
+while playing and paused, change Tempo, recall cues, invoke READY and allow natural
+Queue advancement. Check all decks, views, themes and phone-tab changes while
+listening for seek artifacts or interruptions. Main still starts safely at zero.
+
 ### Queue development increment (26 November 2026)
 
 The user has tested and accepted the Queue functionality. This acceptance is
@@ -162,7 +203,7 @@ Physical iPad Safari verification remains required: reload the application, repe
 
 This checkpoint connects Load, Play, Pause, and the existing queue action. Workspace and performance-view navigation work without replacing players. Current time is read from the actual media player.
 
-The full-song overview is drawn from decoded audio peak/RMS summaries; the larger scrolling waveform is still blank, not fake audio data. Main, pitch-preserving Tempo and overview seeking are connected. Stem faders edit permanent Behavior levels without DSP. Pitch is disabled except for Futuristic's explicitly visual-only travel demo; All themes now expose real song-owned cue pads and numbered overview markers. Participation, EQ, effects, loops and library manipulation remain inactive. No persistence, BPM analysis, matching or Handoff has been added. Eject is available in Behavior/the legacy prototype, with no new active-application Eject button.
+Both waveform windows now draw the same decoded peak/RMS summary. The scrolling waveform moves beneath a stationary center; both views share source timing and the existing seek action. Main, pitch-preserving Tempo and overview seeking are connected. Stem faders edit permanent Behavior levels without DSP. Pitch is disabled except for Futuristic's explicitly visual-only travel demo; All themes now expose real song-owned cue pads and numbered overview markers. Participation, EQ, effects, loops and library manipulation remain inactive. No persistence, BPM analysis, matching or Handoff has been added. Eject is available in Behavior/the legacy prototype, with no new active-application Eject button.
 
 Behavior stores mainVolume in 0–1 units, initially zero, and rejects non-finite/out-of-range values before changing state or audio. Audio applies a 15 ms linear gain ramp; rapid changes retarget from the modeled current ramp value and Main zero reaches exact silence. UI percentages represent requested gain; the short ramp is not displayed as a separate setting. Per-deck Main GainNodes provide attenuation after Signalsmith; a separate gate mutes transport transitions without changing Main. The four stem faders initialize at 100% and edit deck.stemLevels through setStemLevel in 1% steps; they do not change sound yet. Visible stem labels retain H5.3.1 wording; approved data-stem attributes do not redefine audio categories.
 
@@ -260,7 +301,7 @@ Numbered accent-colored overview lines derive directly from those positions.
 Their overlays cannot intercept seeking. Coincident cues share a compact row of
 numbers while their lines retain the saved coordinate. Very closely spaced,
 different positions can still overlap labels; no marker editing is introduced.
-The large scrolling waveform remains unimplemented.
+At this historical cue checkpoint the large scrolling waveform was unimplemented; the scrolling-waveform increment above supersedes that limitation.
 
 Verification: the complete Chromium HTTPS playback/touch suite passed, including
 playing/paused cue assignment and recall, rapid recalls, deletion during a pending

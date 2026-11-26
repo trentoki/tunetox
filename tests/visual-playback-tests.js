@@ -1,4 +1,5 @@
 import { runTouchGuardChecks } from "./touch-guard-tests.js";
+import { checkScrollingWaveforms, assertScrollingAligned } from './scrolling-waveform-tests.js';
 import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, sendToDeck, setTempo, setStemLevel, ejectSong } from "../app/behavior/mixer/deck.js";
 import { createAudioFileURLs, loadAudio, pauseAudio, ejectAudio } from "../app/audio/deck-audio.js";
 const frame = document.getElementById("application");
@@ -516,7 +517,7 @@ run.addEventListener("click", async () => {
     assert(viewport.includes("width=device-width") && viewport.includes("initial-scale=1"), "Responsive viewport changed");
     assert(win.getComputedStyle(doc.querySelector(".app")).touchAction === "manipulation",
       "Application must suppress double-tap zoom while permitting panning");
-    assert([...doc.querySelectorAll("button:not(.glass-preview-shift), .scrolling-waveform, .search-results")]
+    assert([...doc.querySelectorAll("button:not(.glass-preview-shift), .search-results")]
       .every(node => win.getComputedStyle(node).touchAction === "manipulation"),
       "Controls, waveforms and Library scrollers must suppress double-tap zoom");
     assert([...doc.querySelectorAll('.glass-preview-shift')].every(node => win.getComputedStyle(node).touchAction === 'none'),
@@ -625,8 +626,11 @@ run.addEventListener("click", async () => {
     pass("all four loads succeed without autoplay; filenames rendered as text");
     await checkOverviewSeeking(doc, win, players);
     pass('overview: immediate preview, four paused deck seeks, keyboard, bounds, rapid final target, cancel/lost capture/theme cancellation');
+    await checkScrollingWaveforms(doc, win, players);
+    pass('scrolling: decoded data, stationary center, directional mouse/touch seeks, aligned previews, bounds and cancelled/view/resize gestures');
     await checkCuePads(doc, win, players);
     pass('four-deck cues: paused assignment/recall, held/latched/keyboard Shift, zero/end markers, rapid recall, passive overlays, theme retention and song reset');
+    assertScrollingAligned(doc);
     // Parallel decoding may create worklets out of deck order. Follow the actual
     // source -> transport gate -> Main graph, rather than choosing sources[0].
     const firstDeckSource = win.__sources.find(node => node.__testOutput?.__testOutput === win.__gains[0]);
@@ -641,6 +645,22 @@ run.addEventListener("click", async () => {
     }
     await until(() => players.every(p => p.currentTime > .1), "Playback clocks did not advance");
     pass("all four persistent transports run independently");
+    assertScrollingAligned(doc);
+    const scrollingSurfaces = [...doc.querySelectorAll('.scrolling-waveform')];
+    const scrollingGraphics = scrollingSurfaces.map(surface => surface.querySelector('svg'));
+    const firstBars = scrollingGraphics.map(graphic => graphic.firstChild);
+    const beforeScroll = scrollingGraphics.map(graphic => graphic.viewBox.baseVal.x);
+    await delay(150);
+    assert(scrollingGraphics.every((graphic, index) => graphic.viewBox.baseVal.x > beforeScroll[index] && graphic.firstChild === firstBars[index]),
+      'Playing waveforms did not scroll or unnecessarily rebuilt their summary bars');
+    const scrollingBeforeSeek = players[0].currentTime;
+    const otherScrollingTimes = players.slice(1).map(player => player.currentTime);
+    scrollingSurfaces[0].dispatchEvent(new win.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
+    await until(() => !play(1).disabled && !players[0].paused && players[0].currentTime >= scrollingBeforeSeek + 5,
+      'Playing scrolling-waveform seek did not retain playback');
+    assert(players.slice(1).every((player,index) => !player.paused && player.currentTime >= otherScrollingTimes[index]), 'Scrolling seek interrupted another deck');
+    assertScrollingAligned(doc);
+    pass('four moving SVG windows retain their bars; playing scrolling seek retains transport and other decks');
     const otherSeekTimes = players.slice(0, 3).map(p => p.currentTime);
     const overview = deck(4).querySelector('.waveform-overview');
     overview.dispatchEvent(new win.KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
@@ -776,6 +796,7 @@ run.addEventListener("click", async () => {
     deck(1).querySelector(".queue-button").click();
     await until(() => deck(1).querySelector(".song-title").textContent === "First queue.wav" && !players[0].paused, "Queue swap failed");
     pass("occupied queue retained with feedback; READY plays the accepted song");
+    assertScrollingAligned(doc);
     assert(mainInput(1).value === "60" && Math.abs(win.__gains[0].gain.value - .6) < 1e-6,
       "Pause/resume or queued playback reset Main volume");
     await until(() => players[0].currentTime > .1 && !play(1).disabled,
@@ -852,6 +873,7 @@ run.addEventListener("click", async () => {
     pass("processor failure mutes and reports the deck; reload recovers");
     output.dataset.result = "pass";
     pass("all checks complete");
+    assertScrollingAligned(doc);
   } catch (error) {
     output.dataset.result = "fail";
     output.textContent = lines.join("\n") + "\nFAIL " + error.message;
