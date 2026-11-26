@@ -1,3 +1,4 @@
+import { analyzeFrequencyEnergy } from "./analysis/frequency-energy.js";
 import { summarizeOverviewWaveform } from "./waveform/overview-waveform.js";
 import { summarizeScrollingWaveform } from "./waveform/scrolling-waveform.js";
 // Buffered Signalsmith transport. Visual/Behavior retain the same persistent
@@ -129,7 +130,7 @@ export function buildAudio() {
   gate.connect(mainVolumeGain);
   const deckPlaybackInfo = { deckAudio, gate, node: null, thisSongLoadingCanBeStopped: null, latestReplaceOrRemoveNumber: 0, latestDeckActionNumber: 0, latestTempoOrPitchChangeNumber: 0,
     replacementLoadingCanBeStopped: null,
-    loading: false, playing: false, ended: false, error: null, duration: 0, waveformPeaks: null, scrollingWaveform: null,
+    loading: false, playing: false, ended: false, error: null, duration: 0, waveformPeaks: null, scrollingWaveform: null, frequencyEnergy: null,
     songPosition: 0, playbackReferencePoint: null, rate: 1, pitch: 0, latency: 0, url: "", timer: null, cutoff: null };
   deckAudioStates.set(deckAudio, deckPlaybackInfo);
   mainVolumes.set(deckAudio, { gain: mainVolumeGain, ramp: { from: 0, to: 0, start: 0, end: 0 } });
@@ -144,7 +145,8 @@ export function buildAudio() {
     src: { get: () => deckPlaybackInfo.url },
     error: { get: () => deckPlaybackInfo.error },
     waveformPeaks: { get: () => deckPlaybackInfo.waveformPeaks },
-    scrollingWaveform: { get: () => deckPlaybackInfo.scrollingWaveform }
+    scrollingWaveform: { get: () => deckPlaybackInfo.scrollingWaveform },
+    frequencyEnergy: { get: () => deckPlaybackInfo.frequencyEnergy }
   });
   return deckAudio;
 }
@@ -221,6 +223,7 @@ export async function loadAudio(deckAudio, song, { preservePlayback = false } = 
     if (!Number.isFinite(latency) || latency < 0) throw new Error("Invalid Signalsmith latency.");
     const waveformPeaks = summarizeOverviewWaveform(decodedSongAudio);
     const scrollingWaveform = summarizeScrollingWaveform(decodedSongAudio);
+    const frequencyEnergy = await analyzeFrequencyEnergy(decodedSongAudio, scrollingWaveform, signal);
     if (signal.aborted || latestReplaceOrRemoveNumber !== deckPlaybackInfo.latestReplaceOrRemoveNumber) throw new DOMException("Superseded load", "AbortError");
     const previousSongAudioProcessor = deckPlaybackInfo.node;
     newSongAudioProcessor.connect(deckPlaybackInfo.gate);
@@ -239,6 +242,7 @@ export async function loadAudio(deckAudio, song, { preservePlayback = false } = 
     deckPlaybackInfo.duration = decodedSongAudio.duration;
     deckPlaybackInfo.waveformPeaks = waveformPeaks;
     deckPlaybackInfo.scrollingWaveform = scrollingWaveform;
+    deckPlaybackInfo.frequencyEnergy = frequencyEnergy;
     deckPlaybackInfo.latency = latency;
     deckPlaybackInfo.songPosition = 0;
     deckPlaybackInfo.playbackReferencePoint = null;
@@ -386,6 +390,7 @@ export async function ejectAudio(deckAudio) {
   deckPlaybackInfo.songPosition = deckPlaybackInfo.duration = 0;
   deckPlaybackInfo.waveformPeaks = null;
   deckPlaybackInfo.scrollingWaveform = null;
+  deckPlaybackInfo.frequencyEnergy = null;
   deckPlaybackInfo.playbackReferencePoint = null;
   deckPlaybackInfo.playing = deckPlaybackInfo.loading = deckPlaybackInfo.ended = false;
   deckPlaybackInfo.error = null;

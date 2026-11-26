@@ -1,3 +1,4 @@
+import { checkFrequencyEnergy } from './frequency-energy-tests.js';
 import { runTouchGuardChecks } from "./touch-guard-tests.js";
 import { checkScrollingWaveforms, assertScrollingAligned } from './scrolling-waveform-tests.js';
 import { checkWaveformDetail } from './waveform-detail-tests.js';
@@ -310,7 +311,7 @@ async function checkPlaybackCoordination() {
       const others = fixtures.filter(other => other !== item).map(other => ({ deck: other.deck,
         song: other.deck.song, src: other.deck.audio.src, main: other.deck.mainVolume, voice: other.deck.stemLevels.voice }));
       await ejectSong(item.deck);
-      assert(item.deck.song === null && item.deck.audio.duration === 0 && item.deck.audio.scrollingWaveform === null && item.deck.loadingSong === null &&
+      assert(item.deck.song === null && item.deck.audio.duration === 0 && item.deck.audio.scrollingWaveform === null && item.deck.audio.frequencyEnergy === null && item.deck.loadingSong === null &&
         item.deck.cuePositions.every(value => value === null) &&
         item.deck.mainVolume === (index + 1) / 10 && item.deck.stemLevels.voice === (index + 1) / 10,
         'Eject did not clear only its song while retaining deck controls');
@@ -486,6 +487,8 @@ run.addEventListener("click", async () => {
   let players = [], audioAPI;
   try {
     checkWaveformDetail();
+    await checkFrequencyEnergy();
+    pass("shared frequency energy: isolated tones, crossovers, polarity, silence, mixed tones, cancellation, alignment and hue colors");
     pass('5 ms signed transients/RMS, unchanged overview, bounded four-second renderer and linear long-recording storage');
     checkAudioFileResources();
     pass("loaded-song list and audio URL retention/replacement/cleanup");

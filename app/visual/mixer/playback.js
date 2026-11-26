@@ -379,7 +379,7 @@ export function createPlaybackDeck(number, deck, actions) {
     overview.setAttribute('aria-valuemax', String(Number.isFinite(duration) ? duration : 0));
     overview.setAttribute('aria-valuenow', String(songPosition));
     overview.setAttribute('aria-valuetext', formatTime(songPosition) + ' of ' + formatTime(duration));
-    scrollingRenderer.draw(deck.audio.scrollingWaveform, songPosition);
+    scrollingRenderer.draw(deck.audio.scrollingWaveform, songPosition, deck.audio.frequencyEnergy);
     wave.surface.setAttribute('aria-valuemax', String(Number.isFinite(duration) ? duration : 0));
     wave.surface.setAttribute('aria-valuenow', String(songPosition));
     wave.surface.setAttribute('aria-valuetext', formatTime(songPosition) + ' of ' + formatTime(duration));

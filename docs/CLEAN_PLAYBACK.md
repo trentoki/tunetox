@@ -379,3 +379,38 @@ Manual Mac/iPad Safari check (use the existing trusted HTTPS URL on iPad):
 5. Seek through and around marker numbers using mouse/touch, then make rapid cue
    recalls. Listen for unwanted starts, clicks or dropouts; sample accuracy is not
    claimed. Report physical-device results separately from automated checks.
+
+### Shared frequency colors — 26 November 2026
+
+The preceding four-second/5 ms waveform work is preserved in local commit
+`14f41ab`. Frequency additions remain uncommitted for evaluation; nothing pushed.
+[Shared source analysis](../app/audio/analysis/frequency-energy.js) now supplies
+three time-aligned mean-square arrays through `audio.frequencyEnergy`, reusable by
+future BPM analysis. The [waveform specification](../specs/waveform.md) records
+provisional 200/4,000 Hz roll-offs, hue rotations and energy blending. Playback DSP,
+Behavior actions and the original V40 reference ZIP are unchanged.
+
+Verification completed in headless Chrome:
+- Isolated 80/1,000/10,000 Hz at 44.1/48 kHz, stereo polarity, crossover balance,
+  silence, mixed tones, cancellation, summary timing and hue mapping passed.
+- Playback/touch, Queue, Glass/Futuristic controls and iPhone regression suites passed.
+- Actual music: `01ItsNotMe.wav` (~175 s) and `ACRAZE - Take Me Away (Extended Mix).wav`
+  (~322 s), loaded as one plus three copies across four decks. Original SHA-256
+  hashes unchanged. All bands contained energy and exact summary-grid alignment.
+- Over five seconds at 0.5/1/~1.5/2×, source clocks advanced 2.502/5.004/7.501/10.008 s.
+  Callback mean 0.185 ms/deck, p95 0.30 ms, maximum 0.50 ms; measured animation
+  interval mean 16.666 ms in this run. These are host-specific observations.
+- Added frequency-array storage 2,733,636 bytes (~2.61 MiB) across those four decks.
+  Eject cleared frequency/overview/detail references; DevTools backing storage fell
+  from ~408.46 MB loaded to ~0.211 MB after Eject, settling and forced GC. This is
+  not a native-process memory measurement.
+- A generated ten-minute transient recording loaded and played near its end.
+
+Screenshot inspection confirms varied frequency colors with the centered playhead
+and existing waveform silhouettes. Physical Safari appearance, touch, audible
+continuity during analysis and sustained phone/tablet performance remain to verify.
+
+Native CDP mouse/touch checks also passed for all four decks in all three themes
+at 1114×768, 768×1024 and 390×844: exact prior layout geometry, directional seeks,
+playback/Tempo alignment and no horizontal overflow. Frequency tests additionally
+verify cancellation after preparation starts, not just an already-aborted signal.

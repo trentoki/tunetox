@@ -106,4 +106,6 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
 
 ---
 
+**Provisional frequency waveform colors (26 November 2026):** Analyze decoded source energy in Low (<200 Hz), Mid (200–4,000 Hz), and High (>4,000 Hz) ranges on the detailed waveform time grid. Low uses the deck accent; Mid rotates its hue 90°; High rotates it 180°. Shared analysis remains independent of Visual and available for future BPM work. These ranges are provisional; no new BPM detector is approved by this task. See [waveform specification](specs/waveform.md).
+
 **Documentation boundaries:** `AGENTS.md` governs development workflow; `RULES.md` governs intended product behavior; `specs/` retains detailed technical contracts; `TUNETOX_PLAN.md` governs roadmap/context; the master feature checklist tracks implementation and verification. Approved behavior is not proof of implementation.

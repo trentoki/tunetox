@@ -13,7 +13,7 @@ read-only and is neither normalized, rewritten nor uploaded by this analysis.
 - [Overview rendering](../app/visual/waveform/overview-waveform.js) retains the
   existing full-song SVG and fixed visual gain.
 - [Scrolling rendering](../app/visual/waveform/scrolling-waveform.js) draws only
-  visible detailed groups to a canvas, with the same amplitude scale and accent.
+  visible detailed groups to a canvas, with the same amplitude scale and frequency colors described below.
 - The existing [Audio loader](../app/audio/deck-audio.js) analyzes decoded PCM
   before accepting a source, exposes read-only waveformPeaks and scrollingWaveform,
   and clears both on Eject. The existing Visual host refreshes on emptied as well
@@ -52,7 +52,8 @@ Regions before zero/after the recording are blank, never repeated data.
 The renderer visits floor(window start / group interval) through
 ceil(window end / group interval), clamped to the summary array. This is roughly
 800 groups regardless of song length. Min/max peaks and RMS use two batched canvas
-paths, no per-group DOM, and no scan of off-screen groups. Native canvas clipping
+paths for accent-only fallback, or two colored rectangles per visible group. There
+is no per-group DOM and no scan of off-screen groups. Native canvas clipping
 handles partially visible boundary groups. ResizeObserver and devicePixelRatio
 keep pixel dimensions appropriate; the canvas has no layout effect or hit surface.
 The existing parent retains seek gestures, keyboard access and fixed dimensions.
@@ -84,3 +85,45 @@ Canvas antialiasing, display refresh and browser scheduling still affect visual
 smoothness. A 5 ms group limits transient-position precision; this is not a
 sample-accurate audio editor or beat grid. Physical Safari listening/touch,
 sustained mobile memory/CPU and very long real recordings remain unverified.
+
+## Provisional shared frequency energy (26 November 2026)
+
+[Frequency analysis](../app/audio/analysis/frequency-energy.js) reads the same
+original decoded samples once during load and returns three Float32 energy arrays:
+low, mid, high. Each group has the detailed summary's samplesPerGroup and
+groupSeconds; source time is index × groupSeconds. Values are mean-square sample
+amplitudes averaged across all channels and the actual final group length. Opposite
+stereo polarities do not cancel. These are source characteristics, unaffected by
+Main, Tempo or future playback EQ. No BPM calculation is performed.
+
+Bands use fourth-order Linkwitz-Riley filters: low-pass 200 Hz; high-pass 200 Hz
+followed by low-pass 4,000 Hz; high-pass 4,000 Hz. Each edge is two Butterworth
+biquads, Q = 1/√2. Filter state persists between groups and is independent for
+each channel. Edges roll off gradually, with neighboring bands approximately equal
+at crossover. This is energy classification, not stems, isolated instruments or
+an exactly additive spectral partition. Filter startup/phase delay affects the
+first samples and transient colors; no delay compensation or pre-roll is applied.
+At sample rates ≤8 kHz High is zero; other cutoffs are clamped below Nyquist.
+
+The async analysis yields approximately every 12 ms of work (checked every 64
+groups); cancellation rejects without publishing partial data. Scheduling/individual
+chunk duration is browser-dependent. All three arrays are accepted atomically with
+the waveform/source and exposed through the existing audio.frequencyEnergy getter.
+Failed Queue preparation retains outgoing summaries; Eject clears them. Future
+BPM analysis can consume this shared object without decoding/filtering again.
+No retained PCM copies or extra transport state are introduced. Extra summary
+storage is 12 bytes per group, approximately 144 kB/minute or 8.64 MB/hour/deck.
+
+Visual rotates accent HSL hue by 0°, 90°, 180°, preserving saturation/lightness.
+Per-group mean-square energy fractions blend the three colors in RGB, quantized to
+eighths into a 45-color palette rebuilt only when the accent changes. This blending
+is a provisional implementation choice for evaluation. Near-silence uses the accent.
+Each visible group draws the original signed peak silhouette and RMS body; geometry,
+fixed source-time scale, centered playhead, overview and seek interactions are
+unchanged. Only visible groups are visited; color draws two rectangles per group.
+
+[Frequency tests](../tests/frequency-energy-tests.js) cover isolated 80/1,000/10,000 Hz
+at 44.1/48 kHz, opposite polarity channels, crossover balance, silence, mixed tones,
+pre-cancellation, shared-grid alignment, palette rotations and colored rendering.
+Physical Safari appearance, listening and sustained mobile resource usage require
+human evaluation; these checks do not establish a production performance guarantee.
