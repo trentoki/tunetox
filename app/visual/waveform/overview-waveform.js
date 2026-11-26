@@ -1,3 +1,9 @@
+import { summarizeFrequencyEnergy } from '../../audio/analysis/frequency-energy.js';
+import { frequencyPalette, frequencyColor } from './frequency-colors.js';
+
+// Cache source-derived column energy; recoloring never repeats aggregation.
+const columnEnergy = new WeakMap();
+
 export function createOverviewWaveform() {
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("viewBox", "0 0 360 160");
@@ -6,10 +12,20 @@ export function createOverviewWaveform() {
   return svg;
 }
 
-export function drawOverviewWaveform(svg, summary) {
+export function drawOverviewWaveform(svg, summary, energy, accent) {
   svg.replaceChildren();
   if (!summary) return;
   const { minimum, maximum, rms } = summary;
+  let bands;
+  if (energy) {
+    let cached = columnEnergy.get(energy);
+    if (!cached || cached.low.length !== maximum.length) {
+      cached = summarizeFrequencyEnergy(energy, maximum.length);
+      columnEnergy.set(energy, cached);
+    }
+    bands = cached;
+  }
+  const palette = bands ? frequencyPalette(accent || '#5ce0dc') : null;
   const width = 360 / maximum.length;
   // Fixed visual gain: no per-section normalization, and no change to sound.
   const visualGain = 0.55;
@@ -32,6 +48,10 @@ export function drawOverviewWaveform(svg, summary) {
     body.setAttribute("width", String(width));
     body.setAttribute("height", String(Math.max(0.5, bodyHeight * 2)));
     svg.append(body);
+    if (bands) {
+      const color = frequencyColor(palette, bands.low[index], bands.mid[index], bands.high[index]);
+      peak.setAttribute('fill', color); body.setAttribute('fill', color);
+    }
   }
 }
 

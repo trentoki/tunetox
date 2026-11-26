@@ -117,7 +117,7 @@ storage is 12 bytes per group, approximately 144 kB/minute or 8.64 MB/hour/deck.
 Visual rotates accent HSL hue by 0°, 90°, 180°, preserving saturation/lightness.
 Per-group mean-square energy fractions blend the three colors in RGB, quantized to
 eighths into a 45-color palette rebuilt only when the accent changes. This blending
-is a provisional implementation choice for evaluation. Near-silence uses the accent.
+is visually approved for the scrolling waveform; overview appearance remains under evaluation. Near-silence uses the accent.
 Each visible group draws the original signed peak silhouette and RMS body; geometry,
 fixed source-time scale, centered playhead, overview and seek interactions are
 unchanged. Only visible groups are visited; color draws two rectangles per group.
@@ -127,3 +127,26 @@ at 44.1/48 kHz, opposite polarity channels, crossover balance, silence, mixed to
 pre-cancellation, shared-grid alignment, palette rotations and colored rendering.
 Physical Safari appearance, listening and sustained mobile resource usage require
 human evaluation; these checks do not establish a production performance guarantee.
+
+## Overview frequency colors (26 November 2026)
+
+Scrolling colors are visually approved, preserved in local checkpoint `ea66195`.
+Both views now import [one shared color mapping](../app/visual/waveform/frequency-colors.js).
+The original palette calculation is moved unchanged; energy quantization and silence
+fallback are shared too. No second palette, decoding or frequency analysis exists.
+
+`summarizeFrequencyEnergy(energy, columns)` aggregates the existing arrays using
+sample-weighted overlaps with the overview's original integer sample boundaries.
+For each column and band: sum(group mean-square × overlapping sample count) /
+column sample count. Partial groups and the final short group are weighted by their
+actual overlap. This approximates within-group energy as uniform; resolution is
+still ~5 ms, not a new sample-level frequency measurement. Average energies first,
+then map to color; never average already-quantized colors. Input arrays are read-only.
+
+Overview rendering caches aggregated energy by the original energy object in a
+WeakMap. Changing deck accent/theme reuses those column arrays; source replacement
+uses the new source's arrays. Weak keys allow removed sources to be collected.
+The SVG viewBox, rectangle count, x/y/width/height/opacity, original peaks and RMS,
+playback indicator, cue overlays and absolute-seek actions remain unchanged.
+Only the SVG rectangle fill changes. Source/accent changes rebuild the SVG; ordinary
+playback updates only the existing indicator, without repeating aggregation.

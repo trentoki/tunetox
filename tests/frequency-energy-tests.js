@@ -1,6 +1,8 @@
-import { analyzeFrequencyEnergy } from '../app/audio/analysis/frequency-energy.js';
+import { frequencyPalette } from '../app/visual/waveform/frequency-colors.js';
+import { analyzeFrequencyEnergy, summarizeFrequencyEnergy } from '../app/audio/analysis/frequency-energy.js';
 import { summarizeScrollingWaveform } from '../app/audio/waveform/scrolling-waveform.js';
-import { frequencyPalette, createScrollingWaveform, createScrollingRenderer } from '../app/visual/waveform/scrolling-waveform.js';
+import { createScrollingWaveform, createScrollingRenderer } from '../app/visual/waveform/scrolling-waveform.js';
+import { createOverviewWaveform, drawOverviewWaveform } from '../app/visual/waveform/overview-waveform.js';
 
 export async function checkFrequencyEnergy() {
   const assert = (value, message) => { if (!value) throw Error(message); };
@@ -45,6 +47,33 @@ export async function checkFrequencyEnergy() {
   catch (error) { aborted = error.name === 'AbortError'; }
   finally { clearTimeout(scheduledAbort); }
   assert(aborted, 'Analysis failed to yield/cancel during preparation');
+  // Five source samples: groups [0,2), [2,4), [4,5). Overview
+  // columns [0,1), [1,3), [3,5) must weight overlaps and the final sample.
+  const sourceEnergy = { low: new Float32Array([1, 3, 9]), mid: new Float32Array([0, 2, 0]),
+    high: new Float32Array([4, 0, 6]), samplesPerGroup: 2, sampleRate: 1, duration: 5 };
+  const aggregated = summarizeFrequencyEnergy(sourceEnergy, 3);
+  assert([...aggregated.low].join() === '1,2,6' && [...aggregated.mid].join() === '0,1,1' &&
+    [...aggregated.high].join() === '4,2,3', 'Overview aggregation lost fractional boundary/final group weights');
+  assert([...sourceEnergy.low].join() === '1,3,9', 'Overview changed shared energy arrays');
+  const svg = createOverviewWaveform();
+  const summary = { minimum: new Float32Array([-.2, -.4, -.6]), maximum: new Float32Array([.3, .5, .8]), rms: new Float32Array([.1, .2, .3]) };
+  drawOverviewWaveform(svg, summary);
+  const geometry = () => [...svg.children].map(rect => ['x','y','width','height','opacity'].map(key => rect.getAttribute(key)));
+  const before = JSON.stringify(geometry());
+  drawOverviewWaveform(svg, summary, sourceEnergy, '#ff0000');
+  assert(JSON.stringify(geometry()) === before && svg.children.length === 6, 'Frequency colors changed overview geometry');
+  const sharedPalette = frequencyPalette('#ff0000');
+  for (let i = 0; i < 3; i++) {
+    const total = aggregated.low[i] + aggregated.mid[i] + aggregated.high[i];
+    const low = Math.round(8 * aggregated.low[i] / total);
+    const mid = Math.min(8 - low, Math.round(8 * aggregated.mid[i] / total));
+    assert(svg.children[i * 2].getAttribute('fill') === sharedPalette[low * 9 + mid] &&
+      svg.children[i * 2 + 1].getAttribute('fill') === sharedPalette[low * 9 + mid], 'Overview and scrolling color mappings differ');
+  }
+  const firstColor = svg.firstChild.getAttribute('fill');
+  drawOverviewWaveform(svg, summary, sourceEnergy, '#00ff00');
+  assert(svg.firstChild.getAttribute('fill') !== firstColor && JSON.stringify(geometry()) === before, 'Accent change failed to recolor overview');
+  drawOverviewWaveform(svg, null); assert(svg.children.length === 0, 'Eject retained overview');
   const palette = frequencyPalette('#ff0000');
   assert(palette[72] === 'rgb(255,0,0)' && palette[8] === 'rgb(128,255,0)' && palette[0] === 'rgb(0,255,255)',
     'Low/mid/high hue rotations changed');

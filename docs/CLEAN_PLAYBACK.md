@@ -414,3 +414,26 @@ Native CDP mouse/touch checks also passed for all four decks in all three themes
 at 1114×768, 768×1024 and 390×844: exact prior layout geometry, directional seeks,
 playback/Tempo alignment and no horizontal overflow. Frequency tests additionally
 verify cancellation after preparation starts, not just an already-aborted signal.
+
+### Overview complementary coloring — 26 November 2026
+
+The scrolling frequency colors are visually approved, preserved in local checkpoint
+`ea66195`. The full-song SVG now uses the same palette and energy mapping via
+[frequency-colors.js](../app/visual/waveform/frequency-colors.js). Existing source
+energy is aggregated into overview columns with sample-overlap weighting and cached;
+no audio re-analysis or new BPM work. Geometry and absolute seeking are unchanged.
+
+Automated checks passed for exact rectangle geometry, boundary/final-group weighted
+aggregation, unchanged source arrays, identical color mapping, accent recoloring and
+Eject clearing. Playback/absolute seeking/cues/Tempo, Queue, theme and iPhone suites
+passed in Chrome. Actual music loaded on four decks at 0.5/1/~1.5/2×; both waveform
+views showed frequency colors, playback advances matched the prior run, and original
+music hashes were unchanged. Screenshot inspection confirmed colored overviews and
+unchanged centered detail playheads. Physical Safari visual approval and listening
+remain separate human checks. New overview changes remain uncommitted.
+
+Native mouse/touch and exact layout comparisons passed at 1114×768, 768×1024 and
+390×844 in all three themes, including four-deck seek direction, playback/Tempo
+alignment and no horizontal overflow. The iPhone regression initially timed out
+while other browser runs were active; it passed when rerun alone. Syntax/editor
+checks and `git diff --check` passed. Physical device verification remains pending.

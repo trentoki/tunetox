@@ -10,7 +10,7 @@ It connects the application's long-term vision with practical, achievable develo
 
 The plan should be updated as development progresses, clearly distinguishing completed work, approved future work, and decisions still requiring discussion.
 
-Current development checkpoint (26 November 2026): detailed scrolling waveform work preserved in local commit `14f41ab`. Shared three-band source energy and frequency-colored scrolling waveforms are implemented for visual evaluation; frequency boundaries remain provisional. V40 BPM source remains unchanged in its reference ZIP; no BPM implementation or EQ work is included. See [waveform specification](specs/waveform.md) for analysis ownership and limits.
+Current development checkpoint (26 November 2026): detailed scrolling waveform work preserved in local commit `14f41ab`. Shared three-band source energy and frequency-colored scrolling waveforms are visually approved and preserved in local checkpoint `ea66195`. The overview now shares the same coloring using aggregated existing energy; frequency boundaries remain provisional. V40 BPM source remains unchanged in its reference ZIP; no BPM implementation or EQ work is included. See [waveform specification](specs/waveform.md) for analysis ownership and limits.
 
 ## 1. Vision and Product Goals
 

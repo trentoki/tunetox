@@ -1,3 +1,4 @@
+import { frequencyPalette, frequencyColor } from './frequency-colors.js';
 // Source-time geometry is independent of BPM and Tempo. At any playback rate the
 // same transient has the same width; only Audio's source position advances faster.
 export const SCROLLING_WINDOW_SECONDS = 4;
@@ -45,10 +46,7 @@ export function createScrollingRenderer(surface, canvas, resized) {
       // Color uses source energy only; min/max/RMS geometry remains unchanged.
       // Three proportions are quantized to eighths for a small reusable palette.
       for (let group = first; group < end; group++) {
-        const total = energy.low[group] + energy.mid[group] + energy.high[group];
-        const low = total > 1e-20 ? Math.round(8 * energy.low[group] / total) : 8;
-        const mid = total > 1e-20 ? Math.min(8 - low, Math.round(8 * energy.mid[group] / total)) : 0;
-        context.fillStyle = palette[low * 9 + mid];
+        context.fillStyle = frequencyColor(palette, energy.low[group], energy.mid[group], energy.high[group]);
         const x = (group * summary.groupSeconds - start) * pixelsPerSecond;
         context.globalAlpha = .75;
         context.fillRect(x, height / 2 - summary.maximum[group] * amplitude, barWidth,
@@ -76,29 +74,4 @@ export function createScrollingRenderer(surface, canvas, resized) {
     context.globalAlpha = 1;
   }
   return { draw, disconnect: () => observer.disconnect() };
-}
-
-// Rotate HSL hue while preserving the accent saturation/lightness. Resolve CSS
-// color syntax once per accent change, never once per group or animation frame.
-export function frequencyPalette(accent) {
-  const probe = document.createElement('canvas').getContext('2d');
-  probe.fillStyle = accent; probe.fillRect(0, 0, 1, 1);
-  const rgb = Array.from(probe.getImageData(0, 0, 1, 1).data).slice(0, 3).map(v => v / 255);
-  const max = Math.max(...rgb), min = Math.min(...rgb), delta = max - min, lightness = (max + min) / 2;
-  const saturation = delta ? delta / (1 - Math.abs(2 * lightness - 1)) : 0;
-  let hue = 0;
-  if (delta) hue = 60 * (max === rgb[0] ? ((rgb[1] - rgb[2]) / delta + 6) % 6 :
-    max === rgb[1] ? (rgb[2] - rgb[0]) / delta + 2 : (rgb[0] - rgb[1]) / delta + 4);
-  const colors = [0, 90, 180].map(rotation => {
-    probe.fillStyle = `hsl(${hue + rotation} ${saturation * 100}% ${lightness * 100}%)`;
-    probe.fillRect(0, 0, 1, 1);
-    return probe.getImageData(0, 0, 1, 1).data;
-  });
-  const palette = [];
-  for (let low = 0; low <= 8; low++) for (let mid = 0; mid <= 8 - low; mid++) {
-    const high = 8 - low - mid;
-    palette[low * 9 + mid] = `rgb(${[0, 1, 2].map(c =>
-      Math.round((colors[0][c] * low + colors[1][c] * mid + colors[2][c] * high) / 8)).join(',')})`;
-  }
-  return palette;
 }

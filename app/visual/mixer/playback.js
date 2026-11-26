@@ -319,7 +319,7 @@ export function createPlaybackDeck(number, deck, actions) {
       commitSeek(Math.max(0, Math.min(deck.audio.duration, target)));
     });
   }
-  let displayedPeaks = null;
+  let displayedPeaks = null, displayedEnergy = null, displayedAccent = null;
   header.append(participation, tempo, pitch, libraryButton, title, selector, play, queue, main, overview);
   const content = element("div", "performance-content");
   const upperSection = element("section", "performance-upper-section");
@@ -420,8 +420,20 @@ export function createPlaybackDeck(number, deck, actions) {
     }
   }
   document.addEventListener('tunetox-theme-change', () => {
-    cancelTempoRoller(); cancelPitchRoller(); cancelSeekGesture(); renderRollers();
+    cancelTempoRoller(); cancelPitchRoller(); cancelSeekGesture(); renderRollers(); renderOverview();
   });
+
+  function renderOverview() {
+    const peaks = deck.audio.waveformPeaks;
+    const energy = deck.audio.frequencyEnergy;
+    const accent = getComputedStyle(node).getPropertyValue('--accent').trim() || '#5ce0dc';
+    if (peaks !== displayedPeaks || energy !== displayedEnergy || accent !== displayedAccent) {
+      displayedPeaks = peaks; displayedEnergy = energy; displayedAccent = accent;
+      drawOverviewWaveform(overviewGraphic, peaks, energy, accent);
+      overviewPosition.hidden = !peaks;
+      wave.scrollingPlayhead.hidden = !peaks;
+    }
+  }
 
   function render() {
     if (seekGesture && (!canSeek() || deck.audio.src !== seekGesture.source || workspace !== 'performance-view' ||
@@ -456,13 +468,7 @@ export function createPlaybackDeck(number, deck, actions) {
       input.setAttribute('aria-valuetext', percent + '%; stem audio not connected');
       input.closest('label').querySelector('output').textContent = percent + '%';
     });
-    const peaks = deck.audio.waveformPeaks;
-    if (peaks !== displayedPeaks) {
-      displayedPeaks = peaks;
-      drawOverviewWaveform(overviewGraphic, peaks);
-      overviewPosition.hidden = !peaks;
-      wave.scrollingPlayhead.hidden = !peaks;
-    }
+    renderOverview();
     tempoValue.value = deck.tempoRatio.toFixed(2) + "×";
     tempoInput.value = String(Math.round((Math.log2(deck.tempoRatio) + 1) * 500));
     tempoInput.setAttribute("aria-valuetext", deck.tempoRatio.toFixed(2) + " times original speed");

@@ -53,3 +53,26 @@ export async function analyzeFrequencyEnergy(buffer, grid, signal) {
   return { low, mid, high, samplesPerGroup, groupSeconds, sampleRate: buffer.sampleRate,
     duration: buffer.duration, units: 'mean-square', crossoverHz: [200, 4000] };
 }
+
+// Aggregate existing mean-square groups onto the overview's original sample
+// boundaries. Weight partial overlaps/final groups by sample count, not by color.
+// No decoding or filtering occurs here; the source energy arrays remain untouched.
+export function summarizeFrequencyEnergy(energy, columns) {
+  const count = Math.max(1, Math.floor(columns));
+  const low = new Float32Array(count), mid = new Float32Array(count), high = new Float32Array(count);
+  const length = Math.round(energy.duration * energy.sampleRate), size = energy.samplesPerGroup;
+  for (let column = 0; column < count; column++) {
+    const start = Math.floor(column * length / count);
+    const end = Math.min(length, Math.max(start + 1, Math.floor((column + 1) * length / count)));
+    let lowSum = 0, midSum = 0, highSum = 0;
+    for (let group = Math.floor(start / size); group < Math.ceil(end / size); group++) {
+      const overlap = Math.min(end, (group + 1) * size) - Math.max(start, group * size);
+      lowSum += energy.low[group] * overlap;
+      midSum += energy.mid[group] * overlap;
+      highSum += energy.high[group] * overlap;
+    }
+    const samples = Math.max(1, end - start);
+    low[column] = lowSum / samples; mid[column] = midSum / samples; high[column] = highSum / samples;
+  }
+  return { low, mid, high };
+}
