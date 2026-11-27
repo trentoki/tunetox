@@ -193,10 +193,61 @@ document.querySelector('#run').onclick = async () => {
     }
     const overlaps=(a,b)=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
     buttons[0].click();buttons[0].click(); // Controls
-    const controls=[...decks[0].querySelectorAll('.controls > div:first-child > label,.effects-controls > div')];
+    const controls=[...decks[0].querySelectorAll('.controls > div:first-child > label,.effects-controls > div')].filter(n=>n.getClientRects().length);
     const nudges=[...decks[0].querySelectorAll('.nudge-controls button')].map(n=>n.getBoundingClientRect());
     controls.forEach(n=>{const r=n.getBoundingClientRect();assert((r.right<=hr.left||r.left>=hr.right)&&nudges.every(b=>!overlaps(r,b)),'Control overlaps central waveform/nudge');});
+    const order=[...decks[0].querySelectorAll('.controls > div:first-child > label')].sort((a,b)=>a.getBoundingClientRect().top-b.getBoundingClientRect().top).map(n=>n.querySelector('span').textContent);
+    assert(order.join(',')==='Filter,High,Mid,Low','Filter/EQ order');
+    assert(decks[0].querySelectorAll('.effects-controls > div').length===3 && [...decks[0].querySelectorAll('.effects-controls > div')].filter(n=>n.getClientRects().length).length===2,'Two effect slots with third retained');
     buttons[0].click();
+    decks.forEach(d=>d.querySelectorAll('.cue-pad')[7].click());await delay(30);
+    // Both portrait preferences are usable; the three original themes retain H.
+    for(const size of [[1114,768],[768,1024]]) {
+      await viewport(...size);
+      for(const mode of ['horizontal','vertical']) {
+        orientation.value=mode;orientation.dispatchEvent(new win.Event('change'));
+        assert(doc.documentElement.dataset.waveformOrientation===mode,'Waveform saved portrait direction');
+        for(const [i,d] of decks.entries()) {
+          const b=buttons[i], wave=waves[i];
+          for(const config of ['Cues','Stems','Controls']) {
+            assert(b.textContent===config,'Viewport configuration order');
+            const r=wave.getBoundingClientRect();
+            const paint=wave.querySelector('.playhead').getBoundingClientRect();
+            const edge=mode==='vertical'?paint.top:paint.left;
+            const length=mode==='vertical'?paint.height:paint.width;
+            const center=mode==='vertical'?r.top+r.height/2:r.left+r.width/2;
+            assert(Math.abs(edge*win.devicePixelRatio-Math.round(edge*win.devicePixelRatio))<.01,'Playhead fractional paint edge');
+            assert(Math.abs(edge+length/2-center)<=.5/win.devicePixelRatio+.01,'Playhead not centered to nearest device pixel');
+            const sideNodes=[...d.querySelectorAll('.cue-pad,.glass-preview-shift,.stem-faders label,.controls > div:first-child > label,.effects-controls > div,.nudge-controls button')].filter(n=>n.getClientRects().length);
+            const boxes=sideNodes.map(n=>n.getBoundingClientRect());
+            for(let a=0;a<boxes.length;a++) {
+              const box=boxes[a];
+              assert(box.left>=r.left-1 && box.right<=r.right+1 && box.top>=r.top-1 && box.bottom<=r.bottom+1,'Side control outside deck '+size+config);
+              assert(box.right<=r.left+r.width*.28+1 || box.left>=r.right-r.width*.28-1,'Side control obstructs center');
+              assert(boxes.slice(a+1).every(other=>!overlaps(box,other)),'Side controls overlap '+size+config);
+            }
+            const nudge=d.querySelector('.nudge-controls').getBoundingClientRect();
+            assert(nudge.bottom<=r.bottom && nudge.bottom>=r.bottom-6,'Nudges not at bottom');
+            if(config==='Cues') {
+              const pads=[...d.querySelectorAll('.cue-pad')].map(n=>n.getBoundingClientRect());
+              assert(pads.every(p=>p.height>44),'Pads not larger than original');
+              assert(pads.slice(0,4).every((p,j)=>!j||p.top>pads[j-1].top),'Cue numbering order');
+              assert(win.getComputedStyle(d.querySelectorAll('.cue-pad')[6]).backgroundColor==='rgb(228, 231, 221)','Light unassigned pad face');
+            }
+            const position=players[i].currentTime;
+            pointer(wave,'pointerdown',.5,mode==='vertical');pointer(wave,'pointermove',.4,mode==='vertical');pointer(wave,'pointerup',.4,mode==='vertical');
+            await until(()=>Math.abs(players[i].currentTime-position-.4)<.02,'Portrait/landscape seek '+mode);
+            b.click();
+          }
+        }
+      }
+    }
+    for(const themeName of ['default','glass-hardware','futuristic']) {
+      await theme(themeName);assert(doc.documentElement.dataset.waveformOrientation==='horizontal','Original portrait restriction changed');
+    }
+    await theme('waveform');assert(doc.documentElement.dataset.waveformOrientation==='vertical','Waveform portrait preference not restored');
+    await viewport(1114,768);
+    pass('larger light cue rows, bottom nudges, exact control order/two slots, four-deck portrait H/V geometry and seeking');
     pass('Futuristic wheel preview, clean bounded playhead/cues, Shift-only row, side Controls and stationary all-configuration seeking');
     decks.forEach(d=>d.querySelector('.play-pause-button').click());await until(()=>players.every(p=>!p.paused),'Four-deck playback');
     doc.querySelector('.global-nudge button').dispatchEvent(new win.KeyboardEvent('keydown',{key:'End',bubbles:true}));

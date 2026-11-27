@@ -17,6 +17,13 @@ export function getScrollingGeometry(surface) {
   };
 }
 
+// Shared paint edge for a source-centered playhead/cue line. Its thickness is
+// subtracted before snapping, keeping the line center on the logical time axis.
+export function pixelAlignedOffset(origin, offset, scale = window.devicePixelRatio || 1) {
+  const thickness = Math.max(1, Math.round(scale)) / scale;
+  return Math.round((origin + offset - thickness / 2) * scale) / scale - origin;
+}
+
 export function createScrollingWaveform() {
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
@@ -29,7 +36,7 @@ export function createScrollingRenderer(surface, canvas, resized) {
   const context = canvas.getContext('2d');
   let width = 0, height = 0, scale = 0;
   let lastSummary, lastPosition, lastColor, lastEnergy, lastOrientation, lastWindowSeconds, lastColorMode;
-  let palette;
+  let palette, lastPixelAlignedTheme;
   const observer = new ResizeObserver(() => { scale = 0; resized(); });
   observer.observe(surface);
 
@@ -47,6 +54,21 @@ export function createScrollingRenderer(surface, canvas, resized) {
       width = nextWidth; height = nextHeight; scale = nextScale;
       canvas.width = Math.round(width * scale); canvas.height = Math.round(height * scale);
       context.setTransform(scale, 0, 0, scale, 0, 0);
+    }
+    const pixelAlignedTheme = document.documentElement.dataset.theme === 'waveform';
+    if (dimensionsChanged || vertical !== lastOrientation || pixelAlignedTheme !== lastPixelAlignedTheme) {
+      lastPixelAlignedTheme = pixelAlignedTheme;
+      if (pixelAlignedTheme) {
+        // Paint one solid row/column rather than two antialiased neighbors. The
+        // authoritative source center and seek/cue calculations stay unchanged.
+        const rect = surface.getBoundingClientRect();
+        const origin = vertical ? rect.top + surface.clientTop : rect.left + surface.clientLeft;
+        surface.style.setProperty('--waveform-playhead-position', pixelAlignedOffset(origin, (vertical ? rect.height : rect.width) / 2, scale) + 'px');
+        surface.style.setProperty('--waveform-playhead-thickness', Math.max(1, Math.round(scale)) / scale + 'px');
+      } else {
+        surface.style.removeProperty('--waveform-playhead-position');
+        surface.style.removeProperty('--waveform-playhead-thickness');
+      }
     }
     if (!dimensionsChanged && summary === lastSummary && seconds === lastPosition && color === lastColor && energy === lastEnergy && vertical === lastOrientation && windowSeconds === lastWindowSeconds && colorMode === lastColorMode) return;
     if (color !== lastColor || colorMode !== lastColorMode) palette = frequencyPalette(color, colorMode);

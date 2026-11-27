@@ -162,8 +162,9 @@ Scrolling rendering, passive cue placement and relative dragging all read its
 getter. Only visible summary groups are drawn; decoded summaries and frequency
 energy are reused. Zoom does not alter waveform amplitude, tempo or playback time.
 
-Tablet portrait (601–1100 CSS pixels) uses horizontal presentation; landscape uses
-the saved orientation. The waveform occupies the same allocated box. Orientation
+Tablet portrait (601–1100 CSS pixels) uses horizontal presentation in the original
+three themes; Waveform now honors the saved H/V preference in portrait as well.
+Landscape uses the saved orientation in every theme. The waveform occupies the same allocated box. Orientation
 and zoom changes cancel uncommitted seek previews without seeking. See
 [implementation and verification](../docs/D2-WAVEFORM-ZOOM.md).
 
@@ -204,3 +205,23 @@ source invalidation or owner navigation restores the UI without committing a sta
 preview. A passive participant leaving Wave view is removed from the presentation.
 No comparison playback state or analysis is created. See the
 [experiment report](../docs/D2-WAVEFORM-EXPERIMENTS.md) for responsibilities and checks.
+
+
+## Waveform clean-line painting
+
+Waveform keeps source geometry independent of final pixel alignment. The original
+rendered playhead could have a fractional device-pixel edge; a coincident cue painted
+on a different fractional edge could leave a faint neighboring row. After inspecting
+inherited backgrounds, borders, filters, shadows and pseudo-elements (none contributed
+a remaining glow), the renderer now paints a flat line at a device-pixel-aligned edge.
+Thickness is round(devicePixelRatio) physical pixels (at least one), approximately
+one CSS pixel. Paint edge = round((surface origin + logical center − thickness/2)
+× devicePixelRatio) / devicePixelRatio − surface origin. Logical source centers,
+source-time window, cue values and seek calculations are not rounded.
+
+Existing cue marker elements retain their exact percentage positions and labels.
+Waveform alone paints the cue line through an offset pseudo-element using the same
+pixel calculation. This avoids fractional transformed layers creating a secondary
+row, without another cue store or changed source positions. The pixel helper lives
+with existing Visual scrolling geometry; no analysis or Audio changes occur.
+Other themes keep their existing line presentation and comparison behavior.

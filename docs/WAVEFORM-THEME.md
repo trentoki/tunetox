@@ -186,3 +186,92 @@ actual-music performance and listening need human confirmation. Portrait/phone
 Waveform styling remains provisional. Pitch is preview-only; stem audio and existing
 EQ/filter/effect/loop implementation status remain unchanged. Future loop controls
 are deliberately undecided. The deferred Audio readability review stays separate.
+
+## Refinement after physically approved 7b2edf1
+
+Futuristic and Waveform are intended selectable layouts for version 1.0. Existing
+Default/Glass/Futuristic remain available and unchanged in this pass. No release
+version rename or new musical functionality is implied.
+
+### Files, responsibilities and information flow
+
+- Behavior `app/behavior/settings.js`: effective portrait orientation now honors the
+  saved H/V preference in Waveform only. Theme changes recompute that presentation
+  choice without overwriting the saved preference. Other themes retain tablet H.
+- Visual `app/visual/settings.js`: updates the setting label/note to explain the
+  exception; it owns no orientation decision or additional preference state.
+- Visual `app/visual/themes/waveform/theme.css`: lays out evenly spaced, taller light
+  cue pads; fixed bottom nudge pairs; extended vertical stems; left Filter/High/Mid/
+  Low and two right effect slots. It defines flat line paint and portrait captions.
+  The same existing DOM nodes, events and musical values are retained.
+- Visual `app/visual/waveform/scrolling-waveform.js`: owns device-pixel paint alignment
+  of the existing playhead, cached by dimensions/orientation/theme. Its small shared
+  `pixelAlignedOffset` calculation is also used by the existing cue presenter. It
+  changes no logical time-axis center, zoom, source position or analysis.
+- Visual `app/visual/waveform/scrolling-cue-markers.js`: keeps source-exact percentages
+  and numbering; passes only a final paint offset to the Waveform cue-line pseudo-
+  element. The marker/label remains at its authoritative source coordinate. Other
+  themes and full-song overview presentation are untouched.
+- Existing `tests/waveform-theme-tests.js`: adds all-four-deck portrait H/V seeking,
+  orientation preference/restoration, physical-pixel line edges, side-control
+  bounds/nonoverlap, larger/light pad faces, bottom nudges and exact control order.
+
+Flow remains saved preference → Behavior effective orientation → existing Visual
+rendering, and Audio source position/Behavior cues → shared geometry → final paint.
+No playback, cue, nudge or zoom state is copied. No new production files, controls,
+adapters, Audio paths, decoding or analysis are introduced. Readability review keeps
+paint calculations in the existing waveform folder and actual layout in theme CSS.
+The separately deferred Audio readability task remains untouched.
+
+### Paint investigation
+
+Computed styling showed no live playhead shadow/filter/gradient/border or pseudo
+ornament, but the line could land on a half-pixel edge. Aligning only that line also
+revealed a coincident cue's fractional paint as a faint neighboring row. Final paint
+uses the same device-pixel edge for both; a layout-offset pseudo-element avoids the
+extra antialiasing seen with a fractional cue transform. Logical cue positions,
+numbers, waveform geometry and seek calculations are not rounded. The painted line
+center is within half a physical pixel of the original logical center. A screenshot
+comparison hiding/showing playhead and cues found exactly one solid band (1 physical
+pixel at DPR 1; 2 at DPR 2), including a coincident cue. This is Chromium evidence,
+not a claim about untested physical Safari rendering.
+
+### Provisional placement decisions
+
+Bottom nudges reserve 44px of space, at the same left/right positions in every
+configuration. Shift moves to the top-left Cues side area above pad 1, in a 30px
+button; the cue grid begins at 34px. Four equal cue rows have 6px gaps and fill the
+remaining space. Measured pad heights are about 103px landscape and 51px in the
+768×1024 four-deck portrait layout, compared with the previous 44px. Unassigned faces
+are light rubber, assigned faces use deck accent and active presses remain distinct.
+
+Stems retain their two-per-side order, WebKit alignment and Behavior connections;
+a 12px middle gap replaces the unused central nudge gap. Controls uses the existing
+nodes with CSS visual ordering: Filter, High, Mid, Low. Portrait puts captions and
+readouts beside 44px knobs so four rows fit without collisions. Echo and Reverb are
+the two visible right slots; Delay remains hidden only here, not deleted. The
+underlying preview controls/DOM order are retained for other themes. No effect-type
+menu or processing behavior is invented. Future loop layout is still undecided.
+
+### Verification
+
+All twelve regression suites passed: Waveform theme, comparison, zoom, orientation,
+iPhone, nudging, Library interface, Library storage, Library analysis, Queue, Visual
+Playback and Glass Hardware. Exact original-theme geometry matches the prior
+snapshot in nine theme/viewport combinations. Editor diagnostics and whitespace
+checks pass. Tracked Audio is unchanged from `7b2edf1`.
+
+Populated Cues/Stems/Controls screenshots were inspected in landscape and portrait
+Vertical, plus portrait Horizontal, using decoded generated pulse/tone recordings.
+All four decks and controls remain within their allocated areas. Native touch seeks
+retain capture/scale and do not expand or hide the interface. Bottom nudge centers
+are hit-testable in every configuration. Tests verify side-area isolation, cue
+positioning, configuration changes and theme switching with existing sources/nodes
+and playback retained. Existing percentage, cue/Shift and nudge operations are reused.
+
+Remaining limitations: physical iPad Safari must confirm the clean paint, new cue
+size, Shift position and portrait spacing/touch usability. Very small/phone Waveform
+layouts remain provisional. No new listening or end-to-end latency claim is made;
+existing pitch/stem/EQ/filter/effect implementation limitations remain unchanged.
+No personal library data, audio files, exports, certificates or temporary proof
+scripts/screenshots are committed. Stop for physical testing; no push.

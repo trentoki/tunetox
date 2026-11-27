@@ -162,8 +162,9 @@ They do not authorize unrelated restructuring during an approved musical increme
 Waveform Zoom controls set one saved visible duration for all four decks: 1–8 source
 seconds in 0.5-second steps, default 4. Drawing, cue positions and drag distances use
 that same Behavior-owned value. The centered playhead, analysis, playback and full-song
-overview are unchanged. The existing tablet portrait layout always shows horizontal
-scrolling waveforms; landscape restores the saved Horizontal/Vertical preference.
+overview are unchanged. The original three themes use horizontal scrolling waveforms in tablet portrait;
+Waveform respects the saved Horizontal/Vertical preference in portrait too.
+Landscape restores the saved preference in every theme.
 Rotation never changes established musical state or interrupts playback.
 
 **Experimental waveform coloring:** Settings selects Deck shades (default for this
@@ -171,7 +172,7 @@ experiment) or the retained Complementary hues. Both waveform views blend the sa
 relative frequency energies: saturated deck hue for Low, lighter same hue for Mid,
 near-white for High. Analysis, amplitude and source-time geometry are unchanged.
 
-**Temporary waveform comparison experiment:** In landscape Vertical mode, dragging
+**Temporary waveform comparison experiment (original three themes):** In landscape Vertical mode, dragging
 at least 3 CSS pixels expands visible Wave views over the complete deck rectangle.
 All other deck content, including header and overview, is temporarily concealed.
 Library/Stems remain unchanged. Source content is revealed above and below the
@@ -194,8 +195,7 @@ and simultaneous nudging. No per-deck amount controls or percentage state remain
 switching. Header and full-song overview retain their arrangement; one compact
 Cues/Stems/Controls selector replaces the two section selectors. Tap cycles; vertical
 sliding selects continuously. The scrolling waveform permanently fills the content
-area with a centered playhead and existing saved zoom/color mode. Cue pads occupy
-paired corner-side groups; Stems uses existing vertical faders in those side zones;
+area with a centered playhead and existing saved zoom/color mode. Cue pads fill four evenly spaced rows per side (1–4 left, 5–8 right); Stems uses existing vertical faders in those side zones;
 Controls arranges existing previews in the surrounding side areas. Configurations are exclusive,
 while waveform/nudges remain visible. Pointer seeking starts only in the marked
 central 44%; surrounding controls/gaps cannot start seeks. Owner capture and seek behavior remain authoritative, but temporary expansion is
@@ -207,6 +207,15 @@ provisional pending physical iPad testing; the original three layouts are retain
 Pitch is movable preview travel only; musical pitch remains unconnected to that UI.
 The clean, thin scrolling playhead and cue markers/labels stay within the central
 waveform; overview markers are unchanged. Four existing vertical stems retain their
-positions with explicit WebKit thumb centering. Controls occupies the side areas
-around nudges. Hide the old loop strip only in Waveform; retain Shift provisionally
-at bottom-left of the Cues side area. No new loop or musical behavior is specified.
+positions with explicit WebKit thumb centering. Controls occupies the side areas above bottom-corner nudges: Filter, High, Mid, Low
+from top to bottom on the left and two effect slots on the right. The third effect
+is retained but hidden in Waveform. Hide the old loop strip only in Waveform; retain
+Shift provisionally at top-left above cue pad 1. No new loop or musical behavior is specified.
+
+**Waveform 1.0 layout direction:** Retain Futuristic and Waveform as selectable
+layouts for version 1.0; keep the original themes available during this experiment.
+Waveform's larger unassigned cue faces are light/white, with accent-colored assigned
+and distinct active states. Bottom-left/back and bottom-right/forward nudges stay in
+the same places across configurations. Portrait retains the existing four-deck 2×2
+layout, with compact side-control captions where needed. Playhead paint is aligned
+to device pixels without changing logical playback/seek/cue coordinates.

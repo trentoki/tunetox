@@ -613,3 +613,17 @@ bottom-left below Cues 3/4; future loop layout is undecided. Pitch wheel is a di
 travel preview; the existing Audio semitone API is not connected to it. No Audio edits.
 See [file responsibilities, investigation and verification](docs/WAVEFORM-THEME.md).
 Stop at a local checkpoint for physical iPad Safari testing; do not push.
+
+### Waveform bottom controls and portrait pass after 7b2edf1
+
+Physical testing provisionally approves the preceding refinement. Retain Futuristic
+and Waveform as selectable layouts toward version 1.0, without removing other themes
+in this pass. Waveform now has larger evenly spaced light cue pads, fixed bottom
+nudges, top-left Shift above pad 1, improved stem spacing, Filter/High/Mid/Low left
+and two retained effect slots right. It honors saved H/V in four-deck tablet portrait;
+original themes keep portrait H. Final device-pixel line painting removes neighboring
+antialias bands while preserving logical source/cue geometry. No Audio changes.
+All twelve suites pass; populated landscape/portrait H/V checks and one-band paint
+comparison pass. See [responsibilities, decisions and limitations](docs/WAVEFORM-THEME.md).
+Stop at the local checkpoint for physical Safari testing; do not push or start a
+new musical task. Future loops and deferred Audio readability remain separate.

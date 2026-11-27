@@ -9,7 +9,8 @@ let waveformWindowSeconds = 4;
 // Same responsive tablet portrait layout as the existing stem presentation.
 // Phone widths retain the saved orientation; no user-agent or second deck is used.
 const tabletPortrait = window.matchMedia('(min-width:601px) and (max-width:1100px) and (orientation:portrait)');
-export const getWaveformOrientation = () => tabletPortrait.matches ? 'horizontal' : orientation;
+export const getWaveformOrientation = () => tabletPortrait.matches &&
+  document.documentElement.dataset.theme !== 'waveform' ? 'horizontal' : orientation;
 export const getWaveformColorMode = () => waveformColorMode;
 export const getWaveformWindowSeconds = () => waveformWindowSeconds;
 
@@ -88,6 +89,7 @@ export function connectSettings(header, decks) {
 
   function applyAppearance() {
     themes.apply(customized);
+    applyOrientation();
     save();
   }
   themes.themeSelect.onchange = themes.modeSelect.onchange = applyAppearance;

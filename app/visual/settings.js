@@ -13,7 +13,7 @@ export function createSettingsPresentation(header) {
   button.setAttribute('aria-expanded', 'false');
 
   const label = document.createElement('label');
-  label.textContent = 'Landscape scrolling waveform ';
+  label.textContent = 'Scrolling waveform ';
   const orientation = document.createElement('select');
   orientation.setAttribute('aria-label', 'Scrolling waveform orientation');
   for (const value of ['horizontal', 'vertical']) {
@@ -21,7 +21,7 @@ export function createSettingsPresentation(header) {
   }
   label.append(orientation);
   const note = document.createElement('small');
-  note.textContent = 'Tablet portrait always uses Horizontal. Landscape restores this preference.';
+  note.textContent = 'Waveform uses this preference in both orientations. Other themes use Horizontal in tablet portrait.';
   const colorLabel = document.createElement('label');
   colorLabel.textContent = 'Waveform coloring ';
   const waveformColors = document.createElement('select');

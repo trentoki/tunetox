@@ -1,4 +1,4 @@
-import { getScrollingGeometry } from './scrolling-waveform.js';
+import { getScrollingGeometry, pixelAlignedOffset } from './scrolling-waveform.js';
 
 // Passive presentation of the existing Behavior cuePositions array. The eight DOM
 // markers are reused; no cue values, playback position or seek state are retained.
@@ -13,6 +13,9 @@ export function createScrollingCueMarkers(surface) {
   surface.append(overlay);
   return function render(positions, sourceSeconds, valid) {
     const { vertical, visibleAxis: width, playheadOffset, pixelsPerSecond } = getScrollingGeometry(surface);
+    const cleanLines = document.documentElement.dataset.theme === 'waveform';
+    const rect = cleanLines ? surface.getBoundingClientRect() : null;
+    const origin = cleanLines ? (vertical ? rect.top + surface.clientTop : rect.left + surface.clientLeft) : 0;
     markers.forEach((line, index) => {
       const position = positions[index];
       const percent = ((position - sourceSeconds) * pixelsPerSecond + playheadOffset) / width * 100;
@@ -20,6 +23,11 @@ export function createScrollingCueMarkers(surface) {
       if (line.hidden) return;
       line.style.left = vertical ? '0' : percent + '%';
       line.style.top = vertical ? percent + '%' : '0';
+      // Coincident cue/playhead paint must share the same pixel edge, otherwise
+      // an accurately placed fractional cue can look like a second faint line.
+      const offset = cleanLines ? percent / 100 * (vertical ? rect.height : rect.width) : 0;
+      if (cleanLines) line.style.setProperty('--cue-paint-offset', (pixelAlignedOffset(origin, offset) - offset) + 'px');
+      else line.style.removeProperty('--cue-paint-offset');
       // Labels may move inward or apart at edges/coincident cues. The vertical
       // line never shifts away from its exact source-song position.
       let count = 0, ordinal = 0;

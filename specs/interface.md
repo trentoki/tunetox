@@ -114,7 +114,7 @@ and audible transition quality still require verification; sample accuracy is no
 
 ## Current approved performance layout
 
-Futuristic is an optional Visual theme. Only in that theme, the existing Tempo
+Futuristic is an optional Visual theme, shared as Waveform’s visual foundation. In those two themes, the existing Tempo
 range uses a full-surface vertical pointer-captured drag; its approved logarithmic
 range and Behavior action are unchanged. Its matching **Pitch demo** roller is
 Visual-only travel (0–100%, initially 50%), not pitch units or an Audio action.
@@ -132,7 +132,7 @@ The new [Clean Playback entry](../tunetox.html) uses a persistent performance he
 - Each component owns only its two presentation selections and workspace. Changing one section cannot modify the other section, another deck, deck behavior, or audio state.
 - Library round trips preserve both selections. View nodes and audio transport identities remain persistent; visibility changes use the existing hidden attribute contract.
 - Two keyboard-operable toggle buttons share the original compact performance-header selector slot. performance-upper-toggle switches Wave/Stems; performance-lower-toggle switches Cues/Controls. Their visible labels show the current view; aria-pressed is true for Stems or Controls. There are no selector rows inside either content section and no added header height.
-- Original child control names, data-cue, data-frequency-band and data-stem identities remain unchanged. Main Volume is now active at 0% startup with a live percentage; its caption reserves the prior 100% caption width to preserve the fader geometry. Tempo is active in its existing header slot via a transparent native range over the numeric display: 0.5×–2.0× with logarithmic mapping and unity exactly centered. Its display is a ratio, not an invented BPM. Musical Pitch stays disabled; Futuristic alone provides the Visual-only travel demo described above. Stem faders are permanent native range controls (0–100%, 1% steps) backed by Behavior stemLevels; stem audio remains disconnected. Cue pads now assign/recall real song positions; other unfinished musical controls remain inactive. See [control contracts](controls-settings.md).
+- Original child control names, data-cue, data-frequency-band and data-stem identities remain unchanged. Main Volume is now active at 0% startup with a live percentage; its caption reserves the prior 100% caption width to preserve the fader geometry. Tempo is active in its existing header slot via a transparent native range over the numeric display: 0.5×–2.0× with logarithmic mapping and unity exactly centered. Its display is a ratio, not an invented BPM. Musical Pitch stays disabled; Futuristic and Waveform provide the UI-only travel demo described above. Stem faders are permanent native range controls (0–100%, 1% steps) backed by Behavior stemLevels; stem audio remains disconnected. Cue pads now assign/recall real song positions; other unfinished musical controls remain inactive. See [control contracts](controls-settings.md).
 
 The Version 1 PDF and its annotated screenshots record the preceding combined layout. Preserve them as historical styling references. The editable guide begins with a current-layout addendum; its original pages are explicitly historical. Playback behavior and audio modules are unchanged by this interface task.
 
@@ -172,7 +172,8 @@ cues and lower sections remain. Settings is nonmodal and never changes transport
 The top strip provides Waveform Zoom out/in and visible source duration outside
 Settings. One saved duration applies to all decks/orientations: 1–8 seconds in
 0.5-second steps, default 4. Tablet portrait in the existing 601–1100-pixel layout
-always shows horizontal waveforms; the saved orientation is retained for landscape.
+uses horizontal waveforms in the original three themes; Waveform respects the saved
+orientation in portrait as well. The saved choice is retained for landscape.
 This supersedes the earlier always-use-preference experiment in tablet portrait.
 Waveform allocation and horizontal overview are unchanged. On phone widths the compact group omits the long visual label while retaining its
 accessible name and duration/buttons, preserving the normal header height without
@@ -192,17 +193,32 @@ Controls; downward steps reverse, bounded at the ends. A stationary tap cycles w
 wraparound. Keyboard Up/Down selects, and the ordinary button click cycles.
 
 Side zones are 28% on each edge; central 44% is visibly bounded and accepts scrolling
-seek starts. Captured drags can continue beyond it. Cue groups are 1/2 upper-left,
-3/4 lower-left, 5/6 upper-right and 7/8 lower-right. Vertical stem layout places
-Transients/Tune left and Flow/Voice right, above/below centered directional nudges.
-Shift remains the same button, provisionally placed at the bottom-left of the Cues side area; other loop row children are hidden only in Waveform. Controls retains current preview
-status and now occupies side areas: Low/Mid/High left, Filter and three effects right,
-with a gap around the nudge buttons. Waveform imports the shared Futuristic styling and reuses its wheel gestures.
-Pitch wheel travel is preview-only despite the existing Audio semitone API; no
-performance pitch mapping/Behavior is connected. Central playhead/cue lines are thin,
-without glow, and both lines and cue labels stay within the central 44%. Vertical
-WebKit stem thumb centering is explicit. No new signal processing or musical behavior
-is introduced.
+seek starts. Captured drags can continue beyond it. Larger pads occupy four evenly
+spaced rows, 1/2/3/4 left and 5/6/7/8 right. Light/white unassigned faces, assigned
+accent faces and pressed styling remain distinct. Shift is the same button,
+provisionally top-left above pad 1, with the rest of the loop strip hidden only here.
+Directional nudges are bottom-left/back and bottom-right/forward in every configuration.
+
+Vertical stems retain Transients/Tune left and Flow/Voice right; the middle gap is
+smaller and bottom nudge space reserved. Explicit WebKit thumb centering remains.
+Controls displays Filter, High EQ, Mid EQ and Low EQ from top to bottom on the left,
+evenly above Back nudge. Right shows the first two existing effect slots (Echo/Reverb)
+above Forward nudge. The third slot (Delay) remains in the DOM for other themes.
+Each effect retains its selector, knob and readout. Preview status is unchanged.
+
+Waveform imports shared Futuristic styling/wheel gestures. Pitch travel is preview
+only, with no performance semitone mapping. Waveform respects saved H/V orientation
+in portrait; the original themes retain their portrait H restriction. Four decks
+remain in the existing portrait 2×2 grid. In that layout, left Controls captions and
+readouts sit alongside 44px knobs, avoiding collisions while preserving side-only
+placement. No new signal processing or musical behavior is introduced.
+
+The scrolling playhead has one flat, thin paint band, without border/shadow/gradient
+or pseudo decoration. Device-pixel snapping keeps the paint center within half a
+physical pixel of its logical time-axis center. Cue logical percentages remain
+source-exact; their line paint uses the same snapping to avoid a faint neighboring
+row when coincident with the playhead. Numbers and source values are unchanged.
+Overview markers are untouched. Both scrolling line extents stay in the central 44%.
 
 Waveform now opts out of temporary comparison: dragging changes source-position
 preview only, without moving/hiding any controls in any configuration. The original

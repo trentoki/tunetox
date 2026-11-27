@@ -14,21 +14,24 @@ html[data-theme=waveform] .scrolling-waveform::before { content:''; position:abs
 html[data-theme=waveform] .current-playback-time { position:absolute; bottom:4px; left:28%; right:28%; text-align:center; pointer-events:none; font-size:9px; }
 html[data-theme=waveform] .cues-view,
 html[data-theme=waveform] .stems-view { position:absolute; inset:0; display:block; background:transparent; pointer-events:none; overflow:visible; }
-html[data-theme=waveform] .cue-pads { display:contents; }
-html[data-theme=waveform] .cue-pad { position:absolute; width:25%; height:44px; min-height:36px; pointer-events:auto; background:#08141d55; border:1px solid var(--accent); font-size:11px; }
-html[data-theme=waveform] .cue-pad:nth-child(-n+4) { left:1%; }
-html[data-theme=waveform] .cue-pad:nth-child(n+5) { right:1%; }
-html[data-theme=waveform] .cue-pad:nth-child(4n+1) { top:6%; }
-html[data-theme=waveform] .cue-pad:nth-child(4n+2) { top:19%; }
-html[data-theme=waveform] .cue-pad:nth-child(4n+3) { bottom:25%; }
-html[data-theme=waveform] .cue-pad:nth-child(4n+4) { bottom:12%; }
-/* Preserve the existing loop controls in the DOM; only Shift is presented. */
-html[data-theme=waveform] .loop-controls { position:absolute; bottom:2px; left:1%; width:25%; height:30px; pointer-events:auto; }
+/* Four evenly sized rows reserve a top Shift slot and the shared bottom nudges. */
+html[data-theme=waveform] .cue-pads { position:absolute; inset:34px 1% 44px; display:grid; grid-template-columns:25.5% 1fr 25.5%; grid-template-rows:repeat(4,minmax(0,1fr)); gap:6px 0; }
+html[data-theme=waveform] .cue-pad { position:static; width:auto; height:auto; min-height:0; pointer-events:auto; background:#e4e7dd; color:#33423c; border:1px solid; border-color:#fdfff4 #bec9c2 #9aaba3; font-size:13px; }
+html[data-theme=waveform] .cue-pad:nth-child(-n+4) { grid-column:1; }
+html[data-theme=waveform] .cue-pad:nth-child(n+5) { grid-column:3; }
+html[data-theme=waveform] .cue-pad:nth-child(4n+1) { grid-row:1; }
+html[data-theme=waveform] .cue-pad:nth-child(4n+2) { grid-row:2; }
+html[data-theme=waveform] .cue-pad:nth-child(4n+3) { grid-row:3; }
+html[data-theme=waveform] .cue-pad:nth-child(4n+4) { grid-row:4; }
+html[data-theme=waveform] .cue-pad[aria-pressed=true] { background:var(--accent); color:#09202a; }
+html[data-theme=waveform] .cue-pad:enabled:active { background:color-mix(in srgb,var(--accent) 65%,#e4e7dd); box-shadow:inset 0 2px 5px #0008; }
+/* Preserve hidden loop elements and the same Shift button/Behavior. */
+html[data-theme=waveform] .loop-controls { position:absolute; top:0; left:1%; width:25%; height:30px; pointer-events:auto; }
 html[data-theme=waveform] .loop-controls > :not(.glass-preview-shift) { display:none; }
-html[data-theme=waveform] .loop-controls .glass-preview-shift { min-height:28px; width:100%; }
-html[data-theme=waveform] .nudge-controls { top:50%; bottom:auto; transform:translateY(-50%); z-index:6; }
+html[data-theme=waveform] .loop-controls .glass-preview-shift { min-height:30px; width:100%; }
+html[data-theme=waveform] .nudge-controls { top:auto; bottom:4px; transform:none; z-index:6; }
 html[data-theme=waveform] .nudge-controls button { min-width:0; width:24%; min-height:36px; background:#08141d22; }
-html[data-theme=waveform] .stem-faders { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:1fr 1fr; position:absolute; inset:4% 1% 8%; min-height:0; gap:14% 48%; }
+html[data-theme=waveform] .stem-faders { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:1fr 1fr; position:absolute; inset:2% 1% 48px; min-height:0; gap:12px 48%; }
 html[data-theme=waveform] .stem-faders label { display:flex; flex-direction:column; gap:3px; min-height:0; min-width:0; pointer-events:auto; }
 html[data-theme=waveform] .stem-faders span { width:auto; font-size:9px; text-align:center; }
 html[data-theme=waveform] .stem-faders input[type=range] { writing-mode:vertical-lr; direction:rtl; width:36px; height:0; min-height:0; flex:1; margin:0; touch-action:pan-x pinch-zoom; }
@@ -39,30 +42,42 @@ html[data-theme=waveform] .deck .stem-faders input::-webkit-slider-thumb { width
 html[data-theme=waveform] .deck .stem-faders input::-moz-range-track { width:6px; height:100%; border:0; background:linear-gradient(to top,var(--accent) 0 var(--stem-level-fill,100%),#0a1928 var(--stem-level-fill,100%) 100%); }
 html[data-theme=waveform] .deck .stem-faders input::-moz-range-thumb { width:22px; height:22px; margin:0; border:0; border-radius:50%; background:var(--accent); box-shadow:none; }
 
-/* Existing groups become transparent layout contents; controls remain the same
-   nodes. Side slots leave the centered nudge row and central waveform clear. */
-html[data-theme=waveform] .controls { position:absolute; inset:0; background:transparent; overflow:visible; pointer-events:none; }
-html[data-theme=waveform] .controls > div,
-html[data-theme=waveform] .controls .effects-controls { display:contents; }
-html[data-theme=waveform] .controls > div:first-child > label,
-html[data-theme=waveform] .effects-controls > div { position:absolute; width:25%; display:flex; flex-direction:column; align-items:center; gap:1px; pointer-events:auto; font-size:9px; text-align:center; }
-html[data-theme=waveform] .controls > div:first-child > label { left:1%; }
-html[data-theme=waveform] .controls > div:first-child > label:nth-child(1) { left:auto; right:1%; top:2%; }
-html[data-theme=waveform] .controls > div:first-child > label:nth-child(2) { top:8%; }
-html[data-theme=waveform] .controls > div:first-child > label:nth-child(3) { top:28%; }
-html[data-theme=waveform] .controls > div:first-child > label:nth-child(4) { bottom:9%; }
-html[data-theme=waveform] .effects-controls > div { right:1%; }
-html[data-theme=waveform] .effects-controls > div:nth-child(1) { top:24%; }
-html[data-theme=waveform] .effects-controls > div:nth-child(2) { top:57%; }
-html[data-theme=waveform] .effects-controls > div:nth-child(3) { bottom:0; }
+/* Side-only grids: Filter/High/Mid/Low on the left, two retained effects right. */
+html[data-theme=waveform] .controls { position:absolute; inset:4px 1% 48px; background:transparent; overflow:visible; pointer-events:none; display:grid; grid-template-columns:25.5% 1fr 25.5%; }
+html[data-theme=waveform] .controls > div:first-child { grid-column:1; display:flex; flex-direction:column; justify-content:space-around; gap:4px; background:transparent; }
+html[data-theme=waveform] .controls > div:first-child > label { display:flex; flex-direction:column; align-items:center; gap:1px; pointer-events:auto; font-size:9px; text-align:center; }
+html[data-theme=waveform] .controls > div:first-child > label:nth-child(1) { order:0; }
+html[data-theme=waveform] .controls > div:first-child > label:nth-child(4) { order:1; }
+html[data-theme=waveform] .controls > div:first-child > label:nth-child(3) { order:2; }
+html[data-theme=waveform] .controls > div:first-child > label:nth-child(2) { order:3; }
+html[data-theme=waveform] .controls .effects-controls { grid-column:3; display:flex; flex-direction:column; justify-content:space-around; gap:12px; background:transparent; }
+html[data-theme=waveform] .effects-controls > div { display:flex; flex-direction:column; align-items:center; gap:4px; pointer-events:auto; font-size:9px; text-align:center; }
+html[data-theme=waveform] .effects-controls > div:nth-child(n+3) { display:none; }
 html[data-theme=waveform] .controls :is(.filter-knob,.eq-knob,.effect-knob) { width:44px; height:44px; min-height:44px; }
 html[data-theme=waveform] .effect-selector { max-width:100%; min-height:22px; padding:2px; font-size:9px; }
 html[data-theme=waveform] .controls output { font-size:9px; }
 
 /* Source-position geometry is untouched. Only cross-axis extent is restricted. */
-html[data-theme=waveform] .scrolling-waveform > .playhead { box-shadow:none; filter:none; width:1px; }
-html[data-theme=waveform][data-waveform-orientation=vertical] .scrolling-waveform > .playhead { left:28%; right:28%; width:auto; height:1px; }
+html[data-theme=waveform] .scrolling-waveform > .playhead { left:var(--waveform-playhead-position,50%); width:var(--waveform-playhead-thickness,1px); box-shadow:none; filter:none; border:0; outline:0; background:#f4f4f4; background-image:none; opacity:1; }
+html[data-theme=waveform][data-waveform-orientation=vertical] .scrolling-waveform > .playhead { top:var(--waveform-playhead-position,50%); left:28%; right:28%; width:auto; height:var(--waveform-playhead-thickness,1px); }
+/* The original marker retains exact source geometry. Its line is painted at a
+   pixel-aligned layout offset, avoiding a fractional composited transform. */
+html[data-theme=waveform] .scrolling-cue-marker { width:var(--waveform-playhead-thickness,1px); background:none; }
+html[data-theme=waveform] .scrolling-cue-marker::before { content:''; position:absolute; left:var(--cue-paint-offset,0px); top:0; bottom:0; width:var(--waveform-playhead-thickness,1px); background:var(--accent); }
+html[data-theme=waveform][data-waveform-orientation=vertical] .scrolling-cue-marker::before { left:0; right:0; top:var(--cue-paint-offset,0px); bottom:auto; width:auto; height:var(--waveform-playhead-thickness,1px); }
 html[data-theme=waveform] .scrolling-cue-markers { clip-path:inset(0 28%); }
 html[data-theme=waveform][data-waveform-orientation=vertical] .scrolling-cue-markers { left:28%; right:28%; clip-path:inset(0); }
-html[data-theme=waveform][data-waveform-orientation=vertical] .scrolling-cue-marker { right:0; width:auto; height:1px; box-shadow:none; }
+html[data-theme=waveform][data-waveform-orientation=vertical] .scrolling-cue-marker { right:0; width:auto; height:var(--waveform-playhead-thickness,1px); box-shadow:none; }
 html[data-theme=waveform] .nudge-controls button[aria-pressed=true] { background:#ffffff22; color:var(--accent); border-color:var(--accent); }
+
+html[data-theme=waveform] .scrolling-waveform > .playhead::before,
+html[data-theme=waveform] .scrolling-waveform > .playhead::after { content:none; }
+
+/* Portrait has four decks in the existing 2×2 grid. Inline captions allow four
+   44px knob rows above nudges without intruding into the central waveform. */
+@media (min-width:601px) and (max-width:1100px) and (orientation:portrait) {
+  html[data-theme=waveform] .controls > div:first-child > label { display:grid; grid-template-columns:44px minmax(0,1fr); grid-template-rows:1fr 1fr; column-gap:2px; }
+  html[data-theme=waveform] .controls > div:first-child > label > button { grid-column:1; grid-row:1 / 3; }
+  html[data-theme=waveform] .controls > div:first-child > label > span { grid-column:2; grid-row:1; align-self:end; }
+  html[data-theme=waveform] .controls > div:first-child > label > output { grid-column:2; grid-row:2; align-self:start; }
+}
