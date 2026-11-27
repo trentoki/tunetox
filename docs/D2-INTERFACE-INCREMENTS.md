@@ -87,3 +87,26 @@ mouse dragstart and cross-Library song/playlist drops pass. Existing membership 
 accounted for in fixture selection, so repeat-drop checks measure an actual addition.
 Editor diagnostics clean. iPad Safari drag initiation remains a physical check;
 Manage checkboxes remain the supported alternative when native dragging is limited.
+
+## 4. Manage song rows and sticky sections
+
+- `app/visual/library/song-row.js`: shared title/artist/BPM/key row presentation,
+  reused by ordinary Library and Manage; no selection/actions or song cache.
+- `app/visual/library/library-view.js`: uses that row presentation; existing Behavior
+  selection/navigation/loading bindings remain unchanged.
+- `app/visual/library/song-management-view.js`: uses the same rows with link checkbox,
+  no Manage buttons; nests supplied depth rows into presentation sections. All Songs
+  and playlist headings stick within their own section. Child headings temporarily
+  cover parent headings, which return for direct parent contents after the child.
+- `app/visual/library/library.css`: common row spacing/type/dividers and opaque,
+  interactive sticky headings. The body remains the only Manage scroller; fixed Back
+  remains outside it. No scroll handlers or extra navigation state are introduced.
+
+Behavior still owns expansion sets, search and canonical relationship actions.
+Checkboxes and disclosure buttons remain separate; multiple branches stay open.
+
+Increment 4 verification: expanded Library UI and Library analysis/architecture
+suites pass. Native sticky All Songs/child/parent/next heading checks pass in three
+viewports × three themes, including interactive collapse. Phone screenshot reviewed.
+Regression checks confirm shared spacing/type/dividers, sticky All Songs collapse,
+no nested Manage buttons, and fixed Back/context restoration. Editor diagnostics clean.

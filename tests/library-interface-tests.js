@@ -306,6 +306,16 @@ document.querySelector('#run').onclick = async () => {
     const localManage = library(0).querySelector('.library-manage-view');
     localManage.querySelector('[data-manage-all-songs]').click();
     await until(() => localManage.querySelectorAll('[data-link-song-id]').length >= 52, 'Large Manage list missing');
+    const manageBody=localManage.querySelector('.library-manage-body'),allHeading=localManage.querySelector('[data-manage-all-songs]');
+    const managedRow=localManage.querySelectorAll('.manage-song-row')[5];
+    manageBody.scrollTop+=managedRow.getBoundingClientRect().top-manageBody.getBoundingClientRect().top-45;
+    assert(Math.abs(allHeading.getBoundingClientRect().top-manageBody.getBoundingClientRect().top)<2,'All Songs heading did not stick');
+    assert(!localManage.querySelector('.song-manage-button'),'Manage buttons nested inside Manage');
+    const ordinaryRow=library(0).querySelector('.search-result'),manageStyle=win.getComputedStyle(managedRow),ordinaryStyle=win.getComputedStyle(ordinaryRow);
+    assert(manageStyle.paddingTop===ordinaryStyle.paddingTop && manageStyle.borderBottomWidth===ordinaryStyle.borderBottomWidth && win.getComputedStyle(managedRow.querySelector('.song-title')).fontSize===win.getComputedStyle(ordinaryRow.querySelector('.song-title')).fontSize,'Manage song presentation differs');
+    allHeading.click();await until(()=>allHeading.getAttribute('aria-expanded')==='false','Sticky collapse failed');
+    allHeading.click();await until(()=>allHeading.getAttribute('aria-expanded')==='true','Sticky reopen failed');
+    pass('shared song row presentation and interactive sticky All Songs heading');
     localManage.querySelector('.library-manage-body').scrollTop = 100000;
     const backRect = localManage.querySelector('.library-manage-toolbar button').getBoundingClientRect();
     assert(backRect.top >= localManage.getBoundingClientRect().top && backRect.bottom < localManage.getBoundingClientRect().bottom, 'Manage Back not permanently visible');

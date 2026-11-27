@@ -1,3 +1,4 @@
+import { createSongRow } from './song-row.js';
 // Presentation only: DOM creation and rendering of Behavior-supplied snapshots.
 // No selection, navigation, import, sorting or deck-loading decisions live here.
 const make = (tag, text, className) => {
@@ -6,11 +7,6 @@ const make = (tag, text, className) => {
   if (className) node.className = className;
   return node;
 };
-function bpmLabel(song) {
-  if (song.verifiedBpm == null) return song.detectedBpm == null ? 'BPM unknown' : song.detectedBpm + ' BPM (V40)';
-  const detected = song.detectedBpm == null ? '' : ' · V40 ' + song.detectedBpm + ' (Δ ' + (song.detectedBpm - song.verifiedBpm).toFixed(2) + ')';
-  return song.verifiedBpm + ' BPM verified' + detected;
-}
 export function createLibraryPresentation(controls) {
   const { tabs, sort, search, results, selected, destinations } = controls;
   [...destinations.children].forEach((button, index) => {
@@ -49,10 +45,9 @@ export function createLibraryPresentation(controls) {
           row.dataset.playlistId = item.id; row.setAttribute('aria-expanded', String(item.expanded));
           row.style.paddingLeft = (8 + item.depth * 12) + 'px'; return row;
         }
-        const row = make('div', undefined, 'search-result'); row.dataset.songId = item.id;
+        const row = createSongRow(item); row.dataset.songId = item.id;
         row.draggable = true; row.tabIndex = 0; row.setAttribute('role', 'button');
         row.setAttribute('aria-pressed', String(item.id === selectedId));
-        row.append(make('strong', item.title, 'song-title'), make('span', `${item.artist || 'Unknown artist'} · ${bpmLabel(item)} · ${item.key || 'Key unknown'}`, 'artist'));
         showRowManagement(row, selectedId);
         if (item.depth) row.style.paddingLeft = (8 + item.depth * 12) + 'px';
         return row;

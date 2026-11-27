@@ -174,3 +174,12 @@ Origin and destination Libraries may belong to different decks. These actions us
 the same relationship functions as Manage and never load a deck. Existing numbered,
 overview and Queue drop rules are retained. Strip appearance is determined solely
 by each panel's current aria-pressed choice, including the first option.
+
+### D2 Manage presentation
+
+Manage reuses ordinary song-row spacing, typography, metadata and dividing lines,
+retaining link checkboxes without nested Manage actions. All Songs and expanded
+playlist headings are sticky and interactive inside the existing body scroller.
+Nested child headings cover their parent while browsing the child's songs; the
+parent heading returns for its direct contents. Multiple expansions and the fixed
+Back/previous Library context remain controlled by existing Behavior state.
