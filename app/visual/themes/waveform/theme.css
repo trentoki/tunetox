@@ -1,0 +1,43 @@
+/* Everything is scoped: the three approved themes retain their existing layout. */
+html[data-theme=waveform] .performance-selector { width:70px; max-width:30%; }
+html[data-theme=waveform] .performance-selector button { touch-action:none; min-height:26px; }
+html[data-theme=waveform] .performance-header > .song-title { padding-right:76px; }
+html[data-theme=waveform] .performance-content { position:relative; display:block; overflow:hidden; }
+html[data-theme=waveform] .performance-upper-section,
+html[data-theme=waveform] .performance-lower-section { display:contents; }
+html[data-theme=waveform] .wave-view { position:absolute; inset:0; display:block; }
+html[data-theme=waveform] .scrolling-waveform { position:absolute; inset:0; border:0; border-radius:0; background:transparent; }
+/* Central 44% is the seek region; the side zones are reserved in Behavior too. */
+html[data-theme=waveform] .scrolling-waveform::before { content:''; position:absolute; inset:0 28%; border-inline:1px solid #ffffff18; pointer-events:none; }
+html[data-theme=waveform] .current-playback-time { position:absolute; bottom:32px; left:28%; right:28%; text-align:center; pointer-events:none; font-size:9px; }
+html[data-theme=waveform] .cues-view,
+html[data-theme=waveform] .stems-view { position:absolute; inset:0; display:block; background:transparent; pointer-events:none; overflow:visible; }
+html[data-theme=waveform] .cue-pads { display:contents; }
+html[data-theme=waveform] .cue-pad { position:absolute; width:25%; height:44px; min-height:36px; pointer-events:auto; background:#08141d55; border:1px solid var(--accent); font-size:11px; }
+html[data-theme=waveform] .cue-pad:nth-child(-n+4) { left:1%; }
+html[data-theme=waveform] .cue-pad:nth-child(n+5) { right:1%; }
+html[data-theme=waveform] .cue-pad:nth-child(4n+1) { top:6%; }
+html[data-theme=waveform] .cue-pad:nth-child(4n+2) { top:19%; }
+html[data-theme=waveform] .cue-pad:nth-child(4n+3) { bottom:25%; }
+html[data-theme=waveform] .cue-pad:nth-child(4n+4) { bottom:12%; }
+html[data-theme=waveform] .loop-controls { position:absolute; bottom:0; left:0; right:0; pointer-events:auto; }
+html[data-theme=waveform] .loop-controls button { min-height:28px; background:#08141d55; }
+html[data-theme=waveform] .nudge-controls { top:50%; bottom:auto; transform:translateY(-50%); z-index:6; }
+html[data-theme=waveform] .nudge-controls button { min-width:0; width:24%; min-height:36px; background:#08141d22; }
+html[data-theme=waveform] .stem-faders { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:1fr 1fr; position:absolute; inset:4% 1% 8%; min-height:0; gap:14% 48%; }
+html[data-theme=waveform] .stem-faders label { display:flex; flex-direction:column; gap:3px; min-height:0; min-width:0; pointer-events:auto; }
+html[data-theme=waveform] .stem-faders span { width:auto; font-size:9px; text-align:center; }
+html[data-theme=waveform] .stem-faders input[type=range] { writing-mode:vertical-lr; direction:rtl; width:36px; height:0; min-height:0; flex:1; margin:0; touch-action:pan-x pinch-zoom; }
+html[data-theme=waveform] .stem-faders input::-webkit-slider-runnable-track { width:6px; height:100%; }
+html[data-theme=waveform] .stem-faders input::-moz-range-track { width:6px; height:100%; }
+html[data-theme=waveform] .stem-faders input::-webkit-slider-thumb { margin:0 -8px 0 0; }
+html[data-theme=waveform] .controls { position:absolute; inset:5% 2% 8%; background:transparent; gap:20px; pointer-events:none; }
+html[data-theme=waveform] .controls > div { background:transparent; }
+html[data-theme=waveform] .controls button { pointer-events:auto; background:#08141d44; }
+/* Same captured full-deck comparison; remove the ordinary content clipping only. */
+html[data-theme=waveform] .waveform-comparison-active .performance-content { position:static; overflow:visible; }
+html[data-theme=waveform] .waveform-comparison-expanded { inset:auto; z-index:8; }
+html[data-theme=waveform] .controls > div { pointer-events:auto; }
+html[data-theme=waveform] .waveform-comparison-active .wave-view { position:static; }
+html[data-theme=waveform] .waveform-comparison-active .stems-view { visibility:hidden; }
+html[data-theme=waveform] .nudge-controls button[aria-pressed=true] { background:#ffffff22; color:var(--accent); border-color:var(--accent); }

@@ -28,7 +28,7 @@ export function connectSettings(header, decks) {
           saved.waveformWindowSeconds <= 8 && Number.isInteger(saved.waveformWindowSeconds * 2)) {
         waveformWindowSeconds = saved.waveformWindowSeconds;
       }
-      if (['default', 'glass-hardware', 'futuristic'].includes(saved.theme)) themes.themeSelect.value = saved.theme;
+      if (['default', 'glass-hardware', 'futuristic', 'waveform'].includes(saved.theme)) themes.themeSelect.value = saved.theme;
       if (['decks', 'uniform', 'controls'].includes(saved.colorMode)) themes.modeSelect.value = saved.colorMode;
       if (Array.isArray(saved.colors) && saved.colors.length === 4 && saved.colors.every(color => /^#[a-f0-9]{6}$/i.test(color))) {
         themes.colorInputs.forEach((input, index) => input.value = saved.colors[index]);

@@ -585,3 +585,18 @@ suites pass. Next add the experimental Waveform theme using the same constructed
 controls and waveform; preserve the three existing themes. See
 [file responsibilities and checks](docs/WAVEFORM-THEME.md). Do not push; physical
 Safari verification follows the experimental theme checkpoint.
+
+Global nudge checkpoint: `4d24861`. Waveform theme is now implemented through scoped
+Visual theme CSS/presentation and existing Behavior navigation/seeking. No Audio
+changes. It reuses controls and the canvas, retains the three original themes and
+exposes central-only seeking with side performance overlays. Configuration state
+is session-local; saved theme uses the existing preference format. Landscape Vertical
+is the initial physical evaluation target; other layouts are provisional. See the
+linked report for exact responsibilities, test results and remaining uncertainties.
+
+Verification complete: twelve suites have passing results, with focused reload,
+configuration-nudge and phone-header reruns. Native Chromium selector touch/slide
+and mouse/touch comparison checks pass. Original theme geometry matches the
+pre-theme snapshot in nine theme/viewport combinations after final header grouping.
+Editor/whitespace checks pass; no Audio changes or unresolved automated failures.
+Stop at the local Waveform checkpoint for physical iPad testing; do not push.

@@ -1,3 +1,4 @@
+import { isWaveformTheme } from './deck-navigation.js';
 import { beginWaveformComparison, endWaveformComparison, comparisonBlocksSeeking } from './waveform-comparison.js';
 import { getWaveformOrientation, getWaveformWindowSeconds } from '../settings.js';
 // Behavior owns overview/scrolling pointer interpretation and transient seek
@@ -42,6 +43,11 @@ export function connectWaveformSeeking({ deck, node, overview, scrolling, action
   for (const surface of [overview, scrolling]) {
     surface.addEventListener('pointerdown', event => {
       if (event.target.closest('[data-waveform-control]')) return;
+      if (surface === scrolling && isWaveformTheme()) {
+        const rect = surface.getBoundingClientRect();
+        // Side areas remain performance-control territory even in empty gaps.
+        if (event.clientX < rect.left+rect.width*.28 || event.clientX > rect.right-rect.width*.28) return;
+      }
       if (comparisonBlocksSeeking(surface) || !canSeek() || seekGesture || !event.isPrimary || event.button !== 0) return;
       const vertical = surface === scrolling && getWaveformOrientation() === 'vertical';
       const axisLength = surface.getBoundingClientRect()[vertical ? 'height' : 'width'];

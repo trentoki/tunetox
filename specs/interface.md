@@ -177,3 +177,30 @@ This supersedes the earlier always-use-preference experiment in tablet portrait.
 Waveform allocation and horizontal overview are unchanged. On phone widths the compact group omits the long visual label while retaining its
 accessible name and duration/buttons, preserving the normal header height without
 crowding deck controls. Very narrow screens may wrap. Physical device review remains necessary.
+
+## Experimental Waveform theme
+
+See [theme responsibilities and verification](../docs/WAVEFORM-THEME.md). This extends
+the existing theme stylesheet/root attribute mechanism. One shared deck construction
+and its existing control elements serve all themes. Behavior retains the original
+section selections and one experimental configuration per deck; there are no copies
+of musical state. Cues, Stems and Controls overlay a permanent scrolling waveform.
+The full-song overview and remaining header controls retain their original positions.
+The existing upper selector is reused as a compact 70px configuration control; lower
+selector is concealed in this theme. Upward 32px steps advance through Cues/Stems/
+Controls; downward steps reverse, bounded at the ends. A stationary tap cycles with
+wraparound. Keyboard Up/Down selects, and the ordinary button click cycles.
+
+Side zones are 28% on each edge; central 44% is visibly bounded and accepts scrolling
+seek starts. Captured drags can continue beyond it. Cue groups are 1/2 upper-left,
+3/4 lower-left, 5/6 upper-right and 7/8 lower-right. Vertical stem layout places
+Transients/Tune left and Flow/Voice right, above/below centered directional nudges.
+Shift remains in the bottom existing loop row. Controls retains current preview
+status. No new signal processing or musical behavior is introduced.
+
+The existing comparison presentation hides the overlays while revealing the full
+deck. All three configurations participate because their waveform is visible;
+Library and non-Waveform theme Stems views do not. Source-time scaling, analysis,
+owner-only seek and pointer capture remain unchanged. Switching themes restores
+original layouts/section choices; switching configurations never rebuilds a canvas,
+control or Audio node. Theme choice persists; configurations are session-local.

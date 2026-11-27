@@ -189,3 +189,15 @@ can click; physical listening verification remains necessary.
 to every deck (2–50%, default 2%). Vertical dragging/keyboard adjusts it, including
 currently held directions. Each deck retains independent backward/forward holding
 and simultaneous nudging. No per-deck amount controls or percentage state remain.
+
+**Experimental Waveform theme:** Uses the same constructed deck and existing theme
+switching. Header and full-song overview retain their arrangement; one compact
+Cues/Stems/Controls selector replaces the two section selectors. Tap cycles; vertical
+sliding selects continuously. The scrolling waveform permanently fills the content
+area with a centered playhead and existing saved zoom/color mode. Cue pads occupy
+paired corner-side groups; Stems uses existing vertical faders in those side zones;
+Controls overlays existing previews transparently. Configurations are exclusive,
+while waveform/nudges remain visible. Pointer seeking starts only in the marked
+central 44%; surrounding controls/gaps cannot start seeks. Existing landscape
+Vertical full-deck comparison and owner capture remain authoritative. This theme is
+provisional pending physical iPad testing; the original three layouts are retained.

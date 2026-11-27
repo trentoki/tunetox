@@ -2,6 +2,7 @@
 const themes = Object.freeze({
   default: { label: "Default", stylesheet: null },
   "glass-hardware": { label: "Glass Hardware", stylesheet: "app/visual/themes/glass-hardware/theme.css" },
+  waveform: { label: "Waveform (experiment)", stylesheet: "app/visual/themes/waveform/theme.css" },
   futuristic: { label: "Futuristic", stylesheet: "app/visual/themes/futuristic/theme.css" }
 });
 const defaultColors = ["#bb6bff", "#ed65d7", "#4dcdf1", "#69e5aa"];

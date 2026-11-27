@@ -1,7 +1,8 @@
 import { registerWaveformComparison, validateWaveformComparison } from '../../behavior/mixer/waveform-comparison.js';
 import { createExpandedComparison } from '../waveform/expanded-comparison.js';
 import { getWaveformColorMode } from '../../behavior/settings.js';
-import { createDeckNavigation } from '../../behavior/mixer/deck-navigation.js';
+import { createWaveformDeckLayout } from '../themes/waveform/deck-layout.js';
+import { createDeckNavigation, connectWaveformPerformanceSelector } from '../../behavior/mixer/deck-navigation.js';
 import { connectWaveformSeeking } from '../../behavior/mixer/waveform-seeking.js';
 import { installVerticalRoller } from '../../behavior/mixer/vertical-roller.js';
 import { connectTempoControls } from '../../behavior/mixer/tempo-controls.js';
@@ -174,6 +175,7 @@ export function createPlaybackDeck(number, deck, actions) {
     navigation.toggleLower();
   });
   selector.append(upperToggle, lowerToggle);
+  connectWaveformPerformanceSelector(upperToggle, navigation);
   const play = button("play-pause-button", "▶", "Play Deck " + number, actions.togglePlayback);
   const queue = button("queue-button", "EMPTY", "Queue empty", actions.playQueue);
   const main = createRangeField("main-volume-fader", "MAIN 0%", 0);
@@ -227,6 +229,7 @@ export function createPlaybackDeck(number, deck, actions) {
   upperSection.append(wave.node, stems);
   lowerSection.append(cues, controls);
   content.append(upperSection, lowerSection);
+  const renderDeckLayout = createWaveformDeckLayout({ upperToggle, lowerToggle, wave: wave.node, stems, cues, controls });
   performance.append(header, content);
   registerWaveformComparison({ node, navigation, surface: wave.surface, cancelSeek: seeking.cancel,
     presentation: createExpandedComparison({ surface: wave.surface, node, header, lowerSection, redraw: updatePlaybackTime }) });
@@ -322,7 +325,7 @@ export function createPlaybackDeck(number, deck, actions) {
     }
   }
   document.addEventListener('tunetox-theme-change', () => {
-    cancelTempoRoller(); cancelPitchRoller(); seeking.cancel(); renderRollers(); renderOverview();
+    cancelTempoRoller(); cancelPitchRoller(); seeking.cancel(); renderRollers(); renderOverview(); render();
   });
 
   document.addEventListener('tunetox-waveform-colors-change', () => {
@@ -389,16 +392,14 @@ export function createPlaybackDeck(number, deck, actions) {
     mainInput.setAttribute("aria-valuetext", percentage + "%");
     performance.hidden = navigation.workspace !== "performance-view";
     library.hidden = navigation.workspace !== "library-view";
-    wave.node.hidden = navigation.upperView !== "wave-view";
-    stems.hidden = navigation.upperView !== "stems-view";
-    cues.hidden = navigation.lowerView !== "cues-view";
-    controls.hidden = navigation.lowerView !== "controls";
     upperToggle.textContent = navigation.upperView === "wave-view" ? "Wave" : "Stems";
     lowerToggle.textContent = navigation.lowerView === "cues-view" ? "Cues" : "Controls";
     upperToggle.setAttribute("aria-pressed", String(navigation.upperView === "stems-view"));
     lowerToggle.setAttribute("aria-pressed", String(navigation.lowerView === "controls"));
     upperToggle.title = "Switch upper section to " + (navigation.upperView === "wave-view" ? "Stems" : "Wave");
     lowerToggle.title = "Switch lower section to " + (navigation.lowerView === "cues-view" ? "Controls" : "Cues");
+    upperToggle.setAttribute("aria-label", "Toggle upper section for Deck " + number);
+    renderDeckLayout(navigation.presentation);
     title.textContent = deck.song?.name || "Load a song";
     title.title = title.textContent;
     play.textContent = deck.isPlaying ? "Ⅱ" : "▶";

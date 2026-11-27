@@ -27,7 +27,7 @@ export function createGlobalNudgePresentation(header) {
   percent.setAttribute('aria-label', 'Nudge percentage');
   percent.setAttribute('role', 'spinbutton');
   percent.setAttribute('aria-valuemin', '2'); percent.setAttribute('aria-valuemax', '50');
-  group.append(percent); header.querySelector('.waveform-zoom').after(group);
+  group.append(percent); header.querySelector('.waveform-zoom').append(group);
   return { percent, render(value) {
     percent.textContent = value + '%'; percent.setAttribute('aria-valuenow', String(value));
   } };
