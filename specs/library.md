@@ -164,3 +164,13 @@ canonical song-link relationship as All Songs; changing any occurrence refreshes
 all occurrences. Membership and disclosure never change one another. Expansion is
 local to each deck's Manage, not persisted song metadata. Fixed Back and the prior
 Library browsing context remain unchanged.
+
+### D2 relationship drop destinations
+
+Dragging a canonical Library song onto another Library song creates one reciprocal
+explicit link; self-links are rejected and repeated drops do not duplicate it.
+Dropping onto a playlist adds membership without removing any existing membership.
+Origin and destination Libraries may belong to different decks. These actions use
+the same relationship functions as Manage and never load a deck. Existing numbered,
+overview and Queue drop rules are retained. Strip appearance is determined solely
+by each panel's current aria-pressed choice, including the first option.

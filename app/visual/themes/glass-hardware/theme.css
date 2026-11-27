@@ -247,8 +247,8 @@ html[data-theme="glass-hardware"] {
 }
 [data-theme="glass-hardware"] .search-result { border-color: #2e3c47; }
 [data-theme="glass-hardware"] .library-header { border-color: #46545f; }
-[data-theme="glass-hardware"] .section-selector button:first-child,
-[data-theme="glass-hardware"] .song-sort-selector button:first-child {
+[data-theme="glass-hardware"] .section-selector button[aria-pressed="true"],
+[data-theme="glass-hardware"] .song-sort-selector button[aria-pressed="true"] {
   color: var(--accent);
   background: #0c161e;
   box-shadow: inset 0 -2px var(--accent), inset 0 1px #ffffff1c;

@@ -45,3 +45,5 @@
 .manage-playlist-row { display:flex; align-items:center; gap:5px; margin:3px 0; }
 .manage-playlist-row > input { flex-shrink:0; }
 .manage-playlist-row > button { flex:1; min-width:0; padding:7px 4px; text-align:left; overflow-wrap:anywhere; }
+
+.library-view :is(.section-selector,.song-sort-selector) button[aria-pressed=false] { background:transparent; color:var(--accent); box-shadow:none; }

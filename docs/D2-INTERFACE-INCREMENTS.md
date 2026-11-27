@@ -65,3 +65,25 @@ Focused navigation and editable-field/context-menu checks pass. Editor diagnosti
 clean. Tests reopening Links after successful loads were updated for the approved
 new close-on-load rule. Uniform Default colors now apply without requiring a prior
 color edit. Physical Safari selection/callout and modifier review remains due.
+
+## 3. Library relationship drops and strip appearance
+
+`app/behavior/library/library-controls.js` delegates relationship drops from its
+existing results list, including cross-deck origins. The existing song drag payload
+carries only canonical identity. Existing setSongLink/setPlaylistMembership validate
+identities and write unique relationships; membership additions never remove other
+memberships. Self-links are rejected. Existing numbered/overview/Queue drop paths
+are unchanged. No independent relationship store is added.
+
+`app/visual/library/library.css`, mixer playback CSS and both theme stylesheets now
+use aria-pressed for every strip option; first-child styling no longer competes with
+the selected option. Existing Behavior sorting/ascending/descending/sliding code is
+unchanged. Library integration tests cover cross-library links/memberships,
+duplicate/self protection and selected/unselected styling in every theme.
+
+Increment 3 verification: the expanded Library interface suite passes, including
+existing deck/Queue destinations and ascending/descending/sliding behavior. Native
+mouse dragstart and cross-Library song/playlist drops pass. Existing membership was
+accounted for in fixture selection, so repeat-drop checks measure an actual addition.
+Editor diagnostics clean. iPad Safari drag initiation remains a physical check;
+Manage checkboxes remain the supported alternative when native dragging is limited.

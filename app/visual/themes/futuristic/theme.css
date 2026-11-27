@@ -187,8 +187,8 @@ html[data-theme="futuristic"] { background: #050910; color: #d5e6ef; }
 [data-theme="futuristic"] .search { color: #cbe7f6; background: #071320; border-color: #486c85; box-shadow: inset 0 2px 4px #0009; }
 [data-theme="futuristic"] .library-header { border-color: #486c85; }
 [data-theme="futuristic"] .search-result { border-color: #294355; }
-[data-theme="futuristic"] .section-selector button:first-child,
-[data-theme="futuristic"] .song-sort-selector button:first-child { color: #e5ffff; background: color-mix(in srgb, var(--accent) 30%, #14273a); box-shadow: inset 0 -2px var(--accent); }
+[data-theme="futuristic"] .section-selector button[aria-pressed="true"],
+[data-theme="futuristic"] .song-sort-selector button[aria-pressed="true"] { color: #e5ffff; background: color-mix(in srgb, var(--accent) 30%, #14273a); box-shadow: inset 0 -2px var(--accent); }
 
 @media (orientation: portrait), (max-width: 700px) {
   [data-theme="futuristic"] .mixer-decks { gap: 4px; }

@@ -266,6 +266,35 @@ document.querySelector('#run').onclick = async () => {
     assert(restoredAlpha.textContent.includes('121.25 BPM verified') && restoredAlpha.textContent.includes('V40 120'), 'Reload lost detected or verified BPM');
     assert(players.every(player => player.readyState === 0), 'Library restoration loaded a deck');
     pass('application reload restores songs and supplied BPM/key without loading or recreating performance state');
+    open(1); await rows(1,3);
+    const beforeLinks=(await store.listLinks()).length;
+    drop(getRow(0,'Alpha'),getRow(1,'Gamma'));
+    await until(async()=> (await store.listLinks()).length===beforeLinks+1,'Cross-library link');
+    drop(getRow(0,'Alpha'),getRow(1,'Gamma'));drop(getRow(0,'Alpha'),getRow(1,'Alpha'));await delay(50);
+    assert((await store.listLinks()).length===beforeLinks+1,'Duplicate/self link');
+    library(1).querySelectorAll('.section-selector button')[1].click();
+    await until(()=>library(1).querySelector('[data-playlist-id]'),'Playlist drop target');
+    const originalMemberships=await store.listMemberships();
+    const targetPlaylist=library(1).querySelector('[data-playlist-id]').dataset.playlistId;
+    const membershipSong=(await store.listSongs()).find(song=>!originalMemberships.some(m=>m.playlistId===targetPlaylist&&m.songId===song.id));
+    assert(membershipSong,'No nonmember fixture');
+    drop(getRow(0,membershipSong.title),library(1).querySelector('[data-playlist-id]'));
+    await until(async()=> (await store.listMemberships()).length===originalMemberships.length+1,'Playlist membership drop');
+    drop(getRow(0,membershipSong.title),library(1).querySelector('[data-playlist-id]'));await delay(50);
+    const membershipsAfter=await store.listMemberships();
+    assert(membershipsAfter.length===originalMemberships.length+1 && originalMemberships.every(m=>membershipsAfter.some(n=>n.id===m.id)),'Membership replaced/duplicated');
+    for(const theme of ['default','glass-hardware','futuristic']){
+      const selector=doc.querySelector('[aria-label="Visual theme"]');selector.value=theme;selector.dispatchEvent(new win.Event('change'));await delay(60);
+      for(const strip of library(1).querySelectorAll('.section-selector,.song-sort-selector')){
+        for(const button of strip.children){button.click();await delay(20);
+          assert(strip.querySelectorAll('[aria-pressed=true]').length===1,'Multiple selected strip options');
+          const inactive=[...strip.children].filter(b=>b!==button).map(b=>win.getComputedStyle(b));
+          assert(inactive.every(s=>s.backgroundColor==='rgba(0, 0, 0, 0)'&&s.boxShadow==='none'),'Inactive strip styling '+theme);
+        }
+      }
+    }
+    library(1).querySelectorAll('.section-selector button')[0].click();await rows(1,3);
+    pass('cross-library song links/memberships, duplicate/self protection and uniform strip styling in all themes');
     for (let i=0;i<50;i++) {
       const id = (i + 100).toString(16).padStart(64, '0');
       await store.addSong({id, title:'Analysis fixture ' + i, filename:'fixture.wav', artist:'Fixture', verifiedBpm:null, key:null}, new win.Blob(['fixture']));
@@ -280,7 +309,7 @@ document.querySelector('#run').onclick = async () => {
     localManage.querySelector('.library-manage-body').scrollTop = 100000;
     const backRect = localManage.querySelector('.library-manage-toolbar button').getBoundingClientRect();
     assert(backRect.top >= localManage.getBoundingClientRect().top && backRect.bottom < localManage.getBoundingClientRect().bottom, 'Manage Back not permanently visible');
-    open(1); await rows(1, 53); library(1).querySelectorAll('.song-sort-selector button')[3].click();
+    open(1); library(1).querySelectorAll('.song-sort-selector button')[3].click(); await rows(1, 53);
     assert(!localManage.hidden && !doc.querySelector('dialog[open]'), 'Peer interaction disturbed local Manage');
     localManage.querySelector('.library-manage-toolbar button').click();
     await until(() => list.scrollTop === scrollBefore && !library(0).querySelector('.library-content').hidden, 'Manage did not restore list scroll');

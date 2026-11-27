@@ -15,7 +15,7 @@ export function connectSongDrop(target, receive) {
     if (!accepts(event)) return;
     event.preventDefault(); event.stopPropagation();
     const id = event.dataTransfer.getData(songDragType);
-    if (/^[a-f0-9]{64}$/.test(id)) void receive(id);
+    if (/^[a-f0-9]{64}$/.test(id)) void receive(id, event);
   });
 }
 
@@ -61,6 +61,18 @@ export function connectLibraryControls(library, controls, sendSong, report) {
     if (event.target.closest('.song-manage-button')) { event.preventDefault(); return; }
     const row = event.target.closest('[data-song-id]'); if (!row) return;
     select(row); event.dataTransfer.setData(songDragType, selectedId); event.dataTransfer.effectAllowed = 'copy';
+  });
+  // Delegation also accepts songs dragged from any independently open Library.
+  // Canonical storage enforces unique relationships and validates both identities.
+  connectSongDrop(results, async (id, event) => {
+    const song = event.target.closest('[data-song-id]');
+    const playlist = event.target.closest('[data-playlist-id]');
+    try {
+      if (song) {
+        if (id === song.dataset.songId) { report('A song cannot link to itself.'); return; }
+        await library.setSongLink(id, song.dataset.songId, true);
+      } else if (playlist) await library.setPlaylistMembership(id, playlist.dataset.playlistId, true);
+    } catch (error) { fail(error); }
   });
   async function refresh() {
     const request = ++generation;
