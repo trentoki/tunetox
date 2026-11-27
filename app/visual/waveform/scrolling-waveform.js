@@ -3,6 +3,20 @@ import { frequencyPalette, frequencyColor } from './frequency-colors.js';
 // Source-time geometry is independent of BPM and Tempo. At any playback rate the
 // same transient has the same width; only Audio's source position advances faster.
 
+// Shared presentation geometry for rendering and cue lines. Expanded comparison
+// preserves the normal axis length and playhead while revealing a longer canvas.
+export function getScrollingGeometry(surface) {
+  const vertical = document.documentElement.dataset.waveformOrientation === 'vertical';
+  const visibleAxis = vertical ? surface.clientHeight : surface.clientWidth;
+  const normalAxis = Number(surface.dataset.comparisonAxisLength) || visibleAxis;
+  const playheadOffset = surface.dataset.comparisonPlayheadOffset === undefined
+    ? normalAxis / 2 : Number(surface.dataset.comparisonPlayheadOffset);
+  return {
+    vertical, visibleAxis, playheadOffset,
+    pixelsPerSecond: normalAxis / getWaveformWindowSeconds()
+  };
+}
+
 export function createScrollingWaveform() {
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
@@ -39,14 +53,14 @@ export function createScrollingRenderer(surface, canvas, resized) {
     lastSummary = summary; lastPosition = seconds; lastColor = color; lastEnergy = energy; lastOrientation = vertical; lastWindowSeconds = windowSeconds; lastColorMode = colorMode;
     context.clearRect(0, 0, width, height);
     if (!summary) return;
-    const start = seconds - windowSeconds / 2;
+    const { visibleAxis, playheadOffset, pixelsPerSecond } = getScrollingGeometry(surface);
+    const start = seconds - playheadOffset / pixelsPerSecond;
     const first = Math.max(0, Math.floor(start / summary.groupSeconds));
-    const end = Math.min(summary.maximum.length, Math.ceil((start + windowSeconds) / summary.groupSeconds));
+    const end = Math.min(summary.maximum.length, Math.ceil((start + visibleAxis / pixelsPerSecond) / summary.groupSeconds));
     // Rotate only canvas coordinates; DOM controls, box and source scale stay shared.
     context.save();
     if (vertical) context.transform(0, 1, -1, 0, width, 0);
-    const timeSize = vertical ? height : width, crossSize = vertical ? width : height;
-    const pixelsPerSecond = timeSize / windowSeconds;
+    const crossSize = vertical ? width : height;
     const barWidth = summary.groupSeconds * pixelsPerSecond;
     const amplitude = crossSize / 2 * .55;
     if (energy) {

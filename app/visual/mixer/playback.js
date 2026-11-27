@@ -1,3 +1,5 @@
+import { registerWaveformComparison, validateWaveformComparison } from '../../behavior/mixer/waveform-comparison.js';
+import { createExpandedComparison } from '../waveform/expanded-comparison.js';
 import { getWaveformColorMode } from '../../behavior/settings.js';
 import { createDeckNavigation } from '../../behavior/mixer/deck-navigation.js';
 import { connectWaveformSeeking } from '../../behavior/mixer/waveform-seeking.js';
@@ -226,6 +228,8 @@ export function createPlaybackDeck(number, deck, actions) {
   lowerSection.append(cues, controls);
   content.append(upperSection, lowerSection);
   performance.append(header, content);
+  registerWaveformComparison({ node, navigation, surface: wave.surface, cancelSeek: seeking.cancel,
+    presentation: createExpandedComparison({ surface: wave.surface, content, lowerSection, redraw: updatePlaybackTime }) });
 
   const library = element("div", "library-view");
   const libraryHeader = element("div", "library-header");
@@ -340,6 +344,7 @@ export function createPlaybackDeck(number, deck, actions) {
 
   function render() {
     seeking.validate();
+    validateWaveformComparison();
     nudgeControls.validate();
     for (const surface of [overview, wave.surface]) {
       surface.tabIndex = canSeek() ? 0 : -1;

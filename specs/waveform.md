@@ -166,3 +166,38 @@ Tablet portrait (601–1100 CSS pixels) uses horizontal presentation; landscape 
 the saved orientation. The waveform occupies the same allocated box. Orientation
 and zoom changes cancel uncommitted seek previews without seeking. See
 [implementation and verification](../docs/D2-WAVEFORM-ZOOM.md).
+
+## D2 shading and temporary comparison experiments
+
+Both waveform views offer a saved shared coloring mode. Deck shades is the default
+for this experiment: Low is a saturated deck hue, Mid mixes it 50% toward white,
+High 95% toward white. Chromatic saturation is at least 75%, base lightness 35–50%;
+neutral accents stay neutral. The established relative-energy blend and eighth-step
+quantization are unchanged. Complementary hues remains selectable in Settings.
+No Audio analysis, crossover, amplitude or BPM calculations change.
+
+Initial expanded comparison is limited to landscape with effective Vertical
+orientation. A scrolling seek movement of at least 3 CSS pixels activates it; a tap,
+nudge gesture, overview seek, Horizontal or portrait drag does not. Behavior selects
+currently visible Wave views at activation. Library and Stems views are excluded;
+views opened later wait for the next comparison. All participants reveal extra
+future audio downward over their lower controls, within their existing deck area.
+The overview stays unchanged. Original pixels per source second and playhead screen
+height are retained. Comparison playheads align to the gesture owner's screen height.
+
+The original surface/canvas stays in place in the DOM with its pointer capture.
+Its temporary absolute position covers the lower section, which is concealed and
+inert; nudge controls/time text are concealed. Renderer and cue placement share
+presentation geometry: start = source position − playhead offset / pixels per second;
+visible duration = expanded axis length / pixels per second. Amplitude is unchanged.
+The seek action retains its original pointer anchor and original axis length, so
+expansion causes no discontinuity or new seek pathway. Passive scrolling surfaces
+cannot initiate seeking, and existing passive seek previews are cancelled; their
+Audio transport and authoritative source positions continue normally.
+
+Release restores the normal UI and commits only the existing owner seek. Cancellation,
+lost capture, blur, resize/rotation, hidden document, zoom/orientation/theme change,
+source invalidation or owner navigation restores the UI without committing a stale
+preview. A passive participant leaving Wave view is removed from the presentation.
+No comparison playback state or analysis is created. See the
+[experiment report](../docs/D2-WAVEFORM-EXPERIMENTS.md) for responsibilities and checks.

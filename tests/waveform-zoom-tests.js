@@ -77,8 +77,10 @@ document.querySelector('#run').onclick = async () => {
     const overviewCanvases = decks.map(deck => deck.querySelector('.waveform-overview svg'));
     const identities = [...win.nodes], sources = players.map(player => player.src);
     const analysis = players.map(player => [player.scrollingWaveform, player.frequencyEnergy]);
+    const pointerRects = new WeakMap();
     function pointer(surface, type, fraction, vertical = false, touch = false) {
-      const rect = surface.getBoundingClientRect();
+      if(type==='pointerdown') pointerRects.set(surface,surface.getBoundingClientRect());
+      const rect = pointerRects.get(surface) || surface.getBoundingClientRect();
       surface.dispatchEvent(new win.PointerEvent(type, {
         pointerId:1, isPrimary:true, pointerType:touch?'touch':'mouse', button:0, bubbles:true,
         clientX:rect.x + rect.width * (vertical ? .5 : fraction),

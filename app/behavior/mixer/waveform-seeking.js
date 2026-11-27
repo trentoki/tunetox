@@ -1,3 +1,4 @@
+import { beginWaveformComparison, endWaveformComparison, comparisonBlocksSeeking } from './waveform-comparison.js';
 import { getWaveformOrientation, getWaveformWindowSeconds } from '../settings.js';
 // Behavior owns overview/scrolling pointer interpretation and transient seek
 // preview. Audio remains the only advancing source clock. Visual reads position.
@@ -13,6 +14,7 @@ export function connectWaveformSeeking({ deck, node, overview, scrolling, action
     window.removeEventListener('resize', cancelSeekGesture);
     if (previous && previous.surface.hasPointerCapture(previous.id)) previous.surface.releasePointerCapture(previous.id);
     seekPreview = null;
+    endWaveformComparison(scrolling);
     changed();
   }
   function previewSeek(coordinate) {
@@ -40,7 +42,7 @@ export function connectWaveformSeeking({ deck, node, overview, scrolling, action
   for (const surface of [overview, scrolling]) {
     surface.addEventListener('pointerdown', event => {
       if (event.target.closest('[data-waveform-control]')) return;
-      if (!canSeek() || seekGesture || !event.isPrimary || event.button !== 0) return;
+      if (comparisonBlocksSeeking(surface) || !canSeek() || seekGesture || !event.isPrimary || event.button !== 0) return;
       const vertical = surface === scrolling && getWaveformOrientation() === 'vertical';
       const axisLength = surface.getBoundingClientRect()[vertical ? 'height' : 'width'];
       if (!axisLength) return;
@@ -62,7 +64,9 @@ export function connectWaveformSeeking({ deck, node, overview, scrolling, action
       if (seekGesture?.id !== event.pointerId || seekGesture.surface !== surface) return;
       if (!canSeek() || deck.audio.src !== seekGesture.source) { cancelSeekGesture(); return; }
       event.preventDefault();
-      previewSeek(seekGesture?.vertical ? event.clientY : event.clientX);
+      const coordinate = seekGesture.vertical ? event.clientY : event.clientX;
+      if (surface === scrolling && Math.abs(coordinate - seekGesture.anchorCoordinate) >= 3) beginWaveformComparison(surface);
+      previewSeek(coordinate);
     });
     surface.addEventListener('pointerup', event => {
       if (seekGesture?.id !== event.pointerId || seekGesture.surface !== surface) return;
@@ -76,7 +80,7 @@ export function connectWaveformSeeking({ deck, node, overview, scrolling, action
       if (seekGesture?.id === event.pointerId && seekGesture.surface === surface) cancelSeekGesture();
     });
     surface.addEventListener('keydown', event => {
-      if (event.target.closest('[data-waveform-control]') || !canSeek()) return;
+      if (event.target.closest('[data-waveform-control]') || comparisonBlocksSeeking(surface) || !canSeek()) return;
       const current = seekPreview ?? deck.audio.currentTime;
       const target = { ArrowLeft: current - 5, ArrowDown: current - 5,
         ArrowRight: current + 5, ArrowUp: current + 5, Home: 0, End: deck.audio.duration }[event.key];
@@ -85,6 +89,7 @@ export function connectWaveformSeeking({ deck, node, overview, scrolling, action
       commitSeek(Math.max(0, Math.min(deck.audio.duration, target)));
     });
   }
+  document.addEventListener('visibilitychange', () => { if (document.hidden) cancelSeekGesture(); });
   document.addEventListener('tunetox-waveform-orientation-change', cancelSeekGesture);
   document.addEventListener('tunetox-waveform-zoom-change', cancelSeekGesture);
   return {

@@ -549,5 +549,10 @@ Increment 1 implements selectable deck shades, default for physical evaluation.
 Visual playback and zoom browser suites pass, including frequency palette tests,
 four-deck recoloring, unchanged overview geometry and saved mode reload. Audio is
 unchanged. See [experiment responsibilities and verification](docs/D2-WAVEFORM-EXPERIMENTS.md).
-Increment 2 will add temporary comparison during landscape Vertical dragging.
+Increment 1 is locally checkpointed as `9f5edb3`. Increment 2 now implements temporary
+comparison during landscape Vertical dragging, preserving scale and captured seek.
+Eleven regression suites have passing results; native Chromium mouse/touch checks
+pass in all three themes. Initial phone zero-size cue rendering was corrected; an
+initial nudge resume timeout passed on a fresh rerun. No unresolved test failures.
+Physical Safari visual usefulness, capture behavior and listening remain unverified.
 No push; stop for physical iPad testing after independent local checkpoints.

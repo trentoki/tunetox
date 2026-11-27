@@ -212,3 +212,12 @@ html[data-waveform-orientation=vertical] .scrolling-cue-marker { left:0; right:0
   .mixer-header .waveform-zoom output { min-width:29px; }
   .mixer-header .global-library-controls { order:3; margin-left:auto; }
 }
+
+/* Comparison covers only the existing lower performance area, never the overview. */
+.performance-content { position: relative; }
+.scrolling-waveform.waveform-comparison-expanded { position: absolute; z-index: 8; }
+.waveform-comparison-passive { pointer-events: none; }
+.waveform-comparison-active .performance-lower-section,
+.waveform-comparison-active .current-playback-time,
+.waveform-comparison-active [data-waveform-control] { visibility: hidden; }
+html[data-waveform-orientation="vertical"] .waveform-comparison-expanded > .playhead { top: var(--comparison-playhead); }

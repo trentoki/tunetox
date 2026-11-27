@@ -170,3 +170,10 @@ Rotation never changes established musical state or interrupts playback.
 experiment) or the retained Complementary hues. Both waveform views blend the same
 relative frequency energies: saturated deck hue for Low, lighter same hue for Mid,
 near-white for High. Analysis, amplitude and source-time geometry are unchanged.
+
+**Temporary waveform comparison experiment:** In landscape Vertical mode, dragging
+at least 3 CSS pixels expands visible Wave views downward over lower controls.
+Library/Stems and the overview remain unchanged. Playheads align without changing
+source-time scale, and only the dragged waveform seeks. Release/cancellation restores
+normal controls immediately. Horizontal/portrait retain ordinary seeking for this
+initial experiment. See [waveform specification](specs/waveform.md).
