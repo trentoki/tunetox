@@ -1,3 +1,4 @@
+import { createScrollingCueMarkers } from '../waveform/scrolling-cue-markers.js';
 import { connectLibraryControls, connectSongDrop } from '../../behavior/library/library-controls.js';
 // Approved H5.3.1 presentation for the new Clean Playback host.
 // Inputs: one persistent Clean Deck state and bound host actions.
@@ -234,6 +235,7 @@ export function createPlaybackDeck(number, deck, actions) {
   overview.setAttribute('aria-label', 'Song position for Deck ' + number);
   overview.setAttribute('aria-valuemin', '0');
   const wave = createWave();
+  const renderScrollingCues = createScrollingCueMarkers(wave.surface);
   const scrollingRenderer = createScrollingRenderer(wave.surface, wave.graphic, updatePlaybackTime);
   let animationFrame = 0;
   wave.surface.setAttribute('role', 'slider');
@@ -389,6 +391,8 @@ export function createPlaybackDeck(number, deck, actions) {
     overview.setAttribute('aria-valuenow', String(songPosition));
     overview.setAttribute('aria-valuetext', formatTime(songPosition) + ' of ' + formatTime(duration));
     scrollingRenderer.draw(deck.audio.scrollingWaveform, songPosition, deck.audio.frequencyEnergy);
+    renderScrollingCues(deck.cuePositions, songPosition,
+      Boolean(deck.song && !deck.loadingSong && deck.audio.src === deck.song.url && duration > 0));
     wave.surface.setAttribute('aria-valuemax', String(Number.isFinite(duration) ? duration : 0));
     wave.surface.setAttribute('aria-valuenow', String(songPosition));
     wave.surface.setAttribute('aria-valuetext', formatTime(songPosition) + ' of ' + formatTime(duration));

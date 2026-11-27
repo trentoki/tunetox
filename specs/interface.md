@@ -136,3 +136,15 @@ The new [Clean Playback entry](../tunetox.html) uses a persistent performance he
 The Version 1 PDF and its annotated screenshots record the preceding combined layout. Preserve them as historical styling references. The editable guide begins with a current-layout addendum; its original pages are explicitly historical. Playback behavior and audio modules are unchanged by this interface task.
 
 The approved product-level requirements are in [RULES.md](../RULES.md). The full pre-consolidation technical and historical record is preserved in [legacy-rules.md](legacy-rules.md). Before implementing or changing this subsystem, extract its relevant approved details from that record, distinguish superseded experiments and unresolved mechanics, and synchronize code comments and tests. Do not invent missing decisions.
+
+## Scrolling waveform cue markers — approved refinement
+
+The four-source-second scrolling waveform displays passive numbered cue lines
+using the same Behavior cuePositions as the overview. A line's percentage is
+100 × (cue source seconds − (visible source position − 2)) / 4. This remains fixed
+in source time, independent of Tempo/BPM. Lines outside [0,100]% are hidden.
+The visible source position includes the existing seek preview. Cue removal and
+song replacement hide corresponding markers immediately. Labels may shift inward
+or apart at edges/coincident positions; lines remain anchored exactly. Marker color
+uses the existing deck accent; the stationary white playhead remains above them.
+These overlays have no pointer interaction, playback state or cue values of their own.

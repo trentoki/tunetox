@@ -54,3 +54,17 @@ Changed Queue, Library deck-boundary/interface and visual playback tests, plus
 RULES and Queue/Library specifications. These suites passed, including each of the
 four destination types, READY using the latest replacement, natural-end advance,
 failed preparation, cancellation and independent peers. No Audio file changed.
+
+## Increment 3 — scrolling source-anchored cue markers
+
+Created Visual waveform/scrolling-cue-markers, a passive renderer with eight reused
+DOM markers. It reads the existing Behavior cuePositions array and the same source
+position/seek preview as the scrolling renderer. Changed Visual mixer playback
+wiring and CSS only; no Audio, cue assignment or seek decisions changed. Exact
+four-source-second geometry is independent of Tempo. Out-of-window/deleted cues
+hide; labels remain legible at edges/coincident positions while lines stay exact.
+
+Expanded scrolling/visual playback tests compare visible lines with authoritative
+overview positions, numbers, seeking, deletion and passive pointer behavior. Existing
+four-deck playback/tempo/queue, waveform and iPhone regressions passed. Architecture
+review: this file owns DOM presentation only, not stored cue values or a clock.

@@ -14,6 +14,14 @@ export function assertScrollingAligned(doc) {
     const duration = Number(overview.getAttribute('aria-valuemax'));
     assert(position === Number(scrolling.getAttribute('aria-valuenow')), 'Waveforms show different positions');
     assert(scrolling.querySelector('canvas'), 'Detailed scrolling canvas missing');
+    for (const cue of scrolling.querySelectorAll('.scrolling-cue-marker:not([hidden])')) {
+      const overviewCue = deck.querySelector('.waveform-overview .cue-marker[data-cue-number="' + cue.dataset.cueNumber + '"]');
+      assert(overviewCue, 'Scrolling cue has no authoritative overview cue');
+      const seconds = parseFloat(overviewCue.style.left) / 100 * duration;
+      const expected = (seconds - (position - 2)) / 4 * 100;
+      assert(Math.abs(parseFloat(cue.style.left) - expected) < .0001 && cue.textContent === cue.dataset.cueNumber, 'Scrolling cue source position/number mismatch');
+      assert(doc.defaultView.getComputedStyle(cue).pointerEvents === 'none', 'Scrolling cue intercepts gestures');
+    }
     if (scrolling.getClientRects().length) {
       const center = scrolling.getBoundingClientRect().left + scrolling.clientLeft + scrolling.clientWidth / 2;
       assert(Math.abs(scrolling.querySelector('.playhead').getBoundingClientRect().left - center) < 1,

@@ -407,9 +407,12 @@ async function checkCuePads(doc, win, players) {
     key(card,'ArrowRight');
     await until(() => idle(card) && Math.abs(players[index].currentTime - 5) < .01, 'Cue setup seek failed');
     pad(card,1).click();
+    const scrollingCue = () => card.querySelector('.scrolling-cue-marker[data-cue-number="1"]');
+    assert(!scrollingCue().hidden && parseFloat(scrollingCue().style.left) === 50, 'Saved cue not centered at its source time');
     assert(marker(card,1)?.textContent === '1' && parseFloat(marker(card,1).style.left) === 25 &&
       players[index].currentTime === 5 && players[index].paused, 'Cue assignment moved Audio or misplaced its marker');
     shift(card).click();pad(card,1).click();pad(card,2).click();
+    assert(scrollingCue().hidden, 'Removed scrolling cue remains visible');
     assert(!marker(card,1) && !marker(card,2) && players[index].currentTime === 5, 'Latched Shift deletion sought or assigned an empty cue');
     shift(card).click();pad(card,1).click();
     pad(card,1).dispatchEvent(new win.MouseEvent('click',{bubbles:true,shiftKey:true}));
@@ -441,6 +444,10 @@ async function checkCuePads(doc, win, players) {
     pad(card,1).click();pad(card,2).click();pad(card,1).click();
     await until(()=>idle(card)&&Math.abs(players[index].currentTime-5)<.01,'Rapid paused cues lost final target');
     assert(players[index].paused,'Paused cues started playback');
+    key(card,'ArrowRight'); await until(()=>idle(card)&&Math.abs(players[index].currentTime-10)<.01,'Scrolling cue outside-window seek');
+    assert(scrollingCue().hidden, 'Out-of-window cue not hidden');
+    pad(card,1).click(); await until(()=>idle(card)&&Math.abs(players[index].currentTime-5)<.01,'Scrolling cue return');
+    assert(!scrollingCue().hidden && parseFloat(scrollingCue().style.left) === 50, 'Scrolling cue failed to follow seek');
     shift(card).click();pad(card,2).click();pad(card,3).click();shift(card).click();
     assert(card.querySelectorAll('.cue-marker').length===1 && players[index].currentTime===5,'Deletion changed position or markers');
   }
