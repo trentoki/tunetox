@@ -657,3 +657,10 @@ Visual correction responsibilities: Waveform theme CSS owns cue faces, shared wi
 
 
 Final D2 verification: all twelve existing regression suites passed (Waveform theme, comparison, zoom, orientation, iPhone layout, nudging, Library interface/storage/analysis, Queue, visual playback and Glass Hardware). The updated theme suite verifies dark cue faces, precise pad/nudge width and edge equality, absent boundary pseudo-element, unchanged tall pads and displayed stem captions. Populated Chromium native-pointer checks passed landscape Vertical and portrait Horizontal/Vertical across Cues, Stems and Controls, including seeking, bottom nudges and single-band playhead paint. A populated portrait Cues screenshot was visually inspected. Editor diagnostics and whitespace checks passed. Audio and Behavior production files are unchanged; no listening or physical Safari verification is claimed. Stop for physical approval; do not push. Existing untracked BPM research remains excluded.
+
+
+### D2 Play contact activation
+
+Play/Pause now invokes the existing deck playback action on primary pointerdown, consuming the later compatibility click, including the touch double-tap forwarded click. Enter/Space retain native keyboard activation. Secondary mouse buttons and disabled controls do not activate. Behavior owns event interpretation in mixer/performance-input.js; Visual playback constructs the same button and connects it directly. No Audio scheduling, fade, source-position or compensation changes. Physical iPad perceived-latency comparison remains required.
+
+Contact-activation checkpoint verification: visual playback, nudging and Queue browser regression suites passed, including mouse/touch/pen pointerdown activation, compatibility/forwarded-click suppression, disabled/right-button rejection and Enter/Space checks. These synthetic input checks and generated browser audio do not establish physical Safari onset latency. Audio is unchanged.

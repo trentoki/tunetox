@@ -224,3 +224,8 @@ to device pixels without changing logical playback/seek/cue coordinates.
 ### Final D2 physical-test corrections
 
 Waveform cue pads retain their taller four-row layout but return to dark translucent faces, with accent-assigned and pressed states. Cue pads and bottom nudges share a 24% side width and aligned outer edges. The central seek region remains protected but has no visible boundary lines. All active layouts display stem names Beat, Bass, Tune and Voice; identifiers beat, bass, tune and voice are unchanged. Portrait orientation choices, stem alignment and Audio remain unchanged.
+
+
+### D2 Play contact activation
+
+Play/Pause now invokes the existing deck playback action on primary pointerdown, consuming the later compatibility click, including the touch double-tap forwarded click. Enter/Space retain native keyboard activation. Secondary mouse buttons and disabled controls do not activate. Behavior owns event interpretation in mixer/performance-input.js; Visual playback constructs the same button and connects it directly. No Audio scheduling, fade, source-position or compensation changes. Physical iPad perceived-latency comparison remains required.

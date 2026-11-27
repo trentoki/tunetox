@@ -1,3 +1,4 @@
+import { connectPlaybackButton } from '../app/behavior/mixer/performance-input.js';
 // Synthetic event regression checks; these do not emulate Safari's zoom recognizer.
 export function runTouchGuardChecks(doc) {
   const win = doc.defaultView, root = doc.querySelector(".app");
@@ -29,6 +30,26 @@ export function runTouchGuardChecks(doc) {
   }
   const nativeClick = target => target.dispatchEvent(new win.MouseEvent("click", { bubbles: true, cancelable: true, detail: 1 }));
   try {
+    const play = doc.createElement('button'); fixture.append(play);
+    let activations = 0; connectPlaybackButton(play, () => activations++);
+    const down = type => play.dispatchEvent(new win.PointerEvent('pointerdown', {bubbles:true,button:0,pointerType:type}));
+    for (const type of ['mouse','touch','pen']) {
+      down(type); assert(activations > 0, 'Play waits for release');
+      const before = activations; nativeClick(play);
+      assert(activations === before, 'Compatibility click toggled twice');
+    }
+    down('touch'); const before = activations; play.click();
+    assert(activations === before, 'Forwarded touch click toggled twice');
+    down('touch'); play.dispatchEvent(new win.Event('pointercancel'));
+    play.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Enter'})); play.click();
+    assert(activations === before + 2, 'Keyboard after cancelled pointer failed');
+    play.disabled = true; const disabledCount = activations; down('touch');
+    assert(activations === disabledCount, 'Disabled Play activated');
+    play.disabled = false;
+    play.dispatchEvent(new win.PointerEvent('pointerdown',{button:2,bubbles:true}));
+    assert(activations === disabledCount, 'Secondary mouse button activated');
+    play.dispatchEvent(new win.KeyboardEvent('keydown',{key:' '})); play.click();
+    assert(activations === disabledCount+1, 'Space activation failed');
     reset();
     tap(search); assert(!tap(search).defaultPrevented,'Text editing double tap blocked');
     for(const type of ['contextmenu','selectstart']) {

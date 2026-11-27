@@ -1,3 +1,4 @@
+import { connectPlaybackButton } from '../../behavior/mixer/performance-input.js';
 import { registerWaveformComparison, validateWaveformComparison } from '../../behavior/mixer/waveform-comparison.js';
 import { createExpandedComparison } from '../waveform/expanded-comparison.js';
 import { getWaveformColorMode } from '../../behavior/settings.js';
@@ -170,7 +171,10 @@ export function createPlaybackDeck(number, deck, actions) {
   });
   selector.append(upperToggle, lowerToggle);
   connectWaveformPerformanceSelector(upperToggle, navigation);
-  const play = button("play-pause-button", "▶", "Play Deck " + number, actions.togglePlayback);
+  const play = button("play-pause-button", "▶", "Play Deck " + number);
+  play.disabled = false;
+  play.removeAttribute("title");
+  connectPlaybackButton(play, actions.togglePlayback);
   const queue = button("queue-button", "EMPTY", "Queue empty", actions.playQueue);
   const main = createRangeField("main-volume-fader", "MAIN 0%", 0);
   const mainPercentage = element("output", "", "MAIN 0%");

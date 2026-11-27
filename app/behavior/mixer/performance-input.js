@@ -53,3 +53,25 @@ export function installTouchGuards(root) {
   win.addEventListener("blur", reset);
   win.addEventListener("resize", reset);
 }
+
+// Play uses the original deck action on contact. Consume the compatibility click
+// (including the iOS double-tap fallback); keyboard activation keeps native clicks.
+export function connectPlaybackButton(button, togglePlayback) {
+  let pointerActivated = false;
+  button.addEventListener('pointerdown', event => {
+    if (button.disabled || event.button !== 0) return;
+    pointerActivated = true;
+    togglePlayback();
+  });
+  button.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') pointerActivated = false;
+  });
+  button.addEventListener('click', event => {
+    if (pointerActivated) {
+      pointerActivated = false;
+      event.preventDefault();
+      return;
+    }
+    if (!button.disabled && event.detail === 0) togglePlayback();
+  });
+}
