@@ -1,4 +1,4 @@
-import { SCROLLING_WINDOW_SECONDS } from './scrolling-waveform.js';
+import { getWaveformWindowSeconds } from '../../behavior/settings.js';
 
 // Passive presentation of the existing Behavior cuePositions array. The eight DOM
 // markers are reused; no cue values, playback position or seek state are retained.
@@ -12,11 +12,12 @@ export function createScrollingCueMarkers(surface) {
   });
   surface.append(overlay);
   return function render(positions, sourceSeconds, valid) {
+    const windowSeconds = getWaveformWindowSeconds();
     const vertical = document.documentElement.dataset.waveformOrientation === 'vertical';
-    const start = sourceSeconds - SCROLLING_WINDOW_SECONDS / 2, width = vertical ? surface.clientHeight : surface.clientWidth;
+    const start = sourceSeconds - windowSeconds / 2, width = vertical ? surface.clientHeight : surface.clientWidth;
     markers.forEach((line, index) => {
       const position = positions[index];
-      const percent = (position - start) / SCROLLING_WINDOW_SECONDS * 100;
+      const percent = (position - start) / windowSeconds * 100;
       line.hidden = !valid || position === null || !Number.isFinite(position) || percent < 0 || percent > 100;
       if (line.hidden) return;
       line.style.left = vertical ? '0' : percent + '%';

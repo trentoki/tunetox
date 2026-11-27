@@ -12,7 +12,7 @@ import { connectLibraryControls, connectSongDrop } from '../../behavior/library/
 // Class names follow docs/visual-verification/APPROVED-NAMING.md.
 import { installCueControls } from '../../behavior/mixer/cue-controls.js';
 import { createOverviewWaveform, drawOverviewWaveform } from '../waveform/overview-waveform.js';
-import { createScrollingWaveform, createScrollingRenderer, SCROLLING_WINDOW_SECONDS } from '../waveform/scrolling-waveform.js';
+import { createScrollingWaveform, createScrollingRenderer } from '../waveform/scrolling-waveform.js';
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -199,7 +199,7 @@ export function createPlaybackDeck(number, deck, actions) {
   wave.surface.setAttribute('aria-label', 'Scrolling song position for Deck ' + number);
   wave.surface.setAttribute('aria-valuemin', '0');
   const seeking = connectWaveformSeeking({ deck, node, overview, scrolling: wave.surface,
-    windowSeconds: SCROLLING_WINDOW_SECONDS, actions, getBusy: () => busy,
+    actions, getBusy: () => busy,
     isVisible: surface => navigation.workspace === 'performance-view' && (surface === overview || navigation.upperView === 'wave-view'),
     changed: updatePlaybackTime });
   const canSeek = seeking.canSeek;
@@ -296,6 +296,7 @@ export function createPlaybackDeck(number, deck, actions) {
   }
   document.addEventListener('visibilitychange', updatePlaybackTime);
   document.addEventListener('tunetox-waveform-orientation-change', updatePlaybackTime);
+  document.addEventListener('tunetox-waveform-zoom-change', updatePlaybackTime);
 
   function renderRollers() {
     const futuristic = document.documentElement.dataset.theme === 'futuristic';

@@ -529,3 +529,15 @@ no property regrouping, function relocation or parameter rename is implemented n
 locally checkpointed, with nine regression suites passing and native Chromium
 interaction/layout checks recorded in [the D2 report](docs/D2-INTERFACE-INCREMENTS.md).
 Stop for physical Safari testing before additional development or pushing.
+
+
+### D2 physical feedback — global waveform zoom
+
+Physical iPad testing provisionally approved Vertical, with perceived compression;
+Horizontal looked particularly good in portrait. The next local checkpoint adds
+shared saved 1–8-source-second zoom (0.5 steps, default 4), horizontal-only tablet
+portrait and restored landscape preference. It preserves Audio and existing analysis,
+waveform amplitude, overview, Queue and musical state. See
+[files, data flow and verification](docs/D2-WAVEFORM-ZOOM.md). Stop for physical iPad
+testing after verification/checkpointing; do not push or begin another feature.
+The separately deferred Audio readability review and upcoming musical tasks remain.

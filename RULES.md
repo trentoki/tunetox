@@ -78,7 +78,8 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
    the existing shared seek action. Both waveforms track the same source position
    across playback, Tempo changes, cues and Queue swaps; display gestures do not
    create a separate playback clock or change another deck.
-   The scrolling window spans four source seconds, independent of BPM. Detailed
+   The scrolling window defaults to four source seconds, independent of BPM, with
+   a saved global 1–8-second zoom in 0.5-second steps. Detailed
    analysis uses approximately 5 ms sample groups and preserves transient extrema;
    Tempo changes scrolling speed rather than waveform shape or horizontal scale.
 4. Each deck independently retains both section selections, including across Library round trips. All four decks default to **Wave + Cues**. Switching a section must not reset the other section, another deck, playback, queue state, or musical participation. This supersedes the combined Wave/Cue versus Controls switch.
@@ -131,7 +132,7 @@ No multi-selection, Link All or bulk membership assignment is implemented. See [
 
 **D2 orientation experiment:** Settings contains theme/deck-color preferences and a
 saved global Horizontal/Vertical scrolling waveform choice, initially Horizontal.
-Vertical uses the same four-source-second box, colors/cues and authoritative source
+Vertical uses the same scrolling waveform box, colors/cues and authoritative source
 position with a stationary horizontal playhead. Playback scrolls upward; dragging
 up advances/down rewinds. The overview remains horizontal. Global Import and
 Analyze All remain directly accessible.
@@ -156,3 +157,11 @@ fields retain normal editing.
 
 These principles support the existing Visual, Behavior and Audio responsibilities.
 They do not authorize unrelated restructuring during an approved musical increment.
+
+**Global waveform zoom and portrait direction:** The directly accessible top-strip
+Waveform Zoom controls set one saved visible duration for all four decks: 1–8 source
+seconds in 0.5-second steps, default 4. Drawing, cue positions and drag distances use
+that same Behavior-owned value. The centered playhead, analysis, playback and full-song
+overview are unchanged. The existing tablet portrait layout always shows horizontal
+scrolling waveforms; landscape restores the saved Horizontal/Vertical preference.
+Rotation never changes established musical state or interrupts playback.

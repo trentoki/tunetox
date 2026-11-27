@@ -7,7 +7,7 @@ extraction and reconciliation of the remaining historical design rules are pendi
 
 ## Implemented scrolling waveform
 
-The scrolling view uses a four-source-second window beneath a stationary centered
+The scrolling view uses a shared 1–8-source-second window (default 4) beneath a stationary centered
 playhead. Its detailed minimum/maximum/RMS summary groups approximately 5 ms of
 decoded audio, independently of the unchanged 360-column full-song overview.
 Canvas renders only visible groups; requestAnimationFrame reads authoritative
@@ -16,8 +16,9 @@ source-time shape or scale. See the [waveform analysis/rendering contract](wavef
 for data ownership, calculations, memory, animation and verification limits.
 
 Both surfaces retain one shared seek preview and Behavior seek action. For a
-scrolling drag, target source seconds = anchor source seconds - horizontal travel
-/ gesture width × 4, clamped to the song. Right moves backward; left moves forward.
+scrolling drag, target source seconds = anchor source seconds - travel along the
+effective time axis / gesture axis length × shared visible duration, clamped to the
+song. Right/down moves backward; left/up moves forward.
 A stationary tap does not jump. Preview updates both views and the time readout;
 release commits while retaining playing/paused intent. Arrow keys still seek by
 five seconds; Home/End reach the bounds. No BPM, zoom controls or audible scratching
@@ -139,7 +140,7 @@ The approved product-level requirements are in [RULES.md](../RULES.md). The full
 
 ## Scrolling waveform cue markers — approved refinement
 
-The four-source-second scrolling waveform displays passive numbered cue lines
+The zoomable scrolling waveform displays passive numbered cue lines
 using the same Behavior cuePositions as the overview. A line's percentage is
 100 × (cue source seconds − (visible source position − 2)) / 4. This remains fixed
 in source time, independent of Tempo/BPM. Lines outside [0,100]% are hidden.
@@ -164,3 +165,15 @@ rotates only scrolling waveform drawing and cue geometry inside the original box
 forward playback moves upward through a centered horizontal playhead. Drag up seeks
 forward; down seeks backward. Overview, four-second source window, nudge hit areas,
 cues and lower sections remain. Settings is nonmodal and never changes transport.
+
+
+### Global waveform zoom and tablet portrait orientation
+
+The top strip provides Waveform Zoom out/in and visible source duration outside
+Settings. One saved duration applies to all decks/orientations: 1–8 seconds in
+0.5-second steps, default 4. Tablet portrait in the existing 601–1100-pixel layout
+always shows horizontal waveforms; the saved orientation is retained for landscape.
+This supersedes the earlier always-use-preference experiment in tablet portrait.
+Waveform allocation and horizontal overview are unchanged. On phone widths the compact group omits the long visual label while retaining its
+accessible name and duration/buttons, preserving the normal header height without
+crowding deck controls. Very narrow screens may wrap. Physical device review remains necessary.

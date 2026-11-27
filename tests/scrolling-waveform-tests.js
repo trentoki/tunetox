@@ -7,6 +7,8 @@ async function until(test, message) {
 
 // Both surfaces use the same authoritative position, including animation frames.
 export function assertScrollingAligned(doc) {
+  const windowSeconds = parseFloat(doc.querySelector('[aria-label="Visible waveform duration"]')?.textContent) || 4;
+  const vertical = doc.documentElement.dataset.waveformOrientation === 'vertical';
   for (const deck of doc.querySelectorAll('.deck')) {
     const overview = deck.querySelector('.waveform-overview');
     const scrolling = deck.querySelector('.scrolling-waveform');
@@ -18,13 +20,15 @@ export function assertScrollingAligned(doc) {
       const overviewCue = deck.querySelector('.waveform-overview .cue-marker[data-cue-number="' + cue.dataset.cueNumber + '"]');
       assert(overviewCue, 'Scrolling cue has no authoritative overview cue');
       const seconds = parseFloat(overviewCue.style.left) / 100 * duration;
-      const expected = (seconds - (position - 2)) / 4 * 100;
-      assert(Math.abs(parseFloat(cue.style.left) - expected) < .0001 && cue.textContent === cue.dataset.cueNumber, 'Scrolling cue source position/number mismatch');
+      const expected = (seconds - (position - windowSeconds / 2)) / windowSeconds * 100;
+      // Overview CSS percentages are browser-rounded; source reconstruction is approximate.
+      assert(Math.abs(parseFloat(cue.style[vertical ? 'top' : 'left']) - expected) < .01 && cue.textContent === cue.dataset.cueNumber, 'Scrolling cue source position/number mismatch');
       assert(doc.defaultView.getComputedStyle(cue).pointerEvents === 'none', 'Scrolling cue intercepts gestures');
     }
     if (scrolling.getClientRects().length) {
-      const center = scrolling.getBoundingClientRect().left + scrolling.clientLeft + scrolling.clientWidth / 2;
-      assert(Math.abs(scrolling.querySelector('.playhead').getBoundingClientRect().left - center) < 1,
+      const box = scrolling.getBoundingClientRect();
+      const center = vertical ? box.top + scrolling.clientTop + scrolling.clientHeight / 2 : box.left + scrolling.clientLeft + scrolling.clientWidth / 2;
+      assert(Math.abs(scrolling.querySelector('.playhead').getBoundingClientRect()[vertical ? 'top' : 'left'] - center) < 1,
         'Scrolling playhead moved from its CSS center');
     }
   }

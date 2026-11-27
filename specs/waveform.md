@@ -43,15 +43,17 @@ outside the time-critical AudioWorklet. Loading analysis can still delay UI fram
 
 ## Visible rendering and animation
 
-At source position p, the window is [p − 2, p + 2] seconds. Group x is
-(group index × group seconds − window start) × canvas CSS width / 4. Its width
-is group seconds × canvas CSS width / 4. These quantities never depend on BPM or
+At source position p and shared visible duration W (default 4 seconds), the window
+is [p − W/2, p + W/2]. A group’s time-axis coordinate is
+(group index × group seconds − window start) × time-axis CSS length / W. Its width
+along that axis is group seconds × time-axis CSS length / W. The time axis is
+canvas width in Horizontal and height in Vertical. These quantities never depend on BPM or
 Tempo; increasing Tempo only advances Audio's p faster. The playhead stays at 50%.
 Regions before zero/after the recording are blank, never repeated data.
 
 The renderer visits floor(window start / group interval) through
 ceil(window end / group interval), clamped to the summary array. This is roughly
-800 groups regardless of song length. Min/max peaks and RMS use two batched canvas
+800 groups at the default 4 seconds (200–1600 at 1–8 seconds), regardless of song length. Min/max peaks and RMS use two batched canvas
 paths for accent-only fallback, or two colored rectangles per visible group. There
 is no per-group DOM and no scan of off-screen groups. Native canvas clipping
 handles partially visible boundary groups. ResizeObserver and devicePixelRatio
@@ -150,3 +152,17 @@ The SVG viewBox, rectangle count, x/y/width/height/opacity, original peaks and R
 playback indicator, cue overlays and absolute-seek actions remain unchanged.
 Only the SVG rectangle fill changes. Source/accent changes rebuild the SVG; ordinary
 playback updates only the existing indicator, without repeating aggregation.
+
+
+## D2 global zoom refinement
+
+The preceding four-second geometry now describes the default, not a fixed zoom.
+Behavior Settings owns one saved duration (1–8 source seconds, 0.5-second steps).
+Scrolling rendering, passive cue placement and relative dragging all read its
+getter. Only visible summary groups are drawn; decoded summaries and frequency
+energy are reused. Zoom does not alter waveform amplitude, tempo or playback time.
+
+Tablet portrait (601–1100 CSS pixels) uses horizontal presentation; landscape uses
+the saved orientation. The waveform occupies the same allocated box. Orientation
+and zoom changes cancel uncommitted seek previews without seeking. See
+[implementation and verification](../docs/D2-WAVEFORM-ZOOM.md).

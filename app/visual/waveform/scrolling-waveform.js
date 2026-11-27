@@ -1,7 +1,7 @@
+import { getWaveformWindowSeconds } from '../../behavior/settings.js';
 import { frequencyPalette, frequencyColor } from './frequency-colors.js';
 // Source-time geometry is independent of BPM and Tempo. At any playback rate the
 // same transient has the same width; only Audio's source position advances faster.
-export const SCROLLING_WINDOW_SECONDS = 4;
 
 export function createScrollingWaveform() {
   const canvas = document.createElement('canvas');
@@ -14,13 +14,14 @@ export function createScrollingWaveform() {
 export function createScrollingRenderer(surface, canvas, resized) {
   const context = canvas.getContext('2d');
   let width = 0, height = 0, scale = 0;
-  let lastSummary, lastPosition, lastColor, lastEnergy, lastOrientation;
+  let lastSummary, lastPosition, lastColor, lastEnergy, lastOrientation, lastWindowSeconds;
   let palette;
   const observer = new ResizeObserver(() => { scale = 0; resized(); });
   observer.observe(surface);
 
   function draw(summary, seconds, energy) {
     if (!surface.getClientRects().length) { lastSummary = null; lastPosition = null; return; }
+    const windowSeconds = getWaveformWindowSeconds();
     const vertical = document.documentElement.dataset.waveformOrientation === 'vertical';
     const nextWidth = surface.clientWidth, nextHeight = surface.clientHeight;
     const nextScale = window.devicePixelRatio || 1;
@@ -32,19 +33,19 @@ export function createScrollingRenderer(surface, canvas, resized) {
       canvas.width = Math.round(width * scale); canvas.height = Math.round(height * scale);
       context.setTransform(scale, 0, 0, scale, 0, 0);
     }
-    if (!dimensionsChanged && summary === lastSummary && seconds === lastPosition && color === lastColor && energy === lastEnergy && vertical === lastOrientation) return;
+    if (!dimensionsChanged && summary === lastSummary && seconds === lastPosition && color === lastColor && energy === lastEnergy && vertical === lastOrientation && windowSeconds === lastWindowSeconds) return;
     if (color !== lastColor) palette = frequencyPalette(color);
-    lastSummary = summary; lastPosition = seconds; lastColor = color; lastEnergy = energy; lastOrientation = vertical;
+    lastSummary = summary; lastPosition = seconds; lastColor = color; lastEnergy = energy; lastOrientation = vertical; lastWindowSeconds = windowSeconds;
     context.clearRect(0, 0, width, height);
     if (!summary) return;
-    const start = seconds - SCROLLING_WINDOW_SECONDS / 2;
+    const start = seconds - windowSeconds / 2;
     const first = Math.max(0, Math.floor(start / summary.groupSeconds));
-    const end = Math.min(summary.maximum.length, Math.ceil((start + SCROLLING_WINDOW_SECONDS) / summary.groupSeconds));
+    const end = Math.min(summary.maximum.length, Math.ceil((start + windowSeconds) / summary.groupSeconds));
     // Rotate only canvas coordinates; DOM controls, box and source scale stay shared.
     context.save();
     if (vertical) context.transform(0, 1, -1, 0, width, 0);
     const timeSize = vertical ? height : width, crossSize = vertical ? width : height;
-    const pixelsPerSecond = timeSize / SCROLLING_WINDOW_SECONDS;
+    const pixelsPerSecond = timeSize / windowSeconds;
     const barWidth = summary.groupSeconds * pixelsPerSecond;
     const amplitude = crossSize / 2 * .55;
     if (energy) {

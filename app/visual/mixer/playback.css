@@ -197,3 +197,18 @@ html[data-waveform-orientation=vertical] .scrolling-cue-marker { left:0; right:0
 }
 
 .application-identity { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+
+.waveform-zoom { display:flex; align-items:center; gap:4px; flex-shrink:0; font-size:10px; }
+.waveform-zoom > span { max-width:52px; line-height:1.1; }
+.waveform-zoom button { min-width:28px; min-height:28px; padding:2px 5px; font-size:16px; }
+.waveform-zoom output { min-width:34px; text-align:center; font-variant-numeric:tabular-nums; }
+.application-settings > small { display:block; margin:4px 0 10px; }
+@media (max-width:600px), (max-width:1000px) and (max-height:500px) and (pointer:coarse) {
+  .mixer-header .application-identity { order:1; }
+  .mixer-header .settings-button { padding:6px 1px; }
+  .mixer-header .waveform-zoom { order:2; gap:2px; }
+  .mixer-header .waveform-zoom > span { display:none; }
+  .mixer-header .waveform-zoom button { min-width:22px; padding:2px; }
+  .mixer-header .waveform-zoom output { min-width:29px; }
+  .mixer-header .global-library-controls { order:3; margin-left:auto; }
+}
