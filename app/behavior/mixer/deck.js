@@ -1,4 +1,5 @@
-import { buildAudio, loadAudio, startAudio, pauseAudio, ejectAudio, seekAudio, setAudioTempo, setAudioMainVolume } from "../../audio/deck-audio.js";
+import { applyDeckTempo, setNudgeDirection } from './nudging.js';
+import { buildAudio, loadAudio, startAudio, pauseAudio, ejectAudio, seekAudio, setAudioMainVolume } from "../../audio/deck-audio.js";
 
 // Behavior: deck decisions and state. Visual controls are defined elsewhere.
 export function buildDeck() {
@@ -8,6 +9,8 @@ export function buildDeck() {
     isPlaying: false,
     mainVolume: 0,
     tempoRatio: 1,
+    nudgePercent: 2,
+    nudgeDirection: 0,
     stemLevels: { beat: 1, bass: 1, tune: 1, voice: 1 },
     cuePositions: Array(8).fill(null),
     loadingSong: null,
@@ -41,6 +44,7 @@ export function setStemLevel(deck, stem, value) {
 
 export async function loadSong(deck, song) {
   if (deck.isPlaying) return false;
+  if (deck.nudgeDirection) await setNudgeDirection(deck, 0);
   deck.loadingSong = song;
   try {
     await loadAudio(deck.audio, song);
@@ -70,12 +74,13 @@ export function sendToDeck(deck, song) {
 
 export function setTempo(deck, ratio) {
   if (!Number.isFinite(ratio) || ratio < .5 || ratio > 2) throw new RangeError("Tempo ratio must be from 0.5 to 2.");
-  const applied = setAudioTempo(deck.audio, ratio);
+  const applied = applyDeckTempo(deck, ratio);
   deck.tempoRatio = ratio;
   return applied;
 }
 
 export async function seekDeck(deck, seconds) {
+  if (deck.nudgeDirection) await setNudgeDirection(deck, 0);
   await seekAudio(deck.audio, seconds);
   deck.isPlaying = !deck.audio.paused;
 }
@@ -89,12 +94,14 @@ export async function playDeck(deck) {
 
 export async function pauseDeck(deck) {
   if (!deck.isPlaying) return;
+  if (deck.nudgeDirection) await setNudgeDirection(deck, 0);
   await pauseAudio(deck.audio);
   deck.isPlaying = false;
 }
 
 export async function ejectSong(deck) {
   if (deck.isPlaying) return;
+  if (deck.nudgeDirection) await setNudgeDirection(deck, 0);
   deck.loadingSong = null;
   const removing = ejectAudio(deck.audio);
   deck.song = null;
@@ -136,9 +143,11 @@ export function createPlaybackCoordinator(deck, callbacks) {
 
   async function run(operation) {
     if (pending) return;
+    const restoringNudge = deck.nudgeDirection ? setNudgeDirection(deck, 0) : null;
     pending = true;
     callbacks.busyChanged(true);
     try {
+      if (restoringNudge) await restoringNudge;
       const result = await operation();
       callbacks.completed(result);
       return result;
@@ -155,6 +164,7 @@ export function createPlaybackCoordinator(deck, callbacks) {
 
   deck.audio.addEventListener("ended", () => {
     deck.isPlaying = false;
+    void setNudgeDirection(deck, 0).catch(callbacks.failed);
     // Only a real natural completion advances. A seek to the end is paused, not
     // ended. Keep one intent across delayed Play/seek acknowledgements.
     if (!swappingQueue && deck.audio.ended && deck.song && deck.queue) endedQueue = { song: deck.song, queue: deck.queue };
@@ -164,6 +174,7 @@ export function createPlaybackCoordinator(deck, callbacks) {
   deck.audio.addEventListener("error", () => {
     endedQueue = null;
     deck.isPlaying = false;
+    void setNudgeDirection(deck, 0).catch(callbacks.failed);
     callbacks.mediaFailed();
   });
 

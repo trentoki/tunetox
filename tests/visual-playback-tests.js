@@ -533,7 +533,7 @@ run.addEventListener("click", async () => {
     assert(viewport.includes("width=device-width") && viewport.includes("initial-scale=1"), "Responsive viewport changed");
     assert(win.getComputedStyle(doc.querySelector(".app")).touchAction === "manipulation",
       "Application must suppress double-tap zoom while permitting panning");
-    assert([...doc.querySelectorAll("button:not(.glass-preview-shift), .search-results")]
+    assert([...doc.querySelectorAll("button:not(.glass-preview-shift):not([data-waveform-control]), .search-results")]
       .every(node => win.getComputedStyle(node).touchAction === "manipulation"),
       "Controls, waveforms and Library scrollers must suppress double-tap zoom");
     assert([...doc.querySelectorAll('.glass-preview-shift')].every(node => win.getComputedStyle(node).touchAction === 'none'),

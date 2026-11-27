@@ -1,3 +1,8 @@
+import { connectWaveformSeeking } from '../../behavior/mixer/waveform-seeking.js';
+import { installVerticalRoller } from '../../behavior/mixer/vertical-roller.js';
+import { connectTempoControls } from '../../behavior/mixer/tempo-controls.js';
+import { connectNudgeControls } from '../../behavior/mixer/nudge-controls.js';
+import { createNudgePresentation } from '../waveform/nudge-controls.js';
 import { createScrollingCueMarkers } from '../waveform/scrolling-cue-markers.js';
 import { connectLibraryControls, connectSongDrop } from '../../behavior/library/library-controls.js';
 // Approved H5.3.1 presentation for the new Clean Playback host.
@@ -41,50 +46,6 @@ function createRangeField(className, label, value, max = 100) {
   return node;
 }
 
-// Futuristic changes pointer operation only, reusing the native range's input
-// action and keyboard support. 360px covers the full range (180px per octave
-// for Tempo). The anchor is gesture state, never another stored Tempo value.
-function installVerticalRoller(surface, input) {
-  const rollerTravelPixels = 360;
-  let drag = null;
-  let removal;
-  function cancel() {
-    const previous = drag;
-    drag = null;
-    removal?.disconnect();
-    window.removeEventListener('blur', cancel);
-    delete surface.dataset.dragging;
-    if (previous && surface.hasPointerCapture(previous.id)) surface.releasePointerCapture(previous.id);
-  }
-  surface.addEventListener('pointerdown', event => {
-    if (document.documentElement.dataset.theme !== 'futuristic' || input.disabled ||
-      drag || !event.isPrimary || event.button !== 0) return;
-    event.preventDefault(); // Suppress the native horizontal range jump.
-    input.focus({ preventScroll: true });
-    drag = { id: event.pointerId, y: event.clientY, value: Number(input.value) };
-    surface.setPointerCapture(event.pointerId);
-    surface.dataset.dragging = 'true';
-    window.addEventListener('blur', cancel);
-    removal = new MutationObserver(() => { if (!surface.isConnected) cancel(); });
-    removal.observe(document, { childList: true, subtree: true });
-  }, true);
-  surface.addEventListener('pointermove', event => {
-    if (!drag || event.pointerId !== drag.id) return;
-    if (input.disabled || document.documentElement.dataset.theme !== 'futuristic') { cancel(); return; }
-    event.preventDefault();
-    const min = Number(input.min), max = Number(input.max);
-    const value = Math.round(Math.max(min, Math.min(max,
-      drag.value + (drag.y - event.clientY) * (max - min) / rollerTravelPixels)));
-    if (Number(input.value) !== value) {
-      input.value = String(value);
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-  });
-  for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) {
-    surface.addEventListener(type, event => { if (drag?.id === event.pointerId) cancel(); });
-  }
-  return cancel;
-}
 
 function createWave() {
   const node = element("div", "wave-view");
@@ -178,7 +139,6 @@ export function createPlaybackDeck(number, deck, actions) {
   tempoInput.step = "1";
   tempoInput.setAttribute("aria-label", "Tempo ratio for Deck " + number);
   // Log2 scale: endpoints are half/double speed, exact center is unity.
-  tempoInput.addEventListener("input", () => actions.setTempo(2 ** (2 * Number(tempoInput.value) / 1000 - 1)));
   const tempoValue = element("output", "", "1.00×");
   tempo.append(tempoValue);
   const pitch = createRangeField("pitch-slider", "Pitch", 0, 12);
@@ -194,6 +154,7 @@ export function createPlaybackDeck(number, deck, actions) {
   });
   const cancelTempoRoller = installVerticalRoller(tempo, tempoInput);
   const cancelPitchRoller = installVerticalRoller(pitch, pitchInput);
+  connectTempoControls(tempo, tempoInput, actions.setTempo);
   const libraryButton = button("library-button", "Library", "Open Library for Deck " + number, () => {
     workspace = "library-view";
     render();
@@ -241,87 +202,14 @@ export function createPlaybackDeck(number, deck, actions) {
   wave.surface.setAttribute('role', 'slider');
   wave.surface.setAttribute('aria-label', 'Scrolling song position for Deck ' + number);
   wave.surface.setAttribute('aria-valuemin', '0');
-  let seekGesture = null, seekPreview = null, previewSource, seekRequest = 0, seekRemoval;
-  const canSeek = () => Boolean(deck.song) && Number.isFinite(deck.audio.duration) && deck.audio.duration > 0 &&
-    typeof actions.seek === 'function' && (actions.canSeek ? actions.canSeek() : !busy);
-  function cancelSeekGesture() {
-    const previous = seekGesture;
-    seekGesture = null;
-    seekRemoval?.disconnect();
-    window.removeEventListener('blur', cancelSeekGesture);
-    window.removeEventListener('resize', cancelSeekGesture);
-    if (previous && previous.surface.hasPointerCapture(previous.id)) previous.surface.releasePointerCapture(previous.id);
-    seekPreview = null;
-    updatePlaybackTime();
-  }
-  function previewSeek(clientX) {
-    const surface = seekGesture.surface;
-    const rect = surface.getBoundingClientRect();
-    previewSource = deck.audio.src;
-    // Overview is absolute. The scrolling window is a grabbed piece of the same
-    // source timeline: pulling it right moves backward, pulling left moves ahead.
-    const seconds = surface === overview ? (clientX - rect.left) / rect.width * deck.audio.duration :
-      seekGesture.anchorTime - (clientX - seekGesture.anchorX) / seekGesture.width * SCROLLING_WINDOW_SECONDS;
-    seekPreview = Math.max(0, Math.min(deck.audio.duration, seconds));
-    updatePlaybackTime();
-  }
-  function commitSeek(seconds) {
-    const request = ++seekRequest;
-    previewSource = deck.audio.src;
-    seekPreview = seconds;
-    updatePlaybackTime();
-    // A requested marker is temporary feedback, never another advancing clock.
-    // Reconcile to Audio after completion/failure; older replies cannot clear it.
-    Promise.resolve(actions.seek(seconds)).finally(() => {
-      if (request === seekRequest && !seekGesture) { seekPreview = null; updatePlaybackTime(); }
-    }).catch(() => {}); // The host/coordinator owns error reporting.
-  }
-  for (const surface of [overview, wave.surface]) {
-    surface.addEventListener('pointerdown', event => {
-      if (!canSeek() || seekGesture || !event.isPrimary || event.button !== 0) return;
-      const width = surface.getBoundingClientRect().width;
-      if (!width) return;
-      event.preventDefault();
-      surface.focus({ preventScroll: true });
-      seekGesture = { id: event.pointerId, source: deck.audio.src, surface,
-        anchorX: event.clientX, anchorTime: seekPreview ?? deck.audio.currentTime, width };
-      surface.setPointerCapture(event.pointerId);
-      previewSeek(event.clientX);
-      window.addEventListener('blur', cancelSeekGesture);
-      window.addEventListener('resize', cancelSeekGesture);
-      seekRemoval = new MutationObserver(() => {
-        if (!surface.isConnected || node.inert || surface.closest('[hidden]')) cancelSeekGesture();
-      });
-      seekRemoval.observe(document, { childList: true, subtree: true, attributes: true,
-        attributeFilter: ['hidden', 'inert', 'data-iphone-selected'] });
-    });
-    surface.addEventListener('pointermove', event => {
-      if (seekGesture?.id !== event.pointerId || seekGesture.surface !== surface) return;
-      if (!canSeek() || deck.audio.src !== seekGesture.source) { cancelSeekGesture(); return; }
-      event.preventDefault();
-      previewSeek(event.clientX);
-    });
-    surface.addEventListener('pointerup', event => {
-      if (seekGesture?.id !== event.pointerId || seekGesture.surface !== surface) return;
-      const allowed = canSeek() && deck.audio.src === seekGesture.source;
-      if (allowed) previewSeek(event.clientX);
-      const target = seekPreview;
-      cancelSeekGesture();
-      if (allowed) commitSeek(target);
-    });
-    for (const type of ['pointercancel', 'lostpointercapture']) surface.addEventListener(type, event => {
-      if (seekGesture?.id === event.pointerId && seekGesture.surface === surface) cancelSeekGesture();
-    });
-    surface.addEventListener('keydown', event => {
-      if (!canSeek()) return;
-      const current = seekPreview ?? deck.audio.currentTime;
-      const target = { ArrowLeft: current - 5, ArrowDown: current - 5,
-        ArrowRight: current + 5, ArrowUp: current + 5, Home: 0, End: deck.audio.duration }[event.key];
-      if (target === undefined) return;
-      event.preventDefault();
-      commitSeek(Math.max(0, Math.min(deck.audio.duration, target)));
-    });
-  }
+  const seeking = connectWaveformSeeking({ deck, node, overview, scrolling: wave.surface,
+    windowSeconds: SCROLLING_WINDOW_SECONDS, actions, getBusy: () => busy,
+    isVisible: surface => workspace === 'performance-view' && (surface === overview || upperView === 'wave-view'),
+    changed: updatePlaybackTime });
+  const canSeek = seeking.canSeek;
+  const nudgePresentation = createNudgePresentation(wave.surface, number);
+  const nudgeControls = connectNudgeControls(deck, node, nudgePresentation,
+    () => !busy && canSeek(), updatePlaybackTime, actions.announce);
   let displayedPeaks = null, displayedEnergy = null, displayedAccent = null;
   header.append(participation, tempo, pitch, libraryButton, title, selector, play, queue, main, overview);
   const content = element("div", "performance-content");
@@ -381,8 +269,7 @@ export function createPlaybackDeck(number, deck, actions) {
 
 
   function updatePlaybackTime() {
-    if (seekPreview !== null && (!deck.song || previewSource !== deck.audio.src)) seekPreview = null;
-    const songPosition = seekPreview ?? deck.audio.currentTime;
+    const songPosition = seeking.position;
     const duration = deck.audio.duration;
     wave.time.value = formatTime(songPosition) + " / " + formatTime(duration);
     const fraction = Number.isFinite(duration) && duration > 0 ? songPosition / duration : 0;
@@ -433,7 +320,7 @@ export function createPlaybackDeck(number, deck, actions) {
     }
   }
   document.addEventListener('tunetox-theme-change', () => {
-    cancelTempoRoller(); cancelPitchRoller(); cancelSeekGesture(); renderRollers(); renderOverview();
+    cancelTempoRoller(); cancelPitchRoller(); seeking.cancel(); renderRollers(); renderOverview();
   });
 
   function renderOverview() {
@@ -449,8 +336,8 @@ export function createPlaybackDeck(number, deck, actions) {
   }
 
   function render() {
-    if (seekGesture && (!canSeek() || deck.audio.src !== seekGesture.source || workspace !== 'performance-view' ||
-        (seekGesture.surface === wave.surface && upperView !== 'wave-view'))) cancelSeekGesture();
+    seeking.validate();
+    nudgeControls.validate();
     for (const surface of [overview, wave.surface]) {
       surface.tabIndex = canSeek() ? 0 : -1;
       surface.setAttribute('aria-disabled', String(!canSeek()));

@@ -367,6 +367,13 @@ async function changeTempoOrPitch(deckAudio, value, pitch) {
   }
 }
 
+// Effective rate includes a temporary Behavior nudge: established .5–2 times
+// a .5–1.5 multiplier. This uses the same pitch-preserving node and clock path.
+export function setAudioPlaybackRate(deckAudio, rate) {
+  requireRange(rate, 0.25, 3, "Effective playback rate");
+  return changeTempoOrPitch(deckAudio, rate, false);
+}
+
 export function setAudioTempo(deckAudio, rate) {
   requireRange(rate, 0.5, 2, "Tempo ratio");
   return changeTempoOrPitch(deckAudio, rate, false);
