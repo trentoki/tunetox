@@ -50,7 +50,7 @@ export async function checkLibraryDeckLoading(library) {
     assert(playingQueue?.librarySongId === song.id && decks[0].audio.src === playingUrl && !decks[0].audio.paused,
       'Library load interrupted playback instead of queueing');
     await load(0);
-    assert(decks[0].queue === playingQueue && decks[0].audio.src === playingUrl, 'Occupied queue was replaced');
+    assert(decks[0].queue !== playingQueue && decks[0].queue.librarySongId === song.id && decks[0].audio.src === playingUrl, 'Playing queue did not replace prepared resource safely');
     assert(decks.every((deck, index) => deck.audio === identities[index] && deck.mainVolume === 0 && deck.tempoRatio === 1),
       'Library recreated players or reset controls');
     await coordinators[0].togglePlayback();

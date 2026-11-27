@@ -9,11 +9,11 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
 1. TuneTox has exactly four persistent decks, numbered 1–4. All remain operational regardless of screen layout or visibility.
 2. Each deck supports an active loaded song and a prepared queued song. Loading does not automatically start playback. Queuing does not interrupt the current song.
 3. Play starts or resumes; Pause retains playback position; internal Stop rewinds to the beginning without requiring a visible Stop button; Eject unloads, with its presentation to be determined. Play/Pause is the primary visible transport. At natural song end without a queue, the song remains loaded.
-4. A queued-song swap atomically replaces the outgoing song, begins the replacement, and inherits the outgoing deck's current stem levels. Automatic advancement at song end follows this same handoff when a queue is present. Do not silently overwrite an occupied queue.
+4. A queued-song swap atomically replaces the outgoing song, begins the replacement, and inherits the outgoing deck's current stem levels. Automatic advancement at song end follows this same handoff when a queue is present. Intentional assignment to a playing deck replaces its prepared Queue song without altering the sounding song. This applies to numbered destinations and Library drops on numbered buttons, overview or Queue. Existing paused explicit-Queue occupied-slot rejection remains unchanged.
 5. Original song BPM and key remain distinct from current playback tempo and sounding pitch. Decks retain independent transport. Pitch-preserving time stretching is a desired capability; its DSP and limitations belong in technical specifications.
 6. Layout or view changes never load/unload songs, interrupt playback, reset musical settings, or trigger matching.
 7. Independent Tempo spans 0.5×–2.0×, preserves musical pitch, and uses a logarithmic slider with 1.0× exactly at its center. This ratio does not imply BPM detection or enable musical matching. The independent Pitch slider remains disabled in the current Tempo increment. Seeking uses source seconds; do not claim sample-accurate audible positioning without verification.
-8. Each loaded deck song has eight cue positions. An empty pad saves the current source position without seeking or changing playback. An assigned pad recalls through the existing seek mechanism, retaining paused/playing intent; it never toggles transport or starts a paused deck. Shift plus a pad deletes its cue without seeking. The existing Shift button supports hold and click-to-latch clearing; keyboard Shift also clears. Cues remain deck-local through theme/view changes and reset when the loaded song changes or is ejected. Queue preparation alone does not reset the active song's cues. Numbered passive overview markers correspond to these positions. End-of-song seeking retains the existing paused-at-end rule.
+8. Each loaded deck song has eight cue positions. An empty pad saves the current source position without seeking or changing playback. An assigned pad recalls through the existing seek mechanism, retaining paused/playing intent; it never toggles transport or starts a paused deck. Shift plus a pad deletes its cue without seeking. The existing Shift button supports hold and click-to-latch clearing; keyboard Shift also clears. Cues remain deck-local through theme/view changes and reset when the loaded song changes or is ejected. Queue preparation alone does not reset the active song's cues. Numbered passive overview and scrolling-waveform markers correspond to these same positions. End-of-song seeking retains the existing paused-at-end rule.
 
 ## 2. Musical Matching
 
@@ -89,8 +89,7 @@ Current Library increment: all four existing deck Library views share one persis
 collection while retaining independent browsing. Import adds files/folders without
 loading a deck. Existing 1–4 buttons and song drops onto them/overviews use the
 normal paused-load/playing-queue behavior. Explicit Queue drops fill only an empty
-slot without replacing the current song, even while paused. Occupied slots remain
-protected. Unknown BPM/key are not invented. Nested playlists expand inline and
+slot without replacing the current song, even while paused. Occupied slots on paused explicit Queue destinations remain protected; playing assignments replace the prepared song. Unknown BPM/key are not invented. Nested playlists expand inline and
 reference shared songs. Manage operates on one selected song with independent
 reciprocal links and playlist memberships; Links follows the loaded deck song,
 including paused loads. Both existing strips support tap and continuous sliding.

@@ -205,7 +205,17 @@ document.querySelector('#run').onclick = async () => {
     back(0); drop(getRow(1, 'Beta'), deck(0).querySelector('.waveform-overview'));
     await until(() => deck(0).querySelector('.queue-button').textContent === 'READY', 'Playing overview drop should queue');
     assert(players[0].src === playingSource && !players[0].paused, 'Playing overview drop replaced source');
-    pass('numbered-button, overview and explicit Queue drops reuse existing paused/playing/occupied rules');
+    open(0);
+    getRow(0, 'Gamma').click(); library(0).querySelector('.send-to-deck-one').click();
+    await until(() => deck(0).querySelector('.queue-button').title.includes('Gamma'), 'Numbered assignment did not replace playing Queue');
+    drop(getRow(0, 'Beta'), library(0).querySelector('.send-to-deck-one'));
+    await until(() => deck(0).querySelector('.queue-button').title.includes('Beta'), 'Numbered drop did not replace playing Queue');
+    drop(getRow(0, 'Gamma'), deck(0).querySelector('.queue-button'));
+    await until(() => deck(0).querySelector('.queue-button').title.includes('Gamma'), 'Queue drop did not replace playing Queue');
+    drop(getRow(0, 'Beta'), deck(0).querySelector('.waveform-overview'));
+    await until(() => deck(0).querySelector('.queue-button').title.includes('Beta'), 'Overview drop did not replace playing Queue');
+    assert(players[0].src === playingSource && !players[0].paused, 'Replacement changed sounding transport');
+    pass('all four playing Library destinations replace the prepared Queue; paused occupied Queue remains protected');
     await Promise.all(players.map(player => win.eval("import('/app/audio/deck-audio.js')").then(audio => audio.ejectAudio(player))));
     await load(); open(0); await rows(0, 3);
     assert([...library(0).querySelectorAll('[data-song-id]')].some(row => row.textContent.includes('120 BPM') && row.textContent.includes('C minor')),

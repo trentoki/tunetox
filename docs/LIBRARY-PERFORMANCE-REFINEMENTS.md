@@ -39,3 +39,18 @@ migrating obsolete loader fixtures to supported Library imports/destinations.
 The new test-only library-loading-fixture uses isolated databases and detached
 pickers; it does not restore production loaders or introduce a playback pathway.
 No physical Safari verification of these new changes is inferred from prior approval.
+
+## Increment 2 — intentional playing Queue replacement
+
+Changed Behavior mixer/deck loadQueue: while playing, assignment replaces the one
+prepared song. The same sendToDeck/queueSong coordinator paths serve numbered
+selection and all existing Library drop destinations. The sounding resource, source
+time, cues, gain, tempo and peers remain unchanged; normal URL retention releases
+superseded prepared resources. Busy guards still reject during an in-flight operation.
+Paused explicit Queue occupied-slot rejection is preserved: the new instruction's
+replacement condition is a playing deck. No separate queue state/path was added.
+
+Changed Queue, Library deck-boundary/interface and visual playback tests, plus
+RULES and Queue/Library specifications. These suites passed, including each of the
+four destination types, READY using the latest replacement, natural-end advance,
+failed preparation, cancellation and independent peers. No Audio file changed.

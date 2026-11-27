@@ -52,7 +52,10 @@ export async function loadSong(deck, song) {
 }
 
 export function loadQueue(deck, song) {
-  if (deck.queue) return false;
+  // Intentional assignments replace a playing deck's prepared slot only.
+  // The sounding song, cues, controls and Audio transport are never touched.
+  // Paused explicit Queue assignment retains its existing occupied-slot rule.
+  if (deck.queue && !deck.isPlaying) return false;
   deck.queue = song;
   return true;
 }
@@ -210,7 +213,7 @@ export function createPlaybackCoordinator(deck, callbacks) {
     playQueue: () => run(swapQueue),
     sendToDeck(song) {
       if (pending) return Promise.resolve();
-      // One slot, immediate feedback, no silent replacement or audio interruption.
+      // One prepared slot; intentional replacement never interrupts sounding Audio.
       if (deck.isPlaying) {
         const result = sendToDeck(deck, song);
         callbacks.completed(result);

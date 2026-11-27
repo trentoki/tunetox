@@ -8,11 +8,13 @@ The active host remains one four-deck system using Visual, Behavior and Audio.
 Each persistent Behavior deck owns `song`, `queue` and temporary `loadingSong`.
 Sending to an empty/paused deck uses the existing non-autoplay Load action.
 Sending to a playing deck stores one queued song without changing its source,
-position, cues, Main, Tempo or stem settings. `loadQueue` returns false when
-occupied; `sendToDeck` returns `queue-full` with the retained song. Visual reports
-that the incoming file was not queued. It does not open a modal or replace the
-slot. The host's existing URL cleanup releases rejected incoming file references
-while retaining every loaded, queued and currently loading reference.
+position, cues, Main, Tempo or stem settings. As approved in the current refinement,
+intentional assignments replace an occupied prepared slot while playing. Numbered
+selection, numbered drops, overview drops and explicit Queue drops all invoke the
+same Behavior loadQueue assignment. Paused explicit Queue assignment still returns
+false/queue-full when occupied. Coordinator guards still protect an in-flight swap;
+replacement never creates another playback path. Existing URL cleanup releases a
+superseded prepared resource while preserving the sounding source.
 
 Queued files are local read-only references, not predecoded second players.
 Decoding/worklet preparation begins when a swap is requested. Queue metadata and
@@ -61,10 +63,9 @@ explicit retry, not automatically cleared. Once accepted, a subsequent Play fail
 leaves the replacement loaded and paused with the queue consumed; an explicit Play
 can retry. There is no rollback to a discarded source or misleading READY state.
 
-Queue removal/replacement presentation remains undecided. This increment provides
-safe occupied-slot rejection, not an invented Shift gesture or a new queue editor.
-A failed retained slot may require a page/session reload to replace it through the
-current interface. Do not silently clear it as an error-recovery shortcut.
+Explicit assignment now provides playing-slot replacement; the earlier occupied
+rejection policy for playing decks is superseded. No new Queue removal gesture or
+editor is introduced. Paused explicit Queue assignment retains its prior rule.
 
 No gapless, beat-quantized, crossfaded or sample-accurate handoff is claimed. At
 natural end the next source still needs decoding/preparation and DSP lead-in, so a

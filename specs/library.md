@@ -76,7 +76,7 @@ ordering or unknown values are invented.
 Selected row + 1–4 and drops on numbered buttons/full-song overview call the existing
 `sendToDeck`: empty/paused loads paused; playing fills the one Queue slot. Explicit
 Queue drops fill an empty Queue even on a paused/empty deck without changing its
-current source/cues. Occupied queues and busy coordinators reject with feedback.
+current source/cues. Playing assignments replace an existing prepared Queue without affecting the sounding song. Paused explicit occupied Queue assignments and busy coordinators reject with feedback.
 Existing READY/manual and natural-end queue behavior remain unchanged. URL cleanup
 retains only existing loaded/queued/loading references. Unrelated/malformed drops
 cannot trigger library loading. Touch selection + numbered buttons remains available

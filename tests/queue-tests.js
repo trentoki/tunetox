@@ -51,11 +51,11 @@ run.addEventListener('click', async () => {
     await coordinator.togglePlayback();
     for (const peer of peers) await peer.coordinator.togglePlayback();
     await until(() => deck.audio.currentTime > .2, 'Outgoing song did not pass its processing lead-in');
-    const queued = song('Accepted');
-    await coordinator.sendToDeck(queued);
-    const rejected = await coordinator.sendToDeck(song('Rejected'));
-    assert(rejected.kind === 'queue-full' && deck.queue === queued && deck.song.name === 'Current' && deck.cuePositions[0] === 0, 'Occupied queue/cue state changed');
-    pass('occupied queue rejects a second song without changing source, cues or playback');
+    await coordinator.sendToDeck(song('First assignment'));
+    const queued = song('Accepted replacement');
+    const replaced = await coordinator.sendToDeck(queued);
+    assert(replaced.kind === 'queued' && deck.queue === queued && deck.song.name === 'Current' && deck.cuePositions[0] === 0, 'Occupied queue/cue state changed');
+    pass('intentional playing Queue assignment replaces the prepared song without changing source, cues or playback');
 
     let releaseRead, reading = false;
     window.fetch = (url, options) => url === queued.url ? (reading = true, new Promise(resolve => { releaseRead = () => resolve(nativeFetch(url, options)); })) : nativeFetch(url, options);
