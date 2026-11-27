@@ -57,3 +57,17 @@ Foundation and application suites passed: reciprocal/deduplicated links, removal
 invalid/self references, independent membership changes, paused/playing Links,
 independent views and all previous deck/Queue/import checks. Editor checks passed.
 No additional audio or playback state exists in these files.
+
+## Increment 4 — search, sorting and continuous strips
+
+Created Behavior library-strip-interactions, using existing pointer-capture and
+hit-testing patterns. Changed library-controls to invoke the same decisions for
+keyboard/tap and continuous pointer crossing; CSS permits horizontal interaction
+while retaining vertical browser scrolling/pinch. Presentation has no gesture rules.
+Repeated sort taps reverse order; crossing into another sort selects ascending.
+No musical key/BPM is fabricated. Search and organization remain per-view.
+
+Application tests passed, including continuous Title-to-Artist and Songs-to-Links
+crossings, independent peer views, search, supplied/unknown metadata sorting and
+all previous import/Manage/loading checks. Native physical Safari gesture feel
+remains a device check.

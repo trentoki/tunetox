@@ -18,3 +18,5 @@
 
 .library-playlist { display:block; width:100%; text-align:left; background:transparent; color:inherit; border:0; padding:8px; }
 .section-selector button[aria-pressed=true] { background:var(--accent); color:#152330; }
+
+.library-view .section-selector, .library-view .song-sort-selector { touch-action:pan-y pinch-zoom; }

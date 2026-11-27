@@ -106,6 +106,22 @@ document.querySelector('#run').onclick = async () => {
     await until(() => library(0).querySelector('[data-song-id] .song-title').textContent === 'Beta', 'BPM sort unknown last');
     library(0).querySelectorAll('.song-sort-selector button')[2].click();
     await until(() => library(0).querySelector('[data-song-id] .song-title').textContent === 'Beta', 'Key sort unknown last');
+    function slide(strip, from, to) {
+      const buttons = strip.querySelectorAll('button');
+      const point = i => { const box = buttons[i].getBoundingClientRect(); return {clientX:box.x + box.width / 2, clientY:box.y + box.height / 2}; };
+      strip.dispatchEvent(new win.PointerEvent('pointerdown', {...point(from), pointerId: 31, isPrimary:true, button:0, bubbles:true, cancelable:true}));
+      const step = to > from ? 1 : -1;
+      for (let i = from + step; step > 0 ? i <= to : i >= to; i += step)
+        strip.dispatchEvent(new win.PointerEvent('pointermove', {...point(i), pointerId:31, isPrimary:true, bubbles:true}));
+      strip.dispatchEvent(new win.PointerEvent('pointerup', {...point(to), pointerId:31, isPrimary:true, bubbles:true}));
+    }
+    slide(library(0).querySelector('.song-sort-selector'), 0, 3);
+    await until(() => library(0).querySelectorAll('.song-sort-selector button')[3].getAttribute('aria-pressed') === 'true', 'Continuous sort slide');
+    slide(library(0).querySelector('.section-selector'), 0, 2);
+    await until(() => library(0).querySelectorAll('.section-selector button')[2].getAttribute('aria-pressed') === 'true', 'Continuous Library navigation slide');
+    assert(library(1).querySelectorAll('.section-selector button')[0].getAttribute('aria-pressed') === 'true', 'Navigation slide affected another deck');
+    library(0).querySelectorAll('.section-selector button')[0].click(); await rows(0, 3);
+    pass('continuous pointer sliding across organization/content controls; independent deck choices');
     pass('independent search/selection; Title/Artist/BPM/Key sorting; supplied values sort ahead of unknown values');
     getRow(0, 'Alpha').click();
     [...library(0).querySelectorAll('.library-import-button')].find(b => b.textContent === 'Manage').click();

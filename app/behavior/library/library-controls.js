@@ -1,3 +1,4 @@
+import { connectLibraryStrip } from './library-strip-interactions.js';
 import { createSongManagement } from './song-management.js';
 import { createLibraryPresentation } from '../../visual/library/library-view.js';
 
@@ -46,14 +47,17 @@ export function connectLibraryControls(library, controls, sendSong, report) {
     connectSongDrop(button, id => sendSong(id, index, 'deck'));
   });
   [...sort.children].forEach((button, index) => {
-    const key = ['title', 'verifiedBpm', 'key', 'artist'][index];
     button.disabled = false; button.setAttribute('aria-label', 'Sort library by ' + button.textContent);
-    button.onclick = () => { descending = sortKey === key ? !descending : false; sortKey = key; limit = 100; void refresh(); };
+  });
+  connectLibraryStrip(sort, (index, repeat) => {
+    const key = ['title', 'verifiedBpm', 'key', 'artist'][index];
+    descending = sortKey === key && repeat ? !descending : false;
+    sortKey = key; limit = 100; void refresh();
   });
   [...tabs.children].forEach((button, index) => {
     button.disabled = false; button.title = button.textContent; button.setAttribute('aria-label', button.textContent);
-    button.onclick = () => { content = ['songs', 'playlists', 'links'][index]; void refresh(); };
   });
+  connectLibraryStrip(tabs, index => { content = ['songs', 'playlists', 'links'][index]; void refresh(); });
   search.disabled = false; search.setAttribute('aria-label', 'Search library songs and artists');
   search.oninput = () => { limit = 100; void refresh(); };
   function select(row) { selectedId = row.dataset.songId; view.select(selectedId, row.querySelector('.song-title').textContent); }
