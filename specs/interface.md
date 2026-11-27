@@ -232,3 +232,8 @@ control or Audio node. Theme choice persists; configurations are session-local.
 ### Final D2 physical-test corrections
 
 Waveform cue pads retain their taller four-row layout but return to dark translucent faces, with accent-assigned and pressed states. Cue pads and bottom nudges share a 24% side width and aligned outer edges. The central seek region remains protected but has no visible boundary lines. All active layouts display stem names Beat, Bass, Tune and Voice; identifiers beat, bass, tune and voice are unchanged. Portrait orientation choices, stem alignment and Audio remain unchanged.
+
+
+### D2 three-effect presentation refinement
+
+Waveform again displays all three existing preview slots (Echo, Reverb, Delay), evenly distributed above the forward nudge. Each existing selector fills the shared cue/nudge side width and sits above its original amount knob and value. Selector height uses available row space with a 30px minimum, approaching square proportions where space permits; four-deck portrait constrains height. Filter/High/Mid/Low order remains unchanged. Only Waveform CSS changes; no duplicate controls or effect processing. Future sliding effect selection remains intended but unimplemented; selectors remain clearly labeled disabled previews. Browser checks verify three slots, selector width/edge equality, height, vertical order and no side-control overlap across portrait/landscape H/V.

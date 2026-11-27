@@ -229,3 +229,8 @@ Waveform cue pads retain their taller four-row layout but return to dark translu
 ### D2 Play contact activation
 
 Play/Pause now invokes the existing deck playback action on primary pointerdown, consuming the later compatibility click, including the touch double-tap forwarded click. Enter/Space retain native keyboard activation. Secondary mouse buttons and disabled controls do not activate. Behavior owns event interpretation in mixer/performance-input.js; Visual playback constructs the same button and connects it directly. No Audio scheduling, fade, source-position or compensation changes. Physical iPad perceived-latency comparison remains required.
+
+
+### D2 three-effect presentation refinement
+
+Waveform again displays all three existing preview slots (Echo, Reverb, Delay), evenly distributed above the forward nudge. Each existing selector fills the shared cue/nudge side width and sits above its original amount knob and value. Selector height uses available row space with a 30px minimum, approaching square proportions where space permits; four-deck portrait constrains height. Filter/High/Mid/Low order remains unchanged. Only Waveform CSS changes; no duplicate controls or effect processing. Future sliding effect selection remains intended but unimplemented; selectors remain clearly labeled disabled previews. Browser checks verify three slots, selector width/edge equality, height, vertical order and no side-control overlap across portrait/landscape H/V.
