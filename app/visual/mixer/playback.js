@@ -229,7 +229,7 @@ export function createPlaybackDeck(number, deck, actions) {
   content.append(upperSection, lowerSection);
   performance.append(header, content);
   registerWaveformComparison({ node, navigation, surface: wave.surface, cancelSeek: seeking.cancel,
-    presentation: createExpandedComparison({ surface: wave.surface, content, lowerSection, redraw: updatePlaybackTime }) });
+    presentation: createExpandedComparison({ surface: wave.surface, node, header, lowerSection, redraw: updatePlaybackTime }) });
 
   const library = element("div", "library-view");
   const libraryHeader = element("div", "library-header");

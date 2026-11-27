@@ -180,14 +180,17 @@ Initial expanded comparison is limited to landscape with effective Vertical
 orientation. A scrolling seek movement of at least 3 CSS pixels activates it; a tap,
 nudge gesture, overview seek, Horizontal or portrait drag does not. Behavior selects
 currently visible Wave views at activation. Library and Stems views are excluded;
-views opened later wait for the next comparison. All participants reveal extra
-future audio downward over their lower controls, within their existing deck area.
-The overview stays unchanged. Original pixels per source second and playhead screen
-height are retained. Comparison playheads align to the gesture owner's screen height.
+views opened later wait for the next comparison. Following physical approval of the initial comparison, participants now reveal
+extra earlier and later audio across the complete deck interior rectangle. All
+other deck elements, including the overview and header, are temporarily concealed
+and their controls made inert. Original pixels per source second and playhead
+screen height are retained. Comparison playheads align to the gesture owner's screen height.
 
 The original surface/canvas stays in place in the DOM with its pointer capture.
-Its temporary absolute position covers the lower section, which is concealed and
-inert; nudge controls/time text are concealed. Renderer and cue placement share
+Its temporary absolute position covers the deck interior without reparenting it;
+header/lower controls are concealed and inert, and nudge controls/time text concealed.
+Normal amplitude scale is retained even though the drawing surface now covers the
+deck padding. The normal DOM layout remains allocated for exact restoration. Renderer and cue placement share
 presentation geometry: start = source position − playhead offset / pixels per second;
 visible duration = expanded axis length / pixels per second. Amplitude is unchanged.
 The seek action retains its original pointer anchor and original axis length, so

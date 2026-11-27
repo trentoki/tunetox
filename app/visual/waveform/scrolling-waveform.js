@@ -62,7 +62,9 @@ export function createScrollingRenderer(surface, canvas, resized) {
     if (vertical) context.transform(0, 1, -1, 0, width, 0);
     const crossSize = vertical ? width : height;
     const barWidth = summary.groupSeconds * pixelsPerSecond;
-    const amplitude = crossSize / 2 * .55;
+    // Covering the deck padding must not increase waveform amplitude either.
+    const amplitudeSize = Number(surface.dataset.comparisonCrossLength) || crossSize;
+    const amplitude = amplitudeSize / 2 * .55;
     if (energy) {
       // Color uses source energy only; min/max/RMS geometry remains unchanged.
       // Three proportions are quantized to eighths for a small reusable palette.

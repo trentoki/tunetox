@@ -213,10 +213,12 @@ html[data-waveform-orientation=vertical] .scrolling-cue-marker { left:0; right:0
   .mixer-header .global-library-controls { order:3; margin-left:auto; }
 }
 
-/* Comparison covers only the existing lower performance area, never the overview. */
-.performance-content { position: relative; }
+/* Full-deck comparison preserves the captured DOM surface and normal layout. */
+.deck.waveform-comparison-active { position: relative; }
+.waveform-comparison-active .performance-content { position: static; overflow: visible; }
 .scrolling-waveform.waveform-comparison-expanded { position: absolute; z-index: 8; }
 .waveform-comparison-passive { pointer-events: none; }
+.waveform-comparison-active .performance-header,
 .waveform-comparison-active .performance-lower-section,
 .waveform-comparison-active .current-playback-time,
 .waveform-comparison-active [data-waveform-control] { visibility: hidden; }

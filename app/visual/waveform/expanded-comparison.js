@@ -1,6 +1,6 @@
 // Temporary DOM geometry only. The same surface/canvas stays captured and draws
-// extra source time at its original pixels/second. No musical state is retained.
-export function createExpandedComparison({ surface, content, lowerSection, redraw }) {
+// extra source time above/below at its original pixels/second. No musical state is retained.
+export function createExpandedComparison({ surface, node, header, lowerSection, redraw }) {
   let original = null;
   return {
     playheadY() {
@@ -8,19 +8,24 @@ export function createExpandedComparison({ surface, content, lowerSection, redra
     },
     expand(playheadY, interactive) {
       if (original) return;
-      const rect = surface.getBoundingClientRect(), parent = content.getBoundingClientRect();
-      original = { style: surface.getAttribute('style'), inert: lowerSection.inert };
+      const deckRect = node.getBoundingClientRect();
+      original = {
+        style: surface.getAttribute('style'),
+        lowerInert: lowerSection.inert,
+        headerInert: header.inert
+      };
       surface.dataset.comparisonAxisLength = surface.clientHeight;
-      surface.dataset.comparisonPlayheadOffset = playheadY - rect.top - surface.clientTop;
+      surface.dataset.comparisonCrossLength = surface.clientWidth;
+      surface.dataset.comparisonPlayheadOffset = playheadY - deckRect.top - node.clientTop - surface.clientTop;
       surface.style.setProperty('--comparison-playhead', surface.dataset.comparisonPlayheadOffset + 'px');
       Object.assign(surface.style, {
-        top: rect.top - parent.top - content.clientTop + content.scrollTop + 'px',
-        left: rect.left - parent.left - content.clientLeft + content.scrollLeft + 'px',
-        width: rect.width + 'px', height: Math.max(rect.height, parent.bottom - rect.top) + 'px'
+        top: '0px', left: '0px',
+        width: node.clientWidth + 'px', height: node.clientHeight + 'px'
       });
       surface.classList.add('waveform-comparison-expanded');
       surface.classList.toggle('waveform-comparison-passive', !interactive);
-      content.classList.add('waveform-comparison-active');
+      node.classList.add('waveform-comparison-active');
+      header.inert = true;
       lowerSection.inert = true;
       redraw();
     },
@@ -28,12 +33,14 @@ export function createExpandedComparison({ surface, content, lowerSection, redra
       if (!original) return;
       if (original.style === null) surface.removeAttribute('style');
       else surface.setAttribute('style', original.style);
-      lowerSection.inert = original.inert;
+      lowerSection.inert = original.lowerInert;
+      header.inert = original.headerInert;
       original = null;
       delete surface.dataset.comparisonAxisLength;
+      delete surface.dataset.comparisonCrossLength;
       delete surface.dataset.comparisonPlayheadOffset;
       surface.classList.remove('waveform-comparison-expanded', 'waveform-comparison-passive');
-      content.classList.remove('waveform-comparison-active');
+      node.classList.remove('waveform-comparison-active');
       redraw();
     }
   };

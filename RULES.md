@@ -172,8 +172,10 @@ relative frequency energies: saturated deck hue for Low, lighter same hue for Mi
 near-white for High. Analysis, amplitude and source-time geometry are unchanged.
 
 **Temporary waveform comparison experiment:** In landscape Vertical mode, dragging
-at least 3 CSS pixels expands visible Wave views downward over lower controls.
-Library/Stems and the overview remain unchanged. Playheads align without changing
+at least 3 CSS pixels expands visible Wave views over the complete deck rectangle.
+All other deck content, including header and overview, is temporarily concealed.
+Library/Stems remain unchanged. Source content is revealed above and below the
+original screen-position playhead at the original source-time scale. Playheads align without changing
 source-time scale, and only the dragged waveform seeks. Release/cancellation restores
 normal controls immediately. Horizontal/portrait retain ordinary seeking for this
 initial experiment. See [waveform specification](specs/waveform.md).

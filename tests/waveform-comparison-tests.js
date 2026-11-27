@@ -100,6 +100,7 @@ document.querySelector('#run').onclick = async () => {
       });
       await until(() => players.every(p => Math.abs(p.currentTime-seconds)<.01) && decks.every(d => !d.querySelector('.play-pause-button').disabled), 'Absolute seek');
     }
+    await seekAll(7);decks.forEach(d=>d.querySelectorAll('.cue-pad')[1].click());
     await seekAll(13); decks.forEach(d=>d.querySelector('.cue-pad').click());
     await seekAll(10);
     const module=await win.eval("import('/app/visual/waveform/scrolling-waveform.js')");
@@ -111,11 +112,14 @@ document.querySelector('#run').onclick = async () => {
     function restored() {
       assert(!expanded().length,'Expansion remained');
       assert(JSON.stringify(boxes())===originalBoxes,'Normal geometry not restored');
-      assert(decks.every(d=>!d.querySelector('.performance-lower-section').inert),'Lower controls remained inert');
+      assert(decks.every(d=>!d.querySelector('.performance-lower-section').inert && !d.querySelector('.performance-header').inert),'Controls remained inert');
+      assert(decks.every(d=>win.getComputedStyle(d.querySelector('.performance-header')).visibility==='visible'),'Header not restored');
     }
     for(const seconds of [1,4,8]) {
       zoom(seconds); await seekAll(10);
       const before=module.getScrollingGeometry(waves[0]);
+      const originalPlayheads=waves.map(w=>w.querySelector('.playhead').getBoundingClientRect().top);
+      const originalSurfaces=waves.map(w=>({element:w,canvas:w.querySelector('canvas'),width:w.clientWidth}));
       pointer(waves[1],'pointerdown',.5,true);
       pointer(waves[0],'pointerdown',.5,true);
       assert(!expanded().length,'Tap expanded');
@@ -129,6 +133,13 @@ document.querySelector('#run').onclick = async () => {
         const geometry=module.getScrollingGeometry(w);
         assert(geometry.pixelsPerSecond===before.pixelsPerSecond,'Time scale changed');
         assert(geometry.visibleAxis>before.visibleAxis,'No additional source time');
+        assert(geometry.playheadOffset>before.playheadOffset,'No earlier source time revealed');
+        const rect=w.getBoundingClientRect(), deckRect=decks[i].getBoundingClientRect();
+        assert(Math.abs(rect.left-deckRect.left-decks[i].clientLeft)<1 && Math.abs(rect.top-deckRect.top-decks[i].clientTop)<1 && rect.width===decks[i].clientWidth && rect.height===decks[i].clientHeight,'Waveform does not cover complete deck');
+        assert(Math.abs(w.querySelector('.playhead').getBoundingClientRect().top-originalPlayheads[i])<1,'Playhead jumped');
+        assert(w===originalSurfaces[i].element && w.querySelector('canvas')===originalSurfaces[i].canvas,'Captured surface recreated');
+        assert(Number(w.dataset.comparisonCrossLength)===originalSurfaces[i].width,'Amplitude geometry changed');
+        assert(decks[i].querySelector('.performance-header').inert && win.getComputedStyle(decks[i].querySelector('.performance-header')).visibility==='hidden','Header/overview controls not concealed');
         assert(decks[i].querySelector('.performance-lower-section').inert,'Covered controls active');
         assert(win.getComputedStyle(w.querySelector('[data-waveform-control]')).visibility==='hidden','Nudge remained visible');
       }
@@ -141,12 +152,13 @@ document.querySelector('#run').onclick = async () => {
       await until(()=>Math.abs(players[0].currentTime-(10+seconds/4))<.02,'Expanded seek scale');
       restored();
     }
-    pass('1/4/8-second four-deck expansion preserves scale, capture, playheads, overview and owner-only seek');
+    pass('1/4/8-second full-deck expansion reveals both sides, conceals header/overview, retains scale/capture/playheads and owner-only seek');
     zoom(4);await seekAll(10);
     // Cue beyond the normal window appears only in the revealed continuation.
     assert(waves[0].querySelector('.scrolling-cue-marker').hidden,'Distant cue initially visible');
     pointer(waves[0],'pointerdown',.5,true);pointer(waves[0],'pointermove',.47,true);
-    assert(!waves[0].querySelector('.scrolling-cue-marker').hidden,'Continuation cue missing');
+    assert(!waves[0].querySelector('.scrolling-cue-marker').hidden,'Later continuation cue missing');
+    assert(!waves[0].querySelectorAll('.scrolling-cue-marker')[1].hidden,'Earlier continuation cue missing');
     pointer(waves[0],'pointercancel',.47,true);restored();
     assert(players[0].currentTime===10,'Cancel sought');
     for(const event of ['blur','resize']) {

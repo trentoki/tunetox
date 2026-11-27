@@ -566,3 +566,12 @@ native Chromium mouse/touch fader checks pass. Physical Safari listening and lat
 remain unverified. Next extend the existing comparison surface to the complete deck,
 revealing source content above/below the unchanged playhead. No push. See
 [responsibilities and verification](docs/D2-MANUAL-VOLUME-AND-FULL-DECK-COMPARISON.md).
+
+Manual Main increment is locally checkpointed as `4b3face`. The full-deck extension
+is implemented in the existing Visual presentation: reveal earlier/later waveform
+content, hide header/overview/remaining controls, preserve original playhead screen
+position, amplitude, time scale and captured owner seek. No new Audio/Behavior path.
+All eleven regression suites and native Chromium mouse/touch checks in three themes
+pass; no unresolved automated failures. Stop for physical iPad/Safari testing and
+listening before further work or pushing. Four-second default and approved shades
+are unchanged. See the linked report for file responsibilities and remaining risks.

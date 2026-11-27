@@ -34,7 +34,7 @@ rotation and preference reload. Editor diagnostics were clear. Physical Safari
 color evaluation remains pending. Readability review: no duplicate energy/state,
 no Audio edits, and preference decisions remain in Behavior.
 
-## 2. Temporary landscape Vertical comparison
+## 2. Temporary landscape Vertical comparison (initial 0921da8 checkpoint)
 
 The first experiment activates only in landscape Vertical mode after 3 CSS pixels
 of scrolling-waveform movement. Horizontal and portrait seeking remain ordinary.
@@ -115,3 +115,10 @@ still require human testing; automated transport checks are not listening tests.
 The three-pixel threshold, future-only downward continuation and landscape-Vertical
 activation are provisional. Evaluate these on iPad before extending orientations or
 changing comparison geometry. No push or upcoming musical features are included.
+
+## Subsequent physical approval and extension
+
+Both coloring and the initial comparison are physically approved. The later
+full-deck increment supersedes the future-only/lower-area presentation described
+above: see [current responsibilities and verification](D2-MANUAL-VOLUME-AND-FULL-DECK-COMPARISON.md).
+The lifecycle, owner-only seek, original source scale and four-second default remain.
