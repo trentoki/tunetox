@@ -5,7 +5,7 @@ import { createLibraryManagement } from '../../behavior/library/library-manageme
 import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, setTempo, setStemLevel } from "../../behavior/mixer/deck.js";
 import { createAudioFileURLs } from "../../audio/deck-audio.js";
 import { createPlaybackDeck } from "./playback.js";
-import { installTouchGuards } from "./touch-guards.js";
+import { installTouchGuards } from "../../behavior/mixer/performance-input.js";
 import { connectSettings } from "../../behavior/settings.js";
 import { installDeckSelector } from "../iphone/deck-selector.js";
 
@@ -79,6 +79,7 @@ decks.forEach((deck, index) => {
       if (!busy) view.setBusy(false);
     },
     completed(result) {
+      view.completed(result);
       if (result?.kind === "queue-full") announce("Deck " + number + ": queue occupied by " + result.song.name + ". New file was not queued.");
       else if (result?.kind) announce("Deck " + number + ": " + result.song.name +
         (result.kind === "queued" ? " queued." : " loaded. Press Play."));

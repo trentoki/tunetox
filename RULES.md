@@ -135,3 +135,9 @@ Vertical uses the same four-source-second box, colors/cues and authoritative sou
 position with a stationary horizontal playhead. Playback scrolls upward; dragging
 up advances/down rewinds. The overview remains horizontal. Global Import and
 Analyze All remain directly accessible.
+
+**D2 deck interactions:** A successful paused deck load returns only its destination
+Library to that deck's retained performance sections. Queuing alone never closes a
+Library. Shift remains a deck-local held/latched modifier, currently used for cue
+clearing. Performance text selection and callout menus are suppressed; actual text
+fields retain normal editing.

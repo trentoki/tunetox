@@ -36,7 +36,7 @@ export function createThemePresentation(container, deckContainer) {
     const mode = modeSelect.value;
     const deckColors = mode === "uniform" ? Array(4).fill(colorInputs[0].value) : colorInputs.map(input => input.value);
     deckContainer.querySelectorAll(".deck").forEach((deck, index) => {
-      if (themeSelect.value === "default" && !colorsCustomized) deck.style.removeProperty("--accent");
+      if (themeSelect.value === "default" && !colorsCustomized && mode === "decks") deck.style.removeProperty("--accent");
       else deck.style.setProperty("--accent", deckColors[index] || deckColors[0]);
     });
     colorInputs.forEach((input, index) => { input.hidden = mode === "uniform" && index > 0; });

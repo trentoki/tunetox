@@ -35,3 +35,33 @@ Increment 1 verification: orientation, nudging and full Visual playback suites p
 in Chromium; editor diagnostics clean. Early fixture/startup failures were fixed
 before checkpoint. Saved settings are isolated in playback fixtures. Glass theme
 fixture uses the new presentation API explicitly. Physical Safari remains due.
+
+## 2. Destination navigation and performance input
+
+- `app/behavior/mixer/deck-navigation.js`: owns one deck's workspace and retained
+  upper/lower choices. Successful loaded outcomes return only that deck to its prior
+  performance sections; queued/rejected outcomes do not change workspace.
+- `app/visual/mixer/playback.js`: renders navigation getters and binds direct Behavior
+  actions; exposes the successful-load notification, no competing selection store.
+- `app/visual/mixer/application.js`: forwards coordinator's existing `loaded` result
+  to that destination view; no alternative load pathway.
+- `app/behavior/mixer/cue-controls.js`: extracted cue/Shift gestures, held/latched/
+  keyboard modifier state and existing cue action. No cue-position copy.
+- `app/visual/themes/glass-hardware/cue-preview.js`: now presentation only in its
+  existing path. Stable Shift text avoids removing a native press target mid-gesture.
+- `app/behavior/mixer/performance-input.js`: existing touch fallback moved from Visual,
+  plus nonediting selection/context-menu suppression. Text fields keep native editing.
+- `app/visual/mixer/playback.css`: performance selection/callout protection with text
+  input exceptions. Library import/export and audio processing are unchanged.
+
+Shift remains one deck-local modifier; its current secondary action is cue clearing.
+No future secondary controls are implemented. Source position, cues, queues and
+musical settings are not owned by navigation or input helpers.
+
+Increment 2 verification: Library interface (including destination-only restoration
+and queued-view retention), Glass and full Visual playback suites pass. Native
+Chromium mouse/touch Shift toggles pass at center and four corners in all themes.
+Focused navigation and editable-field/context-menu checks pass. Editor diagnostics
+clean. Tests reopening Links after successful loads were updated for the approved
+new close-on-load rule. Uniform Default colors now apply without requiring a prior
+color edit. Physical Safari selection/callout and modifier review remains due.

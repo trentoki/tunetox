@@ -6,7 +6,8 @@ export function runTouchGuardChecks(doc) {
   const button = doc.createElement("button"), other = doc.createElement("button");
   const blank = doc.createElement("div"), range = doc.createElement("input");
   range.type = "range";
-  fixture.append(button, other, blank, range); root.append(fixture);
+  const search=doc.createElement('input'); search.type='search';
+  fixture.append(button, other, blank, range, search); root.append(fixture);
   let clicks = 0, otherClicks = 0, clock = 1000;
   button.addEventListener("click", () => clicks++);
   other.addEventListener("click", () => otherClicks++);
@@ -28,6 +29,12 @@ export function runTouchGuardChecks(doc) {
   }
   const nativeClick = target => target.dispatchEvent(new win.MouseEvent("click", { bubbles: true, cancelable: true, detail: 1 }));
   try {
+    reset();
+    tap(search); assert(!tap(search).defaultPrevented,'Text editing double tap blocked');
+    for(const type of ['contextmenu','selectstart']) {
+      assert(!button.dispatchEvent(new win.Event(type,{bubbles:true,cancelable:true})),'Performance menu/selection allowed');
+      assert(search.dispatchEvent(new win.Event(type,{bubbles:true,cancelable:true})),'Input editing blocked');
+    }
     reset();
     assert(!tap(button).defaultPrevented, "First tap was cancelled");
     nativeClick(button);

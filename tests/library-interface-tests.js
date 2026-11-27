@@ -61,8 +61,13 @@ document.querySelector('#run').onclick = async () => {
     assert(initial.every(song => song.verifiedBpm === null && song.key === null), 'Unknown BPM/key invented');
     pass('existing four Library views share persistent imports; renamed duplicates skipped; importing leaves decks empty; BPM/key unknown');
     const getRow = (index, text) => [...library(index).querySelectorAll('[data-song-id]')].find(row => row.textContent.includes(text));
+    back(0); deck(0).querySelector('.performance-upper-toggle').click(); deck(0).querySelector('.performance-lower-toggle').click(); open(0);
     getRow(0, 'Alpha').click(); library(0).querySelector('.send-to-deck-one').click();
     await until(() => players[0].readyState === 2 && !deck(0).querySelector('.play-pause-button').disabled, 'Numbered load failed');
+    assert(library(0).hidden && [1,2,3].every(i=>!library(i).hidden), 'Successful load closed wrong Library');
+    assert(deck(0).querySelector('.performance-upper-toggle').textContent==='Stems' && deck(0).querySelector('.performance-lower-toggle').textContent==='Controls','Prior performance choices lost');
+    deck(0).querySelector('.performance-upper-toggle').click(); deck(0).querySelector('.performance-lower-toggle').click();
+    pass('Successful load restores destination performance choices and leaves peer Libraries open');
     back(0); deck(0).querySelector('.play-pause-button').click();
     await until(() => !players[0].paused && players[0].currentTime > .05, 'Play/clock failed');
     const playingSource = players[0].src, position = players[0].currentTime;
@@ -221,13 +226,14 @@ document.querySelector('#run').onclick = async () => {
     }
     drop(getRow(0, 'Beta'), library(0).querySelector('.send-to-deck-two'));
     await until(() => players[1].readyState === 2 && deck(1).querySelector('.song-title').textContent.includes('Beta'), 'Numbered drop');
-    library(1).querySelectorAll('.section-selector button')[2].click(); await rows(1, 1);
+    open(1); library(1).querySelectorAll('.section-selector button')[2].click(); await rows(1, 1);
     assert(getRow(1, 'Alpha') && players[1].paused, 'Reciprocal Links does not follow paused loaded Beta');
     getRow(0, 'Gamma').click(); library(0).querySelector('.send-to-deck-two').click();
     await until(() => !deck(1).querySelector('.play-pause-button').disabled && deck(1).querySelector('.song-title').textContent.includes('Gamma'), 'Paused replacement while Links open');
-    await rows(1, 0);
+    open(1); await rows(1, 0);
     getRow(0, 'Beta').click(); library(0).querySelector('.send-to-deck-two').click();
-    await rows(1, 1); assert(getRow(1, 'Alpha') && players[1].paused, 'Open Links did not follow paused replacement');
+    await until(()=>deck(1).querySelector('.song-title').textContent.includes('Beta') && !deck(1).querySelector('.play-pause-button').disabled,'Paused Beta replacement');
+    open(1); await rows(1, 1); assert(getRow(1, 'Alpha') && players[1].paused, 'Open Links did not follow paused replacement');
     library(1).querySelectorAll('.section-selector button')[0].click(); await rows(1, 3);
     back(2); drop(getRow(0, 'Gamma'), deck(2).querySelector('.waveform-overview'));
     await until(() => players[2].readyState === 2 && deck(2).querySelector('.song-title').textContent.includes('Gamma'), 'Overview drop');
@@ -249,6 +255,7 @@ document.querySelector('#run').onclick = async () => {
     await until(() => deck(0).querySelector('.queue-button').title.includes('Gamma'), 'Queue drop did not replace playing Queue');
     drop(getRow(0, 'Beta'), deck(0).querySelector('.waveform-overview'));
     await until(() => deck(0).querySelector('.queue-button').title.includes('Beta'), 'Overview drop did not replace playing Queue');
+    assert(!library(0).hidden, 'Queue assignment closed destination Library');
     assert(players[0].src === playingSource && !players[0].paused, 'Replacement changed sounding transport');
     pass('all four playing Library destinations replace the prepared Queue; paused occupied Queue remains protected');
     await Promise.all(players.map(player => win.eval("import('/app/audio/deck-audio.js')").then(audio => audio.ejectAudio(player))));

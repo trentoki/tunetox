@@ -1,14 +1,17 @@
-// Presentation-only iOS fallback (WebKit 319664); no deck/audio dependencies.
+// Behavior-owned iOS fallback (WebKit 319664); no deck/audio dependencies.
 // Only a second nearby stationary single-finger tap is cancelled. Its button
 // click is forwarded once, since cancelling touchend suppresses native clicks.
 export function installTouchGuards(root) {
   const doc = root.ownerDocument, win = doc.defaultView;
+  const editable = target => target.closest?.('textarea, input:not([type=range]):not([type=color]):not([type=button]):not([type=submit]), [contenteditable=true]');
+  for(const type of ['contextmenu','selectstart']) root.addEventListener(type,event=>{if(!editable(event.target))event.preventDefault();});
   let start = null, previous = null, forwarded = null;
   const point = touch => ({ x: touch.clientX, y: touch.clientY });
   const distance = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
   const reset = () => { start = null; previous = null; forwarded = null; };
   doc.addEventListener("touchstart", event => {
     forwarded = null;
+    if (editable(event.target)) { reset(); return; }
     if (event.touches.length !== 1 || !root.contains(event.target)) { reset(); return; }
     start = { ...point(event.touches[0]), id: event.touches[0].identifier, time: event.timeStamp };
   }, { capture: true, passive: true });

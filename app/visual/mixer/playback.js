@@ -1,3 +1,4 @@
+import { createDeckNavigation } from '../../behavior/mixer/deck-navigation.js';
 import { connectWaveformSeeking } from '../../behavior/mixer/waveform-seeking.js';
 import { installVerticalRoller } from '../../behavior/mixer/vertical-roller.js';
 import { connectTempoControls } from '../../behavior/mixer/tempo-controls.js';
@@ -9,7 +10,7 @@ import { connectLibraryControls, connectSongDrop } from '../../behavior/library/
 // Inputs: one persistent Clean Deck state and bound host actions.
 // Output: a DOM node, render(), and setBusy(). No player creation or DSP here.
 // Class names follow docs/visual-verification/APPROVED-NAMING.md.
-import { installCueControls } from '../themes/glass-hardware/cue-preview.js';
+import { installCueControls } from '../../behavior/mixer/cue-controls.js';
 import { createOverviewWaveform, drawOverviewWaveform } from '../waveform/overview-waveform.js';
 import { createScrollingWaveform, createScrollingRenderer, SCROLLING_WINDOW_SECONDS } from '../waveform/scrolling-waveform.js';
 
@@ -122,9 +123,7 @@ function formatTime(seconds) {
 }
 
 export function createPlaybackDeck(number, deck, actions) {
-  let upperView = "wave-view";
-  let lowerView = "cues-view";
-  let workspace = "performance-view";
+  const navigation = createDeckNavigation(render);
   let busy = false;
   const node = element("section", "deck");
   node.dataset.deck = number;
@@ -156,8 +155,7 @@ export function createPlaybackDeck(number, deck, actions) {
   const cancelPitchRoller = installVerticalRoller(pitch, pitchInput);
   connectTempoControls(tempo, tempoInput, actions.setTempo);
   const libraryButton = button("library-button", "Library", "Open Library for Deck " + number, () => {
-    workspace = "library-view";
-    render();
+    navigation.openLibrary();
     back.focus();
   });
   const title = element("strong", "song-title");
@@ -167,12 +165,10 @@ export function createPlaybackDeck(number, deck, actions) {
   selector.setAttribute("role", "group");
   selector.setAttribute("aria-label", "Performance views for Deck " + number);
   const upperToggle = button("performance-upper-toggle", "Wave", "Toggle upper section for Deck " + number, () => {
-    upperView = upperView === "wave-view" ? "stems-view" : "wave-view";
-    render();
+    navigation.toggleUpper();
   });
   const lowerToggle = button("performance-lower-toggle", "Cues", "Toggle lower section for Deck " + number, () => {
-    lowerView = lowerView === "cues-view" ? "controls" : "cues-view";
-    render();
+    navigation.toggleLower();
   });
   selector.append(upperToggle, lowerToggle);
   const play = button("play-pause-button", "▶", "Play Deck " + number, actions.togglePlayback);
@@ -204,7 +200,7 @@ export function createPlaybackDeck(number, deck, actions) {
   wave.surface.setAttribute('aria-valuemin', '0');
   const seeking = connectWaveformSeeking({ deck, node, overview, scrolling: wave.surface,
     windowSeconds: SCROLLING_WINDOW_SECONDS, actions, getBusy: () => busy,
-    isVisible: surface => workspace === 'performance-view' && (surface === overview || upperView === 'wave-view'),
+    isVisible: surface => navigation.workspace === 'performance-view' && (surface === overview || navigation.upperView === 'wave-view'),
     changed: updatePlaybackTime });
   const canSeek = seeking.canSeek;
   const nudgePresentation = createNudgePresentation(wave.surface, number);
@@ -235,8 +231,7 @@ export function createPlaybackDeck(number, deck, actions) {
   const sectionSelector = element("div", "section-selector");
   for (const text of ["Songs", "Playlists", "Links"]) sectionSelector.append(button("", text, text + " (preview)"));
   const back = button("back-to-performance-button", "←", "Return to performance for Deck " + number, () => {
-    workspace = "performance-view";
-    render();
+    navigation.showPerformance();
     libraryButton.focus();
   });
   libraryHeader.append(element("small", "", "D" + number), sectionSelector, back);
@@ -260,7 +255,7 @@ export function createPlaybackDeck(number, deck, actions) {
   library.append(libraryHeader, libraryContent);
   node.append(performance, library);
   const libraryControls = actions.library ? connectLibraryControls(actions.library,
-    { host: library, content: libraryContent, analysis: actions.libraryAnalysis, tabs: sectionSelector, getLoadedSongId: () => deck.song?.librarySongId || null, sort, search, results, selected, destinations, visible: () => workspace === 'library-view' },
+    { host: library, content: libraryContent, analysis: actions.libraryAnalysis, tabs: sectionSelector, getLoadedSongId: () => deck.song?.librarySongId || null, sort, search, results, selected, destinations, visible: () => navigation.workspace === 'library-view' },
     actions.sendLibrarySong, actions.announce) : null;
   if (actions.library) {
     connectSongDrop(overview, id => actions.sendLibrarySong(id, number - 1, 'deck'));
@@ -288,7 +283,7 @@ export function createPlaybackDeck(number, deck, actions) {
 
   function scheduleAnimation() {
     const animate = node.isConnected && !document.hidden && !node.inert && !deck.audio.paused &&
-      workspace === 'performance-view' && upperView === 'wave-view' && wave.surface.getClientRects().length > 0;
+      navigation.workspace === 'performance-view' && navigation.upperView === 'wave-view' && wave.surface.getClientRects().length > 0;
     if (!animate) {
       if (animationFrame) cancelAnimationFrame(animationFrame);
       animationFrame = 0;
@@ -380,18 +375,18 @@ export function createPlaybackDeck(number, deck, actions) {
     mainInput.value = String(percentage);
     mainInput.style.setProperty("--main-volume-fill", percentage + "%");
     mainInput.setAttribute("aria-valuetext", percentage + "%");
-    performance.hidden = workspace !== "performance-view";
-    library.hidden = workspace !== "library-view";
-    wave.node.hidden = upperView !== "wave-view";
-    stems.hidden = upperView !== "stems-view";
-    cues.hidden = lowerView !== "cues-view";
-    controls.hidden = lowerView !== "controls";
-    upperToggle.textContent = upperView === "wave-view" ? "Wave" : "Stems";
-    lowerToggle.textContent = lowerView === "cues-view" ? "Cues" : "Controls";
-    upperToggle.setAttribute("aria-pressed", String(upperView === "stems-view"));
-    lowerToggle.setAttribute("aria-pressed", String(lowerView === "controls"));
-    upperToggle.title = "Switch upper section to " + (upperView === "wave-view" ? "Stems" : "Wave");
-    lowerToggle.title = "Switch lower section to " + (lowerView === "cues-view" ? "Controls" : "Cues");
+    performance.hidden = navigation.workspace !== "performance-view";
+    library.hidden = navigation.workspace !== "library-view";
+    wave.node.hidden = navigation.upperView !== "wave-view";
+    stems.hidden = navigation.upperView !== "stems-view";
+    cues.hidden = navigation.lowerView !== "cues-view";
+    controls.hidden = navigation.lowerView !== "controls";
+    upperToggle.textContent = navigation.upperView === "wave-view" ? "Wave" : "Stems";
+    lowerToggle.textContent = navigation.lowerView === "cues-view" ? "Cues" : "Controls";
+    upperToggle.setAttribute("aria-pressed", String(navigation.upperView === "stems-view"));
+    lowerToggle.setAttribute("aria-pressed", String(navigation.lowerView === "controls"));
+    upperToggle.title = "Switch upper section to " + (navigation.upperView === "wave-view" ? "Stems" : "Wave");
+    lowerToggle.title = "Switch lower section to " + (navigation.lowerView === "cues-view" ? "Controls" : "Cues");
     title.textContent = deck.song?.name || "Load a song";
     title.title = title.textContent;
     play.textContent = deck.isPlaying ? "Ⅱ" : "▶";
@@ -404,7 +399,7 @@ export function createPlaybackDeck(number, deck, actions) {
     queue.setAttribute("aria-label", deck.queue ? "Play queued song on Deck " + number : "Queue empty");
     updatePlaybackTime();
     if (libraryControls) {
-      if (workspace === 'library-view') libraryControls.opened();
+      if (navigation.workspace === 'library-view') libraryControls.opened();
       return;
     }
     results.replaceChildren();
@@ -416,6 +411,6 @@ export function createPlaybackDeck(number, deck, actions) {
     if (!results.children.length) results.append(element("p", "", "No songs loaded. Use Load D1–D4 above."));
   }
 
-  return { node, render, updatePlaybackTime, setBusy(value) { busy = value; render(); } };
+  return { node, render, updatePlaybackTime, completed:navigation.completed, setBusy(value) { busy = value; render(); } };
 }
 
