@@ -159,16 +159,45 @@ document.querySelector('#run').onclick = async () => {
       element.dispatchEvent(new win.PointerEvent('pointercancel',{pointerId:3,bubbles:true}));
       assert(players[0].currentTime===sourcePosition,'Performance control sought');
     }
-    const originalHead=waves[0].querySelector('.playhead').getBoundingClientRect().top;
-    pointer(waves[0],'pointerdown',.5,true);pointer(waves[0],'pointermove',.4,true);
-    assert(doc.querySelectorAll('.waveform-comparison-expanded').length===4,'Theme comparison not active');
-    for(const [i,w] of waves.entries()) {
-      assert(w.getBoundingClientRect().height===decks[i].clientHeight,'Comparison not full deck');
-      assert(Math.abs(w.querySelector('.playhead').getBoundingClientRect().top-originalHead)<1,'Comparison shifted playhead');
+    function box(node) { const r=node.getBoundingClientRect(); return [r.x,r.y,r.width,r.height]; }
+    const head=waves[0].querySelector('.playhead'), wr=waves[0].getBoundingClientRect(), hr=head.getBoundingClientRect();
+    assert(Math.abs(hr.left-(wr.left+wr.width*.28))<1 && Math.abs(hr.right-(wr.right-wr.width*.28))<1,'Playhead side boundaries');
+    assert(hr.height===1 && win.getComputedStyle(head).boxShadow==='none','Playhead not thin/clean');
+    const marker=waves[0].querySelector('.scrolling-cue-marker'), mr=marker.getBoundingClientRect();
+    assert(Math.abs(mr.left-hr.left)<1 && Math.abs(mr.right-hr.right)<1,'Cue side boundaries');
+    assert(marker.firstChild.getBoundingClientRect().left>=hr.left,'Cue label overlaps side');
+    const loop=decks[0].querySelector('.loop-controls');
+    assert([...loop.children].filter(n=>win.getComputedStyle(n).display!=='none').length===1 && !loop.querySelector('.glass-preview-shift').hidden,'Only Shift should remain');
+    const shift=loop.querySelector('.glass-preview-shift');
+    shift.click();assert(shift.getAttribute('aria-pressed')==='true','Relocated Shift did not latch');
+    pad.click();await delay(25);assert(waves[0].querySelector('.scrolling-cue-marker').hidden,'Relocated Shift did not clear cue');
+    shift.click();pad.click();await delay(25);
+    const pitch=decks[0].querySelector('.pitch-slider input'), tempo=decks[0].querySelector('.tempo-slider input');
+    assert(!pitch.disabled && win.getComputedStyle(decks[0].querySelector('.pitch-slider')).cursor==='ns-resize','Shared pitch preview wheel unavailable');
+    const oldTempo=tempo.value;
+    pitch.value='750';pitch.dispatchEvent(new win.Event('input'));
+    assert(decks[0].querySelector('.pitch-slider output').textContent==='75%' && tempo.value===oldTempo,'Pitch preview changed Tempo');
+    for(const config of ['Cues','Stems','Controls']) {
+      assert(buttons[0].textContent===config,'Configuration before seek');
+      const selectors='.performance-header,.waveform-overview,.performance-selector,.cue-pad,.stem-faders input,.controls button,.nudge-controls button';
+      const elements=[...decks[0].querySelectorAll(selectors)].filter(n=>n.getClientRects().length);
+      const before=JSON.stringify(elements.map(box));
+      const position=players[0].currentTime;
+      pointer(waves[0],'pointerdown',.5,true);pointer(waves[0],'pointermove',.4,true);
+      assert(!doc.querySelector('.waveform-comparison-expanded'),'Waveform theme expanded');
+      assert(JSON.stringify(elements.map(box))===before && elements.every(n=>win.getComputedStyle(n).visibility==='visible'),'Controls moved/concealed during seek '+config);
+      assert(!decks[0].querySelector('.performance-header').inert,'Header disabled during seek');
+      pointer(waves[0],'pointerup',.4,true);
+      await until(()=>Math.abs(players[0].currentTime-position-.4)<.02,'Central seek '+config);
+      buttons[0].click();
     }
-    pointer(waves[0],'pointerup',.4,true);await until(()=>Math.abs(players[0].currentTime-10.4)<.02,'Central seek');
-    assert(!doc.querySelector('.waveform-comparison-expanded'),'Comparison did not restore');
-    pass('continuous selector, protected side/control gestures, cues and canonical full-deck comparison/seek');
+    const overlaps=(a,b)=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+    buttons[0].click();buttons[0].click(); // Controls
+    const controls=[...decks[0].querySelectorAll('.controls > div:first-child > label,.effects-controls > div')];
+    const nudges=[...decks[0].querySelectorAll('.nudge-controls button')].map(n=>n.getBoundingClientRect());
+    controls.forEach(n=>{const r=n.getBoundingClientRect();assert((r.right<=hr.left||r.left>=hr.right)&&nudges.every(b=>!overlaps(r,b)),'Control overlaps central waveform/nudge');});
+    buttons[0].click();
+    pass('Futuristic wheel preview, clean bounded playhead/cues, Shift-only row, side Controls and stationary all-configuration seeking');
     decks.forEach(d=>d.querySelector('.play-pause-button').click());await until(()=>players.every(p=>!p.paused),'Four-deck playback');
     doc.querySelector('.global-nudge button').dispatchEvent(new win.KeyboardEvent('keydown',{key:'End',bubbles:true}));
     const held=decks[1].querySelectorAll('.nudge-controls button')[1];

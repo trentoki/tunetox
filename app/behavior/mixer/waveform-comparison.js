@@ -1,3 +1,4 @@
+import { isWaveformTheme } from './deck-navigation.js';
 import { getWaveformOrientation } from '../settings.js';
 
 // One transient gesture owner; registrations reference existing deck navigation.
@@ -14,7 +15,7 @@ export function comparisonBlocksSeeking(surface) {
   return Boolean(active && active.owner !== surface && waveforms.has(surface));
 }
 export function beginWaveformComparison(surface) {
-  if (active || getWaveformOrientation() !== 'vertical' || !matchMedia('(orientation: landscape)').matches) return;
+  if (isWaveformTheme() || active || getWaveformOrientation() !== 'vertical' || !matchMedia('(orientation: landscape)').matches) return;
   const owner = waveforms.get(surface);
   if (!owner || !eligible(owner)) return;
   const participants = [...waveforms.values()].filter(eligible);

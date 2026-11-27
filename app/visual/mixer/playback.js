@@ -4,7 +4,7 @@ import { getWaveformColorMode } from '../../behavior/settings.js';
 import { createWaveformDeckLayout } from '../themes/waveform/deck-layout.js';
 import { createDeckNavigation, connectWaveformPerformanceSelector } from '../../behavior/mixer/deck-navigation.js';
 import { connectWaveformSeeking } from '../../behavior/mixer/waveform-seeking.js';
-import { installVerticalRoller } from '../../behavior/mixer/vertical-roller.js';
+import { installVerticalRoller, usesVerticalRollers, connectPitchWheelPreview } from '../../behavior/mixer/vertical-roller.js';
 import { connectTempoControls } from '../../behavior/mixer/tempo-controls.js';
 import { connectNudgeControls } from '../../behavior/mixer/nudge-controls.js';
 import { createNudgePresentation } from '../waveform/nudge-controls.js';
@@ -148,13 +148,7 @@ export function createPlaybackDeck(number, deck, actions) {
   const pitchInput = pitch.querySelector('input');
   const pitchValue = element("output", "", "+0.0");
   pitch.append(pitchValue);
-  // Only a theme-local travel preview. This is not semitones or musical state.
-  let pitchPreviewPosition = 500;
-  pitchInput.addEventListener('input', () => {
-    if (document.documentElement.dataset.theme !== 'futuristic') return;
-    pitchPreviewPosition = Number(pitchInput.value);
-    renderRollers();
-  });
+  const getPitchPreviewPosition = connectPitchWheelPreview(pitchInput, renderRollers);
   const cancelTempoRoller = installVerticalRoller(tempo, tempoInput);
   const cancelPitchRoller = installVerticalRoller(pitch, pitchInput);
   connectTempoControls(tempo, tempoInput, actions.setTempo);
@@ -307,7 +301,8 @@ export function createPlaybackDeck(number, deck, actions) {
   document.addEventListener('tunetox-waveform-zoom-change', updatePlaybackTime);
 
   function renderRollers() {
-    const futuristic = document.documentElement.dataset.theme === 'futuristic';
+    const pitchPreviewPosition = getPitchPreviewPosition();
+    const futuristic = usesVerticalRollers();
     pitchInput.disabled = !futuristic;
     pitchInput.max = futuristic ? '1000' : '12';
     pitchInput.value = futuristic ? String(pitchPreviewPosition) : '0';

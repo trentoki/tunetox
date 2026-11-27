@@ -600,3 +600,16 @@ and mouse/touch comparison checks pass. Original theme geometry matches the
 pre-theme snapshot in nine theme/viewport combinations after final header grouping.
 Editor/whitespace checks pass; no Audio changes or unresolved automated failures.
 Stop at the local Waveform checkpoint for physical iPad testing; do not push.
+
+
+### Waveform physical refinement after 1c674d4
+
+Overall layout, compact selector, cues and stem gestures are provisionally approved.
+Waveform now reuses Futuristic styling/wheels, disables temporary expansion only in
+this theme, confines thin scrolling playhead/cues to the central region and places
+Controls in the side zones. Existing stem positions/connections are retained with
+explicit WebKit thumb centering. Only Shift remains from the loop strip, provisionally
+bottom-left below Cues 3/4; future loop layout is undecided. Pitch wheel is a disclosed
+travel preview; the existing Audio semitone API is not connected to it. No Audio edits.
+See [file responsibilities, investigation and verification](docs/WAVEFORM-THEME.md).
+Stop at a local checkpoint for physical iPad Safari testing; do not push.

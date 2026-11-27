@@ -112,3 +112,77 @@ Waveform layouts are provisional, with landscape Vertical the primary target.
 Stem faders still retain levels without stem audio; Filter/EQ/effects and loop previews
 retain their existing implementation status. No new musical functionality is implied.
 No pushing or next musical task is included in this checkpoint.
+
+## Physical feedback refinement after 1c674d4
+
+Overall layout, compact selector, cues and stem interaction are provisionally
+approved. This refinement supersedes the initial Waveform comparison/Controls layout.
+
+### Responsibilities and decisions
+
+- Visual `themes/futuristic/theme.css` now scopes its existing rules to either
+  Futuristic or Waveform with `:is()`. Specificity for Futuristic is unchanged.
+  Waveform imports this same stylesheet before its own overrides. Existing theme
+  selection remains untouched; no copied Futuristic CSS or second switch exists.
+- Behavior `mixer/vertical-roller.js` shares wheel eligibility between those two
+  themes. It also owns the existing pitch travel preview value/listener; Visual no
+  longer owns that directly relevant interaction state. Visual mixer `playback.js`
+  renders the same wheel markings/readout and uses the same installed gestures.
+- Pitch investigation: Waveform previously hid/disabled its input and only Futuristic
+  enabled the roller. The prior Futuristic pitch wheel was already a UI-only travel
+  preview (0–100%), not musical pitch. Waveform now exposes that same preview; no
+  Audio pitch command, semitone mapping or independent pitch processing is added.
+  Labels/tooltips continue to disclose that no sound change occurs.
+- Behavior `mixer/waveform-comparison.js` rejects expansion starts for Waveform only.
+  Existing seek preview/capture/central boundaries and release/cancellation are kept;
+  Default/Glass/Futuristic retain their comparison lifecycle and presentation.
+- Visual `themes/waveform/theme.css` owns marker extents, clean one-pixel playhead,
+  vertical thumb centering, side Controls and the Shift-only presentation. No controls
+  are recreated/reparented and no musical state changes. Scrolling cue lines use the
+  same source-position offsets as before; only their cross-axis extent and clipping
+  change. Labels stay inside the marked central 44%. Overview markers are untouched.
+
+Control slots: Low/Mid EQ above the left nudge, High EQ below; Filter/Echo above the
+right nudge, Reverb/Delay below. All existing preview status is retained. The old
+wrapper groups use layout-only `display:contents` so existing controls occupy those
+side slots. The central waveform remains unobstructed. Provisional Shift is compact
+at bottom-left of the Cues side area, below pads 3/4 and away from the nudge. Other
+loop-strip children are hidden only in this theme; their underlying DOM/Behavior
+remains for existing themes. Future loop activation/length design stays undecided.
+
+Vertical stem inputs retain their positions/orientation/0–100 values. Explicit
+WebKit track width 6px, border 0 and 22px circular thumb use left margin -8px rather
+than the previous right margin. This centers the thumb on the track's cross axis;
+Mozilla styling is separate. Safari native rendering still needs physical checking.
+No Audio, data, decoding, BPM, source clock, zoom or nudge processing is changed.
+
+Audio already exposes `setAudioPitch` for finite semitones through the existing
+Signalsmith processing. What is absent is an approved connected performance control,
+range and Behavior state for that operation. The wheel preview percentage must not
+be mistaken for semitones; this pass leaves the API and all Audio files unchanged.
+
+
+Refinement verification: all twelve existing browser suites passed. Focused checks
+verify stationary/visible controls through seeks in all three configurations, retained
+central seek boundaries, thin bounded playhead/cue labels, Shift-only presentation,
+relocated Shift clearing, wheel preview, side Controls spacing, saved theme and
+playing theme switches without new Audio/canvas identities. Comparison regression
+confirms expansion is retained in the original themes. Their measured layout matches
+the previous snapshot in all nine theme/viewport combinations.
+
+Screenshots were inspected for Cues, Stems and Controls with real decoded generated
+pulse/tone recordings and frequency summaries visible, not decorative/empty waveforms.
+Native Chromium mouse and touch capture/release/seek checks passed in every
+configuration without hiding the header or other controls; both shared wheels respond
+to native touch. Side knobs use 44px touch targets. Screenshot pixel measurements
+of all sixteen stem faders at five levels (0/25/50/75/100%, 80 cases) found identical
+thumb and track horizontal centers in Chromium. Safari-specific WebKit CSS is
+implemented, but actual iPad native range rendering remains physical verification.
+Editor diagnostics/whitespace checks passed. No Audio files or personal library data
+are included. No new production files, duplicated controls or routing layers exist.
+
+Remaining limitations: physical iPad Safari alignment, landscape spacing/legibility,
+actual-music performance and listening need human confirmation. Portrait/phone
+Waveform styling remains provisional. Pitch is preview-only; stem audio and existing
+EQ/filter/effect/loop implementation status remain unchanged. Future loop controls
+are deliberately undecided. The deferred Audio readability review stays separate.

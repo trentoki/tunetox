@@ -1,4 +1,6 @@
-// Futuristic changes pointer operation only, reusing the native range's input
+export const usesVerticalRollers = () => ['futuristic', 'waveform'].includes(document.documentElement.dataset.theme);
+
+// Shared Futuristic-style wheels reuse the existing native range's input
 // action and keyboard support. 360px covers the full range (180px per octave
 // for Tempo). The anchor is gesture state, never another stored Tempo value.
 export function installVerticalRoller(surface, input) {
@@ -14,7 +16,7 @@ export function installVerticalRoller(surface, input) {
     if (previous && surface.hasPointerCapture(previous.id)) surface.releasePointerCapture(previous.id);
   }
   surface.addEventListener('pointerdown', event => {
-    if (document.documentElement.dataset.theme !== 'futuristic' || input.disabled ||
+    if (!usesVerticalRollers() || input.disabled ||
       drag || !event.isPrimary || event.button !== 0) return;
     event.preventDefault(); // Suppress the native horizontal range jump.
     input.focus({ preventScroll: true });
@@ -27,7 +29,7 @@ export function installVerticalRoller(surface, input) {
   }, true);
   surface.addEventListener('pointermove', event => {
     if (!drag || event.pointerId !== drag.id) return;
-    if (input.disabled || document.documentElement.dataset.theme !== 'futuristic') { cancel(); return; }
+    if (input.disabled || !usesVerticalRollers()) { cancel(); return; }
     event.preventDefault();
     const min = Number(input.min), max = Number(input.max);
     const value = Math.round(Math.max(min, Math.min(max,
@@ -43,3 +45,15 @@ export function installVerticalRoller(surface, input) {
   return cancel;
 }
 
+
+// UI travel only: independent musical pitch remains unconnected to this input.
+// Behavior owns the gesture's preview value; Visual renders its wheel markings.
+export function connectPitchWheelPreview(input, changed) {
+  let position = 500;
+  input.addEventListener('input', () => {
+    if (!usesVerticalRollers()) return;
+    position = Number(input.value);
+    changed();
+  });
+  return () => position;
+}

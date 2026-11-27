@@ -196,8 +196,17 @@ Cues/Stems/Controls selector replaces the two section selectors. Tap cycles; ver
 sliding selects continuously. The scrolling waveform permanently fills the content
 area with a centered playhead and existing saved zoom/color mode. Cue pads occupy
 paired corner-side groups; Stems uses existing vertical faders in those side zones;
-Controls overlays existing previews transparently. Configurations are exclusive,
+Controls arranges existing previews in the surrounding side areas. Configurations are exclusive,
 while waveform/nudges remain visible. Pointer seeking starts only in the marked
-central 44%; surrounding controls/gaps cannot start seeks. Existing landscape
-Vertical full-deck comparison and owner capture remain authoritative. This theme is
+central 44%; surrounding controls/gaps cannot start seeks. Owner capture and seek behavior remain authoritative, but temporary expansion is
+disabled in Waveform; every control remains stationary/visible during dragging. The
+other themes retain full-deck comparison. This theme is
 provisional pending physical iPad testing; the original three layouts are retained.
+
+**Waveform physical refinement:** Reuse the Futuristic styling and Tempo/Pitch wheels.
+Pitch is movable preview travel only; musical pitch remains unconnected to that UI.
+The clean, thin scrolling playhead and cue markers/labels stay within the central
+waveform; overview markers are unchanged. Four existing vertical stems retain their
+positions with explicit WebKit thumb centering. Controls occupies the side areas
+around nudges. Hide the old loop strip only in Waveform; retain Shift provisionally
+at bottom-left of the Cues side area. No new loop or musical behavior is specified.

@@ -195,12 +195,19 @@ Side zones are 28% on each edge; central 44% is visibly bounded and accepts scro
 seek starts. Captured drags can continue beyond it. Cue groups are 1/2 upper-left,
 3/4 lower-left, 5/6 upper-right and 7/8 lower-right. Vertical stem layout places
 Transients/Tune left and Flow/Voice right, above/below centered directional nudges.
-Shift remains in the bottom existing loop row. Controls retains current preview
-status. No new signal processing or musical behavior is introduced.
+Shift remains the same button, provisionally placed at the bottom-left of the Cues side area; other loop row children are hidden only in Waveform. Controls retains current preview
+status and now occupies side areas: Low/Mid/High left, Filter and three effects right,
+with a gap around the nudge buttons. Waveform imports the shared Futuristic styling and reuses its wheel gestures.
+Pitch wheel travel is preview-only despite the existing Audio semitone API; no
+performance pitch mapping/Behavior is connected. Central playhead/cue lines are thin,
+without glow, and both lines and cue labels stay within the central 44%. Vertical
+WebKit stem thumb centering is explicit. No new signal processing or musical behavior
+is introduced.
 
-The existing comparison presentation hides the overlays while revealing the full
-deck. All three configurations participate because their waveform is visible;
-Library and non-Waveform theme Stems views do not. Source-time scaling, analysis,
+Waveform now opts out of temporary comparison: dragging changes source-position
+preview only, without moving/hiding any controls in any configuration. The original
+three themes retain their existing full-deck comparison; their Library/Stems views
+do not participate. Source-time scaling, analysis,
 owner-only seek and pointer capture remain unchanged. Switching themes restores
 original layouts/section choices; switching configurations never rebuilds a canvas,
 control or Audio node. Theme choice persists; configurations are session-local.

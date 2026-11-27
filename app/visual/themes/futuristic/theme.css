@@ -1,12 +1,12 @@
 /* Futuristic: crystal housings, phosphor readouts and translucent rubber.
    All selectors are theme-scoped. Native inputs remain the only fader handles. */
-html[data-theme="futuristic"] { background: #050910; color: #d5e6ef; }
-[data-theme="futuristic"] .app {
+html:is([data-theme="futuristic"], [data-theme="waveform"]) { background: #050910; color: #d5e6ef; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .app {
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   background: linear-gradient(155deg, #1a2937, #080f19 24%, #060b12 80%);
 }
-[data-theme="futuristic"] .mixer-decks { gap: 6px; }
-[data-theme="futuristic"] .deck {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .mixer-decks { gap: 6px; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .deck {
   border-color: #405b6e;
   border-top-color: var(--accent);
   border-radius: 8px 8px 4px 4px;
@@ -15,22 +15,22 @@ html[data-theme="futuristic"] { background: #050910; color: #d5e6ef; }
     linear-gradient(180deg, #192736, #0e1925 38%, #101b28);
   box-shadow: inset 1px 0 #c5f1ff25, inset -1px 0 #000b, inset 0 2px #e4faff17, 0 2px 3px #000a;
 }
-[data-theme="futuristic"] h1 { color: #d6efff; letter-spacing: 2px; }
-[data-theme="futuristic"] h1 small,
-[data-theme="futuristic"] .mixer-footer { color: #829caf; }
-[data-theme="futuristic"] .theme-controls {
+:is([data-theme="futuristic"], [data-theme="waveform"]) h1 { color: #d6efff; letter-spacing: 2px; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) h1 small,
+:is([data-theme="futuristic"], [data-theme="waveform"]) .mixer-footer { color: #829caf; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .theme-controls {
   display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px; max-width: 42%;
 }
-[data-theme="futuristic"] .theme-controls select {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .theme-controls select {
   min-width: 0; max-width: 126px; font: inherit; font-size: 9px;
   background: #111d2a; color: #cee9f7; border: 1px solid #54738a; border-radius: 3px;
 }
-[data-theme="futuristic"] .theme-controls input[type="color"] {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .theme-controls input[type="color"] {
   width: 24px; height: 18px; padding: 2px;
   background: #111d2a; border: 1px solid #54738a; border-radius: 3px;
 }
-[data-theme="futuristic"] button,
-[data-theme="futuristic"] #audio-loaders label {
+:is([data-theme="futuristic"], [data-theme="waveform"]) button,
+:is([data-theme="futuristic"], [data-theme="waveform"]) #audio-loaders label {
   background: linear-gradient(160deg, #395367 0 5%, #1a2e40 6% 70%, #112233 71%);
   border-color: #6b8b9f #324d62 #07111e;
   border-radius: 4px;
@@ -38,25 +38,25 @@ html[data-theme="futuristic"] { background: #050910; color: #d5e6ef; }
   text-shadow: 0 1px #000;
   letter-spacing: .1px;
 }
-[data-theme="futuristic"] button:enabled:active {
+:is([data-theme="futuristic"], [data-theme="waveform"]) button:enabled:active {
   background: color-mix(in srgb, var(--accent) 22%, #102133);
   box-shadow: inset 0 2px 3px #000b, inset 0 -1px var(--accent);
 }
-[data-theme="futuristic"] .deck-participation-button {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .deck-participation-button {
   background: linear-gradient(135deg, #6f9fb12b, transparent 40%), #071321;
   box-shadow: inset 0 0 0 2px #040a12, inset 0 0 0 3px #58849a, 0 1px 2px #000b;
   text-shadow: 0 0 6px color-mix(in srgb, var(--accent) 40%, transparent);
 }
-[data-theme="futuristic"] .performance-header > .song-title {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .performance-header > .song-title {
   color: #e5f4fa; font-weight: 600; letter-spacing: .2px;
 }
-[data-theme="futuristic"] .performance-selector {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .performance-selector {
   background: #06101b; border-color: #47687e; box-shadow: inset 0 1px 3px #0009;
 }
-[data-theme="futuristic"] .performance-selector button {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .performance-selector button {
   background: transparent; box-shadow: none; color: #95b4c8;
 }
-[data-theme="futuristic"] .performance-selector button[aria-pressed="true"] {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .performance-selector button[aria-pressed="true"] {
   color: #eaffff;
   background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 36%, #142738), #122237);
   box-shadow: inset 0 1px color-mix(in srgb, var(--accent) 50%, #c9f5ff), inset 0 -2px var(--accent);
@@ -64,56 +64,56 @@ html[data-theme="futuristic"] { background: #050910; color: #d5e6ef; }
 
 /* A cylindrical surface, not a small slider thumb. The markings rotate beneath
    the readout; the existing invisible range supplies focus/keyboard semantics. */
-[data-theme="futuristic"] :is(.tempo-slider, .pitch-slider) {
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.tempo-slider, .pitch-slider) {
   display: flex; align-items: flex-start; justify-content: center; gap: 3px;
   isolation: isolate; overflow: hidden; padding: 2px; cursor: ns-resize;
   border-radius: 5px; border-color: #8aafbf #425d70 #122236;
   background: linear-gradient(180deg, #040b14, #183343 18%, #36596b 40%, #173747 55%, #0a1b29 82%, #030912);
   box-shadow: inset 2px 0 3px #01070dbb, inset -2px 0 3px #01070dbb, inset 0 1px #defaff50, 0 1px #b7e7ff25;
 }
-[data-theme="futuristic"] :is(.tempo-slider, .pitch-slider)::before {
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.tempo-slider, .pitch-slider)::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: repeating-linear-gradient(180deg, transparent 0 7px, #d0f8ff2b 7px 8px, transparent 8px 12px);
   background-position: 0 var(--roller-offset, -60px);
 }
-[data-theme="futuristic"] :is(.tempo-slider, .pitch-slider)::after {
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.tempo-slider, .pitch-slider)::after {
   content: ""; position: absolute; left: 4px; right: 4px; top: 53%; height: 1px;
   background: var(--accent); opacity: .6; pointer-events: none; z-index: -1;
 }
-[data-theme="futuristic"] :is(.tempo-slider, .pitch-slider) span {
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.tempo-slider, .pitch-slider) span {
   color: #d3eaf5; text-transform: uppercase; letter-spacing: .3px; font-size: 7px; white-space: nowrap;
   text-shadow: 0 1px 2px #000;
 }
-[data-theme="futuristic"] :is(.tempo-slider, .pitch-slider) output {
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.tempo-slider, .pitch-slider) output {
   display: inline-block; padding: 0; min-width: 5ch; text-align: left;
   color: #edffff; font-size: 8px; line-height: 10px;
   font-variant-numeric: tabular-nums; letter-spacing: 0;
   text-shadow: 0 1px 2px #000;
 }
-[data-theme="futuristic"] :is(.tempo-slider, .pitch-slider) input {
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.tempo-slider, .pitch-slider) input {
   display: block; position: absolute; inset: 0; width: 100%; height: 100%;
   margin: 0; opacity: 0; cursor: ns-resize; z-index: 2;
   /* Pointer handling belongs to the full roller surface. Letting the native
      range receive touchstart would also invoke its horizontal jump behavior. */
   pointer-events: none;
 }
-[data-theme="futuristic"] :is(.tempo-slider, .pitch-slider),
-[data-theme="futuristic"] :is(.tempo-slider, .pitch-slider) * { touch-action: pinch-zoom; }
-[data-theme="futuristic"] [data-dragging="true"] {
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.tempo-slider, .pitch-slider),
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.tempo-slider, .pitch-slider) * { touch-action: pinch-zoom; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) [data-dragging="true"] {
   border-color: var(--accent);
   box-shadow: inset 0 1px #e6ffff70, inset 0 0 9px color-mix(in srgb, var(--accent) 22%, transparent);
 }
-[data-theme="futuristic"] .pitch-slider { border-top-style: dashed; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .pitch-slider { border-top-style: dashed; }
 
 /* Deep optical windows, with faceted framing rather than painted waveform data. */
-[data-theme="futuristic"] :is(.waveform-overview, .scrolling-waveform) {
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.waveform-overview, .scrolling-waveform) {
   background: linear-gradient(168deg, #a4eaff0a 0 12%, transparent 12%), #050e19;
   border: 1px solid #65899e; border-radius: 7px 3px 7px 3px;
   box-shadow: inset 0 0 0 2px #010710, inset 0 3px 5px #000b, 0 1px #c0f5ff33;
 }
-[data-theme="futuristic"] :is(.waveform-overview, .scrolling-waveform) :is(svg, canvas) { opacity: .95; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.waveform-overview, .scrolling-waveform) :is(svg, canvas) { opacity: .95; }
 /* A passive cover above the waveform and playhead; seeking still reaches the window. */
-[data-theme="futuristic"] .waveform-overview::after {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .waveform-overview::after {
   content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
   border-radius: inherit;
   background: linear-gradient(113deg, transparent 12%, #d9f5ff12 12.5%, #d9f5ff04 24%, transparent 24.5%),
@@ -121,76 +121,76 @@ html[data-theme="futuristic"] { background: #050910; color: #d5e6ef; }
   box-shadow: inset 0 1px #e5faff75, inset 1px 0 #c7ebff30,
     inset 0 -2px #020914a0, inset -1px 0 #06121e80;
 }
-[data-theme="futuristic"] .playhead { background: #e7ffff; box-shadow: 0 0 4px var(--accent); }
-[data-theme="futuristic"] .current-playback-time { color: #9ebed2; font-size: 9px; font-variant-numeric: tabular-nums; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .playhead { background: #e7ffff; box-shadow: 0 0 4px var(--accent); }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .current-playback-time { color: #9ebed2; font-size: 9px; font-variant-numeric: tabular-nums; }
 
 /* One physical crystal-metal cap. Track illumination is derived from the
    existing rendered percentages, including changes made without a pointer. */
-[data-theme="futuristic"] .deck input[type="range"] {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .deck input[type="range"] {
   --lit: var(--main-volume-fill, var(--stem-level-fill, 0%));
   --cap: linear-gradient(90deg, transparent 40%, #080f19 40% 44%, var(--accent) 45% 55%, #080f19 56% 60%, transparent 60%),
     linear-gradient(150deg, #a6c7d3 0 8%, #405d70 9% 45%, #203a4d 46% 88%, #0c1f30 89%);
 }
-[data-theme="futuristic"] .deck input[type="range"]::-webkit-slider-runnable-track {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .deck input[type="range"]::-webkit-slider-runnable-track {
   background: linear-gradient(to right, var(--accent) 0 var(--lit), #0a1928 var(--lit) 100%);
   border: 1px solid #030b14; border-radius: 3px;
   box-shadow: inset 0 1px #ffffff30, 0 1px #6d93a94d, 0 0 4px color-mix(in srgb, var(--accent) calc(var(--lit) * .65), transparent);
 }
-[data-theme="futuristic"] .deck input[type="range"]::-moz-range-track {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .deck input[type="range"]::-moz-range-track {
   background: linear-gradient(to right, var(--accent) 0 var(--lit), #0a1928 var(--lit) 100%);
   border: 1px solid #030b14; border-radius: 3px;
   box-shadow: inset 0 1px #ffffff30, 0 1px #6d93a94d, 0 0 4px color-mix(in srgb, var(--accent) calc(var(--lit) * .65), transparent);
 }
-[data-theme="futuristic"] .deck input[type="range"]::-webkit-slider-thumb {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .deck input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none; width: 22px; height: 24px; margin-top: -10px;
   border: 1px solid #96bdcc; border-radius: 3px; background: var(--cap);
   box-shadow: inset 0 1px #efffff66, inset 0 -2px #020a14, 0 2px 2px #000b;
 }
-[data-theme="futuristic"] .deck input[type="range"]::-moz-range-thumb {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .deck input[type="range"]::-moz-range-thumb {
   width: 22px; height: 24px; border: 1px solid #96bdcc; border-radius: 3px; background: var(--cap);
   box-shadow: inset 0 1px #efffff66, inset 0 -2px #020a14, 0 2px 2px #000b;
 }
-[data-theme="futuristic"] .deck .main-volume-fader input::-webkit-slider-thumb { height: 22px; margin-top: -10.5px; }
-[data-theme="futuristic"] .deck .main-volume-fader input::-moz-range-thumb { height: 22px; }
-[data-theme="futuristic"] .stem-faders span { letter-spacing: .1px; font-size: 10px; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .deck .main-volume-fader input::-webkit-slider-thumb { height: 22px; margin-top: -10.5px; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .deck .main-volume-fader input::-moz-range-thumb { height: 22px; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .stem-faders span { letter-spacing: .1px; font-size: 10px; }
 
 /* Inactive knobs retain their established geometry; no musical values invented. */
-[data-theme="futuristic"] :is(.filter-knob, .eq-knob, .effect-knob) {
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.filter-knob, .eq-knob, .effect-knob) {
   border-radius: 50%;
   background: radial-gradient(circle at 50% 50%, #142b3c 0 55%, #040c18 57% 63%, transparent 64%),
     conic-gradient(from 215deg, #3c6077, #b4d8e5 25%, #26475c 45%, #091525 70%, #52768d);
   border: 2px solid #6c96ac;
   box-shadow: inset 0 1px #e2ffff60, inset 0 -2px #000a, 0 2px 3px #000a;
 }
-[data-theme="futuristic"] :is(.filter-knob, .eq-knob, .effect-knob)::before { box-shadow: 0 0 3px var(--accent); }
-[data-theme="futuristic"] .cue-pad {
+:is([data-theme="futuristic"], [data-theme="waveform"]) :is(.filter-knob, .eq-knob, .effect-knob)::before { box-shadow: 0 0 3px var(--accent); }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .cue-pad {
   display: flex; align-items: flex-start; justify-content: flex-start; padding: 8px;
   background: #e4e7dd; color: #475451;
   border: 1px solid; border-color: #fdfff4 #bec9c2 #9aaba3;
   border-radius: 7px; font-size: 9px; font-weight: 700; text-shadow: none;
   box-shadow: inset 0 1px 2px #ffffff90, inset 0 -4px #bac7bc, 0 0 0 2px #030b14, 0 3px 2px #000b;
 }
-[data-theme="futuristic"] .cue-pad[aria-pressed="true"] {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .cue-pad[aria-pressed="true"] {
   background: var(--accent); color: #09202a;
   border-color: color-mix(in srgb, var(--accent) 40%, #ffffff);
   box-shadow: inset 0 2px 5px #ffffff60, inset 0 -4px color-mix(in srgb, var(--accent) 65%, #293f48),
     inset 0 0 14px #ffffff40, 0 0 0 2px #030b14, 0 0 5px color-mix(in srgb, var(--accent) 60%, transparent);
 }
-[data-theme="futuristic"] .cue-pad:enabled:active {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .cue-pad:enabled:active {
   background: color-mix(in srgb, var(--accent) 65%, #e4e7dd);
   box-shadow: inset 0 -1px #749389, 0 0 0 2px #030b14;
 }
-[data-theme="futuristic"] .loop-controls button[aria-pressed="true"] {
+:is([data-theme="futuristic"], [data-theme="waveform"]) .loop-controls button[aria-pressed="true"] {
   color: #eaffff; background: color-mix(in srgb, var(--accent) 45%, #10273a);
   border-color: var(--accent); box-shadow: inset 0 0 6px color-mix(in srgb, var(--accent) 45%, transparent);
 }
-[data-theme="futuristic"] .search { color: #cbe7f6; background: #071320; border-color: #486c85; box-shadow: inset 0 2px 4px #0009; }
-[data-theme="futuristic"] .library-header { border-color: #486c85; }
-[data-theme="futuristic"] .search-result { border-color: #294355; }
-[data-theme="futuristic"] .section-selector button[aria-pressed="true"],
-[data-theme="futuristic"] .song-sort-selector button[aria-pressed="true"] { color: #e5ffff; background: color-mix(in srgb, var(--accent) 30%, #14273a); box-shadow: inset 0 -2px var(--accent); }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .search { color: #cbe7f6; background: #071320; border-color: #486c85; box-shadow: inset 0 2px 4px #0009; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .library-header { border-color: #486c85; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .search-result { border-color: #294355; }
+:is([data-theme="futuristic"], [data-theme="waveform"]) .section-selector button[aria-pressed="true"],
+:is([data-theme="futuristic"], [data-theme="waveform"]) .song-sort-selector button[aria-pressed="true"] { color: #e5ffff; background: color-mix(in srgb, var(--accent) 30%, #14273a); box-shadow: inset 0 -2px var(--accent); }
 
 @media (orientation: portrait), (max-width: 700px) {
-  [data-theme="futuristic"] .mixer-decks { gap: 4px; }
-  [data-theme="futuristic"] .stem-faders span { font-size: 9px; }
+  :is([data-theme="futuristic"], [data-theme="waveform"]) .mixer-decks { gap: 4px; }
+  :is([data-theme="futuristic"], [data-theme="waveform"]) .stem-faders span { font-size: 9px; }
 }
