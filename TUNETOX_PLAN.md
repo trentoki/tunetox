@@ -456,7 +456,12 @@ footer, functional search/Title-BPM-Key-Artist sorting, independent selections,
 numbered 1–4 loading and library-song drops onto those buttons, full-song overviews
 and Queue. No separate Library area or historical layout is introduced. Explicit
 Queue drops expose existing loadQueue behavior under the existing coordinator guard;
-other destinations retain paused-load/playing-queue rules. Playlists and Links remain
-unimplemented, and bulk analysis is not connected. Permanent song metadata/source
-storage remains separate from experimental measurements. See [the current contract](specs/library.md).
+other destinations retain paused-load/playing-queue rules. Nested playlists, single-song
+Manage, loaded-song Links and tap/slide navigation are now connected. Individual and
+sequential bulk analysis use the explicitly versioned V40 baseline with progress,
+cancellation and persistent compact results. Verified BPM is independently retained.
+Behavior owns interactions, browsing, relationships, storage, analysis jobs and
+library deck-loading coordination; Visual renders, Audio decodes/analyzes independently
+of playback. Permanent data remains separate from regenerable measurements.
+See [increment checkpoints and per-file review](docs/LIBRARY-DEVELOPMENT.md). See [the current contract](specs/library.md).
 The preceding working application is preserved by `checkpoint/pre-library-20261126`.

@@ -349,15 +349,6 @@ export function createPlaybackDeck(number, deck, actions) {
     render();
     libraryButton.focus();
   });
-  if (actions.library) {
-    const [songs, playlists, links] = sectionSelector.children;
-    songs.disabled = false; songs.title = 'Imported songs'; songs.setAttribute('aria-label', 'Songs');
-    songs.setAttribute('aria-pressed', 'true');
-    for (const tab of [playlists, links]) {
-      tab.title = tab.textContent + ' is not implemented';
-      tab.setAttribute('aria-label', tab.textContent + ' (not implemented)');
-    }
-  }
   libraryHeader.append(element("small", "", "D" + number), sectionSelector, back);
   const libraryContent = element("div", "library-content");
   const sort = element("div", "song-sort-selector");
@@ -379,7 +370,7 @@ export function createPlaybackDeck(number, deck, actions) {
   library.append(libraryHeader, libraryContent);
   node.append(performance, library);
   const libraryControls = actions.library ? connectLibraryControls(actions.library,
-    { tabs: sectionSelector, getLoadedSongId: () => deck.song?.librarySongId || null, sort, search, results, selected, destinations, visible: () => workspace === 'library-view' },
+    { analysis: actions.libraryAnalysis, tabs: sectionSelector, getLoadedSongId: () => deck.song?.librarySongId || null, sort, search, results, selected, destinations, visible: () => workspace === 'library-view' },
     actions.sendLibrarySong, actions.announce) : null;
   if (actions.library) {
     connectSongDrop(overview, id => actions.sendLibrarySong(id, number - 1, 'deck'));

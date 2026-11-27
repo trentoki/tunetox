@@ -2,18 +2,20 @@
 // Metadata and source Blob commit atomically; hash IDs prevent cross-tab duplicates.
 export function openLibraryStorage(name = 'tunetox-library-v1') {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open(name, 3);
+    const request = indexedDB.open(name, 4);
     request.onupgradeneeded = () => {
       const db = request.result;
       if (!db.objectStoreNames.contains('songs')) db.createObjectStore('songs', { keyPath: 'id' });
       if (!db.objectStoreNames.contains('sources')) db.createObjectStore('sources');
-      for (const store of ['playlists', 'memberships', 'links'])
+      for (const store of ['playlists', 'memberships', 'links', 'analysisResults'])
         if (!db.objectStoreNames.contains(store)) db.createObjectStore(store, { keyPath: 'id' });
     };
     request.onerror = () => reject(request.error);
-    request.onblocked = () => reject(new Error('Close other TuneTox tabs to open library storage.'));
+    let blocked = false;
+    request.onblocked = () => { blocked = true; reject(new Error('Close other TuneTox tabs, then reload to open library storage.')); };
     request.onsuccess = () => {
       const db = request.result;
+      if (blocked) { db.close(); return; }
       db.onversionchange = () => db.close();
       function read(store, id) {
         return new Promise((done, fail) => {
@@ -32,6 +34,19 @@ export function openLibraryStorage(name = 'tunetox-library-v1') {
         });
       }
       resolve({
+        listAnalysisResults: () => read('analysisResults'),
+        saveAnalysisResult(result) {
+          return new Promise((done, fail) => {
+            const tx = db.transaction(['songs', 'analysisResults'], 'readwrite');
+            const song = tx.objectStore('songs').get(result.songId);
+            song.onsuccess = () => {
+              if (!song.result) { tx.abort(); return; }
+              tx.objectStore('analysisResults').put(result);
+            };
+            tx.oncomplete = () => done();
+            tx.onabort = () => fail(tx.error || new Error('Analysis song is unavailable.'));
+          });
+        },
         listLinks: () => read('links'),
         setRelationship(store, record, present, references) {
           return new Promise((done, fail) => {

@@ -9,6 +9,23 @@ document.querySelector('#run').onclick = async () => {
   const name = 'tunetox-library-test-' + crypto.randomUUID();
   let db, reopened;
   try {
+    const migrationName = name + '-migration';
+    await new Promise((resolve, reject) => {
+      const request = indexedDB.open(migrationName, 1);
+      request.onupgradeneeded = () => {
+        const old = request.result; old.createObjectStore('songs', {keyPath:'id'}); old.createObjectStore('sources');
+      };
+      request.onsuccess = () => {
+        const old = request.result, tx = old.transaction(['songs','sources'], 'readwrite');
+        tx.objectStore('songs').put({id:'old-song', title:'Retained', verifiedBpm:123});
+        tx.objectStore('sources').put(new Blob(['original source']), 'old-song');
+        tx.oncomplete = () => { old.close(); resolve(); }; tx.onabort = () => reject(tx.error);
+      }; request.onerror = () => reject(request.error);
+    });
+    const migrated = await openLibraryStorage(migrationName);
+    assert((await migrated.getSong('old-song')).verifiedBpm === 123 && (await migrated.getSource('old-song')).size === 15 && !(await migrated.listAnalysisResults()).length, 'Additive migration lost data');
+    migrated.close(); indexedDB.deleteDatabase(migrationName);
+    pass('version-1 library upgrades without replacing original source or verified metadata');
     db = await openLibraryStorage(name); const library = createLibraryManagement(Promise.resolve(db));
     const one = new File(['one waveform fixture'], 'Artist - First.wav', { type: 'audio/wav' });
     const duplicate = new File(['one waveform fixture'], 'Renamed.wav', { type: 'audio/wav' });

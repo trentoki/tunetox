@@ -17,8 +17,11 @@ local collection without loading any deck. Search, Title/BPM/Key/Artist sorting 
 independent selection are connected. Select a song and use **1–4**, or drag a song
 to those buttons, a full-song overview or a Queue. Existing paused-load/playing-queue
 and occupied-slot rules apply. Header Load D1–D4 remain direct, session-only file
-shortcuts; use Library Import for persistence. Playlists, Links and bulk analysis
-remain unimplemented. See [Library behavior/storage limits](specs/library.md) and
+shortcuts; use Library Import for persistence. Import Playlist preserves nested
+folders inline. Manage edits a single song’s links, memberships and verified BPM.
+Links follows the deck’s loaded song. Analyze All and individual analysis use the
+versioned original V40 detector, with progress/cancellation and persistent results.
+Detected and verified BPM remain separate; V40 can make half-time errors. See [Library behavior/storage limits](specs/library.md) and
 [Library interface regression tests](tests/library-interface-tests.html).
 
 ## Preserved legacy references

@@ -1,3 +1,4 @@
+import { createLibraryAnalysisQueue } from '../../behavior/library/library-analysis-queue.js';
 import { createLibraryDeckLoading } from '../../behavior/library/library-deck-loading.js';
 import { createLibraryManagement } from '../../behavior/library/library-management.js';
 import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, setTempo, setStemLevel } from "../../behavior/mixer/deck.js";
@@ -19,6 +20,7 @@ const views = [];
 const coordinators = [];
 const musicLibrary = createLibraryManagement();
 musicLibrary.ready.catch(error => announce("Library storage unavailable: " + error.message));
+const libraryAnalysis = createLibraryAnalysisQueue(musicLibrary);
 const audioFileURLs = createAudioFileURLs();
 
 function announce(message) {
@@ -39,7 +41,7 @@ function releaseUnusedURLs() {
 decks.forEach((deck, index) => {
   const number = index + 1;
   const view = createPlaybackDeck(number, deck, {
-    library: musicLibrary,
+    library: musicLibrary, libraryAnalysis,
     sendLibrarySong, announce,
     setTempo(ratio) {
       const applied = setTempo(deck, ratio);

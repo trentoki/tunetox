@@ -6,13 +6,30 @@ const make = (tag, text, className) => {
   if (className) node.className = className;
   return node;
 };
+function bpmLabel(song) {
+  if (song.verifiedBpm == null) return song.detectedBpm == null ? 'BPM unknown' : song.detectedBpm + ' BPM (V40)';
+  const detected = song.detectedBpm == null ? '' : ' · V40 ' + song.detectedBpm + ' (Δ ' + (song.detectedBpm - song.verifiedBpm).toFixed(2) + ')';
+  return song.verifiedBpm + ' BPM verified' + detected;
+}
 export function createLibraryPresentation(controls) {
-  const { tabs, sort, results, selected, destinations } = controls;
+  const { tabs, sort, search, results, selected, destinations } = controls;
+  [...destinations.children].forEach((button, index) => {
+    button.disabled = true; button.removeAttribute('title');
+    button.setAttribute('aria-label', 'Send selected library song to Deck ' + (index + 1));
+  });
+  [...sort.children].forEach(button => {
+    button.disabled = false; button.setAttribute('aria-label', 'Sort library by ' + button.textContent);
+  });
+  [...tabs.children].forEach(button => {
+    button.disabled = false; button.title = button.textContent; button.setAttribute('aria-label', button.textContent);
+  });
+  search.disabled = false; search.setAttribute('aria-label', 'Search library songs, playlists and artists');
   const footer = selected.querySelector('small');
   const importButton = make('button', 'Import', 'library-import-button'); importButton.type = 'button';
   const manageButton = make('button', 'Manage', 'library-import-button'); manageButton.disabled = true;
+  const analyzeButton = make('button', 'Analyze All', 'library-import-button');
   const selectionText = document.createTextNode(' · Select a song, then choose 1–4');
-  footer.replaceChildren(importButton, document.createTextNode(' · '), manageButton, selectionText);
+  footer.replaceChildren(importButton, document.createTextNode(' · '), manageButton, document.createTextNode(' · '), analyzeButton, selectionText);
   const dialog = make('dialog', undefined, 'library-import-dialog');
   dialog.append(make('h2', 'Import into shared library'), make('p', 'Adds files without loading or interrupting any deck. Your originals stay unchanged.'));
   const inputs = [false, true].map(folder => {
@@ -32,7 +49,7 @@ export function createLibraryPresentation(controls) {
   dialog.append(progress, failures, cancel, close, storage, persist); document.body.append(dialog);
   let displayedFailures, failureCount = 0;
   return {
-    importButton, manageButton, dialog, inputs, cancel, close, persist,
+    importButton, manageButton, analyzeButton, dialog, inputs, cancel, close, persist,
     showStorage(message) { storage.textContent = message; },
     showImportProgress(job) {
       if (!dialog.open) return;
@@ -44,7 +61,7 @@ export function createLibraryPresentation(controls) {
       for (; failureCount < job.failures.length; failureCount++) failures.append(make('li', job.failures[failureCount].filename + ': ' + job.failures[failureCount].message));
     },
     showError(message) { progress.textContent = message; },
-    select(id, title) {
+    showSelection(id, title) {
       manageButton.disabled = !id;
       selectionText.textContent = ' · ' + title; footer.title = title;
       results.querySelectorAll('[data-song-id]').forEach(row => row.setAttribute('aria-pressed', String(row.dataset.songId === id)));
@@ -61,11 +78,11 @@ export function createLibraryPresentation(controls) {
         const row = make('div', undefined, 'search-result'); row.dataset.songId = item.id;
         row.draggable = true; row.tabIndex = 0; row.setAttribute('role', 'button');
         row.setAttribute('aria-pressed', String(item.id === selectedId));
-        row.append(make('strong', item.title, 'song-title'), make('span', `${item.artist || 'Unknown artist'} · ${item.verifiedBpm == null ? 'BPM unknown' : item.verifiedBpm + ' BPM'} · ${item.key || 'Key unknown'}`, 'artist'));
+        row.append(make('strong', item.title, 'song-title'), make('span', `${item.artist || 'Unknown artist'} · ${bpmLabel(item)} · ${item.key || 'Key unknown'}`, 'artist'));
         if (item.depth) row.style.paddingLeft = (8 + item.depth * 12) + 'px';
         return row;
       }));
-      if (!rows.length) results.append(make('p', content === 'playlists' ? 'Use Import Playlist to add a folder.' : 'No matching songs. Use Import to add music.'));
+      if (!rows.length) results.append(make('p', content === 'playlists' ? 'Use Import Playlist to add a folder.' : content === 'links' ? 'No matching links for this deck’s loaded song.' : 'No matching songs. Use Import to add music.'));
       if (more) { const button = make('button', 'Show 100 more'); button.dataset.more = 'true'; results.append(button); }
       results.scrollTop = scroll;
       [...tabs.children].forEach((button, i) => button.setAttribute('aria-pressed', String(['songs', 'playlists', 'links'][i] === content)));

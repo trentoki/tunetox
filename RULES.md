@@ -90,8 +90,13 @@ collection while retaining independent browsing. Import adds files/folders witho
 loading a deck. Existing 1–4 buttons and song drops onto them/overviews use the
 normal paused-load/playing-queue behavior. Explicit Queue drops fill only an empty
 slot without replacing the current song, even while paused. Occupied slots remain
-protected. BPM/key stay unknown until supplied; no new BPM interpretation is added.
-Playlists/Links remain unimplemented. See [Library contract](specs/library.md).
+protected. Unknown BPM/key are not invented. Nested playlists expand inline and
+reference shared songs. Manage operates on one selected song with independent
+reciprocal links and playlist memberships; Links follows the loaded deck song,
+including paused loads. Both existing strips support tap and continuous sliding.
+Individual/Analyze All use versioned original V40 analysis, sequential progress,
+cancellation and per-song failures. Verified BPM is separate and never overwritten.
+No multi-selection, Link All or bulk membership assignment is implemented. See [Library contract](specs/library.md).
 
 ## 8. Controls and Settings
 

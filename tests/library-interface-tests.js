@@ -13,7 +13,7 @@ function tone(win, name, frequency) {
   view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
   view.setUint32(24, rate, true); view.setUint32(28, rate * 2, true); view.setUint16(32, 2, true); view.setUint16(34, 16, true);
   text(36, 'data'); view.setUint32(40, count * 2, true);
-  for (let i = 0; i < count; i++) view.setInt16(44 + i * 2, Math.sin(i * 2 * Math.PI * frequency / rate) * 1000, true);
+  for (let i = 0; i < count; i++) view.setInt16(44 + i * 2, Math.sin(i * 2 * Math.PI * frequency / rate) * 1000 * (name.includes('Alpha') ? Math.exp(-((i / rate) % .5) * 60) : 1), true);
   return new win.File([bytes], name, { type: 'audio/wav' });
 }
 document.querySelector('#run').onclick = async () => {
@@ -78,6 +78,9 @@ document.querySelector('#run').onclick = async () => {
     library(0).querySelector('.library-playlist').click();
     await until(() => library(0).querySelectorAll('.library-playlist').length === 2, 'Nested playlist missing');
     library(0).querySelectorAll('.library-playlist')[1].click(); await rows(0, 1);
+    const folderSearch = library(0).querySelector('.search'); folderSearch.value = 'Nested'; folderSearch.dispatchEvent(new win.Event('input'));
+    await rows(0, 1); assert(getRow(0, 'Gamma'), 'Folder-name search lost contents');
+    folderSearch.value = ''; folderSearch.dispatchEvent(new win.Event('input')); await rows(0, 1);
     assert(getRow(0, 'Gamma') && library(0).querySelectorAll('[aria-expanded=true]').length === 2, 'Inline expansion lost parent');
     library(1).querySelectorAll('.section-selector button')[1].click();
     await until(() => library(1).querySelectorAll('.library-playlist').length === 1, 'Independent playlist browsing');
@@ -130,6 +133,16 @@ document.querySelector('#run').onclick = async () => {
     const betaId = meta.find(s => s.title === 'Beta').id, alphaId = meta.find(s => s.title === 'Alpha').id;
     const link = manage.querySelector('[data-link-song-id="' + betaId + '"]'); link.click();
     await until(async () => (await store.listLinks()).length === 1, 'Link was not saved');
+    const verified = manage.querySelector('[aria-label="Verified BPM"]'); verified.value = '121.25'; verified.dispatchEvent(new win.Event('change', {bubbles:true}));
+    manage.querySelector('form').dispatchEvent(new win.Event('submit', {bubbles:true,cancelable:true}));
+    await until(async () => (await store.getSong(alphaId)).verifiedBpm === 121.25, 'Manual BPM UI failed');
+    [...manage.querySelectorAll('button')].find(b => b.textContent === 'Analyze BPM (V40)').click();
+    const analysis = doc.querySelector('.library-analysis-dialog[open]');
+    [...analysis.querySelectorAll('button')].find(b => b.textContent === 'Analyze selected song').click();
+    await until(() => analysis.textContent.includes('1/1 processed'), 'Individual analysis did not finish');
+    assert((await store.listAnalysisResults()).find(r => r.songId === alphaId).bpm === 120 && (await store.getSong(alphaId)).verifiedBpm === 121.25, 'Detected/manual comparison corrupted');
+    [...analysis.querySelectorAll('button')].find(b => b.textContent === 'Close').click();
+    await until(() => manage.textContent.includes('Δ -1.25 BPM'), 'Detected/verified comparison missing');
     const folders = await store.listPlaylists();
     for (const folder of folders) {
       await until(() => manage.querySelector('[data-membership-id="' + folder.id + '"]'), 'Membership row missing');
@@ -141,6 +154,16 @@ document.querySelector('#run').onclick = async () => {
     await until(async () => (await store.listMemberships()).filter(m => m.songId === alphaId).length === 1, 'Individual membership removal failed');
     assert((await store.listLinks()).length === 1, 'Membership altered links');
     [...manage.querySelectorAll('button')].find(b => b.textContent === 'Close').click();
+    [...library(0).querySelectorAll('.library-import-button')].find(b => b.textContent === 'Analyze All').click();
+    const bulk = doc.querySelector('.library-analysis-dialog[open]');
+    [...bulk.querySelectorAll('button')].find(b => b.textContent === 'Analyze entire library').click();
+    [...bulk.querySelectorAll('button')].find(b => b.textContent === 'Cancel analysis').click();
+    await until(() => bulk.textContent.includes('cancelled') && ![...bulk.querySelectorAll('button')].find(b => b.textContent === 'Analyze entire library').disabled, 'Bulk cancel did not settle');
+    [...bulk.querySelectorAll('button')].find(b => b.textContent === 'Analyze entire library').click();
+    await until(() => bulk.textContent.includes('3/3 processed'), 'Bulk analysis did not finish');
+    [...bulk.querySelectorAll('button')].find(b => b.textContent === 'Close').click();
+    assert(!players[0].paused && players[0].src === playingSource, 'UI analysis interrupted playback');
+    pass('individual and bulk analysis controls, cancellation, persistent comparison and verified BPM protection during playback');
     library(0).querySelectorAll('.section-selector button')[2].click(); await rows(0, 1);
     assert(getRow(0, 'Beta'), 'Links does not follow loaded Alpha');
     library(1).querySelectorAll('.section-selector button')[2].click(); await rows(1, 0);
@@ -157,6 +180,11 @@ document.querySelector('#run').onclick = async () => {
     await until(() => players[1].readyState === 2 && deck(1).querySelector('.song-title').textContent.includes('Beta'), 'Numbered drop');
     library(1).querySelectorAll('.section-selector button')[2].click(); await rows(1, 1);
     assert(getRow(1, 'Alpha') && players[1].paused, 'Reciprocal Links does not follow paused loaded Beta');
+    getRow(0, 'Gamma').click(); library(0).querySelector('.send-to-deck-two').click();
+    await until(() => !deck(1).querySelector('.play-pause-button').disabled && deck(1).querySelector('.song-title').textContent.includes('Gamma'), 'Paused replacement while Links open');
+    await rows(1, 0);
+    getRow(0, 'Beta').click(); library(0).querySelector('.send-to-deck-two').click();
+    await rows(1, 1); assert(getRow(1, 'Alpha') && players[1].paused, 'Open Links did not follow paused replacement');
     library(1).querySelectorAll('.section-selector button')[0].click(); await rows(1, 3);
     back(2); drop(getRow(0, 'Gamma'), deck(2).querySelector('.waveform-overview'));
     await until(() => players[2].readyState === 2 && deck(2).querySelector('.song-title').textContent.includes('Gamma'), 'Overview drop');

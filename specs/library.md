@@ -1,130 +1,128 @@
-# Shared persistent Library — current contract
+# Shared Library — current implementation contract
 
-## Scope and approved layout
+The existing four deck Library workspaces retain their approved layout. One
+persistent collection serves all four. Historical libraries are references only.
 
-All four existing deck Library workspaces browse the same persistent collection.
-Their header tabs, Title/BPM/Key/Artist row, search field, song list and numbered
-1–4 destinations retain the approved hierarchy and positions. Each workspace keeps
-its own search, sort direction, selection and scroll position. There is no new
-library area and no requirement to choose a historical panel arrangement.
-The current human clarification supersedes the earlier unresolved placement notes.
+## Ownership and data flow
 
-The working application before this increment is preserved at local checkpoint
-`checkpoint/pre-library-20261126` (`7045e4e`). Existing waveform analysis/rendering,
-Audio DSP and transport execution are unchanged.
+Visual creates existing controls, rows and transient Import/Manage/analysis dialogs.
+It displays Behavior-supplied snapshots and owns no selection, sorting, navigation,
+import, relationship or loading decisions. Behavior binds those controls, owns
+per-view browsing, import operations, storage, relationships and analysis jobs.
+Audio alone decodes and performs musical analysis.
 
-## Ownership and modules
+Existing DOM -> Behavior library-controls -> library-management -> library-storage.
+Behavior supplies rows -> Visual library-view. Manage uses song-management Behavior
+and song-management-view presentation. Library deck loading resolves a canonical
+song/source and directly calls the existing playback coordinator; Audio retains its
+URL and playback ownership. No adapter, routing layer or second deck state exists.
 
-- [library-storage.js](../app/behavior/library/library-storage.js): version-1
-  IndexedDB `tunetox-library-v1`, separate `songs` metadata and `sources` Blob stores.
-  Metadata and source commit atomically; SHA-256 identity prevents renamed/concurrent
-  duplicates from overwriting existing metadata. Dependent writes run inside IDB
-  request callbacks rather than after arbitrary awaits, preserving Safari transactions.
-- [library-management.js](../app/behavior/library/library-management.js): one shared
-  import job/service; sequential hash/store, cancellation, per-file failures,
-  search/sort and validated manual BPM setter. IndexedDB is authoritative; there
-  is no second library cache. Event notifications request fresh reads, not state
-  synchronization. A file being imported never enters a deck action.
-- [library-view.js](../app/visual/library/library-view.js): binds the existing DOM
-  controls and renders rows safely as text. Each instance retains presentation
-  state only. A transient Import chooser supports multiple files/folders, progress,
-  cancellation, errors and a persistence request. It does not replace the Library
-  layout. Shared drag/drop handling accepts only the library's custom song-ID MIME
-  type, with 64-character hash validation and a canonical IDB lookup.
-- [library.css](../app/visual/library/library.css): scoped functional states, Import
-  action in the existing footer line, and transient chooser styling. Existing
-  performance/library geometry is retained across all three themes.
-- [application.js](../app/visual/mixer/application.js): resolves the stored source,
-  creates an existing Audio-owned object URL, and calls the existing deck coordinator.
-  Temporary playback resources carry identity/name/URL, not editable library metadata.
+See [per-file architecture review and increment results](../docs/LIBRARY-DEVELOPMENT.md).
 
-## Import and persistence
+## Persistence and imports
 
-Import adds to the collection without replacing earlier batches or loading any
-deck. Folder FileLists include nested paths. Sidecars/unrecognized extensions are
-skipped; empty files fail individually. Audio MIME types/known audio extensions are
-admitted without decoding at import, so a mislabeled/corrupt file may be retained
-and later fail playback/analysis safely. Duplicate checking requires HTTPS or localhost.
+IndexedDB database `tunetox-library-v1`, schema version 4, contains:
 
-Read/hash/store one file at a time. Browser reads/hashes already underway may finish
-on cancellation, but cancellation is checked before starting the storage transaction.
-Completed files remain, pending files do not resume automatically after restart.
-Quota failures produce per-file reports without orphaned metadata. Import progress
-is shared across views, while lists refresh from canonical storage after completion.
+- `songs`: one metadata record per content SHA-256, including unknown/verified BPM
+  and key. Artist/title are inferred only from an Artist - Title filename.
+- `sources`: read-only source Blobs, keyed by the same content identity.
+- `playlists`: folder names and parent playlist IDs.
+- `memberships`: unique song/playlist references.
+- `links`: reciprocal unordered song-ID pairs.
+- `analysisResults`: compact results keyed by song ID and versioned detector ID.
 
-Metadata retains source hash, filename, inferred Artist - Title, nested relative
-path, size/type, import timestamp, nullable verifiedBpm/verifiedAt, and nullable key.
-New BPM and key values remain unknown: no guesses, tags or filename-based BPM/key
-extraction. Sorting BPM uses the stored verified BPM; Key uses supplied stored key
-text with natural ordering. Unknown values stay last in either direction; no musical
-key ordering is invented. Repeat a sort button to reverse direction.
+Additive upgrades retain older songs and original source Blobs. Metadata/source
+insertion is atomic; duplicate imports never overwrite existing metadata. Import
+reads/hashes/stores sequentially, adds to previous batches, and never calls deck
+loading. Cancellation retains completed work; in-flight native reads/hashes finish
+before cancellation checks. Per-file errors and quota failures are reported.
+Sidecars are skipped. Corrupt audio can import but subsequently fails decoding.
 
-The existing manual BPM setter preserves a distinct field, accepts finite values
-above 0 through 1000 (including decimals), and treats null as explicit clearing.
-No new metadata editor or detector/analysis control is added to the approved layout
-in this increment. Experimental algorithms, bulk analysis, and large regenerable
-measurement persistence remain disconnected. No decoded songs are retained by the
-library. Search covers title, artist, filename, path and supplied BPM/key. Lists
-render 100 rows initially with Show more for larger collections.
+Import Songs chooses multiple audio files. Import Playlist chooses a folder and
+creates nested playlists from relative paths. Each folder import creates a distinct
+playlist tree; identical audio remains one shared song across trees. Songs belong
+to their immediate folder, not implicitly to ancestors. Empty folders cannot be
+recovered from the browser FileList. A failed playlist write can leave an already
+imported song in Songs; reimport or Manage can add membership. Interrupted jobs do
+not resume automatically. Original files are never changed.
 
-## Loading and Queue destinations
+## Browsing, selection and loading
 
-Selecting a row (mouse, touch, Enter/Space) enables its view's existing 1–4 buttons.
-Clicking a numbered button or dropping a song on one calls the same host action.
-The four full-song overview waveforms are also library drop destinations:
+Each deck's Behavior owns its content tab, search, sort, direction, single selected
+song and expanded playlist IDs. Multiple folders may remain open inline; opening
+one does not navigate away. Song rows and relationships are read from canonical
+storage, not mirrored in another mutable library cache. Query snapshots are transient.
 
-- Empty/paused deck: existing `sendToDeck()` loads paused, without autoplay.
-- Playing deck: existing `sendToDeck()` fills its one Queue slot without interrupting
-  the sounding source; an occupied slot is retained with feedback.
-- Explicit Queue drop: existing `loadQueue()` fills an empty slot even while paused
-  or empty, leaving current source, cues and playback untouched. The coordinator's
-  new `queueSong()` method only exposes that existing action under its normal guard.
-  It does not add a queue store, second player or alternative playback pathway.
-- Busy deck: existing operation guard applies; host reports busy and asks to retry.
-  Occupied Queue rejection, READY/manual play and natural-end swapping are unchanged.
+Songs covers the entire collection. Playlists shows nested inline folders. Links
+shows explicit connections of the song currently loaded on that deck, paused or
+playing, and follows queue replacements too. Manage instead captures the library
+song selected when its dialog opens. Links are reciprocal and unique; self links
+are rejected. Playlist membership changes and links are independent. Adding a
+membership never removes another. No multiple selection, Link All or bulk assignment.
 
-Loaded, queued and loading URL references retain the existing cleanup policy.
-Rejected file URLs are released; the persistent source stays in IndexedDB. Dropping
-unrelated files, URLs or malformed song IDs does not invoke library playback.
-Overview absolute seeking and scrolling-waveform gestures remain unchanged.
+Search matches songs, artists, filenames, source paths, supplied BPM/key and playlist
+names. Playlist search retains ancestor context and includes contents below a
+matching folder, without changing expansion state. Lists initially render 100 song
+rows per opened folder/list; Show more increases that limit. Manage has a song
+search field for finding link targets.
 
-## Explicitly unfinished
+Both existing strips support tap, keyboard click and captured continuous pointer
+sliding. Crossing into an organization option chooses ascending order; tapping the
+same active sort again reverses order. Unknown BPM/key sorts last in both directions.
+BPM sorting uses verified BPM when present, otherwise V40 detected BPM; this metadata
+ordering never changes playback tempo. Key uses natural text order; no musical key
+ordering or unknown values are invented.
 
-Playlists and Links remain disabled and labeled not implemented. There is no
-playlist creation/editing/membership/navigation or song-link creation/removal/search
-workflow in this increment. No new behavior is inferred from V40 or old designs.
-Bulk BPM analysis, detector comparisons, analysis-detail presentation and metadata
-editing UI are separate later increments. Touch selection plus 1–4 provides a shared
-alternative where native drag/drop is unavailable or awkward.
+Selected row + 1–4 and drops on numbered buttons/full-song overview call the existing
+`sendToDeck`: empty/paused loads paused; playing fills the one Queue slot. Explicit
+Queue drops fill an empty Queue even on a paused/empty deck without changing its
+current source/cues. Occupied queues and busy coordinators reject with feedback.
+Existing READY/manual and natural-end queue behavior remain unchanged. URL cleanup
+retains only existing loaded/queued/loading references. Unrelated/malformed drops
+cannot trigger library loading. Touch selection + numbered buttons remains available
+where native drag/drop is limited.
 
-## Storage limits and verification
+## Initial BPM analysis
 
-Libraries belong to an exact browser origin (scheme, hostname and port), not a Git
-folder or account. HTTP/HTTPS, localhost/LAN addresses, browsers and devices have
-separate stores. Keep original music: clearing site data, private-mode lifecycle or
-browser eviction can remove a local library. Persistence requests may be denied;
-no fixed capacity or permanent retention is promised. See [WebKit storage policy](https://webkit.org/blog/14403/updates-to-storage-policy/).
-iOS Safari added folder selection in 18.4; older versions need multi-file selection.
-See [WebKit Safari 18.4 notes](https://webkit.org/blog/16574/webkit-features-in-safari-18-4/).
-Physical Safari/iPad import, restart persistence and large-library limits remain
-separate device checks.
+Manage provides individual V40 analysis and verified BPM entry. Analyze All opens
+a shared-job progress dialog for the entire collection. Closing a dialog hides it;
+Cancel explicitly stops analysis. Jobs run sequentially and share one guard across
+all views, separate from the four playback Queues. Completed results persist.
 
-[Foundation checks](../tests/library-tests.html) use disposable named databases and
-synthetic sources: atomic persistence, duplicate protection, nested paths, quota
-failures, cancellation, search/sort, manual BPM safety and import guards.
-[Interface checks](../tests/library-interface-tests.html) remap only the test frame's
-library database name, protecting the user's actual collection. They verify batches,
-folder paths, playback-preserving import, four shared/independent views, unknown
-metadata, all sorts, numbered/drop destinations, occupied Queue rejection and real
-application reload persistence. [Deck boundary checks](../tests/library-deck-loading-tests.js)
-exercise stored Blobs through all four real coordinators, including paused Queue
-behavior and operation guards. These tests do not establish audible Safari quality.
+`v40-original-1` preserves V40's mathematical detector unchanged. The exact archived
+functions/provenance remain under tests/reference. Only decoding is separated:
+Audio uses an independent OfflineAudioContext at 44.1 kHz, then transfers PCM copies
+to a short-lived module Worker. No deck context, waveform, frequency arrays or
+playback state are changed. The worker terminates after each song or cancellation.
+Native decoding cannot be interrupted; cancellation discards its result and waits
+before allowing another job. One song's decoded/PCM data can still be substantial.
+No decoded collection, frequency arrays or regenerable onset/correlation arrays are
+persisted automatically. Existing experimental analysis remains available separately.
 
-## Current sprint updates
+Compact results retain detector version, BPM, sample rate, duration, analysis time
+and last attempt/error. A failed reanalysis retains the previous successful BPM;
+new detector versions occupy separate records. Verified BPM is a distinct field,
+validated above 0 through 1000 (decimals allowed), and only explicit user entry can
+change/clear it. Displayed difference is detected minus verified, without octave
+correction. Manual entry never controls deck tempo. V40 inaccuracies remain: synthetic
+150 BPM can return 75 BPM. No final combined experimental detector is introduced.
 
-The subsequent approved library sprint supersedes the earlier “Explicitly
-unfinished” inventory incrementally. See [implementation and verification log](../docs/LIBRARY-DEVELOPMENT.md).
-Nested folder imports now create playlist trees. Inline expansions are independent
-and multiple levels can remain open. The database upgrades additively to version 2.
-Behavior owns interactions in library-controls and library-to-deck coordination in
-library-deck-loading. Visual library-view only creates and presents DOM snapshots.
+## Storage and verification limits
+
+Storage belongs to an exact origin/browser/device. HTTP/HTTPS, localhost/LAN,
+ports and devices have separate libraries; there is no synchronization. Keep original
+music: private mode, clearing site data, quota and eviction may remove local data.
+Persistence requests may be denied. See [WebKit storage policy](https://webkit.org/blog/14403/updates-to-storage-policy/).
+Folder selection on iOS requires Safari 18.4+; older systems use multiple files.
+See [Safari folder support](https://webkit.org/blog/16574/webkit-features-in-safari-18-4/).
+
+Disposable-database [foundation tests](../tests/library-tests.html),
+[real-application tests](../tests/library-interface-tests.html),
+[analysis tests](../tests/library-analysis-tests.html) and
+[boundary checks](../tests/library-architecture-tests.js) cover migration, imports,
+relationships, controls, destinations, analysis, persistence and negative cases.
+Existing playback, Queue, iPhone and theme regressions passed in desktop Chromium.
+Geometry matches checkpoint 7045e4e at nine theme/viewport combinations. These checks
+and advancing browser playback do not verify audible Safari quality. Physical Safari
+folder import, storage pressure, large-library responsiveness, touch feel and listening
+remain human/device checks. No public release readiness is claimed.

@@ -4,7 +4,7 @@
 // through the same action. Returning across an option does not reverse sort order.
 export function connectLibraryStrip(strip, choose) {
   const buttons = [...strip.querySelectorAll('button')];
-  let pointer = null, previous = -1, ignoreClickUntil = 0;
+  let pointer = null, previous = -1, ignoreClickUntil = 0, lastPointerType = '';
   function indexAt(event) {
     const button = document.elementFromPoint(event.clientX, event.clientY)?.closest('button');
     return button?.parentElement === strip && !button.disabled ? buttons.indexOf(button) : -1;
@@ -16,7 +16,7 @@ export function connectLibraryStrip(strip, choose) {
   strip.addEventListener('pointerdown', event => {
     if (!event.isPrimary || event.button !== 0 || pointer !== null) return;
     const index = indexAt(event); if (index < 0) return;
-    event.preventDefault(); pointer = event.pointerId; previous = index;
+    event.preventDefault(); lastPointerType = event.pointerType; pointer = event.pointerId; previous = index;
     ignoreClickUntil = performance.now() + 600;
     if (event.isTrusted) strip.setPointerCapture(pointer);
     buttons[index].focus({ preventScroll: true }); choose(index, true);
@@ -30,8 +30,9 @@ export function connectLibraryStrip(strip, choose) {
   for (const type of ['pointerup', 'pointercancel', 'lostpointercapture'])
     strip.addEventListener(type, event => { if (event.pointerId === pointer) { ignoreClickUntil = performance.now() + 600; finish(); } });
   window.addEventListener('blur', finish);
+  strip.addEventListener('keydown', () => { ignoreClickUntil = 0; });
   buttons.forEach((button, index) => button.addEventListener('click', event => {
-    if (event.detail && performance.now() < ignoreClickUntil) return;
+    if ((event.detail || lastPointerType === 'touch') && performance.now() < ignoreClickUntil) return;
     choose(index, true);
   }));
 }

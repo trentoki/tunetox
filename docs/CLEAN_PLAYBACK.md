@@ -477,3 +477,15 @@ persisted. Playlists/Links and bulk analysis remain unimplemented. Physical Safa
 iPad folder picking, storage retention, drag/touch and listening remain human checks.
 New Library changes are uncommitted; no audio or personal library contents written
 to repository files, and no push performed.
+
+### Library sprint completion — 27 November 2026
+
+The subsequent Library increments now include nested inline playlists, single-song
+Manage, loaded-song Links, tap/slide navigation, and sequential versioned V40 analysis
+with separate verified BPM. Earlier “not implemented” Library notes above describe
+the first increment only. See [the current contract](../specs/library.md) and
+[per-increment verification and architectural review](LIBRARY-DEVELOPMENT.md).
+Playback, waveform analysis/rendering, vendored DSP and iPhone implementation files
+remain unchanged from 7045e4e; the Behavior coordinator only exposes its existing
+Queue action for library destinations. Physical Safari listening/storage evaluation
+remains necessary. Both existing local HTTP and HTTPS previews respond successfully.

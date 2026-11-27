@@ -1,19 +1,34 @@
+import { V40_DETECTOR_ID } from '../../audio/analysis/v40-bpm.js';
 import { openLibraryStorage } from './library-storage.js';
 
 const audioExtension = /\.(wav|wave|mp3|m4a|mp4|aac|aif|aiff|flac|ogg|oga|opus|webm)$/i;
 const compare = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
 
+export function matchesLibrarySong(song, query) {
+  const text = query.toLocaleLowerCase().trim();
+  return !text || [song.title, song.artist, song.filename, song.relativePath, song.verifiedBpm ?? '', song.detectedBpm ?? '', song.key ?? '']
+    .some(value => String(value).toLocaleLowerCase().includes(text));
+}
+
 // One shared service for all library panels. IndexedDB is the canonical song
-// collection; views own search/selection only. Decoded audio is never stored here.
+// collection; per-view Behavior owns browsing only. Decoded audio is never stored here.
 export function createLibraryManagement(storage = openLibraryStorage()) {
   const events = new EventTarget();
   const job = { running: false, cancelRequested: false, total: 0, processed: 0, added: 0, duplicates: 0, skipped: 0, failures: [], current: '' };
   const notify = type => events.dispatchEvent(new Event(type));
   async function listSongs({ query = '', sort = 'title', descending = false } = {}) {
-    const all = await (await storage).listSongs(), text = query.toLocaleLowerCase().trim();
-    const songs = all.filter(song => !text || [song.title, song.artist, song.filename, song.relativePath, song.verifiedBpm ?? '', song.key ?? '']
-      .some(value => String(value).toLocaleLowerCase().includes(text)));
-    const key = ['title', 'artist', 'verifiedBpm', 'key', 'addedAt'].includes(sort) ? sort : 'title';
+    const db = await storage;
+    const [records, results] = await Promise.all([db.listSongs(), db.listAnalysisResults()]);
+    const baseline = new Map(results.filter(result => result.detectorId === V40_DETECTOR_ID).map(result => [result.songId, result]));
+    // Derived query rows only: durable song fields and detector results each have
+    // one authoritative store. Verified BPM wins display sorting when supplied.
+    const all = records.map(song => {
+      const detectedBpm = baseline.get(song.id)?.bpm ?? null;
+      return { ...song, detectedBpm, displayBpm: song.verifiedBpm ?? detectedBpm };
+    }), text = query.toLocaleLowerCase().trim();
+    const songs = all.filter(song => matchesLibrarySong(song, text));
+    if (sort === 'verifiedBpm') sort = 'displayBpm';
+    const key = ['displayBpm', 'title', 'artist', 'verifiedBpm', 'key', 'addedAt'].includes(sort) ? sort : 'title';
     return songs.sort((a, b) => {
       const left = a[key], right = b[key];
       if (left === null || left === undefined) return right === null || right === undefined ? compare.compare(a.title, b.title) : 1;
@@ -25,6 +40,15 @@ export function createLibraryManagement(storage = openLibraryStorage()) {
   return {
     ready: storage,
     events, importJob: job, listSongs,
+    async getAnalysisResults(songId) {
+      const results = await (await storage).listAnalysisResults();
+      return songId ? results.filter(result => result.songId === songId) : results;
+    },
+    async saveAnalysisResult(result) {
+      if (!result.songId || !result.detectorId || (result.bpm !== null && (!Number.isFinite(result.bpm) || result.bpm <= 0))) throw new Error('Invalid analysis result.');
+      await (await storage).saveAnalysisResult({ ...result, id: result.songId + ':' + result.detectorId });
+      notify('change');
+    },
     async getLinkedSongIds(id) {
       if (!id) return [];
       return (await (await storage).listLinks()).filter(link => link.a === id || link.b === id).map(link => link.a === id ? link.b : link.a);
@@ -68,16 +92,19 @@ export function createLibraryManagement(storage = openLibraryStorage()) {
         const names = (file.webkitRelativePath || '').split('/').slice(0, -1).filter(Boolean);
         if (!playlist || !names.length) return null;
         let parentId = null, path = '';
-        const records = [];
+        const records = [], pending = new Map();
         for (const name of names) {
           path += '/' + name;
-          if (!folders.has(path)) {
+          if (!folders.has(path) && !pending.has(path)) {
             const item = { id: crypto.randomUUID(), name, parentId };
-            folders.set(path, item); records.push(item);
+            pending.set(path, item); records.push(item);
           }
-          parentId = folders.get(path).id;
+          parentId = (folders.get(path) || pending.get(path)).id;
         }
-        if (records.length) await db.savePlaylists(records);
+        if (records.length) {
+          await db.savePlaylists(records);
+          for (const [path, item] of pending) folders.set(path, item);
+        }
         return parentId;
       }
       try {
