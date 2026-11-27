@@ -1,4 +1,4 @@
-import { frequencyPalette } from '../app/visual/waveform/frequency-colors.js';
+import { frequencyPalette, frequencyColor } from '../app/visual/waveform/frequency-colors.js';
 import { analyzeFrequencyEnergy, summarizeFrequencyEnergy } from '../app/audio/analysis/frequency-energy.js';
 import { summarizeScrollingWaveform } from '../app/audio/waveform/scrolling-waveform.js';
 import { createScrollingWaveform, createScrollingRenderer } from '../app/visual/waveform/scrolling-waveform.js';
@@ -77,6 +77,16 @@ export async function checkFrequencyEnergy() {
   const palette = frequencyPalette('#ff0000');
   assert(palette[72] === 'rgb(255,0,0)' && palette[8] === 'rgb(128,255,0)' && palette[0] === 'rgb(0,255,255)',
     'Low/mid/high hue rotations changed');
+  for (const accent of ['#ff0000','#00ff00','#0000ff','#bb6bff','#ed65d7','#4dcdf1','#69e5aa']) {
+    const shades = frequencyPalette(accent, 'shades');
+    const channels = index => shades[index].match(/\d+/g).map(Number);
+    const low = channels(72), mid = channels(8), high = channels(0);
+    assert(low.every((v,i) => v <= mid[i] && mid[i] <= high[i]) && Math.min(...high) >= 242,
+      'Deck shades must approach white monotonically');
+    assert(frequencyColor(shades,1,0,0) === shades[72] && frequencyColor(shades,0,1,0) === shades[8], 'Shading energy dominance');
+    drawOverviewWaveform(svg, summary, sourceEnergy, accent, 'shades');
+    assert(JSON.stringify(geometry()) === before, 'Shading changed overview geometry');
+  }
   const surface = document.createElement('div'), canvas = createScrollingWaveform();
   surface.style.cssText = 'position:fixed;left:-10000px;width:400px;height:160px;--accent:#ff0000';
   surface.append(canvas); document.body.append(surface);

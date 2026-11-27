@@ -22,7 +22,14 @@ export function createSettingsPresentation(header) {
   label.append(orientation);
   const note = document.createElement('small');
   note.textContent = 'Tablet portrait always uses Horizontal. Landscape restores this preference.';
-  panel.append(label, note);
+  const colorLabel = document.createElement('label');
+  colorLabel.textContent = 'Waveform coloring ';
+  const waveformColors = document.createElement('select');
+  waveformColors.setAttribute('aria-label', 'Waveform coloring');
+  waveformColors.add(new Option('Deck shades (experiment)', 'shades'));
+  waveformColors.add(new Option('Complementary hues', 'hues'));
+  colorLabel.append(waveformColors);
+  panel.append(label, note, colorLabel);
 
   const identity = document.createElement('div');
   identity.className = 'application-identity';
@@ -53,7 +60,7 @@ export function createSettingsPresentation(header) {
   header.append(zoom, panel);
 
   return {
-    button, panel, orientation, zoomIn, zoomOut,
+    button, panel, orientation, waveformColors, zoomIn, zoomOut,
     renderZoom(seconds) {
       duration.textContent = seconds.toFixed(1) + ' s';
       zoomIn.disabled = seconds === 1;

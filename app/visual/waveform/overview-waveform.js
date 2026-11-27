@@ -12,7 +12,7 @@ export function createOverviewWaveform() {
   return svg;
 }
 
-export function drawOverviewWaveform(svg, summary, energy, accent) {
+export function drawOverviewWaveform(svg, summary, energy, accent, colorMode = 'hues') {
   svg.replaceChildren();
   if (!summary) return;
   const { minimum, maximum, rms } = summary;
@@ -25,7 +25,7 @@ export function drawOverviewWaveform(svg, summary, energy, accent) {
     }
     bands = cached;
   }
-  const palette = bands ? frequencyPalette(accent || '#5ce0dc') : null;
+  const palette = bands ? frequencyPalette(accent || '#5ce0dc', colorMode) : null;
   const width = 360 / maximum.length;
   // Fixed visual gain: no per-section normalization, and no change to sound.
   const visualGain = 0.55;

@@ -541,3 +541,13 @@ waveform amplitude, overview, Queue and musical state. See
 [files, data flow and verification](docs/D2-WAVEFORM-ZOOM.md). Stop for physical iPad
 testing after verification/checkpointing; do not push or begin another feature.
 The separately deferred Audio readability review and upcoming musical tasks remain.
+
+### Waveform comparison experiments after approved bd6fade
+
+Global waveform zoom is physically approved; retain four seconds by default.
+Increment 1 implements selectable deck shades, default for physical evaluation.
+Visual playback and zoom browser suites pass, including frequency palette tests,
+four-deck recoloring, unchanged overview geometry and saved mode reload. Audio is
+unchanged. See [experiment responsibilities and verification](docs/D2-WAVEFORM-EXPERIMENTS.md).
+Increment 2 will add temporary comparison during landscape Vertical dragging.
+No push; stop for physical iPad testing after independent local checkpoints.

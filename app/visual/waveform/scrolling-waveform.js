@@ -1,4 +1,4 @@
-import { getWaveformWindowSeconds } from '../../behavior/settings.js';
+import { getWaveformWindowSeconds, getWaveformColorMode } from '../../behavior/settings.js';
 import { frequencyPalette, frequencyColor } from './frequency-colors.js';
 // Source-time geometry is independent of BPM and Tempo. At any playback rate the
 // same transient has the same width; only Audio's source position advances faster.
@@ -14,13 +14,14 @@ export function createScrollingWaveform() {
 export function createScrollingRenderer(surface, canvas, resized) {
   const context = canvas.getContext('2d');
   let width = 0, height = 0, scale = 0;
-  let lastSummary, lastPosition, lastColor, lastEnergy, lastOrientation, lastWindowSeconds;
+  let lastSummary, lastPosition, lastColor, lastEnergy, lastOrientation, lastWindowSeconds, lastColorMode;
   let palette;
   const observer = new ResizeObserver(() => { scale = 0; resized(); });
   observer.observe(surface);
 
   function draw(summary, seconds, energy) {
     if (!surface.getClientRects().length) { lastSummary = null; lastPosition = null; return; }
+    const colorMode = getWaveformColorMode();
     const windowSeconds = getWaveformWindowSeconds();
     const vertical = document.documentElement.dataset.waveformOrientation === 'vertical';
     const nextWidth = surface.clientWidth, nextHeight = surface.clientHeight;
@@ -33,9 +34,9 @@ export function createScrollingRenderer(surface, canvas, resized) {
       canvas.width = Math.round(width * scale); canvas.height = Math.round(height * scale);
       context.setTransform(scale, 0, 0, scale, 0, 0);
     }
-    if (!dimensionsChanged && summary === lastSummary && seconds === lastPosition && color === lastColor && energy === lastEnergy && vertical === lastOrientation && windowSeconds === lastWindowSeconds) return;
-    if (color !== lastColor) palette = frequencyPalette(color);
-    lastSummary = summary; lastPosition = seconds; lastColor = color; lastEnergy = energy; lastOrientation = vertical; lastWindowSeconds = windowSeconds;
+    if (!dimensionsChanged && summary === lastSummary && seconds === lastPosition && color === lastColor && energy === lastEnergy && vertical === lastOrientation && windowSeconds === lastWindowSeconds && colorMode === lastColorMode) return;
+    if (color !== lastColor || colorMode !== lastColorMode) palette = frequencyPalette(color, colorMode);
+    lastSummary = summary; lastPosition = seconds; lastColor = color; lastEnergy = energy; lastOrientation = vertical; lastWindowSeconds = windowSeconds; lastColorMode = colorMode;
     context.clearRect(0, 0, width, height);
     if (!summary) return;
     const start = seconds - windowSeconds / 2;

@@ -60,6 +60,18 @@ document.querySelector('#run').onclick = async () => {
       fixtures[i].files = transfer.files; fixtures[i].dispatchEvent(new win.Event('change'));
       await fixtures[i].fixtureCompletion;
     }
+    const colorSelect=doc.querySelector('[aria-label="Waveform coloring"]');
+    assert(colorSelect.value==='shades','Experimental shades should default');
+    const colorBefore=[...doc.querySelectorAll('.scrolling-waveform canvas')].map(c=>c.toDataURL());
+    const overviewGeometry=()=>JSON.stringify([...doc.querySelectorAll('.waveform-overview rect')].map(r=>['x','y','width','height','opacity'].map(a=>r.getAttribute(a))));
+    const geometryBefore=overviewGeometry();
+    colorSelect.value='hues';colorSelect.dispatchEvent(new win.Event('change'));
+    assert([...doc.querySelectorAll('.scrolling-waveform canvas')].every((c,i)=>c.toDataURL()!==colorBefore[i]),'Mode switch did not recolor each scrolling view');
+    assert(overviewGeometry()===geometryBefore,'Mode switch altered overview geometry');
+    colorSelect.value='shades';colorSelect.dispatchEvent(new win.Event('change'));
+    assert([...doc.querySelectorAll('.scrolling-waveform canvas')].every((c,i)=>c.toDataURL()===colorBefore[i]),'Mode switch did not restore shaded canvas');
+    colorSelect.value='hues';colorSelect.dispatchEvent(new win.Event('change'));
+    pass('default deck shades and selectable hue alternative recolor all decks without changing geometry');
     const decks = [...doc.querySelectorAll('.deck')];
     const waves = decks.map(deck => deck.querySelector('.scrolling-waveform'));
     const overviewCanvases = decks.map(deck => deck.querySelector('.waveform-overview svg'));
@@ -156,6 +168,7 @@ document.querySelector('#run').onclick = async () => {
     zoom(1); await mount(); doc=win.document;
     assert(doc.querySelector('[aria-label="Visible waveform duration"]').textContent==='1.0 s','Saved zoom missing after reload');
     assert(doc.querySelector('[aria-label="Scrolling waveform orientation"]').value==='vertical' && doc.querySelector('[aria-label="Visual theme"]').value==='futuristic','Zoom overwrote appearance/orientation');
+    assert(doc.querySelector('[aria-label="Waveform coloring"]').value==='hues','Color mode preference did not persist');
     for (const invalid of [0,8.5,3.3,'4',null]) {
       localStorage.setItem(name,JSON.stringify({version:1,waveformWindowSeconds:invalid}));await mount();
       assert(win.document.querySelector('[aria-label="Visible waveform duration"]').textContent==='4.0 s','Invalid zoom not rejected');

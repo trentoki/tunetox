@@ -1,3 +1,4 @@
+import { getWaveformColorMode } from '../../behavior/settings.js';
 import { createDeckNavigation } from '../../behavior/mixer/deck-navigation.js';
 import { connectWaveformSeeking } from '../../behavior/mixer/waveform-seeking.js';
 import { installVerticalRoller } from '../../behavior/mixer/vertical-roller.js';
@@ -206,7 +207,7 @@ export function createPlaybackDeck(number, deck, actions) {
   const nudgePresentation = createNudgePresentation(wave.surface, number);
   const nudgeControls = connectNudgeControls(deck, node, nudgePresentation,
     () => !busy && canSeek(), updatePlaybackTime, actions.announce);
-  let displayedPeaks = null, displayedEnergy = null, displayedAccent = null;
+  let displayedPeaks = null, displayedEnergy = null, displayedAccent = null, displayedColorMode = null;
   header.append(participation, tempo, pitch, libraryButton, title, selector, play, queue, main, overview);
   const content = element("div", "performance-content");
   const upperSection = element("section", "performance-upper-section");
@@ -320,13 +321,18 @@ export function createPlaybackDeck(number, deck, actions) {
     cancelTempoRoller(); cancelPitchRoller(); seeking.cancel(); renderRollers(); renderOverview();
   });
 
+  document.addEventListener('tunetox-waveform-colors-change', () => {
+    renderOverview(); updatePlaybackTime();
+  });
+
   function renderOverview() {
+    const colorMode = getWaveformColorMode();
     const peaks = deck.audio.waveformPeaks;
     const energy = deck.audio.frequencyEnergy;
     const accent = getComputedStyle(node).getPropertyValue('--accent').trim() || '#5ce0dc';
-    if (peaks !== displayedPeaks || energy !== displayedEnergy || accent !== displayedAccent) {
-      displayedPeaks = peaks; displayedEnergy = energy; displayedAccent = accent;
-      drawOverviewWaveform(overviewGraphic, peaks, energy, accent);
+    if (peaks !== displayedPeaks || energy !== displayedEnergy || accent !== displayedAccent || colorMode !== displayedColorMode) {
+      displayedPeaks = peaks; displayedEnergy = energy; displayedAccent = accent; displayedColorMode = colorMode;
+      drawOverviewWaveform(overviewGraphic, peaks, energy, accent, colorMode);
       overviewPosition.hidden = !peaks;
       wave.scrollingPlayhead.hidden = !peaks;
     }

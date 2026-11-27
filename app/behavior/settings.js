@@ -4,11 +4,13 @@ import { createThemePresentation } from '../visual/themes/theme-manager.js';
 // Device-local presentation preferences. No deck/audio state is saved here.
 const key = 'tunetox-settings-v1';
 let orientation = 'horizontal';
+let waveformColorMode = 'shades';
 let waveformWindowSeconds = 4;
 // Same responsive tablet portrait layout as the existing stem presentation.
 // Phone widths retain the saved orientation; no user-agent or second deck is used.
 const tabletPortrait = window.matchMedia('(min-width:601px) and (max-width:1100px) and (orientation:portrait)');
 export const getWaveformOrientation = () => tabletPortrait.matches ? 'horizontal' : orientation;
+export const getWaveformColorMode = () => waveformColorMode;
 export const getWaveformWindowSeconds = () => waveformWindowSeconds;
 
 export function connectSettings(header, decks) {
@@ -20,6 +22,7 @@ export function connectSettings(header, decks) {
   try {
     const saved = JSON.parse(localStorage.getItem(key));
     if (saved?.version === 1) {
+      if (['shades', 'hues'].includes(saved.waveformColorMode)) waveformColorMode = saved.waveformColorMode;
       if (['horizontal', 'vertical'].includes(saved.orientation)) orientation = saved.orientation;
       if (Number.isFinite(saved.waveformWindowSeconds) && saved.waveformWindowSeconds >= 1 &&
           saved.waveformWindowSeconds <= 8 && Number.isInteger(saved.waveformWindowSeconds * 2)) {
@@ -34,11 +37,12 @@ export function connectSettings(header, decks) {
     }
   } catch { /* Invalid/unavailable preferences retain safe defaults. */ }
   view.orientation.value = orientation;
+  view.waveformColors.value = waveformColorMode;
 
   function save() {
     try {
       localStorage.setItem(key, JSON.stringify({
-        version: 1, orientation, waveformWindowSeconds,
+        version: 1, orientation, waveformWindowSeconds, waveformColorMode,
         theme: themes.themeSelect.value, colorMode: themes.modeSelect.value,
         colors: themes.colorInputs.map(input => input.value), customized
       }));
@@ -73,6 +77,11 @@ export function connectSettings(header, decks) {
   view.orientation.onchange = () => {
     orientation = view.orientation.value;
     applyOrientation();
+    save();
+  };
+  view.waveformColors.onchange = () => {
+    waveformColorMode = view.waveformColors.value;
+    document.dispatchEvent(new Event('tunetox-waveform-colors-change'));
     save();
   };
   tabletPortrait.addEventListener('change', applyOrientation);

@@ -165,3 +165,8 @@ that same Behavior-owned value. The centered playhead, analysis, playback and fu
 overview are unchanged. The existing tablet portrait layout always shows horizontal
 scrolling waveforms; landscape restores the saved Horizontal/Vertical preference.
 Rotation never changes established musical state or interrupts playback.
+
+**Experimental waveform coloring:** Settings selects Deck shades (default for this
+experiment) or the retained Complementary hues. Both waveform views blend the same
+relative frequency energies: saturated deck hue for Low, lighter same hue for Mid,
+near-white for High. Analysis, amplitude and source-time geometry are unchanged.
