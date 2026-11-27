@@ -177,3 +177,8 @@ Library/Stems and the overview remain unchanged. Playheads align without changin
 source-time scale, and only the dragged waveform seeks. Release/cancellation restores
 normal controls immediately. Horizontal/portrait retain ordinary seeking for this
 initial experiment. See [waveform specification](specs/waveform.md).
+
+**Direct manual Main Volume:** Apply the requested normalized gain immediately on
+the existing Main GainNode, including exact mute. Retain the established linear
+percentage mapping and separate transport/source safety operations. Abrupt changes
+can click; physical listening verification remains necessary.

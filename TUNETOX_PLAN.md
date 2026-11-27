@@ -556,3 +556,13 @@ pass in all three themes. Initial phone zero-size cue rendering was corrected; a
 initial nudge resume timeout passed on a fresh rerun. No unresolved test failures.
 Physical Safari visual usefulness, capture behavior and listening remain unverified.
 No push; stop for physical iPad testing after independent local checkpoints.
+
+### Post-0921da8 physical feedback and next two increments
+
+Deck shades and temporary waveform comparison are physically approved. Preserve them
+and four-second default zoom. Manual Main no longer intentionally ramps (previously
+15 ms); existing 4 ms transport-opening safety remains. Visual Playback/Queue and
+native Chromium mouse/touch fader checks pass. Physical Safari listening and latency
+remain unverified. Next extend the existing comparison surface to the complete deck,
+revealing source content above/below the unchanged playhead. No push. See
+[responsibilities and verification](docs/D2-MANUAL-VOLUME-AND-FULL-DECK-COMPARISON.md).

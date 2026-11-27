@@ -517,7 +517,7 @@ run.addEventListener("click", async () => {
       'const NativeWorklet=window.AudioWorkletNode;window.AudioWorkletNode=class extends NativeWorklet{constructor(...args){super(...args);window.__sources.push(this);}connect(...args){this.__testOutput=args[0];return super.connect(...args);}};' +
       'const NativeContext=window.AudioContext;window.AudioContext=class extends NativeContext{' +
       'constructor(...args){super(...args);window.__contexts.push(this);}' +
-      'createGain(){const g=super.createGain(),connect=g.connect.bind(g),destination=this.destination;g.connect=(...args)=>{g.__testOutput=args[0];if(args[0]===destination)window.__gains.push(g);return connect(...args);};return g;}};<\/script>';
+      'createGain(){const g=super.createGain(),connect=g.connect.bind(g),destination=this.destination;g.__gainCalls=[];for(const method of ["setValueAtTime","linearRampToValueAtTime","setTargetAtTime"]){const original=g.gain[method].bind(g.gain);g.gain[method]=(...args)=>{g.__gainCalls.push({method,args,now:this.currentTime});return original(...args);};}g.connect=(...args)=>{g.__testOutput=args[0];if(args[0]===destination)window.__gains.push(g);return connect(...args);};return g;}};<\/script>';
     frame.srcdoc = source.replace("<head>", "<head>" + observer);
     await new Promise(resolve => frame.addEventListener("load", resolve, { once: true }));
     const doc = frame.contentDocument, win = frame.contentWindow;
@@ -717,15 +717,30 @@ run.addEventListener("click", async () => {
     assert(meters.every(meter => rms(meter) < 1e-7), "Playing at Main zero must be silent");
     const volumeSources = players.map(p => p.src), volumeTimes = players.map(p => p.currentTime);
     [100,50,25,0].forEach((percent, index) => volume(index + 1, percent));
+    const immediateGain = (index,value) => {
+      const call=win.__gains[index].__gainCalls.at(-1);
+      return call.method==='setValueAtTime' && call.args[0]===value && call.args[1]<=call.now && call.now-call.args[1]<.01;
+    };
+    assert([1,.5,.25,0].every((value,i)=>immediateGain(i,value)),
+      'Manual four-deck gains were deferred or ramped');
     await delay(120);
     const levels = meters.map(rms);
     assert(levels[0] > .005 && Math.abs(levels[1] / levels[0] - .5) < .08 &&
       Math.abs(levels[2] / levels[0] - .25) < .04 && levels[3] < 1e-7,
       "Measured audio must follow independent 100/50/25/0 percent Main levels");
+    for (let movement = 0; movement < 50; movement++) {
+      const percent = movement % 2 ? 0 : 100;
+      for (let deck = 1; deck <= 4; deck++) {
+        volume(deck, percent);
+        assert(immediateGain(deck-1,percent/100), 'Rapid manual gain was not immediate');
+      }
+    }
+    [90,50,25,0].forEach((percent,index)=>volume(index+1,percent));
     volume(1, 90); volume(1, 10); volume(1, 60);
     await delay(100);
     assert(Math.abs(win.__gains[0].gain.value - .6) < 1e-6, "Rapid retarget did not reach final gain");
     volume(1, 0);
+    assert(immediateGain(0,0), "Manual mute was ramped");
     await delay(100);
     assert(rms(meters[0]) < 1e-7 && rms(meters[1]) > .005, "Main zero failed to mute only its deck");
     volume(1, 60);

@@ -9,7 +9,6 @@ let signalsmithLoadingPromise;
 const deckAudioStates = new WeakMap();
 const mainVolumes = new WeakMap();
 const disposedAudioNodes = new WeakSet();
-const volumeRampSeconds = 0.015;
 const transportRampSeconds = 0.004;
 const signalsmithLibraryURL = new URL("../../vendor/signalsmith-stretch-1.3.2/SignalsmithStretch.mjs", import.meta.url).href;
 
@@ -133,7 +132,7 @@ export function buildAudio() {
     loading: false, playing: false, ended: false, error: null, duration: 0, waveformPeaks: null, scrollingWaveform: null, frequencyEnergy: null,
     songPosition: 0, playbackReferencePoint: null, rate: 1, pitch: 0, latency: 0, url: "", timer: null, cutoff: null };
   deckAudioStates.set(deckAudio, deckPlaybackInfo);
-  mainVolumes.set(deckAudio, { gain: mainVolumeGain, ramp: { from: 0, to: 0, start: 0, end: 0 } });
+  mainVolumes.set(deckAudio, mainVolumeGain);
   // Compatibility is limited to read-only media-style information and events.
   // Transport commands are the exported Audio functions, not fake HTML methods.
   Object.defineProperties(deckAudio, {
@@ -153,14 +152,12 @@ export function buildAudio() {
 
 export function setAudioMainVolume(deckAudio, value) {
   requireRange(value, 0, 1, "Main volume");
-  const path = mainVolumes.get(deckAudio), now = context.currentTime, previous = path.ramp;
-  const fraction = previous.end > previous.start
-    ? Math.max(0, Math.min(1, (now - previous.start) / (previous.end - previous.start))) : 1;
-  const from = previous.from + (previous.to - previous.from) * fraction;
-  path.gain.gain.cancelScheduledValues(now);
-  path.gain.gain.setValueAtTime(from, now);
-  path.gain.gain.linearRampToValueAtTime(value, now + volumeRampSeconds);
-  path.ramp = { from, to: value, start: now, end: now + volumeRampSeconds };
+  const gain = mainVolumes.get(deckAudio).gain;
+  const now = context.currentTime;
+  // Manual Main requests are immediate, including mute. Transport safety uses
+  // its separate gate and retains its own ramp (specs/controls-settings.md).
+  gain.cancelScheduledValues(now);
+  gain.setValueAtTime(value, now);
 }
 
 export async function loadAudio(deckAudio, song, { preservePlayback = false } = {}) {
