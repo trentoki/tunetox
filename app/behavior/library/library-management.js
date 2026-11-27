@@ -25,6 +25,8 @@ export function createLibraryManagement(storage = openLibraryStorage()) {
   return {
     ready: storage,
     events, importJob: job, listSongs,
+    async listPlaylists() { return (await storage).listPlaylists(); },
+    async listMemberships() { return (await storage).listMemberships(); },
     async getSong(id) { return (await storage).getSong(id); },
     async getSource(id) {
       const source = await (await storage).getSource(id);
@@ -37,7 +39,7 @@ export function createLibraryManagement(storage = openLibraryStorage()) {
       await (await storage).setVerifiedBpm(id, value); notify('change');
     },
     cancelImport() { if (job.running) { job.cancelRequested = true; notify('progress'); } },
-    async importFiles(files) {
+    async importFiles(files, { playlist = false } = {}) {
       if (job.running) throw new Error('An import is already running.');
       if (!globalThis.crypto?.subtle) throw new Error('Import requires HTTPS or localhost for content-based duplicate checking.');
       job.running = true; // Claim synchronously, including while IndexedDB opens.
@@ -46,6 +48,24 @@ export function createLibraryManagement(storage = openLibraryStorage()) {
       catch (error) { job.running = false; notify('progress'); throw error; }
       Object.assign(job, { running: true, cancelRequested: false, total: files.length, processed: 0, added: 0, duplicates: 0, skipped: 0, failures: [], current: '' });
       notify('progress');
+      // Each folder import is a distinct playlist tree. Duplicate audio remains shared.
+      const folders = new Map();
+      async function foldersFor(file) {
+        const names = (file.webkitRelativePath || '').split('/').slice(0, -1).filter(Boolean);
+        if (!playlist || !names.length) return null;
+        let parentId = null, path = '';
+        const records = [];
+        for (const name of names) {
+          path += '/' + name;
+          if (!folders.has(path)) {
+            const item = { id: crypto.randomUUID(), name, parentId };
+            folders.set(path, item); records.push(item);
+          }
+          parentId = folders.get(path).id;
+        }
+        if (records.length) await db.savePlaylists(records);
+        return parentId;
+      }
       try {
         // FileList references only; read/hash/store exactly one source at a time.
         for (const file of files) {
@@ -63,6 +83,8 @@ export function createLibraryManagement(storage = openLibraryStorage()) {
               relativePath: file.webkitRelativePath || '', size: file.size, type: file.type,
               addedAt: Date.now(), verifiedBpm: null, verifiedAt: null, key: null };
             if (await db.addSong(song, file)) job.added++; else job.duplicates++;
+            const playlistId = await foldersFor(file);
+            if (playlistId) await db.addMemberships([{ id: playlistId + ':' + id, playlistId, songId: id }]);
           } catch (error) {
             job.failures.push({ filename: file.name, message: error.name === 'QuotaExceededError' ? 'Browser storage is full; this file was not imported.' : error.message });
           } finally { job.processed++; notify('progress'); }

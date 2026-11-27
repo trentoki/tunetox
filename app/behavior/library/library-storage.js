@@ -2,11 +2,13 @@
 // Metadata and source Blob commit atomically; hash IDs prevent cross-tab duplicates.
 export function openLibraryStorage(name = 'tunetox-library-v1') {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open(name, 1);
+    const request = indexedDB.open(name, 2);
     request.onupgradeneeded = () => {
       const db = request.result;
-      db.createObjectStore('songs', { keyPath: 'id' });
-      db.createObjectStore('sources');
+      if (!db.objectStoreNames.contains('songs')) db.createObjectStore('songs', { keyPath: 'id' });
+      if (!db.objectStoreNames.contains('sources')) db.createObjectStore('sources');
+      for (const store of ['playlists', 'memberships'])
+        if (!db.objectStoreNames.contains(store)) db.createObjectStore(store, { keyPath: 'id' });
     };
     request.onerror = () => reject(request.error);
     request.onblocked = () => reject(new Error('Close other TuneTox tabs to open library storage.'));
@@ -21,7 +23,19 @@ export function openLibraryStorage(name = 'tunetox-library-v1') {
           query.onerror = () => fail(query.error);
         });
       }
+      function write(store, records) {
+        return new Promise((done, fail) => {
+          const tx = db.transaction(store, 'readwrite');
+          for (const record of records) tx.objectStore(store).put(record);
+          tx.oncomplete = () => done();
+          tx.onabort = () => fail(tx.error || new Error('Library write failed.'));
+        });
+      }
       resolve({
+        listPlaylists: () => read('playlists'),
+        listMemberships: () => read('memberships'),
+        savePlaylists: records => write('playlists', records),
+        addMemberships: records => write('memberships', records),
         listSongs: () => read('songs'),
         getSong: id => read('songs', id),
         getSource: id => read('sources', id),

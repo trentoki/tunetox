@@ -119,3 +119,12 @@ metadata, all sorts, numbered/drop destinations, occupied Queue rejection and re
 application reload persistence. [Deck boundary checks](../tests/library-deck-loading-tests.js)
 exercise stored Blobs through all four real coordinators, including paused Queue
 behavior and operation guards. These tests do not establish audible Safari quality.
+
+## Current sprint updates
+
+The subsequent approved library sprint supersedes the earlier “Explicitly
+unfinished” inventory incrementally. See [implementation and verification log](../docs/LIBRARY-DEVELOPMENT.md).
+Nested folder imports now create playlist trees. Inline expansions are independent
+and multiple levels can remain open. The database upgrades additively to version 2.
+Behavior owns interactions in library-controls and library-to-deck coordination in
+library-deck-loading. Visual library-view only creates and presents DOM snapshots.

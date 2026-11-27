@@ -1,4 +1,4 @@
-import { connectLibraryControls, connectSongDrop } from '../library/library-view.js';
+import { connectLibraryControls, connectSongDrop } from '../../behavior/library/library-controls.js';
 // Approved H5.3.1 presentation for the new Clean Playback host.
 // Inputs: one persistent Clean Deck state and bound host actions.
 // Output: a DOM node, render(), and setBusy(). No player creation or DSP here.
@@ -379,7 +379,7 @@ export function createPlaybackDeck(number, deck, actions) {
   library.append(libraryHeader, libraryContent);
   node.append(performance, library);
   const libraryControls = actions.library ? connectLibraryControls(actions.library,
-    { sort, search, results, selected, destinations, visible: () => workspace === 'library-view' },
+    { tabs: sectionSelector, getLoadedSongId: () => deck.song?.librarySongId || null, sort, search, results, selected, destinations, visible: () => workspace === 'library-view' },
     actions.sendLibrarySong, actions.announce) : null;
   if (actions.library) {
     connectSongDrop(overview, id => actions.sendLibrarySong(id, number - 1, 'deck'));

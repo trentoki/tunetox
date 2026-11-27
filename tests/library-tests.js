@@ -13,7 +13,7 @@ document.querySelector('#run').onclick = async () => {
     const one = new File(['one waveform fixture'], 'Artist - First.wav', { type: 'audio/wav' });
     const duplicate = new File(['one waveform fixture'], 'Renamed.wav', { type: 'audio/wav' });
     const other = new File(['second waveform fixture'], '<b>Second</b>.wav', { type: 'audio/wav' });
-    Object.defineProperty(other, 'webkitRelativePath', { value: 'Folder/Nested/<b>Second</b>.wav' });
+    Object.defineProperty(other, 'webkitRelativePath', { value: 'Folder/Nested/Second.wav' });
     let result = await library.importFiles([one, duplicate, other, new File(['sidecar'], 'notes.txt'), new File([], 'empty.wav')]);
     assert(result.added === 2 && result.duplicates === 1 && result.skipped === 1 && result.failures.length === 1, 'Import counters/failure isolation');
     let songs = await library.listSongs();
@@ -50,6 +50,12 @@ document.querySelector('#run').onclick = async () => {
     open(reopened); await pendingImport;
     assert(overlapRejected, 'Overlapping imports accepted while database opening');
     pass('one import guard across shared views, including asynchronous database opening');
+    await restored.importFiles([other, duplicate], { playlist: true });
+    const folders = await restored.listPlaylists(), members = await restored.listMemberships();
+    assert(folders.length === 2 && folders.find(p => p.name === 'Nested').parentId === folders.find(p => p.name === 'Folder').id, 'Nested playlist hierarchy');
+    assert(members.length === 1 && members[0].songId === songs.find(s => s.title.includes('Second')).id, 'Duplicate folder import did not reference canonical song');
+    assert((await restored.listSongs()).length === 3, 'Playlist duplicated song records');
+    pass('folder import creates nested playlists referencing existing songs without duplicating metadata or audio');
     await checkLibraryDeckLoading(restored);
     pass('stored songs load directly onto all four persistent decks; playing deck queues; occupied queue and controls preserved');
     output.dataset.result = 'pass';

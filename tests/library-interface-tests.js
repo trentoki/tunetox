@@ -73,6 +73,18 @@ document.querySelector('#run').onclick = async () => {
     assert(progress.includes('1 imported') && progress.includes('1 duplicates') && players[0].src === playingSource && !players[0].paused && players[0].currentTime > position,
       'Subsequent/folder import replaced collection or interrupted playback: ' + JSON.stringify({progress, sameSource:players[0].src===playingSource, paused:players[0].paused, before:position, after:players[0].currentTime}));
     pass('second nested-folder batch adds to collection; no source, position or playback interruption');
+    library(0).querySelectorAll('.section-selector button')[1].click();
+    await until(() => library(0).querySelectorAll('.library-playlist').length === 1, 'Root playlist missing');
+    library(0).querySelector('.library-playlist').click();
+    await until(() => library(0).querySelectorAll('.library-playlist').length === 2, 'Nested playlist missing');
+    library(0).querySelectorAll('.library-playlist')[1].click(); await rows(0, 1);
+    assert(getRow(0, 'Gamma') && library(0).querySelectorAll('[aria-expanded=true]').length === 2, 'Inline expansion lost parent');
+    library(1).querySelectorAll('.section-selector button')[1].click();
+    await until(() => library(1).querySelectorAll('.library-playlist').length === 1, 'Independent playlist browsing');
+    assert(!library(1).querySelector('[aria-expanded=true]'), 'Expansion leaked across decks');
+    library(0).querySelectorAll('.section-selector button')[0].click();
+    library(1).querySelectorAll('.section-selector button')[0].click(); await rows(0, 3); await rows(1, 3);
+    pass('inline nested playlist expansion retains multiple open levels and independent per-deck browsing');
     const search = library(0).querySelector('.search'); search.value = 'Alpha'; search.dispatchEvent(new win.Event('input', { bubbles: true }));
     await rows(0, 1); await rows(1, 3);
     assert(!library(1).querySelector('[aria-pressed=true][data-song-id]'), 'Selection shared across views');

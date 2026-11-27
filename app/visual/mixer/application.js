@@ -1,3 +1,4 @@
+import { createLibraryDeckLoading } from '../../behavior/library/library-deck-loading.js';
 import { createLibraryManagement } from '../../behavior/library/library-management.js';
 import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, setTempo, setStemLevel } from "../../behavior/mixer/deck.js";
 import { createAudioFileURLs } from "../../audio/deck-audio.js";
@@ -28,23 +29,7 @@ function renderAll() {
   views.forEach(view => view.render());
 }
 
-// Resolve the canonical library source, then invoke the existing deck action.
-// The temporary playback resource carries identity/name/URL only, not an editable
-// duplicate library record. Import never enters this path.
-async function sendLibrarySong(id, index, destination = 'deck') {
-  try {
-    const playback = coordinators[index];
-    if (!playback || playback.isPending()) { announce('Deck ' + (index + 1) + ' is busy; try again.'); return; }
-    const record = await musicLibrary.getSong(id);
-    if (!record) throw new Error('Library song not found.');
-    const source = await musicLibrary.getSource(id);
-    if (playback.isPending()) { announce('Deck ' + (index + 1) + ' is busy; try again.'); return; }
-    const song = { librarySongId: record.id, name: record.filename, url: audioFileURLs.create(source) };
-    if (destination === 'queue') await playback.queueSong(song);
-    else await playback.sendToDeck(song);
-  } catch (error) { announce('Library: ' + error.message); }
-  finally { releaseUnusedURLs(); renderAll(); }
-}
+const sendLibrarySong = createLibraryDeckLoading(musicLibrary, coordinators, audioFileURLs, releaseUnusedURLs, renderAll, announce);
 
 // Supply current references; Audio owns URL tracking and revocation.
 function releaseUnusedURLs() {
