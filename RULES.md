@@ -234,3 +234,8 @@ Play/Pause now invokes the existing deck playback action on primary pointerdown,
 ### D2 three-effect presentation refinement
 
 Waveform again displays all three existing preview slots (Echo, Reverb, Delay), evenly distributed above the forward nudge. Each existing selector fills the shared cue/nudge side width and sits above its original amount knob and value. Selector height uses available row space with a 30px minimum, approaching square proportions where space permits; four-deck portrait constrains height. Filter/High/Mid/Low order remains unchanged. Only Waveform CSS changes; no duplicate controls or effect processing. Future sliding effect selection remains intended but unimplemented; selectors remain clearly labeled disabled previews. Browser checks verify three slots, selector width/edge equality, height, vertical order and no side-control overlap across portrait/landscape H/V.
+
+
+### D2 browser page zoom policy
+
+Prevent browser pinch and double-tap page zoom on iPad/iPhone while preserving independent simultaneous controls, normal Library scrolling and text editing. Application waveform Zoom remains available and independent. Visual owns the viewport and touch-action pan permissions; Behavior owns Safari gesture prevention and the existing stationary double-tap fallback. Do not cancel all multi-touch movement. Physical Safari verification remains required.

@@ -531,17 +531,18 @@ run.addEventListener("click", async () => {
     assert(win.__gains.every(gain => gain.gain.value === 0), "Audio must start with zero gain");
     const viewport = doc.querySelector('meta[name="viewport"]').content;
     assert(viewport.includes("width=device-width") && viewport.includes("initial-scale=1"), "Responsive viewport changed");
-    assert(win.getComputedStyle(doc.querySelector(".app")).touchAction === "manipulation",
+    assert(viewport.includes("maximum-scale=1") && viewport.includes("user-scalable=no"), "Page zoom viewport policy missing");
+    assert(win.getComputedStyle(doc.querySelector(".app")).touchAction === "pan-x pan-y",
       "Application must suppress double-tap zoom while permitting panning");
     assert([...doc.querySelectorAll("button:not(.glass-preview-shift):not([data-waveform-control]), .search-results")]
-      .every(node => win.getComputedStyle(node).touchAction === "manipulation"),
+      .every(node => win.getComputedStyle(node).touchAction === "pan-x pan-y"),
       "Controls, waveforms and Library scrollers must suppress double-tap zoom");
     assert([...doc.querySelectorAll('.glass-preview-shift')].every(node => win.getComputedStyle(node).touchAction === 'none'),
       'On-screen Shift must support a stationary two-finger chord without browser gestures');
-    assert([...doc.querySelectorAll('.waveform-overview')].every(node => win.getComputedStyle(node).touchAction === 'pinch-zoom'),
-      'Overview gestures must block single-finger panning while preserving pinch');
+    assert([...doc.querySelectorAll('.waveform-overview')].every(node => win.getComputedStyle(node).touchAction === 'none'),
+      'Overview gestures must block single-finger panning and pinch zoom');
     assert([...doc.querySelectorAll('input[type="range"]')].every(input =>
-      win.getComputedStyle(input).touchAction === "pan-y pinch-zoom"), "Fader gesture policy missing");
+      win.getComputedStyle(input).touchAction === "pan-y"), "Fader gesture policy missing");
     assert([...doc.querySelectorAll(".search-results")].every(results =>
       win.getComputedStyle(results).overflowY === "auto"), "Library scrolling must remain enabled");
     pass("device-width viewport; double-tap zoom policy; fader gestures and Library scrolling preserved");

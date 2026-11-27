@@ -5,6 +5,10 @@ export function installTouchGuards(root) {
   const doc = root.ownerDocument, win = doc.defaultView;
   const editable = target => target.closest?.('textarea, input:not([type=range]):not([type=color]):not([type=button]):not([type=submit]), [contenteditable=true]');
   for(const type of ['contextmenu','selectstart']) root.addEventListener(type,event=>{if(!editable(event.target))event.preventDefault();});
+  // Safari's page-pinch recognizer is separate from independent pointer gestures.
+  // Do not cancel multi-touch touchmove: faders and Library scrolling still need it.
+  for (const type of ['gesturestart', 'gesturechange', 'gestureend'])
+    doc.addEventListener(type, event => event.preventDefault(), {passive:false});
   let start = null, previous = null, forwarded = null;
   const point = touch => ({ x: touch.clientX, y: touch.clientY });
   const distance = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);

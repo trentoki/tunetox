@@ -57,7 +57,7 @@ export async function checkScrollingWaveforms(doc, win, players) {
   try {
     for (const [index, surface] of surfaces.entries()) {
       assert(surface.querySelector('canvas') && players[index].scrollingWaveform.groupSeconds < .0051, 'Detailed 5 ms source data/canvas missing');
-      assert(win.getComputedStyle(surface).touchAction === 'pinch-zoom', 'Scrolling drag blocks pinch or permits page panning');
+      assert(win.getComputedStyle(surface).touchAction === 'none', 'Scrolling drag permits browser zoom or panning');
       key(surface, 'Home'); await settled(surface, 0);
       key(surface, 'ArrowRight'); await settled(surface, 5);
       key(surface, 'ArrowRight'); await settled(surface, 10);

@@ -3,11 +3,11 @@
 :root { color-scheme: dark; font-family: system-ui, sans-serif; color: #d3dce9; background: #070b11; font-size: 12px; }
 * { box-sizing: border-box; }
 body { margin: 0; }
-html, body { width: 100%; height: 100%; overflow: hidden; }
+html, body { width: 100%; height: 100%; overflow: hidden; touch-action:pan-x pan-y; }
 /* Safari: suppress double-tap zoom throughout the performance surface, including
-   SVGs and disabled preview controls, while retaining normal pan/pinch gestures.
+   SVGs and disabled preview controls, while retaining normal scrolling gestures.
    Keep the device-width, initial-scale=1 viewport in tunetox.html. */
-.app, .app * { touch-action: manipulation; }
+.app, .app * { touch-action: pan-x pan-y; }
 [hidden] { display: none !important; }
 button, input { font: inherit; }
 button { color: var(--accent); background: #15303c; border: 1px solid #36586c; border-radius: 4px; cursor: pointer; }
@@ -52,9 +52,9 @@ h1 small { font-size: 9px; color: #b8afbd; margin-left: 10px; }
 .main-volume-fader output { grid-area: 1 / 1; }
 input[type="range"] { accent-color: var(--accent); min-width: 0; width: 100%; height: 18px; }
 input[type="range"] { appearance: none; -webkit-appearance: none; background: transparent; opacity: 1; }
-/* Horizontal gestures belong to the native fader; vertical scrolling and pinch
+/* Horizontal gestures belong to the native fader; vertical scrolling
    remain available. The JS guard ignores drags and handles stationary taps only. */
-input[type="range"] { touch-action: pan-y pinch-zoom; }
+input[type="range"] { touch-action: pan-y; }
 input[type="range"]::-webkit-slider-runnable-track { height: 6px; background: #36586c; border-radius: 4px; }
 input[type="range"]::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border: 0; border-radius: 50%; background: var(--accent); margin-top: -8px; }
 input[type="range"]::-moz-range-track { height: 6px; background: #36586c; border-radius: 4px; }
@@ -64,8 +64,8 @@ input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 0; bo
 .main-volume-fader input::-webkit-slider-thumb { width: 22px; height: 15px; border-radius: 8px; margin-top: -6px; background: white; }
 .main-volume-fader input::-moz-range-thumb { width: 22px; height: 15px; border-radius: 8px; background: white; }
 .waveform-overview { grid-column: 1 / 5; grid-row: 4; position: relative; background: #07131c; border: 1px solid #304c61; border-radius: 3px; overflow: hidden; }
-.waveform-overview[role="slider"] { touch-action: pinch-zoom; }
-.scrolling-waveform[role="slider"] { touch-action: pinch-zoom; }
+.waveform-overview[role="slider"] { touch-action: none; }
+.scrolling-waveform[role="slider"] { touch-action: none; }
 .scrolling-waveform[aria-disabled="false"] { cursor: grab; }
 .scrolling-waveform:active[aria-disabled="false"] { cursor: grabbing; }
 .scrolling-waveform:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
@@ -186,7 +186,7 @@ html[data-waveform-orientation=vertical] .scrolling-cue-marker { left:0; right:0
   html .deck .stems-view .stem-faders { flex-direction:row; align-items:stretch; justify-content:space-around; }
   html .deck .stem-faders label { flex:1; min-width:0; min-height:0; flex-direction:column; gap:3px; text-align:center; }
   html .deck .stem-faders span { width:auto; }
-  html .deck .stem-faders input[type=range] { writing-mode:vertical-lr; direction:rtl; width:36px; height:0; min-height:0; flex:1; margin:0; touch-action:pan-x pinch-zoom; }
+  html .deck .stem-faders input[type=range] { writing-mode:vertical-lr; direction:rtl; width:36px; height:0; min-height:0; flex:1; margin:0; touch-action:pan-x; }
   html .deck .stem-faders input::-webkit-slider-runnable-track { width:6px; height:100%; }
   html .deck .stem-faders input::-moz-range-track { width:6px; height:100%; }
   html .deck .stem-faders input::-webkit-slider-thumb { margin:0 -8px 0 0; }

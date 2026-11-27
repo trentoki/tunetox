@@ -34,7 +34,7 @@ html[data-theme=waveform] .nudge-controls button { min-width:0; width:var(--wave
 html[data-theme=waveform] .stem-faders { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:1fr 1fr; position:absolute; inset:2% 1% 48px; min-height:0; gap:12px 48%; }
 html[data-theme=waveform] .stem-faders label { display:flex; flex-direction:column; gap:3px; min-height:0; min-width:0; pointer-events:auto; }
 html[data-theme=waveform] .stem-faders span { width:auto; font-size:9px; text-align:center; }
-html[data-theme=waveform] .stem-faders input[type=range] { writing-mode:vertical-lr; direction:rtl; width:36px; height:0; min-height:0; flex:1; margin:0; touch-action:pan-x pinch-zoom; }
+html[data-theme=waveform] .stem-faders input[type=range] { writing-mode:vertical-lr; direction:rtl; width:36px; height:0; min-height:0; flex:1; margin:0; touch-action:pan-x; }
 /* Explicit cross-axis centering: (6px track - 22px thumb) / 2 = -8px.
    Vertical WebKit ranges align from the left, not the horizontal range's top. */
 html[data-theme=waveform] .deck .stem-faders input::-webkit-slider-runnable-track { width:6px; height:100%; border:0; box-sizing:border-box; background:linear-gradient(to top,var(--accent) 0 var(--stem-level-fill,100%),#0a1928 var(--stem-level-fill,100%) 100%); }

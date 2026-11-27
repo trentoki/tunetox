@@ -84,7 +84,7 @@ document.querySelector('#run').addEventListener('click',async()=>{
     await select('default');const original=JSON.stringify(appearance());
     await select('futuristic');
     const tempo=views[0].node.querySelector('.tempo-slider input');
-    assert(getComputedStyle(tempo).pointerEvents==='none'&&getComputedStyle(tempo.parentElement).touchAction==='pinch-zoom',
+    assert(getComputedStyle(tempo).pointerEvents==='none'&&getComputedStyle(tempo.parentElement).touchAction==='none',
       'Native horizontal touch behavior must not compete with the roller surface');
     for(const [position,ratio] of [[0,.5],[500,1],[1000,2],[500,1]]){
       tempo.value=position;tempo.dispatchEvent(new Event('input',{bubbles:true}));

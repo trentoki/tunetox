@@ -50,6 +50,10 @@ export function runTouchGuardChecks(doc) {
     assert(activations === disabledCount, 'Secondary mouse button activated');
     play.dispatchEvent(new win.KeyboardEvent('keydown',{key:' '})); play.click();
     assert(activations === disabledCount+1, 'Space activation failed');
+    for(const type of ['gesturestart','gesturechange','gestureend']) {
+      assert(!root.dispatchEvent(new win.Event(type,{bubbles:true,cancelable:true})), 'Safari page zoom gesture not prevented');
+    }
+    assert(win.getComputedStyle(root).touchAction==='pan-x pan-y','Application permits pinch zoom');
     reset();
     tap(search); assert(!tap(search).defaultPrevented,'Text editing double tap blocked');
     for(const type of ['contextmenu','selectstart']) {
@@ -93,7 +97,7 @@ export function runTouchGuardChecks(doc) {
     assert(!tap(blank,30,30,450).defaultPrevented, "Long press blocked");
     reset();tap(blank);
     assert(!tap(blank,150,150).defaultPrevented, "Distant tap blocked");
-    return "single/double/triple taps, duplicate clicks, blank areas, different buttons, fader drags, pinch, scrolling, long/distant taps";
+    return "single/double/triple taps, duplicate clicks, blank areas, different buttons, fader drags, independent multi-touch, prevented Safari page zoom, scrolling, long/distant taps";
   } finally { reset();fixture.remove(); }
 }
 
