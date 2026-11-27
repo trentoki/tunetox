@@ -13,7 +13,7 @@
 <div id="themes"></div><main id="fixtures" class="mixer-decks"></main>
 <script type="module">
 import { createPlaybackDeck } from './app/visual/mixer/playback.js';
-import { installThemeControls } from './app/visual/themes/theme-manager.js';
+import { createThemePresentation } from './app/visual/themes/theme-manager.js';
 import { setStemLevel, createPlaybackCoordinator } from './app/behavior/mixer/deck.js';
 const fixtures = document.querySelector('#fixtures');
 let tempoUpdates = 0;
@@ -25,7 +25,8 @@ const views = states.map((state,index) => {
     setStemLevel(stem,value){setStemLevel(state,stem,value);view.render();}});
   fixtures.append(view.node); view.render(); return view;
 });
-installThemeControls(document.querySelector('#themes'),fixtures);
+const appearance = createThemePresentation(document.querySelector('#themes'),fixtures);
+appearance.themeSelect.addEventListener('change',()=>appearance.apply()); appearance.apply();
 // The base URL matches the real application's theme paths.
 const theme = document.querySelector('[aria-label="Visual theme"]');
 async function select(value) {

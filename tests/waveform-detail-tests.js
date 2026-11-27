@@ -27,7 +27,7 @@ export function checkWaveformDetail() {
   surface.style.cssText = 'position:fixed;left:-10000px;top:0;width:400px;height:160px;--accent:#ff5500';
   const canvas = createScrollingWaveform(); surface.append(canvas); document.body.append(surface);
   let rectangles = [], dimensions = [];
-  const context = { clearRect() { rectangles = []; }, setTransform(...args) { dimensions = args; }, beginPath() {},
+  const context = { save() {}, restore() {}, transform() {}, clearRect() { rectangles = []; }, setTransform(...args) { dimensions = args; }, beginPath() {},
     rect(...args) { rectangles.push(args); }, fill() {} };
   canvas.getContext = () => context;
   const renderer = createScrollingRenderer(surface, canvas, () => {});

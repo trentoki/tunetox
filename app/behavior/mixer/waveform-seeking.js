@@ -1,3 +1,4 @@
+import { getWaveformOrientation } from '../settings.js';
 // Behavior owns overview/scrolling pointer interpretation and transient seek
 // preview. Audio remains the only advancing source clock. Visual reads position.
 export function connectWaveformSeeking({ deck, node, overview, scrolling, windowSeconds, actions, getBusy, isVisible, changed }) {
@@ -40,14 +41,15 @@ export function connectWaveformSeeking({ deck, node, overview, scrolling, window
     surface.addEventListener('pointerdown', event => {
       if (event.target.closest('[data-waveform-control]')) return;
       if (!canSeek() || seekGesture || !event.isPrimary || event.button !== 0) return;
-      const width = surface.getBoundingClientRect().width;
+      const vertical = surface === scrolling && getWaveformOrientation() === 'vertical';
+      const width = surface.getBoundingClientRect()[vertical ? 'height' : 'width'];
       if (!width) return;
       event.preventDefault();
       surface.focus({ preventScroll: true });
       seekGesture = { id: event.pointerId, source: deck.audio.src, surface,
-        anchorX: event.clientX, anchorTime: seekPreview ?? deck.audio.currentTime, width };
+        vertical, anchorX: vertical ? event.clientY : event.clientX, anchorTime: seekPreview ?? deck.audio.currentTime, width };
       surface.setPointerCapture(event.pointerId);
-      previewSeek(event.clientX);
+      previewSeek(seekGesture?.vertical ? event.clientY : event.clientX);
       window.addEventListener('blur', cancelSeekGesture);
       window.addEventListener('resize', cancelSeekGesture);
       seekRemoval = new MutationObserver(() => {
@@ -60,12 +62,12 @@ export function connectWaveformSeeking({ deck, node, overview, scrolling, window
       if (seekGesture?.id !== event.pointerId || seekGesture.surface !== surface) return;
       if (!canSeek() || deck.audio.src !== seekGesture.source) { cancelSeekGesture(); return; }
       event.preventDefault();
-      previewSeek(event.clientX);
+      previewSeek(seekGesture?.vertical ? event.clientY : event.clientX);
     });
     surface.addEventListener('pointerup', event => {
       if (seekGesture?.id !== event.pointerId || seekGesture.surface !== surface) return;
       const allowed = canSeek() && deck.audio.src === seekGesture.source;
-      if (allowed) previewSeek(event.clientX);
+      if (allowed) previewSeek(seekGesture?.vertical ? event.clientY : event.clientX);
       const target = seekPreview;
       cancelSeekGesture();
       if (allowed) commitSeek(target);
@@ -83,6 +85,7 @@ export function connectWaveformSeeking({ deck, node, overview, scrolling, window
       commitSeek(Math.max(0, Math.min(deck.audio.duration, target)));
     });
   }
+  document.addEventListener('tunetox-waveform-orientation-change', cancelSeekGesture);
   return {
     canSeek,
     cancel: cancelSeekGesture,

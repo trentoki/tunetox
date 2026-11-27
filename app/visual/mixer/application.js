@@ -6,7 +6,7 @@ import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, se
 import { createAudioFileURLs } from "../../audio/deck-audio.js";
 import { createPlaybackDeck } from "./playback.js";
 import { installTouchGuards } from "./touch-guards.js";
-import { installThemeControls } from "../themes/theme-manager.js";
+import { connectSettings } from "../../behavior/settings.js";
 import { installDeckSelector } from "../iphone/deck-selector.js";
 
 // Visual startup: assemble existing deck behavior, audio resources, and views.
@@ -109,7 +109,7 @@ decks.forEach((deck, index) => {
   }
 });
 renderAll();
-installThemeControls(document.querySelector(".mixer-header"), container);
+connectSettings(document.querySelector(".mixer-header"), container);
 installDeckSelector(container);
 
 connectGlobalLibraryControls(document.querySelector(".mixer-header"), musicLibrary, libraryAnalysis, announce);

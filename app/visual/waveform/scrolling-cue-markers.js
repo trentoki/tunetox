@@ -12,13 +12,15 @@ export function createScrollingCueMarkers(surface) {
   });
   surface.append(overlay);
   return function render(positions, sourceSeconds, valid) {
-    const start = sourceSeconds - SCROLLING_WINDOW_SECONDS / 2, width = surface.clientWidth;
+    const vertical = document.documentElement.dataset.waveformOrientation === 'vertical';
+    const start = sourceSeconds - SCROLLING_WINDOW_SECONDS / 2, width = vertical ? surface.clientHeight : surface.clientWidth;
     markers.forEach((line, index) => {
       const position = positions[index];
       const percent = (position - start) / SCROLLING_WINDOW_SECONDS * 100;
       line.hidden = !valid || position === null || !Number.isFinite(position) || percent < 0 || percent > 100;
       if (line.hidden) return;
-      line.style.left = percent + '%';
+      line.style.left = vertical ? '0' : percent + '%';
+      line.style.top = vertical ? percent + '%' : '0';
       // Labels may move inward or apart at edges/coincident cues. The vertical
       // line never shifts away from its exact source-song position.
       let count = 0, ordinal = 0;
@@ -27,7 +29,8 @@ export function createScrollingCueMarkers(surface) {
         count++; if (cue < index) ordinal++;
       }
       const x = percent / 100 * width;
-      line.firstChild.style.left = (Math.max(1 - x, Math.min(-count * 6, width - x - count * 12 - 1)) + ordinal * 12) + 'px';
+      line.firstChild.style.top = vertical ? '0' : '';
+      line.firstChild.style.left = vertical ? ordinal * 12 + 'px' : (Math.max(1 - x, Math.min(-count * 6, width - x - count * 12 - 1)) + ordinal * 12) + 'px';
     });
   };
 }

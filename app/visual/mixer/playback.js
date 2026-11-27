@@ -300,6 +300,7 @@ export function createPlaybackDeck(number, deck, actions) {
     }
   }
   document.addEventListener('visibilitychange', updatePlaybackTime);
+  document.addEventListener('tunetox-waveform-orientation-change', updatePlaybackTime);
 
   function renderRollers() {
     const futuristic = document.documentElement.dataset.theme === 'futuristic';

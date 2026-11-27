@@ -6,7 +6,7 @@ const themes = Object.freeze({
 });
 const defaultColors = ["#bb6bff", "#ed65d7", "#4dcdf1", "#69e5aa"];
 let stylesheet;
-export function installThemeControls(container, deckContainer) {
+export function createThemePresentation(container, deckContainer) {
   const group = document.createElement("div");
   group.className = "theme-controls";
   const themeSelect = document.createElement("select");
@@ -22,8 +22,7 @@ export function installThemeControls(container, deckContainer) {
     input.setAttribute("aria-label", "Deck " + (index + 1) + " color");
     return input;
   });
-  let colorsCustomized = false;
-  function apply() {
+  function apply(colorsCustomized = false) {
     const theme = themes[themeSelect.value] || themes.default;
     document.documentElement.dataset.theme = themeSelect.value;
     document.documentElement.dataset.colorMode = modeSelect.value;
@@ -43,13 +42,7 @@ export function installThemeControls(container, deckContainer) {
     colorInputs.forEach((input, index) => { input.hidden = mode === "uniform" && index > 0; });
     document.dispatchEvent(new Event('tunetox-theme-change'));
   }
-  themeSelect.addEventListener("change", apply);
-  modeSelect.addEventListener("change", apply);
-  colorInputs.forEach(input => input.addEventListener("input", () => {
-    colorsCustomized = true;
-    apply();
-  }));
   group.append(themeSelect, modeSelect, ...colorInputs);
   container.append(group);
-  apply();
+  return { themeSelect, modeSelect, colorInputs, apply };
 }

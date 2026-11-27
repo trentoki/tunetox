@@ -81,7 +81,7 @@ export async function checkFrequencyEnergy() {
   surface.style.cssText = 'position:fixed;left:-10000px;width:400px;height:160px;--accent:#ff0000';
   surface.append(canvas); document.body.append(surface);
   let rectangles = 0; const colors = new Set();
-  const context = { setTransform() {}, clearRect() {}, fillRect() { rectangles++; colors.add(this.fillStyle); } };
+  const context = { save() {}, restore() {}, transform() {}, setTransform() {}, clearRect() {}, fillRect() { rectangles++; colors.add(this.fillStyle); } };
   canvas.getContext = () => context;
   const renderer = createScrollingRenderer(surface, canvas, () => {});
   try {

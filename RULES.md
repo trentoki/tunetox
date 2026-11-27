@@ -128,3 +128,10 @@ No multi-selection, Link All or bulk membership assignment is implemented. See [
 **Frequency waveform colors (overview and scrolling visually approved, 26 November 2026):** Analyze decoded source energy in Low (<200 Hz), Mid (200–4,000 Hz), and High (>4,000 Hz) ranges on the detailed waveform time grid. Low uses the deck accent; Mid rotates its hue 90°; High rotates it 180°. Shared analysis remains independent of Visual and available for future BPM work. Apply the same mapping to the full-song overview using aggregated existing frequency energy per column. Preserve geometry, playback indicator and absolute seeking. These ranges are provisional. Separate per-band rhythmic analysis is authorized as an offline exploration only; no final BPM selection, matching integration or performance-interface change is approved. See [waveform specification](specs/waveform.md).
 
 **Documentation boundaries:** `AGENTS.md` governs development workflow; `RULES.md` governs intended product behavior; `specs/` retains detailed technical contracts; `TUNETOX_PLAN.md` governs roadmap/context; the master feature checklist tracks implementation and verification. Approved behavior is not proof of implementation.
+
+**D2 orientation experiment:** Settings contains theme/deck-color preferences and a
+saved global Horizontal/Vertical scrolling waveform choice, initially Horizontal.
+Vertical uses the same four-source-second box, colors/cues and authoritative source
+position with a stationary horizontal playhead. Playback scrolls upward; dragging
+up advances/down rewinds. The overview remains horizontal. Global Import and
+Analyze All remain directly accessible.

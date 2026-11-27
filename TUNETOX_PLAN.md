@@ -487,3 +487,21 @@ has collapsible All Songs and independently expandable playlist rows with separa
 membership and canonical song-link checkboxes. See
 [ownership and verification report](docs/NUDGE-MANAGE-REFINEMENTS.md) and
 [nudge specification](specs/nudging.md). Physical Safari input/listening is still due.
+
+### D2 interface pass and distinct upcoming work
+
+The approved current pass is Settings/orientation, deck interaction corrections,
+Library relationship drops/strip styling, Manage row/sticky presentation, then iPad
+portrait stems. Preserve the same Audio and canonical deck/library data. See
+[per-increment review](docs/D2-INTERFACE-INCREMENTS.md).
+
+Retain as separate upcoming tasks, not implemented in this pass:
+- Offline, independently functioning iPad installation.
+- Audible vinyl-style scrubbing: velocity controls speed/direction/natural pitch;
+  stationary gestures are silent. Separate from current silent seek gestures.
+- Expanded vertical mode; noninteractive stacked reference waveforms; adjacent-deck
+  shared wider comparison area (three distinct interface tasks).
+- Filter and three-band EQ; independent pitch adjustment/reset.
+- MIDI/controller and jog-wheel support.
+- Improved BPM detection and eventual BPM-based Tempo controls.
+- BeatMatch, TuneMatch, looping, effects, stem separation, Handoff and sampler.

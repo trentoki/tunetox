@@ -165,3 +165,14 @@ svg { width: 100%; height: 100%; display: block; fill: var(--accent); opacity: .
 .nudge-controls button { pointer-events:auto; min-width:54px; min-height:30px; padding:4px 8px; background:#07131cdd; color:var(--accent); touch-action:none; user-select:none; -webkit-touch-callout:none; }
 .nudge-controls button[aria-pressed=true] { background:var(--accent); color:#07131c; }
 .nudge-controls button[role=spinbutton] { cursor:ns-resize; }
+
+/* Settings does not change deck geometry or block other controls. */
+.settings-button { padding:6px 9px; }
+.application-settings { position:absolute; top:100%; left:0; z-index:30; max-width:min(520px,95vw); box-sizing:border-box; padding:12px; background:#12212bef; border:1px solid #789; border-radius:5px; }
+.application-settings[hidden] { display:none; }
+.mixer-header { position:relative; }
+.application-settings label { display:block; margin-bottom:10px; }
+.application-settings .theme-controls { display:flex; flex-wrap:wrap; gap:6px; }
+html[data-waveform-orientation=vertical] .scrolling-waveform > .playhead { left:0; right:0; top:50%; bottom:auto; width:auto; height:2px; }
+html[data-waveform-orientation=vertical] .scrolling-cue-marker { left:0; right:0; width:auto; height:2px; bottom:auto; }
+.nudge-controls button { background:rgba(12,25,34,.38); backdrop-filter:blur(2px); }

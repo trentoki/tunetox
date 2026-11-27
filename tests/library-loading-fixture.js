@@ -3,8 +3,9 @@
 // Frames must remap the database before application startup; no personal library
 // is read or changed. Renamed generated WAVs get an ignored trailing test tag so
 // content deduplication does not collapse deliberately distinct test resources.
-export function libraryTestStorageScript(name) {
-  return '<script>const libraryOpen=indexedDB.open.bind(indexedDB);indexedDB.open=(n,v)=>libraryOpen(n==="tunetox-library-v1"?' + JSON.stringify(name) + ':n,v);<\/script>';
+export function libraryTestStorageScript(name, isolatePreferences = true) {
+  const preferences = isolatePreferences ? 'const preferences=new Map(),readPreference=Storage.prototype.getItem,writePreference=Storage.prototype.setItem;Storage.prototype.getItem=function(k){return k==="tunetox-settings-v1"?(preferences.get(k)||null):readPreference.call(this,k)};Storage.prototype.setItem=function(k,v){if(k==="tunetox-settings-v1")preferences.set(k,v);else writePreference.call(this,k,v)};' : '';
+  return '<script>'+preferences+'const libraryOpen=indexedDB.open.bind(indexedDB);indexedDB.open=(n,v)=>libraryOpen(n==="tunetox-library-v1"?' + JSON.stringify(name) + ':n,v);<\/script>';
 }
 export function createLibraryLoadingFixtures(win, doc) {
   let pending = Promise.resolve();
