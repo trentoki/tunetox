@@ -12,6 +12,8 @@ The plan should be updated as development progresses, clearly distinguishing com
 
 Current development checkpoint (26 November 2026): detailed scrolling waveform work preserved in local commit `14f41ab`. Shared three-band source energy and frequency-colored scrolling waveforms are visually approved and preserved in local checkpoint `ea66195`. The overview now shares the same coloring using aggregated existing energy; frequency boundaries remain provisional. V40 BPM source remains unchanged in its reference ZIP; no BPM implementation or EQ work is included. See [waveform specification](specs/waveform.md) for analysis ownership and limits.
 
+Approved overview and scrolling complementary colors are preserved in local checkpoint `7045e4e`. Exploratory per-band positive energy changes and autocorrelation now live under `app/audio/analysis/`, with an unchanged V40 comparison baseline, standalone tests and [saved findings/measurements](docs/bpm-exploration/README.md). This code is not loaded by the performance application and makes no combined/final BPM decision. Playback, zoom, beatmatching and the existing interface remain unchanged. Next decisions await review of the findings.
+
 ## 1. Vision and Product Goals
 
 **Guiding question:** What are we building, and why?
@@ -445,3 +447,16 @@ Approval of a feature or experiment does not automatically constitute approval o
 Use testing results, development experience, and user feedback to guide improvements.
 
 Testing procedures and release practices should evolve as TuneTox grows, supporting both reliability and creative progress.
+
+### Current library wiring increment (27 November 2026)
+
+The human confirmed the current deck Library layout is acceptable. All four existing
+workspaces now use the shared persistent collection, with Import in the existing
+footer, functional search/Title-BPM-Key-Artist sorting, independent selections,
+numbered 1–4 loading and library-song drops onto those buttons, full-song overviews
+and Queue. No separate Library area or historical layout is introduced. Explicit
+Queue drops expose existing loadQueue behavior under the existing coordinator guard;
+other destinations retain paused-load/playing-queue rules. Playlists and Links remain
+unimplemented, and bulk analysis is not connected. Permanent song metadata/source
+storage remains separate from experimental measurements. See [the current contract](specs/library.md).
+The preceding working application is preserved by `checkpoint/pre-library-20261126`.

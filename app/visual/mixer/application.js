@@ -1,3 +1,4 @@
+import { createLibraryManagement } from '../../behavior/library/library-management.js';
 import { buildDeck, getLoadedSongs, createPlaybackCoordinator, setMainVolume, setTempo, setStemLevel } from "../../behavior/mixer/deck.js";
 import { createAudioFileURLs } from "../../audio/deck-audio.js";
 import { createPlaybackDeck } from "./playback.js";
@@ -14,6 +15,9 @@ const status = document.getElementById("playback-status");
 installTouchGuards(document.querySelector(".app"));
 const decks = Array.from({ length: 4 }, () => buildDeck());
 const views = [];
+const coordinators = [];
+const musicLibrary = createLibraryManagement();
+musicLibrary.ready.catch(error => announce("Library storage unavailable: " + error.message));
 const audioFileURLs = createAudioFileURLs();
 
 function announce(message) {
@@ -24,6 +28,24 @@ function renderAll() {
   views.forEach(view => view.render());
 }
 
+// Resolve the canonical library source, then invoke the existing deck action.
+// The temporary playback resource carries identity/name/URL only, not an editable
+// duplicate library record. Import never enters this path.
+async function sendLibrarySong(id, index, destination = 'deck') {
+  try {
+    const playback = coordinators[index];
+    if (!playback || playback.isPending()) { announce('Deck ' + (index + 1) + ' is busy; try again.'); return; }
+    const record = await musicLibrary.getSong(id);
+    if (!record) throw new Error('Library song not found.');
+    const source = await musicLibrary.getSource(id);
+    if (playback.isPending()) { announce('Deck ' + (index + 1) + ' is busy; try again.'); return; }
+    const song = { librarySongId: record.id, name: record.filename, url: audioFileURLs.create(source) };
+    if (destination === 'queue') await playback.queueSong(song);
+    else await playback.sendToDeck(song);
+  } catch (error) { announce('Library: ' + error.message); }
+  finally { releaseUnusedURLs(); renderAll(); }
+}
+
 // Supply current references; Audio owns URL tracking and revocation.
 function releaseUnusedURLs() {
   audioFileURLs.releaseUnused(decks.flatMap(deck => [deck.song?.url, deck.queue?.url, deck.loadingSong?.url]));
@@ -32,6 +54,8 @@ function releaseUnusedURLs() {
 decks.forEach((deck, index) => {
   const number = index + 1;
   const view = createPlaybackDeck(number, deck, {
+    library: musicLibrary,
+    sendLibrarySong, announce,
     setTempo(ratio) {
       const applied = setTempo(deck, ratio);
       view.render();
@@ -99,6 +123,8 @@ decks.forEach((deck, index) => {
       announce("Deck " + number + ": this file could not be played. " + (deck.audio.error?.message || "Try another audio file."));
     }
   });
+
+  coordinators.push(playback);
 
   input.addEventListener("change", async () => {
     const file = input.files[0];

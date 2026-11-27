@@ -12,6 +12,15 @@ Visit http://127.0.0.1:8080/tunetox.html. The server accepts loopback/private IP
 
 The active application has four decks with Load, Play/Pause/resume, protected one-slot queues with READY and automatic natural-end advancement, pitch-preserving Tempo (0.5×–2.0×, centered at 1.0×), independent Main Volume, full-song waveform seeking, and eight functional cue pads per loaded deck. Numbered cues appear on the real audio-derived overview. The scrolling waveform uses a detailed ~5 ms peak/RMS summary in a fixed four-source-second window beneath a centered stationary playhead; drag right to move backward and left to move forward, committing the seek on release. Stem faders edit Behavior-owned levels but have no stem audio connection. Musical Pitch, EQ and effects remain inactive; Futuristic's Pitch Demo is Visual-only. All Main faders start at 0%: raise a deck's Main after pressing Play to hear it. Visual, Behavior, and Audio live in `app/visual/`, `app/behavior/`, and `app/audio/`. AudioWorklet requires localhost on this Mac or trusted HTTPS for iPad/iPhone; plain-HTTP LAN audio cannot run Signalsmith. Run [playback regression checks](tests/visual-playback-tests.html) and [Queue checks](tests/queue-tests.html) through the same server. See [Queue behavior and limitations](specs/queue.md) and [HTTPS setup](docs/LOCAL_HTTPS.md). Natural-end swaps still need preparation time; gapless playback and physical Safari transition quality are not verified.
 
+Each deck's **Library → Import** adds multiple files or folders to one persistent
+local collection without loading any deck. Search, Title/BPM/Key/Artist sorting and
+independent selection are connected. Select a song and use **1–4**, or drag a song
+to those buttons, a full-song overview or a Queue. Existing paused-load/playing-queue
+and occupied-slot rules apply. Header Load D1–D4 remain direct, session-only file
+shortcuts; use Library Import for persistence. Playlists, Links and bulk analysis
+remain unimplemented. See [Library behavior/storage limits](specs/library.md) and
+[Library interface regression tests](tests/library-interface-tests.html).
+
 ## Preserved legacy references
 
 See the [24 November codebase audit and proposed branch preservation plan](docs/CODEBASE-AUDIT-2026-11-24.md) for confirmed follow-up issues, cleanup scope and verification results.

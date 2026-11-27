@@ -437,3 +437,43 @@ Native mouse/touch and exact layout comparisons passed at 1114×768, 768×1024 a
 alignment and no horizontal overflow. The iPhone regression initially timed out
 while other browser runs were active; it passed when rerun alone. Syntax/editor
 checks and `git diff --check` passed. Physical device verification remains pending.
+
+### Existing Library controls connected — 27 November 2026
+
+The accepted deck Library layout is retained. Each of the four workspaces now
+browses the same IndexedDB collection with independent search, Title/BPM/Key/Artist
+sorting, selection and scrolling. **Import** occupies the original footer line and
+opens a transient file/folder chooser; importing never calls a deck action. Batches
+add to the library and renamed copies are rejected by content hash. Imported BPM/key
+stay unknown. Existing 1–4 buttons and library song drops onto them/overviews use
+`sendToDeck()`. Explicit Queue drops expose existing `loadQueue()` through a guarded
+`queueSong()` coordinator method: fill empty slots without changing playback/current
+song even while paused; reject occupied slots. No alternate playback graph or queue.
+See the [Library contract](../specs/library.md).
+
+Verification completed in isolated Chrome databases with generated WAVs:
+- Foundation: multi-file/nested-folder import, duplicates, close/reopen persistence,
+  validated verified BPM, search/sort, cancellation, quota failure isolation and guards.
+- Actual application UI: multiple batches; import while a source plays with the
+  same source and advancing clock; shared collection in all four views; independent
+  search/selection; Title/Artist/BPM/Key ordering including supplied vs unknown data;
+  numbered buttons; button/overview/Queue drops; occupied rejection; reload persistence.
+- Real stored Blobs through all four existing coordinators; explicit paused Queue
+  preserves current song/cues; busy operation rejects queue assignment.
+- Native browser drop dispatch reaches disabled-empty Queue, overview and unselected
+  numbered destinations. A real mouse dragstart publishes the library ID and a
+  native Queue drop preserves the paused sounding-source reference.
+- Exact bounding-box comparisons with `7045e4e` passed for Performance and Library
+  header/content/sort/search/results/footer/destinations at 1114×768, 768×1024 and
+  390×844 in Default, Glass Hardware and Futuristic. No horizontal overflow.
+- Existing playback/waveform/Tempo/Main/cue/touch, Queue, iPhone and theme suites passed.
+  The test observer now distinguishes audio transports from the Library EventTarget;
+  there remain four persistent transports and one playback AudioContext.
+
+Audio, approved waveform modules, original performance CSS, phone layout and vendor
+DSP remain unchanged from `7045e4e`. A separate scoped stylesheet styles functional
+Library states and its transient chooser. No experimental analysis is auto-run or
+persisted. Playlists/Links and bulk analysis remain unimplemented. Physical Safari/
+iPad folder picking, storage retention, drag/touch and listening remain human checks.
+New Library changes are uncommitted; no audio or personal library contents written
+to repository files, and no push performed.

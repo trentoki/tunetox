@@ -85,6 +85,14 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
 6. Support deck accent colors, coordinated waveforms/controls, themes, accessible input alternatives, and isolated Design Mode experiments. Never merge prototypes into working audio without review.
 7. Detailed view gestures, cue behavior, dimensions, navigation, and customization belong in `specs/interface.md`; historical v40 is inspiration, not a mandatory implementation.
 
+Current Library increment: all four existing deck Library views share one persistent
+collection while retaining independent browsing. Import adds files/folders without
+loading a deck. Existing 1–4 buttons and song drops onto them/overviews use the
+normal paused-load/playing-queue behavior. Explicit Queue drops fill only an empty
+slot without replacing the current song, even while paused. Occupied slots remain
+protected. BPM/key stay unknown until supplied; no new BPM interpretation is added.
+Playlists/Links remain unimplemented. See [Library contract](specs/library.md).
+
 ## 8. Controls and Settings
 
 1. Touch, mouse, keyboard, and future MIDI controls invoke shared, consistently identified application actions. Controls have stable IDs independent of visual placement.
@@ -106,6 +114,6 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
 
 ---
 
-**Frequency waveform colors (scrolling visually approved, 26 November 2026):** Analyze decoded source energy in Low (<200 Hz), Mid (200–4,000 Hz), and High (>4,000 Hz) ranges on the detailed waveform time grid. Low uses the deck accent; Mid rotates its hue 90°; High rotates it 180°. Shared analysis remains independent of Visual and available for future BPM work. Apply the same mapping to the full-song overview using aggregated existing frequency energy per column. Preserve geometry, playback indicator and absolute seeking. These ranges are provisional; no new BPM detector is approved by this task. See [waveform specification](specs/waveform.md).
+**Frequency waveform colors (overview and scrolling visually approved, 26 November 2026):** Analyze decoded source energy in Low (<200 Hz), Mid (200–4,000 Hz), and High (>4,000 Hz) ranges on the detailed waveform time grid. Low uses the deck accent; Mid rotates its hue 90°; High rotates it 180°. Shared analysis remains independent of Visual and available for future BPM work. Apply the same mapping to the full-song overview using aggregated existing frequency energy per column. Preserve geometry, playback indicator and absolute seeking. These ranges are provisional. Separate per-band rhythmic analysis is authorized as an offline exploration only; no final BPM selection, matching integration or performance-interface change is approved. See [waveform specification](specs/waveform.md).
 
 **Documentation boundaries:** `AGENTS.md` governs development workflow; `RULES.md` governs intended product behavior; `specs/` retains detailed technical contracts; `TUNETOX_PLAN.md` governs roadmap/context; the master feature checklist tracks implementation and verification. Approved behavior is not proof of implementation.

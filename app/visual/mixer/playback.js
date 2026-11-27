@@ -1,3 +1,4 @@
+import { connectLibraryControls, connectSongDrop } from '../library/library-view.js';
 // Approved H5.3.1 presentation for the new Clean Playback host.
 // Inputs: one persistent Clean Deck state and bound host actions.
 // Output: a DOM node, render(), and setBusy(). No player creation or DSP here.
@@ -348,6 +349,15 @@ export function createPlaybackDeck(number, deck, actions) {
     render();
     libraryButton.focus();
   });
+  if (actions.library) {
+    const [songs, playlists, links] = sectionSelector.children;
+    songs.disabled = false; songs.title = 'Imported songs'; songs.setAttribute('aria-label', 'Songs');
+    songs.setAttribute('aria-pressed', 'true');
+    for (const tab of [playlists, links]) {
+      tab.title = tab.textContent + ' is not implemented';
+      tab.setAttribute('aria-label', tab.textContent + ' (not implemented)');
+    }
+  }
   libraryHeader.append(element("small", "", "D" + number), sectionSelector, back);
   const libraryContent = element("div", "library-content");
   const sort = element("div", "song-sort-selector");
@@ -368,6 +378,14 @@ export function createPlaybackDeck(number, deck, actions) {
   libraryContent.append(sort, search, results, selected);
   library.append(libraryHeader, libraryContent);
   node.append(performance, library);
+  const libraryControls = actions.library ? connectLibraryControls(actions.library,
+    { sort, search, results, selected, destinations, visible: () => workspace === 'library-view' },
+    actions.sendLibrarySong, actions.announce) : null;
+  if (actions.library) {
+    connectSongDrop(overview, id => actions.sendLibrarySong(id, number - 1, 'deck'));
+    connectSongDrop(queue, id => actions.sendLibrarySong(id, number - 1, 'queue'));
+  }
+
 
   function updatePlaybackTime() {
     if (seekPreview !== null && (!deck.song || previewSource !== deck.audio.src)) seekPreview = null;
@@ -502,6 +520,10 @@ export function createPlaybackDeck(number, deck, actions) {
     queue.title = deck.queue?.name || "Queue empty";
     queue.setAttribute("aria-label", deck.queue ? "Play queued song on Deck " + number : "Queue empty");
     updatePlaybackTime();
+    if (libraryControls) {
+      if (workspace === 'library-view') libraryControls.opened();
+      return;
+    }
     results.replaceChildren();
     for (const song of actions.librarySongs()) {
       const row = element("div", "search-result");

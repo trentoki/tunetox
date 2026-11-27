@@ -1,0 +1,17 @@
+/* Existing Library hierarchy/dimensions are retained. Only functional states and
+   the transient import chooser need styling; no new library region is mounted. */
+.library-content .search-result[role=button] { cursor:pointer; }
+.library-content .search-result[aria-pressed=true] { background:#243d50; box-shadow:inset 3px 0 var(--accent); }
+.library-content .song-sort-selector button { background:transparent; color:var(--accent); }
+.library-content .song-sort-selector button[aria-pressed=true] { background:var(--accent); color:#152330; }
+.library-content > div:last-child .library-import-button { display:inline; height:auto; min-height:0; padding:0; border:0; font:inherit; vertical-align:baseline; background:transparent; color:var(--accent); text-decoration:underline; }
+.library-content > div:last-child small { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.library-import-dialog { max-width:min(480px,90vw); max-height:85dvh; overflow:auto; background:#101823; color:#deedf5; border:1px solid #36516a; border-radius:6px; padding:16px; }
+.library-import-dialog::backdrop { background:#0009; }
+.library-import-dialog h2 { font-size:16px; }
+.library-import-dialog label { display:block; border:1px solid #36516a; padding:8px; margin:8px 0; }
+.library-import-dialog input[type=file] { display:block; width:100%; min-width:0; margin-top:5px; }
+.library-import-dialog button { padding:7px; margin:4px; }
+.library-import-dialog small { display:block; margin:10px 0; }
+.library-import-dialog p,.library-import-dialog li { overflow-wrap:anywhere; }
+.library-import-dialog,.library-import-dialog * { touch-action:manipulation; }

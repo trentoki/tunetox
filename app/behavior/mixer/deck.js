@@ -219,6 +219,12 @@ export function createPlaybackCoordinator(deck, callbacks) {
       }
       return run(() => sendToDeck(deck, song));
     },
+    // Explicit Queue destinations reuse the same one-slot state even if paused.
+    // All other destinations keep sendToDeck's paused-load/playing-queue rule.
+    queueSong(song) {
+      return run(() => loadQueue(deck, song)
+        ? { kind: "queued", song } : { kind: "queue-full", song: deck.queue });
+    },
     canSeek: () => readyToSeek() && (!pending || seeking),
     seek,
     cue(number, clear = false) {

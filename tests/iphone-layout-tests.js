@@ -31,7 +31,7 @@ run.addEventListener('click', async () => {
     const source = await (await fetch('../tunetox.html')).text();
     const observer = '<base href="' + new URL('../', location.href).href + '">' +
       '<script>window.__players=[];window.__contexts=[];window.__nodes=[];' +
-      'const Target=EventTarget;window.EventTarget=class extends Target{constructor(){super();window.__players.push(this);}};' +
+      'const Target=EventTarget;window.EventTarget=class extends Target{constructor(){super();queueMicrotask(()=>{if("currentTime" in this)window.__players.push(this);});}};' +
       'const Context=AudioContext;window.AudioContext=class extends Context{constructor(...a){super(...a);window.__contexts.push(this);}};' +
       'const Worklet=AudioWorkletNode;window.AudioWorkletNode=class extends Worklet{constructor(...a){super(...a);window.__nodes.push(this);}};<\/script>';
     frame.srcdoc = source.replace('<head>', '<head>' + observer);

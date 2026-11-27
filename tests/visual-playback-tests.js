@@ -504,7 +504,7 @@ run.addEventListener("click", async () => {
     const observer = '<base href="' + new URL("../", location.href).href + '">' +
       '<script>window.__players=[];window.__contexts=[];window.__gains=[];window.__sources=[];' +
       'window.__frameCount=0;const nativeFrame=requestAnimationFrame;window.requestAnimationFrame=callback=>nativeFrame(time=>{window.__frameCount++;callback(time);});' +
-      'const NativeTarget=window.EventTarget;window.EventTarget=class extends NativeTarget{constructor(){super();window.__players.push(this);}};' +
+      'const NativeTarget=window.EventTarget;window.EventTarget=class extends NativeTarget{constructor(){super();queueMicrotask(()=>{if("currentTime" in this)window.__players.push(this);});}};' +
       'const NativeWorklet=window.AudioWorkletNode;window.AudioWorkletNode=class extends NativeWorklet{constructor(...args){super(...args);window.__sources.push(this);}connect(...args){this.__testOutput=args[0];return super.connect(...args);}};' +
       'const NativeContext=window.AudioContext;window.AudioContext=class extends NativeContext{' +
       'constructor(...args){super(...args);window.__contexts.push(this);}' +
