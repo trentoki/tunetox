@@ -148,3 +148,19 @@ song replacement hide corresponding markers immediately. Labels may shift inward
 or apart at edges/coincident positions; lines remain anchored exactly. Marker color
 uses the existing deck accent; the stationary white playhead remains above them.
 These overlays have no pointer interaction, playback state or cue values of their own.
+
+### D2 tablet portrait stem layout
+
+At portrait widths 601–1100 CSS pixels, the same four stem inputs are vertical,
+side by side, top=100%, within their existing allocated upper section. Landscape
+remains horizontal; the existing <=600-pixel phone rules are unchanged. This is a
+responsive layout condition, not platform detection or a second deck component.
+
+### D2 isolated waveform orientation
+
+Settings retains theme/color preferences and a global saved Horizontal/Vertical
+choice (version-1 device-local settings). Horizontal is the default. Vertical
+rotates only scrolling waveform drawing and cue geometry inside the original box;
+forward playback moves upward through a centered horizontal playhead. Drag up seeks
+forward; down seeks backward. Overview, four-second source window, nudge hit areas,
+cues and lower sections remain. Settings is nonmodal and never changes transport.

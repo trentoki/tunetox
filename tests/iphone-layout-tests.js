@@ -132,7 +132,7 @@ run.addEventListener('click', async () => {
     tabs[3].click();
     frame.style.width = '768px'; await delay(150);
     assert(visible().length === 4 && decks.every(deck => !deck.inert), 'Tablet restoration hid or disabled decks');
-    assert(win.getComputedStyle(input(0, 'input[data-stem="beat"]')).writingMode === 'horizontal-tb', 'Tablet stems changed');
+    assert(win.getComputedStyle(input(0, 'input[data-stem="beat"]')).writingMode === 'vertical-lr', 'Portrait tablet stems should be vertical');
     frame.style.width = '390px'; await delay(150);
     assert(visible().length === 1 && visible()[0] === decks[3], 'Resize lost phone selection');
     pass('all hidden source clocks advance; transport/context/worklet identities retained; tablet round trip retains selection');
@@ -156,6 +156,17 @@ run.addEventListener('click', async () => {
     await until(() => !input(0, '.play-pause-button').disabled && input(0, '.queue-button').disabled && players[0].src !== sources[0], 'Retained queue did not play');
     assert(!players[0].paused && input(0, '.main-volume-fader input').value === '10', 'Queue lost playback/gain');
     pass('retained READY queue remains functional after switching');
+    const stemValues=decks.map(d=>[...d.querySelectorAll('.stem-faders input')].map(i=>i.value));
+    decks.forEach(d=>{const b=d.querySelector('.performance-upper-toggle');if(b.textContent==='Wave')b.click();});
+    for(const theme of ['default','glass-hardware','futuristic']){
+      const themeInput=doc.querySelector('[aria-label="Visual theme"]');themeInput.value=theme;themeInput.dispatchEvent(new win.Event('change'));await delay(60);
+      for(const [width,height,vertical] of [[768,1024,true],[1024,1366,true],[1114,768,false],[390,844,true]]){
+        frame.style.width=width+'px';frame.style.height=height+'px';frame.style.maxWidth='none';await delay(50);
+        decks.forEach(d=>d.querySelectorAll('.stem-faders input').forEach(i=>assert(win.getComputedStyle(i).writingMode===(vertical?'vertical-lr':'horizontal-tb'),'Stem orientation '+width+theme)));
+        assert(JSON.stringify(stemValues)===JSON.stringify(decks.map(d=>[...d.querySelectorAll('.stem-faders input')].map(i=>i.value))),'Rotation changed stem values');
+      }
+    }
+    pass('tablet portrait vertical / landscape horizontal stems across all themes; phone orientation and authoritative levels retained');
     results.dataset.result = 'pass';
   } catch (error) {
     results.textContent += 'FAIL ' + error.message;

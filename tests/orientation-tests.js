@@ -38,14 +38,20 @@ document.querySelector('#run').onclick=async()=>{
  pointer('pointerdown',r.y+r.height*.7);pointer('pointermove',r.y+r.height*.45);pointer('pointerup',r.y+r.height*.45);
  });
  await delay(300);
- waves.forEach(w=>assert(Math.abs(Number(w.getAttribute('aria-valuenow'))-1)<.1,'Upward seek'));
+ waves.forEach(w=>{assert(Math.abs(Number(w.getAttribute('aria-valuenow'))-1)<.1,'Upward seek');assert(Math.abs(parseFloat(w.querySelector('.scrolling-cue-marker').style.top)-25)<1,'Cue did not move with source');});
+ for(const [i,w]of waves.entries()){
+  const r=w.getBoundingClientRect(),pointer=(type,y)=>w.dispatchEvent(new win.PointerEvent(type,{pointerId:2,isPrimary:true,button:0,pointerType:i%2?'mouse':'touch',clientX:r.x+r.width/2,clientY:y,bubbles:true}));
+  pointer('pointerdown',r.y+r.height*.3);pointer('pointermove',r.y+r.height*.425);pointer('pointerup',r.y+r.height*.425);
+ }
+ await delay(250);waves.forEach(w=>assert(Math.abs(Number(w.getAttribute('aria-valuenow'))-.5)<.1,'Downward seek'));
+
  cards.forEach(c=>c.querySelector('.play-pause-button').click());await delay(700);
  const before=waves.map(w=>Number(w.getAttribute('aria-valuenow')));
  orientation.value='horizontal';orientation.dispatchEvent(new win.Event('change'));await delay(250);
  waves.forEach((w,i)=>assert(Number(w.getAttribute('aria-valuenow'))>before[i],'Orientation interrupted deck'));
  orientation.value='vertical';orientation.dispatchEvent(new win.Event('change'));await mount();doc=frame.contentDocument;
  assert(doc.documentElement.dataset.waveformOrientation==='vertical','Saved orientation');
- out.textContent='PASS D2/Settings, default/persisted orientation, unchanged four-deck geometry, horizontal playhead/cues, mouse/touch upward seek and uninterrupted orientation switches';out.dataset.result='pass';
+ out.textContent='PASS D2/Settings, default/persisted orientation, unchanged four-deck geometry, horizontal playhead/cues, mouse/touch upward/downward seek and uninterrupted orientation switches';out.dataset.result='pass';
  }catch(e){out.textContent+='FAIL '+e.stack;out.dataset.result='fail';}
  finally{frame.src='about:blank';frame.removeAttribute('srcdoc');localStorage.removeItem(name);indexedDB.deleteDatabase(name);}
 };

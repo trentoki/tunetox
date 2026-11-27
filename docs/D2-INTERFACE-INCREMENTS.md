@@ -110,3 +110,65 @@ suites pass. Native sticky All Songs/child/parent/next heading checks pass in th
 viewports × three themes, including interactive collapse. Phone screenshot reviewed.
 Regression checks confirm shared spacing/type/dividers, sticky All Songs collapse,
 no nested Manage buttons, and fixed Back/context restoration. Editor diagnostics clean.
+
+## 5. Tablet portrait stems
+
+`app/visual/mixer/playback.css` uses one portrait-only responsive query (601–1100
+CSS pixels, covering current iPad portrait sizes while excluding phone widths and
+landscape). Same existing stem inputs/Behavior actions, vertical top=100%, allocated
+upper section and stem-panel bounds unchanged. Landscape and phone rules untouched.
+The query expresses layout size, not a user-agent/device fork. Existing iPhone tests
+now cover tablet portrait, landscape and phone orientations in every theme with
+retained authoritative levels. Native touch was measured moving a stem upward.
+
+## Final verification and ownership review
+
+All nine browser suites passed together after the five increments: iPhone layout,
+orientation, nudging, Library interface, Library storage, Library analysis, Queue,
+Visual playback and Glass Hardware. The obsolete horizontal-tablet assertion was
+updated for the newly approved portrait behavior. A final focused orientation run
+also verifies downward rewind and cue movement after seeking.
+
+Native Chromium checks passed:
+- Vertical touch-up/mouse-down waveform seeking with playback retained in three
+  viewport sizes × three themes; unchanged overview behavior remains regression-tested.
+- Shift center/four-corner mouse and touch toggles in every theme.
+- Real cross-Library dragstart and native song/playlist relationship drops.
+- Interactive sticky All Songs/child/parent/next headings in nine combinations.
+- Portrait stem allocation unchanged at 768×1024 and 1024×1366; landscape and phone
+  stem geometry exactly matches pre-increment measurements in all themes. Native
+  upward touch increases the stem value. Portrait and Manage screenshots reviewed.
+
+Settings identity grouping keeps its button beside the D2 name. All affected
+production files were reviewed by responsibility: Visual owns DOM/drawing/style;
+Behavior owns Settings, navigation, modifier/gesture/relationship decisions; Audio
+owns the unchanged playback path. No new clock, song store, relationship copy,
+synchronization layer or adapter was added. The only Audio file change preserves
+the human-written explanatory comments for the effective 0.25–3 rate bounds.
+BPM math, decoding/filtering, DSP, storage schema and source audio remain unchanged.
+
+Remaining pre-existing architectural concerns: phone tab/transition gestures still
+live in the existing Visual iPhone module, and the unrelated Pitch travel preview
+still has its input handling in Visual playback. These were not expanded or
+restructured during this pass. The Audio readability review is recorded separately
+in the plan and remains deferred; the Boolean parameter is not renamed now.
+
+Physical Safari checks remain: native long-press/drag initiation and text-callout
+suppression with editable search fields; vertical waveform touch feel and cue label
+legibility; sticky nested headings and portrait stem travel; live listening during
+nudges, seeking and Queue changes, including extreme effective rates/backgrounding.
+Chromium signal/state/layout results do not certify Safari audio quality or device
+resource use. No unresolved automated regression failures remain after corrections.
+HTTP and HTTPS servers remain detached and responsive. No push is authorized.
+
+## Local checkpoints
+
+| Increment | Checkpoint |
+| --- | --- |
+| Settings and waveform orientation | `e3f4415` |
+| Deck navigation, Shift and performance input | `c4cc6a7` |
+| Library relationship drops and strip styling | `152f645` |
+| Manage shared rows and nested sticky headings | `faab37b` |
+| Portrait stems, final verification and readability documentation | Final D2 checkpoint containing this report; see latest Git commit |
+
+No further feature work follows this checkpoint until physical D2 review.

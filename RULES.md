@@ -82,7 +82,7 @@ The complete preceding RULES.md, including detailed matching/handoff contracts, 
    analysis uses approximately 5 ms sample groups and preserves transient extrema;
    Tempo changes scrolling speed rather than waveform shape or horizontal scale.
 4. Each deck independently retains both section selections, including across Library round trips. All four decks default to **Wave + Cues**. Switching a section must not reset the other section, another deck, playback, queue state, or musical participation. This supersedes the combined Wave/Cue versus Controls switch.
-5. The iPhone layout displays one existing shared deck at a time, selected immediately by compact tabs 1–4. All four decks remain operational; switching visibility never recreates Audio/Behavior objects or resets playback, songs, queues or control values. A separate handle below the tabs expands downward and collapses upward into an empty Transition area; its musical controls remain undecided. Only on iPhone, the four existing stem faders are vertical and side by side, retaining their names, ranges, values and actions. Preserve all themes and existing iPad/desktop layouts. Responsive thresholds and gestures are documented in `specs/interface.md` and remain subject to physical device review. Visibility never determines musical participation.
+5. The iPhone layout displays one existing shared deck at a time, selected immediately by compact tabs 1–4. All four decks remain operational; switching visibility never recreates Audio/Behavior objects or resets playback, songs, queues or control values. A separate handle below the tabs expands downward and collapses upward into an empty Transition area; its musical controls remain undecided. On iPhone, the four existing stem faders are vertical and side by side, retaining their names, ranges, values and actions. D2 also uses vertical stems within the unchanged iPad portrait allocation; landscape remains unchanged. Preserve all themes and other existing iPad/desktop layouts. Responsive thresholds and gestures are documented in `specs/interface.md` and remain subject to physical device review. Visibility never determines musical participation.
 6. Support deck accent colors, coordinated waveforms/controls, themes, accessible input alternatives, and isolated Design Mode experiments. Never merge prototypes into working audio without review.
 7. Detailed view gestures, cue behavior, dimensions, navigation, and customization belong in `specs/interface.md`; historical v40 is inspiration, not a mandatory implementation.
 
@@ -141,3 +141,18 @@ Library to that deck's retained performance sections. Queuing alone never closes
 Library. Shift remains a deck-local held/latched modifier, currently used for cue
 clearing. Performance text selection and callout menus are suppressed; actual text
 fields retain normal editing.
+
+## Human readability of implementation
+
+- Organize code according to conceptual relationships rather than merely grouping
+  declarations by instruction type.
+- Keep related declarations and operations physically close wherever initialization
+  dependencies permit.
+- Favor a progressive, understandable human reading order.
+- Prefer descriptive naming and readable formatting over compactness.
+- Minimize the number of places a reader must visit to understand an operation.
+- Do not introduce unnecessary functions, files, abstractions or intermediate layers
+  for organizational purposes.
+
+These principles support the existing Visual, Behavior and Audio responsibilities.
+They do not authorize unrelated restructuring during an approved musical increment.

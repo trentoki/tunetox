@@ -505,3 +505,27 @@ Retain as separate upcoming tasks, not implemented in this pass:
 - MIDI/controller and jog-wheel support.
 - Improved BPM detection and eventual BPM-based Tempo controls.
 - BeatMatch, TuneMatch, looping, effects, stem separation, Handoff and sampler.
+
+### Deferred Audio readability review — after physical D2 testing
+
+Review [deck-audio.js](app/audio/deck-audio.js) as a focused, separately agreed task.
+Do not restructure it during the current D2 interface pass. Maintain a playable
+musical instrument while improving architectural clarity incrementally.
+
+Review points:
+- The distance between shared state declarations and deck audio initialization:
+  keep related declarations/initialization close where dependencies permit.
+- Organizing functions according to the deck audio lifecycle so a reader can follow
+  initialization, loading/preparation, playback, timing/rate changes and disposal.
+- Readable formatting and conceptual grouping of `deckPlaybackInfo` properties.
+- Proposed rename of Boolean parameter `pitch` to `changePitch` in
+  `changeTempoOrPitch`, making the operation flag distinct from stored pitch values.
+
+Preserve the manually added effective-rate comments explaining the established
+0.5–2 Tempo range, ±50% nudge and resulting 0.25–3 rate limits. The review is deferred;
+no property regrouping, function relocation or parameter rename is implemented now.
+
+**D2 interface pass status:** All five requested increments are implemented and
+locally checkpointed, with nine regression suites passing and native Chromium
+interaction/layout checks recorded in [the D2 report](docs/D2-INTERFACE-INCREMENTS.md).
+Stop for physical Safari testing before additional development or pushing.

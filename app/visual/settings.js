@@ -6,6 +6,8 @@ export function createSettingsPresentation(header) {
   const label = document.createElement('label'); label.textContent = 'Scrolling waveform ';
   const orientation = document.createElement('select'); orientation.setAttribute('aria-label', 'Scrolling waveform orientation');
   for (const value of ['horizontal','vertical']) orientation.add(new Option(value[0].toUpperCase()+value.slice(1),value));
-  label.append(orientation); panel.append(label); header.querySelector('h1').after(button); header.append(panel);
+  label.append(orientation); panel.append(label);
+  const identity=document.createElement('div');identity.className='application-identity';
+  const name=header.querySelector('h1');name.before(identity);identity.append(name,button);header.append(panel);
   return { button, panel, orientation, show(open) { panel.hidden = !open; button.setAttribute('aria-expanded',String(open)); } };
 }

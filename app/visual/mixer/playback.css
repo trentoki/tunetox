@@ -179,3 +179,21 @@ html[data-waveform-orientation=vertical] .scrolling-cue-marker { left:0; right:0
 
 .app { user-select:none; -webkit-user-select:none; -webkit-touch-callout:none; }
 .app :is(input:not([type=range]):not([type=color]),textarea,[contenteditable=true]) { user-select:text; -webkit-user-select:text; -webkit-touch-callout:default; }
+
+/* Tablet portrait uses the same four inputs in the same allocated upper section.
+   Excludes phone widths and every landscape layout; no device-specific state. */
+@media (min-width:601px) and (max-width:1100px) and (orientation:portrait) {
+  html .deck .stems-view .stem-faders { flex-direction:row; align-items:stretch; justify-content:space-around; }
+  html .deck .stem-faders label { flex:1; min-width:0; min-height:0; flex-direction:column; gap:3px; text-align:center; }
+  html .deck .stem-faders span { width:auto; }
+  html .deck .stem-faders input[type=range] { writing-mode:vertical-lr; direction:rtl; width:36px; height:0; min-height:0; flex:1; margin:0; touch-action:pan-x pinch-zoom; }
+  html .deck .stem-faders input::-webkit-slider-runnable-track { width:6px; height:100%; }
+  html .deck .stem-faders input::-moz-range-track { width:6px; height:100%; }
+  html .deck .stem-faders input::-webkit-slider-thumb { margin:0 -8px 0 0; }
+  html[data-theme=glass-hardware] .deck .stem-faders input::-webkit-slider-runnable-track,
+  html[data-theme=futuristic] .deck .stem-faders input::-webkit-slider-runnable-track { background:linear-gradient(to top,var(--accent) 0 var(--stem-level-fill,100%),#101b23 var(--stem-level-fill,100%) 100%); }
+  html[data-theme=glass-hardware] .deck .stem-faders input::-moz-range-track,
+  html[data-theme=futuristic] .deck .stem-faders input::-moz-range-track { background:linear-gradient(to top,var(--accent) 0 var(--stem-level-fill,100%),#101b23 var(--stem-level-fill,100%) 100%); }
+}
+
+.application-identity { display:flex; align-items:center; gap:6px; flex-shrink:0; }
