@@ -575,3 +575,13 @@ All eleven regression suites and native Chromium mouse/touch checks in three the
 pass; no unresolved automated failures. Stop for physical iPad/Safari testing and
 listening before further work or pushing. Four-second default and approved shades
 are unchanged. See the linked report for file responsibilities and remaining risks.
+
+### Waveform theme experiment after df0338e
+
+Physical testing approves deck shades and expanded waveform comparison. Shared global
+nudge amount is implemented as a separate local checkpoint: one session value, no
+per-deck copies, independent directional holds preserved. Nudging/playback/comparison
+suites pass. Next add the experimental Waveform theme using the same constructed
+controls and waveform; preserve the three existing themes. See
+[file responsibilities and checks](docs/WAVEFORM-THEME.md). Do not push; physical
+Safari verification follows the experimental theme checkpoint.

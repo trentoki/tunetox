@@ -9,7 +9,6 @@ export function buildDeck() {
     isPlaying: false,
     mainVolume: 0,
     tempoRatio: 1,
-    nudgePercent: 2,
     nudgeDirection: 0,
     stemLevels: { beat: 1, bass: 1, tune: 1, voice: 1 },
     cuePositions: Array(8).fill(null),

@@ -2,8 +2,9 @@
 
 ## Approved behavior and units
 
-Each persistent Behavior deck retains one established tempoRatio (0.5–2), one
-session-local nudgePercent (2–50) and temporary nudgeDirection (-1, 0, +1). Effective
+Each persistent Behavior deck retains its established tempoRatio (0.5–2) and
+temporary nudgeDirection (-1, 0, +1). One Behavior-owned session-local nudgePercent
+(2–50, default 2) is shared by all decks. Effective
 Audio rate = tempoRatio × (1 + direction × percent / 100). Thus 50% means half or
 one-and-a-half of established speed. The effective range is .25–3; the established
 Tempo control's range remains .5–2. Nudge never overwrites established Tempo.
@@ -12,7 +13,8 @@ latest base, not a saved anchor. The elapsed phase adjustment remains: no seek o
 position rewind occurs on release. Pitch/semitones remain unchanged.
 
 The backward/forward hold buttons occupy the scrolling waveform's lower corners;
-the percentage control sits between them. All three are excluded from pointer and
+the single percentage control is beside global Waveform Zoom. Direction buttons
+are more translucent. All nudge controls are excluded from pointer and
 keyboard waveform seeking, including paused/disabled directional controls. Gaps and
 other waveform areas retain existing dragging. Only loaded, playing, ready decks
 can start a directional hold; percentage remains adjustable while paused/empty.
@@ -22,7 +24,9 @@ can start a directional hold; percentage remains adjustable while paused/empty.
 - Behavior mixer/nudging owns validated percentage/direction changes and computes
   effective rate from the same existing deck object; no second clock/store.
 - Behavior nudge-controls interprets pointer and keyboard holds, percentage drags
-  and cancellation. Visual waveform/nudge-controls creates/renders the three areas.
+  and cancellation. Visual waveform/nudge-controls creates/renders directional pairs and one global amount.
+  Global amount changes directly reapply the existing rate to currently held decks;
+  there are no synchronized per-deck percentage copies.
 - Audio setAudioPlaybackRate validates .25–3 and calls the existing
   changeTempoOrPitch scheduling function on the same Signalsmith node, transport
   gates and source-time reference. Legacy setAudioTempo retains its .5–2 contract.

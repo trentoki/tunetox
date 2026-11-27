@@ -1,6 +1,6 @@
 import { libraryTestStorageScript, createLibraryLoadingFixtures } from './library-loading-fixture.js';
 import { buildDeck, setTempo } from '../app/behavior/mixer/deck.js';
-import { setNudgeDirection, setNudgePercent } from '../app/behavior/mixer/nudging.js';
+import { getNudgePercent, setNudgeDirection, setNudgePercent } from '../app/behavior/mixer/nudging.js';
 const assert = (value, message) => { if (!value) throw Error(message); };
 const delay = ms => new Promise(resolve=>setTimeout(resolve,ms));
 async function until(test, message) { for(let i=0;i<600;i++){if(await test())return;await delay(15);}throw Error(message); }
@@ -17,10 +17,11 @@ document.querySelector('#run').onclick=async()=>{
   const name='tunetox-nudge-test-'+crypto.randomUUID();let win,players=[];
   try {
     const one=buildDeck(),two=buildDeck();
-    assert(one.nudgePercent===2 && one.nudgeDirection===0,'Nudge defaults');
-    for(const value of [NaN,1,51,'10']) {let bad=false;try{await setNudgePercent(one,value);}catch{bad=true;}assert(bad && one.nudgePercent===2,'Invalid percentage accepted');}
-    await setNudgePercent(one,50);await setTempo(one,.5);await setNudgeDirection(one,-1);await setTempo(one,2);await setNudgeDirection(one,0);
-    assert(one.tempoRatio===2 && one.nudgeDirection===0 && two.tempoRatio===1 && two.nudgePercent===2,'State ownership/restoration');
+    assert(getNudgePercent()===2 && one.nudgeDirection===0,'Nudge defaults');
+    for(const value of [NaN,1,51,'10']) {let bad=false;try{await setNudgePercent(value,[one,two]);}catch{bad=true;}assert(bad && getNudgePercent()===2,'Invalid percentage accepted');}
+    await setNudgePercent(50,[one,two]);await setTempo(one,.5);await setNudgeDirection(one,-1);await setTempo(one,2);await setNudgeDirection(one,0);
+    assert(one.tempoRatio===2 && one.nudgeDirection===0 && two.tempoRatio===1 && getNudgePercent()===50,'State ownership/restoration');
+    await setNudgePercent(2,[one,two]);
     pass('Behavior percentage bounds, established/temporary separation and independent defaults');
     const source=await(await fetch('../tunetox.html')).text();
     const probe='<base href="'+new URL('../',location.href).href+'">'+libraryTestStorageScript(name)+'<script>window.__players=[];window.__contexts=[];window.__gains=[];window.__nodes=[];const T=EventTarget;window.EventTarget=class extends T{constructor(){super();queueMicrotask(()=>{if("currentTime" in this)__players.push(this);});}};const C=AudioContext;window.AudioContext=class extends C{constructor(...a){super(...a);__contexts.push(this);}createGain(){const g=super.createGain(),connect=g.connect.bind(g);g.connect=(...a)=>{if(a[0]===this.destination)__gains.push(g);return connect(...a);};return g;}};const N=AudioWorkletNode;window.AudioWorkletNode=class extends N{constructor(...a){super(...a);__nodes.push(this);}};<\/script>';
@@ -34,10 +35,11 @@ document.querySelector('#run').onclick=async()=>{
     const meters=win.__gains.map(g=>{const a=context.createAnalyser();a.fftSize=8192;g.connect(a);return {a,samples:new Float32Array(8192)};});
     function pitch(i){const m=meters[i];m.a.getFloatTimeDomainData(m.samples);let first,last,count=0;for(let j=1;j<m.samples.length;j++)if(m.samples[j-1]<=0&&m.samples[j]>0){const x=j-1-m.samples[j-1]/(m.samples[j]-m.samples[j-1]);first??=x;last=x;count++;}return (count-1)*context.sampleRate/(last-first);}
     function tempo(i,ratio){const input=cards[i].querySelector('.tempo-slider input');input.value=String((Math.log2(ratio)+1)*500);input.dispatchEvent(new win.Event('input'));}
-    const pct=i=>cards[i].querySelector('.nudge-controls [role=spinbutton]');
-    const direction=(i,d)=>cards[i].querySelectorAll('.nudge-controls button')[d<0?0:2];
+    const pct=()=>doc.querySelector('.global-nudge [role=spinbutton]');
+    assert(doc.querySelectorAll('.global-nudge [role=spinbutton]').length===1 && !doc.querySelector('.deck [role=spinbutton]'),'Percentage must be global only');
+    const direction=(i,d)=>cards[i].querySelectorAll('.nudge-controls button')[d<0?0:1];
     const restore=[];
-    for(const button of doc.querySelectorAll('.nudge-controls button')){const methods=['setPointerCapture','hasPointerCapture','releasePointerCapture'],old=methods.map(m=>button[m]);let capture=false;button.setPointerCapture=()=>capture=true;button.hasPointerCapture=()=>capture;button.releasePointerCapture=()=>capture=false;restore.push(()=>methods.forEach((m,i)=>button[m]=old[i]));}
+    for(const button of doc.querySelectorAll('.nudge-controls button, .global-nudge button')){const methods=['setPointerCapture','hasPointerCapture','releasePointerCapture'],old=methods.map(m=>button[m]);let capture=false;button.setPointerCapture=()=>capture=true;button.hasPointerCapture=()=>capture;button.releasePointerCapture=()=>capture=false;restore.push(()=>methods.forEach((m,i)=>button[m]=old[i]));}
     const pointer=(button,type,id=21,extra={})=>button.dispatchEvent(new win.PointerEvent(type,{pointerId:id,isPrimary:true,pointerType:'touch',button:0,clientX:100,clientY:200,bubbles:true,cancelable:true,...extra}));
     async function slope(i){const at=context.currentTime,position=players[i].currentTime;await delay(320);return (players[i].currentTime-position)/(context.currentTime-at);}
     try {
@@ -69,6 +71,8 @@ document.querySelector('#run').onclick=async()=>{
       pointer(direction(0,-1),'pointerdown',101);pointer(direction(1,1),'pointerdown',102,{isPrimary:false});
       const speeds = [await slope(0),await slope(1)];
       assert(Math.abs(speeds[0]-.5)<.06 && Math.abs(speeds[1]-1.5)<.06,'Simultaneous touch decks did not remain independent: '+speeds.join(', '));
+      pct().dispatchEvent(new win.KeyboardEvent('keydown',{key:'Home',bubbles:true}));
+      assert(Math.abs(await slope(0)-.98)<.06 && Math.abs(await slope(1)-1.02)<.06,'Shared amount did not update both held directions');
       pointer(direction(0,-1),'pointerup',101);
       assert(direction(1,1).getAttribute('aria-pressed')==='true','Releasing one deck cancelled another');
       pointer(direction(1,1),'pointerup',102,{isPrimary:false});

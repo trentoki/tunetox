@@ -1,3 +1,4 @@
+import { connectGlobalNudgeControls } from '../../behavior/mixer/nudge-controls.js';
 import { connectGlobalLibraryControls } from '../../behavior/library/library-global-controls.js';
 import { createLibraryAnalysisQueue } from '../../behavior/library/library-analysis-queue.js';
 import { createLibraryDeckLoading } from '../../behavior/library/library-deck-loading.js';
@@ -111,6 +112,7 @@ decks.forEach((deck, index) => {
 });
 renderAll();
 connectSettings(document.querySelector(".mixer-header"), container);
+connectGlobalNudgeControls(document.querySelector(".mixer-header"), decks, announce);
 installDeckSelector(container);
 
 connectGlobalLibraryControls(document.querySelector(".mixer-header"), musicLibrary, libraryAnalysis, announce);

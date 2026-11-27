@@ -184,3 +184,8 @@ initial experiment. See [waveform specification](specs/waveform.md).
 the existing Main GainNode, including exact mute. Retain the established linear
 percentage mapping and separate transport/source safety operations. Abrupt changes
 can click; physical listening verification remains necessary.
+
+**Global nudge amount:** One session-local percentage beside Waveform Zoom applies
+to every deck (2–50%, default 2%). Vertical dragging/keyboard adjusts it, including
+currently held directions. Each deck retains independent backward/forward holding
+and simultaneous nudging. No per-deck amount controls or percentage state remain.
