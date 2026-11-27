@@ -57,7 +57,7 @@ and [verification](docs/CLEAN_PLAYBACK.md). Physical Safari smoothness/listening
 and very long real recordings remain review work. EQ has not begun. Earlier local
 checkpoints d8c4c7d (accepted Queue) and b5ff7b9 (initial scrolling) remain preserved.
 
-**DJ-ready performance sprint — Queue (26 November 2026):** Occupied slots now
+**Historical DJ-ready Queue checkpoint (26 November 2026; playing-slot policy superseded by the later approved replacement refinement):** Occupied slots then
 retain their accepted song and report rejection instead of silently replacing it.
 The user has tested and accepted this Queue increment; preserve it as a separate
 development checkpoint before scrolling-waveform work (local commit `d8c4c7d`).
@@ -465,3 +465,16 @@ library deck-loading coordination; Visual renders, Audio decodes/analyzes indepe
 of playback. Permanent data remains separate from regenerable measurements.
 See [increment checkpoints and per-file review](docs/LIBRARY-DEVELOPMENT.md). See [the current contract](specs/library.md).
 The preceding working application is preserved by `checkpoint/pre-library-20261126`.
+
+
+### Library performance refinements after physical approval
+
+The user physically approved the Library foundation. Import and Analyze All now sit
+globally beside themes; obsolete header loaders are removed. Selected-row Manage
+opens inside its deck with fixed Back and preserved browsing context. Development
+BPM controls are separated from permanent relationships. Intentional assignments
+replace a playing deck's prepared Queue without touching the sounding source.
+Scrolling waveforms display the same source-anchored cues as overviews. V40 math and
+schema-v4 persistence remain unchanged. Metadata-only research JSON is explicitly
+prepared/downloaded from global Analyze All; no personal library export is committed.
+See [increment verification and ownership review](docs/LIBRARY-PERFORMANCE-REFINEMENTS.md).

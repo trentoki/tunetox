@@ -5,7 +5,7 @@ persistent collection serves all four. Historical libraries are references only.
 
 ## Ownership and data flow
 
-Visual creates existing controls, rows and transient Import/Manage/analysis dialogs.
+Visual creates existing controls, rows and transient global Import/analysis dialogs and deck-local Manage panes.
 It displays Behavior-supplied snapshots and owns no selection, sorting, navigation,
 import, relationship or loading decisions. Behavior binds those controls, owns
 per-view browsing, import operations, storage, relationships and analysis jobs.
@@ -56,7 +56,7 @@ storage, not mirrored in another mutable library cache. Query snapshots are tran
 Songs covers the entire collection. Playlists shows nested inline folders. Links
 shows explicit connections of the song currently loaded on that deck, paused or
 playing, and follows queue replacements too. Manage instead captures the library
-song selected when its dialog opens. Links are reciprocal and unique; self links
+song selected when its pane opens. Links are reciprocal and unique; self links
 are rejected. Playlist membership changes and links are independent. Adding a
 membership never removes another. No multiple selection, Link All or bulk assignment.
 
@@ -84,7 +84,9 @@ where native drag/drop is limited.
 
 ## Initial BPM analysis
 
-Manage provides individual V40 analysis and verified BPM entry. Analyze All opens
+Manage groups individual V40 analysis and verified BPM entry under a temporary
+Development disclosure. These controls run inline without blocking other decks.
+Global Analyze All opens
 a shared-job progress dialog for the entire collection. Closing a dialog hides it;
 Cancel explicitly stops analysis. Jobs run sequentially and share one guard across
 all views, separate from the four playback Queues. Completed results persist.
@@ -126,3 +128,29 @@ Geometry matches checkpoint 7045e4e at nine theme/viewport combinations. These c
 and advancing browser playback do not verify audible Safari quality. Physical Safari
 folder import, storage pressure, large-library responsiveness, touch feel and listening
 remain human/device checks. No public release readiness is claimed.
+
+
+## Approved performance placement and research export refinement
+
+Import and Analyze All now appear globally beside the theme picker. Header direct
+Load D1–D4 controls are removed. Existing Library numbered buttons and drag/drop
+remain the destination actions. Manage appears only at the right of selected song
+rows, below which it replaces the corresponding deck's Library content. The Library
+header Back and Songs/Playlists/Links strip remain above it. Manage has its own fixed
+Back toolbar outside its scrolling body. Returning restores prior browsing search,
+selection, expansion and scroll; tapping a Library tab leaves Manage for that tab.
+
+The global Analyze All dialog provides Prepare BPM research export, followed by an
+explicit Download link for physical Safari. JSON formatVersion 1 contains a compact
+measurements array with title, detectorVersion, detectedBpm, verifiedBpm and difference
+(detected minus verified; null if either is unknown). Each detector version has a
+separate row. Unanalyzed songs retain null detector fields. Only these fields are
+exported: no source audio, paths, IDs, links, playlist data or intermediate arrays.
+JSON preserves literal titles without spreadsheet formula interpretation. Export is
+requested and downloaded locally, never automatically saved to the repository.
+The Blob URL is released after closing/regenerating; there is no new library cache.
+
+Storage remains schema version 4 and V40 mathematics is unchanged from checkpoint
+20657c8. Reload/reopen tests retain detected and verified values independently,
+including multiple detector versions and reference comparison pairs. Browser storage
+eviction and cross-origin/device separation remain the same constraints.

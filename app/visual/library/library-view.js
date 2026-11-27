@@ -34,7 +34,6 @@ export function createLibraryPresentation(controls) {
     button.setAttribute('aria-label', 'Manage selected song'); row.append(button);
   }
   return {
-    showError(message) { footer.textContent = message; },
     showBrowsing(visible) { controls.content.hidden = !visible; },
     restoreScroll(value) { results.scrollTop = value; },
     showSelection(id, title) {

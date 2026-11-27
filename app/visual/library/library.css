@@ -1,10 +1,9 @@
-/* Existing Library hierarchy/dimensions are retained. Only functional states and
-   the transient import chooser need styling; no new library region is mounted. */
+/* Shared Library states, global actions and deck-local Manage presentation.
+   Performance geometry and the existing Library header/list layout are retained. */
 .library-content .search-result[role=button] { cursor:pointer; }
 .library-content .search-result[aria-pressed=true] { background:#243d50; box-shadow:inset 3px 0 var(--accent); }
 .library-content .song-sort-selector button { background:transparent; color:var(--accent); }
 .library-content .song-sort-selector button[aria-pressed=true] { background:var(--accent); color:#152330; }
-.library-content > div:last-child .library-import-button { display:inline; height:auto; min-height:0; padding:0; border:0; font:inherit; vertical-align:baseline; background:transparent; color:var(--accent); text-decoration:underline; }
 .library-content > div:last-child small { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .library-import-dialog { max-width:min(480px,90vw); max-height:85dvh; overflow:auto; background:#101823; color:#deedf5; border:1px solid #36516a; border-radius:6px; padding:16px; }
 .library-import-dialog::backdrop { background:#0009; }
@@ -21,7 +20,6 @@
 
 .library-view .section-selector, .library-view .song-sort-selector { touch-action:pan-y pinch-zoom; }
 
-.library-manage-dialog pre { max-width:100%; overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; }
 
 .global-library-controls { display:flex; gap:6px; flex-shrink:0; }
 .global-library-controls button { padding:6px 9px; background:#15303c; color:#d3dce9; border:1px solid #36586c; border-radius:4px; }
@@ -38,3 +36,7 @@
 .library-manage-body input[type=search], .library-manage-body input[type=number] { max-width:100%; box-sizing:border-box; }
 .library-manage-body pre { white-space:pre-wrap; overflow-wrap:anywhere; }
 .library-development-analysis { border-top:1px dashed #789; margin-top:16px; padding-top:8px; }
+
+@media (max-width:600px), (max-width:1000px) and (max-height:500px) and (pointer:coarse) {
+  .global-library-controls button { padding:7px 5px; font-size:10px; }
+}

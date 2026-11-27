@@ -95,6 +95,10 @@ reciprocal links and playlist memberships; Links follows the loaded deck song,
 including paused loads. Both existing strips support tap and continuous sliding.
 Individual/Analyze All use versioned original V40 analysis, sequential progress,
 cancellation and per-song failures. Verified BPM is separate and never overwritten.
+Import and Analyze All are global controls near themes; header direct loaders are
+removed. Manage appears on selected song rows and opens inside that deck's Library,
+with its own fixed Back and preserved browsing context. Development BPM controls
+remain separately labeled. Explicit research export includes only compact metadata.
 No multi-selection, Link All or bulk membership assignment is implemented. See [Library contract](specs/library.md).
 
 ## 8. Controls and Settings

@@ -84,6 +84,25 @@ document.querySelector('#run').onclick = async () => {
     assert((await storage.listAnalysisResults()).filter(r => r.songId === song.id).length === 2 && (await storage.getSong(song.id)).verifiedBpm === 121.25, 'Result persistence lost');
     assert((await storage.listAnalysisResults()).every(r => !('frequencyEnergy' in r) && !('channels' in r)), 'Large intermediates persisted');
     pass('restart persistence for detector versions/manual BPM, compact results only');
+    const restored = createLibraryManagement(Promise.resolve(storage));
+    const pairs = [[77,115],[109,110],[111,112],[115,110]];
+    for (let index=0;index<pairs.length;index++) {
+      const id = (100+index).toString(16).padStart(64,'0');
+      await storage.addSong({id,title:'Reference fixture ' + index,verifiedBpm:pairs[index][1]}, new Blob(['fixture']));
+      await restored.saveAnalysisResult({songId:id,detectorId:V40_DETECTOR_ID,bpm:pairs[index][0]});
+    }
+    const exported = await restored.exportBpmResearch();
+    assert(exported.formatVersion === 1 && exported.measurements.every(row => Object.keys(row).length === 5), 'Export field allowlist');
+    assert(exported.measurements.filter(row => row.title === song.title).length === 2, 'Export merged detector versions');
+    for (let index=0;index<pairs.length;index++) {
+      const row = exported.measurements.find(row => row.title === 'Reference fixture ' + index);
+      assert(row.detectedBpm === pairs[index][0] && row.verifiedBpm === pairs[index][1] && row.difference === pairs[index][0]-pairs[index][1], 'Reference difference wrong');
+    }
+    storage.close(); storage = await openLibraryStorage(name);
+    const afterUpdate = await createLibraryManagement(Promise.resolve(storage)).exportBpmResearch();
+    assert(JSON.stringify(afterUpdate) === JSON.stringify(exported), 'Application reopening changed research values');
+    assert(!JSON.stringify(exported).includes('relativePath') && !JSON.stringify(exported).includes('sources'), 'Export leaked source data');
+    pass('compact versioned JSON export, independent detector rows, reference differences and reopened-application persistence');
     output.dataset.result = 'pass';
   } catch(error) { output.textContent += 'FAIL ' + error.stack; output.dataset.result = 'fail'; }
   finally { if (deck) await ejectAudio(deck.audio); if (url) URL.revokeObjectURL(url); storage?.close(); indexedDB.deleteDatabase(name); }

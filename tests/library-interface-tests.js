@@ -169,6 +169,11 @@ document.querySelector('#run').onclick = async () => {
     await until(() => bulk.textContent.includes('cancelled') && ![...bulk.querySelectorAll('button')].find(b => b.textContent === 'Analyze entire library').disabled, 'Bulk cancel did not settle');
     [...bulk.querySelectorAll('button')].find(b => b.textContent === 'Analyze entire library').click();
     await until(() => bulk.textContent.includes('3/3 processed'), 'Bulk analysis did not finish');
+    [...bulk.querySelectorAll('button')].find(b => b.textContent === 'Prepare BPM research export').click();
+    await until(() => bulk.querySelector('a[download]') && !bulk.querySelector('a[download]').hidden, 'Research download link missing');
+    const exported = await (await win.fetch(bulk.querySelector('a[download]').href)).json();
+    const exportedAlpha = exported.measurements.find(row => row.title === 'Alpha');
+    assert(exportedAlpha.detectedBpm === 120 && exportedAlpha.verifiedBpm === 121.25 && exportedAlpha.difference === -1.25 && Object.keys(exportedAlpha).length === 5, 'UI export included wrong data');
     [...bulk.querySelectorAll('button')].find(b => b.textContent === 'Close').click();
     assert(!players[0].paused && players[0].src === playingSource, 'UI analysis interrupted playback');
     pass('individual and bulk analysis controls, cancellation, persistent comparison and verified BPM protection during playback');
@@ -220,6 +225,8 @@ document.querySelector('#run').onclick = async () => {
     await load(); open(0); await rows(0, 3);
     assert([...library(0).querySelectorAll('[data-song-id]')].some(row => row.textContent.includes('120 BPM') && row.textContent.includes('C minor')),
       'Reload lost persistent collection or supplied metadata');
+    const restoredAlpha = [...library(0).querySelectorAll('.search-result')].find(row => row.textContent.includes('Alpha'));
+    assert(restoredAlpha.textContent.includes('121.25 BPM verified') && restoredAlpha.textContent.includes('V40 120'), 'Reload lost detected or verified BPM');
     assert(players.every(player => player.readyState === 0), 'Library restoration loaded a deck');
     pass('application reload restores songs and supplied BPM/key without loading or recreating performance state');
     for (let i=0;i<50;i++) {

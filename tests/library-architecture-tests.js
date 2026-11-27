@@ -9,7 +9,7 @@ export async function checkLibraryArchitecture() {
       throw Error('Behavior or Audio leaked into Visual: ' + name);
   }
   const host = await source('app/visual/mixer/application.js');
-  if (/async function sendLibrarySong|musicLibrary\.getSource\(|musicLibrary\.getSong\(/.test(host)) throw Error('Library deck coordination leaked into Visual host');
+  if (/async function sendLibrarySong|audio-loaders|musicLibrary\.getSource\(|musicLibrary\.getSong\(/.test(host)) throw Error('Library deck coordination leaked into Visual host');
   for (const name of ['v40-bpm', 'library-audio-analysis', 'library-analysis-worker']) {
     const text = await source('app/audio/analysis/' + name + '.js');
     if (/from ['"].*(behavior|visual)/.test(text)) throw Error('Audio analysis imports UI/Behavior: ' + name);

@@ -8,9 +8,13 @@ export function createLibraryAnalysisPresentation() {
   const failures = document.createElement('ul');
   const start = document.createElement('button'), cancel = document.createElement('button'), close = document.createElement('button');
   cancel.textContent = 'Cancel analysis'; close.textContent = 'Close';
-  dialog.append(title, note, progress, failures, start, cancel, close); document.body.append(dialog);
+  const exportButton = document.createElement('button'); exportButton.textContent = 'Prepare BPM research export';
+  const exportLink = document.createElement('a'); exportLink.textContent = 'Download BPM research (.json)'; exportLink.hidden = true;
+  dialog.append(title, note, progress, failures, start, cancel, close, exportButton, exportLink); document.body.append(dialog);
   return {
-    dialog, start, cancel, close,
+    dialog, start, cancel, close, exportButton,
+    showExport(url) { exportLink.href = url; exportLink.download = 'TuneTox-BPM-research.json'; exportLink.hidden = false; },
+    clearExport() { exportLink.hidden = true; exportLink.removeAttribute('href'); },
     showError(message) { progress.textContent = message; },
     render(job, individual) {
       start.textContent = individual ? 'Analyze selected song' : 'Analyze entire library';

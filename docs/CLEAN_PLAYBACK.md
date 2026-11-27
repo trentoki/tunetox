@@ -489,3 +489,14 @@ Playback, waveform analysis/rendering, vendored DSP and iPhone implementation fi
 remain unchanged from 7045e4e; the Behavior coordinator only exposes its existing
 Queue action for library destinations. Physical Safari listening/storage evaluation
 remains necessary. Both existing local HTTP and HTTPS previews respond successfully.
+
+
+### Approved Library performance refinements
+
+Global Import/Analyze All replace obsolete header loaders. Selected-row Manage is
+nonblocking and deck-local, with fixed Back and preserved browsing context. Playing
+Queue assignments now replace the prepared slot through existing Behavior. The
+scrolling waveform displays source-anchored cue numbers from the same cue state
+as the overview. Original V40 analysis and schema-v4 storage are unchanged; compact
+metadata-only research export is explicitly prepared/downloaded from Analyze All.
+See [increment tests and file ownership audit](LIBRARY-PERFORMANCE-REFINEMENTS.md).

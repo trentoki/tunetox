@@ -21,8 +21,11 @@ export function createScrollingCueMarkers(surface) {
       line.style.left = percent + '%';
       // Labels may move inward or apart at edges/coincident cues. The vertical
       // line never shifts away from its exact source-song position.
-      const count = positions.filter(value => value === position).length;
-      const ordinal = positions.slice(0, index).filter(value => value === position).length;
+      let count = 0, ordinal = 0;
+      for (let cue = 0; cue < positions.length; cue++) {
+        if (positions[cue] !== position) continue;
+        count++; if (cue < index) ordinal++;
+      }
       const x = percent / 100 * width;
       line.firstChild.style.left = (Math.max(1 - x, Math.min(-count * 6, width - x - count * 12 - 1)) + ordinal * 12) + 'px';
     });

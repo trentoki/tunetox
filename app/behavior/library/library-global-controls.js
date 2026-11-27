@@ -4,7 +4,7 @@ import { createLibraryAnalysisControls } from './library-analysis-controls.js';
 // One global entry point for the shared import and analysis jobs. No deck action.
 export function connectGlobalLibraryControls(host, library, queue, report) {
   const view = createLibraryImportPresentation(host);
-  const analysis = createLibraryAnalysisControls(queue, report);
+  const analysis = createLibraryAnalysisControls(queue, report, library);
   const fail = error => { view.showError(error.message); report(error.message); };
   view.analyzeButton.onclick = () => analysis.open();
   view.importButton.onclick = () => { view.dialog.showModal(); view.showImportProgress(library.importJob); };

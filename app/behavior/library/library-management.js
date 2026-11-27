@@ -40,6 +40,28 @@ export function createLibraryManagement(storage = openLibraryStorage()) {
   return {
     ready: storage,
     events, importJob: job, listSongs,
+    async exportBpmResearch() {
+      const db = await storage;
+      const [songs, results] = await Promise.all([db.listSongs(), db.listAnalysisResults()]);
+      const measurements = [], bySong = new Map();
+      for (const result of results) {
+        if (!bySong.has(result.songId)) bySong.set(result.songId, []);
+        bySong.get(result.songId).push(result);
+      }
+      for (const song of songs) {
+        const detected = bySong.get(song.id) || [];
+        for (const result of detected.length ? detected : [null]) {
+          const detectedBpm = result?.bpm ?? null, verifiedBpm = song.verifiedBpm ?? null;
+          measurements.push({ title: song.title, detectorVersion: result?.detectorId ?? null,
+            detectedBpm, verifiedBpm,
+            difference: detectedBpm !== null && verifiedBpm !== null ? Number((detectedBpm - verifiedBpm).toFixed(6)) : null });
+        }
+      }
+      // Explicit field allowlist: no source Blob, paths, IDs, links, playlists or
+      // regenerable measurements. JSON preserves exact titles without spreadsheet
+      // formula interpretation. Each detector version remains a separate row.
+      return { formatVersion: 1, measurements };
+    },
     async getAnalysisResults(songId) {
       const results = await (await storage).listAnalysisResults();
       return songId ? results.filter(result => result.songId === songId) : results;

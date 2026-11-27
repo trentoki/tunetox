@@ -4,7 +4,7 @@ export function createLibraryImportPresentation(host) {
   const group = make('div', undefined, 'global-library-controls');
   const importButton = make('button', 'Import'), analyzeButton = make('button', 'Analyze All');
   importButton.className = 'global-library-import'; analyzeButton.className = 'global-library-analyze';
-  group.append(importButton, analyzeButton); host.append(group);
+  group.append(importButton, analyzeButton); host.insertBefore(group, host.querySelector('.theme-controls'));
   const dialog = make('dialog', undefined, 'library-import-dialog');
   dialog.append(make('h2', 'Import into shared library'), make('p', 'Adds files without loading or interrupting any deck. Your originals stay unchanged.'));
   const inputs = [false, true].map(folder => {
