@@ -3,7 +3,7 @@
 // the user: importing, selection, scheduling or deck coordination inside Visual.
 export async function checkLibraryArchitecture() {
   const source = async path => (await (await fetch('../' + path)).text());
-  for (const name of ['library-view', 'song-management-view', 'library-analysis-view']) {
+  for (const name of ['library-view', 'library-import-view', 'song-management-view', 'library-analysis-view']) {
     const text = await source('app/visual/library/' + name + '.js');
     if (/addEventListener\(|\.on(click|input|submit|change)\s*=|indexedDB|new Worker|new AudioContext|sendToDeck\(|queueSong\(/.test(text))
       throw Error('Behavior or Audio leaked into Visual: ' + name);

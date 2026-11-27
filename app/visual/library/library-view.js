@@ -25,46 +25,21 @@ export function createLibraryPresentation(controls) {
   });
   search.disabled = false; search.setAttribute('aria-label', 'Search library songs, playlists and artists');
   const footer = selected.querySelector('small');
-  const importButton = make('button', 'Import', 'library-import-button'); importButton.type = 'button';
-  const manageButton = make('button', 'Manage', 'library-import-button'); manageButton.disabled = true;
-  const analyzeButton = make('button', 'Analyze All', 'library-import-button');
-  const selectionText = document.createTextNode(' · Select a song, then choose 1–4');
-  footer.replaceChildren(importButton, document.createTextNode(' · '), manageButton, document.createTextNode(' · '), analyzeButton, selectionText);
-  const dialog = make('dialog', undefined, 'library-import-dialog');
-  dialog.append(make('h2', 'Import into shared library'), make('p', 'Adds files without loading or interrupting any deck. Your originals stay unchanged.'));
-  const inputs = [false, true].map(folder => {
-    const label = make('label', folder ? 'Import Playlist' : 'Import Songs');
-    const input = make('input'); input.type = 'file'; input.multiple = true;
-    input.setAttribute('aria-label', folder ? 'Import music folder' : 'Import multiple audio files');
-    if (folder) {
-      if ('webkitdirectory' in input) input.webkitdirectory = true;
-      else { input.disabled = true; input.dataset.unsupported = 'true'; label.title = 'Use multiple files in this browser.'; }
-    }
-    label.append(input); dialog.append(label); return input;
-  });
-  const progress = make('p'); progress.setAttribute('role', 'status');
-  const failures = make('ul'), cancel = make('button', 'Cancel import'), close = make('button', 'Close');
-  const storage = make('small', 'Stored on this device for this address/browser. Keep originals; browser data may be evicted.');
-  const persist = make('button', 'Request persistent storage');
-  dialog.append(progress, failures, cancel, close, storage, persist); document.body.append(dialog);
-  let displayedFailures, failureCount = 0;
+  const selectionText = document.createTextNode('Select a song, then choose 1–4');
+  footer.replaceChildren(selectionText);
+  function showRowManagement(row, selectedId) {
+    const previous = row.querySelector('.song-manage-button'); previous?.remove();
+    if (row.dataset.songId !== selectedId) return;
+    const button = make('button', 'Manage', 'song-manage-button'); button.type = 'button'; button.draggable = false;
+    button.setAttribute('aria-label', 'Manage selected song'); row.append(button);
+  }
   return {
-    importButton, manageButton, analyzeButton, dialog, inputs, cancel, close, persist,
-    showStorage(message) { storage.textContent = message; },
-    showImportProgress(job) {
-      if (!dialog.open) return;
-      progress.textContent = job.running ? `Import ${job.processed}/${job.total}: ${job.current}${job.cancelRequested ? ' · stopping…' : ''}`
-        : `${job.added} imported · ${job.duplicates} duplicates · ${job.skipped} skipped · ${job.failures.length} failed${job.cancelRequested ? ' · cancelled' : ''}`;
-      inputs.forEach(input => { input.disabled = job.running || input.dataset.unsupported === 'true'; });
-      cancel.disabled = !job.running || job.cancelRequested;
-      if (displayedFailures !== job.failures) { failures.replaceChildren(); failureCount = 0; displayedFailures = job.failures; }
-      for (; failureCount < job.failures.length; failureCount++) failures.append(make('li', job.failures[failureCount].filename + ': ' + job.failures[failureCount].message));
-    },
-    showError(message) { progress.textContent = message; },
+    showError(message) { footer.textContent = message; },
+    showBrowsing(visible) { controls.content.hidden = !visible; },
+    restoreScroll(value) { results.scrollTop = value; },
     showSelection(id, title) {
-      manageButton.disabled = !id;
       selectionText.textContent = ' · ' + title; footer.title = title;
-      results.querySelectorAll('[data-song-id]').forEach(row => row.setAttribute('aria-pressed', String(row.dataset.songId === id)));
+      results.querySelectorAll('[data-song-id]').forEach(row => { row.setAttribute('aria-pressed', String(row.dataset.songId === id)); showRowManagement(row, id); });
       destinations.querySelectorAll('button').forEach(button => { button.disabled = !id; });
     },
     render({ rows, selectedId, content, sortKey, descending, more }) {
@@ -79,6 +54,7 @@ export function createLibraryPresentation(controls) {
         row.draggable = true; row.tabIndex = 0; row.setAttribute('role', 'button');
         row.setAttribute('aria-pressed', String(item.id === selectedId));
         row.append(make('strong', item.title, 'song-title'), make('span', `${item.artist || 'Unknown artist'} · ${bpmLabel(item)} · ${item.key || 'Key unknown'}`, 'artist'));
+        showRowManagement(row, selectedId);
         if (item.depth) row.style.paddingLeft = (8 + item.depth * 12) + 'px';
         return row;
       }));

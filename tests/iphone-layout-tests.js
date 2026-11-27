@@ -1,3 +1,4 @@
+import { libraryTestStorageScript, createLibraryLoadingFixtures } from './library-loading-fixture.js';
 import { assertScrollingAligned } from './scrolling-waveform-tests.js';
 const frame = document.querySelector('#application');
 const results = document.querySelector('#results');
@@ -29,7 +30,8 @@ run.addEventListener('click', async () => {
   let win, players = [];
   try {
     const source = await (await fetch('../tunetox.html')).text();
-    const observer = '<base href="' + new URL('../', location.href).href + '">' +
+    const testDatabase = 'tunetox-transport-test-' + crypto.randomUUID();
+    const observer = libraryTestStorageScript(testDatabase) + '<base href="' + new URL('../', location.href).href + '">' +
       '<script>window.__players=[];window.__contexts=[];window.__nodes=[];' +
       'const Target=EventTarget;window.EventTarget=class extends Target{constructor(){super();queueMicrotask(()=>{if("currentTime" in this)window.__players.push(this);});}};' +
       'const Context=AudioContext;window.AudioContext=class extends Context{constructor(...a){super(...a);window.__contexts.push(this);}};' +
@@ -45,8 +47,9 @@ run.addEventListener('click', async () => {
     const visible = () => decks.filter(deck => win.getComputedStyle(deck).display !== 'none');
     const input = (deck, selector) => decks[deck].querySelector(selector);
     const set = (deck, selector, value) => { const node = input(deck, selector); node.value = value; node.dispatchEvent(new win.Event('input', { bubbles: true })); };
+    const testInputs = createLibraryLoadingFixtures(win, doc);
     const load = async (deck, name) => {
-      const picker = doc.querySelectorAll('#audio-loaders input')[deck];
+      const picker = testInputs[deck];
       const transfer = new win.DataTransfer(); transfer.items.add(tone(win, name)); picker.files = transfer.files;
       picker.dispatchEvent(new win.Event('change', { bubbles: true }));
       await until(() => !picker.disabled && players[deck].readyState >= 2, 'Load did not finish');

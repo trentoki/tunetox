@@ -30,7 +30,7 @@ document.querySelector('#run').onclick = async () => {
       frame.srcdoc = source.replace('<head>', '<head>' + prefix);
       await new Promise(resolve => frame.addEventListener('load', resolve, { once: true }));
       win = frame.contentWindow; doc = frame.contentDocument;
-      await until(() => win.__players.length === 4 && doc.querySelectorAll('.library-import-dialog input[type=file]').length === 8, 'Application did not mount');
+      await until(() => win.__players.length === 4 && doc.querySelectorAll('.library-import-dialog input[type=file]').length === 2, 'Application did not mount');
       players = win.__players;
     }
     await load(); store = await openLibraryStorage(dbName);
@@ -40,7 +40,7 @@ document.querySelector('#run').onclick = async () => {
     function back(index) { deck(index).querySelector('.back-to-performance-button').click(); }
     async function rows(index, count) { await until(() => library(index).querySelectorAll('[data-song-id]').length === count, 'Library row count ' + index + '/' + count); }
     async function importFiles(files, folder = false) {
-      library(0).querySelector('.library-import-button').click();
+      doc.querySelector('.global-library-import').click();
       const dialog = doc.querySelector('dialog[open]');
       const input = dialog.querySelectorAll('input[type=file]')[folder ? 1 : 0], transfer = new win.DataTransfer();
       files.forEach(file => transfer.items.add(file)); input.files = transfer.files; input.dispatchEvent(new win.Event('change', { bubbles: true }));
@@ -50,6 +50,7 @@ document.querySelector('#run').onclick = async () => {
       [...dialog.querySelectorAll('button')].find(button => button.textContent === 'Close').click();
       return progress;
     }
+    assert(!doc.querySelector('#audio-loaders') && doc.querySelectorAll('.global-library-import').length === 1, 'Obsolete loaders or duplicate global Import');
     open(0); await rows(0, 0);
     const first = tone(win, 'Zed - Alpha.wav', 220), second = tone(win, 'Amy - Beta.wav', 330);
     const duplicate = new win.File([await first.arrayBuffer()], 'Renamed.wav', { type: 'audio/wav' });
@@ -85,6 +86,11 @@ document.querySelector('#run').onclick = async () => {
     library(1).querySelectorAll('.section-selector button')[1].click();
     await until(() => library(1).querySelectorAll('.library-playlist').length === 1, 'Independent playlist browsing');
     assert(!library(1).querySelector('[aria-expanded=true]'), 'Expansion leaked across decks');
+    getRow(0, 'Gamma').click(); getRow(0, 'Gamma').querySelector('.song-manage-button').click();
+    const nestedManage = library(0).querySelector('.library-manage-view');
+    nestedManage.querySelector('.library-manage-toolbar button').click();
+    await rows(0, 1);
+    assert(library(0).querySelectorAll('[aria-expanded=true]').length === 2 && getRow(0, 'Gamma').getAttribute('aria-pressed') === 'true', 'Manage return lost nested browsing');
     library(0).querySelectorAll('.section-selector button')[0].click();
     library(1).querySelectorAll('.section-selector button')[0].click(); await rows(0, 3); await rows(1, 3);
     pass('inline nested playlist expansion retains multiple open levels and independent per-deck browsing');
@@ -127,9 +133,14 @@ document.querySelector('#run').onclick = async () => {
     pass('continuous pointer sliding across organization/content controls; independent deck choices');
     pass('independent search/selection; Title/Artist/BPM/Key sorting; supplied values sort ahead of unknown values');
     getRow(0, 'Alpha').click();
-    [...library(0).querySelectorAll('.library-import-button')].find(b => b.textContent === 'Manage').click();
-    const manage = doc.querySelector('.library-manage-dialog[open]');
+    getRow(0, 'Alpha').querySelector('.song-manage-button').click();
+    const manage = library(0).querySelector('.library-manage-view:not([hidden])');
     await until(() => manage.querySelectorAll('[data-link-song-id]').length === 2, 'Manage songs missing');
+    assert(!doc.querySelector('dialog[open]') && !deck(1).inert && library(0).querySelector('.section-selector').getClientRects().length, 'Manage blocks other decks or hides Library navigation');
+    const toolbar = manage.querySelector('.library-manage-toolbar'), body = manage.querySelector('.library-manage-body');
+    body.scrollTop = 1000;
+    assert(toolbar.getBoundingClientRect().top >= manage.getBoundingClientRect().top, 'Manage Back scrolled away');
+    body.scrollTop = 0;
     const betaId = meta.find(s => s.title === 'Beta').id, alphaId = meta.find(s => s.title === 'Alpha').id;
     const link = manage.querySelector('[data-link-song-id="' + betaId + '"]'); link.click();
     await until(async () => (await store.listLinks()).length === 1, 'Link was not saved');
@@ -137,11 +148,8 @@ document.querySelector('#run').onclick = async () => {
     manage.querySelector('form').dispatchEvent(new win.Event('submit', {bubbles:true,cancelable:true}));
     await until(async () => (await store.getSong(alphaId)).verifiedBpm === 121.25, 'Manual BPM UI failed');
     [...manage.querySelectorAll('button')].find(b => b.textContent === 'Analyze BPM (V40)').click();
-    const analysis = doc.querySelector('.library-analysis-dialog[open]');
-    [...analysis.querySelectorAll('button')].find(b => b.textContent === 'Analyze selected song').click();
-    await until(() => analysis.textContent.includes('1/1 processed'), 'Individual analysis did not finish');
+    await until(() => manage.textContent.includes('1/1 processed'), 'Individual analysis did not finish');
     assert((await store.listAnalysisResults()).find(r => r.songId === alphaId).bpm === 120 && (await store.getSong(alphaId)).verifiedBpm === 121.25, 'Detected/manual comparison corrupted');
-    [...analysis.querySelectorAll('button')].find(b => b.textContent === 'Close').click();
     await until(() => manage.textContent.includes('Δ -1.25 BPM'), 'Detected/verified comparison missing');
     const folders = await store.listPlaylists();
     for (const folder of folders) {
@@ -153,8 +161,8 @@ document.querySelector('#run').onclick = async () => {
     manage.querySelector('[data-membership-id="' + folders[0].id + '"]').click();
     await until(async () => (await store.listMemberships()).filter(m => m.songId === alphaId).length === 1, 'Individual membership removal failed');
     assert((await store.listLinks()).length === 1, 'Membership altered links');
-    [...manage.querySelectorAll('button')].find(b => b.textContent === 'Close').click();
-    [...library(0).querySelectorAll('.library-import-button')].find(b => b.textContent === 'Analyze All').click();
+    [...manage.querySelectorAll('button')].find(b => b.textContent === 'Back to Library').click();
+    doc.querySelector('.global-library-analyze').click();
     const bulk = doc.querySelector('.library-analysis-dialog[open]');
     [...bulk.querySelectorAll('button')].find(b => b.textContent === 'Analyze entire library').click();
     [...bulk.querySelectorAll('button')].find(b => b.textContent === 'Cancel analysis').click();
@@ -204,6 +212,25 @@ document.querySelector('#run').onclick = async () => {
       'Reload lost persistent collection or supplied metadata');
     assert(players.every(player => player.readyState === 0), 'Library restoration loaded a deck');
     pass('application reload restores songs and supplied BPM/key without loading or recreating performance state');
+    for (let i=0;i<50;i++) {
+      const id = (i + 100).toString(16).padStart(64, '0');
+      await store.addSong({id, title:'Analysis fixture ' + i, filename:'fixture.wav', artist:'Fixture', verifiedBpm:null, key:null}, new win.Blob(['fixture']));
+    }
+    const restoredSearch = library(0).querySelector('.search'); restoredSearch.value = 'a'; restoredSearch.dispatchEvent(new win.Event('input'));
+    await rows(0, 53); getRow(0, 'Alpha').click();
+    const list = library(0).querySelector('.search-results'); list.scrollTop = 140; const scrollBefore = list.scrollTop;
+    getRow(0, 'Alpha').querySelector('.song-manage-button').click();
+    const localManage = library(0).querySelector('.library-manage-view');
+    await until(() => localManage.querySelectorAll('[data-link-song-id]').length === 52, 'Large Manage list missing');
+    localManage.querySelector('.library-manage-body').scrollTop = 100000;
+    const backRect = localManage.querySelector('.library-manage-toolbar button').getBoundingClientRect();
+    assert(backRect.top >= localManage.getBoundingClientRect().top && backRect.bottom < localManage.getBoundingClientRect().bottom, 'Manage Back not permanently visible');
+    open(1); await rows(1, 53); library(1).querySelectorAll('.song-sort-selector button')[3].click();
+    assert(!localManage.hidden && !doc.querySelector('dialog[open]'), 'Peer interaction disturbed local Manage');
+    localManage.querySelector('.library-manage-toolbar button').click();
+    await until(() => list.scrollTop === scrollBefore && !library(0).querySelector('.library-content').hidden, 'Manage did not restore list scroll');
+    assert(restoredSearch.value === 'a' && getRow(0, 'Alpha').getAttribute('aria-pressed') === 'true', 'Manage lost search or selection');
+    pass('deck-local nonblocking Manage, fixed Back, independent peers and restored search/selection/scroll/nested expansion');
     output.dataset.result = 'pass';
   } catch (error) { output.textContent += 'FAIL ' + error.stack; output.dataset.result = 'fail'; }
   finally {

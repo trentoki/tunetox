@@ -370,7 +370,7 @@ export function createPlaybackDeck(number, deck, actions) {
   library.append(libraryHeader, libraryContent);
   node.append(performance, library);
   const libraryControls = actions.library ? connectLibraryControls(actions.library,
-    { analysis: actions.libraryAnalysis, tabs: sectionSelector, getLoadedSongId: () => deck.song?.librarySongId || null, sort, search, results, selected, destinations, visible: () => workspace === 'library-view' },
+    { host: library, content: libraryContent, analysis: actions.libraryAnalysis, tabs: sectionSelector, getLoadedSongId: () => deck.song?.librarySongId || null, sort, search, results, selected, destinations, visible: () => workspace === 'library-view' },
     actions.sendLibrarySong, actions.announce) : null;
   if (actions.library) {
     connectSongDrop(overview, id => actions.sendLibrarySong(id, number - 1, 'deck'));

@@ -1,3 +1,4 @@
+import { connectGlobalLibraryControls } from '../../behavior/library/library-global-controls.js';
 import { createLibraryAnalysisQueue } from '../../behavior/library/library-analysis-queue.js';
 import { createLibraryDeckLoading } from '../../behavior/library/library-deck-loading.js';
 import { createLibraryManagement } from '../../behavior/library/library-management.js';
@@ -12,7 +13,6 @@ import { installDeckSelector } from "../iphone/deck-selector.js";
 // Each component receives its existing Clean Deck state and deck-bound actions.
 // UI workspace changes never replace a deck or touch its audio player.
 const container = document.querySelector(".mixer-decks");
-const loaders = document.getElementById("audio-loaders");
 const status = document.getElementById("playback-status");
 installTouchGuards(document.querySelector(".app"));
 const decks = Array.from({ length: 4 }, () => buildDeck());
@@ -72,20 +72,10 @@ decks.forEach((deck, index) => {
   views.push(view);
   container.append(view.node);
 
-  const label = document.createElement("label");
-  label.append("Load D" + number);
-  const input = document.createElement("input");
-  input.type = "file";
-  // Do not filter the Files picker: iPadOS may gray out valid audio files for audio/*.
-  // Decode validation still occurs in the audio loading layer.
-  input.setAttribute("aria-label", "Load audio for Deck " + number);
-  label.append(input);
-  loaders.append(label);
   const playback = createPlaybackCoordinator(deck, {
     busyChanged(busy) {
       // Preserve the existing UI update order while Behavior owns the guard.
       if (busy) view.setBusy(true);
-      input.disabled = busy;
       if (!busy) view.setBusy(false);
     },
     completed(result) {
@@ -113,15 +103,6 @@ decks.forEach((deck, index) => {
 
   coordinators.push(playback);
 
-  input.addEventListener("change", async () => {
-    const file = input.files[0];
-    if (!file || playback.isPending()) return;
-    const url = audioFileURLs.create(file);
-    // Behavior owns loading/queue decisions, including occupied-slot protection.
-    await playback.sendToDeck({ name: file.name, url });
-    input.value = "";
-  });
-
   deck.audio.addEventListener("timeupdate", () => view.updatePlaybackTime());
   for (const event of ["loadedmetadata", "durationchange", "emptied"]) {
     deck.audio.addEventListener(event, () => view.render());
@@ -130,3 +111,5 @@ decks.forEach((deck, index) => {
 renderAll();
 installThemeControls(document.querySelector(".mixer-header"), container);
 installDeckSelector(container);
+
+connectGlobalLibraryControls(document.querySelector(".mixer-header"), musicLibrary, libraryAnalysis, announce);

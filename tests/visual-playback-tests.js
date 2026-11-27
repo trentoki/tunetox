@@ -1,3 +1,4 @@
+import { libraryTestStorageScript, createLibraryLoadingFixtures } from './library-loading-fixture.js';
 import { checkFrequencyEnergy } from './frequency-energy-tests.js';
 import { runTouchGuardChecks } from "./touch-guard-tests.js";
 import { checkScrollingWaveforms, assertScrollingAligned } from './scrolling-waveform-tests.js';
@@ -452,7 +453,7 @@ async function checkCuePads(doc, win, players) {
     assert(cards.every(card=>win.getComputedStyle(card.querySelector('.cue-markers')).pointerEvents==='none'&&
       win.getComputedStyle(marker(card,1)).pointerEvents==='none'),'Cue markers intercept seeking');
   }
-  const input=doc.querySelectorAll('#audio-loaders input')[3], transfer=new win.DataTransfer();
+  const input=win.__testLoaders[3], transfer=new win.DataTransfer();
   transfer.items.add(tone(win,'Cue replacement.wav',220));input.files=transfer.files;input.dispatchEvent(new win.Event('change',{bubbles:true}));
   await until(()=>idle(cards[3])&&cards[3].querySelector('.song-title').textContent==='Cue replacement.wav','Cue replacement failed');
   assert(!marker(cards[3],1)&&cards.slice(0,3).every(card=>marker(card,1)),'Song replacement reset wrong deck cues');
@@ -501,7 +502,8 @@ run.addEventListener("click", async () => {
     const source = await (await fetch("../tunetox.html")).text();
     // Observe real players and gain nodes only in the isolated test frame.
     // No production diagnostics interface or alternate audio implementation.
-    const observer = '<base href="' + new URL("../", location.href).href + '">' +
+    const testDatabase = 'tunetox-transport-test-' + crypto.randomUUID();
+    const observer = libraryTestStorageScript(testDatabase) + '<base href="' + new URL("../", location.href).href + '">' +
       '<script>window.__players=[];window.__contexts=[];window.__gains=[];window.__sources=[];' +
       'window.__frameCount=0;const nativeFrame=requestAnimationFrame;window.requestAnimationFrame=callback=>nativeFrame(time=>{window.__frameCount++;callback(time);});' +
       'const NativeTarget=window.EventTarget;window.EventTarget=class extends NativeTarget{constructor(){super();queueMicrotask(()=>{if("currentTime" in this)window.__players.push(this);});}};' +
@@ -539,12 +541,14 @@ run.addEventListener("click", async () => {
     pass("touch fallback: " + runTouchGuardChecks(doc));
     assert([...doc.querySelectorAll(".play-pause-button")].every(b => b.disabled), "Empty Play must be disabled");
     pass("empty decks cannot play");
-    const inputs = [...doc.querySelectorAll('input[type="file"]')];
+    const inputs = createLibraryLoadingFixtures(win, doc);
+    win.__testLoaders = inputs;
     const load = (index, name) => {
       const transfer = new win.DataTransfer();
       transfer.items.add(tone(win, name, index === 3 ? 220 : 440, index === 1 ? 2 : 1));
       inputs[index].files = transfer.files;
       inputs[index].dispatchEvent(new win.Event("change", { bubbles: true }));
+      return inputs[index].fixtureCompletion;
     };
     const deck = number => doc.querySelector('.deck[data-deck="' + number + '"]');
     const play = number => deck(number).querySelector(".play-pause-button");
@@ -795,8 +799,8 @@ run.addEventListener("click", async () => {
     pass("Pause retains position; resume and deck independence");
 
     const priorSource = players[0].src;
-    load(0, "First queue.wav");
-    load(0, "Replacement queue.wav");
+    await load(0, "First queue.wav");
+    await load(0, "Replacement queue.wav");
     assert(players[0].src === priorSource && !players[0].paused, "Queuing interrupted playback");
     assert(deck(1).querySelector(".queue-button").title === "First queue.wav", "Occupied queue was overwritten");
     assert(doc.querySelector('#playback-status').textContent.includes('queue occupied'), 'Occupied queue feedback missing');
