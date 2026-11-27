@@ -199,7 +199,7 @@ accent faces and pressed styling remain distinct. Shift is the same button,
 provisionally top-left above pad 1, with the rest of the loop strip hidden only here.
 Directional nudges are bottom-left/back and bottom-right/forward in every configuration.
 
-Vertical stems retain Transients/Tune left and Flow/Voice right; the middle gap is
+Vertical stems retain Beat/Tune left and Bass/Voice right; the middle gap is
 smaller and bottom nudge space reserved. Explicit WebKit thumb centering remains.
 Controls displays Filter, High EQ, Mid EQ and Low EQ from top to bottom on the left,
 evenly above Back nudge. Right shows the first two existing effect slots (Echo/Reverb)
@@ -227,3 +227,8 @@ do not participate. Source-time scaling, analysis,
 owner-only seek and pointer capture remain unchanged. Switching themes restores
 original layouts/section choices; switching configurations never rebuilds a canvas,
 control or Audio node. Theme choice persists; configurations are session-local.
+
+
+### Final D2 physical-test corrections
+
+Waveform cue pads retain their taller four-row layout but return to dark translucent faces, with accent-assigned and pressed states. Cue pads and bottom nudges share a 24% side width and aligned outer edges. The central seek region remains protected but has no visible boundary lines. All active layouts display stem names Beat, Bass, Tune and Voice; identifiers beat, bass, tune and voice are unchanged. Portrait orientation choices, stem alignment and Audio remain unchanged.

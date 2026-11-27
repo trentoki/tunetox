@@ -105,8 +105,8 @@ function createControls() {
 function createStems(actions) {
   const node = element("div", "stems-view");
   const stems = element("div", "stem-faders");
-  // Approved attribute identities; visible historical labels remain unchanged.
-  for (const [name, stem] of [["Transients", "beat"], ["Flow", "bass"], ["Tune", "tune"], ["Voice", "voice"]]) {
+  // Human-facing stem names share the existing permanent attribute identities.
+  for (const [name, stem] of [["Beat", "beat"], ["Bass", "bass"], ["Tune", "tune"], ["Voice", "voice"]]) {
     const fader = createRangeField("", name + " 100%", 100);
     fader.querySelector("span").replaceChildren(document.createTextNode(name), element("output", "", "100%"));
     const input = fader.querySelector("input");

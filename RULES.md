@@ -219,3 +219,8 @@ and distinct active states. Bottom-left/back and bottom-right/forward nudges sta
 the same places across configurations. Portrait retains the existing four-deck 2×2
 layout, with compact side-control captions where needed. Playhead paint is aligned
 to device pixels without changing logical playback/seek/cue coordinates.
+
+
+### Final D2 physical-test corrections
+
+Waveform cue pads retain their taller four-row layout but return to dark translucent faces, with accent-assigned and pressed states. Cue pads and bottom nudges share a 24% side width and aligned outer edges. The central seek region remains protected but has no visible boundary lines. All active layouts display stem names Beat, Bass, Tune and Voice; identifiers beat, bass, tune and voice are unchanged. Portrait orientation choices, stem alignment and Audio remain unchanged.

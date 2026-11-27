@@ -232,7 +232,11 @@ document.querySelector('#run').onclick = async () => {
               const pads=[...d.querySelectorAll('.cue-pad')].map(n=>n.getBoundingClientRect());
               assert(pads.every(p=>p.height>44),'Pads not larger than original');
               assert(pads.slice(0,4).every((p,j)=>!j||p.top>pads[j-1].top),'Cue numbering order');
-              assert(win.getComputedStyle(d.querySelectorAll('.cue-pad')[6]).backgroundColor==='rgb(228, 231, 221)','Light unassigned pad face');
+              assert(win.getComputedStyle(d.querySelectorAll('.cue-pad')[6]).backgroundColor==='rgba(8, 20, 29, 0.333)','Dark translucent unassigned pad face');
+              const nudges=[...d.querySelectorAll('.nudge-controls button')].map(n=>n.getBoundingClientRect());
+              pads.forEach((p,j)=>{const n=nudges[j<4?0:1];assert(Math.abs(p.width-n.width)<.1 && Math.abs(p.left-n.left)<.1,'Cue/nudge edges aligned');});
+              assert(win.getComputedStyle(wave,'::before').content==='none','Invisible seek boundaries');
+              assert([...d.querySelectorAll('.stem-faders span')].map(n=>n.firstChild.textContent).join(',')==='Beat,Bass,Tune,Voice','Visible stem names');
             }
             const position=players[i].currentTime;
             pointer(wave,'pointerdown',.5,mode==='vertical');pointer(wave,'pointermove',.4,mode==='vertical');pointer(wave,'pointerup',.4,mode==='vertical');
@@ -247,7 +251,7 @@ document.querySelector('#run').onclick = async () => {
     }
     await theme('waveform');assert(doc.documentElement.dataset.waveformOrientation==='vertical','Waveform portrait preference not restored');
     await viewport(1114,768);
-    pass('larger light cue rows, bottom nudges, exact control order/two slots, four-deck portrait H/V geometry and seeking');
+    pass('larger dark cue rows, bottom nudges, exact control order/two slots, four-deck portrait H/V geometry and seeking');
     pass('Futuristic wheel preview, clean bounded playhead/cues, Shift-only row, side Controls and stationary all-configuration seeking');
     decks.forEach(d=>d.querySelector('.play-pause-button').click());await until(()=>players.every(p=>!p.paused),'Four-deck playback');
     doc.querySelector('.global-nudge button').dispatchEvent(new win.KeyboardEvent('keydown',{key:'End',bubbles:true}));

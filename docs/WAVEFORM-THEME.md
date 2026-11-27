@@ -275,3 +275,11 @@ layouts remain provisional. No new listening or end-to-end latency claim is made
 existing pitch/stem/EQ/filter/effect implementation limitations remain unchanged.
 No personal library data, audio files, exports, certificates or temporary proof
 scripts/screenshots are committed. Stop for physical testing; no push.
+
+
+### Final D2 physical-test corrections
+
+Waveform cue pads retain their taller four-row layout but return to dark translucent faces, with accent-assigned and pressed states. Cue pads and bottom nudges share a 24% side width and aligned outer edges. The central seek region remains protected but has no visible boundary lines. All active layouts display stem names Beat, Bass, Tune and Voice; identifiers beat, bass, tune and voice are unchanged. Portrait orientation choices, stem alignment and Audio remain unchanged.
+
+
+Final D2 verification: all twelve existing regression suites passed (Waveform theme, comparison, zoom, orientation, iPhone layout, nudging, Library interface/storage/analysis, Queue, visual playback and Glass Hardware). The updated theme suite verifies dark cue faces, precise pad/nudge width and edge equality, absent boundary pseudo-element, unchanged tall pads and displayed stem captions. Populated Chromium native-pointer checks passed landscape Vertical and portrait Horizontal/Vertical across Cues, Stems and Controls, including seeking, bottom nudges and single-band playhead paint. A populated portrait Cues screenshot was visually inspected. Editor diagnostics and whitespace checks passed. Audio and Behavior production files are unchanged; no listening or physical Safari verification is claimed. Stop for physical approval; do not push. Existing untracked BPM research remains excluded.
