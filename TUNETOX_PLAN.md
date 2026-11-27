@@ -478,3 +478,12 @@ Scrolling waveforms display the same source-anchored cues as overviews. V40 math
 schema-v4 persistence remain unchanged. Metadata-only research JSON is explicitly
 prepared/downloaded from global Analyze All; no personal library export is committed.
 See [increment verification and ownership review](docs/LIBRARY-PERFORMANCE-REFINEMENTS.md).
+
+### Manual nudge and Manage refinement
+
+Pitch-preserving temporary nudge and Tempo double-reset use the existing transport.
+Waveform seeking, Tempo/roller and nudge gestures are owned in Behavior. Manage now
+has collapsible All Songs and independently expandable playlist rows with separate
+membership and canonical song-link checkboxes. See
+[ownership and verification report](docs/NUDGE-MANAGE-REFINEMENTS.md) and
+[nudge specification](specs/nudging.md). Physical Safari input/listening is still due.

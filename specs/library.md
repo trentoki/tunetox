@@ -154,3 +154,13 @@ Storage remains schema version 4 and V40 mathematics is unchanged from checkpoin
 20657c8. Reload/reopen tests retain detected and verified values independently,
 including multiple detector versions and reference comparison pairs. Browser storage
 eviction and cross-origin/device separation remain the same constraints.
+
+### Manage disclosure refinement
+
+All Songs starts collapsed; nonempty link search opens it to reveal matching songs.
+Playlists have independent membership checkboxes and inline disclosure buttons.
+Multiple nested branches may remain open. Expanded playlist songs use the same
+canonical song-link relationship as All Songs; changing any occurrence refreshes
+all occurrences. Membership and disclosure never change one another. Expansion is
+local to each deck's Manage, not persisted song metadata. Fixed Back and the prior
+Library browsing context remain unchanged.

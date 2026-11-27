@@ -7,6 +7,8 @@ export function createSongManagementPresentation(host) {
   const body = make('div'); body.className = 'library-manage-body';
   const title = make('h2'), status = make('p'); status.setAttribute('role', 'status');
   const search = make('input'); search.type = 'search'; search.placeholder = 'Find songs to link'; search.setAttribute('aria-label', 'Find songs to link');
+  const allSongs = make('button', '▸ All Songs'); allSongs.dataset.manageAllSongs = 'true';
+  const more = make('button', 'Show 100 more'); more.dataset.manageMore = 'true'; more.hidden = true;
   const links = make('div'), memberships = make('div'), close = make('button', 'Back to Library');
   const bpmForm = make('form'), verifiedBpm = make('input'); verifiedBpm.type = 'number'; verifiedBpm.min = '0.001'; verifiedBpm.max = '1000'; verifiedBpm.step = 'any';
   verifiedBpm.setAttribute('aria-label', 'Verified BPM');
@@ -17,14 +19,14 @@ export function createSongManagementPresentation(host) {
   development.append(make('summary', 'Development · BPM analysis and correction'), bpmForm, analyze, analysisResults);
   const analysisStatus = make('p'), cancelAnalysis = make('button', 'Cancel analysis');
   analysisStatus.setAttribute('role', 'status'); development.append(analysisStatus, cancelAnalysis);
-  toolbar.append(close, title); body.append(status, make('h3', 'Song links'), search, links, make('h3', 'Playlist membership'), memberships, development);
+  toolbar.append(close, title); body.append(status, make('h3', 'Song links'), search, allSongs, links, make('h3', 'Playlists'), memberships, more, development);
   dialog.append(toolbar, body); host.append(dialog);
   function checkbox(label, field, id, checked) {
     const row = make('label'), input = make('input'); input.type = 'checkbox'; input.dataset[field] = id; input.checked = checked;
     row.append(input, document.createTextNode(' ' + label)); return row;
   }
   return {
-    dialog, search, close, bpmForm, verifiedBpm, analyze, cancelAnalysis,
+    dialog, search, allSongs, close, bpmForm, verifiedBpm, analyze, cancelAnalysis,
     showVisible(visible) { dialog.hidden = !visible; },
     showAnalysis(job) {
       analyze.disabled = job.running; cancelAnalysis.disabled = !job.running || job.cancelRequested;
@@ -32,7 +34,7 @@ export function createSongManagementPresentation(host) {
     },
     beginSong() { delete verifiedBpm.dataset.editingSongId; },
     showError(message) { status.textContent = message; },
-    render({ song, songs, linked, playlists, memberIds, analysis }) {
+    render({ song, songs, linked, playlistRows, memberIds, analysis, allSongsExpanded, allSongsCount, more: hasMore }) {
       title.textContent = 'Manage · ' + song.title;
       if (verifiedBpm.dataset.editingSongId !== song.id) verifiedBpm.value = song.verifiedBpm ?? '';
       verifiedBpm.dataset.editingSongId = song.id;
@@ -43,11 +45,24 @@ export function createSongManagementPresentation(host) {
         const data = make('pre', JSON.stringify(result, null, 2)); details.append(summary, data); return details;
       }));
       if (!analysis.length) analysisResults.append(make('p', 'No detected BPM yet. Verified BPM is never replaced by analysis.'));
-      links.replaceChildren(...songs.map(other => checkbox(other.title + (other.artist ? ' · ' + other.artist : ''), 'linkSongId', other.id, linked.includes(other.id))));
-      if (!songs.length) links.append(make('p', 'No other matching songs.'));
-      const path = folder => { const parent = playlists.find(p => p.id === folder.parentId); return parent ? path(parent) + ' / ' + folder.name : folder.name; };
-      memberships.replaceChildren(...playlists.map(folder => checkbox(path(folder), 'membershipId', folder.id, memberIds.includes(folder.id))));
-      if (!playlists.length) memberships.append(make('p', 'Import a playlist folder first.'));
+      const songLink = other => checkbox(other.title + (other.artist ? ' · ' + other.artist : ''), 'linkSongId', other.id, linked.includes(other.id));
+      allSongs.setAttribute('aria-expanded', String(allSongsExpanded));
+      allSongs.textContent = (allSongsExpanded ? '▾ ' : '▸ ') + 'All Songs (' + allSongsCount + ')';
+      links.hidden = !allSongsExpanded; links.replaceChildren(...songs.map(songLink));
+      if (allSongsExpanded && !songs.length) links.append(make('p', 'No other matching songs.'));
+      memberships.replaceChildren(...playlistRows.map(item => {
+        if (!item.folder) {
+          const row = songLink(item); row.style.paddingLeft = (12 + item.depth * 12) + 'px'; return row;
+        }
+        const row = make('div'); row.className = 'manage-playlist-row'; row.style.paddingLeft = item.depth * 12 + 'px';
+        const member = make('input'); member.type = 'checkbox'; member.dataset.membershipId = item.id;
+        member.checked = memberIds.includes(item.id); member.setAttribute('aria-label', 'Membership in ' + item.name);
+        const disclosure = make('button', (item.expanded ? '▾ ' : '▸ ') + item.name);
+        disclosure.dataset.managePlaylist = item.id; disclosure.setAttribute('aria-expanded', String(item.expanded));
+        row.append(member, disclosure); return row;
+      }));
+      if (!playlistRows.length) memberships.append(make('p', 'No matching playlists. Use Import Playlist to add a folder.'));
+      more.hidden = !hasMore;
     }
   };
 }

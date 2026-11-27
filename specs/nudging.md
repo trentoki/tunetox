@@ -42,7 +42,7 @@ retain existing stop/report behavior; nudging does not auto-resume failed playba
 
 One hold per deck; additional overlapping holds on that deck are ignored. Different
 decks accept simultaneous touches. Pointer release/cancel/lost capture, key release,
-control blur, window blur/resize, hidden document/control/deck, view/theme change,
+keyboard-control blur, window blur/resize, hidden document/control/deck, view/theme change,
 source replacement and transport operations restore established tempo. Coordinator
 operations restore before proceeding; pause/load/seek/eject public actions also
 cancel an active nudge. Natural end/error clears the temporary direction. No extra

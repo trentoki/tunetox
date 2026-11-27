@@ -1,19 +1,28 @@
+import { getPlaylistRows } from './library-playlist-browsing.js';
+import { matchesLibrarySong } from './library-management.js';
 import { createSongManagementPresentation } from '../../visual/library/song-management-view.js';
 
 // Manage operates on the selected library song captured when opened, independently
 // of the deck-loaded song that drives Links. No audio or mirrored metadata cache.
 export function createSongManagement(library, report, analysis, controls, returned) {
   const view = createSongManagementPresentation(controls.host);
-  let songId = null, generation = 0, open = false;
+  let songId = null, generation = 0, open = false, allSongsExpanded = false, limit = 100;
+  const expandedPlaylists = new Set();
   async function refresh() {
     const request = ++generation;
     try {
       const [song, songs, linked, playlists, memberships, analysis] = await Promise.all([
-        library.getSong(songId), library.listSongs({ query: view.search.value }), library.getLinkedSongIds(songId), library.listPlaylists(), library.listMemberships(), library.getAnalysisResults(songId)
+        library.getSong(songId), library.listSongs(), library.getLinkedSongIds(songId), library.listPlaylists(), library.listMemberships(), library.getAnalysisResults(songId)
       ]);
       if (request !== generation || !open) return;
       if (!song) throw new Error('Selected song is unavailable.');
-      view.render({ analysis, song, songs: songs.filter(s => s.id !== songId), linked, playlists, memberIds: memberships.filter(m => m.songId === songId).map(m => m.playlistId) });
+      const candidates = songs.filter(other => other.id !== songId);
+      const filtered = candidates.filter(other => matchesLibrarySong(other, view.search.value));
+      const playlistRows = getPlaylistRows(playlists, memberships, candidates, view.search.value, expandedPlaylists, limit);
+      view.render({ analysis, song, songs: allSongsExpanded ? filtered.slice(0, limit) : [],
+        allSongsExpanded, allSongsCount: filtered.length, linked, playlistRows: playlistRows.rows,
+        more: playlistRows.more || (allSongsExpanded && filtered.length > limit),
+        memberIds: memberships.filter(m => m.songId === songId).map(m => m.playlistId) });
     } catch (error) { view.showError(error.message); report(error.message); }
   }
   view.analyze.onclick = async () => {
@@ -35,7 +44,17 @@ export function createSongManagement(library, report, analysis, controls, return
     } catch (error) { view.showError(error.message); report(error.message); }
   };
   view.close.onclick = () => close();
-  view.search.oninput = () => void refresh();
+  view.allSongs.onclick = () => { allSongsExpanded = !allSongsExpanded; void refresh(); };
+  view.search.oninput = () => { if (view.search.value.trim()) allSongsExpanded = true; limit = 100; void refresh(); };
+  view.dialog.addEventListener('click', event => {
+    const folder = event.target.closest('[data-manage-playlist]');
+    if (folder) {
+      const id = folder.dataset.managePlaylist;
+      if (expandedPlaylists.has(id)) expandedPlaylists.delete(id); else expandedPlaylists.add(id);
+      void refresh();
+    }
+    if (event.target.closest('[data-manage-more]')) { limit += 100; void refresh(); }
+  });
   view.dialog.addEventListener('change', async event => {
     const input = event.target;
     if (!input.dataset.linkSongId && !input.dataset.membershipId) return;

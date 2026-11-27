@@ -30,7 +30,8 @@ export function connectNudgeControls(deck, node, view, canOperate, changed, repo
       event.preventDefault(); event.stopPropagation(); if (!event.repeat) start(button,direction,undefined,event.key);
     });
     button.addEventListener('keyup', event => { if (hold?.button === button && hold.key === event.key) { event.preventDefault(); release(); } });
-    button.addEventListener('blur', () => { if (hold?.button === button) release(); });
+    // Another deck's touch may take focus while this pointer remains captured.
+    button.addEventListener('blur', () => { if (hold?.button === button && hold.pointer === undefined) release(); });
     button.addEventListener('contextmenu', event => event.preventDefault());
   });
   function endDrag() {
@@ -64,7 +65,15 @@ export function connectNudgeControls(deck, node, view, canOperate, changed, repo
         (hold && (!eligible() || hold.source !== deck.audio.src || deck.nudgeDirection === 0)))) cancel();
     render();
   };
-  new MutationObserver(validate).observe(document,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','inert','data-iphone-selected']});
+  // Ignore ordinary waveform/time-label DOM updates. Only visibility/removal of
+  // this control's ancestors can cancel its gesture; avoid layout reads per frame.
+  new MutationObserver(records => {
+    if (!hold && !drag) return;
+    const relevant = records.some(record => record.type === 'attributes'
+      ? record.target.contains(view.group)
+      : [...record.removedNodes].some(removed => removed.contains(view.group)));
+    if (relevant) validate();
+  }).observe(document,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden','inert','data-iphone-selected']});
   for (const type of ['pause','ended','error','emptied']) deck.audio.addEventListener(type,validate);
   render(); return {validate};
 }

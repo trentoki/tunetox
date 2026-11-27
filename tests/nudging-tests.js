@@ -65,6 +65,14 @@ document.querySelector('#run').onclick=async()=>{
       direction(0,-1).dispatchEvent(new win.KeyboardEvent('keydown',{key:' ',bubbles:true}));direction(0,-1).dispatchEvent(new win.KeyboardEvent('keyup',{key:' ',bubbles:true}));assert(direction(0,-1).getAttribute('aria-pressed')==='false','Keyboard release');
       assert(players.every((p,i)=>p.src===sources[i]&&!p.paused)&&win.__nodes.length===identities.length&&identities.every((n,i)=>n===win.__nodes[i]),'Nudge changed source/node/peer operation');
       pass('mouse/touch/keyboard holds, percentage dragging, bounds, cancel/lost capture/blur/view/pause and live-base restoration');
+      tempo(0,1);tempo(1,1);await delay(250);pct(1).dispatchEvent(new win.KeyboardEvent('keydown',{key:'End',bubbles:true}));
+      pointer(direction(0,-1),'pointerdown',101);pointer(direction(1,1),'pointerdown',102,{isPrimary:false});
+      const speeds = [await slope(0),await slope(1)];
+      assert(Math.abs(speeds[0]-.5)<.06 && Math.abs(speeds[1]-1.5)<.06,'Simultaneous touch decks did not remain independent: '+speeds.join(', '));
+      pointer(direction(0,-1),'pointerup',101);
+      assert(direction(1,1).getAttribute('aria-pressed')==='true','Releasing one deck cancelled another');
+      pointer(direction(1,1),'pointerup',102,{isPrimary:false});
+      pass('simultaneous multi-touch nudge holds are deck-local');
       const control=cards[0].querySelector('.tempo-slider');tempo(0,1.5);control.dispatchEvent(new win.MouseEvent('dblclick',{bubbles:true,cancelable:true}));assert(cards[0].querySelector('.tempo-slider output').textContent==='1.00×','Mouse Tempo reset');
       const tap=(type,id)=>control.dispatchEvent(new win.PointerEvent(type,{pointerId:id,pointerType:'touch',isPrimary:true,button:0,clientX:40,clientY:40,bubbles:true}));
       tempo(0,1.5);tap('pointerdown',71);tap('pointerup',71);assert(cards[0].querySelector('.tempo-slider output').textContent==='1.50×','Single touch reset Tempo');tap('pointerdown',72);tap('pointerup',72);assert(cards[0].querySelector('.tempo-slider output').textContent==='1.00×','Double touch reset');

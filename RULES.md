@@ -99,7 +99,9 @@ cancellation and per-song failures. Verified BPM is separate and never overwritt
 Import and Analyze All are global controls near themes; header direct loaders are
 removed. Manage appears on selected song rows and opens inside that deck's Library,
 with its own fixed Back and preserved browsing context. Development BPM controls
-remain separately labeled. Explicit research export includes only compact metadata.
+remain separately labeled. Manage All Songs is collapsible; playlist membership checkboxes
+and inline expansion buttons are independent, and song-link state is shared across
+all displayed occurrences. Explicit research export includes only compact metadata.
 No multi-selection, Link All or bulk membership assignment is implemented. See [Library contract](specs/library.md).
 
 ## 8. Controls and Settings
