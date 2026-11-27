@@ -56,6 +56,17 @@ document.querySelector('#run').onclick = async () => {
     assert(members.length === 1 && members[0].songId === songs.find(s => s.title.includes('Second')).id, 'Duplicate folder import did not reference canonical song');
     assert((await restored.listSongs()).length === 3, 'Playlist duplicated song records');
     pass('folder import creates nested playlists referencing existing songs without duplicating metadata or audio');
+    const otherId = songs.find(s => s.id !== first.id).id;
+    await restored.setSongLink(first.id, otherId, true); await restored.setSongLink(otherId, first.id, true);
+    assert((await restored.getLinkedSongIds(first.id))[0] === otherId && (await restored.getLinkedSongIds(otherId))[0] === first.id && (await reopened.listLinks()).length === 1, 'Bidirectional link identity');
+    await restored.setPlaylistMembership(first.id, folders[0].id, true); await restored.setPlaylistMembership(first.id, folders[1].id, true);
+    await restored.setPlaylistMembership(first.id, folders[0].id, false);
+    assert((await restored.listMemberships()).filter(m => m.songId === first.id).length === 1 && (await restored.getLinkedSongIds(first.id)).length === 1, 'Independent relationships');
+    await restored.setSongLink(first.id, otherId, false);
+    let selfRejected = false; try { await restored.setSongLink(first.id, first.id, true); } catch { selfRejected = true; }
+    let missingRejected = false; try { await restored.setPlaylistMembership('missing', folders[0].id, true); } catch { missingRejected = true; }
+    assert(selfRejected && missingRejected && !(await restored.getLinkedSongIds(first.id)).length, 'Invalid relationship handling');
+    pass('reciprocal unique links, membership addition/removal, independent relationships and invalid references');
     await checkLibraryDeckLoading(restored);
     pass('stored songs load directly onto all four persistent decks; playing deck queues; occupied queue and controls preserved');
     output.dataset.result = 'pass';

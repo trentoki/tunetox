@@ -25,6 +25,20 @@ export function createLibraryManagement(storage = openLibraryStorage()) {
   return {
     ready: storage,
     events, importJob: job, listSongs,
+    async getLinkedSongIds(id) {
+      if (!id) return [];
+      return (await (await storage).listLinks()).filter(link => link.a === id || link.b === id).map(link => link.a === id ? link.b : link.a);
+    },
+    async setSongLink(id, otherId, present) {
+      if (id === otherId) throw new Error('A song cannot link to itself.');
+      const [a, b] = [id, otherId].sort();
+      await (await storage).setRelationship('links', { id: a + ':' + b, a, b }, present, [['songs', a], ['songs', b]]);
+      notify('change');
+    },
+    async setPlaylistMembership(songId, playlistId, present) {
+      await (await storage).setRelationship('memberships', { id: playlistId + ':' + songId, playlistId, songId }, present, [['songs', songId], ['playlists', playlistId]]);
+      notify('change');
+    },
     async listPlaylists() { return (await storage).listPlaylists(); },
     async listMemberships() { return (await storage).listMemberships(); },
     async getSong(id) { return (await storage).getSong(id); },

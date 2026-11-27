@@ -1,3 +1,4 @@
+import { createSongManagement } from './song-management.js';
 import { createLibraryPresentation } from '../../visual/library/library-view.js';
 
 const songDragType = 'application/x-tunetox-library-song';
@@ -21,6 +22,9 @@ export function connectLibraryControls(library, controls, sendSong, report) {
   const { tabs, sort, search, results, destinations } = controls;
   const view = createLibraryPresentation(controls), expanded = new Set();
   let selectedId = null, content = 'songs', sortKey = 'title', descending = false;
+  const manage = createSongManagement(library, report);
+  view.manageButton.onclick = () => { if (selectedId) manage.open(selectedId); };
+  let lastLoadedSongId;
   let generation = 0, rendered = false, limit = 100;
   const fail = error => { view.showError(error.message); report(error.message); };
   view.importButton.onclick = () => { view.dialog.showModal(); view.showImportProgress(library.importJob); };
@@ -32,7 +36,7 @@ export function connectLibraryControls(library, controls, sendSong, report) {
     try { await library.importFiles(files, { playlist: index === 1 }); } catch (error) { fail(error); }
   }));
   view.persist.onclick = async () => {
-    try { view.storage.textContent = navigator.storage?.persist ? (await navigator.storage.persist() ? 'Persistence granted. Keep your originals.' : 'Persistence not granted; browser data may be evicted.') : 'Persistent storage requests unavailable.'; }
+    try { view.showStorage(navigator.storage?.persist ? (await navigator.storage.persist() ? 'Persistence granted. Keep your originals.' : 'Persistence not granted; browser data may be evicted.') : 'Persistent storage requests unavailable.'); }
     catch (error) { fail(error); }
   };
   const buttons = [...destinations.children];
@@ -47,9 +51,8 @@ export function connectLibraryControls(library, controls, sendSong, report) {
     button.onclick = () => { descending = sortKey === key ? !descending : false; sortKey = key; limit = 100; void refresh(); };
   });
   [...tabs.children].forEach((button, index) => {
-    if (index === 2) return;
     button.disabled = false; button.title = button.textContent; button.setAttribute('aria-label', button.textContent);
-    button.onclick = () => { content = ['songs', 'playlists'][index]; void refresh(); };
+    button.onclick = () => { content = ['songs', 'playlists', 'links'][index]; void refresh(); };
   });
   search.disabled = false; search.setAttribute('aria-label', 'Search library songs and artists');
   search.oninput = () => { limit = 100; void refresh(); };
@@ -71,7 +74,11 @@ export function connectLibraryControls(library, controls, sendSong, report) {
   async function refresh() {
     const request = ++generation;
     try {
-      const songs = await library.listSongs({ query: search.value, sort: sortKey, descending });
+      let songs = await library.listSongs({ query: search.value, sort: sortKey, descending });
+      if (content === 'links') {
+        const ids = new Set(await library.getLinkedSongIds(controls.getLoadedSongId()));
+        songs = songs.filter(song => ids.has(song.id));
+      }
       const [playlists, memberships] = content === 'playlists' ? await Promise.all([library.listPlaylists(), library.listMemberships()]) : [[], []];
       if (request !== generation) return;
       const rows = [];
@@ -92,5 +99,5 @@ export function connectLibraryControls(library, controls, sendSong, report) {
   }
   library.events.addEventListener('change', () => { rendered = false; if (controls.visible()) { rendered = true; void refresh(); } });
   library.events.addEventListener('progress', () => view.showImportProgress(library.importJob));
-  return { refresh() { rendered = true; return refresh(); }, opened() { if (!rendered) { rendered = true; void refresh(); } } };
+  return { refresh() { rendered = true; return refresh(); }, opened() { const loaded = controls.getLoadedSongId(); if (loaded !== lastLoadedSongId) { lastLoadedSongId = loaded; if (content === 'links') rendered = false; } if (!rendered) { rendered = true; void refresh(); } } };
 }

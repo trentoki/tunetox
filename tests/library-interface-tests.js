@@ -30,7 +30,7 @@ document.querySelector('#run').onclick = async () => {
       frame.srcdoc = source.replace('<head>', '<head>' + prefix);
       await new Promise(resolve => frame.addEventListener('load', resolve, { once: true }));
       win = frame.contentWindow; doc = frame.contentDocument;
-      await until(() => win.__players.length === 4 && doc.querySelectorAll('.library-import-dialog').length === 4, 'Application did not mount');
+      await until(() => win.__players.length === 4 && doc.querySelectorAll('.library-import-dialog input[type=file]').length === 8, 'Application did not mount');
       players = win.__players;
     }
     await load(); store = await openLibraryStorage(dbName);
@@ -107,6 +107,30 @@ document.querySelector('#run').onclick = async () => {
     library(0).querySelectorAll('.song-sort-selector button')[2].click();
     await until(() => library(0).querySelector('[data-song-id] .song-title').textContent === 'Beta', 'Key sort unknown last');
     pass('independent search/selection; Title/Artist/BPM/Key sorting; supplied values sort ahead of unknown values');
+    getRow(0, 'Alpha').click();
+    [...library(0).querySelectorAll('.library-import-button')].find(b => b.textContent === 'Manage').click();
+    const manage = doc.querySelector('.library-manage-dialog[open]');
+    await until(() => manage.querySelectorAll('[data-link-song-id]').length === 2, 'Manage songs missing');
+    const betaId = meta.find(s => s.title === 'Beta').id, alphaId = meta.find(s => s.title === 'Alpha').id;
+    const link = manage.querySelector('[data-link-song-id="' + betaId + '"]'); link.click();
+    await until(async () => (await store.listLinks()).length === 1, 'Link was not saved');
+    const folders = await store.listPlaylists();
+    for (const folder of folders) {
+      await until(() => manage.querySelector('[data-membership-id="' + folder.id + '"]'), 'Membership row missing');
+      manage.querySelector('[data-membership-id="' + folder.id + '"]').click();
+      await until(async () => (await store.listMemberships()).some(m => m.songId === alphaId && m.playlistId === folder.id), 'Membership not saved');
+    }
+    assert((await store.listMemberships()).filter(m => m.songId === alphaId).length === 2, 'Adding membership removed another');
+    manage.querySelector('[data-membership-id="' + folders[0].id + '"]').click();
+    await until(async () => (await store.listMemberships()).filter(m => m.songId === alphaId).length === 1, 'Individual membership removal failed');
+    assert((await store.listLinks()).length === 1, 'Membership altered links');
+    [...manage.querySelectorAll('button')].find(b => b.textContent === 'Close').click();
+    library(0).querySelectorAll('.section-selector button')[2].click(); await rows(0, 1);
+    assert(getRow(0, 'Beta'), 'Links does not follow loaded Alpha');
+    library(1).querySelectorAll('.section-selector button')[2].click(); await rows(1, 0);
+    library(0).querySelectorAll('.section-selector button')[0].click(); await rows(0, 3);
+    library(1).querySelectorAll('.section-selector button')[0].click(); await rows(1, 3);
+    pass('single-song Manage saves independent links/memberships; Links follows loaded song rather than library selection');
     function drop(row, target) {
       const transfer = new win.DataTransfer();
       row.dispatchEvent(new win.DragEvent('dragstart', { bubbles: true, dataTransfer: transfer }));
@@ -115,6 +139,9 @@ document.querySelector('#run').onclick = async () => {
     }
     drop(getRow(0, 'Beta'), library(0).querySelector('.send-to-deck-two'));
     await until(() => players[1].readyState === 2 && deck(1).querySelector('.song-title').textContent.includes('Beta'), 'Numbered drop');
+    library(1).querySelectorAll('.section-selector button')[2].click(); await rows(1, 1);
+    assert(getRow(1, 'Alpha') && players[1].paused, 'Reciprocal Links does not follow paused loaded Beta');
+    library(1).querySelectorAll('.section-selector button')[0].click(); await rows(1, 3);
     back(2); drop(getRow(0, 'Gamma'), deck(2).querySelector('.waveform-overview'));
     await until(() => players[2].readyState === 2 && deck(2).querySelector('.song-title').textContent.includes('Gamma'), 'Overview drop');
     back(3); drop(getRow(0, 'Beta'), deck(3).querySelector('.queue-button'));

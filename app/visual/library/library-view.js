@@ -10,8 +10,9 @@ export function createLibraryPresentation(controls) {
   const { tabs, sort, results, selected, destinations } = controls;
   const footer = selected.querySelector('small');
   const importButton = make('button', 'Import', 'library-import-button'); importButton.type = 'button';
+  const manageButton = make('button', 'Manage', 'library-import-button'); manageButton.disabled = true;
   const selectionText = document.createTextNode(' · Select a song, then choose 1–4');
-  footer.replaceChildren(importButton, selectionText);
+  footer.replaceChildren(importButton, document.createTextNode(' · '), manageButton, selectionText);
   const dialog = make('dialog', undefined, 'library-import-dialog');
   dialog.append(make('h2', 'Import into shared library'), make('p', 'Adds files without loading or interrupting any deck. Your originals stay unchanged.'));
   const inputs = [false, true].map(folder => {
@@ -31,7 +32,8 @@ export function createLibraryPresentation(controls) {
   dialog.append(progress, failures, cancel, close, storage, persist); document.body.append(dialog);
   let displayedFailures, failureCount = 0;
   return {
-    importButton, dialog, inputs, cancel, close, persist, storage,
+    importButton, manageButton, dialog, inputs, cancel, close, persist,
+    showStorage(message) { storage.textContent = message; },
     showImportProgress(job) {
       if (!dialog.open) return;
       progress.textContent = job.running ? `Import ${job.processed}/${job.total}: ${job.current}${job.cancelRequested ? ' · stopping…' : ''}`
@@ -43,6 +45,7 @@ export function createLibraryPresentation(controls) {
     },
     showError(message) { progress.textContent = message; },
     select(id, title) {
+      manageButton.disabled = !id;
       selectionText.textContent = ' · ' + title; footer.title = title;
       results.querySelectorAll('[data-song-id]').forEach(row => row.setAttribute('aria-pressed', String(row.dataset.songId === id)));
       destinations.querySelectorAll('button').forEach(button => { button.disabled = !id; });

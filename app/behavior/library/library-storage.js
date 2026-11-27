@@ -2,12 +2,12 @@
 // Metadata and source Blob commit atomically; hash IDs prevent cross-tab duplicates.
 export function openLibraryStorage(name = 'tunetox-library-v1') {
   return new Promise((resolve, reject) => {
-    const request = indexedDB.open(name, 2);
+    const request = indexedDB.open(name, 3);
     request.onupgradeneeded = () => {
       const db = request.result;
       if (!db.objectStoreNames.contains('songs')) db.createObjectStore('songs', { keyPath: 'id' });
       if (!db.objectStoreNames.contains('sources')) db.createObjectStore('sources');
-      for (const store of ['playlists', 'memberships'])
+      for (const store of ['playlists', 'memberships', 'links'])
         if (!db.objectStoreNames.contains(store)) db.createObjectStore(store, { keyPath: 'id' });
     };
     request.onerror = () => reject(request.error);
@@ -32,6 +32,25 @@ export function openLibraryStorage(name = 'tunetox-library-v1') {
         });
       }
       resolve({
+        listLinks: () => read('links'),
+        setRelationship(store, record, present, references) {
+          return new Promise((done, fail) => {
+            const tx = db.transaction([...new Set([store, ...references.map(r => r[0])])], 'readwrite');
+            // Validate references within the same transaction as the relationship.
+            let pending = references.length;
+            for (const [source, id] of references) {
+              const query = tx.objectStore(source).get(id);
+              query.onsuccess = () => {
+                if (!query.result) { tx.abort(); return; }
+                if (--pending) return;
+                if (present) tx.objectStore(store).put(record);
+                else tx.objectStore(store).delete(record.id);
+              };
+            }
+            tx.oncomplete = () => done();
+            tx.onabort = () => fail(tx.error || new Error('Song or playlist is unavailable.'));
+          });
+        },
         listPlaylists: () => read('playlists'),
         listMemberships: () => read('memberships'),
         savePlaylists: records => write('playlists', records),

@@ -36,3 +36,24 @@ library-view renders. Loading uses library-deck-loading -> existing deck coordin
 browsing state; storage owns the shared collection. No adapter or synchronization
 layer. Disposable-database unit and real-application suites passed; editor problems
 reported none. Physical Safari and listening remain human checks.
+
+## Increment 3 — single-song Manage and loaded-song Links
+
+Created Visual song-management-view for transient dialog presentation, and Behavior
+song-management for selected-song interaction decisions. Changed storage with
+additive schema-v3 link relationships and atomic reference validation; management
+owns reciprocal unique link operations and independent membership mutations.
+Changed Behavior library-controls to open Manage and derive Links from the existing
+deck song ID supplied by Visual playback. Visual library-view presents Manage and
+state only. No multi-selection, bulk membership, Link All or new playback path.
+
+Manage captures the selected library song when opened; Links follows the current
+loaded song, including paused loads. Links are reciprocal unordered song pairs;
+memberships reference individual folders and never remove other memberships.
+Existing historical Manage notes were consulted for context; current requirements
+supersede their multi-selection and design experiments.
+
+Foundation and application suites passed: reciprocal/deduplicated links, removal,
+invalid/self references, independent membership changes, paused/playing Links,
+independent views and all previous deck/Queue/import checks. Editor checks passed.
+No additional audio or playback state exists in these files.
